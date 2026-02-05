@@ -5,17 +5,33 @@ import SummaryStats from "@/components/Sections/SummaryStats";
 import ExpertiseSection from "@/components/Sections/ExpertiseSection";
 import ExperienceStack from "@/components/Sections/ExperienceStack";
 import ProjectGallery from "@/components/Sections/ProjectGallery";
+import FloatingNav from "@/components/Navigation/FloatingNav";
 
 export default function Home() {
   return (
     <main className="bg-deep min-h-screen selection:bg-brand-blue/30 selection:text-white pb-32">
-      <DigitalHero />
-      <SummaryStats />
+      <FloatingNav />
+
+      <section id="hero">
+        <DigitalHero />
+      </section>
+
+      <section id="stats">
+        <SummaryStats />
+      </section>
 
       <div className="space-y-0">
-        <ExpertiseSection />
-        <ExperienceStack />
-        <ProjectGallery />
+        <section id="expertise">
+          <ExpertiseSection />
+        </section>
+
+        <section id="experience">
+          <ExperienceStack />
+        </section>
+
+        <section id="projects">
+          <ProjectGallery />
+        </section>
       </div>
 
       <footer className="py-12 text-center text-muted font-mono text-[10px] tracking-widest border-t border-white/5 mt-24">
