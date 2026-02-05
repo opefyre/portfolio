@@ -1,14 +1,35 @@
 @import "tailwindcss";
 
+:root {
+  /* Light Mode (Clean Architect) */
+  --bg-deep: #ffffff;
+  --bg-canvas: #f8fafc;
+  --text-silver: #0f172a;
+  --text-muted: #64748b;
+  --color-border: rgba(0, 0, 0, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.8);
+}
+
+.dark {
+  /* Dark Mode (Digital Architect) */
+  --bg-deep: #030712;
+  --bg-canvas: #0B101B;
+  --text-silver: #F8FAFC;
+  --text-muted: #94A3B8;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.02);
+}
+
 @theme {
-  /* High-End Palette */
-  --color-deep: #030712;
-  /* Deepest Abyss */
-  --color-canvas: #0B101B;
-  /* Secondary Dark */
+  /* Variable-Mapped Palette */
+  --color-deep: var(--bg-deep);
+  --color-canvas: var(--bg-canvas);
+  --color-silver: var(--text-silver);
+  --color-muted: var(--text-muted);
+  --color-border: var(--color-border);
+
+  /* Constants */
   --color-slate-glass: rgba(56, 189, 248, 0.1);
-  --color-silver: #F8FAFC;
-  --color-muted: #94A3B8;
   --color-brand-blue: #38BDF8;
   --color-brand-purple: #818CF8;
 
@@ -22,8 +43,16 @@
 }
 
 /* Core Reset */
-:root {
-  color-scheme: dark;
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+  }
 }
 
 body {
@@ -32,6 +61,7 @@ body {
   font-family: var(--font-body);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 /* Base Texture - The Digital Noise */
@@ -55,12 +85,12 @@ body::before {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1E293B;
+  background: #334155;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #475569;
 }
 
 /* Typgoraphy Utils */
@@ -72,23 +102,22 @@ body::before {
 
 /* Glassmorphism Classes */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--glass-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 .glass-panel-hover:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-brand-blue);
   transform: translateY(-2px);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Gradient Text */
 .text-gradient {
-  background: linear-gradient(135deg, #F8FAFC 0%, #94A3B8 100%);
+  background: linear-gradient(135deg, var(--text-silver) 0%, var(--text-muted) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

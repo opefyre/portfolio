@@ -20,17 +20,21 @@ export const metadata: Metadata = {
   description: "Process Excellence & Digital Transformation. Creating the future of enterprise operations.",
 };
 
+import { ThemeProvider } from "@/components/shared/ThemeProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${fontBody.variable} ${fontDisplay.variable}`}>
+    <html lang="en" className={`${fontBody.variable} ${fontDisplay.variable}`} suppressHydrationWarning>
       <body className="antialiased">
-        <SmoothScroller>
-          {children}
-        </SmoothScroller>
+        <ThemeProvider>
+          <SmoothScroller>
+            {children}
+          </SmoothScroller>
+        </ThemeProvider>
       </body>
     </html>
   );
