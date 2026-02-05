@@ -11,13 +11,15 @@
 }
 
 .dark {
-  /* Dark Mode (Digital Architect) */
+  /* Dark Mode (High Contrast) */
   --bg-deep: #030712;
-  --bg-canvas: #0B101B;
+  --bg-canvas: #0f172a;
   --text-silver: #F8FAFC;
-  --text-muted: #94A3B8;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --glass-bg: rgba(255, 255, 255, 0.02);
+  --text-muted: #CBD5E1;
+  /* Brightened from #94A3B8 to #CBD5E1 (Slate-300) */
+  --color-border: rgba(255, 255, 255, 0.15);
+  /* Increased form 0.08 */
+  --glass-bg: rgba(2, 6, 23, 0.7);
 }
 
 @theme {

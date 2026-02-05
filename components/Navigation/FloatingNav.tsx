@@ -24,9 +24,9 @@ export default function FloatingNav() {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
 
-            // Simple spy logic
+            // Refined spy logic: Check top of viewport with small offset
             const sections = navItems.map(item => document.getElementById(item.id));
-            const scrollPosition = window.scrollY + window.innerHeight / 3;
+            const scrollPosition = window.scrollY + 120; // Trigger when top of section hits 120px from top
 
             for (const section of sections) {
                 if (section && section.offsetTop <= scrollPosition && (section.offsetTop + section.offsetHeight) > scrollPosition) {
@@ -43,7 +43,7 @@ export default function FloatingNav() {
         const element = document.getElementById(id);
         if (element) {
             window.scrollTo({
-                top: element.offsetTop,
+                top: element.offsetTop - 80, // Offset for the fixed header
                 behavior: "smooth",
             });
         }

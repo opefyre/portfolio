@@ -12,24 +12,24 @@ export default function Home() {
     <main className="bg-deep min-h-screen selection:bg-brand-blue/30 selection:text-white pb-32">
       <FloatingNav />
 
-      <section id="hero">
+      <section id="hero" className="scroll-mt-0">
         <DigitalHero />
       </section>
 
-      <section id="stats">
+      <section id="stats" className="scroll-mt-32">
         <SummaryStats />
       </section>
 
       <div className="space-y-0">
-        <section id="expertise">
+        <section id="expertise" className="scroll-mt-32">
           <ExpertiseSection />
         </section>
 
-        <section id="experience">
+        <section id="experience" className="scroll-mt-32">
           <ExperienceStack />
         </section>
 
-        <section id="projects">
+        <section id="projects" className="scroll-mt-32">
           <ProjectGallery />
         </section>
       </div>
