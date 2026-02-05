@@ -71,19 +71,24 @@ export default function FloatingNav() {
                         onClick={() => scrollTo(item.id)}
                         className={clsx(
                             "relative px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300",
-                            activeSection === item.id
-                                ? "text-primary dark:text-white"
-                                : "text-tertiary hover:text-primary"
+                            // Inactive state text color
+                            activeSection !== item.id && "text-tertiary hover:text-primary dark:hover:text-white"
                         )}
                     >
                         {activeSection === item.id && (
                             <motion.div
                                 layoutId="nav-pill"
-                                className="absolute inset-0 bg-white dark:bg-white/10 rounded-full border border-border shadow-sm"
+                                className="absolute inset-0 bg-white dark:bg-white rounded-full border border-border shadow-sm"
                                 transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                             />
                         )}
-                        <span className={clsx("relative z-10", activeSection === item.id && "text-primary dark:text-white")}>{item.name}</span>
+                        {/* Active state text color: Black on White Pill (both modes) */}
+                        <span className={clsx(
+                            "relative z-10 font-bold transition-colors duration-300",
+                            activeSection === item.id ? "text-black" : ""
+                        )}>
+                            {item.name}
+                        </span>
                     </button>
                 ))}
 
@@ -96,12 +101,14 @@ export default function FloatingNav() {
                         aria-label="Toggle Theme"
                     >
                         <div className="relative w-4 h-4">
+                            {/* Sun Icon */}
                             <svg
                                 className={clsx("absolute inset-0 w-full h-full transition-transform duration-500 rotate-0 dark:-rotate-90 dark:scale-0 text-amber-500")}
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
                             >
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
+                            {/* Moon Icon */}
                             <svg
                                 className={clsx("absolute inset-0 w-full h-full transition-transform duration-500 rotate-90 scale-0 dark:rotate-0 dark:scale-100 text-brand-blue")}
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
