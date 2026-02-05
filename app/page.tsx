@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <main className="bg-deep min-h-screen selection:bg-brand-blue/30 selection:text-white pb-32">
       <FloatingNav />
-
+      {/* Scroll Margin corrections included */}
       <section id="hero" className="scroll-mt-0">
         <DigitalHero />
       </section>
@@ -34,9 +34,10 @@ export default function Home() {
         </section>
       </div>
 
-      <footer className="py-12 text-center text-muted font-mono text-[10px] tracking-widest border-t border-white/5 mt-24">
+      {/* Footer Refactor: Semantic Colors */}
+      <footer className="py-12 text-center text-tertiary font-mono text-[10px] tracking-widest border-t border-border mt-24">
         <p>PROCESS EXCELLENCE // DIGITAL TRANSFORMATION</p>
-        <p className="mt-2 text-white/20">© 2026 ABOLFAZL SHIRKAVAND</p>
+        <p className="mt-2 text-tertiary/60">© 2026 ABOLFAZL SHIRKAVAND</p>
       </footer>
     </main>
   );
