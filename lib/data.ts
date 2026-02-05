@@ -8,7 +8,6 @@ export interface Position {
     title: string;
     period: string;
     achievements: string[];
-    isProcessFocused: boolean;
 }
 
 export interface Project {
@@ -23,15 +22,27 @@ export interface Skill {
     items: string[];
 }
 
+export interface Certification {
+    name: string;
+    issuer?: string;
+    year?: string;
+}
+
+export interface Education {
+    degree: string;
+    institution: string;
+    period: string;
+}
+
 export const personalInfo = {
-    name: "Abolfazl Shirkavand",
-    title: "Digital Transformation & Process Excellence Leader",
+    name: "Abosh Shirkavand",
+    title: "Digital Transformation & Process Excellence Expert",
     email: "abolfazl.shirkavand73@gmail.com",
     phone: "+351 964 450 951",
     location: "Lisbon, Portugal",
     linkedin: "https://www.linkedin.com/in/abolfazl-shirkavand/",
     summary:
-        "Digital Transformation and Process Improvement expert with 8+ years of experience driving enterprise-wide automation, system integration, and operational excellence. Proven track record of building and leading cross-functional digital teams, delivering scalable cloud-based solutions, and redesigning business processes through data, AI, and technology.",
+        "Digital Transformation and Process Improvement expert with 8+ years of experience driving enterprise-wide automation, system integration, and operational excellence. Proven track record of building and leading cross-functional digital teams, delivering scalable cloud-based solutions, and redesigning business processes through data, AI, and technology. Strong expertise in application rationalization, internal platform ownership, AI-enabled automation, and end-to-end process discovery.",
 };
 
 export const experiences: Experience[] = [
@@ -43,43 +54,39 @@ export const experiences: Experience[] = [
                 title: "Head of Digital Innovation",
                 period: "Apr 2025 – Present",
                 achievements: [
-                    "Own the Application & Digital Transformation function, leading enterprise automation, system integration, and internal platform strategy",
-                    "Established and led the Digital Transformation team across the organization",
-                    "Define and govern the internal applications landscape, ensuring tool rationalization and long-term scalability",
-                    "Translate business strategy into digital roadmaps, prioritizing initiatives based on value and organizational readiness",
-                    "Lead transformation initiatives through structured process discovery and redesign",
-                    "Oversee delivery of cloud-based and AI-enabled solutions that replace manual workflows",
-                    "Act as partner to functional leaders, challenging legacy practices and driving adoption of optimized ways of working",
-                    "Build and develop high-performing engineering teams, setting delivery standards and technical direction",
+                    "Own the Application & Digital Transformation function, leading enterprise automation, system integration, and internal platform strategy.",
+                    "Established and led the Digital Transformation team, responsible for enterprise automation and internal product delivery.",
+                    "Define and govern the internal applications landscape, ensuring tool rationalization and long-term scalability.",
+                    "Translate business strategy into digital roadmaps, prioritizing initiatives based on value and organizational readiness.",
+                    "Lead transformation initiatives through structured process discovery and redesign.",
+                    "Oversee delivery of cloud-based and AI-enabled solutions that replace manual workflows.",
+                    "Act as partner to functional leaders, challenging legacy practices and driving adoption of optimized ways of working.",
+                    "Build and develop high-performing engineering teams, setting delivery standards and technical direction.",
+                    "Establish metrics to track value realization from digital initiatives (efficiency, productivity, scalability)."
                 ],
-                isProcessFocused: true,
             },
             {
                 title: "Digital Process Improvement Manager",
                 period: "Jul 2024 – Apr 2025",
                 achievements: [
-                    "Led a team of >12 direct employees across IT, Application, and Digital Transformation functions",
-                    "Defined and executed process reengineering strategies, aligning digital transformation with business goals",
-                    "Directed 50+ process optimization and automation projects, achieving extensive reduction in manual effort",
-                    "Oversaw development of scalable cloud-native automation tools and system integrations",
-                    "Led enterprise-wide automation initiatives, integrating ERP, Jira, Notion, Slack, and third-party APIs",
-                    "Drove AI-powered innovations, implementing predictive analytics and intelligent assistants",
-                    "Championed data-driven culture with real-time dashboards in Tableau and Looker Studio",
-                    "Standardized knowledge management, supervising creation of 150+ technical documents",
+                    "Led a team of >12 employees across IT, Application, and Digital Transformation functions.",
+                    "Directed 50+ process optimization and automation projects, achieving extensive reduction in manual effort.",
+                    "Oversaw development of scalable cloud-native automation/integration tools.",
+                    "Led enterprise-wide automation integrating ERP, Jira, Notion, Slack, and third-party APIs.",
+                    "Drove AI-powered innovations: predictive analytics, automation tools, and intelligent assistants.",
+                    "Championed data-driven culture with real-time dashboards in Tableau and Looker Studio.",
+                    "Standardized knowledge management, supervising creation of 150+ technical documents."
                 ],
-                isProcessFocused: true,
             },
             {
                 title: "Digital Innovation Project Manager",
                 period: "Oct 2023 – Jun 2024",
                 achievements: [
-                    "Led team of 5 for project-based operations within IT & Application teams",
-                    "Managed end-to-end project lifecycles for innovation and system implementation",
-                    "Implemented automation and optimization projects across multiple departments",
-                    "Collaborated with senior stakeholders to align digital transformation projects with company-wide goals",
-                    "Created web-based platforms for managing projects and observing KPIs",
+                    "Led a team of 5 for project-based operations within IT & Application teams.",
+                    "Managed end-to-end project lifecycles for innovation and system implementation.",
+                    "Implemented automation and optimization projects across multiple departments.",
+                    "Created web-based platforms for managing projects and observing project KPIs."
                 ],
-                isProcessFocused: true,
             },
         ],
     },
@@ -91,30 +98,24 @@ export const experiences: Experience[] = [
                 title: "SC New Product Introduction Manager",
                 period: "Aug 2021 – Feb 2023",
                 achievements: [
-                    "Owned supply chain workstream for New Product Introduction, coordinating cross-functional teams",
-                    "Implemented pillars within Integrated Work System (IWS), driving standardization and continuous improvement",
-                    "Led cost-saving initiatives, negotiating with suppliers and optimizing material sourcing (avg 12% decrease)",
-                    "Designed centralized NPI tracking dashboards using Excel, VBA, and macros",
-                    "Conducted 100+ supplier visits and negotiations, establishing contingency plans",
-                    "Managed end-to-end NPI projects, reducing launch timelines from 5 months to 2 months",
-                    "Streamlined production planning with MRP-based scheduling across multiple production lines",
-                    "Improved inventory control, balancing stock levels to prevent shortages",
-                    "Introduced KPI-driven performance tracking aligned with business objectives",
+                    "Owned supply chain workstream for NPI, coordinating cross-functional teams.",
+                    "Implemented IWS pillars, driving standardization and continuous improvement.",
+                    "Led cost-saving initiatives, reducing procurement expenses by avg 12%.",
+                    "Designed centralized NPI tracking dashboards using Excel, VBA, and macros.",
+                    "Managed end-to-end NPI projects, reducing launch timelines from 5 months to 2 months.",
+                    "Streamlined production planning with MRP-based scheduling for 40+ SKUs.",
+                    "Conducted 100+ supplier visits and negotiations to prevent shortages."
                 ],
-                isProcessFocused: true,
             },
             {
                 title: "Management Trainee (Global Graduate)",
                 period: "Mar 2020 – Jul 2021",
                 achievements: [
-                    "Rotated through Operations, Engineering, Finance, IT, and HR teams",
-                    "Developed Excel-based automated dashboards for data-driven decision-making",
-                    "Designed Spare Part Inventory Management System using Excel, macros, and VBA",
-                    "Created MRP-based planning solution integrating 9 production lines, 5 warehouses, and 40+ SKUs",
-                    "Conducted gap analysis and optimization, leading to standardized workflows",
-                    "Implemented Predictive Maintenance pillar to reduce breakdowns and improve machine uptime",
+                    "Rotated through Operations, Engineering, Finance, IT, and HR.",
+                    "Designed Spare Part Inventory Management System using Excel/VBA.",
+                    "Created MRP-based planning solution integrating 9 production lines and 5 warehouses.",
+                    "Implemented Predictive Maintenance pillar in IWS to reduce breakdowns."
                 ],
-                isProcessFocused: true,
             },
         ],
     },
@@ -126,24 +127,20 @@ export const experiences: Experience[] = [
                 title: "Operations Improvement Specialist",
                 period: "Sep 2017 – Feb 2020",
                 achievements: [
-                    "Led 10+ projects improving OCT, enhancing OEE, reducing MTBF, and eliminating quality defects",
-                    "Supported supervisors to meet targets on supplier OTD, Material Defect Rate, and OTIF",
-                    "Managed ERP processes for inventory tracking, material planning, and production scheduling",
-                    "Designed Power BI dashboards for planning & production KPIs, reducing reporting time by 60%",
-                    "Contributed to implementation of AM, CS&L, and PD pillars in WCM framework",
+                    "Led 10+ projects improving OCT, OEE, MTBF, and eliminating quality defects.",
+                    "Designed Power BI dashboards reducing reporting time by 60%.",
+                    "Managed ERP processes for inventory tracking and production scheduling.",
+                    "Contributed to WCM implementation (AM, CS&L, PD pillars)."
                 ],
-                isProcessFocused: true,
             },
             {
                 title: "Operations Improvement Officer",
                 period: "Sep 2016 – Aug 2017",
                 achievements: [
-                    "Supported ERP-driven inventory management and production planning",
-                    "Conducted data analysis and developed Power BI dashboards for real-time reporting",
-                    "Assisted in WCM implementation, optimizing supply chain workflows",
-                    "Supported improvements in Order Cycle Time, OTIF, and Overall Efficiency",
+                    "Supported ERP-driven inventory management and production planning.",
+                    "Developed Power BI dashboards for real-time reporting.",
+                    "Assisted in WCM implementation, optimizing Order Cycle Time and OTIF."
                 ],
-                isProcessFocused: true,
             },
         ],
     },
@@ -152,133 +149,67 @@ export const experiences: Experience[] = [
 export const projects: Project[] = [
     {
         title: "Fleet Asset Management Software",
-        description:
-            "Inventory & task management software for fleet asset management and vehicle maintenance monitoring",
-        impact:
-            "Increased data reliability, decreased manual work, increased visibility and insights on inventory & assets",
-        category: "System Implementation",
+        description: "Inventory & task management software for fleet asset management.",
+        impact: "Increased data reliability, decreased manual work, increased visibility.",
+        category: "Software Dev",
     },
     {
         title: "Contract Management System",
-        description:
-            "Software for managing company contracts with modules for contract management, automatic reminders for renewals, and analytics dashboard",
-        impact:
-            "Increased visibility and reliability, reduced legal risks, decreased time for reporting & insight provisioning",
-        category: "System Implementation",
+        description: "Software for managing company contracts with auto-reminders and analytics.",
+        impact: "Reduced legal risks, decreased reporting time.",
+        category: "Software Dev",
     },
     {
-        title: "Payroll Automation Tool (Odoo-based)",
-        description:
-            "Dedicated automation tool for monthly payroll calculation, integrated with HRMS and Finance ERP",
-        impact: "Decreased payroll calculation cycle from days to minutes",
+        title: "Payroll Automation Tool",
+        description: "Odoo-based automation tool for monthly payroll calculation integrated with HRMS.",
+        impact: "Decreased cycle from days to minutes.",
         category: "Automation",
     },
     {
-        title: "ERP Implementation & Migration",
-        description:
-            "Odoo implementation/migration/upgrade (Purchase, Inventory, Fleet, Payroll, HR) from v13 to v16 and v18",
-        impact:
-            "Enabled enterprise-wide process standardization and real-time visibility",
-        category: "System Implementation",
+        title: "ERP Migration (Odoo)",
+        description: "Migration/Upgrade of Odoo (Purchase, Inventory, Fleet, Payroll) v13 to v18.",
+        impact: "Enterprise-wide standardization.",
+        category: "ERP",
     },
     {
         title: "Employee Internal Portal",
-        description:
-            "Centralized web-based application for employees to manage their requests",
-        impact: "Streamlined internal request management and increased employee satisfaction",
-        category: "Platform Development",
+        description: "Centralized web-based application for employee requests.",
+        impact: "Streamlined request management.",
+        category: "Internal Tools",
     },
     {
-        title: "Procurement System Implementation",
-        description: "End-to-end implementation of Penny procurement system for internal purchases",
-        impact: "Standardized procurement process and improved vendor management",
+        title: "Procurement System (Penny)",
+        description: "End-to-end implementation of Penny procurement system.",
+        impact: "Standardized procurement process.",
         category: "System Implementation",
     },
     {
-        title: "Ticketing System Implementation",
-        description: "Jira-based ticketing system for several teams, integrated with Slack",
-        impact: "Improved issue tracking, resolution time, and cross-team collaboration",
+        title: "Ticketing System (Jira)",
+        description: "Jira-based system integrated with Slack for multiple teams.",
+        impact: "Improved resolution time & collaboration.",
         category: "System Integration",
     },
     {
-        title: "Monitoring Tools & Dashboards",
-        description:
-            "System usage & health monitoring for Infobip, Call Center apps (Ziwo, Maqsam) with automated alerts",
-        impact: "Proactive issue detection and faster incident response",
-        category: "Analytics & Monitoring",
+        title: "Monitoring Dashboards",
+        description: "Health monitoring for Infobip, Ziwo, Maqsam with auto-alerts.",
+        impact: "Proactive issue detection.",
+        category: "Analytics",
     },
     {
-        title: "Access Management Tool (Lumos)",
-        description:
-            "Dedicated platform for managing application access requests, approvals, and monthly audits",
-        impact: "Enhanced security compliance and streamlined access governance",
+        title: "Access Management (Lumos)",
+        description: "Platform for application access requests and audits.",
+        impact: "Enhanced security compliance.",
         category: "System Implementation",
     },
     {
         title: "HRMS Integration Suite",
-        description:
-            "Multiple integration projects between HRMS (BambooHR, Keka, Odoo), Slack, Google Admin, and ERP systems",
-        impact: "Eliminated manual data entry and ensured system-wide data consistency",
-        category: "System Integration",
+        description: "Integrations: BambooHR/Keka/Odoo <> Slack <> Google Admin <> ERP.",
+        impact: "Eliminated manual data entry.",
+        category: "Integration",
     },
 ];
 
-export const skills: Skill[] = [
-    {
-        category: "Process Excellence",
-        items: [
-            "Operating Model Design",
-            "Continuous Improvement (Kaizen, PDCA, VSM, 5W, 5G, 5S, 3Mu)",
-            "Process Discovery & AS-IS/TO-BE Design",
-            "Performance Management & KPI Frameworks",
-            "Root Cause Analysis",
-            "Process Standardization & Governance",
-        ],
-    },
-    {
-        category: "Digital Transformation",
-        items: [
-            "Enterprise Automation Strategy",
-            "System Integration & Data Flow Design",
-            "Application Rationalization",
-            "Digital Roadmap Development",
-            "Change Management",
-            "Technology Enablement",
-        ],
-    },
-    {
-        category: "Project & Delivery Management",
-        items: [
-            "Agile, Waterfall, Hybrid Methodologies",
-            "Jira, Notion, MS Project",
-            "Portfolio Management",
-            "Stakeholder Engagement",
-            "Cross-functional Team Leadership",
-        ],
-    },
-    {
-        category: "Data & Analytics",
-        items: [
-            "Power BI, Tableau, Looker Studio",
-            "BigQuery, SQL",
-            "Advanced Excel (VBA, Macros)",
-            "Data-Driven Decision Making",
-            "Predictive Analytics",
-        ],
-    },
-    {
-        category: "Automation & Integration",
-        items: [
-            "Python, JavaScript, Google Apps Script",
-            "APIs, Webhooks, Data Pipelines",
-            "ERP Systems (SAP, Dynamics, Odoo)",
-            "Cloud Platforms (GCP, Firebase)",
-            "AI-Powered Automation (OpenAI, Gemini)",
-        ],
-    },
-];
-
-export const education = [
+export const education: Education[] = [
     {
         degree: "Master's in Technology and Engineering Management",
         institution: "URV",
@@ -296,13 +227,36 @@ export const education = [
     },
 ];
 
-export const certifications = [
-    "Google Project Management: Professional Certificate",
-    "Master Digital Transformation",
-    "Product Management Professional Certificate",
+export const certifications: Certification[] = [
+    { name: "Google Project Management: Professional Certificate" },
+    { name: "Master Digital Transformation" },
+    { name: "Product Management Professional Certificate" },
+];
+
+export const skills: Skill[] = [
+    {
+        category: "Process Excellence",
+        items: ["Kaizen", "PDCA", "VSM", "5S", "Root Cause Analysis", "Process Discovery", "AS-IS/TO-BE Design"],
+    },
+    {
+        category: "Enterprise Systems",
+        items: ["SAP", "Microsoft Dynamics", "Odoo", "SAGE", "Slack", "MS Teams"],
+    },
+    {
+        category: "Automation & Dev",
+        items: ["Python", "Google Apps Script", "JavaScript", "SQL", "APIs", "Webhooks"],
+    },
+    {
+        category: "Data & BI",
+        items: ["Power BI", "Tableau", "Looker Studio", "BigQuery", "Advanced Excel (VBA)"],
+    },
+    {
+        category: "Cloud & AI",
+        items: ["GCP", "Firebase", "OpenAI API", "Gemini", "Cloudflare"],
+    },
 ];
 
 export const languages = [
-    { language: "English", proficiency: "Full Professional Proficiency" },
-    { language: "Spanish", proficiency: "Limited Working Proficiency" },
+    { language: "English", level: "Full Professional" },
+    { language: "Spanish", level: "Limited Working" },
 ];
