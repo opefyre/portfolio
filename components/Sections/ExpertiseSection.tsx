@@ -9,17 +9,17 @@ const Card = ({ className, title, children }: { className?: string; title: strin
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         className={clsx(
-            "bg-white/60 dark:bg-white/[0.02] border border-border p-6 rounded-2xl flex flex-col hover:border-brand-blue/30 transition-colors duration-300 shadow-sm dark:shadow-none backdrop-blur-sm",
+            "bg-white/60 dark:bg-transparent border border-border dark:border-white/10 p-6 rounded-2xl flex flex-col hover:border-brand-blue/30 transition-colors duration-300 shadow-sm dark:shadow-none backdrop-blur-sm",
             className
         )}
     >
-        <h3 className="text-xs font-mono uppercase tracking-widest text-muted mb-4 border-b border-border pb-2">{title}</h3>
+        <h3 className="text-xs font-mono uppercase tracking-widest text-muted dark:text-gray-500 mb-4 border-b border-border dark:border-white/5 pb-2">{title}</h3>
         <div className="flex-1">{children}</div>
     </motion.div>
 );
 
 const SkillTag = ({ item }: { item: string }) => (
-    <span className="inline-flex items-center px-2.5 py-1 rounded bg-deep/5 dark:bg-white/5 border border-border text-[11px] text-silver hover:border-brand-blue/30 transition-colors cursor-default whitespace-nowrap">
+    <span className="inline-flex items-center px-2.5 py-1 rounded bg-deep/5 dark:bg-white/5 border border-border dark:border-white/10 text-[11px] text-silver dark:text-gray-300 hover:border-brand-blue/30 hover:text-brand-blue transition-colors cursor-default whitespace-nowrap">
         {item}
     </span>
 );
@@ -39,7 +39,7 @@ export default function ExpertiseSection() {
                             </span>
                         ))}
                         {skills.find(s => s.category === "Digital Transformation")?.items.map(skill => (
-                            <span key={skill} className="px-3 py-1.5 bg-deep/5 dark:bg-white/5 border border-border text-silver rounded text-xs">
+                            <span key={skill} className="px-3 py-1.5 bg-deep/5 dark:bg-white/5 border border-border dark:border-white/10 text-silver dark:text-gray-300 rounded text-xs">
                                 {skill}
                             </span>
                         ))}
@@ -50,7 +50,7 @@ export default function ExpertiseSection() {
                 <Card className="md:col-span-3 lg:col-span-2" title="Active Certifications">
                     <ul className="space-y-3">
                         {certifications.map((cert, idx) => (
-                            <li key={idx} className="flex items-center justify-between text-xs sm:text-sm text-silver/90 border-b border-border last:border-0 pb-2 last:pb-0">
+                            <li key={idx} className="flex items-center justify-between text-xs sm:text-sm text-silver/90 dark:text-gray-300 border-b border-border dark:border-white/5 last:border-0 pb-2 last:pb-0">
                                 <span className="truncate pr-4">{cert.name}</span>
                                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] shrink-0" />
                             </li>
@@ -60,13 +60,13 @@ export default function ExpertiseSection() {
 
                 {/* Education - Tall 1x2 */}
                 <Card className="md:col-span-2 lg:col-span-1 md:row-span-2" title="Academic Log">
-                    <div className="space-y-6 relative before:absolute before:left-[3px] before:top-2 before:bottom-2 before:w-[1px] before:bg-border">
+                    <div className="space-y-6 relative before:absolute before:left-[3px] before:top-2 before:bottom-2 before:w-[1px] before:bg-border dark:before:bg-white/10">
                         {education.map((edu, idx) => (
                             <div key={idx} className="relative pl-5">
-                                <div className="absolute left-0 top-1.5 w-1.5 h-1.5 rounded-full bg-border" />
-                                <div className="text-silver text-xs font-semibold leading-tight mb-1">{edu.degree}</div>
-                                <div className="text-muted text-[10px] uppercase tracking-wider">{edu.institution}</div>
-                                <div className="text-muted/50 text-[10px] font-mono mt-0.5">{edu.period}</div>
+                                <div className="absolute left-0 top-1.5 w-1.5 h-1.5 rounded-full bg-border dark:bg-white/20" />
+                                <div className="text-silver dark:text-white text-xs font-semibold leading-tight mb-1">{edu.degree}</div>
+                                <div className="text-muted dark:text-gray-400 text-[10px] uppercase tracking-wider">{edu.institution}</div>
+                                <div className="text-muted/50 dark:text-gray-600 text-[10px] font-mono mt-0.5">{edu.period}</div>
                             </div>
                         ))}
                     </div>
