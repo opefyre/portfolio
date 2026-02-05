@@ -94,6 +94,14 @@ export default function FloatingNav() {
 
                 <div className="w-px h-4 bg-border mx-1" />
 
+                {/* Primary CTA - ADDED */}
+                <button
+                    onClick={() => window.open('mailto:shirkavand.a.s@gmail.com')}
+                    className="hidden md:flex items-center px-4 py-2 rounded-full bg-brand-blue text-white text-xs font-bold uppercase tracking-wider hover:bg-brand-blue/90 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] transition-all duration-300 mr-1"
+                >
+                    Let's Chat
+                </button>
+
                 {mounted && (
                     <button
                         onClick={toggleTheme}
