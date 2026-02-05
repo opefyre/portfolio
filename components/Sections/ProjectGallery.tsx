@@ -25,9 +25,9 @@ const ProjectCard = ({ project }: any) => (
 
 export default function ProjectGallery() {
     return (
-        <section className="container-wide py-24">
-            <h2 className="section-title mb-12">Select Projects</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <section className="container-wide section-padding">
+            <h2 className="section-title mb-12 md:mb-16">Select Projects</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {projects.map((project, idx) => (
                     <ProjectCard key={idx} project={project} />
                 ))}

@@ -17,8 +17,8 @@ const StatCard = ({ label, value, subtext, delay = 0 }: any) => (
 
 export default function SummaryStats() {
     return (
-        <section className="container-wide py-12">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <section className="container-wide py-12 md:py-20">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                 <StatCard
                     value="8+"
                     label="Years Experience"

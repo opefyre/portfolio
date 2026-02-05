@@ -26,10 +26,10 @@ const SkillTag = ({ item }: { item: string }) => (
 
 export default function ExpertiseSection() {
     return (
-        <section className="container-wide py-24">
-            <h2 className="section-title mb-12">Technical Command Center</h2>
+        <section className="container-wide section-padding">
+            <h2 className="section-title mb-12 md:mb-16">Technical Command Center</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-4 gap-4 auto-rows-[minmax(180px,auto)]">
+            <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[minmax(180px,auto)]">
                 {/* Main Domain: Process Excellence */}
                 <Card className="md:col-span-3 lg:col-span-2 md:row-span-2" title="Core Domain: Process Excellence">
                     <div className="flex flex-wrap gap-2 content-start h-full">

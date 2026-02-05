@@ -5,8 +5,8 @@ import { experiences } from "@/lib/data";
 
 export default function ExperienceStack() {
     return (
-        <section className="container-wide py-12 md:py-24">
-            <h2 className="section-title mb-12">Professional History</h2>
+        <section className="container-wide section-padding">
+            <h2 className="section-title mb-12 md:mb-16">Professional History</h2>
 
             <div className="space-y-16">
                 {experiences.map((role, idx) => (
