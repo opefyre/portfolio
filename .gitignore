@@ -38,6 +38,9 @@ abosh-portfolio-d6eeb942eef4.json
 .firebase/
 firebase-debug.log
 
+# private documentation
+INFRASTRUCTURE.md
+
 # vercel
 .vercel
 
