@@ -5,160 +5,125 @@ import { education, certifications, personalInfo } from "@/lib/data";
 
 export function ContactSection() {
     return (
-        <section id="contact" className="relative min-h-screen py-20">
-            {/* Background */}
-            <div className="absolute inset-0 bg-gradient-to-t from-neon-blue/10 via-transparent to-transparent -z-10" />
+        <section id="contact" className="relative min-h-screen py-section">
+            <div className="absolute inset-0 bg-gradient-to-t from-electric-blue/10 via-black to-black -z-10" />
+            <div className="absolute inset-0 grid-background opacity-25 -z-10" />
 
-            <div className="max-w-6xl mx-auto px-6">
-                {/* Section Title */}
-                <motion.h2
-                    className="text-5xl md:text-6xl font-bold mb-16 text-center font-display"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+            <div className="max-w-[90rem] mx-auto px-6">
+                <motion.div
+                    className="mb-30"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
                 >
-                    <span className="gradient-text">Get In Touch</span>
-                </motion.h2>
+                    <h2 className="text-massive md:text-giant font-black leading-none tracking-tight">
+                        <span className="block text-white/20">Let's Work</span>
+                        <span className="block gradient-text-animated mt-4">Together</span>
+                    </h2>
+                </motion.div>
 
-                {/* Contact Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                {/* Contact Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-26">
                     {[
-                        {
-                            icon: "📧",
-                            label: "Email",
-                            value: personalInfo.email,
-                            href: `mailto:${personalInfo.email}`,
-                        },
-                        {
-                            icon: "📱",
-                            label: "Phone",
-                            value: personalInfo.phone,
-                            href: `tel:${personalInfo.phone}`,
-                        },
-                        {
-                            icon: "📍",
-                            label: "Location",
-                            value: personalInfo.location,
-                            href: null,
-                        },
-                        {
-                            icon: "💼",
-                            label: "LinkedIn",
-                            value: "Connect",
-                            href: personalInfo.linkedin,
-                        },
+                        { icon: "📧", label: "Email", value: personalInfo.email, href: `mailto:${personalInfo.email}` },
+                        { icon: "📱", label: "Phone", value: personalInfo.phone, href: `tel:${personalInfo.phone}` },
+                        { icon: "📍", label: "Location", value: personalInfo.location, href: null },
+                        { icon: "💼", label: "LinkedIn", value: "Connect", href: personalInfo.linkedin },
                     ].map((contact, index) => (
                         <motion.div
                             key={index}
-                            className="holographic p-6 text-center group"
-                            initial={{ opacity: 0, scale: 0.9 }}
+                            className="group p-10 text-center border-2 border-white/10 hover:border-electric-blue transition-all duration-500"
+                            initial={{ opacity: 0, scale: 0.8 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ delay: index * 0.1, duration: 0.6 }}
-                            whileHover={{ scale: 1.05, y: -5 }}
+                            transition={{ delay: index * 0.1 }}
+                            whileHover={{ scale: 1.1, y: -10 }}
+                            style={{
+                                background: "linear-gradient(135deg, rgba(0, 217, 255, 0.03), transparent)",
+                            }}
                         >
-                            <div className="text-4xl mb-3">{contact.icon}</div>
-                            <p className="text-sm text-gray-500 mb-2">{contact.label}</p>
+                            <div className="text-6xl mb-6">{contact.icon}</div>
+                            <p className="text-sm text-gray-600 mb-3 uppercase tracking-widest">{contact.label}</p>
                             {contact.href ? (
                                 <a
                                     href={contact.href}
                                     target={contact.label === "LinkedIn" ? "_blank" : undefined}
                                     rel={contact.label === "LinkedIn" ? "noopener noreferrer" : undefined}
-                                    className="text-neon-blue hover:text-glow transition-all"
+                                    className="text-xl font-bold text-electric-blue hover:text-electric-purple transition-colors"
                                 >
                                     {contact.value}
                                 </a>
                             ) : (
-                                <p className="text-white">{contact.value}</p>
+                                <p className="text-xl font-bold text-white">{contact.value}</p>
                             )}
                         </motion.div>
                     ))}
                 </div>
 
                 {/* Education & Certifications */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {/* Education */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-26">
                     <motion.div
-                        className="glass-strong p-8"
-                        initial={{ opacity: 0, x: -50 }}
+                        className="p-12 border-l-8 border-electric-blue"
+                        style={{ background: "linear-gradient(90deg, rgba(0, 217, 255, 0.05), transparent)" }}
+                        initial={{ opacity: 0, x: -60 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
                     >
-                        <h3 className="text-2xl font-bold mb-6 text-neon-purple">
-                            Education
-                        </h3>
-                        <div className="space-y-6">
+                        <h3 className="text-4xl font-black mb-10 text-electric-blue">Education</h3>
+                        <div className="space-y-8">
                             {education.map((edu, index) => (
-                                <div key={index} className="border-l-2 border-neon-blue pl-4">
-                                    <h4 className="font-bold text-white">{edu.degree}</h4>
-                                    <p className="text-gray-400 text-sm">{edu.institution}</p>
-                                    <p className="text-gray-500 text-xs">{edu.period}</p>
+                                <div key={index}>
+                                    <h4 className="text-2xl font-bold text-white mb-2">{edu.degree}</h4>
+                                    <p className="text-xl text-gray-400">{edu.institution}</p>
+                                    <p className="text-gray-600">{edu.period}</p>
                                 </div>
                             ))}
                         </div>
                     </motion.div>
 
-                    {/* Certifications */}
                     <motion.div
-                        className="glass-strong p-8"
-                        initial={{ opacity: 0, x: 50 }}
+                        className="p-12 border-l-8 border-electric-purple"
+                        style={{ background: "linear-gradient(90deg, rgba(168, 85, 247, 0.05), transparent)" }}
+                        initial={{ opacity: 0, x: 60 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
                     >
-                        <h3 className="text-2xl font-bold mb-6 text-neon-purple">
-                            Certifications
-                        </h3>
-                        <div className="space-y-4">
+                        <h3 className="text-4xl font-black mb-10 text-electric-purple">Certifications</h3>
+                        <div className="space-y-6">
                             {certifications.map((cert, index) => (
-                                <motion.div
-                                    key={index}
-                                    className="flex items-start gap-3"
-                                    initial={{ opacity: 0, x: 20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                                >
-                                    <span className="text-neon-blue mt-1">✓</span>
-                                    <span className="text-gray-300">{cert}</span>
-                                </motion.div>
+                                <div key={index} className="flex items-start gap-4">
+                                    <span className="text-3xl text-neon-green">✓</span>
+                                    <span className="text-xl text-gray-300">{cert}</span>
+                                </div>
                             ))}
                         </div>
                     </motion.div>
                 </div>
 
-                {/* Footer CTA */}
+                {/* CTA */}
                 <motion.div
-                    className="text-center mt-16"
-                    initial={{ opacity: 0, y: 30 }}
+                    className="text-center"
+                    initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
                 >
-                    <p className="text-xl text-gray-400 mb-6">
-                        Ready to drive transformation together?
-                    </p>
+                    <p className="text-4xl text-gray-400 mb-10">Ready to drive transformation?</p>
                     <a
                         href={`mailto:${personalInfo.email}`}
-                        className="inline-block px-8 py-4 holographic text-lg font-semibold hover:scale-105 transition-all duration-300"
+                        className="inline-block px-16 py-8 text-2xl font-black"
+                        style={{
+                            background: "linear-gradient(135deg, #00D9FF, #A855F7, #EC4899)",
+                            boxShadow: "0 0 80px rgba(0, 217, 255, 0.4)",
+                        }}
                     >
-                        Let's Connect
+                        <span className="text-black">LET'S TALK</span>
                     </a>
                 </motion.div>
             </div>
 
-            {/* Footer */}
-            <motion.footer
-                className="mt-20 text-center text-gray-500 text-sm pb-8"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-            >
-                <p>© 2026 {personalInfo.name}. All rights reserved.</p>
-            </motion.footer>
+            <footer className="mt-30 text-center text-gray-600 pb-10">
+                <p>© 2026 {personalInfo.name}</p>
+            </footer>
         </section>
     );
 }

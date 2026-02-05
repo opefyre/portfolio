@@ -7,59 +7,41 @@ import { useState } from "react";
 export function ProjectsSection() {
     const [selectedCategory, setSelectedCategory] = useState("All");
 
-    const categories = [
-        "All",
-        ...Array.from(new Set(projects.map((p) => p.category))),
-    ];
-
-    const filteredProjects =
-        selectedCategory === "All"
-            ? projects
-            : projects.filter((p) => p.category === selectedCategory);
+    const categories = ["All", ...Array.from(new Set(projects.map((p) => p.category)))];
+    const filteredProjects = selectedCategory === "All" ? projects : projects.filter((p) => p.category === selectedCategory);
 
     return (
-        <section id="projects" className="relative min-h-screen py-20">
-            {/* Background */}
-            <div className="absolute inset-0 grid-background opacity-15 -z-10" />
+        <section id="projects" className="relative min-h-screen py-section">
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-neon-green/5 to-black -z-10" />
+            <div className="absolute inset-0 grid-background opacity-20 -z-10" />
 
-            <div className="max-w-7xl mx-auto px-6">
-                {/* Section Title */}
-                <motion.h2
-                    className="text-5xl md:text-6xl font-bold mb-8 text-center font-display"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <span className="gradient-text">Key Projects</span>
-                </motion.h2>
-
-                <motion.p
-                    className="text-xl text-gray-400 text-center mb-12 max-w-3xl mx-auto"
+            <div className="max-w-[90rem] mx-auto px-6">
+                <motion.div
+                    className="mb-30"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.2, duration: 0.8 }}
                 >
-                    Transformative initiatives driving operational excellence and digital
-                    innovation
-                </motion.p>
+                    <h2 className="text-massive md:text-giant font-black leading-none tracking-tight">
+                        <span className="block text-white/20">Portfolio</span>
+                        <span className="block gradient-text-animated mt-4">Projects</span>
+                    </h2>
+                </motion.div>
 
                 {/* Category Filter */}
                 <motion.div
-                    className="flex flex-wrap justify-center gap-4 mb-12"
-                    initial={{ opacity: 0, y: 20 }}
+                    className="flex flex-wrap gap-6 mb-20"
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.3, duration: 0.6 }}
                 >
                     {categories.map((category) => (
                         <button
                             key={category}
                             onClick={() => setSelectedCategory(category)}
-                            className={`px-6 py-2 rounded-full transition-all duration-300 ${selectedCategory === category
-                                    ? "bg-gradient-to-r from-neon-blue to-neon-purple text-white shadow-lg"
-                                    : "glass hover:scale-105"
+                            className={`px-8 py-4 text-lg font-bold uppercase tracking-wider transition-all duration-500 ${selectedCategory === category
+                                    ? "bg-electric-blue text-black scale-110"
+                                    : "border-2 border-white/20 text-white hover:border-electric-blue"
                                 }`}
                         >
                             {category}
@@ -68,43 +50,33 @@ export function ProjectsSection() {
                 </motion.div>
 
                 {/* Projects Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                     {filteredProjects.map((project, index) => (
                         <motion.div
                             key={index}
-                            className="holographic p-6 group hover:scale-105 transition-all duration-300"
-                            initial={{ opacity: 0, y: 50, rotateY: -15 }}
-                            whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+                            className="group p-10 border-2 border-white/10 hover:border-electric-purple transition-all duration-500"
+                            initial={{ opacity: 0, y: 60 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: index * 0.1, duration: 0.6 }}
-                            whileHover={{
-                                rotateY: 5,
-                                rotateX: 5,
-                                transition: { duration: 0.3 },
+                            transition={{ delay: index * 0.1 }}
+                            whileHover={{ scale: 1.05, y: -10 }}
+                            style={{
+                                background: "linear-gradient(135deg, rgba(168, 85, 247, 0.05), transparent)",
                             }}
-                            style={{ transformStyle: "preserve-3d" }}
                         >
-                            {/* Category Badge */}
-                            <div className="flex justify-between items-start mb-4">
-                                <span className="text-xs px-3 py-1 bg-neon-purple/20 text-neon-purple rounded-full border border-neon-purple/50">
-                                    {project.category}
-                                </span>
+                            <div className="text-sm px-4 py-2 bg-electric-purple/20 text-electric-purple inline-block mb-6 uppercase tracking-wider font-bold">
+                                {project.category}
                             </div>
 
-                            {/* Project Title */}
-                            <h3 className="text-xl font-bold mb-3 text-neon-blue group-hover:text-glow-purple">
+                            <h3 className="text-2xl font-black mb-4 text-white group-hover:text-electric-purple transition-colors">
                                 {project.title}
                             </h3>
 
-                            {/* Description */}
-                            <p className="text-gray-400 mb-4 text-sm leading-relaxed">
-                                {project.description}
-                            </p>
+                            <p className="text-gray-400 mb-6 leading-relaxed">{project.description}</p>
 
-                            {/* Impact */}
-                            <div className="border-t border-gray-700 pt-4">
-                                <p className="text-xs text-gray-500 mb-2">Impact:</p>
-                                <p className="text-sm text-neon-green">{project.impact}</p>
+                            <div className="pt-6 border-t-2 border-white/10">
+                                <p className="text-xs text-gray-600 mb-2 uppercase tracking-wider">Impact</p>
+                                <p className="text-neon-green font-bold">{project.impact}</p>
                             </div>
                         </motion.div>
                     ))}

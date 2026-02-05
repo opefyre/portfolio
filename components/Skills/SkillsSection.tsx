@@ -5,105 +5,60 @@ import { skills } from "@/lib/data";
 
 export function SkillsSection() {
     return (
-        <section id="skills" className="relative min-h-screen py-20">
-            {/* Background */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-neon-purple/5 to-transparent -z-10" />
+        <section id="skills" className="relative min-h-screen py-section">
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-electric-pink/5 to-black -z-10" />
+            <div className="absolute inset-0 grid-background opacity-10 -z-10" />
 
-            <div className="max-w-7xl mx-auto px-6">
-                {/* Section Title */}
-                <motion.h2
-                    className="text-5xl md:text-6xl font-bold mb-16 text-center font-display"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+            <div className="max-w-[90rem] mx-auto px-6">
+                <motion.div
+                    className="mb-30"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
                 >
-                    <span className="gradient-text">Skills & Expertise</span>
-                </motion.h2>
+                    <h2 className="text-massive md:text-giant font-black leading-none tracking-tight">
+                        <span className="block text-white/20">What I Do</span>
+                        <span className="block gradient-text-animated mt-4">Expertise</span>
+                    </h2>
+                </motion.div>
 
-                {/* Skills Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                     {skills.map((skillCategory, catIndex) => (
                         <motion.div
                             key={catIndex}
-                            className="glass-strong p-6 hover:scale-105 transition-transform"
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            className="group p-12 border-2 border-white/10 hover:border-electric-blue transition-all duration-500"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ delay: catIndex * 0.15, duration: 0.6 }}
+                            transition={{ delay: catIndex * 0.15 }}
+                            whileHover={{ scale: 1.02, y: -10 }}
+                            style={{
+                                background: "linear-gradient(135deg, rgba(0, 217, 255, 0.03), rgba(168, 85, 247, 0.03))",
+                            }}
                         >
-                            {/* Category Title */}
-                            <h3 className="text-2xl font-bold mb-6 text-neon-blue text-glow">
+                            <h3 className="text-4xl font-black mb-10 text-electric-blue group-hover:text-electric-purple transition-colors">
                                 {skillCategory.category}
                             </h3>
 
-                            {/* Skills List */}
-                            <div className="space-y-3">
+                            <div className="space-y-5">
                                 {skillCategory.items.map((skill, skillIndex) => (
                                     <motion.div
                                         key={skillIndex}
-                                        className="relative"
-                                        initial={{ opacity: 0, x: -20 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
+                                        className="flex items-center gap-4 text-xl text-gray-300"
+                                        initial={{ x: -30, opacity: 0 }}
+                                        whileInView={{ x: 0, opacity: 1 }}
                                         viewport={{ once: true }}
-                                        transition={{
-                                            delay: catIndex * 0.15 + skillIndex * 0.05,
-                                            duration: 0.4,
-                                        }}
+                                        transition={{ delay: skillIndex * 0.05 }}
+                                        whileHover={{ x: 10 }}
                                     >
-                                        <div className="flex items-center gap-2 group">
-                                            <motion.div
-                                                className="w-2 h-2 rounded-full bg-neon-purple"
-                                                whileHover={{ scale: 1.5 }}
-                                                transition={{ type: "spring", stiffness: 400 }}
-                                            />
-                                            <span className="text-gray-300 group-hover:text-white group-hover:translate-x-1 transition-all">
-                                                {skill}
-                                            </span>
-                                        </div>
+                                        <div className="w-3 h-3 bg-electric-purple" />
+                                        <span className="font-medium">{skill}</span>
                                     </motion.div>
                                 ))}
                             </div>
                         </motion.div>
                     ))}
                 </div>
-
-                {/* Featured Tools */}
-                <motion.div
-                    className="mt-16"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <h3 className="text-3xl font-bold mb-8 text-center text-neon-purple">
-                        Core Competencies
-                    </h3>
-                    <div className="flex flex-wrap justify-center gap-4">
-                        {[
-                            "Process Discovery",
-                            "Continuous Improvement",
-                            "System Integration",
-                            "Cloud Platforms",
-                            "Data Analytics",
-                            "AI Automation",
-                            "KPI Frameworks",
-                            "Change Management",
-                        ].map((tool, index) => (
-                            <motion.div
-                                key={index}
-                                className="holographic px-6 py-3"
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.05, duration: 0.3 }}
-                                whileHover={{ scale: 1.1, rotate: 2 }}
-                            >
-                                <span className="font-semibold">{tool}</span>
-                            </motion.div>
-                        ))}
-                    </div>
-                </motion.div>
             </div>
         </section>
     );
