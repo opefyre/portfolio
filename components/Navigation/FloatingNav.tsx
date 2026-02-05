@@ -24,9 +24,8 @@ export default function FloatingNav() {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
 
-            // Refined spy logic: Check top of viewport with small offset
             const sections = navItems.map(item => document.getElementById(item.id));
-            const scrollPosition = window.scrollY + 120; // Trigger when top of section hits 120px from top
+            const scrollPosition = window.scrollY + 120; // Trigger offset
 
             for (const section of sections) {
                 if (section && section.offsetTop <= scrollPosition && (section.offsetTop + section.offsetHeight) > scrollPosition) {
@@ -43,7 +42,7 @@ export default function FloatingNav() {
         const element = document.getElementById(id);
         if (element) {
             window.scrollTo({
-                top: element.offsetTop - 80, // Offset for the fixed header
+                top: element.offsetTop - 80,
                 behavior: "smooth",
             });
         }
@@ -63,7 +62,7 @@ export default function FloatingNav() {
             <div className={clsx(
                 "pointer-events-auto flex items-center gap-1 p-1.5 rounded-full transition-all duration-500 border backdrop-blur-md",
                 scrolled
-                    ? "bg-deep/80 border-white/10 shadow-lg shadow-brand-blue/5"
+                    ? "bg-page/80 border-border shadow-lg shadow-brand-blue/5"
                     : "bg-transparent border-transparent"
             )}>
                 {navItems.map((item) => (
@@ -73,40 +72,36 @@ export default function FloatingNav() {
                         className={clsx(
                             "relative px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300",
                             activeSection === item.id
-                                ? "text-white dark:text-white text-silver"
-                                : "text-muted hover:text-brand-blue"
+                                ? "text-primary dark:text-white"
+                                : "text-tertiary hover:text-primary"
                         )}
                     >
                         {activeSection === item.id && (
                             <motion.div
                                 layoutId="nav-pill"
-                                className="absolute inset-0 bg-brand-blue/80 dark:bg-white/10 rounded-full border border-white/5"
+                                className="absolute inset-0 bg-white dark:bg-white/10 rounded-full border border-border shadow-sm"
                                 transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                             />
                         )}
-                        <span className={clsx("relative z-10", activeSection === item.id && "text-white")}>{item.name}</span>
+                        <span className={clsx("relative z-10", activeSection === item.id && "text-primary dark:text-white")}>{item.name}</span>
                     </button>
                 ))}
 
-                {/* Theme Toggle Separator */}
-                <div className="w-px h-4 bg-white/10 mx-1" />
+                <div className="w-px h-4 bg-border mx-1" />
 
-                {/* Theme Toggle Button */}
                 {mounted && (
                     <button
                         onClick={toggleTheme}
-                        className="relative px-3 py-2 rounded-full text-muted hover:text-brand-blue transition-colors group"
+                        className="relative px-3 py-2 rounded-full text-tertiary hover:text-brand-blue transition-colors group"
                         aria-label="Toggle Theme"
                     >
                         <div className="relative w-4 h-4">
-                            {/* Sun Icon */}
                             <svg
                                 className={clsx("absolute inset-0 w-full h-full transition-transform duration-500 rotate-0 dark:-rotate-90 dark:scale-0 text-amber-500")}
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
                             >
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
-                            {/* Moon Icon */}
                             <svg
                                 className={clsx("absolute inset-0 w-full h-full transition-transform duration-500 rotate-90 scale-0 dark:rotate-0 dark:scale-100 text-brand-blue")}
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}

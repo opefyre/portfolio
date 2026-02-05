@@ -1,139 +1,87 @@
 @import "tailwindcss";
 
-:root {
-  /* Light Mode (Clean Architect) */
-  --bg-deep: #ffffff;
-  --bg-canvas: #f8fafc;
-  --text-silver: #0f172a;
-  --text-muted: #64748b;
-  --color-border: rgba(0, 0, 0, 0.08);
-  --glass-bg: rgba(255, 255, 255, 0.8);
-}
-
-.dark {
-  /* Dark Mode (High Contrast) */
-  --bg-deep: #030712;
-  --bg-canvas: #0f172a;
-  --text-silver: #F8FAFC;
-  --text-muted: #CBD5E1;
-  /* Brightened from #94A3B8 to #CBD5E1 (Slate-300) */
-  --color-border: rgba(255, 255, 255, 0.15);
-  /* Increased form 0.08 */
-  --glass-bg: rgba(2, 6, 23, 0.7);
-}
-
 @theme {
-  /* Variable-Mapped Palette */
-  --color-deep: var(--bg-deep);
-  --color-canvas: var(--bg-canvas);
-  --color-silver: var(--text-silver);
-  --color-muted: var(--text-muted);
-  --color-border: var(--color-border);
+  /* Semantic Palette Mapping */
+  --color-page: var(--bg-page);
+  --color-card: var(--bg-card);
+  --color-card-hover: var(--bg-card-hover);
 
-  /* Constants */
-  --color-slate-glass: rgba(56, 189, 248, 0.1);
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-tertiary: var(--text-tertiary);
+
+  --color-border: var(--border-color);
+  --color-border-hover: var(--border-color-hover);
+
+  /* Brand Colors */
   --color-brand-blue: #38BDF8;
   --color-brand-purple: #818CF8;
-
-  /* Precision Spacing Scale */
-  --spacing-section: clamp(6rem, 20vh, 12rem);
-  --spacing-container: clamp(2rem, 5vw, 6rem);
 
   /* Fonts */
   --font-display: "Syne", sans-serif;
   --font-body: "Manrope", sans-serif;
 }
 
-/* Core Reset */
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-  }
+/* 
+  COLOR SYSTEM V2 - High Contrast & Semantic 
+  Adhering to WCAG AA/AAA standards.
+*/
+
+:root {
+  /* LIGHT: Clean, High Contrast, Professional */
+  --bg-page: #ffffff;
+  --bg-card: #f8fafc;
+  /* Slate-50 */
+  --bg-card-hover: #f1f5f9;
+  /* Slate-100 */
+
+  --text-primary: #0f172a;
+  /* Slate-900 - Almost Black */
+  --text-secondary: #475569;
+  /* Slate-600 - Readable Gray */
+  --text-tertiary: #94a3b8;
+  /* Slate-400 - Low priority info */
+
+  --border-color: #e2e8f0;
+  /* Slate-200 */
+  --border-color-hover: #cbd5e1;
+  /* Slate-300 */
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color-scheme: light;
-  }
+.dark {
+  /* DARK: Deep Space, Neon Accents, Clear Text */
+  --bg-page: #030712;
+  /* Gray-950 - True Black/Blue */
+  --bg-card: rgba(17, 24, 39, 0.4);
+  /* Gray-900 with transparency */
+  --bg-card-hover: rgba(31, 41, 55, 0.6);
+  /* Gray-800 */
+
+  --text-primary: #f8fafc;
+  /* Slate-50 - Pure White */
+  --text-secondary: #cbd5e1;
+  /* Slate-300 - Bright Gray */
+  --text-tertiary: #64748b;
+  /* Slate-500 - Muted but visible */
+
+  --border-color: rgba(255, 255, 255, 0.1);
+  /* Subtle white border */
+  --border-color-hover: rgba(56, 189, 248, 0.3);
+  /* Brand Blue hint */
 }
 
+/* Reset & Base Styles */
 body {
-  background-color: var(--color-deep);
-  color: var(--color-silver);
+  background-color: var(--bg-page);
+  color: var(--text-primary);
   font-family: var(--font-body);
-  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-/* Base Texture - The Digital Noise */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
-  mix-blend-mode: overlay;
-}
-
-/* Precision Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-deep);
-}
-
-::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #475569;
-}
-
-/* Typgoraphy Utils */
-.text-display {
-  font-family: var(--font-display);
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-}
-
-/* Glassmorphism Classes */
-.glass-panel {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--color-border);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-}
-
-.glass-panel-hover:hover {
-  border-color: var(--color-brand-blue);
-  transform: translateY(-2px);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Gradient Text */
-.text-gradient {
-  background: linear-gradient(135deg, var(--text-silver) 0%, var(--text-muted) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-accent {
-  background: linear-gradient(135deg, #38BDF8 0%, #818CF8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Layout Utilities */
-.container-wide {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding-left: var(--spacing-container);
-  padding-right: var(--spacing-container);
+/* Utilities for convenience */
+.glass-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(8px);
 }

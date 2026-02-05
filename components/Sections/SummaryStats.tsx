@@ -1,18 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import clsx from "clsx";
 
 const StatCard = ({ label, value, subtext, delay = 0 }: any) => (
     <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, delay }}
-        className="bg-white/60 dark:bg-transparent border border-border dark:border-white/10 p-6 rounded-xl flex flex-col justify-center items-start hover:border-brand-blue/30 transition-colors shadow-sm dark:shadow-none backdrop-blur-sm"
+        className="bg-card border border-border p-6 rounded-xl flex flex-col justify-center items-start hover:border-brand-blue/30 hover:bg-card-hover transition-colors shadow-sm dark:shadow-none backdrop-blur-sm"
     >
-        <div className="text-4xl md:text-5xl font-display font-bold text-silver dark:text-white mb-2">{value}</div>
+        <div className="text-4xl md:text-5xl font-display font-bold text-primary mb-2">{value}</div>
         <div className="text-brand-blue text-sm uppercase tracking-wider font-semibold mb-1">{label}</div>
-        {subtext && <div className="text-muted dark:text-gray-400 text-xs">{subtext}</div>}
+        {subtext && <div className="text-secondary text-xs">{subtext}</div>}
     </motion.div>
 );
 
