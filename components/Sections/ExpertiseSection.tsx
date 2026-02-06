@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { skills, certifications, education } from "@/lib/data";
 import clsx from "clsx";
+import SectionHeader from "@/components/UI/SectionHeader"; // Importing the standard header
 
 // Cast to any to bypass strict Framer Motion type checks
 const containerVariants: any = {
@@ -28,13 +29,6 @@ const cardVariants: any = {
         }
     }
 };
-
-const SectionHeader = ({ title, subtitle }: { title: string; subtitle?: string }) => (
-    <div className="mb-8 md:mb-12">
-        <h3 className="section-title text-2xl md:text-3xl mb-2">{title}</h3>
-        {subtitle && <p className="text-secondary text-sm md:text-base max-w-2xl">{subtitle}</p>}
-    </div>
-);
 
 const Card = ({ className, title, children }: { className?: string; title: string; children: React.ReactNode }) => (
     <motion.div
@@ -62,11 +56,14 @@ export default function ExpertiseSection() {
     const otherSkills = skills.filter(s => s.category !== "Process Excellence" && s.category !== "Strategic Leadership");
 
     return (
-        <section className="container-wide section-padding space-y-24 md:space-y-32">
+        <section className="container-wide section-padding space-y-24 md:space-y-32" id="expert-section"> {/* Added generic id wrapper context if needed, but inner divs carry ids */}
 
             {/* PART 1: COMPETENCIES (Skills) */}
-            <div>
-                <SectionHeader title="Core Competencies" subtitle="Process Excellence, Strategic Leadership & Digital Transformation" />
+            <div id="expertise"> {/* ID for Navigation */}
+                <SectionHeader
+                    title="Technical Command Center"
+                    subtitle="Core competencies across Process Excellence, Strategic Leadership, and Digital Transformation."
+                />
 
                 <motion.div
                     variants={containerVariants}
@@ -111,8 +108,11 @@ export default function ExpertiseSection() {
             </div>
 
             {/* PART 2: CREDENTIALS (Education & Certs) */}
-            <div>
-                <SectionHeader title="Credentials & Academic Log" />
+            <div id="credentials"> {/* Added ID for Navigation */}
+                <SectionHeader
+                    title="Credentials & Academic Log"
+                    subtitle="Formal education, certifications, and professional milestones."
+                />
 
                 <motion.div
                     variants={containerVariants}

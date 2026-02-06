@@ -2,11 +2,15 @@
 
 import { motion } from "framer-motion";
 import { experiences } from "@/lib/data";
+import SectionHeader from "@/components/UI/SectionHeader";
 
 export default function ExperienceStack() {
     return (
-        <section className="container-wide section-padding">
-            <h2 className="section-title mb-12 md:mb-16">Professional History</h2>
+        <section className="container-wide section-padding" id="experience">
+            <SectionHeader
+                title="Professional History"
+                subtitle="A chronological record of roles, responsibilities, and key achievements."
+            />
 
             <div className="space-y-16">
                 {experiences.map((role, idx) => (

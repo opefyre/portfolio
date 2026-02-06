@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import clsx from "clsx";
 
+// UPDATED NAV ITEMS to match new ID structure
 const navItems = [
     { name: "Overview", id: "hero" },
     { name: "Impact", id: "stats" },
-    { name: "Expertise", id: "expertise" },
+    { name: "Skills", id: "expertise" }, // Was Expertise
+    { name: "Credentials", id: "credentials" }, // NEW SECTION
     { name: "History", id: "experience" },
     { name: "Projects", id: "projects" },
 ];
@@ -94,7 +96,7 @@ export default function FloatingNav() {
 
                 <div className="w-px h-4 bg-border mx-1" />
 
-                {/* Primary CTA - ADDED */}
+                {/* Primary CTA */}
                 <button
                     onClick={() => window.open('mailto:shirkavand.a.s@gmail.com')}
                     className="hidden md:flex items-center px-4 py-2 rounded-full bg-brand-blue text-white text-xs font-bold uppercase tracking-wider hover:bg-brand-blue/90 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] transition-all duration-300 mr-1"

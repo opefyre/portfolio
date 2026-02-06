@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { projects, Project } from "@/lib/data";
 import { useState } from "react";
 import ProjectModal from "@/components/UI/ProjectModal";
+import SectionHeader from "@/components/UI/SectionHeader";
 
 const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => void }) => (
     <div
@@ -44,13 +45,15 @@ export default function ProjectGallery() {
 
     const closeModal = () => {
         setIsModalOpen(false);
-        // Wait for animation to finish before clearing project? 
-        // Actually AnimatePresence handles exit, so it's fine.
     };
 
     return (
-        <section className="container-wide section-padding">
-            <h2 className="section-title mb-12 md:mb-16">Select Projects</h2>
+        <section className="container-wide section-padding" id="projects"> {/* Ensure ID is here */}
+            <SectionHeader
+                title="Select Projects"
+                subtitle="A curated selection of impactful projects driving digital transformation and procedure optimization."
+            />
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {projects.map((project, idx) => (
                     <ProjectCard
