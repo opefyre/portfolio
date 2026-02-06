@@ -293,6 +293,36 @@ export const skills: Skill[] = [
 ];
 
 export const languages = [
-    { language: "English", level: "Full Professional" },
     { language: "Spanish", level: "Limited Working" },
 ];
+
+export const elixiaryVenture = {
+    title: "Elixiary AI",
+    tagline: "The World's First AI Mixologist",
+    description: "A production-grade AI platform that generates personalized cocktail recipes using Google's Genkit & Gemini. Features a complete Pro subscription model, secure authentication, and real-time generation.",
+    website: "https://elixiary.com",
+    metrics: [
+        { label: "Tech Stack", value: "Next.js 15 + Firebase" },
+        { label: "AI Engine", value: "Google Gemini + Genkit" },
+        { label: "Infra", value: "Vercel + Cloudflare" },
+    ],
+    techStack: [
+        "Next.js 15 (App Router)",
+        "Firebase Genkit",
+        "Google Gemini Pro",
+        "Firestore",
+        "Stripe Payments",
+        "Tailwind CSS v4",
+        "Brevo (Email)",
+        "Cloudflare DNS",
+        "Vercel Hosting",
+        "Algolia Search"
+    ],
+    socials: {
+        x: "https://x.com/elixiary",
+        instagram: "https://www.instagram.com/elixiary.ai",
+        tiktok: "https://www.tiktok.com/@elixiary.ai",
+        github: "https://github.com/opefyre",
+        email: "mailto:opefyre@gmail.com"
+    }
+};

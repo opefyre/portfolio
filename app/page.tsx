@@ -1,11 +1,7 @@
 "use client";
 
-import DigitalHero from "@/components/Hero/DigitalHero";
-import SummaryStats from "@/components/Sections/SummaryStats";
-import ExpertiseSection from "@/components/Sections/ExpertiseSection";
-import ExperienceStack from "@/components/Sections/ExperienceStack";
-import ProjectGallery from "@/components/Sections/ProjectGallery";
-import FloatingNav from "@/components/Navigation/FloatingNav";
+import ElixiaryFeature from "@/components/Sections/ElixiaryFeature";
+import ConnectRow from "@/components/Contact/ConnectRow";
 
 export default function Home() {
   return (
@@ -25,6 +21,11 @@ export default function Home() {
           <ExpertiseSection />
         </section>
 
+        {/* FEATURED VENTURE: Elixiary AI */}
+        <section id="venture" className="scroll-mt-32">
+          <ElixiaryFeature />
+        </section>
+
         <section id="experience" className="scroll-mt-32">
           <ExperienceStack />
         </section>
@@ -34,8 +35,11 @@ export default function Home() {
         </section>
       </div>
 
+      {/* CONNECT: Socials & Contact */}
+      <ConnectRow />
+
       {/* Footer Refactor: Semantic Colors */}
-      <footer className="py-12 text-center text-tertiary font-mono text-[10px] tracking-widest border-t border-border mt-24">
+      <footer className="py-12 text-center text-tertiary font-mono text-[10px] tracking-widest border-t border-border mt-0 bg-page">
         <p>PROCESS EXCELLENCE // DIGITAL TRANSFORMATION</p>
         <p className="mt-2 text-tertiary/60">© 2026 ABOLFAZL SHIRKAVAND</p>
       </footer>
