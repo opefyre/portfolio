@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { skills, certifications, education } from "@/lib/data";
 import clsx from "clsx";
 
-// Cast to any to bypass strict Framer Motion type checks during build
+// Cast to any to bypass strict Framer Motion type checks
 const containerVariants: any = {
     hidden: { opacity: 0 },
     visible: {
@@ -29,6 +29,13 @@ const cardVariants: any = {
     }
 };
 
+const SectionHeader = ({ title, subtitle }: { title: string; subtitle?: string }) => (
+    <div className="mb-8 md:mb-12">
+        <h3 className="section-title text-2xl md:text-3xl mb-2">{title}</h3>
+        {subtitle && <p className="text-secondary text-sm md:text-base max-w-2xl">{subtitle}</p>}
+    </div>
+);
+
 const Card = ({ className, title, children }: { className?: string; title: string; children: React.ReactNode }) => (
     <motion.div
         variants={cardVariants}
@@ -43,93 +50,107 @@ const Card = ({ className, title, children }: { className?: string; title: strin
 );
 
 const SkillTag = ({ item }: { item: string }) => (
-    <span className="inline-flex items-center px-2.5 py-1 rounded bg-page border border-border text-[11px] text-secondary hover:border-brand-blue/30 hover:text-brand-blue transition-colors cursor-default whitespace-nowrap">
+    <span className="inline-flex items-center px-3 py-1.5 rounded-md bg-page border border-border text-xs text-secondary hover:border-brand-blue/30 hover:text-brand-blue transition-colors cursor-default select-none whitespace-nowrap">
         {item}
     </span>
 );
 
 export default function ExpertiseSection() {
+    // Separate skills into primary focus vs others
+    const processSkills = skills.find(s => s.category === "Process Excellence");
+    const strategySkills = skills.find(s => s.category === "Strategic Leadership");
+    const otherSkills = skills.filter(s => s.category !== "Process Excellence" && s.category !== "Strategic Leadership");
+
     return (
-        <section className="container-wide section-padding">
-            <h2 className="section-title mb-12 md:mb-16">Technical Command Center</h2>
+        <section className="container-wide section-padding space-y-24 md:space-y-32">
 
-            <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-                className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[minmax(180px,auto)]"
-            >
-                {/* Main Domain: Process Excellence */}
-                <Card className="md:col-span-3 lg:col-span-2 md:row-span-2" title="Core Domain: Process Excellence">
-                    <div className="flex flex-wrap gap-2 content-start h-full">
-                        {skills.find(s => s.category === "Process Excellence")?.items.map(skill => (
-                            <span key={skill} className="px-4 py-2 bg-brand-blue/10 border border-brand-blue/20 text-brand-blue rounded text-sm font-medium">
-                                {skill}
-                            </span>
-                        ))}
-                        {skills.find(s => s.category === "Digital Transformation")?.items.map(skill => (
-                            <span key={skill} className="px-3 py-1.5 bg-page border border-border text-secondary rounded text-xs">
-                                {skill}
-                            </span>
-                        ))}
-                    </div>
-                </Card>
+            {/* PART 1: COMPETENCIES (Skills) */}
+            <div>
+                <SectionHeader title="Core Competencies" subtitle="Process Excellence, Strategic Leadership & Digital Transformation" />
 
-                {/* Certifications */}
-                <Card className="md:col-span-3 lg:col-span-2" title="Active Certifications">
-                    <ul className="space-y-3">
-                        {certifications.map((cert, idx) => (
-                            <li key={idx} className="flex items-center justify-between text-xs sm:text-sm text-secondary border-b border-border last:border-0 pb-2 last:pb-0">
-                                <span className="truncate pr-4">{cert.name}</span>
-                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] shrink-0" />
-                            </li>
-                        ))}
-                    </ul>
-                </Card>
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-50px" }}
+                    className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-4 gap-6"
+                >
+                    {/* Primary Focus: Process Excellence (Large Card) */}
+                    <Card className="md:col-span-3 lg:col-span-2 md:row-span-2 border-brand-blue/20 bg-brand-blue/5" title="Process Excellence & Optimization">
+                        <div className="flex flex-wrap gap-2.5 content-start h-full">
+                            {processSkills?.items.map(skill => (
+                                <span key={skill} className="px-4 py-2 bg-brand-blue text-white shadow-lg shadow-brand-blue/20 rounded-lg text-sm font-bold tracking-wide">
+                                    {skill}
+                                </span>
+                            ))}
+                        </div>
+                    </Card>
 
-                {/* Education */}
-                <Card className="md:col-span-2 lg:col-span-1 md:row-span-2" title="Academic Log">
-                    <div className="space-y-6 relative before:absolute before:left-[3px] before:top-2 before:bottom-2 before:w-[1px] before:bg-border">
-                        {education.map((edu, idx) => (
-                            <div key={idx} className="relative pl-5">
-                                <div className="absolute left-0 top-1.5 w-1.5 h-1.5 rounded-full bg-border" />
-                                <div className="text-primary text-xs font-semibold leading-tight mb-1">{edu.degree}</div>
-                                <div className="text-tertiary text-[10px] uppercase tracking-wider">{edu.institution}</div>
-                                <div className="text-tertiary/70 text-[10px] font-mono mt-0.5">{edu.period}</div>
+                    {/* Secondary Focus: Strategic Leadership */}
+                    <Card className="md:col-span-3 lg:col-span-2" title="Strategic Leadership">
+                        <div className="flex flex-wrap gap-2">
+                            {strategySkills?.items.map(skill => (
+                                <span key={skill} className="px-3 py-1.5 bg-brand-purple/10 border border-brand-purple/20 text-brand-purple rounded-md text-xs font-semibold">
+                                    {skill}
+                                </span>
+                            ))}
+                        </div>
+                    </Card>
+
+                    {/* Other Categories Dynamically Mapped */}
+                    {otherSkills.map((skillGroup, idx) => (
+                        <Card key={idx} className="md:col-span-2 lg:col-span-1" title={skillGroup.category}>
+                            <div className="flex flex-wrap gap-1.5">
+                                {skillGroup.items.map(item => (
+                                    <SkillTag key={item} item={item} />
+                                ))}
                             </div>
-                        ))}
-                    </div>
-                </Card>
+                        </Card>
+                    ))}
+                </motion.div>
+            </div>
 
-                {/* Tech Stacks */}
-                <Card className="md:col-span-2 lg:col-span-1" title="Enterprise Systems">
-                    <div className="flex flex-wrap gap-1.5">
-                        {skills.find(s => s.category === "Enterprise Systems")?.items.map(sk => (
-                            <SkillTag key={sk} item={sk} />
-                        ))}
-                    </div>
-                </Card>
+            {/* PART 2: CREDENTIALS (Education & Certs) */}
+            <div>
+                <SectionHeader title="Credentials & Academic Log" />
 
-                <Card className="md:col-span-2 lg:col-span-1" title="Automation & Dev">
-                    <div className="flex flex-wrap gap-1.5">
-                        {skills.find(s => s.category === "Automation & Dev")?.items.map(sk => (
-                            <SkillTag key={sk} item={sk} />
-                        ))}
-                    </div>
-                </Card>
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-50px" }}
+                    className="grid grid-cols-1 md:grid-cols-2 gap-8"
+                >
+                    {/* Education */}
+                    <Card className="h-full" title="Academic Milestones">
+                        <div className="space-y-8 relative before:absolute before:left-[3px] before:top-2 before:bottom-2 before:w-[1px] before:bg-border">
+                            {education.map((edu, idx) => (
+                                <div key={idx} className="relative pl-6 group">
+                                    <div className="absolute left-0 top-1.5 w-1.5 h-1.5 rounded-full bg-border group-hover:bg-brand-blue transition-colors" />
+                                    <div className="text-primary text-sm font-bold leading-tight mb-1">{edu.degree}</div>
+                                    <div className="text-tertiary text-xs uppercase tracking-wider font-semibold">{edu.institution}</div>
+                                    <div className="text-tertiary/70 text-[10px] font-mono mt-1">{edu.period}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </Card>
 
-                <Card className="md:col-span-4 lg:col-span-1" title="Cloud & Intelligence">
-                    <div className="flex flex-wrap gap-1.5">
-                        {skills.find(s => s.category === "Cloud & AI")?.items.map(sk => (
-                            <SkillTag key={sk} item={sk} />
-                        ))}
-                        {skills.find(s => s.category === "Data & BI")?.items.map(sk => (
-                            <SkillTag key={sk} item={sk} />
-                        ))}
-                    </div>
-                </Card>
-            </motion.div>
+                    {/* Certifications */}
+                    <Card className="h-full" title="Professional Certifications">
+                        <ul className="space-y-4">
+                            {certifications.map((cert, idx) => (
+                                <li key={idx} className="flex items-start justify-between group">
+                                    <span className="text-sm text-secondary group-hover:text-primary transition-colors pr-4 leading-relaxed font-medium">
+                                        {cert.name}
+                                    </span>
+                                    <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] shrink-0 mt-1.5" />
+                                </li>
+                            ))}
+                        </ul>
+                    </Card>
+                </motion.div>
+            </div>
+
         </section>
     );
 }
