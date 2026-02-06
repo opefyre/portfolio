@@ -284,7 +284,7 @@ export const skills: Skill[] = [
     },
     {
         category: "Technical Stack", // Cloud, Code, Automation
-        items: ["GCP", "AWS", "Python", "JavaScript", "SQL", "APIs", "Webhooks", "Google Apps Script", "VBA & Macros", "N8N"],
+        items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Firebase", "GCP", "Python", "SQL", "APIs", "Webhooks", "N8N"],
     },
     {
         category: "Data & Analytics",

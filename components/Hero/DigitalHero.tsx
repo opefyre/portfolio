@@ -45,9 +45,9 @@ export default function DigitalHero() {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 text-center px-4 mix-blend-normal dark:mix-blend-screen max-w-4xl mx-auto">
-                {/* Title Gradient uses explicit tailwind colors but falls back to safe semantic concepts */}
-                <h1 className="text-display text-5xl md:text-7xl lg:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-slate-900 to-slate-500 dark:from-white dark:to-gray-400 mb-6 leading-tight">
+            <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+                {/* Title Gradient updated for high contrast in dark mode */}
+                <h1 className="text-display text-5xl md:text-7xl lg:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-slate-900 via-slate-700 to-slate-500 dark:from-white dark:via-slate-200 dark:to-slate-400 mb-6 leading-tight drop-shadow-sm dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                     {personalInfo.name}
                 </h1>
                 <h2 className="text-brand-blue font-bold tracking-[0.1em] text-lg md:text-xl uppercase mb-8">
