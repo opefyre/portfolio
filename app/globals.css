@@ -46,6 +46,12 @@
   /* Slate-200 */
   --border-color-hover: #cbd5e1;
   /* Slate-300 */
+
+  /* Hero Gradient - Light Mode (Dark Text) */
+  --hero-gradient-from: #0f172a;
+  /* Slate.900 */
+  --hero-gradient-to: #94a3b8;
+  /* Slate.400 */
 }
 
 .dark {
@@ -68,6 +74,11 @@
   /* Subtle white border */
   --border-color-hover: rgba(56, 189, 248, 0.3);
   /* Brand Blue hint */
+
+  /* Hero Gradient - Dark Mode (Light Text) */
+  --hero-gradient-from: #ffffff;
+  --hero-gradient-to: #cbd5e1;
+  /* Slate.300 */
 }
 
 /* Reset & Base Styles */

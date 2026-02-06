@@ -50,7 +50,7 @@ export default function DigitalHero() {
             {/* Content */}
             <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
                 {/* Title Gradient - Simplified to 2-stop for reliability */}
-                <h1 className="text-display text-5xl md:text-7xl lg:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-slate-900 to-slate-400 dark:from-white dark:to-slate-300 mb-6 leading-tight drop-shadow-sm pb-2">
+                <h1 className="text-display text-5xl md:text-7xl lg:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[var(--hero-gradient-from)] to-[var(--hero-gradient-to)] mb-6 leading-tight drop-shadow-sm pb-2 transition-colors duration-500">
                     {personalInfo.name}
                 </h1>
                 <h2 className="text-brand-blue font-bold tracking-[0.1em] text-lg md:text-xl uppercase mb-8">
