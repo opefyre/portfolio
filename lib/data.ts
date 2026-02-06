@@ -260,33 +260,36 @@ export const certifications: Certification[] = [
     { name: "Google Project Management: Professional Certificate" },
     { name: "Master Digital Transformation" },
     { name: "Product Management Professional Certificate" },
+    { name: "Google Cloud Digital Leader" },
+    { name: "Aha! Product Management Professional" },
+    { name: "Mastering Jira Administration" },
 ];
 
 export const skills: Skill[] = [
     {
         category: "Process Excellence",
-        items: ["Kaizen", "PDCA", "VSM", "5S", "5G", "5W", "3Mu", "Root Cause Analysis", "AS-IS/TO-BE Design"],
+        items: ["Six Sigma", "Kaizen", "PDCA", "VSM", "5S", "Root Cause Analysis", "Business Process Mapping", "Operational Excellence", "Supply Chain Optimization"],
     },
     {
-        category: "Enterprise Systems",
-        items: ["SAP", "Microsoft Dynamics", "Odoo", "SAGE", "Slack", "MS Teams", "Google/Microsoft Bundles"],
+        category: "Project & Program Management",
+        items: ["Agile/Scrum", "Waterfall", "Jira Administration", "Risk Management", "Stakeholder Management", "Project Delivery", "Budget Management", "Scope Development"],
     },
     {
-        category: "Automation & Dev",
-        items: ["Python", "Google Apps Script", "JavaScript", "SQL", "APIs", "Webhooks", "N8N"],
+        category: "Digital Transformation",
+        items: ["Change Management", "Digital Strategy", "Operating Model Design", "Tech Governance", "Process Implementation", "Systems Improvement", "Strategic Planning"],
     },
     {
-        category: "Data & BI",
-        items: ["Power BI", "Tableau", "Looker Studio", "BigQuery", "Advanced Excel (VBA)", "Macros"],
+        category: "Enterprise Systems", // ERP & Core
+        items: ["SAP", "Microsoft Dynamics", "Odoo", "SAGE", "Slack Automation", "Google Workspace", "Inventory Management", "MRP", "Production Planning"],
     },
     {
-        category: "Cloud & AI",
-        items: ["GCP", "Firebase", "Cloudflare", "OpenAI API", "Gemini", "AI Agents"],
+        category: "Technical Stack", // Cloud, Code, Automation
+        items: ["GCP", "AWS", "Python", "JavaScript", "SQL", "APIs", "Webhooks", "Google Apps Script", "VBA & Macros", "N8N"],
     },
     {
-        category: "Strategic Leadership", // Added based on "Soft Skills"
-        items: ["Change Management", "Stakeholder Engagement", "Deep Analytical Thinking", "Negotiation", "Tech Governance"],
-    },
+        category: "Data & Analytics",
+        items: ["Power BI", "Tableau", "Looker Studio", "BigQuery", "Data Analysis", "Demand Forecasting", "KPI Frameworks"],
+    }
 ];
 
 export const languages = [

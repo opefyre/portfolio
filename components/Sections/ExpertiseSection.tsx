@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { skills, certifications, education } from "@/lib/data";
 import clsx from "clsx";
-import SectionHeader from "@/components/UI/SectionHeader"; // Importing the standard header
+import SectionHeader from "@/components/UI/SectionHeader";
 
 // Cast to any to bypass strict Framer Motion type checks
 const containerVariants: any = {
@@ -50,19 +50,24 @@ const SkillTag = ({ item }: { item: string }) => (
 );
 
 export default function ExpertiseSection() {
-    // Separate skills into primary focus vs others
+    // Separate primary areas
     const processSkills = skills.find(s => s.category === "Process Excellence");
-    const strategySkills = skills.find(s => s.category === "Strategic Leadership");
-    const otherSkills = skills.filter(s => s.category !== "Process Excellence" && s.category !== "Strategic Leadership");
+    const projectSkills = skills.find(s => s.category === "Project & Program Management");
+
+    // Remaining specific categories
+    const otherSkills = skills.filter(s =>
+        s.category !== "Process Excellence" &&
+        s.category !== "Project & Program Management"
+    );
 
     return (
-        <section className="container-wide section-padding space-y-24 md:space-y-32" id="expert-section"> {/* Added generic id wrapper context if needed, but inner divs carry ids */}
+        <section className="container-wide section-padding space-y-24 md:space-y-32" id="expert-section">
 
             {/* PART 1: COMPETENCIES (Skills) */}
-            <div id="expertise"> {/* ID for Navigation */}
+            <div id="expertise">
                 <SectionHeader
                     title="Technical Command Center"
-                    subtitle="Core competencies across Process Excellence, Strategic Leadership, and Digital Transformation."
+                    subtitle="Core competencies across Process Excellence, Project Management, and Digital Transformation."
                 />
 
                 <motion.div
@@ -72,7 +77,7 @@ export default function ExpertiseSection() {
                     viewport={{ once: true, margin: "-50px" }}
                     className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-4 gap-6"
                 >
-                    {/* Primary Focus: Process Excellence (Large Card) */}
+                    {/* Primary Hero 1: Process Excellence */}
                     <Card className="md:col-span-3 lg:col-span-2 md:row-span-2 border-brand-blue/20 bg-brand-blue/5" title="Process Excellence & Optimization">
                         <div className="flex flex-wrap gap-2.5 content-start h-full">
                             {processSkills?.items.map(skill => (
@@ -83,18 +88,18 @@ export default function ExpertiseSection() {
                         </div>
                     </Card>
 
-                    {/* Secondary Focus: Strategic Leadership */}
-                    <Card className="md:col-span-3 lg:col-span-2" title="Strategic Leadership">
-                        <div className="flex flex-wrap gap-2">
-                            {strategySkills?.items.map(skill => (
-                                <span key={skill} className="px-3 py-1.5 bg-brand-purple/10 border border-brand-purple/20 text-brand-purple rounded-md text-xs font-semibold">
+                    {/* Primary Hero 2: Project Management (Highlighted as requested) */}
+                    <Card className="md:col-span-3 lg:col-span-2 md:row-span-2 border-brand-purple/20 bg-brand-purple/5" title="Project & Program Management">
+                        <div className="flex flex-wrap gap-2.5 content-start h-full">
+                            {projectSkills?.items.map(skill => (
+                                <span key={skill} className="px-4 py-2 bg-brand-purple/10 border border-brand-purple/20 text-brand-purple rounded-lg text-sm font-semibold tracking-wide">
                                     {skill}
                                 </span>
                             ))}
                         </div>
                     </Card>
 
-                    {/* Other Categories Dynamically Mapped */}
+                    {/* Dynamically Map Remaining Categories (Digital Strategy, Tech Stack, Enterprise, Data) */}
                     {otherSkills.map((skillGroup, idx) => (
                         <Card key={idx} className="md:col-span-2 lg:col-span-1" title={skillGroup.category}>
                             <div className="flex flex-wrap gap-1.5">
@@ -108,10 +113,10 @@ export default function ExpertiseSection() {
             </div>
 
             {/* PART 2: CREDENTIALS (Education & Certs) */}
-            <div id="credentials"> {/* Added ID for Navigation */}
+            <div id="credentials">
                 <SectionHeader
                     title="Credentials & Academic Log"
-                    subtitle="Formal education, certifications, and professional milestones."
+                    subtitle="Formal education, certifications, and professional learning path."
                 />
 
                 <motion.div
@@ -135,18 +140,18 @@ export default function ExpertiseSection() {
                         </div>
                     </Card>
 
-                    {/* Certifications */}
-                    <Card className="h-full" title="Professional Certifications">
-                        <ul className="space-y-4">
+                    {/* Certifications (Expanded & Styled) */}
+                    <Card className="h-full" title="Active Certifications">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
                             {certifications.map((cert, idx) => (
-                                <li key={idx} className="flex items-start justify-between group">
-                                    <span className="text-sm text-secondary group-hover:text-primary transition-colors pr-4 leading-relaxed font-medium">
+                                <div key={idx} className="flex items-start gap-2.5 group">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] shrink-0 mt-2" />
+                                    <span className="text-sm text-secondary group-hover:text-primary transition-colors font-medium leading-relaxed">
                                         {cert.name}
                                     </span>
-                                    <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] shrink-0 mt-1.5" />
-                                </li>
+                                </div>
                             ))}
-                        </ul>
+                        </div>
                     </Card>
                 </motion.div>
             </div>
