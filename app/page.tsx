@@ -1,7 +1,13 @@
 "use client";
 
+import DigitalHero from "@/components/Hero/DigitalHero";
+import SummaryStats from "@/components/Sections/SummaryStats";
+import ExpertiseSection from "@/components/Sections/ExpertiseSection";
+import ExperienceStack from "@/components/Sections/ExperienceStack";
+import ProjectGallery from "@/components/Sections/ProjectGallery";
+import FloatingNav from "@/components/Navigation/FloatingNav";
 import ElixiaryFeature from "@/components/Sections/ElixiaryFeature";
-import ConnectRow from "@/components/Contact/ConnectRow";
+
 
 export default function Home() {
   return (
@@ -35,8 +41,7 @@ export default function Home() {
         </section>
       </div>
 
-      {/* CONNECT: Socials & Contact */}
-      <ConnectRow />
+
 
       {/* Footer Refactor: Semantic Colors */}
       <footer className="py-12 text-center text-tertiary font-mono text-[10px] tracking-widest border-t border-border mt-0 bg-page">
