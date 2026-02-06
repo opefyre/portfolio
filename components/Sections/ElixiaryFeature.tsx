@@ -91,6 +91,30 @@ export default function ElixiaryFeature() {
                                 View Code
                             </a>
                         </div>
+
+                        {/* Social Connect Row (Integrated) */}
+                        <div className="pt-8 border-t border-white/5">
+                            <h4 className="text-xs uppercase tracking-widest text-tertiary mb-4">Connect with Elixiary</h4>
+                            <div className="flex items-center gap-6">
+                                {[
+                                    { name: "X", url: elixiaryVenture.socials.x, icon: XIcon },
+                                    { name: "Instagram", url: elixiaryVenture.socials.instagram, icon: Instagram },
+                                    { name: "TikTok", url: elixiaryVenture.socials.tiktok, icon: TikTokIcon },
+                                    { name: "Email", url: elixiaryVenture.socials.email, icon: Mail },
+                                ].map((social) => (
+                                    <a
+                                        key={social.name}
+                                        href={social.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-slate-400 hover:text-white transition-colors duration-300"
+                                        aria-label={social.name}
+                                    >
+                                        <social.icon className="w-5 h-5" />
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
                     </div>
 
                     {/* Right: Abstract Visualization / Stats */}
