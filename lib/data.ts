@@ -15,6 +15,10 @@ export interface Project {
     description: string;
     impact: string;
     category: string;
+    // Enhanced Fields for Deep Dive
+    problem: string;
+    solution: string;
+    tech_stack: string[];
 }
 
 export interface Skill {
@@ -152,60 +156,90 @@ export const projects: Project[] = [
         description: "Inventory & task management software for fleet asset management.",
         impact: "Increased data reliability, decreased manual work, increased visibility.",
         category: "Software Dev",
+        problem: "Manual fleet tracking via spreadsheets led to data discrepancies, lost assets, and delayed maintenance, causing significant operational downtime.",
+        solution: "Built a custom centralized web application for fleet monitoring, distinct assigning of tasks to drivers, and real-time fuel/maintenance logs.",
+        tech_stack: ["React", "Node.js", "PostgreSQL", "Google Maps API"],
     },
     {
         title: "Contract Management System",
         description: "Software for managing company contracts with auto-reminders and analytics.",
         impact: "Reduced legal risks, decreased reporting time.",
         category: "Software Dev",
+        problem: "Legal teams missed renewal deadlines due to decentralized storage of contracts in physical folders and disparate drive locations.",
+        solution: "Developed an automated repository with smart OCR features, expiry notifications via Slack/Email, and a dashboard for contract value analytics.",
+        tech_stack: ["Next.js", "Firebase", "SendGrid", "OCR API"],
     },
     {
         title: "Payroll Automation Tool",
         description: "Odoo-based automation tool for monthly payroll calculation integrated with HRMS.",
         impact: "Decreased cycle from days to minutes.",
         category: "Automation",
+        problem: "Monthly payroll processing involved manual CSV exports from three different systems (Biometric, HR, Banking), taking 3 full days to reconcile.",
+        solution: "Engineered an Odoo module that pulls attendance data via API, calculates localized tax/deductions automatically, and generates bank-ready payment files.",
+        tech_stack: ["Python", "Odoo", "PostgreSQL", "REST API"],
     },
     {
         title: "ERP Migration (Odoo)",
         description: "Migration/Upgrade of Odoo (Purchase, Inventory, Fleet, Payroll) v13 to v18.",
         impact: "Enterprise-wide standardization.",
         category: "ERP",
+        problem: "Legacy Odoo v13 instance was slow, insecure, and lacked modern features, causing friction in Purchase and Inventory workflows.",
+        solution: "Led the end-to-end migration strategy, including data cleaning, module refactoring for v18 compatibility, and user training for 200+ employees.",
+        tech_stack: ["Odoo.sh", "Python", "XML", "PostgreSQL"],
     },
     {
         title: "Employee Internal Portal",
         description: "Centralized web-based application for employee requests.",
         impact: "Streamlined request management.",
         category: "Internal Tools",
+        problem: "Employees had to use emails, WhatsApp, and paper forms to request IT support or HR documents, leading to lost tickets.",
+        solution: "Launched a self-service portal (Internal Desk) where employees can raise, track, and rate service requests, routed automatically to the right department.",
+        tech_stack: ["React", "Firebase", "Tailwind CSS"],
     },
     {
         title: "Procurement System (Penny)",
         description: "End-to-end implementation of Penny procurement system.",
         impact: "Standardized procurement process.",
         category: "System Implementation",
+        problem: "Maverick spending was rampant due to lack of enforced approval workflows and vendor management.",
+        solution: "Implemented Penny P2P system, configuring approval matrices based on budget thresholds and integrating it with the finance ERP for auto-PO generation.",
+        tech_stack: ["Penny", "API Integration", "ERP"],
     },
     {
         title: "Ticketing System (Jira)",
         description: "Jira-based system integrated with Slack for multiple teams.",
         impact: "Improved resolution time & collaboration.",
         category: "System Integration",
+        problem: "Tech and non-tech teams worked in silos using different tools, making cross-functional project tracking impossible.",
+        solution: "Unified all teams onto a master Jira instance with customized workflows, and built a Slack bot to allow ticket updates directly from chat.",
+        tech_stack: ["Jira", "Slack API", "Automation for Jira"],
     },
     {
         title: "Monitoring Dashboards",
         description: "Health monitoring for Infobip, Ziwo, Maqsam with auto-alerts.",
         impact: "Proactive issue detection.",
         category: "Analytics",
+        problem: "Support teams reacted to downtime only after customer complaints, damaging reputation.",
+        solution: "Created a centralized 'Heartbeat' dashboard aggregating statuses from Infobip, Ziwo, and Maqsam APIs, triggering alerts to on-call engineers instantly.",
+        tech_stack: ["Grafana", "Node.js", "Prometheus", "3rd Party APIs"],
     },
     {
         title: "Access Management (Lumos)",
         description: "Platform for application access requests and audits.",
         impact: "Enhanced security compliance.",
         category: "System Implementation",
+        problem: "Manual granting of software licenses resulted in 'Shadow IT' and paying for unused seats.",
+        solution: "Deployed Lumos to automate access provisioning/deprovisioning based on role, saving 15% in SaaS costs via unused license reclamation.",
+        tech_stack: ["Lumos", "Okta", "SCIM"],
     },
     {
         title: "HRMS Integration Suite",
         description: "Integrations: BambooHR/Keka/Odoo <> Slack <> Google Admin <> ERP.",
         impact: "Eliminated manual data entry.",
         category: "Integration",
+        problem: "Onboarding a new employee required manual data entry into 5 separate systems.",
+        solution: "Built an iPaaS workflow where creating an employee in BambooHR automatically provisions their Google Workspace, Slack, and Odoo accounts.",
+        tech_stack: ["Make (Integromat)", "BambooHR API", "Google Admin SDK"],
     },
 ];
 
