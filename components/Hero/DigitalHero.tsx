@@ -44,11 +44,13 @@ export default function DigitalHero() {
                 </Canvas>
             </div>
 
+            {/* Grid Overlay: Moved behind content but above background */}
+            <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.05)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,black_40%,transparent_100%)] pointer-events-none" />
+
             {/* Content */}
             <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-                {/* Title Gradient updated for high contrast in dark mode */}
-                {/* Added via-white to ensure it stays bright for most of the text */}
-                <h1 className="text-display text-5xl md:text-7xl lg:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-slate-900 via-slate-700 to-slate-500 dark:from-white dark:via-slate-100 dark:to-slate-300 mb-6 leading-tight drop-shadow-sm pb-2">
+                {/* Title Gradient - Simplified to 2-stop for reliability */}
+                <h1 className="text-display text-5xl md:text-7xl lg:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-slate-900 to-slate-400 dark:from-white dark:to-slate-300 mb-6 leading-tight drop-shadow-sm pb-2">
                     {personalInfo.name}
                 </h1>
                 <h2 className="text-brand-blue font-bold tracking-[0.1em] text-lg md:text-xl uppercase mb-8">
@@ -59,9 +61,6 @@ export default function DigitalHero() {
                     Driving enterprise-wide automation, system integration, and operational excellence through data, AI, and technology.
                 </p>
             </div>
-
-            {/* Grid Overlay: Updated to use semantic border colors implicitly or safe RGBA */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.05)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,black_40%,transparent_100%)] pointer-events-none" />
         </section>
     );
 }
