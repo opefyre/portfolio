@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { personalInfo } from "@/lib/data";
 import { useTheme } from "next-themes";
 import clsx from "clsx";
 
@@ -98,7 +99,7 @@ export default function FloatingNav() {
 
                 {/* Primary CTA */}
                 <button
-                    onClick={() => window.open('mailto:shirkavand.a.s@gmail.com')}
+                    onClick={() => window.open(`mailto:${personalInfo.email}`)}
                     className="hidden md:flex items-center px-4 py-2 rounded-full bg-brand-blue text-white text-xs font-bold uppercase tracking-wider hover:bg-brand-blue/90 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] transition-all duration-300 mr-1"
                 >
                     Let's Chat
