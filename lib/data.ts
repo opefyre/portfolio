@@ -322,7 +322,7 @@ export const elixiaryVenture = {
         x: "https://x.com/elixiary",
         instagram: "https://www.instagram.com/elixiary.ai",
         tiktok: "https://www.tiktok.com/@elixiary.ai",
-        github: "https://github.com/opefyre",
+        github: "https://github.com/opefyre/elixiary-ai-firebase-studio",
         email: "mailto:hello@elixiary.com"
     }
 };
