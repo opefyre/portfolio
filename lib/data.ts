@@ -333,37 +333,4 @@ export const languages = [
     { language: "Spanish", level: "Limited Working" },
 ];
 
-export const elixiaryVenture = {
-    title: "Elixiary AI",
-    tagline: "The World's Best AI Mixologist",
-    description: "The ultimate destination for cocktail enthusiasts. Beyond its core AI generation engine, it features a massive library of curated recipes and a comprehensive education hub for aspiring mixologists.",
-    website: "https://elixiary.com",
-    modules: [
-        { name: "Curated Recipes", url: "https://elixiary.com/cocktails" },
-        { name: "Education Hub", url: "https://elixiary.com/education" }
-    ],
-    metrics: [
-        { label: "Tech Stack", value: "Next.js 15 + Firebase" },
-        { label: "AI Engine", value: "Google Gemini + Genkit" },
-        { label: "Infra", value: "Vercel + Cloudflare" },
-    ],
-    techStack: [
-        "Next.js 15 (App Router)",
-        "Firebase Genkit",
-        "Google Gemini Pro",
-        "Firestore",
-        "Stripe Payments",
-        "Tailwind CSS v4",
-        "Brevo (Email)",
-        "Cloudflare DNS",
-        "Vercel Hosting",
-        "Algolia Search"
-    ],
-    socials: {
-        x: "https://x.com/elixiary",
-        instagram: "https://www.instagram.com/elixiary.ai",
-        tiktok: "https://www.tiktok.com/@elixiary.ai",
-        github: "https://github.com/opefyre/elixiary-ai-firebase-studio",
-        email: "mailto:hello@elixiary.com"
-    }
-};
+

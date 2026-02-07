@@ -10,9 +10,9 @@ import clsx from "clsx";
 const navItems = [
     { name: "Overview", id: "hero" },
     { name: "Impact", id: "stats" },
-    { name: "Skills", id: "expertise" }, // Was Expertise
-    { name: "Credentials", id: "credentials" }, // NEW SECTION
+    { name: "Skills", id: "expertise" },
     { name: "History", id: "experience" },
+    { name: "Venture", id: "venture" },
     { name: "Projects", id: "projects" },
 ];
 

@@ -27,13 +27,13 @@ export default function Home() {
           <ExpertiseSection />
         </section>
 
+        <section id="experience" className="scroll-mt-32">
+          <ExperienceStack />
+        </section>
+
         {/* FEATURED VENTURE: Elixiary AI */}
         <section id="venture" className="scroll-mt-32">
           <ElixiaryFeature />
-        </section>
-
-        <section id="experience" className="scroll-mt-32">
-          <ExperienceStack />
         </section>
 
         <section id="projects" className="scroll-mt-32">

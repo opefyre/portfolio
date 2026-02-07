@@ -57,8 +57,8 @@ export default function DigitalHero() {
                     PROCESS EXCELLENCE & DIGITAL TRANSFORMATION
                 </h2>
                 {/* Semantic text color update */}
-                <p className="text-secondary text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
-                    Driving enterprise-wide automation, system integration, and operational excellence through data, AI, and technology.
+                <p className="text-secondary text-lg md:text-xl font-light leading-relaxed max-w-3xl mx-auto">
+                    Driving operational excellence and enterprise-wide efficiency through Lean Six Sigma, system integration, and AI-enabled automation across industrial and digital environments.
                 </p>
             </div>
         </section>
