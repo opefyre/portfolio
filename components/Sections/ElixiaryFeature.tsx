@@ -56,6 +56,21 @@ export default function ElixiaryFeature() {
                             <p className="text-secondary text-lg leading-relaxed max-w-xl">
                                 {elixiaryVenture.description}
                             </p>
+
+                            {/* Key Modules */}
+                            <div className="flex flex-wrap gap-3">
+                                {elixiaryVenture.modules.map((mod) => (
+                                    <a
+                                        key={mod.name}
+                                        href={mod.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="px-4 py-2 rounded-lg bg-brand-purple/5 border border-brand-purple/10 text-brand-purple text-xs font-bold uppercase tracking-wider hover:bg-brand-purple/10 transition-colors flex items-center gap-2"
+                                    >
+                                        {mod.name} <ArrowUpRight className="w-3 h-3" />
+                                    </a>
+                                ))}
+                            </div>
                         </div>
 
                         {/* Tech Stack Grid */}

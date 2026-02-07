@@ -46,7 +46,44 @@ export const personalInfo = {
     location: "Lisbon, Portugal",
     linkedin: "https://www.linkedin.com/in/abolfazl-shirkavand/",
     summary:
-        "Digital Transformation and Process Improvement expert with 8+ years of experience driving enterprise-wide automation, system integration, and operational excellence. Proven track record of building and leading cross-functional digital teams, delivering scalable cloud-based solutions, and redesigning business processes through data, AI, and technology. Strong expertise in application rationalization, internal platform ownership, AI-enabled automation, and end-to-end process discovery.",
+        "Digital Transformation and Operational Excellence leader with 8+ years of experience bridging the gap between industrial operations and modern technology. Expert in driving enterprise-wide efficiency, reducing waste, and optimizing performance through Lean Six Sigma methodologies, while simultaneously leading digital innovation, AI-enabled automation, and system integration. Proven track record in both manufacturing environments and tech-driven sectors, building cross-functional teams that deliver measurable ROI and scalable process improvements.",
+};
+
+// ... (existing code) ...
+
+export const elixiaryVenture = {
+    title: "Elixiary AI",
+    tagline: "The World's Best AI Mixologist",
+    description: "The ultimate destination for cocktail enthusiasts. Combining a production-grade AI generator with a massive library of curated recipes and a comprehensive education hub for aspiring mixologists.",
+    website: "https://elixiary.com",
+    modules: [
+        { name: "Curated Cocktails", url: "https://elixiary.com/cocktails" },
+        { name: "Education Hub", url: "https://elixiary.com/education" }
+    ],
+    metrics: [
+        { label: "Tech Stack", value: "Next.js 15 + Firebase" },
+        { label: "AI Engine", value: "Google Gemini + Genkit" },
+        { label: "Infra", value: "Vercel + Cloudflare" },
+    ],
+    techStack: [
+        "Next.js 15 (App Router)",
+        "Firebase Genkit",
+        "Google Gemini Pro",
+        "Firestore",
+        "Stripe Payments",
+        "Tailwind CSS v4",
+        "Brevo (Email)",
+        "Cloudflare DNS",
+        "Vercel Hosting",
+        "Algolia Search"
+    ],
+    socials: {
+        x: "https://x.com/elixiary",
+        instagram: "https://www.instagram.com/elixiary.ai",
+        tiktok: "https://www.tiktok.com/@elixiary.ai",
+        github: "https://github.com/opefyre/elixiary-ai-firebase-studio",
+        email: "mailto:hello@elixiary.com"
+    }
 };
 
 export const experiences: Experience[] = [
@@ -298,9 +335,13 @@ export const languages = [
 
 export const elixiaryVenture = {
     title: "Elixiary AI",
-    tagline: "The World's First AI Mixologist",
-    description: "A production-grade AI platform that generates personalized cocktail recipes using Google's Genkit & Gemini. Features a complete Pro subscription model, secure authentication, and real-time generation.",
+    tagline: "The World's Best AI Mixologist",
+    description: "The ultimate destination for cocktail enthusiasts. Beyond its core AI generation engine, it features a massive library of curated recipes and a comprehensive education hub for aspiring mixologists.",
     website: "https://elixiary.com",
+    modules: [
+        { name: "Curated Recipes", url: "https://elixiary.com/cocktails" },
+        { name: "Education Hub", url: "https://elixiary.com/education" }
+    ],
     metrics: [
         { label: "Tech Stack", value: "Next.js 15 + Firebase" },
         { label: "AI Engine", value: "Google Gemini + Genkit" },
