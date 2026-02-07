@@ -11,16 +11,16 @@ export function TerminalIntro({ onComplete }: TerminalIntroProps) {
     const [lines, setLines] = useState<string[]>([]);
     const [showCursor, setShowCursor] = useState(true);
 
-    const terminalLines = [
-        "> Initializing portfolio system...",
-        "> Loading process excellence modules...",
-        "> Connecting to digital transformation framework...",
-        "> System online. Welcome.",
-        "",
-        "> Launching visual interface...",
-    ];
-
     useEffect(() => {
+        const terminalLines = [
+            "> Initializing portfolio system...",
+            "> Loading process excellence modules...",
+            "> Connecting to digital transformation framework...",
+            "> System online. Welcome.",
+            "",
+            "> Launching visual interface...",
+        ];
+
         let currentLine = 0;
         const interval = setInterval(() => {
             if (currentLine < terminalLines.length) {

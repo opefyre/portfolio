@@ -18,7 +18,30 @@ const TikTokIcon = ({ className }: { className?: string }) => (
 
 import SectionHeader from "@/components/UI/SectionHeader";
 
-export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: any }) {
+interface Module {
+    name: string;
+    url: string;
+}
+
+interface Socials {
+    github: string;
+    x: string;
+    instagram: string;
+    tiktok: string;
+    email: string;
+}
+
+interface ElixiaryVenture {
+    title: string;
+    tagline: string;
+    description: string;
+    modules: Module[];
+    techStack: string[];
+    website: string;
+    socials: Socials;
+}
+
+export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: ElixiaryVenture }) {
     return (
         <section className="container-wide section-padding">
             <SectionHeader
@@ -58,7 +81,7 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
 
                             {/* Key Modules */}
                             <div className="flex flex-wrap gap-3">
-                                {elixiaryVenture.modules.map((mod: any) => (
+                                {elixiaryVenture.modules.map((mod: Module) => (
                                     <a
                                         key={mod.name}
                                         href={mod.url}

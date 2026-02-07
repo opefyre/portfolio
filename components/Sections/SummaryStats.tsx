@@ -26,7 +26,14 @@ const AnimatedCounter = ({ value, duration = 2 }: { value: number; duration?: nu
     return <motion.span ref={ref}>{displayValue}</motion.span>;
 };
 
-const StatCard = ({ label, value, subtext, delay = 0 }: any) => {
+interface StatCardProps {
+    label: string;
+    value: string;
+    subtext?: string;
+    delay?: number;
+}
+
+const StatCard = ({ label, value, subtext, delay = 0 }: StatCardProps) => {
     // Extract number from string if possible, or just render static if complex
     const numValue = parseInt(value.replace(/\D/g, ''));
     const isNumber = !isNaN(numValue) && value.match(/\d+/);

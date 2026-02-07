@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Experience } from "@/lib/db";
 import SectionHeader from "@/components/UI/SectionHeader";
 

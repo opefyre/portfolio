@@ -1,5 +1,4 @@
 import "server-only";
-import { createFirebaseAdminApp } from "./firebase-admin";
 import * as admin from "firebase-admin";
 import { cache } from "react";
 import { unstable_cache } from "next/cache";
@@ -14,11 +13,13 @@ import {
 } from "./data";
 
 // Initialize Admin with local credentials for build time
+// Service account must be provided via env var in CI/CD (GitHub Secrets)
+// Local dev can use .env.local
 const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT_KEY
     ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY)
-    : require("../abosh-portfolio-d6eeb942eef4.json");
+    : undefined;
 
-if (!admin.apps.length) {
+if (!admin.apps.length && serviceAccount) {
     try {
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount)
@@ -77,6 +78,33 @@ export interface Education {
     period: string;
 }
 
+export interface PersonalInfo {
+    name: string;
+    title: string;
+    email: string;
+    phone: string;
+    location: string;
+    linkedin: string;
+    summary: string;
+}
+
+export interface ElixiaryVenture {
+    title: string;
+    tagline: string;
+    description: string;
+    modules: Array<{ name: string; url: string }>;
+    techStack: string[];
+    website: string;
+    socials: {
+        github: string;
+        x: string;
+        instagram: string;
+        tiktok: string;
+        email: string;
+    };
+    metrics?: Array<{ label: string; value: string }>;
+}
+
 // Helper for safe fetch
 async function safeFetch<T>(fn: () => Promise<T>, fallback: T): Promise<T> {
     if (!db) return fallback;
@@ -94,7 +122,7 @@ export const getPersonalInfo = cache(async () => {
             const doc = await db!.collection("meta").doc("personalInfo").get();
             // If doc doesn't exist, throw to trigger fallback
             if (!doc.exists) throw new Error("Doc not found");
-            return doc.data() as any;
+            return doc.data() as PersonalInfo;
         }, staticPersonalInfo),
         ["personal-info"],
         { tags: ["meta"] }
@@ -106,7 +134,7 @@ export const getElixiaryVenture = cache(async () => {
         async () => safeFetch(async () => {
             const doc = await db!.collection("meta").doc("elixiaryVenture").get();
             if (!doc.exists) throw new Error("Doc not found");
-            return doc.data() as any;
+            return doc.data() as ElixiaryVenture; // Corrected type
         }, staticElixiaryVenture),
         ["elixiary-venture"],
         { tags: ["meta"] }

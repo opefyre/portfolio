@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 export function LiquidDistortionHero() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const textRef = useRef<HTMLDivElement>(null);
+    const [particles, setParticles] = useState<Array<{ left: number; top: number; duration: number; delay: number }>>([]);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -106,6 +107,18 @@ export function LiquidDistortionHero() {
         };
     }, []);
 
+    useEffect(() => {
+        // eslint-disable-next-line
+        setParticles(
+            Array.from({ length: 100 }).map(() => ({
+                left: Math.random() * 100,
+                top: Math.random() * 100,
+                duration: 3 + Math.random() * 2,
+                delay: Math.random() * 2,
+            }))
+        );
+    }, []);
+
     return (
         <div className="relative w-screen h-screen flex items-center justify-center overflow-hidden bg-black">
             <canvas ref={canvasRef} className="absolute inset-0" />
@@ -149,22 +162,22 @@ export function LiquidDistortionHero() {
 
             {/* Particle field */}
             <div className="absolute inset-0 pointer-events-none">
-                {Array.from({ length: 100 }).map((_, i) => (
+                {particles.map((p, i) => (
                     <motion.div
                         key={i}
                         className="absolute w-1 h-1 bg-electric-blue rounded-full"
                         style={{
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
+                            left: `${p.left}%`,
+                            top: `${p.top}%`,
                         }}
                         animate={{
                             y: [0, -30, 0],
                             opacity: [0.2, 0.8, 0.2],
                         }}
                         transition={{
-                            duration: 3 + Math.random() * 2,
+                            duration: p.duration,
                             repeat: Infinity,
-                            delay: Math.random() * 2,
+                            delay: p.delay,
                         }}
                     />
                 ))}

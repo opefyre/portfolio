@@ -1,12 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Skill, Certification, Education } from "@/lib/db";
 import clsx from "clsx";
 import SectionHeader from "@/components/UI/SectionHeader";
 
 // Cast to any to bypass strict Framer Motion type checks
-const containerVariants: any = {
+const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
@@ -17,7 +17,7 @@ const containerVariants: any = {
     }
 };
 
-const cardVariants: any = {
+const cardVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
         opacity: 1,

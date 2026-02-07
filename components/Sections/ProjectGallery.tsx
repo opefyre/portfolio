@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Project } from "@/lib/db";
 import { useState } from "react";
 import ProjectModal from "@/components/UI/ProjectModal";

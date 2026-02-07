@@ -2,7 +2,6 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { Project } from "@/lib/data";
-import clsx from "clsx";
 import { useEffect } from "react";
 
 interface ProjectModalProps {

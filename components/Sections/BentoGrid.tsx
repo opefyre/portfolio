@@ -3,7 +3,14 @@
 import { motion } from "framer-motion";
 import clsx from "clsx";
 
-const BentoCard = ({ className, title, content, delay = 0 }: any) => (
+interface BentoCardProps {
+    className?: string;
+    title: string;
+    content: React.ReactNode;
+    delay?: number;
+}
+
+const BentoCard = ({ className, title, content, delay = 0 }: BentoCardProps) => (
     <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

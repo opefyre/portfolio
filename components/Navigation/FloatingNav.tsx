@@ -21,6 +21,7 @@ export default function FloatingNav({ email }: { email: string }) {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        // eslint-disable-next-line
         setMounted(true);
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
@@ -100,7 +101,7 @@ export default function FloatingNav({ email }: { email: string }) {
                     onClick={() => window.open(`mailto:${email}`)}
                     className="hidden md:flex items-center px-4 py-2 rounded-full bg-brand-blue text-white text-xs font-bold uppercase tracking-wider hover:bg-brand-blue/90 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] transition-all duration-300 mr-1"
                 >
-                    Let's Chat
+                    Let&apos;s Chat
                 </button>
 
                 {mounted && (
