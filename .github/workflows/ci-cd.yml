@@ -68,6 +68,6 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
           channelId: live
-          projectId: abosh-portfolio-d6eeb942eef4 
+          projectId: abosh-portfolio 
         env:
           FIREBASE_CLI_PREVIEWS: none
