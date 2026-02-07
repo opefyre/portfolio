@@ -1,10 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { elixiaryVenture } from "@/lib/data";
-import clsx from "clsx";
-import SectionHeader from "@/components/UI/SectionHeader";
-import { ArrowUpRight, Cpu, Server, Zap, Github, Mail, Instagram } from "lucide-react";
+import { ArrowUpRight, Cpu, Server, Zap, Mail, Instagram } from "lucide-react";
 
 // Custom Icons
 const XIcon = ({ className }: { className?: string }) => (
@@ -19,7 +16,9 @@ const TikTokIcon = ({ className }: { className?: string }) => (
     </svg>
 );
 
-export default function ElixiaryFeature() {
+import SectionHeader from "@/components/UI/SectionHeader";
+
+export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: any }) {
     return (
         <section className="container-wide section-padding">
             <SectionHeader
@@ -44,7 +43,7 @@ export default function ElixiaryFeature() {
                                 className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-brand-purple text-xs font-bold uppercase tracking-wider"
                             >
                                 <Zap className="w-3 h-3" />
-                                <span>Flagship Project</span>
+                                <span className="text-white">Flagship Project</span>
                             </motion.div>
 
                             <h3 className="text-4xl md:text-5xl font-display font-medium text-white leading-tight">
@@ -59,7 +58,7 @@ export default function ElixiaryFeature() {
 
                             {/* Key Modules */}
                             <div className="flex flex-wrap gap-3">
-                                {elixiaryVenture.modules.map((mod) => (
+                                {elixiaryVenture.modules.map((mod: any) => (
                                     <a
                                         key={mod.name}
                                         href={mod.url}
@@ -77,7 +76,7 @@ export default function ElixiaryFeature() {
                         <div className="space-y-4">
                             <h4 className="text-xs uppercase tracking-widest text-tertiary">Infrastructure & Tech Stack</h4>
                             <div className="flex flex-wrap gap-2">
-                                {elixiaryVenture.techStack.map((tech) => (
+                                {elixiaryVenture.techStack.map((tech: string) => (
                                     <span
                                         key={tech}
                                         className="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-slate-300 text-sm hover:border-brand-blue/30 hover:text-brand-blue transition-colors cursor-default"

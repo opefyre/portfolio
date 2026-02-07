@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { projects, Project } from "@/lib/data";
+import { Project } from "@/lib/db";
 import { useState } from "react";
 import ProjectModal from "@/components/UI/ProjectModal";
 import SectionHeader from "@/components/UI/SectionHeader";
@@ -34,7 +34,7 @@ const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => vo
     </div>
 );
 
-export default function ProjectGallery() {
+export default function ProjectGallery({ projects }: { projects: Project[] }) {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 

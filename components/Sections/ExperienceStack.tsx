@@ -1,10 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { experiences } from "@/lib/data";
+import { Experience } from "@/lib/db";
 import SectionHeader from "@/components/UI/SectionHeader";
 
-export default function ExperienceStack() {
+export default function ExperienceStack({ experiences }: { experiences: Experience[] }) {
     return (
         <section className="container-wide section-padding" id="experience">
             <SectionHeader

@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Explicitly deny default access
+    match /{document=**} {
+      allow read: if false;
+      allow write: if false;
+    }
+
+    // Public Read-Only Collections
+    // Only allow reading complete documents, no listing of entire collections if we wanted to be strict,
+    // but for SSG/portfolio text, list is fine.
+    match /meta/{docId} {
+        allow read: if true;
+        allow write: if false;
+    }
+    match /experiences/{docId} {
+        allow read: if true;
+        allow write: if false;
+    }
+    match /projects/{docId} {
+        allow read: if true;
+        allow write: if false;
+    }
+    match /education/{docId} {
+        allow read: if true;
+        allow write: if false;
+    }
+    match /certifications/{docId} {
+        allow read: if true;
+        allow write: if false;
+    }
+    match /skills/{docId} {
+        allow read: if true;
+        allow write: if false;
+    }
+  }
+}

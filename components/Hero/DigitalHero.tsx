@@ -4,7 +4,6 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial } from "@react-three/drei";
 import { useRef, useState } from "react";
 import * as random from "maath/random/dist/maath-random.cjs";
-import { personalInfo } from "@/lib/data";
 import { useTheme } from "next-themes";
 
 function StarField(props: any) {
@@ -34,7 +33,7 @@ function StarField(props: any) {
     );
 }
 
-export default function DigitalHero() {
+export default function DigitalHero({ name }: { name: string }) {
     return (
         <section className="relative h-[85vh] w-full flex flex-col justify-center items-center overflow-hidden">
             {/* 3D Background */}
@@ -51,7 +50,7 @@ export default function DigitalHero() {
             <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
                 {/* Title Gradient - Simplified to 2-stop for reliability */}
                 <h1 className="text-display text-5xl md:text-7xl lg:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[var(--hero-gradient-from)] to-[var(--hero-gradient-to)] mb-6 leading-tight drop-shadow-sm pb-2 transition-colors duration-500">
-                    {personalInfo.name}
+                    {name}
                 </h1>
                 <h2 className="text-brand-blue font-bold tracking-[0.1em] text-lg md:text-xl uppercase mb-8">
                     PROCESS EXCELLENCE & DIGITAL TRANSFORMATION

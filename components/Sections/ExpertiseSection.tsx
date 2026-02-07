@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { skills, certifications, education } from "@/lib/data";
+import { Skill, Certification, Education } from "@/lib/db";
 import clsx from "clsx";
 import SectionHeader from "@/components/UI/SectionHeader";
 
@@ -49,7 +49,15 @@ const SkillTag = ({ item }: { item: string }) => (
     </span>
 );
 
-export default function ExpertiseSection() {
+export default function ExpertiseSection({
+    skills,
+    certifications,
+    education
+}: {
+    skills: Skill[];
+    certifications: Certification[];
+    education: Education[];
+}) {
     // Separate primary areas
     const processSkills = skills.find(s => s.category === "Process Excellence");
     const projectSkills = skills.find(s => s.category === "Project & Program Management");

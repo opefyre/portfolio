@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView, useSpring, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const AnimatedCounter = ({ value, duration = 2 }: { value: number; duration?: number }) => {
     const ref = useRef<HTMLSpanElement>(null);
@@ -26,10 +26,11 @@ const AnimatedCounter = ({ value, duration = 2 }: { value: number; duration?: nu
     return <motion.span ref={ref}>{displayValue}</motion.span>;
 };
 
-const StatCard = ({ label, value, suffix = "", subtext, delay = 0 }: any) => {
+const StatCard = ({ label, value, subtext, delay = 0 }: any) => {
     // Extract number from string if possible, or just render static if complex
     const numValue = parseInt(value.replace(/\D/g, ''));
     const isNumber = !isNaN(numValue) && value.match(/\d+/);
+    const suffix = value.replace(/[\d\.]/g, ''); // Extract non-digits like + or %
 
     return (
         <motion.div
@@ -42,11 +43,7 @@ const StatCard = ({ label, value, suffix = "", subtext, delay = 0 }: any) => {
                 {isNumber ? (
                     <>
                         <AnimatedCounter value={numValue} />
-                        <span>{value.replace(/\d+/g, '')}</span>
-                        {/* Re-attach non-numeric parts like % or + if they weren't part of value prop properly. 
-                     Actually, let's assume 'value' prop might be "8+" or "12%". 
-                     We animate '8' and append '+'. 
-                 */}
+                        <span>{suffix}</span>
                     </>
                 ) : (
                     value
