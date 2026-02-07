@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "deploy": "next build && firebase deploy"
+    "deploy": "./scripts/secure-deploy.sh"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
