@@ -8,8 +8,7 @@ import clsx from "clsx";
 
 // UPDATED NAV ITEMS to match new ID structure
 const navItems = [
-    { name: "Overview", id: "hero" },
-    { name: "Impact", id: "stats" },
+    { name: "Overview", id: "overview" },
     { name: "Skills", id: "expertise" },
     { name: "History", id: "experience" },
     { name: "Venture", id: "venture" },

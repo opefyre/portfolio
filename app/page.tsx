@@ -14,11 +14,8 @@ export default function Home() {
     <main className="bg-deep min-h-screen selection:bg-brand-blue/30 selection:text-white pb-32">
       <FloatingNav />
       {/* Scroll Margin corrections included */}
-      <section id="hero" className="scroll-mt-0">
+      <section id="overview" className="scroll-mt-0">
         <DigitalHero />
-      </section>
-
-      <section id="stats" className="scroll-mt-32">
         <SummaryStats />
       </section>
 
