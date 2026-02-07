@@ -18,6 +18,9 @@ const fontDisplay = Syne({
 export const metadata: Metadata = {
   title: "Abolfazl Shirkavand | Digital Architect",
   description: "Process Excellence & Digital Transformation. Creating the future of enterprise operations.",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 import { ThemeProvider } from "@/components/shared/ThemeProvider";
