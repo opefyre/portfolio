@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Project } from "@/lib/data";
+import { Project } from "@/lib/db";
 import { useEffect } from "react";
 
 interface ProjectModalProps {

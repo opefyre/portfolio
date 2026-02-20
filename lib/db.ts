@@ -2,43 +2,27 @@ import "server-only";
 import * as admin from "firebase-admin";
 import { cache } from "react";
 import { unstable_cache } from "next/cache";
-import {
-    personalInfo as staticPersonalInfo,
-    experiences as staticExperiences,
-    projects as staticProjects,
-    skills as staticSkills,
-    education as staticEducation,
-    certifications as staticCertifications,
-    elixiaryVenture as staticElixiaryVenture
-} from "./data";
 
-// Initialize Admin with local credentials for build time
+// Initialize Admin with credentials for build time
 // Service account must be provided via env var in CI/CD (GitHub Secrets)
 // Local dev can use .env.local
-const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT_KEY
-    ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY)
-    : undefined;
-
-if (!admin.apps.length && serviceAccount) {
-    try {
-        admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount)
-        });
-    } catch (e) {
-        console.error("Firebase Admin Init Failed (using fallback data):", e);
-    }
+if (!process.env.FIREBASE_SERVICE_ACCOUNT_KEY) {
+    throw new Error("🚨 CRITICAL: FIREBASE_SERVICE_ACCOUNT_KEY environment variable is missing. The application requires Firebase to run.");
 }
 
-let db: admin.firestore.Firestore | null = null;
-try {
-    db = admin.firestore();
-} catch (e) {
-    console.error("Firestore Init Failed (using fallback data):", e);
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
+
+if (!admin.apps.length) {
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount)
+    });
 }
+
+const db = admin.firestore();
 
 export const revalidate = 3600;
 
-// Types (Mirrors lib/data.ts)
+// Types
 export interface Experience {
     company: string;
     location: string;
@@ -52,6 +36,7 @@ export interface Position {
 }
 
 export interface Project {
+    id?: string;
     title: string;
     description: string;
     impact: string;
@@ -105,25 +90,13 @@ export interface ElixiaryVenture {
     metrics?: Array<{ label: string; value: string }>;
 }
 
-// Helper for safe fetch
-async function safeFetch<T>(fn: () => Promise<T>, fallback: T): Promise<T> {
-    if (!db) return fallback;
-    try {
-        return await fn();
-    } catch (error) {
-        console.error("Firestore Fetch Error (using fallback):", error);
-        return fallback;
-    }
-}
-
 export const getPersonalInfo = cache(async () => {
     return unstable_cache(
-        async () => safeFetch(async () => {
-            const doc = await db!.collection("meta").doc("personalInfo").get();
-            // If doc doesn't exist, throw to trigger fallback
-            if (!doc.exists) throw new Error("Doc not found");
+        async () => {
+            const doc = await db.collection("meta").doc("personalInfo").get();
+            if (!doc.exists) throw new Error("PersonalInfo doc not found in Firestore");
             return doc.data() as PersonalInfo;
-        }, staticPersonalInfo),
+        },
         ["personal-info"],
         { tags: ["meta"] }
     )();
@@ -131,11 +104,11 @@ export const getPersonalInfo = cache(async () => {
 
 export const getElixiaryVenture = cache(async () => {
     return unstable_cache(
-        async () => safeFetch(async () => {
-            const doc = await db!.collection("meta").doc("elixiaryVenture").get();
-            if (!doc.exists) throw new Error("Doc not found");
-            return doc.data() as ElixiaryVenture; // Corrected type
-        }, staticElixiaryVenture),
+        async () => {
+            const doc = await db.collection("meta").doc("elixiaryVenture").get();
+            if (!doc.exists) throw new Error("ElixiaryVenture doc not found in Firestore");
+            return doc.data() as ElixiaryVenture;
+        },
         ["elixiary-venture"],
         { tags: ["meta"] }
     )();
@@ -143,11 +116,11 @@ export const getElixiaryVenture = cache(async () => {
 
 export const getExperiences = cache(async () => {
     return unstable_cache(
-        async () => safeFetch(async () => {
-            const snapshot = await db!.collection("experiences").get();
-            if (snapshot.empty) throw new Error("Collection empty");
+        async () => {
+            const snapshot = await db.collection("experiences").get();
+            if (snapshot.empty) throw new Error("Experiences collection empty in Firestore");
             return snapshot.docs.map(d => d.data() as Experience);
-        }, staticExperiences),
+        },
         ["experiences"],
         { tags: ["content"] }
     )();
@@ -155,11 +128,15 @@ export const getExperiences = cache(async () => {
 
 export const getProjects = cache(async () => {
     return unstable_cache(
-        async () => safeFetch(async () => {
-            const snapshot = await db!.collection("projects").get();
-            if (snapshot.empty) throw new Error("Collection empty");
-            return snapshot.docs.map(d => d.data() as Project);
-        }, staticProjects),
+        async () => {
+            const snapshot = await db.collection("projects").get();
+            if (snapshot.empty) throw new Error("Projects collection empty in Firestore");
+            return snapshot.docs.map(d => {
+                const data = d.data() as Project;
+                data.id = d.id; // Include the Firestore document ID to allow UI interactions/referencing.
+                return data;
+            });
+        },
         ["projects"],
         { tags: ["content"] }
     )();
@@ -167,11 +144,11 @@ export const getProjects = cache(async () => {
 
 export const getSkills = cache(async () => {
     return unstable_cache(
-        async () => safeFetch(async () => {
-            const snapshot = await db!.collection("skills").get();
-            if (snapshot.empty) throw new Error("Collection empty");
+        async () => {
+            const snapshot = await db.collection("skills").get();
+            if (snapshot.empty) throw new Error("Skills collection empty in Firestore");
             return snapshot.docs.map(d => d.data() as Skill);
-        }, staticSkills),
+        },
         ["skills"],
         { tags: ["content"] }
     )();
@@ -179,11 +156,11 @@ export const getSkills = cache(async () => {
 
 export const getEducation = cache(async () => {
     return unstable_cache(
-        async () => safeFetch(async () => {
-            const snapshot = await db!.collection("education").get();
-            if (snapshot.empty) throw new Error("Collection empty");
+        async () => {
+            const snapshot = await db.collection("education").get();
+            if (snapshot.empty) throw new Error("Education collection empty in Firestore");
             return snapshot.docs.map(d => d.data() as Education);
-        }, staticEducation),
+        },
         ["education"],
         { tags: ["content"] }
     )();
@@ -191,11 +168,11 @@ export const getEducation = cache(async () => {
 
 export const getCertifications = cache(async () => {
     return unstable_cache(
-        async () => safeFetch(async () => {
-            const snapshot = await db!.collection("certifications").get();
-            if (snapshot.empty) throw new Error("Collection empty");
+        async () => {
+            const snapshot = await db.collection("certifications").get();
+            if (snapshot.empty) throw new Error("Certifications collection empty in Firestore");
             return snapshot.docs.map(d => d.data() as Certification);
-        }, staticCertifications),
+        },
         ["certifications"],
         { tags: ["content"] }
     )();

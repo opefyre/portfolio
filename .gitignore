@@ -47,3 +47,8 @@ INFRASTRUCTURE.md
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# data seeding & scripts
+scripts/
+projects - Sheet1.csv
+projects-merged.json
