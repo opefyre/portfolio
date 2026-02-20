@@ -3,6 +3,12 @@
 import { useEffect } from 'react';
 import Lenis from 'lenis';
 
+declare global {
+    interface Window {
+        __lenis?: Lenis;
+    }
+}
+
 export default function SmoothScroller({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         const lenis = new Lenis({
@@ -14,6 +20,9 @@ export default function SmoothScroller({ children }: { children: React.ReactNode
             touchMultiplier: 2,
         });
 
+        // Expose globally so modals can pause/resume smooth scroll
+        window.__lenis = lenis;
+
         function raf(time: number) {
             lenis.raf(time);
             requestAnimationFrame(raf);
@@ -23,6 +32,7 @@ export default function SmoothScroller({ children }: { children: React.ReactNode
 
         return () => {
             lenis.destroy();
+            delete window.__lenis;
         };
     }, []);
 

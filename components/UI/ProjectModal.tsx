@@ -11,15 +11,20 @@ interface ProjectModalProps {
 }
 
 export default function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
-    // Prevent body scroll when modal is open
+    // Prevent body scroll AND stop Lenis smooth scroll when modal is open
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = "hidden";
+            // Stop Lenis so native overflow-y-auto works inside the modal
+            window.__lenis?.stop();
         } else {
             document.body.style.overflow = "unset";
+            // Resume Lenis smooth scrolling
+            window.__lenis?.start();
         }
         return () => {
             document.body.style.overflow = "unset";
+            window.__lenis?.start();
         };
     }, [isOpen]);
 
