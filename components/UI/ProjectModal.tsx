@@ -43,7 +43,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                         className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm cursor-pointer"
                     />
 
-                    {/* Modal Content */}
+                    {/* Modal Content - onWheel stopPropagation prevents Lenis from eating scroll events */}
                     <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 md:p-8 pointer-events-none">
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -51,7 +51,8 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
                             className="bg-card w-full max-w-2xl max-h-full flex flex-col rounded-3xl border border-border shadow-2xl pointer-events-auto"
-                            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+                            onClick={(e) => e.stopPropagation()}
+                            onWheel={(e) => e.stopPropagation()} // Block Lenis from intercepting wheel events inside the modal
                         >
                             <div className="p-6 md:p-8 overflow-y-auto flex-1 min-h-0 custom-scrollbar">
                                 {/* Header */}
