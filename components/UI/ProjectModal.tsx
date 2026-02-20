@@ -53,7 +53,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                             className="bg-card w-full max-w-2xl max-h-full flex flex-col rounded-3xl border border-border shadow-2xl pointer-events-auto"
                             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
                         >
-                            <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar">
+                            <div className="p-6 md:p-8 overflow-y-auto flex-1 min-h-0 custom-scrollbar">
                                 {/* Header */}
                                 <div className="flex justify-between items-start mb-6">
                                     <div>
