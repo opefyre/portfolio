@@ -67,6 +67,8 @@ const identities = [
     "Intelligent Workflows",
     "Agile Program Delivery",
     "Cross-Functional Leadership",
+    "Stakeholder Management",
+    "Risk & Resource Planning",
 ];
 
 export default function DigitalHero({ name, title }: { name: string; title: string }) {
@@ -138,11 +140,11 @@ export default function DigitalHero({ name, title }: { name: string; title: stri
                     transition={{ delay: 0.9, duration: 0.6 }}
                     className="inline-flex items-center justify-center mb-8"
                 >
-                    <div className="relative rounded-lg bg-[#0a0f0a] border border-[#00ff41]/20 px-5 py-3 shadow-[0_0_20px_rgba(0,255,65,0.08),inset_0_1px_0_rgba(0,255,65,0.05)] overflow-hidden">
+                    <div className="relative rounded-lg bg-[#0a0f0a] border border-[#00ff41]/20 w-[280px] md:w-[380px] px-5 py-3 shadow-[0_0_20px_rgba(0,255,65,0.08),inset_0_1px_0_rgba(0,255,65,0.05)] overflow-hidden">
                         {/* Scanline overlay */}
                         <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,255,65,0.03)_2px,rgba(0,255,65,0.03)_4px)] pointer-events-none" />
 
-                        <div className="relative flex items-center gap-2 font-mono">
+                        <div className="relative flex items-center gap-2 font-mono text-left">
                             <span className="text-[#00ff41]/50 text-xs md:text-sm select-none">&gt;_</span>
                             <AnimatePresence mode="wait">
                                 <motion.span
