@@ -1,20 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Cpu, Server, Zap, Mail, Instagram, Github } from "lucide-react";
+import { ArrowUpRight, Zap, Mail, Instagram, Github } from "lucide-react";
+import Image from "next/image";
+import { useState, useEffect, useCallback } from "react";
 
 // Custom Icons
-const XIcon = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-);
+function XIcon({ className }: { className?: string }) {
+    return (
+        <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+    );
+}
 
-const TikTokIcon = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
-    </svg>
-);
+function TikTokIcon({ className }: { className?: string }) {
+    return (
+        <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.37a8.16 8.16 0 004.77 1.52V7.44a4.85 4.85 0 01-1-.75z" />
+        </svg>
+    );
+}
 
 import SectionHeader from "@/components/UI/SectionHeader";
 
@@ -22,7 +28,6 @@ interface Module {
     name: string;
     url: string;
 }
-
 interface Socials {
     github: string;
     x: string;
@@ -30,7 +35,6 @@ interface Socials {
     tiktok: string;
     email: string;
 }
-
 interface ElixiaryVenture {
     title: string;
     tagline: string;
@@ -41,68 +45,79 @@ interface ElixiaryVenture {
     socials: Socials;
 }
 
+const showcaseImages = [
+    { src: "/elixiary/hero.png", alt: "Elixiary AI Landing Page" },
+    { src: "/elixiary/recipe-detail.png", alt: "Recipe Detail View" },
+    { src: "/elixiary/achievements.png", alt: "Gamification & Achievements" },
+    { src: "/elixiary/cocktail-grid.png", alt: "AI-Generated Cocktail Gallery" },
+];
+
 export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: ElixiaryVenture }) {
+    const [activeImage, setActiveImage] = useState(0);
+
+    // Auto-rotate images
+    const nextImage = useCallback(() => {
+        setActiveImage((prev) => (prev + 1) % showcaseImages.length);
+    }, []);
+
+    useEffect(() => {
+        const timer = setInterval(nextImage, 4000);
+        return () => clearInterval(timer);
+    }, [nextImage]);
+
     return (
         <section className="container-wide section-padding">
-            <SectionHeader
-                title="Featured Venture"
-                subtitle="Building production-grade AI applications from scratch."
-            />
 
-            <div className="relative rounded-3xl overflow-hidden border border-border bg-card shadow-2xl">
-                {/* Background Glows */}
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-blue/10 blur-[100px] rounded-full pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-purple/10 blur-[100px] rounded-full pointer-events-none" />
+            <div className="rounded-2xl border border-border bg-card overflow-hidden">
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-0">
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 p-8 md:p-12 items-center relative z-10">
-
-                    {/* Left: Content */}
-                    <div className="space-y-8">
+                    {/* Left: Content — 2 columns */}
+                    <div className="lg:col-span-2 p-6 md:p-8 flex flex-col justify-between space-y-6">
                         <div className="space-y-4">
                             <motion.div
-                                initial={{ opacity: 0, x: -20 }}
+                                initial={{ opacity: 0, x: -10 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
-                                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-brand-purple text-xs font-bold uppercase tracking-wider"
+                                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-brand-purple text-[10px] font-bold uppercase tracking-wider"
                             >
-                                <Zap className="w-3 h-3" />
-                                <span>Flagship Project</span>
+                                <Zap className="w-2.5 h-2.5" />
+                                <span>Featured Project</span>
                             </motion.div>
 
-                            <h3 className="text-4xl md:text-5xl font-display font-medium text-primary leading-tight">
+                            <h3 className="text-2xl md:text-3xl font-display font-medium text-primary leading-tight">
                                 {elixiaryVenture.title}
                             </h3>
-                            <p className="text-xl md:text-2xl text-brand-blue font-light">
+                            <p className="text-base text-brand-blue font-light">
                                 {elixiaryVenture.tagline}
                             </p>
-                            <p className="text-secondary text-lg leading-relaxed max-w-xl">
+                            <p className="text-secondary text-sm leading-relaxed">
                                 {elixiaryVenture.description}
                             </p>
 
-                            {/* Key Modules */}
-                            <div className="flex flex-wrap gap-3">
+                            {/* Key Modules — compact */}
+                            <div className="flex flex-wrap gap-2">
                                 {elixiaryVenture.modules.map((mod: Module) => (
                                     <a
                                         key={mod.name}
                                         href={mod.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="px-4 py-2 rounded-lg bg-brand-purple/5 border border-brand-purple/10 text-brand-purple text-xs font-bold uppercase tracking-wider hover:bg-brand-purple/10 transition-colors flex items-center gap-2"
+                                        className="px-3 py-1.5 rounded-lg bg-brand-purple/5 border border-brand-purple/10 text-brand-purple text-[10px] font-bold uppercase tracking-wider hover:bg-brand-purple/10 transition-colors flex items-center gap-1.5"
                                     >
-                                        {mod.name} <ArrowUpRight className="w-3 h-3" />
+                                        {mod.name} <ArrowUpRight className="w-2.5 h-2.5" />
                                     </a>
                                 ))}
                             </div>
                         </div>
 
-                        {/* Tech Stack Grid */}
-                        <div className="space-y-4">
-                            <h4 className="text-xs uppercase tracking-widest text-tertiary">Infrastructure & Tech Stack</h4>
-                            <div className="flex flex-wrap gap-2">
+                        {/* Tech Stack — compact inline */}
+                        <div className="space-y-2">
+                            <h4 className="text-[10px] uppercase tracking-widest text-tertiary">Tech Stack</h4>
+                            <div className="flex flex-wrap gap-1.5">
                                 {elixiaryVenture.techStack.map((tech: string) => (
                                     <span
                                         key={tech}
-                                        className="px-3 py-1.5 rounded-md bg-page border border-border text-secondary text-sm hover:border-brand-blue/30 hover:text-brand-blue transition-colors cursor-default"
+                                        className="px-2 py-1 rounded-md bg-page border border-border text-secondary text-xs"
                                     >
                                         {tech}
                                     </span>
@@ -110,21 +125,18 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
                             </div>
                         </div>
 
-                        <div className="flex flex-wrap gap-4 pt-4">
+                        {/* CTA + Socials — compact row */}
+                        <div className="flex items-center justify-between pt-4 border-t border-border">
                             <a
                                 href={elixiaryVenture.website}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-blue hover:bg-brand-blue/90 text-white font-bold transition-all hover:shadow-[0_0_20px_rgba(56,189,248,0.4)]"
+                                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue hover:bg-brand-blue/90 text-white text-xs font-bold transition-all hover:shadow-[0_0_15px_rgba(56,189,248,0.3)]"
                             >
-                                Visit Live App <ArrowUpRight className="w-4 h-4" />
+                                Visit App <ArrowUpRight className="w-3 h-3" />
                             </a>
-                        </div>
 
-                        {/* Social Connect Row */}
-                        <div className="pt-8 border-t border-border">
-                            <h4 className="text-xs uppercase tracking-widest text-tertiary mb-4">Connect with Elixiary</h4>
-                            <div className="flex items-center gap-6">
+                            <div className="flex items-center gap-4">
                                 {[
                                     { name: "GitHub", url: elixiaryVenture.socials.github, icon: Github },
                                     { name: "X", url: elixiaryVenture.socials.x, icon: XIcon },
@@ -140,40 +152,52 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
                                         className="text-tertiary hover:text-brand-blue transition-colors duration-300"
                                         aria-label={social.name}
                                     >
-                                        <social.icon className="w-5 h-5" />
+                                        <social.icon className="w-4 h-4" />
                                     </a>
                                 ))}
                             </div>
                         </div>
                     </div>
 
-                    {/* Right: Abstract Visualization / Stats */}
-                    <div className="relative h-full min-h-[300px] md:min-h-[400px] flex items-center justify-center bg-gradient-to-br from-page/50 to-card rounded-2xl border border-border p-4 md:p-8">
-                        {/* Abstract representation of AI/Cloud Architecture */}
-                        <div className="grid grid-cols-2 gap-3 md:gap-4 w-full max-w-md">
-                            <div className="space-y-3 md:space-y-4">
-                                <div className="p-4 md:p-6 rounded-2xl bg-card-hover border border-brand-purple/20">
-                                    <Cpu className="w-6 h-6 md:w-8 md:h-8 text-brand-purple mb-3 md:mb-4" />
-                                    <div className="text-lg md:text-2xl font-bold text-primary">Genkit</div>
-                                    <div className="text-xs text-secondary mt-1">AI Logic Layer</div>
-                                </div>
-                                <div className="p-4 md:p-6 rounded-2xl bg-card-hover border border-emerald-500/20">
-                                    <Server className="w-6 h-6 md:w-8 md:h-8 text-emerald-500 mb-3 md:mb-4" />
-                                    <div className="text-lg md:text-2xl font-bold text-primary">Vercel</div>
-                                    <div className="text-xs text-secondary mt-1">Edge Runtime</div>
-                                </div>
-                            </div>
-                            <div className="space-y-3 md:space-y-4 mt-6 md:mt-8">
-                                <div className="p-4 md:p-6 rounded-2xl bg-card-hover border border-orange-500/20">
-                                    <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-500 text-sm md:text-base font-bold mb-3 md:mb-4">λ</div>
-                                    <div className="text-lg md:text-2xl font-bold text-primary">Firebase</div>
-                                    <div className="text-xs text-secondary mt-1">Backend-as-a-Service</div>
-                                </div>
-                                <div className="p-4 md:p-6 rounded-2xl bg-card-hover border border-blue-500/20">
-                                    <Zap className="w-6 h-6 md:w-8 md:h-8 text-brand-blue mb-3 md:mb-4" />
-                                    <div className="text-lg md:text-2xl font-bold text-primary">Stripe</div>
-                                    <div className="text-xs text-secondary mt-1">Payment Infrastructure</div>
-                                </div>
+                    {/* Right: Screenshot Showcase — 3 columns */}
+                    <div className="lg:col-span-3 relative bg-page/50 border-t lg:border-t-0 lg:border-l border-border min-h-[300px] md:min-h-[420px]">
+                        {/* Main Image */}
+                        <div className="relative w-full h-full">
+                            {showcaseImages.map((img, i) => (
+                                <motion.div
+                                    key={img.src}
+                                    initial={false}
+                                    animate={{ opacity: i === activeImage ? 1 : 0 }}
+                                    transition={{ duration: 0.5 }}
+                                    className="absolute inset-0"
+                                >
+                                    <Image
+                                        src={img.src}
+                                        alt={img.alt}
+                                        fill
+                                        className="object-cover object-top"
+                                        sizes="(max-width: 1024px) 100vw, 60vw"
+                                        priority={i === 0}
+                                    />
+                                </motion.div>
+                            ))}
+
+                            {/* Bottom gradient overlay for dots */}
+                            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/60 to-transparent" />
+
+                            {/* Dot indicators */}
+                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2">
+                                {showcaseImages.map((_, i) => (
+                                    <button
+                                        key={i}
+                                        onClick={() => setActiveImage(i)}
+                                        className={`rounded-full transition-all duration-300 ${i === activeImage
+                                                ? "w-6 h-2 bg-brand-blue"
+                                                : "w-2 h-2 bg-white/40 hover:bg-white/60"
+                                            }`}
+                                        aria-label={`View ${showcaseImages[i].alt}`}
+                                    />
+                                ))}
                             </div>
                         </div>
                     </div>
