@@ -50,7 +50,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
-                            className="bg-card w-full max-w-2xl max-h-full flex flex-col rounded-3xl border border-border shadow-2xl pointer-events-auto"
+                            className="bg-card w-full max-w-2xl max-h-full flex flex-col rounded-3xl shadow-2xl pointer-events-auto"
                             onClick={(e) => e.stopPropagation()}
                             onWheel={(e) => e.stopPropagation()} // Block Lenis from intercepting wheel events inside the modal
                         >
