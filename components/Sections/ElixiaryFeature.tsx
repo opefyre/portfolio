@@ -47,8 +47,12 @@ interface ElixiaryVenture {
 
 const showcaseImages = [
     { src: "/elixiary/hero.png", alt: "Elixiary AI Landing Page" },
+    { src: "/elixiary/cocktail-cards.png", alt: "AI-Generated Cocktail Cards" },
     { src: "/elixiary/recipe-detail.png", alt: "Recipe Detail View" },
+    { src: "/elixiary/collection.png", alt: "My Cocktail Collection" },
+    { src: "/elixiary/blog-history.png", alt: "Cocktail History Articles" },
     { src: "/elixiary/achievements.png", alt: "Gamification & Achievements" },
+    { src: "/elixiary/featured-card.png", alt: "Featured Cocktail Highlight" },
     { src: "/elixiary/cocktail-grid.png", alt: "AI-Generated Cocktail Gallery" },
 ];
 
@@ -204,8 +208,8 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
                                         key={i}
                                         onClick={() => setActiveImage(i)}
                                         className={`rounded-full transition-all duration-300 ${i === activeImage
-                                                ? "w-6 h-2 bg-brand-blue"
-                                                : "w-2 h-2 bg-white/40 hover:bg-white/60"
+                                            ? "w-6 h-2 bg-brand-blue"
+                                            : "w-2 h-2 bg-white/40 hover:bg-white/60"
                                             }`}
                                         aria-label={`View ${showcaseImages[i].alt}`}
                                     />
