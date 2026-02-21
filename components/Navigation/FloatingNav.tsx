@@ -23,32 +23,43 @@ const navItems = [
 ];
 
 export default function FloatingNav({ email }: { email: string }) {
-    const [activeSection, setActiveSection] = useState("hero");
+    const [activeSection, setActiveSection] = useState("overview");
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
 
-            const sections = navItems.map(item => document.getElementById(item.id));
-            const scrollPosition = window.scrollY + 120;
-
-            for (const section of sections) {
-                if (section && section.offsetTop <= scrollPosition && (section.offsetTop + section.offsetHeight) > scrollPosition) {
-                    setActiveSection(section.id);
+            // Use getBoundingClientRect for accurate detection of nested elements
+            // Iterate in reverse so the LAST section whose top is above the threshold wins
+            let found = false;
+            for (let i = navItems.length - 1; i >= 0; i--) {
+                const el = document.getElementById(navItems[i].id);
+                if (el) {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top <= 150) {
+                        setActiveSection(navItems[i].id);
+                        found = true;
+                        break;
+                    }
                 }
+            }
+            if (!found) {
+                setActiveSection("overview");
             }
         };
 
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     const scrollTo = (id: string) => {
         const element = document.getElementById(id);
         if (element) {
+            // getBoundingClientRect gives accurate position even for deeply nested elements
+            const absoluteTop = element.getBoundingClientRect().top + window.scrollY;
             window.scrollTo({
-                top: element.offsetTop - 80,
+                top: absoluteTop - 100,
                 behavior: "smooth",
             });
         }
