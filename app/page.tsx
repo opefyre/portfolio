@@ -40,7 +40,7 @@ export default async function Home() {
       <FloatingNav email={personalInfo.email} />
       {/* Scroll Margin corrections included */}
       <section id="overview" className="scroll-mt-0">
-        <DigitalHero name={personalInfo.name} />
+        <DigitalHero name={personalInfo.name} title={personalInfo.title} />
         <SummaryStats />
       </section>
 
