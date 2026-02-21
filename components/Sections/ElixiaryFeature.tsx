@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ArrowUpRight, Zap, Mail, Instagram, Github } from "lucide-react";
 import MagneticButton from "@/components/UI/MagneticButton";
 import Image from "next/image";
@@ -59,6 +60,9 @@ const showcaseImages = [
 
 export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: ElixiaryVenture }) {
     const [activeImage, setActiveImage] = useState(0);
+    const cardRef = useRef<HTMLDivElement>(null);
+    const isInView = useInView(cardRef, { once: true, amount: 0.2 });
+    const [hasRevealed, setHasRevealed] = useState(false);
 
     // Auto-rotate images
     const nextImage = useCallback(() => {
@@ -70,159 +74,186 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
         return () => clearInterval(timer);
     }, [nextImage]);
 
+    // Track when reveal animation completes
+    useEffect(() => {
+        if (isInView) {
+            const timer = setTimeout(() => setHasRevealed(true), 900);
+            return () => clearTimeout(timer);
+        }
+    }, [isInView]);
+
     return (
         <section className="container-wide section-padding">
 
-            <div className="rounded-2xl border border-border bg-card overflow-hidden">
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-0">
+            <div ref={cardRef} className="relative">
+                {/* Glow flash behind the card during reveal */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? { opacity: [0, 0.6, 0] } : { opacity: 0 }}
+                    transition={{ duration: 1.2, ease: "easeOut" }}
+                    className="absolute inset-0 rounded-2xl bg-brand-blue/20 blur-2xl -z-10"
+                />
 
-                    {/* Left: Content — 2 columns */}
-                    <div className="lg:col-span-2 p-6 md:p-8 flex flex-col justify-between space-y-6">
-                        <div className="space-y-4">
-                            <motion.div
-                                initial={{ opacity: 0, x: -10 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-brand-purple text-[10px] font-bold uppercase tracking-wider"
-                            >
-                                <Zap className="w-2.5 h-2.5" />
-                                <span>Featured Project</span>
-                            </motion.div>
+                {/* Main card with clip-path reveal */}
+                <motion.div
+                    initial={{ clipPath: "inset(48% 0% 48% 0%)" }}
+                    animate={isInView
+                        ? { clipPath: "inset(0% 0% 0% 0%)" }
+                        : { clipPath: "inset(48% 0% 48% 0%)" }
+                    }
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
+                    className="rounded-2xl border border-border bg-card overflow-hidden"
+                >
+                    <div className="grid grid-cols-1 lg:grid-cols-5 gap-0">
 
-                            <h3 className="text-2xl md:text-3xl font-display font-medium text-primary leading-tight">
-                                {elixiaryVenture.title}
-                            </h3>
-                            <p className="text-base text-brand-blue font-light">
-                                {elixiaryVenture.tagline}
-                            </p>
-                            <p className="text-secondary text-sm leading-relaxed">
-                                {elixiaryVenture.description}
-                            </p>
-
-                            {/* Key Modules — compact */}
-                            <div className="flex flex-wrap gap-2">
-                                {elixiaryVenture.modules.map((mod: Module) => (
-                                    <a
-                                        key={mod.name}
-                                        href={mod.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="px-3 py-1.5 rounded-lg bg-brand-purple/5 border border-brand-purple/10 text-brand-purple text-[10px] font-bold uppercase tracking-wider hover:bg-brand-purple/10 transition-colors flex items-center gap-1.5"
-                                    >
-                                        {mod.name} <ArrowUpRight className="w-2.5 h-2.5" />
-                                    </a>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Tech Stack — compact inline */}
-                        <div className="space-y-2">
-                            <h4 className="text-[10px] uppercase tracking-widest text-tertiary">Tech Stack</h4>
-                            <div className="flex flex-wrap gap-1.5">
-                                {elixiaryVenture.techStack.map((tech: string) => (
-                                    <span
-                                        key={tech}
-                                        className="px-2 py-1 rounded-md bg-page border border-border text-secondary text-xs"
-                                    >
-                                        {tech}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* CTA + Socials — compact row */}
-                        <div className="flex items-center justify-between pt-4 border-t border-border">
-                            <MagneticButton as="a" strength={0.4}>
-                                <a
-                                    href={elixiaryVenture.website}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue hover:bg-brand-blue/90 text-white text-xs font-bold transition-all hover:shadow-[0_0_15px_rgba(56,189,248,0.3)]"
-                                >
-                                    Visit App <ArrowUpRight className="w-3 h-3" />
-                                </a>
-                            </MagneticButton>
-
-                            <div className="flex items-center gap-4">
-                                {[
-                                    { name: "GitHub", url: elixiaryVenture.socials.github, icon: Github },
-                                    { name: "X", url: elixiaryVenture.socials.x, icon: XIcon },
-                                    { name: "Instagram", url: elixiaryVenture.socials.instagram, icon: Instagram },
-                                    { name: "TikTok", url: elixiaryVenture.socials.tiktok, icon: TikTokIcon },
-                                    { name: "Email", url: elixiaryVenture.socials.email, icon: Mail },
-                                ].map((social) => (
-                                    <a
-                                        key={social.name}
-                                        href={social.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-tertiary hover:text-brand-blue transition-colors duration-300"
-                                        aria-label={social.name}
-                                    >
-                                        <social.icon className="w-4 h-4" />
-                                    </a>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Right: Screenshot Showcase — 3 columns */}
-                    <div className="lg:col-span-3 relative border-t lg:border-t-0 lg:border-l border-border p-4 md:p-6 flex flex-col bg-[#060d1b]">
-                        {/* Browser-style top bar */}
-                        <div className="flex items-center gap-2 mb-3">
-                            <div className="flex gap-1.5">
-                                <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-                                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-                                <div className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
-                            </div>
-                            <div className="flex-1 h-5 rounded-md bg-white/5 border border-white/10 flex items-center px-2">
-                                <span className="text-[9px] text-tertiary/60 font-mono">elixiary.com</span>
-                            </div>
-                        </div>
-
-                        {/* Image container with clear border */}
-                        <div className="relative flex-1 rounded-lg overflow-hidden ring-1 ring-white/10 shadow-[inset_0_2px_20px_rgba(0,0,0,0.3)] min-h-[260px] md:min-h-[360px]">
-                            {showcaseImages.map((img, i) => (
+                        {/* Left: Content — 2 columns */}
+                        <div className="lg:col-span-2 p-6 md:p-8 flex flex-col justify-between space-y-6">
+                            <div className="space-y-4">
                                 <motion.div
-                                    key={img.src}
-                                    initial={false}
-                                    animate={{ opacity: i === activeImage ? 1 : 0 }}
-                                    transition={{ duration: 0.5 }}
-                                    className="absolute inset-0"
+                                    initial={{ opacity: 0, x: -10 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-brand-purple text-[10px] font-bold uppercase tracking-wider"
                                 >
-                                    <Image
-                                        src={img.src}
-                                        alt={img.alt}
-                                        fill
-                                        className="object-cover object-top"
-                                        sizes="(max-width: 1024px) 100vw, 60vw"
-                                        priority={i === 0}
-                                    />
+                                    <Zap className="w-2.5 h-2.5" />
+                                    <span>Featured Project</span>
                                 </motion.div>
-                            ))}
 
-                            {/* Bottom gradient overlay for dots */}
-                            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/70 to-transparent" />
+                                <h3 className="text-2xl md:text-3xl font-display font-medium text-primary leading-tight">
+                                    {elixiaryVenture.title}
+                                </h3>
+                                <p className="text-base text-brand-blue font-light">
+                                    {elixiaryVenture.tagline}
+                                </p>
+                                <p className="text-secondary text-sm leading-relaxed">
+                                    {elixiaryVenture.description}
+                                </p>
 
-                            {/* Dot indicators */}
-                            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2">
-                                {showcaseImages.map((_, i) => (
-                                    <button
-                                        key={i}
-                                        onClick={() => setActiveImage(i)}
-                                        className={`rounded-full transition-all duration-300 ${i === activeImage
-                                            ? "w-6 h-2 bg-brand-blue"
-                                            : "w-2 h-2 bg-white/40 hover:bg-white/60"
-                                            }`}
-                                        aria-label={`View ${showcaseImages[i].alt}`}
-                                    />
-                                ))}
+                                {/* Key Modules — compact */}
+                                <div className="flex flex-wrap gap-2">
+                                    {elixiaryVenture.modules.map((mod: Module) => (
+                                        <a
+                                            key={mod.name}
+                                            href={mod.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="px-3 py-1.5 rounded-lg bg-brand-purple/5 border border-brand-purple/10 text-brand-purple text-[10px] font-bold uppercase tracking-wider hover:bg-brand-purple/10 transition-colors flex items-center gap-1.5"
+                                        >
+                                            {mod.name} <ArrowUpRight className="w-2.5 h-2.5" />
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Tech Stack — compact inline */}
+                            <div className="space-y-2">
+                                <h4 className="text-[10px] uppercase tracking-widest text-tertiary">Tech Stack</h4>
+                                <div className="flex flex-wrap gap-1.5">
+                                    {elixiaryVenture.techStack.map((tech: string) => (
+                                        <span
+                                            key={tech}
+                                            className="px-2 py-1 rounded-md bg-page border border-border text-secondary text-xs"
+                                        >
+                                            {tech}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* CTA + Socials — compact row */}
+                            <div className="flex items-center justify-between pt-4 border-t border-border">
+                                <MagneticButton as="a" strength={0.4}>
+                                    <a
+                                        href={elixiaryVenture.website}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue hover:bg-brand-blue/90 text-white text-xs font-bold transition-all hover:shadow-[0_0_15px_rgba(56,189,248,0.3)]"
+                                    >
+                                        Visit App <ArrowUpRight className="w-3 h-3" />
+                                    </a>
+                                </MagneticButton>
+
+                                <div className="flex items-center gap-4">
+                                    {[
+                                        { name: "GitHub", url: elixiaryVenture.socials.github, icon: Github },
+                                        { name: "X", url: elixiaryVenture.socials.x, icon: XIcon },
+                                        { name: "Instagram", url: elixiaryVenture.socials.instagram, icon: Instagram },
+                                        { name: "TikTok", url: elixiaryVenture.socials.tiktok, icon: TikTokIcon },
+                                        { name: "Email", url: elixiaryVenture.socials.email, icon: Mail },
+                                    ].map((social) => (
+                                        <a
+                                            key={social.name}
+                                            href={social.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-tertiary hover:text-brand-blue transition-colors duration-300"
+                                            aria-label={social.name}
+                                        >
+                                            <social.icon className="w-4 h-4" />
+                                        </a>
+                                    ))}
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                </div>
+                        {/* Right: Screenshot Showcase — 3 columns */}
+                        <div className="lg:col-span-3 relative border-t lg:border-t-0 lg:border-l border-border p-4 md:p-6 flex flex-col bg-[#060d1b]">
+                            {/* Browser-style top bar */}
+                            <div className="flex items-center gap-2 mb-3">
+                                <div className="flex gap-1.5">
+                                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
+                                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
+                                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
+                                </div>
+                                <div className="flex-1 h-5 rounded-md bg-white/5 border border-white/10 flex items-center px-2">
+                                    <span className="text-[9px] text-tertiary/60 font-mono">elixiary.com</span>
+                                </div>
+                            </div>
+
+                            {/* Image container with clear border */}
+                            <div className="relative flex-1 rounded-lg overflow-hidden ring-1 ring-white/10 shadow-[inset_0_2px_20px_rgba(0,0,0,0.3)] min-h-[260px] md:min-h-[360px]">
+                                {showcaseImages.map((img, i) => (
+                                    <motion.div
+                                        key={img.src}
+                                        initial={false}
+                                        animate={{ opacity: i === activeImage ? 1 : 0 }}
+                                        transition={{ duration: 0.5 }}
+                                        className="absolute inset-0"
+                                    >
+                                        <Image
+                                            src={img.src}
+                                            alt={img.alt}
+                                            fill
+                                            className="object-cover object-top"
+                                            sizes="(max-width: 1024px) 100vw, 60vw"
+                                            priority={i === 0}
+                                        />
+                                    </motion.div>
+                                ))}
+
+                                {/* Bottom gradient overlay for dots */}
+                                <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/70 to-transparent" />
+
+                                {/* Dot indicators */}
+                                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2">
+                                    {showcaseImages.map((_, i) => (
+                                        <button
+                                            key={i}
+                                            onClick={() => setActiveImage(i)}
+                                            className={`rounded-full transition-all duration-300 ${i === activeImage
+                                                ? "w-6 h-2 bg-brand-blue"
+                                                : "w-2 h-2 bg-white/40 hover:bg-white/60"
+                                                }`}
+                                            aria-label={`View ${showcaseImages[i].alt}`}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </motion.div>
             </div>
-        </section >
+        </section>
     );
 }

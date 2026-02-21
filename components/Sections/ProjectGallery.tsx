@@ -7,13 +7,13 @@ import ProjectModal from "@/components/UI/ProjectModal";
 import SectionHeader from "@/components/UI/SectionHeader";
 
 const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 40 },
     visible: (i: number) => ({
         opacity: 1,
         y: 0,
         transition: {
-            delay: i * 0.08,
-            duration: 0.5,
+            delay: i * 0.1,
+            duration: 0.6,
             ease: [0.25, 0.4, 0.25, 1] as const,
         },
     }),
@@ -25,9 +25,10 @@ const ProjectCard = ({ project, onClick, index }: { project: Project; onClick: (
         variants={cardVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
+        viewport={{ once: true, amount: 0.1 }}
+        whileHover={{ y: -4, transition: { duration: 0.2 } }}
         onClick={onClick}
-        className="group bg-card border border-border hover:border-brand-blue/30 hover:bg-card-hover p-6 rounded-xl transition-all duration-300 hover:-translate-y-1 shadow-[0_2px_8px_rgba(0,0,0,0.3)] cursor-pointer h-full flex flex-col"
+        className="group bg-card border border-border hover:border-brand-blue/30 hover:bg-card-hover p-6 rounded-xl transition-[color,background-color,border-color,box-shadow] duration-300 shadow-[0_2px_8px_rgba(0,0,0,0.3)] cursor-pointer h-full flex flex-col"
     >
         <h3 className="text-xl font-display font-medium text-primary group-hover:text-brand-blue transition-colors mb-4">
             {project.title}
