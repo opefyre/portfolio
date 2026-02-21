@@ -148,30 +148,30 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
                     </div>
 
                     {/* Right: Abstract Visualization / Stats */}
-                    <div className="relative h-full min-h-[400px] flex items-center justify-center bg-gradient-to-br from-page/50 to-card rounded-2xl border border-border p-8">
+                    <div className="relative h-full min-h-[300px] md:min-h-[400px] flex items-center justify-center bg-gradient-to-br from-page/50 to-card rounded-2xl border border-border p-4 md:p-8">
                         {/* Abstract representation of AI/Cloud Architecture */}
-                        <div className="grid grid-cols-2 gap-4 w-full max-w-md">
-                            <div className="space-y-4">
-                                <div className="p-6 rounded-2xl bg-card-hover border border-brand-purple/20">
-                                    <Cpu className="w-8 h-8 text-brand-purple mb-4" />
-                                    <div className="text-2xl font-bold text-primary">Genkit</div>
+                        <div className="grid grid-cols-2 gap-3 md:gap-4 w-full max-w-md">
+                            <div className="space-y-3 md:space-y-4">
+                                <div className="p-4 md:p-6 rounded-2xl bg-card-hover border border-brand-purple/20">
+                                    <Cpu className="w-6 h-6 md:w-8 md:h-8 text-brand-purple mb-3 md:mb-4" />
+                                    <div className="text-lg md:text-2xl font-bold text-primary">Genkit</div>
                                     <div className="text-xs text-secondary mt-1">AI Logic Layer</div>
                                 </div>
-                                <div className="p-6 rounded-2xl bg-card-hover border border-emerald-500/20">
-                                    <Server className="w-8 h-8 text-emerald-500 mb-4" />
-                                    <div className="text-2xl font-bold text-primary">Vercel</div>
+                                <div className="p-4 md:p-6 rounded-2xl bg-card-hover border border-emerald-500/20">
+                                    <Server className="w-6 h-6 md:w-8 md:h-8 text-emerald-500 mb-3 md:mb-4" />
+                                    <div className="text-lg md:text-2xl font-bold text-primary">Vercel</div>
                                     <div className="text-xs text-secondary mt-1">Edge Runtime</div>
                                 </div>
                             </div>
-                            <div className="space-y-4 mt-8">
-                                <div className="p-6 rounded-2xl bg-card-hover border border-orange-500/20">
-                                    <div className="w-8 h-8 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-500 font-bold mb-4">λ</div>
-                                    <div className="text-2xl font-bold text-primary">Firebase</div>
+                            <div className="space-y-3 md:space-y-4 mt-6 md:mt-8">
+                                <div className="p-4 md:p-6 rounded-2xl bg-card-hover border border-orange-500/20">
+                                    <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-500 text-sm md:text-base font-bold mb-3 md:mb-4">λ</div>
+                                    <div className="text-lg md:text-2xl font-bold text-primary">Firebase</div>
                                     <div className="text-xs text-secondary mt-1">Backend-as-a-Service</div>
                                 </div>
-                                <div className="p-6 rounded-2xl bg-card-hover border border-blue-500/20">
-                                    <Zap className="w-8 h-8 text-brand-blue mb-4" />
-                                    <div className="text-2xl font-bold text-primary">Stripe</div>
+                                <div className="p-4 md:p-6 rounded-2xl bg-card-hover border border-blue-500/20">
+                                    <Zap className="w-6 h-6 md:w-8 md:h-8 text-brand-blue mb-3 md:mb-4" />
+                                    <div className="text-lg md:text-2xl font-bold text-primary">Stripe</div>
                                     <div className="text-xs text-secondary mt-1">Payment Infrastructure</div>
                                 </div>
                             </div>
