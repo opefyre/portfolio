@@ -45,7 +45,7 @@ export default async function Home() {
       </section>
 
       {/* Skills — TINTED section with integrated wave edges */}
-      <section id="expertise" className="scroll-mt-32 relative bg-section-tinted mt-0" style={{ clipPath: 'none' }}>
+      <section className="scroll-mt-32 relative bg-section-tinted mt-0" style={{ clipPath: 'none' }}>
         {/* Top wave edge — extends above the section */}
         <div className="absolute top-0 left-0 right-0 -translate-y-full h-16 md:h-24 overflow-hidden">
           <svg className="absolute bottom-0 w-full h-full" viewBox="0 0 1440 96" preserveAspectRatio="none" fill="none">

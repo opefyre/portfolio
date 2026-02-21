@@ -69,10 +69,10 @@ export default function ExpertiseSection({
     );
 
     return (
-        <section className="container-wide section-padding space-y-24 md:space-y-32" id="expert-section">
+        <section className="container-wide section-padding space-y-24 md:space-y-32">
 
             {/* PART 1: COMPETENCIES (Skills) */}
-            <div id="expertise">
+            <div id="expertise" className="scroll-mt-32">
                 <SectionHeader
                     title="Technical Command Center"
                     subtitle="Core competencies across Process Excellence, Project Management, and Digital Transformation."
@@ -121,7 +121,7 @@ export default function ExpertiseSection({
             </div>
 
             {/* PART 2: CREDENTIALS (Education & Certs) */}
-            <div id="credentials">
+            <div id="credentials" className="scroll-mt-32">
                 <SectionHeader
                     title="Credentials & Academic Log"
                     subtitle="Formal education, certifications, and professional learning path."
