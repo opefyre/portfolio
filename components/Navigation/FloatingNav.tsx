@@ -88,7 +88,7 @@ export default function FloatingNav({ email }: { email: string }) {
                             key={item.id}
                             onClick={() => scrollTo(item.id)}
                             className={clsx(
-                                "relative px-2 md:px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300",
+                                "relative cursor-pointer px-2 md:px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300",
                                 activeSection !== item.id && "text-tertiary hover:text-white"
                             )}
                             aria-label={item.name}
@@ -123,7 +123,7 @@ export default function FloatingNav({ email }: { email: string }) {
                 <MagneticButton strength={0.3}>
                     <button
                         onClick={() => window.open(`mailto:${email}`)}
-                        className="hidden md:flex items-center px-4 py-2 rounded-full bg-brand-blue text-white text-xs font-bold uppercase tracking-wider hover:bg-brand-blue/90 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] transition-all duration-300 mr-1"
+                        className="hidden md:flex cursor-pointer items-center px-4 py-2 rounded-full bg-brand-blue text-white text-xs font-bold uppercase tracking-wider hover:bg-brand-blue/90 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] transition-all duration-300 mr-1"
                     >
                         Let&apos;s Chat
                     </button>
