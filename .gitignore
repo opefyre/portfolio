@@ -52,3 +52,5 @@ next-env.d.ts
 scripts/
 projects - Sheet1.csv
 projects-merged.json
+projects-cleaned.json
+projects-raw-dump.json
