@@ -121,7 +121,7 @@ export const getExperiences = cache(async () => {
             const snapshot = await db.collection("experiences").get();
             if (snapshot.empty) throw new Error("Experiences collection empty in Firestore");
             const experiences = snapshot.docs.map(d => d.data() as Experience);
-            return experiences.sort((a, b) => a.order - b.order);
+            return experiences.sort((a, b) => b.order - a.order);
         },
         ["experiences"],
         { tags: ["content"] }
