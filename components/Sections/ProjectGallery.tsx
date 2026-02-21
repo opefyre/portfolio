@@ -1,8 +1,8 @@
 "use client";
 
 import { Project } from "@/lib/db";
-import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useSpring, useMotionValue, useVelocity, useTransform, MotionValue } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useSpring, useMotionValue, useVelocity, useTransform, useScroll, MotionValue } from "framer-motion";
 import ProjectModal from "@/components/UI/ProjectModal";
 import SectionHeader from "@/components/UI/SectionHeader";
 import { ArrowUpRight } from "lucide-react";
@@ -43,7 +43,7 @@ const CursorPreviewOverlay = ({ activeProject, mousePosition }: { activeProject:
                         translateX: "-50%",
                         translateY: "-50%"
                     }}
-                    className="fixed top-0 left-0 w-72 aspect-[4/3] pointer-events-none z-[100] rounded-2xl overflow-hidden shadow-2xl shadow-brand-blue/10 border border-white/10"
+                    className="fixed top-0 left-0 w-72 aspect-[4/3] pointer-events-none z-20 rounded-2xl overflow-hidden shadow-2xl shadow-brand-blue/10 border border-white/10"
                 >
                     {/* Placeholder Block (Image Fallback) */}
                     <div className="w-full h-full bg-card/90 backdrop-blur-xl flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
@@ -75,50 +75,63 @@ const ProjectRow = ({
     onClick: () => void;
     onHoverStart: () => void;
     onHoverEnd: () => void;
-}) => (
-    <motion.div
-        layout
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95 }}
-        whileHover="hover"
-        onMouseEnter={onHoverStart}
-        onMouseLeave={onHoverEnd}
-        onClick={onClick}
-        className="group relative flex flex-col md:flex-row items-start md:items-center justify-between py-6 md:py-8 border-b border-border/50 cursor-pointer transition-colors hover:bg-white/[0.02] px-4 -mx-4 rounded-xl"
-    >
-        {/* Left side: Num & Title */}
-        <div className="flex items-baseline gap-6 md:gap-12 w-full md:w-auto">
-            <span className="text-tertiary font-mono text-sm">
-                {(index + 1).toString().padStart(2, '0')}
-            </span>
-            <div className="flex-1">
-                <h3 className="text-xl md:text-3xl font-display font-medium text-primary md:group-hover:translate-x-4 transition-transform duration-500 ease-out">
-                    {project.title}
-                </h3>
+}) => {
+    const rowRef = useRef<HTMLDivElement>(null);
+
+    // Fade out simply as it approaches the sticky header
+    // Start fading at 180px from top, completely invisible at 100px from top
+    const { scrollYProgress } = useScroll({
+        target: rowRef,
+        offset: ["start 160px", "start 80px"]
+    });
+
+    const fadeOutOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+
+    return (
+        <motion.div
+            ref={rowRef}
+            layout
+            // Combine layout animations with scroll-tied opacity
+            style={{ opacity: fadeOutOpacity }}
+            whileHover="hover"
+            onMouseEnter={onHoverStart}
+            onMouseLeave={onHoverEnd}
+            onClick={onClick}
+            className="group relative flex flex-col md:flex-row items-start md:items-center justify-between py-6 md:py-8 border-b border-border/50 cursor-pointer transition-colors hover:bg-white/[0.02] px-4 -mx-4 rounded-xl"
+        >
+            {/* Left side: Num & Title */}
+            <div className="flex items-baseline gap-6 md:gap-12 w-full md:w-auto">
+                <span className="text-tertiary font-mono text-sm">
+                    {(index + 1).toString().padStart(2, '0')}
+                </span>
+                <div className="flex-1">
+                    <h3 className="text-xl md:text-3xl font-display font-medium text-primary md:group-hover:translate-x-4 transition-transform duration-500 ease-out">
+                        {project.title}
+                    </h3>
+                </div>
             </div>
-        </div>
 
-        {/* Right side: Category & Arrow */}
-        <div className="flex items-center justify-between md:justify-end gap-8 w-full md:w-auto mt-4 md:mt-0 pl-11 md:pl-0">
-            <span className="text-sm text-secondary uppercase tracking-widest bg-page px-3 py-1 rounded-full border border-border">
-                {project.category}
-            </span>
+            {/* Right side: Category & Arrow */}
+            <div className="flex items-center justify-between md:justify-end gap-8 w-full md:w-auto mt-4 md:mt-0 pl-11 md:pl-0">
+                <span className="text-sm text-secondary uppercase tracking-widest bg-page px-3 py-1 rounded-full border border-border">
+                    {project.category}
+                </span>
 
-            {/* Animated Arrow */}
-            <motion.div
-                variants={{
-                    hover: { x: 0, opacity: 1 }
-                }}
-                initial={{ x: -10, opacity: 0 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="hidden md:flex w-10 h-10 rounded-full bg-brand-blue/10 items-center justify-center text-brand-blue"
-            >
-                <ArrowUpRight className="w-5 h-5" />
-            </motion.div>
-        </div>
-    </motion.div>
-);
+                {/* Animated Arrow */}
+                <motion.div
+                    variants={{
+                        hover: { x: 0, opacity: 1 }
+                    }}
+                    initial={{ x: -10, opacity: 0 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className="hidden md:flex w-10 h-10 rounded-full bg-brand-blue/10 items-center justify-center text-brand-blue"
+                >
+                    <ArrowUpRight className="w-5 h-5" />
+                </motion.div>
+            </div>
+        </motion.div>
+    );
+};
 
 export default function ProjectGallery({ projects }: { projects: Project[] }) {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -169,7 +182,7 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
             />
 
             {/* Category Filter Pills */}
-            <div className="flex flex-wrap gap-2 mb-12 sticky top-24 z-30 bg-page/80 backdrop-blur-md py-4 -mx-4 px-4 border-y border-border/30">
+            <div className="flex flex-wrap gap-2 mb-12 sticky top-24 z-30 bg-page/90 backdrop-blur-md py-4 -mx-4 px-4 border-y border-border/30">
                 {categories.map(cat => (
                     <button
                         key={cat}
