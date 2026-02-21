@@ -1,7 +1,42 @@
 "use client";
 
 import { Experience } from "@/lib/db";
+import { motion } from "framer-motion";
 import SectionHeader from "@/components/UI/SectionHeader";
+
+const entryVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.15 },
+    },
+};
+
+const numberVariants = {
+    hidden: { opacity: 0, x: -30 },
+    visible: {
+        opacity: 1,
+        x: 0,
+        transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] as const },
+    },
+};
+
+const contentVariants = {
+    hidden: { opacity: 0, x: 30 },
+    visible: {
+        opacity: 1,
+        x: 0,
+        transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] as const },
+    },
+};
+
+const dotVariants = {
+    hidden: { scale: 0 },
+    visible: {
+        scale: 1,
+        transition: { duration: 0.3, ease: "easeOut" as const },
+    },
+};
 
 export default function ExperienceStack({ experiences }: { experiences: Experience[] }) {
     return (
@@ -13,16 +48,23 @@ export default function ExperienceStack({ experiences }: { experiences: Experien
 
             <div className="space-y-16">
                 {experiences.map((role, idx) => (
-                    <div key={idx} className="group relative grid grid-cols-1 md:grid-cols-12 gap-8 border-t border-border pt-12 hover:border-brand-blue/30 transition-colors duration-500">
-                        {/* Timeline Year */}
-                        <div className="md:col-span-3">
+                    <motion.div
+                        key={idx}
+                        variants={entryVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-80px" }}
+                        className="group relative grid grid-cols-1 md:grid-cols-12 gap-8 border-t border-border pt-12 hover:border-brand-blue/30 transition-colors duration-500"
+                    >
+                        {/* Timeline Number */}
+                        <motion.div variants={numberVariants} className="md:col-span-3">
                             <span className="text-display text-5xl md:text-6xl text-tertiary/30 group-hover:text-tertiary transition-colors duration-500">
                                 0{experiences.length - idx}
                             </span>
-                        </div>
+                        </motion.div>
 
                         {/* Content */}
-                        <div className="md:col-span-9 space-y-8">
+                        <motion.div variants={contentVariants} className="md:col-span-9 space-y-8">
                             <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2">
                                 <h3 className="text-3xl md:text-4xl font-display font-medium text-primary group-hover:text-brand-blue transition-colors duration-300">
                                     {role.company}
@@ -33,8 +75,11 @@ export default function ExperienceStack({ experiences }: { experiences: Experien
                             <div className="space-y-10">
                                 {role.positions.map((pos, pIdx) => (
                                     <div key={pIdx} className="relative pl-6 border-l border-border group-hover/pos:border-brand-purple/50 transition-colors">
-                                        {/* Dot */}
-                                        <div className="absolute left-[-5px] top-2 w-2 h-2 rounded-full bg-border group-hover:bg-brand-purple transition-colors" />
+                                        {/* Animated Dot */}
+                                        <motion.div
+                                            variants={dotVariants}
+                                            className="absolute left-[-5px] top-2 w-2 h-2 rounded-full bg-border group-hover:bg-brand-purple transition-colors"
+                                        />
 
                                         <h4 className="text-xl text-primary font-medium">{pos.title}</h4>
                                         <p className="text-tertiary text-sm font-mono mb-3">{pos.period}</p>
@@ -50,8 +95,8 @@ export default function ExperienceStack({ experiences }: { experiences: Experien
                                     </div>
                                 ))}
                             </div>
-                        </div>
-                    </div>
+                        </motion.div>
+                    </motion.div>
                 ))}
             </div>
         </section>

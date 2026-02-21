@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
+import MagneticButton from "@/components/UI/MagneticButton";
 import {
     LayoutDashboard,
     Wrench,
@@ -25,6 +26,8 @@ const navItems = [
 export default function FloatingNav({ email }: { email: string }) {
     const [activeSection, setActiveSection] = useState("overview");
     const [scrolled, setScrolled] = useState(false);
+    const { scrollYProgress } = useScroll();
+    const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
 
     useEffect(() => {
         const handleScroll = () => {
@@ -117,12 +120,20 @@ export default function FloatingNav({ email }: { email: string }) {
                 <div className="w-px h-4 bg-border mx-1" />
 
                 {/* Primary CTA */}
-                <button
-                    onClick={() => window.open(`mailto:${email}`)}
-                    className="hidden md:flex items-center px-4 py-2 rounded-full bg-brand-blue text-white text-xs font-bold uppercase tracking-wider hover:bg-brand-blue/90 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] transition-all duration-300 mr-1"
-                >
-                    Let&apos;s Chat
-                </button>
+                <MagneticButton strength={0.3}>
+                    <button
+                        onClick={() => window.open(`mailto:${email}`)}
+                        className="hidden md:flex items-center px-4 py-2 rounded-full bg-brand-blue text-white text-xs font-bold uppercase tracking-wider hover:bg-brand-blue/90 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] transition-all duration-300 mr-1"
+                    >
+                        Let&apos;s Chat
+                    </button>
+                </MagneticButton>
+
+                {/* Scroll Progress Bar */}
+                <motion.div
+                    style={{ scaleX }}
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-brand-blue to-brand-purple origin-left rounded-full"
+                />
             </div>
         </motion.div>
     );

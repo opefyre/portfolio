@@ -2,11 +2,30 @@
 
 import { Project } from "@/lib/db";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import ProjectModal from "@/components/UI/ProjectModal";
 import SectionHeader from "@/components/UI/SectionHeader";
 
-const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => void }) => (
-    <div
+const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: (i: number) => ({
+        opacity: 1,
+        y: 0,
+        transition: {
+            delay: i * 0.08,
+            duration: 0.5,
+            ease: [0.25, 0.4, 0.25, 1] as const,
+        },
+    }),
+};
+
+const ProjectCard = ({ project, onClick, index }: { project: Project; onClick: () => void; index: number }) => (
+    <motion.div
+        custom={index}
+        variants={cardVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
         onClick={onClick}
         className="group bg-card border border-border hover:border-brand-blue/30 hover:bg-card-hover p-6 rounded-xl transition-all duration-300 hover:-translate-y-1 shadow-[0_2px_8px_rgba(0,0,0,0.3)] cursor-pointer h-full flex flex-col"
     >
@@ -25,7 +44,7 @@ const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => vo
                 {project.category}
             </span>
         </div>
-    </div>
+    </motion.div>
 );
 
 export default function ProjectGallery({ projects }: { projects: Project[] }) {
@@ -42,7 +61,7 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
     };
 
     return (
-        <section className="container-wide section-padding" id="projects"> {/* Ensure ID is here */}
+        <section className="container-wide section-padding" id="projects">
             <SectionHeader
                 title="Select Projects"
                 subtitle="A curated selection of impactful projects driving digital transformation and procedure optimization."
@@ -52,6 +71,7 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
                 {projects.map((project, idx) => (
                     <ProjectCard
                         key={idx}
+                        index={idx}
                         project={project}
                         onClick={() => openModal(project)}
                     />
