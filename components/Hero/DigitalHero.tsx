@@ -106,7 +106,7 @@ export default function DigitalHero({ name, title }: { name: string; title: stri
                     className="h-10 flex items-center justify-center mb-8 overflow-hidden"
                 >
                     <span className="text-tertiary font-mono text-sm md:text-base uppercase tracking-[0.2em] mr-3">
-                        //
+                        {"//"}
                     </span>
                     <AnimatePresence mode="wait">
                         <motion.span
@@ -121,7 +121,7 @@ export default function DigitalHero({ name, title }: { name: string; title: stri
                         </motion.span>
                     </AnimatePresence>
                     <span className="text-tertiary font-mono text-sm md:text-base uppercase tracking-[0.2em] ml-3">
-                        //
+                        {"//"}
                     </span>
                 </motion.div>
 
