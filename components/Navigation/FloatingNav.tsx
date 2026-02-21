@@ -4,14 +4,23 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import clsx from "clsx";
+import {
+    LayoutDashboard,
+    Wrench,
+    Briefcase,
+    Rocket,
+    FolderKanban,
+    GraduationCap,
+} from "lucide-react";
 
-// UPDATED NAV ITEMS to match new ID structure
+// Nav items with icons for mobile view
 const navItems = [
-    { name: "Overview", id: "overview" },
-    { name: "Skills", id: "expertise" },
-    { name: "History", id: "experience" },
-    { name: "Venture", id: "venture" },
-    { name: "Projects", id: "projects" },
+    { name: "Overview", id: "overview", icon: LayoutDashboard },
+    { name: "Skills", id: "expertise", icon: Wrench },
+    { name: "History", id: "experience", icon: Briefcase },
+    { name: "Venture", id: "venture", icon: Rocket },
+    { name: "Projects", id: "projects", icon: FolderKanban },
+    { name: "Education", id: "credentials", icon: GraduationCap },
 ];
 
 export default function FloatingNav({ email }: { email: string }) {
@@ -59,7 +68,7 @@ export default function FloatingNav({ email }: { email: string }) {
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1, duration: 0.8 }}
-            className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none"
+            className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4"
         >
             <div className={clsx(
                 "pointer-events-auto flex items-center gap-1 p-1.5 rounded-full transition-all duration-500 border backdrop-blur-md",
@@ -67,32 +76,42 @@ export default function FloatingNav({ email }: { email: string }) {
                     ? "bg-page/80 border-border shadow-lg shadow-brand-blue/5"
                     : "bg-transparent border-transparent"
             )}>
-                {navItems.map((item) => (
-                    <button
-                        key={item.id}
-                        onClick={() => scrollTo(item.id)}
-                        className={clsx(
-                            "relative px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300",
-                            // Inactive state text color
-                            activeSection !== item.id && "text-tertiary hover:text-primary dark:hover:text-white"
-                        )}
-                    >
-                        {activeSection === item.id && (
-                            <motion.div
-                                layoutId="nav-pill"
-                                className="absolute inset-0 bg-white dark:bg-white rounded-full border border-border shadow-sm"
-                                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                            />
-                        )}
-                        {/* Active state text color: Black on White Pill (both modes) */}
-                        <span className={clsx(
-                            "relative z-10 font-bold transition-colors duration-300",
-                            activeSection === item.id ? "text-black" : ""
-                        )}>
-                            {item.name}
-                        </span>
-                    </button>
-                ))}
+                {navItems.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                        <button
+                            key={item.id}
+                            onClick={() => scrollTo(item.id)}
+                            className={clsx(
+                                "relative px-2 md:px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300",
+                                // Inactive state text color
+                                activeSection !== item.id && "text-tertiary hover:text-primary dark:hover:text-white"
+                            )}
+                            aria-label={item.name}
+                        >
+                            {activeSection === item.id && (
+                                <motion.div
+                                    layoutId="nav-pill"
+                                    className="absolute inset-0 bg-white dark:bg-white rounded-full border border-border shadow-sm"
+                                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                />
+                            )}
+                            {/* Icon on mobile, text on desktop */}
+                            <span className={clsx(
+                                "relative z-10 font-bold transition-colors duration-300 md:hidden flex items-center justify-center",
+                                activeSection === item.id ? "text-black" : ""
+                            )}>
+                                <Icon className="w-4 h-4" />
+                            </span>
+                            <span className={clsx(
+                                "relative z-10 font-bold transition-colors duration-300 hidden md:inline",
+                                activeSection === item.id ? "text-black" : ""
+                            )}>
+                                {item.name}
+                            </span>
+                        </button>
+                    );
+                })}
 
                 <div className="w-px h-4 bg-border mx-1" />
 
