@@ -10,14 +10,9 @@ const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => vo
         onClick={onClick}
         className="group bg-card border border-border hover:border-brand-blue/30 hover:bg-card-hover p-6 rounded-xl transition-all duration-300 hover:-translate-y-1 shadow-[0_2px_8px_rgba(0,0,0,0.3)] cursor-pointer h-full flex flex-col"
     >
-        <div className="flex justify-between items-start mb-4">
-            <h3 className="text-xl font-display font-medium text-primary group-hover:text-brand-blue transition-colors">
-                {project.title}
-            </h3>
-            <span className="text-[10px] uppercase tracking-widest px-2 py-1 bg-page rounded text-tertiary border border-border">
-                {project.category}
-            </span>
-        </div>
+        <h3 className="text-xl font-display font-medium text-primary group-hover:text-brand-blue transition-colors mb-4">
+            {project.title}
+        </h3>
         <p className="text-secondary text-sm leading-relaxed mb-6 border-b border-border pb-6 flex-1">
             {project.description}
         </p>
@@ -26,8 +21,8 @@ const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => vo
             <p className="text-primary text-sm line-clamp-2">{project.impact}</p>
         </div>
         <div className="mt-4 pt-4 border-t border-border/50 flex justify-end">
-            <span className="text-xs text-brand-blue font-semibold group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                Deep Dive <span className="text-lg">→</span>
+            <span className="text-[10px] uppercase tracking-widest px-2 py-1 bg-page rounded text-tertiary border border-border">
+                {project.category}
             </span>
         </div>
     </div>
