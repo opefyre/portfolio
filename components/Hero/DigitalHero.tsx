@@ -65,6 +65,8 @@ const identities = [
     "Lean Six Sigma",
     "Data-Driven Decisions",
     "Intelligent Workflows",
+    "Agile Program Delivery",
+    "Cross-Functional Leadership",
 ];
 
 export default function DigitalHero({ name, title }: { name: string; title: string }) {
@@ -156,25 +158,26 @@ export default function DigitalHero({ name, title }: { name: string; title: stri
                     </span>
                 </motion.div>
 
-                {/* Scroll indicator — clickable */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.5, duration: 0.8 }}
-                    className="absolute bottom-8 left-1/2 -translate-x-1/2"
-                >
-                    <motion.button
-                        onClick={scrollToContent}
-                        animate={{ y: [0, 8, 0] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                        className="flex flex-col items-center gap-2 cursor-pointer group"
-                        aria-label="Scroll to content"
-                    >
-                        <span className="text-tertiary group-hover:text-brand-blue font-mono text-[10px] uppercase tracking-widest transition-colors">Scroll</span>
-                        <div className="w-px h-8 bg-gradient-to-b from-tertiary/50 group-hover:from-brand-blue/50 to-transparent transition-colors" />
-                    </motion.button>
-                </motion.div>
             </div>
+
+            {/* Scroll indicator — clickable, anchored to section bottom */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.5, duration: 0.8 }}
+                className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10"
+            >
+                <motion.button
+                    onClick={scrollToContent}
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    className="flex flex-col items-center gap-2 cursor-pointer group"
+                    aria-label="Scroll to content"
+                >
+                    <span className="text-tertiary group-hover:text-brand-blue font-mono text-[10px] uppercase tracking-widest transition-colors">Scroll</span>
+                    <div className="w-px h-8 bg-gradient-to-b from-tertiary/50 group-hover:from-brand-blue/50 to-transparent transition-colors" />
+                </motion.button>
+            </motion.div>
         </section>
     );
 }
