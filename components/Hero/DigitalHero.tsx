@@ -1,8 +1,8 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Points, PointMaterial } from "@react-three/drei";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import * as random from "maath/random/dist/maath-random.cjs";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,11 +12,31 @@ function StarField(props: React.ComponentProps<typeof Points>) {
     const ref = useRef<THREE.Points>(null);
     const [sphere] = useState(() => random.inSphere(new Float32Array(6000), { radius: 1.5 }) as Float32Array);
     const { theme } = useTheme();
+    const mouse = useRef({ x: 0, y: 0 });
+    const { size } = useThree();
+
+    // Listen for mouse movement on the canvas
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            // Normalize to -1 to 1
+            mouse.current.x = (e.clientX / size.width - 0.5) * 2;
+            mouse.current.y = -(e.clientY / size.height - 0.5) * 2;
+        };
+        window.addEventListener("mousemove", handleMouseMove);
+        return () => window.removeEventListener("mousemove", handleMouseMove);
+    }, [size]);
 
     useFrame((state, delta) => {
         if (ref.current) {
+            // Base rotation
             ref.current.rotation.x -= delta / 15;
             ref.current.rotation.y -= delta / 20;
+
+            // Mouse-responsive tilt (subtle, lerped for smoothness)
+            const targetRotX = mouse.current.y * 0.15;
+            const targetRotZ = mouse.current.x * 0.1;
+            ref.current.rotation.x += (targetRotX - ref.current.rotation.x) * delta * 0.5;
+            ref.current.rotation.z += (targetRotZ - ref.current.rotation.z) * delta * 0.5;
         }
     });
 
@@ -42,6 +62,9 @@ const identities = [
     "Enterprise Systems",
     "AI & Automation",
     "Operational Strategy",
+    "Lean Six Sigma",
+    "Data-Driven Decisions",
+    "Intelligent Workflows",
 ];
 
 export default function DigitalHero({ name, title }: { name: string; title: string }) {
@@ -59,9 +82,17 @@ export default function DigitalHero({ name, title }: { name: string; title: stri
     const firstName = nameParts[0];
     const lastName = nameParts.slice(1).join(" ");
 
+    const scrollToContent = useCallback(() => {
+        // Scroll past the hero to the first content section
+        window.scrollTo({
+            top: window.innerHeight * 0.85,
+            behavior: "smooth",
+        });
+    }, []);
+
     return (
         <section className="relative h-[90vh] w-full flex flex-col justify-center items-center overflow-hidden">
-            {/* 3D Background */}
+            {/* 3D Background — interactive, responds to mouse */}
             <div className="absolute inset-0 z-0 opacity-30 dark:opacity-40">
                 <Canvas camera={{ position: [0, 0, 1] }}>
                     <StarField />
@@ -125,21 +156,23 @@ export default function DigitalHero({ name, title }: { name: string; title: stri
                     </span>
                 </motion.div>
 
-                {/* Scroll indicator */}
+                {/* Scroll indicator — clickable */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.5, duration: 0.8 }}
                     className="absolute bottom-8 left-1/2 -translate-x-1/2"
                 >
-                    <motion.div
+                    <motion.button
+                        onClick={scrollToContent}
                         animate={{ y: [0, 8, 0] }}
                         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                        className="flex flex-col items-center gap-2"
+                        className="flex flex-col items-center gap-2 cursor-pointer group"
+                        aria-label="Scroll to content"
                     >
-                        <span className="text-tertiary font-mono text-[10px] uppercase tracking-widest">Scroll</span>
-                        <div className="w-px h-8 bg-gradient-to-b from-tertiary/50 to-transparent" />
-                    </motion.div>
+                        <span className="text-tertiary group-hover:text-brand-blue font-mono text-[10px] uppercase tracking-widest transition-colors">Scroll</span>
+                        <div className="w-px h-8 bg-gradient-to-b from-tertiary/50 group-hover:from-brand-blue/50 to-transparent transition-colors" />
+                    </motion.button>
                 </motion.div>
             </div>
         </section>
