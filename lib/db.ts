@@ -26,6 +26,7 @@ export const revalidate = 3600;
 export interface Experience {
     company: string;
     location: string;
+    order: number;
     positions: Position[];
 }
 
@@ -119,7 +120,8 @@ export const getExperiences = cache(async () => {
         async () => {
             const snapshot = await db.collection("experiences").get();
             if (snapshot.empty) throw new Error("Experiences collection empty in Firestore");
-            return snapshot.docs.map(d => d.data() as Experience);
+            const experiences = snapshot.docs.map(d => d.data() as Experience);
+            return experiences.sort((a, b) => a.order - b.order);
         },
         ["experiences"],
         { tags: ["content"] }
