@@ -160,9 +160,21 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
                     </div>
 
                     {/* Right: Screenshot Showcase — 3 columns */}
-                    <div className="lg:col-span-3 relative bg-page/50 border-t lg:border-t-0 lg:border-l border-border min-h-[300px] md:min-h-[420px]">
-                        {/* Main Image */}
-                        <div className="relative w-full h-full">
+                    <div className="lg:col-span-3 relative border-t lg:border-t-0 lg:border-l border-border p-4 md:p-6 flex flex-col bg-[#060d1b]">
+                        {/* Browser-style top bar */}
+                        <div className="flex items-center gap-2 mb-3">
+                            <div className="flex gap-1.5">
+                                <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
+                                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
+                                <div className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
+                            </div>
+                            <div className="flex-1 h-5 rounded-md bg-white/5 border border-white/10 flex items-center px-2">
+                                <span className="text-[9px] text-tertiary/60 font-mono">elixiary.com</span>
+                            </div>
+                        </div>
+
+                        {/* Image container with clear border */}
+                        <div className="relative flex-1 rounded-lg overflow-hidden ring-1 ring-white/10 shadow-[inset_0_2px_20px_rgba(0,0,0,0.3)] min-h-[260px] md:min-h-[360px]">
                             {showcaseImages.map((img, i) => (
                                 <motion.div
                                     key={img.src}
@@ -183,10 +195,10 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
                             ))}
 
                             {/* Bottom gradient overlay for dots */}
-                            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/60 to-transparent" />
+                            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/70 to-transparent" />
 
                             {/* Dot indicators */}
-                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2">
+                            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2">
                                 {showcaseImages.map((_, i) => (
                                     <button
                                         key={i}
