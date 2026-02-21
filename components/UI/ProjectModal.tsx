@@ -95,9 +95,9 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
                                     {/* Tech Stack */}
                                     <div className="space-y-3">
-                                        <h3 className="text-sm font-mono uppercase tracking-widest text-secondary border-b border-border pb-2">Tech Stack</h3>
+                                        <h3 className="text-sm font-mono uppercase tracking-widest text-secondary border-b border-border pb-2">Tools & Skills</h3>
                                         <div className="flex flex-wrap gap-2">
-                                            {project.tech_stack?.map((tech) => (
+                                            {project.skills?.map((tech) => (
                                                 <span key={tech} className="px-3 py-1.5 bg-page border border-border rounded text-xs font-mono text-tertiary">
                                                     {tech}
                                                 </span>

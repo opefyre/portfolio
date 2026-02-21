@@ -1,0 +1,655 @@
+[
+  {
+    "id": "access-governance-lumos",
+    "title": "Access Governance (Lumos)",
+    "category": "Enterprise Systems",
+    "description": "End-to-end implementation of Lumos identity governance platform — from vendor selection to change management and policy enforcement.",
+    "problem": "Shadow IT and manual access provisioning created security risks and compliance gaps across the organization.",
+    "solution": "Implemented Lumos for centralized access governance with SCIM-based auto-provisioning, role-based approval workflows, and end-to-end employee lifecycle management from onboarding to offboarding.",
+    "impact": "Enhanced security compliance and eliminated Shadow IT across 20+ integrated applications.",
+    "skills": [
+      "Lumos",
+      "SCIM",
+      "AWS Identity Center",
+      "GCP",
+      "Salesforce",
+      "GitHub",
+      "Google Workspace"
+    ]
+  },
+  {
+    "id": "automated-onboarding-communication-platform",
+    "title": "Automated Onboarding Communication Platform",
+    "category": "Enterprise Systems",
+    "description": "Built an automated multi-channel onboarding communication system integrating HRIS, Slack, and Gmail for standardized new hire engagement.",
+    "problem": "Manual onboarding communications were inconsistent and time-consuming, leading to poor new hire experiences.",
+    "solution": "Delivered 'OnCom App' on Google Apps Script integrating Keka HRIS, Slack API, and Gmail with configurable triggers, role-based admin controls, and automated scheduling for multi-channel onboarding messages.",
+    "impact": "Standardized onboarding communications and reduced HR manual workload significantly.",
+    "skills": [
+      "Google Apps Script",
+      "Keka API",
+      "Slack API",
+      "Gmail API",
+      "Google Sheets",
+      "HTML/CSS/JS"
+    ]
+  },
+  {
+    "id": "autonomous-maintenance-am-equipment-care-implementation-wcm",
+    "title": "Autonomous Maintenance & Equipment Care (WCM)",
+    "category": "Operations & Strategy",
+    "description": "Implemented Autonomous Maintenance practices to improve equipment cleaning standards, inspection routines, and early fault detection.",
+    "problem": "Operators lacked ownership of equipment maintenance, leading to recurring minor breakdowns and reliability issues.",
+    "solution": "Trained operators on autonomous maintenance routines including standardized cleaning, inspection checklists, and early fault detection within the WCM framework.",
+    "impact": "Improved equipment reliability and reduced minor breakdown frequency.",
+    "skills": [
+      "WCM",
+      "Lean Manufacturing",
+      "SOP Development"
+    ]
+  },
+  {
+    "id": "business-trip-expense-management-system",
+    "title": "Business Trip & Expense Management System",
+    "category": "Enterprise Systems",
+    "description": "Led acquisition and implementation of Rydoo as the enterprise expense management system with ERP and HRIS integrations.",
+    "problem": "Manual expense handling caused slow reimbursements, weak compliance enforcement, and heavy administrative overhead.",
+    "solution": "Implemented Rydoo with integrations to Odoo ERP and BambooHR, digitizing the full expense workflow from trip approval through automated reimbursement processing.",
+    "impact": "Reduced reimbursement processing time by 70% and strengthened compliance enforcement.",
+    "skills": [
+      "Rydoo",
+      "Odoo ERP",
+      "BambooHR",
+      "API Integration"
+    ]
+  },
+  {
+    "id": "company-knowledge-management-system",
+    "title": "Company Knowledge Management System",
+    "category": "Enterprise Systems",
+    "description": "Led delivery of a centralized KMS to consolidate policies, SOPs, and governance documents with AI-powered search.",
+    "problem": "Knowledge was scattered across drives, emails, and shared folders — making policies hard to find and maintain.",
+    "solution": "Delivered a centralized KMS with document governance, automated review cycles, role-based access control, employee directory sync, and AI-powered intelligent search.",
+    "impact": "Eliminated information silos and improved policy accessibility company-wide.",
+    "skills": [
+      "Identity Directory",
+      "AI Search",
+      "RBAC",
+      "Google Workspace"
+    ]
+  },
+  {
+    "id": "contract-lifecycle-system",
+    "title": "Contract Lifecycle System",
+    "category": "Enterprise Systems",
+    "description": "Led initiative for a centralized contract management platform with AI-powered insights and role-based governance.",
+    "problem": "Contracts were managed in spreadsheets with no visibility into renewals, expirations, or compliance status.",
+    "solution": "Delivered a Django + React CMS with role-based access, audit trails, renewal tracking, automated notifications, and an AI-powered Gemini chatbot for contract insights.",
+    "impact": "Reduced legal risks and decreased time for contract reporting and insight provisioning.",
+    "skills": [
+      "Django",
+      "React",
+      "CloudSQL",
+      "Gemini AI",
+      "BambooHR API"
+    ]
+  },
+  {
+    "id": "custom-odoo-workflow-automation-approval-engine",
+    "title": "Custom Odoo Workflow Automation & Approval Engine",
+    "category": "Process Automation",
+    "description": "Designed custom approval workflows in Odoo to enforce role-based authorization across procurement, finance, and HR.",
+    "problem": "Approval requests were handled informally, causing delays and policy non-compliance.",
+    "solution": "Implemented role-based approval workflows in Odoo with automated routing, escalation rules, and policy enforcement across procurement, finance, and HR processes.",
+    "impact": "Reduced approval cycle time and improved compliance with internal policies.",
+    "skills": [
+      "Odoo",
+      "Python",
+      "Workflow Automation"
+    ]
+  },
+  {
+    "id": "digital-traceability-framework-for-new-product-materials",
+    "title": "Digital Traceability Framework for Materials",
+    "category": "Operations & Strategy",
+    "description": "Designed a traceability workflow to track materials from supplier receipt through production usage.",
+    "problem": "Lack of standardized batch tracking created traceability gaps during audits and product launches.",
+    "solution": "Implemented end-to-end material traceability from supplier receipt to production usage, standardizing batch tracking and data capture for audit readiness.",
+    "impact": "Improved audit readiness and regulatory compliance for new product materials.",
+    "skills": [
+      "Excel/VBA",
+      "Data Modeling",
+      "Quality Management"
+    ]
+  },
+  {
+    "id": "early-defect-detection-in-process-quality-feedback-loop",
+    "title": "Early Defect Detection & Quality Feedback Loop",
+    "category": "Operations & Strategy",
+    "description": "Introduced in-process inspection checkpoints and rapid feedback loops to catch defects early during manufacturing.",
+    "problem": "Defects were detected too late in production, causing costly rework and yield losses.",
+    "solution": "Introduced in-process inspection checkpoints and rapid operator feedback loops during scale-up phases, enabling earlier defect detection and reducing propagation.",
+    "impact": "Improved first-pass yield and significantly reduced rework during product launches.",
+    "skills": [
+      "Quality Systems",
+      "SPC",
+      "Lean Manufacturing"
+    ]
+  },
+  {
+    "id": "employee-service-portal",
+    "title": "Employee Service Portal",
+    "category": "Enterprise Systems",
+    "description": "Centralized web portal for employees to submit, track, and manage service requests with automated department routing.",
+    "problem": "Employees used emails, WhatsApp, and paper forms for support requests, leading to lost tickets and no tracking.",
+    "solution": "Built a self-service portal where employees raise, track, and rate service requests, with automated routing to the correct department.",
+    "impact": "Streamlined request management and eliminated lost tickets.",
+    "skills": [
+      "React",
+      "Firebase",
+      "Tailwind CSS"
+    ]
+  },
+  {
+    "id": "enterprise-ai-assistant-knowledge-automation-platform",
+    "title": "Enterprise AI Assistant & Knowledge Platform",
+    "category": "Process Automation",
+    "description": "Designed and led implementation of an AI-powered Slack assistant for policy queries, HR lookups, and IT request automation.",
+    "problem": "Employees couldn't quickly find policies or SOPs, creating support overhead and inconsistent information access.",
+    "solution": "Built a RAG-based AI assistant on Google Cloud integrated with Slack, HRMS, and Notion — enabling conversational policy retrieval, IT ticket submission, and knowledge queries with source validation.",
+    "impact": "Reduced internal support load and enabled instant, reliable answers for employees.",
+    "skills": [
+      "Google Cloud",
+      "Vertex AI",
+      "Slack API",
+      "Vector Search",
+      "HRMS API",
+      "Notion API"
+    ]
+  },
+  {
+    "id": "enterprise-data-integration-hub-odoo-centric",
+    "title": "Enterprise Data Integration Hub (Odoo-Centric)",
+    "category": "Software Development",
+    "description": "Led design of cross-system integrations between Odoo and core platforms to eliminate data silos.",
+    "problem": "Critical data was siloed across BambooHR, Rydoo, Google Workspace, and internal portals with no synchronization.",
+    "solution": "Designed and implemented integrations between Odoo and core platforms including BambooHR, Rydoo, internal portals, and Google Workspace for automated data exchange.",
+    "impact": "Eliminated data silos and reduced manual reconciliation across departments.",
+    "skills": [
+      "Odoo",
+      "REST APIs",
+      "BambooHR",
+      "Rydoo",
+      "Google Workspace"
+    ]
+  },
+  {
+    "id": "erp-governance-user-adoption-framework",
+    "title": "ERP Governance & User Adoption Framework",
+    "category": "Software Development",
+    "description": "Established governance standards for ERP usage including data ownership, user roles, and organization-wide training.",
+    "problem": "Inconsistent ERP usage and workarounds across departments compromised data integrity.",
+    "solution": "Defined data ownership rules, user role policies, and conducted training programs to ensure consistent ERP usage and reduce workarounds across departments.",
+    "impact": "Improved system adoption and reduced process deviations.",
+    "skills": [
+      "Odoo",
+      "Training & Documentation",
+      "Change Management"
+    ]
+  },
+  {
+    "id": "factory-operations-lead-for-new-product-launches",
+    "title": "Factory Operations Lead for Product Launches",
+    "category": "Operations & Strategy",
+    "description": "Served as factory operations lead for 10+ new product launches, coordinating cross-functional readiness.",
+    "problem": "Lack of coordinated readiness across planning, sourcing, and manufacturing caused launch delays and disruptions.",
+    "solution": "Coordinated end-to-end launch readiness across planning, sourcing, manufacturing, quality, and warehousing for 10+ product launches, bridging R&D and factory operations.",
+    "impact": "Reduced launch timelines and minimized operational disruptions during commercialization.",
+    "skills": [
+      "Project Management",
+      "Cross-Functional Coordination",
+      "Supply Chain"
+    ]
+  },
+  {
+    "id": "fleet-asset-management",
+    "title": "Fleet Asset Management System",
+    "category": "Software Development",
+    "description": "Centralized tool for managing vehicles and garage assets, replacing fragmented Google Sheets with a unified platform.",
+    "problem": "Operations team tracked fleet inventory across multiple Google Sheets with no validation or centralized visibility.",
+    "solution": "Designed and managed delivery of a React + Node.js fleet management app with inventory, maintenance, analytics, access control modules, and Keka/Google SSO integrations.",
+    "impact": "Increased data reliability and provided centralized visibility for operations and finance teams.",
+    "skills": [
+      "React",
+      "Node.js",
+      "CloudSQL",
+      "GCP",
+      "Keka API",
+      "Google SSO"
+    ]
+  },
+  {
+    "id": "integrated-work-system-iws-reliability-maintenance-implementation",
+    "title": "IWS Reliability & Maintenance Implementation",
+    "category": "Operations & Strategy",
+    "description": "Deputy lead for Planned Maintenance pillar, strengthening engineering execution through standardized routines.",
+    "problem": "Unplanned equipment stoppages and inconsistent maintenance routines were impacting production performance.",
+    "solution": "Strengthened planned maintenance execution through standardized routines, performance tracking, and preventive maintenance practices, reducing unplanned stoppages.",
+    "impact": "Improved equipment reliability and reduced unplanned stoppages during ramp-up.",
+    "skills": [
+      "IWS/TPM",
+      "Planned Maintenance",
+      "CMMS"
+    ]
+  },
+  {
+    "id": "it-asset-management-platform",
+    "title": "IT Asset Management Platform",
+    "category": "Enterprise Systems",
+    "description": "Built a custom web platform for centralized IT asset lifecycle management — from procurement to write-off.",
+    "problem": "IT assets were tracked in spreadsheets with no lifecycle management, leading to inaccurate inventory and security gaps.",
+    "solution": "Delivered a React-based ITAM platform with asset lifecycle tracking, warranty monitoring, work order management, role-based dashboards, SSO authentication, and audit logging.",
+    "impact": "Reduced manual asset tracking effort and improved inventory accuracy significantly.",
+    "skills": [
+      "React",
+      "REST API",
+      "SSO",
+      "RBAC",
+      "Cloud Deployment"
+    ]
+  },
+  {
+    "id": "it-performance-dashboard",
+    "title": "IT Performance Dashboard",
+    "category": "Data & Analytics",
+    "description": "Enterprise reporting dashboard built in Looker Studio for real-time IT support performance analytics via Jira data.",
+    "problem": "IT support performance was invisible — no metrics on SLA compliance, workload distribution, or resolution trends.",
+    "solution": "Built an end-to-end data pipeline from Jira to BigQuery to Looker Studio, computing SLA success rates, workload distribution, and performance benchmarks per team and coordinator.",
+    "impact": "Enabled data-driven IT support management with real-time SLA tracking and team benchmarking.",
+    "skills": [
+      "Looker Studio",
+      "BigQuery",
+      "Jira API",
+      "SQL"
+    ]
+  },
+  {
+    "id": "jml-request-automation-jira-provisioning-system",
+    "title": "JML Request Automation & Jira Provisioning",
+    "category": "Process Automation",
+    "description": "Digitized Joiner/Mover/Leaver requests with automated Jira ticket creation and admin approval workflows.",
+    "problem": "Employee lifecycle changes (JML) required manual ticket creation and lacked structured approval workflows.",
+    "solution": "Built a GAS + Google Sheets workflow for JML requests with admin approval console, automated Jira issue creation via REST API, background processing, audit logging, and role-based access control.",
+    "impact": "Automated IT provisioning for employee lifecycle changes, eliminating manual ticket creation.",
+    "skills": [
+      "Google Apps Script",
+      "Jira REST API",
+      "Google Sheets",
+      "Google Admin SDK"
+    ]
+  },
+  {
+    "id": "line-changeover-time-reduction-initiative",
+    "title": "Line Changeover Time Reduction",
+    "category": "Process Optimization",
+    "description": "Led cross-functional effort to reduce changeover time through reorganized staging and standardized procedures.",
+    "problem": "Long changeover times between product variants reduced line flexibility and increased downtime.",
+    "solution": "Reorganized tool staging, material preparation, and operator sequencing with standardized checklists and pre-staging practices to reduce changeover time.",
+    "impact": "Improved changeover efficiency and increased line flexibility during product introductions.",
+    "skills": [
+      "SMED",
+      "Lean Manufacturing",
+      "SOP Development"
+    ]
+  },
+  {
+    "id": "line-side-material-flow-production-stock-optimization",
+    "title": "Line-Side Material Flow Optimization",
+    "category": "Process Optimization",
+    "description": "Reorganized line-side storage and material positioning to reduce operator movement and prevent line interruptions.",
+    "problem": "Poor material positioning caused excessive operator movement and frequent line interruptions.",
+    "solution": "Reorganized line-side storage areas and optimized material handling practices to reduce operator movement and prevent production line interruptions.",
+    "impact": "Improved production continuity and reduced handling inefficiencies.",
+    "skills": [
+      "5S",
+      "Lean Manufacturing",
+      "Layout Optimization"
+    ]
+  },
+  {
+    "id": "noc-monitoring-dashboards",
+    "title": "NOC Monitoring Dashboards",
+    "category": "Data & Analytics",
+    "description": "Centralized health monitoring dashboard for telecom services with automated alerts for potential threats.",
+    "problem": "Support teams only discovered downtime after customer complaints, damaging service reputation.",
+    "solution": "Created a centralized 'Heartbeat' dashboard aggregating statuses from Infobip, Ziwo, and Maqsam APIs with instant alerts to on-call engineers.",
+    "impact": "Enabled proactive issue detection and reduced downtime response time.",
+    "skills": [
+      "Node.js",
+      "3rd Party APIs"
+    ]
+  },
+  {
+    "id": "npi-launch-visibility-decision-dashboard",
+    "title": "NPI Launch Visibility Dashboard",
+    "category": "Operations & Strategy",
+    "description": "Centralized launch dashboard consolidating cross-functional inputs into a single readiness view for leadership.",
+    "problem": "Launch progress was tracked in scattered spreadsheets with no consolidated visibility for leadership.",
+    "solution": "Built an automated Excel/VBA dashboard consolidating inputs from planning, warehousing, and production teams to track milestones, risks, and dependencies in real time.",
+    "impact": "Reduced manual reporting effort by 70% and improved launch decision turnaround time.",
+    "skills": [
+      "Excel/VBA",
+      "Data Consolidation",
+      "Dashboard Design"
+    ]
+  },
+  {
+    "id": "npi-readiness-scale-up-execution-framework",
+    "title": "NPI Readiness & Scale-Up Framework",
+    "category": "Operations & Strategy",
+    "description": "Developed a structured readiness framework with checkpoints and governance routines for new product launches.",
+    "problem": "Launches lacked structured readiness criteria, leading to ~5-month lead times and unreliable execution.",
+    "solution": "Created a structured readiness framework with checkpoints, KPIs, and cross-functional governance routines, coordinating execution across sourcing, planning, manufacturing, and quality.",
+    "impact": "Reduced launch lead time from ~5 months to ~2 months with improved reliability.",
+    "skills": [
+      "Project Management",
+      "Cross-Functional Governance",
+      "KPI Frameworks"
+    ]
+  },
+  {
+    "id": "odoo-finance-operations-module-implementation",
+    "title": "Odoo Finance & Operations Module Implementation",
+    "category": "Software Development",
+    "description": "Led implementation and configuration of core Odoo modules for Purchase, Inventory, Finance, and HR workflows.",
+    "problem": "Financial and operational workflows were manual and disconnected from the ERP system.",
+    "solution": "Implemented core Odoo modules (Purchase, Inventory, Finance, HR), defined approval flows, and integrated with procurement and expense systems.",
+    "impact": "Standardized financial workflows and improved process traceability across departments.",
+    "skills": [
+      "Odoo",
+      "Python",
+      "PostgreSQL",
+      "API Integration"
+    ]
+  },
+  {
+    "id": "odoo-reporting-operational-insights-enhancement",
+    "title": "Odoo Reporting & Operational Insights",
+    "category": "Software Development",
+    "description": "Designed custom Odoo reporting views and dashboards for real-time operational KPI visibility.",
+    "problem": "Leadership lacked real-time visibility into operational KPIs and financial metrics from the ERP.",
+    "solution": "Designed custom reporting views and dashboards in Odoo for operational KPIs, financial metrics, and procurement performance visibility.",
+    "impact": "Enabled real-time operational insights and reduced manual report preparation.",
+    "skills": [
+      "Odoo",
+      "SQL",
+      "Dashboard Design",
+      "Business Intelligence"
+    ]
+  },
+  {
+    "id": "onboarding-automation",
+    "title": "Onboarding Automation Platform",
+    "category": "Process Automation",
+    "description": "End-to-end hiring automation from headcount approval through AI-powered CV screening to pre-onboarding workflows.",
+    "problem": "HR onboarding involved manual data entry, fragmented tools, and no automated candidate screening.",
+    "solution": "Built a Google Apps Script platform automating the full hiring pipeline: headcount approvals, AI-generated job descriptions, CV screening via OpenAI/Gemini, candidate shortlisting, and pre-onboarding document collection.",
+    "impact": "Eliminated manual data entry for new hires and automated the end-to-end hiring pipeline.",
+    "skills": [
+      "Google Apps Script",
+      "BambooHR API",
+      "OpenAI API",
+      "Gemini API",
+      "BigQuery",
+      "PandaDoc"
+    ]
+  },
+  {
+    "id": "payroll-automation-engine",
+    "title": "Payroll Automation Engine",
+    "category": "Software Development",
+    "description": "Custom Odoo module that consolidates employee data from multiple systems and automates payroll calculation and reporting.",
+    "problem": "Payroll calculation took 4+ days involving 3-4 team members across finance and HR with manual data gathering.",
+    "solution": "Developed a custom Odoo module (v16→v18) integrating BambooHR, Rydoo, and internal portals to auto-fetch salary, leave, expense, and loan data — generating complete payroll reports with one click.",
+    "impact": "Reduced payroll calculation from 4 days to under 1 hour.",
+    "skills": [
+      "Python",
+      "Odoo",
+      "PostgreSQL",
+      "REST API",
+      "BambooHR",
+      "Rydoo"
+    ]
+  },
+  {
+    "id": "procurement-system-penny",
+    "title": "Procure-to-Pay Digitization (Odoo + Penny)",
+    "category": "Software Development",
+    "description": "Designed the end-to-end digital procurement workflow integrating Penny with Odoo Finance.",
+    "problem": "Procurement was handled manually with no audit trail or automated financial reconciliation.",
+    "solution": "Designed the end-to-end procurement workflow integrating Penny platform with Odoo Finance for automated purchase tracking, invoice alignment, and financial reconciliation.",
+    "impact": "Increased spend visibility and reduced procurement processing time.",
+    "skills": [
+      "Odoo",
+      "Penny",
+      "API Integration",
+      "Finance Automation"
+    ]
+  },
+  {
+    "id": "production-line-efficiency-oee-improvement-program",
+    "title": "Production Line Efficiency & OEE Improvement",
+    "category": "Process Optimization",
+    "description": "Led multiple line improvement initiatives to reduce stoppages, improve balance, and eliminate operational inefficiencies.",
+    "problem": "Frequent minor stoppages and poor line balance were reducing OEE and production throughput.",
+    "solution": "Led cross-functional improvement initiatives with operators, maintenance, and supervisors to address root causes of downtime, reduce stoppages, and streamline line operations.",
+    "impact": "Improved OEE, reduced unplanned stoppages, and increased production throughput.",
+    "skills": [
+      "OEE Analysis",
+      "Root Cause Analysis",
+      "Lean Manufacturing"
+    ]
+  },
+  {
+    "id": "production-loss-downtime-analytics-dashboard",
+    "title": "Production Loss & Downtime Analytics",
+    "category": "Operations & Strategy",
+    "description": "Power BI dashboards analyzing downtime categories, loss trends, and shift performance across production lines.",
+    "problem": "Production losses and downtime causes were not systematically tracked or visualized for action.",
+    "solution": "Designed Power BI dashboards consolidating operational data to visualize downtime categories, loss trends, and shift performance for daily reviews and root cause prioritization.",
+    "impact": "Improved visibility into loss drivers and enabled data-driven improvement actions.",
+    "skills": [
+      "Power BI",
+      "Data Analysis",
+      "Operations Data"
+    ]
+  },
+  {
+    "id": "production-planning-material-readiness-automation",
+    "title": "Production Planning & Material Readiness Automation",
+    "category": "Operations & Strategy",
+    "description": "Automation tools consolidating production, inventory, and warehouse data for improved planning accuracy.",
+    "problem": "Planning relied on manual data consolidation across production, inventory, and warehouse systems.",
+    "solution": "Deployed automation tools to consolidate production, inventory, and warehouse data, reducing manual planning effort by ~50% and improving material availability visibility.",
+    "impact": "Reduced manual planning effort by 50% and improved material availability during scale-up.",
+    "skills": [
+      "Excel/VBA",
+      "Data Automation",
+      "Supply Chain Planning"
+    ]
+  },
+  {
+    "id": "quality-defect-reduction-first-pass-yield-improvement",
+    "title": "Quality Defect Reduction & Yield Improvement",
+    "category": "Process Optimization",
+    "description": "Strengthened defect detection practices and operator feedback loops to improve first-pass yield.",
+    "problem": "High defect rates and late detection were causing excessive rework and yield losses.",
+    "solution": "Worked with quality and production teams to introduce improved in-process checks and operator feedback loops, reducing defect propagation and supporting yield improvements.",
+    "impact": "Improved first-pass yield and reduced rework across production lines.",
+    "skills": [
+      "Quality Management",
+      "Root Cause Analysis",
+      "SPC"
+    ]
+  },
+  {
+    "id": "real-time-production-kpi-reporting-visualization",
+    "title": "Real-Time Production KPI Dashboards",
+    "category": "Operations & Strategy",
+    "description": "Automated production KPI dashboards tracking output, efficiency, downtime, and quality in near real-time.",
+    "problem": "Production reporting was manual, delaying shift-level performance reviews and corrective actions.",
+    "solution": "Developed automated dashboards tracking output, efficiency, downtime, and quality in near real-time, replacing manual reporting routines.",
+    "impact": "Reduced reporting preparation time by 60% and enabled faster corrective actions.",
+    "skills": [
+      "Dashboard Design",
+      "Data Automation",
+      "KPI Frameworks"
+    ]
+  },
+  {
+    "id": "safespeak-snoonu-employee-complaint-grievance-reporting-platform",
+    "title": "SafeSpeak – Employee Grievance Platform",
+    "category": "Enterprise Systems",
+    "description": "Confidential employee grievance reporting module with structured submission, investigation workflows, and SLA tracking.",
+    "problem": "Employees had no safe, structured channel to submit complaints or grievances with confidentiality guarantees.",
+    "solution": "Designed a confidential grievance module integrated into the Internal Portal with anonymous reporting, investigation SLAs, two-way communication, and auto-escalation to Legal when needed.",
+    "impact": "Established a trusted channel for employee grievances with investigation SLA compliance.",
+    "skills": [
+      "Internal Portal",
+      "Workflow Design",
+      "RBAC",
+      "Notification Engine"
+    ]
+  },
+  {
+    "id": "snoonu-internal-policy-summarizer",
+    "title": "AI Policy Summarizer",
+    "category": "Software Development",
+    "description": "AI-powered pipeline that ingests policy PDFs, extracts content via Document AI, and generates structured summaries.",
+    "problem": "Manually reviewing and summarizing corporate policies was time-consuming and resulted in inconsistent documentation.",
+    "solution": "Built a GAS-orchestrated pipeline using Google Document AI for OCR extraction and Vertex AI Gemini for summary refinement, processing new policy PDFs automatically every 10 minutes into a structured knowledge base.",
+    "impact": "Automated policy processing and improved accessibility of corporate governance information.",
+    "skills": [
+      "Google Apps Script",
+      "Document AI",
+      "Vertex AI Gemini",
+      "Google Drive",
+      "Google Sheets"
+    ]
+  },
+  {
+    "id": "standard-work-workflow-optimization-wcm",
+    "title": "Standard Work & Workflow Optimization (WCM)",
+    "category": "Process Optimization",
+    "description": "Workflow gap analysis and standardized operating practices implementation aligned with WCM standards.",
+    "problem": "Inconsistent operating practices across teams were undermining KPI performance and execution quality.",
+    "solution": "Conducted workflow gap analyses and implemented standardized operating practices aligned with WCM standards, reinforcing adherence to standard work across production teams.",
+    "impact": "Improved execution consistency and supported KPI performance improvements.",
+    "skills": [
+      "WCM",
+      "Lean Manufacturing",
+      "SOP Development"
+    ]
+  },
+  {
+    "id": "strategic-erp-migration",
+    "title": "Odoo ERP Version Upgrade Program",
+    "category": "Software Development",
+    "description": "Led Odoo upgrade across major versions (v13→v16→v18), coordinating data migration and module compatibility.",
+    "problem": "Outdated ERP version limited functionality and posed security and scalability risks.",
+    "solution": "Led the Odoo upgrade from v13 through v16 to v18, coordinating data migration, module compatibility assessment, user acceptance testing, and post-migration stabilization.",
+    "impact": "Improved system performance, security, and scalability across the organization.",
+    "skills": [
+      "Odoo",
+      "Python",
+      "PostgreSQL",
+      "Data Migration"
+    ]
+  },
+  {
+    "id": "supplier-capacity-supply-continuity-program",
+    "title": "Supplier Capacity & Continuity Program",
+    "category": "Operations & Strategy",
+    "description": "Led supplier capacity assessments and contingency planning to ensure supply continuity during product launches.",
+    "problem": "Supply disruptions during product launches were caused by unassessed supplier capacity constraints.",
+    "solution": "Conducted supplier capacity assessments and developed contingency plans in collaboration with suppliers and internal stakeholders to ensure on-time material availability during ramp-up.",
+    "impact": "Reduced supply disruption risks and improved on-time material availability.",
+    "skills": [
+      "Supply Chain Management",
+      "Risk Assessment",
+      "Vendor Management"
+    ]
+  },
+  {
+    "id": "supplier-delivery-material-quality-performance-monitoring",
+    "title": "Supplier Performance Monitoring",
+    "category": "Operations & Strategy",
+    "description": "Structured tracking of supplier delivery performance, material quality, and OTIF compliance.",
+    "problem": "Supplier performance issues impacting production were not systematically tracked or reported.",
+    "solution": "Introduced structured tracking practices and reporting routines for supplier delivery performance, material quality, and OTIF compliance to enable faster issue resolution.",
+    "impact": "Improved visibility into supplier performance and faster resolution of supply issues.",
+    "skills": [
+      "Performance Tracking",
+      "OTIF Analysis",
+      "Reporting"
+    ]
+  },
+  {
+    "id": "supply-team-ticketing-automation",
+    "title": "Supply Team Ticketing Automation",
+    "category": "Process Automation",
+    "description": "Slack-to-Jira ticket automation with interactive approval, email intake, and full lifecycle tracking.",
+    "problem": "Supply team ticket requests were handled ad-hoc via Slack messages with no tracking or accountability.",
+    "solution": "Built a GAS automation connecting Slack Events and Jira REST API — detecting supply team mentions, posting interactive approval buttons, creating Jira tickets with custom fields, and posting confirmation links back to Slack threads.",
+    "impact": "Automated ticket creation from Slack and email, eliminating manual tracking.",
+    "skills": [
+      "Google Apps Script",
+      "Slack API",
+      "Jira REST API",
+      "Google Sheets",
+      "Gmail API"
+    ]
+  },
+  {
+    "id": "universal-ticketing-jira",
+    "title": "Universal Ticketing (Jira)",
+    "category": "Enterprise Systems",
+    "description": "Jira-based ticketing system integrated with Slack for unified cross-functional project tracking.",
+    "problem": "Tech and non-tech teams worked in silos using different tools, making cross-functional tracking impossible.",
+    "solution": "Unified all teams onto a single Jira instance with customized workflows and a Slack bot for direct ticket management from chat.",
+    "impact": "Improved resolution time and cross-functional collaboration.",
+    "skills": [
+      "Jira",
+      "Slack API",
+      "Automation for Jira"
+    ]
+  },
+  {
+    "id": "visual-factory-shift-communication-boards",
+    "title": "Visual Factory & Shift Communication Boards",
+    "category": "Operations & Strategy",
+    "description": "Implemented visual management boards displaying production targets, downtime causes, and quality alerts.",
+    "problem": "Information gaps between shifts led to slow responses and misaligned priorities on the factory floor.",
+    "solution": "Deployed visual management boards standardizing communication of production targets, downtime causes, quality alerts, and maintenance status across shift handovers.",
+    "impact": "Improved operator awareness and reduced information gaps between shifts.",
+    "skills": [
+      "Visual Management",
+      "Lean Manufacturing",
+      "Communication Design"
+    ]
+  },
+  {
+    "id": "warehouse-material-flow-staging-optimization",
+    "title": "Warehouse Material Flow & Staging Optimization",
+    "category": "Process Optimization",
+    "description": "Redesigned staging zones and delivery timing to ensure timely material delivery to production lines.",
+    "problem": "Poorly organized staging areas caused operator waiting time and line interruptions during ramp-up.",
+    "solution": "Redesigned staging zones and delivery timing to reduce operator waiting time and improve line continuity during increased launch volumes.",
+    "impact": "Reduced operator waiting time and improved line continuity during ramp-up.",
+    "skills": [
+      "Warehouse Optimization",
+      "Layout Design",
+      "Lean Logistics"
+    ]
+  }
+]

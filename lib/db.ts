@@ -43,7 +43,7 @@ export interface Project {
     category: string;
     problem: string;
     solution: string;
-    tech_stack: string[];
+    skills: string[];
 }
 
 export interface Skill {
