@@ -86,13 +86,14 @@ const ProjectRow = ({
     });
 
     const fadeOutOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+    const pointerEvents = useTransform(scrollYProgress, [0.99, 1], ["auto", "none"]);
 
     return (
         <motion.div
             ref={rowRef}
             layout
-            // Combine layout animations with scroll-tied opacity
-            style={{ opacity: fadeOutOpacity }}
+            // Combine layout animations with scroll-tied opacity and pointer events
+            style={{ opacity: fadeOutOpacity, pointerEvents }}
             whileHover="hover"
             onMouseEnter={onHoverStart}
             onMouseLeave={onHoverEnd}
