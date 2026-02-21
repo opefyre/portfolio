@@ -17,10 +17,10 @@ import {
 const navItems = [
     { name: "Overview", id: "overview", icon: LayoutDashboard },
     { name: "Skills", id: "expertise", icon: Wrench },
+    { name: "Education", id: "credentials", icon: GraduationCap },
     { name: "History", id: "experience", icon: Briefcase },
     { name: "Venture", id: "venture", icon: Rocket },
     { name: "Projects", id: "projects", icon: FolderKanban },
-    { name: "Education", id: "credentials", icon: GraduationCap },
 ];
 
 export default function FloatingNav({ email }: { email: string }) {
