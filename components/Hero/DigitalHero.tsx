@@ -4,14 +4,14 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Points, PointMaterial } from "@react-three/drei";
 import { useRef, useState, useEffect, useCallback } from "react";
 import * as random from "maath/random/dist/maath-random.cjs";
-import { useTheme } from "next-themes";
+
 import { motion, AnimatePresence } from "framer-motion";
 import * as THREE from "three";
 
 function StarField(props: React.ComponentProps<typeof Points>) {
     const ref = useRef<THREE.Points>(null);
     const [sphere] = useState(() => random.inSphere(new Float32Array(6000), { radius: 1.5 }) as Float32Array);
-    const { theme } = useTheme();
+
     const mouse = useRef({ x: 0, y: 0 });
     const { size } = useThree();
 
@@ -45,7 +45,7 @@ function StarField(props: React.ComponentProps<typeof Points>) {
             <Points ref={ref} positions={sphere} stride={3} frustumCulled={false} {...props}>
                 <PointMaterial
                     transparent
-                    color={theme === 'light' ? "#020617" : "#38BDF8"}
+                    color="#38BDF8"
                     size={0.002}
                     sizeAttenuation={true}
                     depthWrite={false}
@@ -95,14 +95,14 @@ export default function DigitalHero({ name, title }: { name: string; title: stri
     return (
         <section className="relative h-[90vh] w-full flex flex-col justify-center items-center overflow-hidden">
             {/* 3D Background — interactive, responds to mouse */}
-            <div className="absolute inset-0 z-0 opacity-30 dark:opacity-40">
+            <div className="absolute inset-0 z-0 opacity-40">
                 <Canvas camera={{ position: [0, 0, 1] }}>
                     <StarField />
                 </Canvas>
             </div>
 
             {/* Grid Overlay */}
-            <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.05)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,black_40%,transparent_100%)] pointer-events-none" />
+            <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,black_40%,transparent_100%)] pointer-events-none" />
 
             {/* Content */}
             <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">

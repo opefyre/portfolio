@@ -51,8 +51,8 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
 
             <div className="relative rounded-3xl overflow-hidden border border-border bg-card shadow-2xl">
                 {/* Background Glows */}
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-blue/5 dark:bg-brand-blue/10 blur-[100px] rounded-full pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-purple/5 dark:bg-brand-purple/10 blur-[100px] rounded-full pointer-events-none" />
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-blue/10 blur-[100px] rounded-full pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-purple/10 blur-[100px] rounded-full pointer-events-none" />
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 p-8 md:p-12 items-center relative z-10">
 

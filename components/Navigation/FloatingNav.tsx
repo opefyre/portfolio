@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useTheme } from "next-themes";
 import clsx from "clsx";
 import {
     LayoutDashboard,
@@ -26,17 +25,13 @@ const navItems = [
 export default function FloatingNav({ email }: { email: string }) {
     const [activeSection, setActiveSection] = useState("hero");
     const [scrolled, setScrolled] = useState(false);
-    const { theme, setTheme } = useTheme();
-    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        // eslint-disable-next-line
-        setMounted(true);
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
 
             const sections = navItems.map(item => document.getElementById(item.id));
-            const scrollPosition = window.scrollY + 120; // Trigger offset
+            const scrollPosition = window.scrollY + 120;
 
             for (const section of sections) {
                 if (section && section.offsetTop <= scrollPosition && (section.offsetTop + section.offsetHeight) > scrollPosition) {
@@ -57,10 +52,6 @@ export default function FloatingNav({ email }: { email: string }) {
                 behavior: "smooth",
             });
         }
-    };
-
-    const toggleTheme = () => {
-        setTheme(theme === "dark" ? "light" : "dark");
     };
 
     return (
@@ -84,15 +75,14 @@ export default function FloatingNav({ email }: { email: string }) {
                             onClick={() => scrollTo(item.id)}
                             className={clsx(
                                 "relative px-2 md:px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300",
-                                // Inactive state text color
-                                activeSection !== item.id && "text-tertiary hover:text-primary dark:hover:text-white"
+                                activeSection !== item.id && "text-tertiary hover:text-white"
                             )}
                             aria-label={item.name}
                         >
                             {activeSection === item.id && (
                                 <motion.div
                                     layoutId="nav-pill"
-                                    className="absolute inset-0 bg-white dark:bg-white rounded-full border border-border shadow-sm"
+                                    className="absolute inset-0 bg-white rounded-full border border-border shadow-sm"
                                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                 />
                             )}
@@ -122,41 +112,6 @@ export default function FloatingNav({ email }: { email: string }) {
                 >
                     Let&apos;s Chat
                 </button>
-
-                {mounted && (
-                    <button
-                        onClick={toggleTheme}
-                        className="relative p-2 ml-1 rounded-full text-tertiary hover:text-brand-blue transition-colors group overflow-hidden"
-                        aria-label="Toggle Theme"
-                    >
-                        <motion.div
-                            initial={false}
-                            animate={{ rotate: theme === 'dark' ? 180 : 0 }}
-                            transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                            className="relative w-5 h-5"
-                        >
-                            {/* Sun (visible in light mode) */}
-                            <motion.svg
-                                className="absolute inset-0 w-full h-full text-amber-500"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
-                                animate={{ scale: theme === 'dark' ? 0 : 1, opacity: theme === 'dark' ? 0 : 1 }}
-                                transition={{ duration: 0.2 }}
-                            >
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </motion.svg>
-
-                            {/* Moon (visible in dark mode) */}
-                            <motion.svg
-                                className="absolute inset-0 w-full h-full text-brand-blue"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
-                                animate={{ scale: theme === 'dark' ? 1 : 0, opacity: theme === 'dark' ? 1 : 0 }}
-                                transition={{ duration: 0.2 }}
-                            >
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                            </motion.svg>
-                        </motion.div>
-                    </button>
-                )}
             </div>
         </motion.div>
     );
