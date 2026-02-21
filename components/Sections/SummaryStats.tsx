@@ -44,7 +44,7 @@ const StatCard = ({ label, value, subtext, delay = 0 }: StatCardProps) => {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay }}
-            className="bg-card border border-border p-6 rounded-xl flex flex-col justify-center items-start hover:border-brand-blue/30 hover:bg-card-hover transition-colors shadow-sm dark:shadow-none backdrop-blur-sm"
+            className="bg-card border border-border p-6 rounded-xl flex flex-col justify-center items-start hover:border-brand-blue/30 hover:bg-card-hover transition-colors shadow-sm dark:shadow-[0_2px_8px_rgba(0,0,0,0.3)] backdrop-blur-sm"
         >
             <div className="text-4xl md:text-5xl font-display font-bold text-primary mb-2 flex items-baseline">
                 {isNumber ? (

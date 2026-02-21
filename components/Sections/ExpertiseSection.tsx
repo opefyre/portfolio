@@ -34,7 +34,7 @@ const Card = ({ className, title, children }: { className?: string; title: strin
     <motion.div
         variants={cardVariants}
         className={clsx(
-            "bg-card border border-border p-6 rounded-2xl flex flex-col hover:border-brand-blue/30 hover:bg-card-hover transition-colors duration-300 shadow-sm dark:shadow-none backdrop-blur-sm",
+            "bg-card border border-border p-6 rounded-2xl flex flex-col hover:border-brand-blue/30 hover:bg-card-hover transition-colors duration-300 shadow-sm dark:shadow-[0_2px_8px_rgba(0,0,0,0.3)] backdrop-blur-sm",
             className
         )}
     >

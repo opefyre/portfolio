@@ -45,32 +45,43 @@ export default async function Home() {
       </section>
 
       <div className="space-y-0">
-        <section id="expertise" className="scroll-mt-32">
-          <ExpertiseSection
-            skills={skills}
-            certifications={certifications}
-            education={education}
-          />
+        {/* Skills — warm gradient wash + blue glow */}
+        <section id="expertise" className="scroll-mt-32 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-blue/[0.03] dark:bg-brand-blue/[0.08] blur-[120px] rounded-full pointer-events-none" />
+          <div className="bg-gradient-to-b from-page via-card/30 to-page">
+            <ExpertiseSection
+              skills={skills}
+              certifications={certifications}
+              education={education}
+            />
+          </div>
         </section>
 
-        <section id="experience" className="scroll-mt-32">
-          <ExperienceStack experiences={experiences} />
+        {/* Experience — cool tint + purple glow */}
+        <section id="experience" className="scroll-mt-32 relative overflow-hidden">
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-purple/[0.03] dark:bg-brand-purple/[0.08] blur-[120px] rounded-full pointer-events-none" />
+          <div className="bg-gradient-to-b from-page via-brand-blue/[0.02] to-page">
+            <ExperienceStack experiences={experiences} />
+          </div>
         </section>
 
-        {/* FEATURED VENTURE: Elixiary AI */}
+        {/* FEATURED VENTURE: Elixiary AI — already has glows */}
         <section id="venture" className="scroll-mt-32">
           <ElixiaryFeature elixiaryVenture={elixiaryVenture} />
         </section>
 
-        <section id="projects" className="scroll-mt-32">
-          <ProjectGallery projects={projects} />
+        {/* Projects — purple tint + dual glows */}
+        <section id="projects" className="scroll-mt-32 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-brand-blue/[0.03] dark:bg-brand-blue/[0.08] blur-[120px] rounded-full pointer-events-none" />
+          <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-brand-purple/[0.03] dark:bg-brand-purple/[0.08] blur-[120px] rounded-full pointer-events-none" />
+          <div className="bg-gradient-to-b from-page via-brand-purple/[0.02] to-page">
+            <ProjectGallery projects={projects} />
+          </div>
         </section>
       </div>
 
-
-
-      {/* Footer Refactor: Semantic Colors */}
-      <footer className="py-12 text-center text-tertiary font-mono text-[10px] tracking-widest border-t border-border mt-0 bg-page">
+      {/* Footer — gradient sink */}
+      <footer className="py-12 text-center text-tertiary font-mono text-[10px] tracking-widest border-t border-border mt-0 bg-gradient-to-b from-page to-card">
         <p>PROCESS EXCELLENCE // DIGITAL TRANSFORMATION</p>
         <p className="mt-2 text-tertiary/60">© 2026 ABOLFAZL SHIRKAVAND</p>
       </footer>

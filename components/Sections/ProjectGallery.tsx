@@ -8,7 +8,7 @@ import SectionHeader from "@/components/UI/SectionHeader";
 const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => void }) => (
     <div
         onClick={onClick}
-        className="group bg-card border border-border hover:border-brand-blue/30 hover:bg-card-hover p-6 rounded-xl transition-all duration-300 hover:-translate-y-1 shadow-sm dark:shadow-none cursor-pointer h-full flex flex-col"
+        className="group bg-card border border-border hover:border-brand-blue/30 hover:bg-card-hover p-6 rounded-xl transition-all duration-300 hover:-translate-y-1 shadow-sm dark:shadow-[0_2px_8px_rgba(0,0,0,0.3)] cursor-pointer h-full flex flex-col"
     >
         <div className="flex justify-between items-start mb-4">
             <h3 className="text-xl font-display font-medium text-primary group-hover:text-brand-blue transition-colors">
