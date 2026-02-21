@@ -131,31 +131,42 @@ export default function DigitalHero({ name, title }: { name: string; title: stri
                     </span>
                 </motion.h1>
 
-                {/* Animated rotating subtitle */}
+                {/* Terminal-style rotating identity */}
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.9, duration: 0.6 }}
-                    className="h-10 flex items-center justify-center mb-8 overflow-hidden"
+                    className="inline-flex items-center justify-center mb-8"
                 >
-                    <span className="text-tertiary font-mono text-sm md:text-base uppercase tracking-[0.2em] mr-3">
-                        {"//"}
-                    </span>
-                    <AnimatePresence mode="wait">
-                        <motion.span
-                            key={currentIdentity}
-                            initial={{ y: 20, opacity: 0, filter: "blur(4px)" }}
-                            animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                            exit={{ y: -20, opacity: 0, filter: "blur(4px)" }}
-                            transition={{ duration: 0.4, ease: "easeInOut" }}
-                            className="text-brand-blue font-bold text-sm md:text-lg uppercase tracking-[0.15em]"
-                        >
-                            {identities[currentIdentity]}
-                        </motion.span>
-                    </AnimatePresence>
-                    <span className="text-tertiary font-mono text-sm md:text-base uppercase tracking-[0.2em] ml-3">
-                        {"//"}
-                    </span>
+                    <div className="relative rounded-lg bg-[#0a0f0a] border border-[#00ff41]/20 px-5 py-3 shadow-[0_0_20px_rgba(0,255,65,0.08),inset_0_1px_0_rgba(0,255,65,0.05)] overflow-hidden">
+                        {/* Scanline overlay */}
+                        <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,255,65,0.03)_2px,rgba(0,255,65,0.03)_4px)] pointer-events-none" />
+
+                        <div className="relative flex items-center gap-2 font-mono">
+                            <span className="text-[#00ff41]/50 text-xs md:text-sm select-none">&gt;_</span>
+                            <AnimatePresence mode="wait">
+                                <motion.span
+                                    key={currentIdentity}
+                                    initial={{ opacity: 0, filter: "blur(2px)" }}
+                                    animate={{ opacity: 1, filter: "blur(0px)" }}
+                                    exit={{ opacity: 0, filter: "blur(2px)" }}
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                    className="text-[#00ff41] text-sm md:text-base tracking-wide font-medium"
+                                    style={{ textShadow: "0 0 8px rgba(0,255,65,0.5)" }}
+                                >
+                                    {identities[currentIdentity]}
+                                </motion.span>
+                            </AnimatePresence>
+                            <motion.span
+                                animate={{ opacity: [1, 0] }}
+                                transition={{ duration: 0.7, repeat: Infinity, repeatType: "reverse" }}
+                                className="text-[#00ff41] text-sm md:text-base font-mono"
+                                style={{ textShadow: "0 0 8px rgba(0,255,65,0.5)" }}
+                            >
+                                █
+                            </motion.span>
+                        </div>
+                    </div>
                 </motion.div>
 
             </div>
