@@ -88,20 +88,37 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
             <div ref={cardRef} className="relative">
                 {/* Glow flash behind the card during reveal */}
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={isInView ? { opacity: [0, 0.6, 0] } : { opacity: 0 }}
-                    transition={{ duration: 1.2, ease: "easeOut" }}
-                    className="absolute inset-0 rounded-2xl bg-brand-blue/20 blur-2xl -z-10"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={isInView ? { opacity: [0, 1, 0], scale: [0.8, 1.2, 1] } : {}}
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                    className="absolute inset-0 rounded-2xl bg-brand-blue/30 blur-3xl -z-10"
                 />
 
-                {/* Main card with clip-path reveal */}
+                {/* Main card with 3D Holographic reveal */}
                 <motion.div
-                    initial={{ clipPath: "inset(48% 0% 48% 0%)" }}
-                    animate={isInView
-                        ? { clipPath: "inset(0% 0% 0% 0%)" }
-                        : { clipPath: "inset(48% 0% 48% 0%)" }
-                    }
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
+                    initial={{
+                        opacity: 0,
+                        rotateX: 45,
+                        rotateY: 20,
+                        rotateZ: -5,
+                        y: 150,
+                        scale: 0.8,
+                        filter: "blur(20px)"
+                    }}
+                    animate={isInView ? {
+                        opacity: 1,
+                        rotateX: 0,
+                        rotateY: 0,
+                        rotateZ: 0,
+                        y: 0,
+                        scale: 1,
+                        filter: "blur(0px)"
+                    } : {}}
+                    transition={{
+                        duration: 1.4,
+                        ease: [0.16, 1, 0.3, 1] as const
+                    }}
+                    style={{ transformPerspective: 2000, transformStyle: "preserve-3d" }}
                     className="rounded-2xl border border-border bg-card overflow-hidden"
                 >
                     <div className="grid grid-cols-1 lg:grid-cols-5 gap-0">

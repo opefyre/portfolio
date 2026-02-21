@@ -129,11 +129,41 @@ export default function FloatingNav({ email }: { email: string }) {
                     </button>
                 </MagneticButton>
 
-                {/* Scroll Progress Bar */}
-                <motion.div
-                    style={{ scaleX }}
-                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-brand-blue to-brand-purple origin-left rounded-full"
-                />
+                {/* Circular Scroll Progress */}
+                <div className="relative w-8 h-8 flex items-center justify-center ml-1 bg-page/50 rounded-full border border-border/50">
+                    <svg className="w-8 h-8 transform -rotate-90" viewBox="0 0 36 36">
+                        {/* Background Track */}
+                        <circle
+                            cx="18"
+                            cy="18"
+                            r="15.915"
+                            fill="transparent"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            className="text-border"
+                        />
+                        {/* Progress Fill */}
+                        <motion.circle
+                            cx="18"
+                            cy="18"
+                            r="15.915"
+                            fill="transparent"
+                            stroke="url(#progress-gradient)"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            style={{ pathLength: scaleX }}
+                            className="text-brand-blue"
+                        />
+                        <defs>
+                            <linearGradient id="progress-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stopColor="#38bdf8" />
+                                <stop offset="100%" stopColor="#c084fc" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    {/* Inner glowing dot */}
+                    <div className="absolute w-1 h-1 bg-white rounded-full shadow-[0_0_5px_#white]" />
+                </div>
             </div>
         </motion.div>
     );
