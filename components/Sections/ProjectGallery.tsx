@@ -7,25 +7,24 @@ import ProjectModal from "@/components/UI/ProjectModal";
 import SectionHeader from "@/components/UI/SectionHeader";
 
 const cardVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: (i: number) => ({
+    hidden: { opacity: 0, scale: 0.96, y: 30 },
+    visible: {
         opacity: 1,
+        scale: 1,
         y: 0,
         transition: {
-            delay: i * 0.1,
-            duration: 0.6,
+            duration: 0.5,
             ease: [0.25, 0.4, 0.25, 1] as const,
         },
-    }),
+    },
 };
 
-const ProjectCard = ({ project, onClick, index }: { project: Project; onClick: () => void; index: number }) => (
+const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => void }) => (
     <motion.div
-        custom={index}
         variants={cardVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
+        viewport={{ once: true, amount: 0.1 }}
         whileHover={{ y: -4, transition: { duration: 0.2 } }}
         onClick={onClick}
         className="group bg-card border border-border hover:border-brand-blue/30 hover:bg-card-hover p-6 rounded-xl transition-[color,background-color,border-color,box-shadow] duration-300 shadow-[0_2px_8px_rgba(0,0,0,0.3)] cursor-pointer h-full flex flex-col"
@@ -72,7 +71,6 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
                 {projects.map((project, idx) => (
                     <ProjectCard
                         key={idx}
-                        index={idx}
                         project={project}
                         onClick={() => openModal(project)}
                     />

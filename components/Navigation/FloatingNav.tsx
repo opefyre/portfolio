@@ -161,8 +161,6 @@ export default function FloatingNav({ email }: { email: string }) {
                             </linearGradient>
                         </defs>
                     </svg>
-                    {/* Inner glowing dot */}
-                    <div className="absolute w-1 h-1 bg-white rounded-full shadow-[0_0_5px_#white]" />
                 </div>
             </div>
         </motion.div>

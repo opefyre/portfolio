@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight, Zap, Mail, Instagram, Github } from "lucide-react";
 import MagneticButton from "@/components/UI/MagneticButton";
 import Image from "next/image";
@@ -61,8 +61,21 @@ const showcaseImages = [
 export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: ElixiaryVenture }) {
     const [activeImage, setActiveImage] = useState(0);
     const cardRef = useRef<HTMLDivElement>(null);
-    const isInView = useInView(cardRef, { once: true, amount: 0.2 });
-    const [hasRevealed, setHasRevealed] = useState(false);
+
+    // Scroll-linked animation
+    const { scrollYProgress } = useScroll({
+        target: cardRef,
+        offset: ["0 1", "0.6 1"] // Animation finishes when card is 60% above the bottom of the viewport
+    });
+
+    const scale = useTransform(scrollYProgress, [0, 1], [0.85, 1]);
+    const rotateX = useTransform(scrollYProgress, [0, 1], [40, 0]);
+    const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+    const yPulse = useTransform(scrollYProgress, [0, 1], [100, 0]);
+    const blur = useTransform(scrollYProgress, [0, 1], ["blur(20px)", "blur(0px)"]);
+
+    const glowOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
+    const glowScale = useTransform(scrollYProgress, [0, 1], [0.8, 1.2]);
 
     // Auto-rotate images
     const nextImage = useCallback(() => {
@@ -74,51 +87,29 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
         return () => clearInterval(timer);
     }, [nextImage]);
 
-    // Track when reveal animation completes
-    useEffect(() => {
-        if (isInView) {
-            const timer = setTimeout(() => setHasRevealed(true), 900);
-            return () => clearTimeout(timer);
-        }
-    }, [isInView]);
+    // (Removed isInView timer)
 
     return (
         <section className="container-wide section-padding">
 
             <div ref={cardRef} className="relative">
-                {/* Glow flash behind the card during reveal */}
+                {/* Glow flash behind the card linked to scroll */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={isInView ? { opacity: [0, 1, 0], scale: [0.8, 1.2, 1] } : {}}
-                    transition={{ duration: 1.5, ease: "easeOut" }}
+                    style={{ opacity: glowOpacity, scale: glowScale }}
                     className="absolute inset-0 rounded-2xl bg-brand-blue/30 blur-3xl -z-10"
                 />
 
-                {/* Main card with 3D Holographic reveal */}
+                {/* Main card with Scroll-tied 3D Holographic Parallax */}
                 <motion.div
-                    initial={{
-                        opacity: 0,
-                        rotateX: 45,
-                        rotateY: 20,
-                        rotateZ: -5,
-                        y: 150,
-                        scale: 0.8,
-                        filter: "blur(20px)"
+                    style={{
+                        opacity,
+                        rotateX,
+                        scale,
+                        y: yPulse,
+                        filter: blur,
+                        transformPerspective: 2000,
+                        transformStyle: "preserve-3d"
                     }}
-                    animate={isInView ? {
-                        opacity: 1,
-                        rotateX: 0,
-                        rotateY: 0,
-                        rotateZ: 0,
-                        y: 0,
-                        scale: 1,
-                        filter: "blur(0px)"
-                    } : {}}
-                    transition={{
-                        duration: 1.4,
-                        ease: [0.16, 1, 0.3, 1] as const
-                    }}
-                    style={{ transformPerspective: 2000, transformStyle: "preserve-3d" }}
                     className="rounded-2xl border border-border bg-card overflow-hidden"
                 >
                     <div className="grid grid-cols-1 lg:grid-cols-5 gap-0">
