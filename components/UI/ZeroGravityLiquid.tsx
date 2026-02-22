@@ -22,11 +22,11 @@ export default function ZeroGravityLiquid() {
             <svg className="absolute w-0 h-0">
                 <defs>
                     <filter id="zero-gravity-goo">
-                        <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur" />
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
                         <feColorMatrix
                             in="blur"
                             mode="matrix"
-                            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 35 -15"
+                            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 25 -10"
                             result="goo"
                         />
                         <feBlend in="SourceGraphic" in2="goo" />
@@ -34,9 +34,9 @@ export default function ZeroGravityLiquid() {
                 </defs>
             </svg>
 
-            {/* The liquid mass container */}
+            {/* The liquid mass container - Subtler and smaller */}
             <motion.div
-                className="relative w-[300px] h-[300px] md:w-[600px] md:h-[600px] opacity-70"
+                className="relative w-[200px] h-[200px] md:w-[350px] md:h-[350px] opacity-30 mix-blend-screen"
                 style={{ filter: "url(#zero-gravity-goo)" }}
                 animate={{
                     x: mousePosition.x,

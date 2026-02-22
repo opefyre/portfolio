@@ -6,6 +6,8 @@ import { Check, Copy, ArrowRight, Loader2 } from "lucide-react";
 import ZeroGravityLiquid from "@/components/UI/ZeroGravityLiquid";
 import FloatingInput from "@/components/UI/FloatingInput";
 import MagneticButton from "@/components/UI/MagneticButton";
+import EnvelopeSystem from "@/components/UI/EnvelopeSystem";
+import { submitInquiry } from "@/lib/firebase-client";
 
 export default function ContactPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -24,23 +26,23 @@ export default function ContactPage() {
         setIsSubmitting(true);
 
         try {
-            // Because Next.js 'output: export' static builds do not support server-side API routes,
-            // we handle the cinematic state directly on the client to prevent the HTML redirect crash,
-            // until a Firebase Web API Key is provided.
+            const formData = new FormData(e.currentTarget);
+            const data = Object.fromEntries(formData.entries());
 
-            // Simulate network transit time
-            await new Promise((resolve) => setTimeout(resolve, 1500));
+            // Add ISO timestamp to the incoming form data
+            data.createdAt = new Date().toISOString();
+            data.status = "unread";
 
-            // Generate a secure-looking ID locally
-            const hexChars = '0123456789ABCDEF';
-            const randomHex = (len: number) => Array.from({ length: len }).map(() => hexChars[Math.floor(Math.random() * 16)]).join('');
-            const fakeId = `REQ-${randomHex(4)}-${randomHex(2)}`;
+            // Dispatch to the native Client-Side Firebase SDK using our robust abstraction
+            // This safely bypasses Next.js static export API limitations
+            const ticket = await submitInquiry(data);
 
-            setTicketData({ id: fakeId, timestamp: new Date().toISOString() });
+            setTicketData({ id: ticket.id, timestamp: data.createdAt as string });
             setIsSuccess(true);
         } catch (error) {
-            console.error(error);
+            console.error("Transmission Error:", error);
             setIsSubmitting(false);
+            alert("Secure transmission failed. Please use the direct generic email.");
         }
     };
 
@@ -110,30 +112,13 @@ export default function ContactPage() {
                         </div>
                     </motion.div>
 
-                    {/* Right Column: The Unified Minimal Form / Transmission Ticket */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                        className="bg-deep/40 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-8 md:p-12 shadow-2xl relative overflow-hidden"
-                    >
-                        {/* Shimmer effect inside form */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/5 to-transparent pointer-events-none" />
-
-                        <AnimatePresence mode="wait">
-                            {!isSuccess ? (
-                                <motion.form
-                                    key="contact-form"
-                                    onSubmit={handleSubmit}
-                                    className="flex flex-col gap-6 relative z-10 w-full origin-top"
-                                    exit={{
-                                        opacity: 0,
-                                        height: 0,
-                                        rotateX: -90,
-                                        scale: 0.9,
-                                        transition: { duration: 0.5, ease: "circIn" }
-                                    }}
-                                >
+                    {/* Right Column: Envelope System Wrapper */}
+                    <div className="w-full relative">
+                        <EnvelopeSystem
+                            isSubmitting={isSubmitting}
+                            isSuccess={isSuccess}
+                            formComponent={
+                                <form onSubmit={handleSubmit} className="flex flex-col gap-6 relative z-10 w-full">
                                     <FloatingInput id="name" label="Your Name" required />
                                     <FloatingInput id="email" type="email" label="Email Address" required />
                                     <FloatingInput id="message" label="How can I help you?" isTextArea required />
@@ -171,15 +156,10 @@ export default function ContactPage() {
                                             </button>
                                         </MagneticButton>
                                     </div>
-                                </motion.form>
-                            ) : (
-                                <motion.div
-                                    key="success-ticket"
-                                    className="relative z-10 w-full flex flex-col gap-6 font-mono"
-                                    initial={{ opacity: 0, y: 50, scale: 0.95 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    transition={{ duration: 0.6, delay: 0.4, type: "spring", bounce: 0.4 }}
-                                >
+                                </form>
+                            }
+                            ticketComponent={
+                                <div className="bg-deep/40 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-8 md:p-12 shadow-2xl relative overflow-hidden font-mono text-white">
                                     <div className="flex items-center gap-4 text-brand-blue border-b border-white/10 pb-6">
                                         <div className="w-12 h-12 rounded-full bg-brand-blue/10 flex items-center justify-center">
                                             <Check className="w-6 h-6" />
@@ -220,10 +200,10 @@ export default function ContactPage() {
                                         <ArrowRight className="w-3 h-3 rotate-180 transition-transform group-hover:-translate-x-1" />
                                         Reset Form
                                     </button>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </motion.div>
+                                </div>
+                            }
+                        />
+                    </div>
 
                 </div>
             </div>
