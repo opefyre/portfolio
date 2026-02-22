@@ -63,10 +63,10 @@ export default function EnvelopeSystem({
 
                             {/* 2. THE TOP FLAP */}
                             <motion.div
-                                className="absolute top-0 left-0 right-0 h-[55%] bg-gradient-to-b from-[#1b1e26] to-[#12141a] z-30 origin-top rounded-t-2xl drop-shadow-xl"
+                                className="absolute top-0 left-0 right-0 h-[60%] bg-gradient-to-b from-[#1b1e26] to-[#12141a] z-30 origin-top rounded-t-2xl drop-shadow-xl"
                                 style={{
                                     // A true envelope flap is wide at the top hinges, then angles down to a point.
-                                    clipPath: "polygon(0 0, 100% 0, 100% 10%, 50% 100%, 0 10%)",
+                                    clipPath: "polygon(0 0, 100% 0, 100% 50%, 50% 100%, 0 50%)",
                                     backfaceVisibility: "hidden"
                                 }}
                                 initial={{ opacity: 0, rotateX: -180 }}
@@ -89,7 +89,7 @@ export default function EnvelopeSystem({
                             {/* 4. THE WAX SEAL */}
                             <motion.div
                                 className="absolute left-1/2 -translate-x-1/2 z-40 w-16 h-16 rounded-full bg-gradient-to-br from-red-600 to-red-800 shadow-[0_4px_15px_rgba(220,38,38,0.5),inset_0_-2px_6px_rgba(0,0,0,0.6)] flex items-center justify-center"
-                                style={{ top: "calc(55% - 40px)" }} // Move it up slightly to cleanly overlap the tip of the flap
+                                style={{ top: "calc(60% - 32px)" }} // Perfectly straddles the exact tip of the 60% flap
                                 initial={{ scale: 3, opacity: 0 }}
                                 animate={{
                                     scale: (phase === "sealed" || phase === "flying") ? 1 : 4,
