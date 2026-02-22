@@ -159,35 +159,16 @@ export default function ContactPage() {
                                 </form>
                             }
                             ticketComponent={
-                                <div className="bg-deep/40 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-8 md:p-12 shadow-2xl relative overflow-hidden font-mono text-white">
-                                    <div className="flex items-center gap-4 text-brand-blue border-b border-white/10 pb-6">
-                                        <div className="w-12 h-12 rounded-full bg-brand-blue/10 flex items-center justify-center">
-                                            <Check className="w-6 h-6" />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-xl font-bold uppercase tracking-widest">Transmission</h3>
-                                            <p className="text-brand-blue/60 text-sm">Securely Logged</p>
-                                        </div>
+                                <div className="bg-deep/40 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-8 md:p-12 shadow-2xl relative overflow-hidden text-center text-white flex flex-col items-center">
+                                    <div className="w-16 h-16 rounded-full bg-brand-blue/10 flex items-center justify-center mb-6">
+                                        <Check className="w-8 h-8 text-brand-blue" />
                                     </div>
 
-                                    <div className="space-y-4 py-4">
-                                        <div>
-                                            <p className="text-xs text-tertiary uppercase tracking-widest mb-1">Request ID</p>
-                                            <p className="text-lg text-white">{ticketData?.id}</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-xs text-tertiary uppercase tracking-widest mb-1">Timestamp</p>
-                                            <p className="text-sm text-secondary">
-                                                {ticketData ? new Date(ticketData.timestamp).toLocaleString() : ""}
-                                            </p>
-                                        </div>
-                                    </div>
+                                    <h3 className="text-2xl font-display font-medium mb-3">Message Sent</h3>
 
-                                    <div className="pt-4 border-t border-white/10">
-                                        <p className="text-sm text-secondary leading-relaxed font-sans">
-                                            Your inquiry has been successfully routed. I will review the dossier and respond to your comms shortly.
-                                        </p>
-                                    </div>
+                                    <p className="text-secondary leading-relaxed max-w-sm">
+                                        Thank you for reaching out. I&apos;ve received your message and will get back to you as soon as possible.
+                                    </p>
 
                                     <button
                                         onClick={() => {
