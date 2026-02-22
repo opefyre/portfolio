@@ -4,38 +4,8 @@ import { motion } from "framer-motion";
 import { Skill, Certification, Education } from "@/lib/db";
 import SectionHeader from "@/components/UI/SectionHeader";
 import GlassTerminal from "@/components/UI/GlassTerminal";
-import { GraduationCap } from "lucide-react";
-
-const CertificationsMarquee = ({ certifications }: { certifications: Certification[] }) => {
-    // Duplicate the array to create a seamless infinite loop
-    const duplicated = [...certifications, ...certifications, ...certifications, ...certifications];
-
-    return (
-        <div className="relative flex overflow-hidden py-16 border-y border-white/5 my-32 bg-black/20">
-            <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-canvas to-transparent z-10 pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-canvas to-transparent z-10 pointer-events-none" />
-
-            <motion.div
-                className="flex shrink-0 gap-16 items-center px-8"
-                animate={{ x: ["0%", "-50%"] }}
-                transition={{
-                    duration: 30,
-                    repeat: Infinity,
-                    ease: "linear",
-                }}
-            >
-                {duplicated.map((cert, i) => (
-                    <div key={i} className="flex items-center gap-4 shrink-0">
-                        <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.8)] animate-pulse" />
-                        <span className="text-xl md:text-2xl font-display font-medium text-white/90 tracking-wide">
-                            {cert.name}
-                        </span>
-                    </div>
-                ))}
-            </motion.div>
-        </div>
-    );
-};
+import HolographicCard from "@/components/UI/HolographicCard";
+import { GraduationCap, ShieldCheck } from "lucide-react";
 export default function ExpertiseSection({
     skills,
     certifications,
@@ -61,13 +31,44 @@ export default function ExpertiseSection({
                 </div>
             </div>
 
-            {/* PART 2: CREDENTIALS MARQUEE */}
-            <div className="w-full">
-                <CertificationsMarquee certifications={certifications} />
+            {/* PART 2: HOLOGRAPHIC CREDENTIALS VAULT */}
+            <div id="credentials" className="container max-w-6xl mx-auto px-6 scroll-mt-32">
+                <SectionHeader
+                    title="Verified Credentials"
+                    subtitle="Industry-standard certifications and professional authorizations."
+                />
+
+                <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {certifications.map((cert, idx) => (
+                        <motion.div
+                            key={idx}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.5, delay: idx * 0.1 }}
+                            className="h-32" // Fixed height for consistent cards
+                        >
+                            <HolographicCard>
+                                <div className="flex flex-col h-full justify-between">
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+                                            <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400">Authorized</span>
+                                        </div>
+                                        <ShieldCheck className="w-5 h-5 text-white/20" />
+                                    </div>
+                                    <h4 className="font-display text-lg md:text-xl font-medium text-white leading-tight">
+                                        {cert.name}
+                                    </h4>
+                                </div>
+                            </HolographicCard>
+                        </motion.div>
+                    ))}
+                </div>
             </div>
 
             {/* PART 3: ACADEMIC TIMELINE */}
-            <div id="credentials" className="container max-w-4xl mx-auto px-6 scroll-mt-32">
+            <div className="container max-w-4xl mx-auto px-6 mt-32">
                 <SectionHeader
                     title="Academic Log"
                     subtitle="Formal education and foundational knowledge."
