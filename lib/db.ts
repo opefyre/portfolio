@@ -161,7 +161,14 @@ export const getEducation = cache(async () => {
         async () => {
             const snapshot = await db.collection("education").get();
             if (snapshot.empty) throw new Error("Education collection empty in Firestore");
-            return snapshot.docs.map(d => d.data() as Education);
+            const docs = snapshot.docs.map(d => d.data() as Education);
+            // Sort by period descending (newest at the top, oldest at the bottom)
+            // Extracts the last 4-digit number (end year) from strings like "2012 - 2016" or "2020"
+            return docs.sort((a, b) => {
+                const yearA = parseInt(a.period.match(/\d{4}/g)?.pop() || "0");
+                const yearB = parseInt(b.period.match(/\d{4}/g)?.pop() || "0");
+                return yearB - yearA;
+            });
         },
         ["education"],
         { tags: ["content"] }
