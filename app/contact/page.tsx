@@ -10,6 +10,7 @@ import MagneticButton from "@/components/UI/MagneticButton";
 export default function ContactPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [ticketData, setTicketData] = useState<{ id: string; timestamp: string } | null>(null);
     const [copied, setCopied] = useState(false);
 
     const handleCopyEmail = () => {
@@ -23,25 +24,27 @@ export default function ContactPage() {
         setIsSubmitting(true);
 
         try {
-            // Using our mocked contact routing endpoint
+            const formData = new FormData(e.currentTarget);
+            const data = Object.fromEntries(formData.entries());
+
             const res = await fetch("/api/contact", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ sent: true }),
+                body: JSON.stringify(data),
             });
 
             if (res.ok) {
+                const json = await res.json();
+                setTicketData(json.ticket);
                 setIsSuccess(true);
-                // Reset form after a few seconds showing success
-                setTimeout(() => {
-                    setIsSuccess(false);
-                    setIsSubmitting(false);
-                    (e.target as HTMLFormElement).reset();
-                }, 3000);
+            } else {
+                setIsSubmitting(false);
+                alert("Failed to send message. Please try the direct email.");
             }
         } catch (error) {
             console.error(error);
             setIsSubmitting(false);
+            alert("Failed to send message. Please try the direct email.");
         }
     };
 
@@ -113,7 +116,7 @@ export default function ContactPage() {
                         </div>
                     </motion.div>
 
-                    {/* Right Column: The Unified Minimal Form */}
+                    {/* Right Column: The Unified Minimal Form / Transmission Ticket */}
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -123,72 +126,109 @@ export default function ContactPage() {
                         {/* Shimmer effect inside form */}
                         <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/5 to-transparent pointer-events-none" />
 
-                        <form onSubmit={handleSubmit} className="flex flex-col gap-6 relative z-10 w-full">
-                            <FloatingInput
-                                id="name"
-                                label="Your Name"
-                                required
-                            />
+                        <AnimatePresence mode="wait">
+                            {!isSuccess ? (
+                                <motion.form
+                                    key="contact-form"
+                                    onSubmit={handleSubmit}
+                                    className="flex flex-col gap-6 relative z-10 w-full origin-top"
+                                    exit={{
+                                        opacity: 0,
+                                        height: 0,
+                                        rotateX: -90,
+                                        scale: 0.9,
+                                        transition: { duration: 0.5, ease: "circIn" }
+                                    }}
+                                >
+                                    <FloatingInput id="name" label="Your Name" required />
+                                    <FloatingInput id="email" type="email" label="Email Address" required />
+                                    <FloatingInput id="message" label="How can I help you?" isTextArea required />
 
-                            <FloatingInput
-                                id="email"
-                                type="email"
-                                label="Email Address"
-                                required
-                            />
+                                    <div className="pt-6">
+                                        <MagneticButton strength={0.2} className="w-full sm:w-auto">
+                                            <button
+                                                type="submit"
+                                                disabled={isSubmitting}
+                                                className="relative w-full sm:w-auto overflow-hidden bg-brand-blue text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-sm transition-all duration-300 hover:bg-brand-blue/90 hover:shadow-[0_0_20px_rgba(56,189,248,0.4)] disabled:opacity-70 disabled:cursor-not-allowed group flex items-center justify-center min-w-[200px]"
+                                            >
+                                                <AnimatePresence mode="wait">
+                                                    {isSubmitting ? (
+                                                        <motion.div
+                                                            key="submitting"
+                                                            initial={{ opacity: 0, y: 20 }}
+                                                            animate={{ opacity: 1, y: 0 }}
+                                                            exit={{ opacity: 0, y: -20 }}
+                                                        >
+                                                            <Loader2 className="w-5 h-5 animate-spin" />
+                                                        </motion.div>
+                                                    ) : (
+                                                        <motion.div
+                                                            key="idle"
+                                                            initial={{ opacity: 0, y: 20 }}
+                                                            animate={{ opacity: 1, y: 0 }}
+                                                            exit={{ opacity: 0, y: -20 }}
+                                                            className="flex items-center gap-2"
+                                                        >
+                                                            Transmit
+                                                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                                                        </motion.div>
+                                                    )}
+                                                </AnimatePresence>
+                                            </button>
+                                        </MagneticButton>
+                                    </div>
+                                </motion.form>
+                            ) : (
+                                <motion.div
+                                    key="success-ticket"
+                                    className="relative z-10 w-full flex flex-col gap-6 font-mono"
+                                    initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                    transition={{ duration: 0.6, delay: 0.4, type: "spring", bounce: 0.4 }}
+                                >
+                                    <div className="flex items-center gap-4 text-brand-blue border-b border-white/10 pb-6">
+                                        <div className="w-12 h-12 rounded-full bg-brand-blue/10 flex items-center justify-center">
+                                            <Check className="w-6 h-6" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-xl font-bold uppercase tracking-widest">Transmission</h3>
+                                            <p className="text-brand-blue/60 text-sm">Securely Logged</p>
+                                        </div>
+                                    </div>
 
-                            <FloatingInput
-                                id="message"
-                                label="How can I help you?"
-                                isTextArea
-                                required
-                            />
+                                    <div className="space-y-4 py-4">
+                                        <div>
+                                            <p className="text-xs text-tertiary uppercase tracking-widest mb-1">Request ID</p>
+                                            <p className="text-lg text-white">{ticketData?.id}</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-xs text-tertiary uppercase tracking-widest mb-1">Timestamp</p>
+                                            <p className="text-sm text-secondary">
+                                                {ticketData ? new Date(ticketData.timestamp).toLocaleString() : ""}
+                                            </p>
+                                        </div>
+                                    </div>
 
-                            <div className="pt-6">
-                                <MagneticButton strength={0.2} className="w-full sm:w-auto">
+                                    <div className="pt-4 border-t border-white/10">
+                                        <p className="text-sm text-secondary leading-relaxed font-sans">
+                                            Your inquiry has been successfully routed. I will review the dossier and respond to your comms shortly.
+                                        </p>
+                                    </div>
+
                                     <button
-                                        type="submit"
-                                        disabled={isSubmitting || isSuccess}
-                                        className="relative w-full sm:w-auto overflow-hidden bg-brand-blue text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-sm transition-all duration-300 hover:bg-brand-blue/90 hover:shadow-[0_0_20px_rgba(56,189,248,0.4)] disabled:opacity-70 disabled:cursor-not-allowed group flex items-center justify-center min-w-[200px]"
+                                        onClick={() => {
+                                            setIsSuccess(false);
+                                            setIsSubmitting(false);
+                                            setTicketData(null);
+                                        }}
+                                        className="mt-4 text-xs tracking-widest uppercase text-tertiary hover:text-white transition-colors self-start flex items-center gap-2 group"
                                     >
-                                        <AnimatePresence mode="wait">
-                                            {isSuccess ? (
-                                                <motion.div
-                                                    key="success"
-                                                    initial={{ opacity: 0, y: 20 }}
-                                                    animate={{ opacity: 1, y: 0 }}
-                                                    exit={{ opacity: 0, y: -20 }}
-                                                    className="flex items-center gap-2"
-                                                >
-                                                    <Check className="w-5 h-5" />
-                                                    Received
-                                                </motion.div>
-                                            ) : isSubmitting ? (
-                                                <motion.div
-                                                    key="submitting"
-                                                    initial={{ opacity: 0, y: 20 }}
-                                                    animate={{ opacity: 1, y: 0 }}
-                                                    exit={{ opacity: 0, y: -20 }}
-                                                >
-                                                    <Loader2 className="w-5 h-5 animate-spin" />
-                                                </motion.div>
-                                            ) : (
-                                                <motion.div
-                                                    key="idle"
-                                                    initial={{ opacity: 0, y: 20 }}
-                                                    animate={{ opacity: 1, y: 0 }}
-                                                    exit={{ opacity: 0, y: -20 }}
-                                                    className="flex items-center gap-2"
-                                                >
-                                                    Transmit
-                                                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
+                                        <ArrowRight className="w-3 h-3 rotate-180 transition-transform group-hover:-translate-x-1" />
+                                        Reset Form
                                     </button>
-                                </MagneticButton>
-                            </div>
-                        </form>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </motion.div>
 
                 </div>

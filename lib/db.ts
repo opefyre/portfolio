@@ -18,7 +18,7 @@ if (!admin.apps.length) {
     });
 }
 
-const db = admin.firestore();
+export const db = admin.firestore();
 
 export const revalidate = 3600;
 
