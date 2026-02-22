@@ -37,7 +37,7 @@ export default async function Home() {
 
   return (
     <main className="bg-page min-h-screen selection:bg-brand-blue/30 selection:text-white">
-      <FloatingNav email={personalInfo.email} />
+      <FloatingNav />
       {/* Scroll Margin corrections included */}
       <section id="overview" className="scroll-mt-0">
         <DigitalHero name={personalInfo.name} title={personalInfo.title} />

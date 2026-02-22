@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import clsx from "clsx";
 import MagneticButton from "@/components/UI/MagneticButton";
 import {
@@ -23,7 +24,7 @@ const navItems = [
     { name: "Projects", id: "projects", icon: FolderKanban },
 ];
 
-export default function FloatingNav({ email }: { email: string }) {
+export default function FloatingNav() {
     const [activeSection, setActiveSection] = useState("overview");
     const [scrolled, setScrolled] = useState(false);
     const { scrollYProgress } = useScroll();
@@ -121,12 +122,12 @@ export default function FloatingNav({ email }: { email: string }) {
 
                 {/* Primary CTA */}
                 <MagneticButton strength={0.3}>
-                    <button
-                        onClick={() => window.open(`mailto:${email}`)}
+                    <Link
+                        href="/contact"
                         className="hidden md:flex cursor-pointer items-center px-4 py-2 rounded-full bg-brand-blue text-white text-xs font-bold uppercase tracking-wider hover:bg-brand-blue/90 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] transition-all duration-300 mr-1"
                     >
                         Let&apos;s Chat
-                    </button>
+                    </Link>
                 </MagneticButton>
 
                 {/* Circular Scroll Progress */}
