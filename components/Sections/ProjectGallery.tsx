@@ -2,7 +2,7 @@
 
 import { Project } from "@/lib/db";
 import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useInView } from "framer-motion";
 import ProjectModal from "@/components/UI/ProjectModal";
 import SectionHeader from "@/components/UI/SectionHeader";
 import { ArrowUpRight, Plus, Box, LayoutGrid } from "lucide-react";
@@ -65,8 +65,8 @@ const AmbientParticles = () => {
 };
 
 
-// --- The 3D Cinematic Project Card ---
-const Project3DCard = ({
+// --- The 3D Cinematic Desktop Project Card ---
+const DesktopProjectCard = ({
     project,
     index,
     isHovered,
@@ -262,6 +262,101 @@ const Project3DCard = ({
 };
 
 
+// --- The Viewport-Driven Smart Stack Mobile Card ---
+const MobileProjectCard = ({
+    project,
+    index,
+    onClick,
+    onActiveChange
+}: {
+    project: Project;
+    index: number;
+    onClick: () => void;
+    onActiveChange: (active: boolean) => void;
+}) => {
+    const ref = useRef<HTMLDivElement>(null);
+    const isInView = useInView(ref, { margin: "-40% 0px -40% 0px" });
+
+    useEffect(() => {
+        onActiveChange(isInView);
+    }, [isInView, onActiveChange]);
+
+    return (
+        <motion.div
+            ref={ref}
+            animate={{
+                opacity: isInView ? 1 : 0.4,
+                scale: isInView ? 1 : 0.95,
+            }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="relative w-full rounded-3xl bg-card border border-border shadow-xl overflow-hidden flex flex-col cursor-pointer mb-8"
+            onClick={onClick}
+        >
+            {/* Top overview (always visible) */}
+            <div className="p-6 bg-gradient-to-br from-card to-card-hover z-10 relative">
+                {/* Subtle active glow */}
+                <motion.div
+                    animate={{ opacity: isInView ? 1 : 0 }}
+                    className="absolute inset-0 bg-brand-blue/5 pointer-events-none"
+                />
+
+                <div className="flex items-center gap-3 mb-6 relative z-10">
+                    <div className="w-8 h-8 rounded-full border border-brand-blue/30 flex items-center justify-center text-brand-blue font-mono text-xs bg-brand-blue/5 shadow-[0_0_10px_rgba(56,189,248,0.2)]">
+                        {(index + 1).toString().padStart(2, '0')}
+                    </div>
+                    <span className="text-secondary tracking-widest uppercase text-[10px] font-mono">
+                        {project.category}
+                    </span>
+                </div>
+
+                <h3 className="text-2xl font-display font-medium leading-tight mb-3 text-white relative z-10">
+                    {project.title}
+                </h3>
+
+                <p className={clsx("text-secondary text-sm leading-relaxed transition-all duration-500 relative z-10", !isInView && "line-clamp-2")}>
+                    {project.description}
+                </p>
+            </div>
+
+            {/* Expandable drawer when in view */}
+            <motion.div
+                animate={{
+                    height: isInView ? "auto" : 0,
+                    opacity: isInView ? 1 : 0,
+                }}
+                className="overflow-hidden bg-deep/80 border-t border-border/50"
+            >
+                <div className="p-6 space-y-6">
+                    <div>
+                        <h4 className="text-brand-blue text-[10px] font-bold uppercase tracking-widest mb-3 flex items-center gap-1.5">
+                            <LayoutGrid className="w-3 h-3" /> Tech Stack
+                        </h4>
+                        <div className="flex flex-wrap gap-1.5">
+                            {project.skills.slice(0, 4).map((skill, i) => (
+                                <span key={i} className="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-secondary font-mono">
+                                    {skill}
+                                </span>
+                            ))}
+                            {project.skills.length > 4 && (
+                                <span className="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-brand-blue font-mono">
+                                    +{project.skills.length - 4}
+                                </span>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="flex items-center justify-between text-brand-blue pt-4 border-t border-border/30">
+                        <span className="text-xs font-medium tracking-wide">Tap to Read Case Study</span>
+                        <div className="w-6 h-6 rounded-full bg-brand-blue/10 flex items-center justify-center">
+                            <ArrowUpRight className="w-3 h-3" />
+                        </div>
+                    </div>
+                </div>
+            </motion.div>
+        </motion.div>
+    );
+};
+
 // --- The Main Section Container ---
 export default function ProjectGallery({ projects }: { projects: Project[] }) {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -338,18 +433,36 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
                     />
                 </motion.div>
 
-                <div className="flex flex-col gap-12 lg:gap-32 w-full max-w-7xl mx-auto">
+                <div className="flex flex-col gap-12 lg:gap-32 w-full max-w-7xl mx-auto px-4 md:px-0">
                     {projects.map((project, idx) => (
-                        <Project3DCard
-                            key={project.id || idx}
-                            project={project}
-                            index={idx}
-                            isHovered={hoveredProjectIdx === idx}
-                            isAnyHovered={isAnyHovered}
-                            onHoverStart={() => setHoveredProjectIdx(idx)}
-                            onHoverEnd={() => setHoveredProjectIdx(null)}
-                            onClick={() => openModal(project)}
-                        />
+                        <div key={project.id || idx}>
+                            {/* Desktop View */}
+                            <div className="hidden md:block">
+                                <DesktopProjectCard
+                                    project={project}
+                                    index={idx}
+                                    isHovered={hoveredProjectIdx === idx}
+                                    isAnyHovered={isAnyHovered}
+                                    onHoverStart={() => setHoveredProjectIdx(idx)}
+                                    onHoverEnd={() => setHoveredProjectIdx(null)}
+                                    onClick={() => openModal(project)}
+                                />
+                            </div>
+
+                            {/* Mobile View */}
+                            <div className="block md:hidden">
+                                <MobileProjectCard
+                                    project={project}
+                                    index={idx}
+                                    onClick={() => openModal(project)}
+                                    onActiveChange={(active) => {
+                                        // Update global background state on scroll
+                                        if (active) setHoveredProjectIdx(idx);
+                                        else if (hoveredProjectIdx === idx) setHoveredProjectIdx(null);
+                                    }}
+                                />
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>
