@@ -56,33 +56,34 @@ export default function EnvelopeSystem({
                             transition={{ duration: 0.4 }}
                         />
 
-                        {/* The Flap */}
+                        {/* The Flap - Mathematically correct 3D hinge */}
                         <motion.div
-                            className="absolute top-[20%] left-0 right-0 h-[40%] bg-gradient-to-b from-[#2a2d36] to-[#1a1c23] border-b border-white/10 z-30 origin-top"
-                            style={{ clipPath: "polygon(0 0, 100% 0, 50% 100%)" }}
-                            initial={{ opacity: 0, rotateX: 0 }}
+                            className="absolute top-[20%] left-0 right-0 h-[40%] bg-gradient-to-b from-[#2a2d36] to-[#1a1c23] border-b border-white/10 z-30 origin-top pointer-events-none"
+                            style={{ clipPath: "polygon(0 0, 100% 0, 50% 100%)", backfaceVisibility: "hidden" }}
+                            initial={{ opacity: 0, rotateX: -180 }}
                             animate={{
                                 opacity: phase !== "idle" ? 1 : 0,
-                                rotateX: phase === "sealed" || phase === "flying" ? -180 : 0,
+                                rotateX: phase === "sealed" || phase === "flying" ? 0 : -180,
                             }}
-                            transition={{ duration: 0.5, ease: "easeInOut" }}
+                            transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
                         />
 
                         {/* The Letter (Form) */}
                         <motion.div
                             className="relative bg-deep/40 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-8 md:p-12 shadow-2xl z-10 w-full"
+                            initial={{ y: 0, scale: 1 }}
                             animate={{
-                                y: phase !== "idle" ? 80 : 0,
-                                scale: phase !== "idle" ? 0.85 : 1,
+                                y: phase !== "idle" ? 100 : 0,
+                                scale: phase !== "idle" ? 0.75 : 1,
                             }}
-                            transition={{ duration: 0.5, ease: "backIn" }}
+                            transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
                         >
                             {formComponent}
                         </motion.div>
 
                         {/* The Front Pocket */}
                         <motion.div
-                            className="absolute bottom-0 left-0 right-0 h-[80%] bg-gradient-to-tr from-[#1f2229]/90 to-[#2a2d36]/90 backdrop-blur-xl border border-white/10 rounded-b-[2rem] z-20"
+                            className="absolute bottom-0 left-0 right-0 h-[80%] bg-gradient-to-tr from-[#1f2229]/90 to-[#2a2d36]/90 backdrop-blur-xl border border-white/10 rounded-b-[2rem] z-20 pointer-events-none"
                             style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 0, 50% 35%, 0 0)" }}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: phase !== "idle" ? 1 : 0 }}
