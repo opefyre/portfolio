@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import MagneticButton from "@/components/UI/MagneticButton";

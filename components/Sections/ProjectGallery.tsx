@@ -1,7 +1,7 @@
 "use client";
 
 import { Project } from "@/lib/db";
-import { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import ProjectModal from "@/components/UI/ProjectModal";
 import SectionHeader from "@/components/UI/SectionHeader";
@@ -9,36 +9,57 @@ import { ArrowUpRight, Plus, Box, LayoutGrid } from "lucide-react";
 import clsx from "clsx";
 
 // --- Ambient Particles Component ---
+const generateParticles = () =>
+    Array.from({ length: 15 }).map(() => ({
+        size: Math.random() * 6 + 2,
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        yEnd: Math.random() * -100 - 50,
+        xEnd: (Math.random() - 0.5) * 50,
+        opacityMid: Math.random() * 0.5 + 0.2,
+        duration: Math.random() * 10 + 10,
+        delay: Math.random() * 10,
+    }));
+
 const AmbientParticles = () => {
+    // Lazy state initialization runs generateParticles EXACTLY once on mount
+    const [particles] = useState(generateParticles);
+
+    // Prevent Hydration error by tracking mount state
+    const [isMounted, setIsMounted] = useState(false);
+    useEffect(() => {
+        // eslint-disable-next-line
+        setIsMounted(true);
+    }, []);
+
+    if (!isMounted || particles.length === 0) return null;
+
     return (
         <div className="absolute inset-0 overflow-hidden pointer-events-none mix-blend-screen opacity-40">
-            {Array.from({ length: 15 }).map((_, i) => {
-                const size = Math.random() * 6 + 2;
-                return (
-                    <motion.div
-                        key={i}
-                        className="absolute bg-brand-blue rounded-full blur-[1px]"
-                        style={{
-                            width: size,
-                            height: size,
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
-                        }}
-                        animate={{
-                            y: [0, Math.random() * -100 - 50],
-                            x: [0, (Math.random() - 0.5) * 50],
-                            opacity: [0, Math.random() * 0.5 + 0.2, 0],
-                            scale: [0, 1, 0],
-                        }}
-                        transition={{
-                            duration: Math.random() * 10 + 10,
-                            repeat: Infinity,
-                            ease: "linear",
-                            delay: Math.random() * 10,
-                        }}
-                    />
-                );
-            })}
+            {particles.map((p, i) => (
+                <motion.div
+                    key={i}
+                    className="absolute bg-brand-blue rounded-full blur-[1px]"
+                    style={{
+                        width: p.size,
+                        height: p.size,
+                        left: p.left,
+                        top: p.top,
+                    }}
+                    animate={{
+                        y: [0, p.yEnd],
+                        x: [0, p.xEnd],
+                        opacity: [0, p.opacityMid, 0],
+                        scale: [0, 1, 0],
+                    }}
+                    transition={{
+                        duration: p.duration,
+                        repeat: Infinity,
+                        ease: "linear",
+                        delay: p.delay,
+                    }}
+                />
+            ))}
         </div>
     );
 };

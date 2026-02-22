@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight, Zap, Mail, Instagram, Github } from "lucide-react";
 import MagneticButton from "@/components/UI/MagneticButton";
 import Image from "next/image";
@@ -23,8 +23,6 @@ function TikTokIcon({ className }: { className?: string }) {
         </svg>
     );
 }
-
-import SectionHeader from "@/components/UI/SectionHeader";
 
 interface Module {
     name: string;
