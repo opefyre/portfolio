@@ -35,5 +35,12 @@ service cloud.firestore {
         allow read: if true;
         allow write: if false;
     }
+
+    // Contact Form Inquiries (Write-Only)
+    // Allows anyone to submit an inquiry, but nobody can read or modify existing ones.
+    match /inquiries/{docId} {
+        allow read: if false;
+        allow write: if true;
+    }
   }
 }

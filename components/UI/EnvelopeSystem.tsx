@@ -50,8 +50,8 @@ export default function EnvelopeSystem({
                         exit={{ opacity: 0 }}
                     >
                         {/* ABSOLUTE ENVELOPE BOUNDS */}
-                        {/* By pushing the envelope borders outward, the letter has physical space to shrink and slide inside. */}
-                        <div className="absolute -inset-4 md:-inset-8 pointer-events-none">
+                        {/* We use inset-0 so the envelope perfectly matches the form's regular dimensions. The form scales *down* into it. */}
+                        <div className="absolute inset-0 pointer-events-none">
 
                             {/* 1. TOUGH BACK LAYER */}
                             <motion.div
@@ -65,8 +65,8 @@ export default function EnvelopeSystem({
                             <motion.div
                                 className="absolute top-0 left-0 right-0 h-[60%] bg-gradient-to-b from-[#1b1e26] to-[#12141a] z-30 origin-top rounded-t-2xl drop-shadow-xl"
                                 style={{
-                                    // A true envelope flap is wide at the top hinges, then angles down to a point.
-                                    clipPath: "polygon(0 0, 100% 0, 100% 50%, 50% 100%, 0 50%)",
+                                    // Hinges perfectly at the top edge and angles straight down to a V point.
+                                    clipPath: "polygon(0 0, 100% 0, 50% 100%)",
                                     backfaceVisibility: "hidden"
                                 }}
                                 initial={{ opacity: 0, rotateX: -180 }}
@@ -79,8 +79,11 @@ export default function EnvelopeSystem({
 
                             {/* 3. THE FRONT POCKET */}
                             <motion.div
-                                className="absolute bottom-0 left-0 right-0 h-[70%] bg-gradient-to-tr from-[#16181f] to-[#1f222b] border border-white/10 rounded-b-2xl z-20 shadow-[0_-10px_30px_rgba(0,0,0,0.3)]"
-                                style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 0, 50% 35%, 0 0)" }}
+                                className="absolute inset-0 bg-gradient-to-tr from-[#16181f] to-[#1f222b] border border-white/10 rounded-2xl z-20 shadow-[0_-10px_30px_rgba(0,0,0,0.3)]"
+                                style={{
+                                    // A full-height pocket that dips at the top center to form a classic envelope V-notch.
+                                    clipPath: "polygon(0 0, 0 100%, 100% 100%, 100% 0, 50% 60%)"
+                                }}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: phase !== "idle" ? 1 : 0, y: phase !== "idle" ? 0 : 20 }}
                                 transition={{ duration: 0.4 }}
@@ -114,8 +117,8 @@ export default function EnvelopeSystem({
                             className="relative bg-deep/80 backdrop-blur-xl border border-white/10 rounded-[1.5rem] p-8 md:p-12 shadow-2xl z-10 w-full"
                             initial={{ y: 0, scale: 1 }}
                             animate={{
-                                y: (phase === "sliding" || phase === "sealed" || phase === "flying") ? 70 : 0,
-                                scale: (phase === "sliding" || phase === "sealed" || phase === "flying") ? 0.75 : 1,
+                                y: (phase === "sliding" || phase === "sealed" || phase === "flying") ? 40 : 0,
+                                scale: (phase === "sliding" || phase === "sealed" || phase === "flying") ? 0.82 : 1,
                             }}
                             transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
                         >
