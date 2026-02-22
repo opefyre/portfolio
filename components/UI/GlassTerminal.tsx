@@ -54,7 +54,7 @@ export default function GlassTerminal({ skills }: { skills: Skill[] }) {
                                 key={skillGroup.category}
                                 onClick={() => setActiveCategory(skillGroup.category)}
                                 className={clsx(
-                                    "flex items-center gap-3 w-full p-4 rounded-xl text-left transition-all duration-300 relative group",
+                                    "flex items-center gap-3 w-full p-4 rounded-xl text-left transition-all duration-300 relative group cursor-pointer",
                                     activeCategory === skillGroup.category
                                         ? "bg-brand-blue/10 text-white"
                                         : "hover:bg-white/5 text-secondary hover:text-white"

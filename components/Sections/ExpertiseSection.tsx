@@ -5,6 +5,37 @@ import { Skill, Certification, Education } from "@/lib/db";
 import SectionHeader from "@/components/UI/SectionHeader";
 import GlassTerminal from "@/components/UI/GlassTerminal";
 import { GraduationCap } from "lucide-react";
+
+const CertificationsMarquee = ({ certifications }: { certifications: Certification[] }) => {
+    // Duplicate the array to create a seamless infinite loop
+    const duplicated = [...certifications, ...certifications, ...certifications, ...certifications];
+
+    return (
+        <div className="relative flex overflow-hidden py-16 border-y border-white/5 my-32 bg-black/20">
+            <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-canvas to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-canvas to-transparent z-10 pointer-events-none" />
+
+            <motion.div
+                className="flex shrink-0 gap-16 items-center px-8"
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{
+                    duration: 30,
+                    repeat: Infinity,
+                    ease: "linear",
+                }}
+            >
+                {duplicated.map((cert, i) => (
+                    <div key={i} className="flex items-center gap-4 shrink-0">
+                        <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.8)] animate-pulse" />
+                        <span className="text-xl md:text-2xl font-display font-medium text-white/90 tracking-wide">
+                            {cert.name}
+                        </span>
+                    </div>
+                ))}
+            </motion.div>
+        </div>
+    );
+};
 export default function ExpertiseSection({
     skills,
     certifications,
@@ -30,8 +61,13 @@ export default function ExpertiseSection({
                 </div>
             </div>
 
+            {/* PART 2: CREDENTIALS MARQUEE */}
+            <div className="w-full">
+                <CertificationsMarquee certifications={certifications} />
+            </div>
+
             {/* PART 3: ACADEMIC TIMELINE */}
-            <div className="container max-w-4xl mx-auto px-6">
+            <div id="credentials" className="container max-w-4xl mx-auto px-6 scroll-mt-32">
                 <SectionHeader
                     title="Academic Log"
                     subtitle="Formal education and foundational knowledge."
