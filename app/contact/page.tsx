@@ -7,6 +7,7 @@ import ZeroGravityLiquid from "@/components/UI/ZeroGravityLiquid";
 import FloatingInput from "@/components/UI/FloatingInput";
 import MagneticButton from "@/components/UI/MagneticButton";
 import EnvelopeSystem from "@/components/UI/EnvelopeSystem";
+import MagneticBackButton from "@/components/UI/MagneticBackButton";
 import { submitInquiry } from "@/lib/firebase-client";
 
 export default function ContactPage() {
@@ -48,6 +49,8 @@ export default function ContactPage() {
 
     return (
         <main className="relative min-h-screen w-full overflow-hidden flex items-center justify-center pt-24 pb-12">
+            <MagneticBackButton />
+
             <div className="hidden md:block">
                 <ZeroGravityLiquid />
             </div>
