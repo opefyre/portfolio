@@ -2,249 +2,341 @@
 
 import { Project } from "@/lib/db";
 import { useState, useRef } from "react";
-import { motion, AnimatePresence, useSpring, useMotionValue, useVelocity, useTransform, useScroll, MotionValue } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import ProjectModal from "@/components/UI/ProjectModal";
 import SectionHeader from "@/components/UI/SectionHeader";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Plus, Box, LayoutGrid } from "lucide-react";
 import clsx from "clsx";
 
-// --- Liquid Cursor Hover Preview ---
-const CursorPreviewOverlay = ({ activeProject, mousePosition }: { activeProject: Project | null; mousePosition: { x: MotionValue<number>; y: MotionValue<number> } }) => {
-    // Smooth out mouse position
-    const smoothX = useSpring(mousePosition.x, { damping: 20, stiffness: 200, mass: 0.5 });
-    const smoothY = useSpring(mousePosition.y, { damping: 20, stiffness: 200, mass: 0.5 });
-
-    // Calculate velocity for liquid stretch
-    const xVelocity = useVelocity(smoothX);
-    const yVelocity = useVelocity(smoothY);
-
-    // Map velocity to distortion (skew and scale)
-    const skewX = useTransform(xVelocity, [-1000, 1000], [10, -10]);
-    const skewY = useTransform(yVelocity, [-1000, 1000], [-10, 10]);
-    const stretchX = useTransform(xVelocity, [-2000, 0, 2000], [1.1, 1, 1.1]);
-    const stretchY = useTransform(yVelocity, [-2000, 0, 2000], [1.1, 1, 1.1]);
-
+// --- Ambient Particles Component ---
+const AmbientParticles = () => {
     return (
-        <AnimatePresence>
-            {activeProject && (
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.6 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.6 }}
-                    transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                    style={{
-                        x: smoothX,
-                        y: smoothY,
-                        skewX,
-                        skewY,
-                        scaleX: stretchX,
-                        scaleY: stretchY,
-                        // Center the preview exactly on the cursor
-                        translateX: "-50%",
-                        translateY: "-50%"
-                    }}
-                    className="fixed top-0 left-0 w-72 aspect-[4/3] pointer-events-none z-20 rounded-2xl overflow-hidden shadow-2xl shadow-brand-blue/10 border border-white/10"
-                >
-                    {/* Placeholder Block (Image Fallback) */}
-                    <div className="w-full h-full bg-card/90 backdrop-blur-xl flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
-                        {/* Abstract background blobs */}
-                        <div className="absolute top-0 left-0 w-full h-full opacity-20 bg-gradient-to-br from-brand-blue to-brand-purple blur-3xl mix-blend-overlay" />
-
-                        <span className="text-secondary text-xs uppercase tracking-widest font-mono mb-2">Preview</span>
-                        <h4 className="text-white font-display font-medium text-xl leading-tight text-balance">
-                            {activeProject.title}
-                        </h4>
-                    </div>
-                </motion.div>
-            )}
-        </AnimatePresence>
+        <div className="absolute inset-0 overflow-hidden pointer-events-none mix-blend-screen opacity-40">
+            {Array.from({ length: 15 }).map((_, i) => {
+                const size = Math.random() * 6 + 2;
+                return (
+                    <motion.div
+                        key={i}
+                        className="absolute bg-brand-blue rounded-full blur-[1px]"
+                        style={{
+                            width: size,
+                            height: size,
+                            left: `${Math.random() * 100}%`,
+                            top: `${Math.random() * 100}%`,
+                        }}
+                        animate={{
+                            y: [0, Math.random() * -100 - 50],
+                            x: [0, (Math.random() - 0.5) * 50],
+                            opacity: [0, Math.random() * 0.5 + 0.2, 0],
+                            scale: [0, 1, 0],
+                        }}
+                        transition={{
+                            duration: Math.random() * 10 + 10,
+                            repeat: Infinity,
+                            ease: "linear",
+                            delay: Math.random() * 10,
+                        }}
+                    />
+                );
+            })}
+        </div>
     );
 };
 
 
-// --- Individual Roster Row ---
-const ProjectRow = ({
+// --- The 3D Cinematic Project Card ---
+const Project3DCard = ({
     project,
     index,
-    onClick,
+    isHovered,
+    isAnyHovered,
     onHoverStart,
-    onHoverEnd
+    onHoverEnd,
+    onClick,
 }: {
     project: Project;
     index: number;
-    onClick: () => void;
+    isHovered: boolean;
+    isAnyHovered: boolean;
     onHoverStart: () => void;
     onHoverEnd: () => void;
+    onClick: () => void;
 }) => {
-    const rowRef = useRef<HTMLDivElement>(null);
+    const cardRef = useRef<HTMLDivElement>(null);
 
-    // Fade out simply as it approaches the sticky header
-    // Start fading at 180px from top, completely invisible at 100px from top
+    // Scroll-based entrance purely for sliding into the page
     const { scrollYProgress } = useScroll({
-        target: rowRef,
-        offset: ["start 160px", "start 80px"]
+        target: cardRef,
+        offset: ["start 100%", "start 80%"]
     });
+    const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+    const y = useTransform(scrollYProgress, [0, 1], [50, 0]);
 
-    const fadeOutOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-    const pointerEvents = useTransform(scrollYProgress, [0.99, 1], ["auto", "none"]);
+    // Handle global dimming when something else is hovered
+    const isDimmed = isAnyHovered && !isHovered;
 
     return (
         <motion.div
-            ref={rowRef}
-            layout
-            // Combine layout animations with scroll-tied opacity and pointer events
-            style={{ opacity: fadeOutOpacity, pointerEvents }}
-            whileHover="hover"
+            ref={cardRef}
+            style={{ opacity, y, perspective: "2000px" }}
+            className={clsx(
+                "relative w-full max-w-4xl mx-auto mb-12 lg:mb-20 transition-opacity duration-700",
+                isDimmed ? "opacity-30 grayscale-[50%]" : "opacity-100"
+            )}
             onMouseEnter={onHoverStart}
             onMouseLeave={onHoverEnd}
-            onClick={onClick}
-            className="group relative flex flex-col md:flex-row items-start md:items-center justify-between py-6 md:py-8 border-b border-border/50 cursor-pointer transition-colors hover:bg-white/[0.02] px-4 -mx-4 rounded-xl"
         >
-            {/* Left side: Num & Title */}
-            <div className="flex items-baseline gap-6 md:gap-12 w-full md:w-auto">
-                <span className="text-tertiary font-mono text-sm">
-                    {(index + 1).toString().padStart(2, '0')}
-                </span>
-                <div className="flex-1">
-                    <h3 className="text-xl md:text-3xl font-display font-medium text-primary md:group-hover:translate-x-4 transition-transform duration-500 ease-out">
-                        {project.title}
-                    </h3>
-                </div>
-            </div>
-
-            {/* Right side: Category & Arrow */}
-            <div className="flex items-center justify-between md:justify-end gap-8 w-full md:w-auto mt-4 md:mt-0 pl-11 md:pl-0">
-                <span className="text-sm text-secondary uppercase tracking-widest bg-page px-3 py-1 rounded-full border border-border">
-                    {project.category}
-                </span>
-
-                {/* Animated Arrow */}
+            <motion.div
+                animate={{
+                    // Cinematic 3D hover physics
+                    scale: isHovered ? 1.05 : 0.9,
+                    rotateY: isHovered ? -12 : 0,
+                    rotateX: isHovered ? 5 : 0,
+                    z: isHovered ? 50 : 0,
+                }}
+                transition={{
+                    type: "spring",
+                    stiffness: 250,
+                    damping: 25,
+                    mass: 1.2
+                }}
+                className="relative w-full rounded-2xl md:rounded-[2rem] bg-card border border-border overflow-hidden shadow-2xl cursor-pointer group"
+                style={{ transformStyle: "preserve-3d" }}
+                onClick={onClick}
+            >
+                {/* 3D Depth Shadow (simulates physical light blocking behind card) */}
                 <motion.div
-                    variants={{
-                        hover: { x: 0, opacity: 1 }
-                    }}
-                    initial={{ x: -10, opacity: 0 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="hidden md:flex w-10 h-10 rounded-full bg-brand-blue/10 items-center justify-center text-brand-blue"
-                >
-                    <ArrowUpRight className="w-5 h-5" />
-                </motion.div>
-            </div>
+                    animate={{ opacity: isHovered ? 0.3 : 0, x: isHovered ? 20 : 0, y: isHovered ? 20 : 0 }}
+                    className="absolute inset-0 bg-black blur-2xl -z-10 rounded-[2rem] pointer-events-none"
+                    style={{ transform: "translateZ(-50px)" }}
+                />
+
+                <div className="grid grid-cols-1 md:grid-cols-12 min-h-[300px] md:min-h-[400px]">
+
+                    {/* Left Panel: Primary Overview (Always Visible) */}
+                    <div className="md:col-span-12 p-8 md:p-12 flex flex-col justify-between relative z-10 transition-all duration-500 bg-gradient-to-br from-card to-card-hover"
+                        style={{ gridColumn: isHovered ? "span 7" : "span 12" }}
+                    >
+                        {/* Number & Category */}
+                        <div className="flex items-center gap-4 mb-12">
+                            <motion.div
+                                animate={{ rotate: isHovered ? 360 : 0, scale: isHovered ? 1.1 : 1 }}
+                                transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                                className="w-10 h-10 rounded-full border border-brand-blue/30 flex items-center justify-center text-brand-blue font-mono text-sm bg-brand-blue/5"
+                            >
+                                {(index + 1).toString().padStart(2, '0')}
+                            </motion.div>
+                            <span className="text-secondary tracking-widest uppercase text-xs font-mono">
+                                {project.category}
+                            </span>
+                        </div>
+
+                        <div className="max-w-xl">
+                            <motion.h3
+                                animate={{
+                                    scale: isHovered ? 1.05 : 1,
+                                    transformOrigin: "left bottom",
+                                    color: isHovered ? "#fff" : "#e2e8f0"
+                                }}
+                                className="text-3xl md:text-5xl font-display font-medium leading-tight mb-4"
+                            >
+                                {project.title}
+                            </motion.h3>
+
+                            {/* Detailed description only fully visible on hover */}
+                            <motion.div
+                                animate={{
+                                    height: isHovered ? "auto" : 0,
+                                    opacity: isHovered ? 1 : 0,
+                                    marginTop: isHovered ? 24 : 0
+                                }}
+                                className="overflow-hidden text-secondary text-lg leading-relaxed"
+                            >
+                                {project.description}
+                            </motion.div>
+                        </div>
+
+                        {/* Expand prompt (visible when NOT hovered) */}
+                        <motion.div
+                            animate={{ opacity: isHovered ? 0 : 1, y: isHovered ? 20 : 0 }}
+                            className="absolute bottom-8 right-12 flex items-center gap-2 text-tertiary"
+                        >
+                            <span className="text-sm font-mono tracking-widest uppercase">Explore</span>
+                            <ArrowUpRight className="w-5 h-5" />
+                        </motion.div>
+                    </div>
+
+                    {/* Right Panel: The Unhinge Reveal (Only Visible on Hover) */}
+                    <motion.div
+                        className="hidden md:flex flex-col bg-deep/80 backdrop-blur-xl border-l border-border/50 p-10 overflow-hidden relative"
+                        initial={{ opacity: 0, x: 50, rotateY: 90 }}
+                        animate={{
+                            opacity: isHovered ? 1 : 0,
+                            x: isHovered ? 0 : 50,
+                            rotateY: isHovered ? 0 : 90,
+                        }}
+                        transition={{ type: "spring", stiffness: 200, damping: 25, delay: 0.1 }}
+                        style={{
+                            transformOrigin: "left",
+                            gridColumn: isHovered ? "span 5 / span 5" : "span 0",
+                            display: isHovered ? "flex" : "none"
+                        }}
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-b from-brand-blue/5 to-transparent pointer-events-none" />
+
+                        <div className="flex-1 space-y-8 relative z-10">
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
+                                transition={{ delay: 0.2 }}
+                            >
+                                <h4 className="text-brand-purple text-xs font-bold uppercase tracking-widest mb-3 flex items-center gap-2">
+                                    <Box className="w-4 h-4" /> Challenge
+                                </h4>
+                                <p className="text-secondary text-sm leading-relaxed line-clamp-3">
+                                    {project.problem}
+                                </p>
+                            </motion.div>
+
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
+                                transition={{ delay: 0.3 }}
+                            >
+                                <h4 className="text-brand-blue text-xs font-bold uppercase tracking-widest mb-3 flex items-center gap-2">
+                                    <LayoutGrid className="w-4 h-4" /> Tech Stack
+                                </h4>
+                                <div className="flex flex-wrap gap-2">
+                                    {project.skills.slice(0, 5).map((skill, i) => (
+                                        <span key={i} className="px-2.5 py-1 bg-white/5 border border-white/10 rounded text-xs text-secondary font-mono">
+                                            {skill}
+                                        </span>
+                                    ))}
+                                    {project.skills.length > 5 && (
+                                        <span className="px-2.5 py-1 bg-white/5 border border-white/10 rounded text-xs text-brand-blue font-mono">
+                                            +{project.skills.length - 5}
+                                        </span>
+                                    )}
+                                </div>
+                            </motion.div>
+                        </div>
+
+                        {/* Action Bar */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
+                            transition={{ delay: 0.4 }}
+                            className="pt-6 border-t border-border mt-auto flex items-center justify-between"
+                        >
+                            <span className="text-sm text-white font-medium">View Case Study</span>
+                            <div className="w-8 h-8 rounded-full bg-brand-blue text-white flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <Plus className="w-4 h-4" />
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                </div>
+            </motion.div>
         </motion.div>
     );
 };
 
+
+// --- The Main Section Container ---
 export default function ProjectGallery({ projects }: { projects: Project[] }) {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
-    const [activeCategory, setActiveCategory] = useState<string>("All");
-
-    // Dynamic Categories
-    const categories = ["All", ...Array.from(new Set(projects.map(p => p.category)))];
-
-    // Mouse position tracking explicitly for this container instead of global to avoid unnecessary renders
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
-
-    const handleMouseMove = (e: React.MouseEvent) => {
-        // Only track mouse when hovered over a project (reduces calculation)
-        if (hoveredProject) {
-            mouseX.set(e.clientX);
-            mouseY.set(e.clientY);
-        }
-    };
-
-    // Filtered projects
-    const displayProjects = activeCategory === "All"
-        ? projects
-        : projects.filter(p => p.category === activeCategory);
+    // Track globally which project is hovered for the background shift
+    const [hoveredProjectIdx, setHoveredProjectIdx] = useState<number | null>(null);
 
     const openModal = (project: Project) => {
         setSelectedProject(project);
         setIsModalOpen(true);
-        setHoveredProject(null); // hide preview
     };
 
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
+    const isAnyHovered = hoveredProjectIdx !== null;
 
     return (
-        <section
-            className="container-wide section-padding relative"
-            id="projects"
-            onMouseMove={handleMouseMove}
-        >
-            <SectionHeader
-                title="Select Projects"
-                subtitle="A curated selection of impactful projects driving digital transformation and procedure optimization."
-            />
+        <section className="relative min-h-screen py-32 overflow-hidden" id="projects">
 
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap gap-2 mb-12 sticky top-24 z-30 bg-page/90 backdrop-blur-md py-4 -mx-4 px-4 border-y border-border/30">
-                {categories.map(cat => (
-                    <button
-                        key={cat}
-                        onClick={() => setActiveCategory(cat)}
-                        className={clsx(
-                            "px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 border relative",
-                            activeCategory === cat
-                                ? "border-transparent text-black"
-                                : "border-border text-tertiary hover:text-primary hover:border-border/80"
-                        )}
-                    >
-                        {activeCategory === cat && (
+            {/* 🌌 Cinematic Immersive Background Layer */}
+            <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-canvas">
+                {/* 
+                  Base ambient grid. Will be tinted by the active project color. 
+                  Currently using static brand-blue/purple since we don't have project-specific color data yet.
+                */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+
+                <AnimatePresence>
+                    {isAnyHovered && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.7, ease: "easeInOut" }}
+                            className="absolute inset-0"
+                        >
+                            {/* Huge blurry shifting gradient orb */}
                             <motion.div
-                                layoutId="active-category"
-                                className="absolute inset-0 bg-white rounded-full -z-10"
-                                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                animate={{
+                                    scale: [1, 1.2, 1],
+                                    opacity: [0.6, 0.8, 0.6],
+                                }}
+                                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                                className="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-brand-blue/30 blur-[120px] rounded-full mix-blend-screen"
                             />
-                        )}
-                        <span className="relative z-10">{cat}</span>
-                    </button>
-                ))}
+                            <motion.div
+                                animate={{
+                                    scale: [1, 1.5, 1],
+                                    opacity: [0.4, 0.6, 0.4],
+                                }}
+                                transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                                className="absolute bottom-1/4 right-1/4 w-1/3 h-1/3 bg-brand-purple/20 blur-[100px] rounded-full mix-blend-screen"
+                            />
+
+                            {/* Vignette mask to keep edges dark and text readable */}
+                            <div className="absolute inset-0 bg-radial-gradient from-transparent via-canvas/80 to-canvas" />
+
+                            <AmbientParticles />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
 
-            {/* Roster List */}
-            <motion.div layout className="flex flex-col">
-                <AnimatePresence mode="popLayout">
-                    {displayProjects.map((project, idx) => (
-                        <ProjectRow
-                            key={project.id || project.title}
-                            index={idx}
+            {/* Foreground Content */}
+            <div className="container relative z-10">
+                <motion.div
+                    animate={{ opacity: isAnyHovered ? 0.3 : 1 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <SectionHeader
+                        title="Selected Work"
+                        subtitle="A curated selection of impactful projects driving digital transformation."
+                        centered
+                        className="mb-24"
+                    />
+                </motion.div>
+
+                <div className="flex flex-col gap-12 lg:gap-32 w-full max-w-7xl mx-auto">
+                    {projects.map((project, idx) => (
+                        <Project3DCard
+                            key={project.id || idx}
                             project={project}
+                            index={idx}
+                            isHovered={hoveredProjectIdx === idx}
+                            isAnyHovered={isAnyHovered}
+                            onHoverStart={() => setHoveredProjectIdx(idx)}
+                            onHoverEnd={() => setHoveredProjectIdx(null)}
                             onClick={() => openModal(project)}
-                            onHoverStart={() => setHoveredProject(project)}
-                            onHoverEnd={() => setHoveredProject(null)}
                         />
                     ))}
-                </AnimatePresence>
-
-                {displayProjects.length === 0 && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="py-12 text-center text-secondary"
-                    >
-                        No projects found in this category.
-                    </motion.div>
-                )}
-            </motion.div>
-
-            {/* Desktop Only: Liquid Hover Preview */}
-            <div className="hidden md:block">
-                <CursorPreviewOverlay
-                    activeProject={hoveredProject}
-                    mousePosition={{ x: mouseX, y: mouseY }}
-                />
+                </div>
             </div>
 
             <ProjectModal
                 project={selectedProject}
                 isOpen={isModalOpen}
-                onClose={closeModal}
+                onClose={() => setIsModalOpen(false)}
             />
         </section>
     );
