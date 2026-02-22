@@ -36,6 +36,10 @@ jobs:
         # This runs 'next build' which does the static export.
         # It needs DB access to fetch content.
         run: npm run build
+        env:
+          NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
+          NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}
+          NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}
 
       # Upload build artifacts to pass to the deploy job (saves rebuilding)
       - name: Upload Build Artifact
