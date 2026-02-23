@@ -26,7 +26,7 @@ export default function LocationGlobe() {
             devicePixelRatio: 2,
             width: width * 2,
             height: width * 2,
-            phi: 0,
+            phi: 3.5, // Rotate the starting position so Lisbon is visible on load
             theta: 0.3,
             dark: 1,
             diffuse: 1.2,
@@ -39,8 +39,8 @@ export default function LocationGlobe() {
                 { location: [38.7223, -9.1393], size: 0.08 }
             ],
             onRender: (state) => {
-                // Scroll-linked rotation strictly
-                state.phi = (springScroll.get() * 0.0015);
+                // Scroll-linked rotation strictly, retaining the initial 3.5 offset
+                state.phi = 3.5 + (springScroll.get() * 0.0015);
 
                 // Keep dimensions exact
                 state.width = width * 2;
@@ -57,7 +57,7 @@ export default function LocationGlobe() {
     return (
         <div className="absolute top-0 left-1/2 translate-x-[-20%] translate-y-[-60%] w-[300px] h-[300px] md:w-[450px] md:h-[450px] pointer-events-none z-[-1]">
             {/* Canvas Container */}
-            <div className="w-full h-full relative z-0 mix-blend-screen drop-shadow-[0_0_30px_rgba(255,0,110,0.1)] opacity-40">
+            <div className="w-full h-full relative z-0 mix-blend-screen drop-shadow-[0_0_30px_rgba(255,0,110,0.1)] opacity-65">
                 <canvas
                     ref={canvasRef}
                     style={{
