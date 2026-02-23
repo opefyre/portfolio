@@ -1,60 +1,91 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Sphere } from "@react-three/drei";
-import { useRef } from "react";
-import * as THREE from "three";
-
-function RotatingGlobe() {
-    const meshRef = useRef<THREE.Mesh>(null);
-
-    useFrame((state) => {
-        if (meshRef.current) {
-            const scrollY = window.scrollY;
-            const t = state.clock.getElapsedTime();
-
-            // Dynamic rotation: base continuous spin + scroll injection
-            meshRef.current.rotation.y = (t * 0.15) + (scrollY * 0.002);
-            meshRef.current.rotation.x = (t * 0.08) + (scrollY * 0.001);
-            meshRef.current.rotation.z = (t * 0.05);
-        }
-    });
-
-    return (
-        <Sphere ref={meshRef} args={[1.5, 24, 24]} scale={1.2}>
-            <meshBasicMaterial
-                color="#ff006e"
-                wireframe={true}
-                transparent
-                opacity={0.3}
-            />
-        </Sphere>
-    );
-}
+import createGlobe from "cobe";
+import { useEffect, useRef } from "react";
+import { useScroll, useSpring } from "framer-motion";
 
 export default function LocationGlobe() {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const { scrollY } = useScroll(); // Get smooth scroll from framer motion
+    const springScroll = useSpring(scrollY, { damping: 20, stiffness: 100 });
+
+    useEffect(() => {
+        let phi = 0;
+        let width = 0;
+
+        const onResize = () => {
+            if (canvasRef.current) {
+                width = canvasRef.current.offsetWidth;
+            }
+        };
+        window.addEventListener('resize', onResize);
+        onResize();
+
+        if (!canvasRef.current) return;
+
+        const globe = createGlobe(canvasRef.current, {
+            devicePixelRatio: 2,
+            width: width * 2,
+            height: width * 2,
+            phi: 0,
+            theta: 0.3,
+            dark: 1,
+            diffuse: 1.2,
+            mapSamples: 16000,
+            mapBrightness: 6,
+            baseColor: [0.1, 0.1, 0.1], // Dark gray
+            markerColor: [1, 0, 110 / 255], // #ff006e
+            glowColor: [0.05, 0.05, 0.05], // Very dark glow
+            markers: [
+                { location: [38.7223, -9.1393], size: 0.08 }
+            ],
+            onRender: (state) => {
+                // Scroll-linked rotation plus ambient rotation
+                phi += 0.005;
+                state.phi = phi + (springScroll.get() * 0.003);
+
+                // Keep dimensions exact
+                state.width = width * 2;
+                state.height = width * 2;
+            },
+        });
+
+        return () => {
+            globe.destroy();
+            window.removeEventListener('resize', onResize);
+        };
+    }, [springScroll]);
+
     return (
-        <div className="absolute top-1/2 left-[90%] md:left-[100%] translate-y-[-50%] w-[250px] h-[250px] md:w-[450px] md:h-[450px] pointer-events-none z-[-1] opacity-80 mix-blend-screen">
+        <div className="absolute top-1/2 left-full translate-y-[-50%] w-[300px] h-[300px] md:w-[450px] md:h-[450px] pointer-events-none z-[-1]">
+
             {/* Holographic Tether Line */}
+            {/* The SVG starts at x=16 to give the pill border some breathing room, and runs into the globe */}
             <svg
-                className="absolute left-[0px] top-[50%] w-[120px] md:w-[150px] h-full overflow-visible pointer-events-none z-0 transform -translate-x-[90px] md:-translate-x-[110px]"
+                className="absolute left-[16px] top-1/2 -translate-y-1/2 w-[calc(50%-24px)] md:w-[calc(50%-32px)] h-[20px] overflow-visible pointer-events-none z-10"
             >
                 {/* Line connecting the pill to the sphere */}
                 <line
-                    x1="0" y1="0"
-                    x2="100%" y2="0"
+                    x1="0" y1="10"
+                    x2="100%" y2="10"
                     stroke="#ff006e"
                     strokeWidth="1.5"
-                    className="drop-shadow-[0_0_5px_rgba(255,0,110,0.8)]"
+                    strokeDasharray="4 2"
+                    className="drop-shadow-[0_0_5px_rgba(255,0,110,0.8)] opacity-60"
                 />
-                <circle cx="100%" cy="0" r="3" fill="#ff006e" className="drop-shadow-[0_0_8px_rgba(255,0,110,1)]" />
+                <circle cx="100%" cy="10" r="3" fill="#ff006e" className="drop-shadow-[0_0_8px_rgba(255,0,110,1)]" />
             </svg>
 
             {/* Canvas Container */}
-            <div className="w-full h-full relative z-10 drop-shadow-[0_0_20px_rgba(255,0,110,0.4)]">
-                <Canvas camera={{ position: [0, 0, 4] }}>
-                    <RotatingGlobe />
-                </Canvas>
+            <div className="w-full h-full relative z-0 mix-blend-screen drop-shadow-[0_0_30px_rgba(255,0,110,0.1)]">
+                <canvas
+                    ref={canvasRef}
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        contain: "layout paint size"
+                    }}
+                />
             </div>
         </div>
     );
