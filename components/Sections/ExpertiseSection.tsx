@@ -21,7 +21,7 @@ export default function ExpertiseSection({
         target: academicRef,
         offset: ["0 1", "1 0"]
     });
-    const academicY = useTransform(scrollYProgress, [0, 1], [150, -150]);
+    const academicY = useTransform(scrollYProgress, [0, 1], [350, -350]);
 
     return (
         <section className="container-wide section-padding space-y-24 md:space-y-32">
