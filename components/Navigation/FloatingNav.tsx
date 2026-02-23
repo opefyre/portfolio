@@ -12,6 +12,7 @@ import {
     Rocket,
     FolderKanban,
     GraduationCap,
+    MessageSquare,
 } from "lucide-react";
 
 // Nav items with icons for mobile view
@@ -124,9 +125,10 @@ export default function FloatingNav() {
                 <MagneticButton strength={0.3}>
                     <Link
                         href="/contact"
-                        className="hidden md:flex cursor-pointer items-center px-4 py-2 rounded-full bg-brand-blue text-white text-xs font-bold uppercase tracking-wider hover:bg-brand-blue/90 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] transition-all duration-300 mr-1"
+                        className="flex cursor-pointer items-center px-2.5 md:px-4 py-2 rounded-full bg-brand-blue text-white text-xs font-bold uppercase tracking-wider hover:bg-brand-blue/90 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] transition-all duration-300 mr-1"
                     >
-                        Let&apos;s Chat
+                        <MessageSquare className="w-4 h-4 md:hidden" />
+                        <span className="hidden md:inline">Let&apos;s Chat</span>
                     </Link>
                 </MagneticButton>
 
