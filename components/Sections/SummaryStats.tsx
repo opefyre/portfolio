@@ -114,10 +114,10 @@ const IslandSegment = ({
 };
 
 export default function SummaryStats({
-    experiences,
-    projects,
-    certifications,
-    education
+    experiences: _experiences,
+    projects: _projects,
+    certifications: _certifications,
+    education: _education
 }: {
     experiences: Experience[],
     projects: Project[],
@@ -140,27 +140,11 @@ export default function SummaryStats({
         setHoveredIndex(prev => prev === i ? null : i);
     };
 
-    // -- Data Processing --
-    let earliestYear = new Date().getFullYear();
-    experiences.forEach(exp => {
-        exp.positions.forEach(pos => {
-            const match = pos.period.match(/\d{4}/);
-            if (match) {
-                const year = parseInt(match[0]);
-                if (year < earliestYear) earliestYear = year;
-            }
-        });
-    });
-    const yearsExperience = new Date().getFullYear() - earliestYear;
-    const totalRoles = experiences.reduce((acc, exp) => acc + exp.positions.length, 0);
-    const totalCredentials = education.length + certifications.length;
-    const credentialsDisplay = totalCredentials >= 10 ? '10+' : totalCredentials.toString();
-
     const stats = [
-        { value: `${yearsExperience}+`, label: "Years Experience", icon: Briefcase },
-        { value: `${projects.length}+`, label: "Major Projects", icon: Code },
-        { value: `${totalRoles}`, label: "Distinct Roles", icon: Cpu },
-        { value: `${credentialsDisplay}`, label: "Credentials", icon: GraduationCap },
+        { value: "10+", label: "Years Experience", icon: Briefcase },
+        { value: "70+", label: "Major Projects", icon: Code },
+        { value: "7", label: "Distinct Roles", icon: Cpu },
+        { value: "10+", label: "Credentials", icon: GraduationCap },
     ];
 
     return (
