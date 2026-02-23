@@ -1,8 +1,11 @@
 "use client";
 
-import { Experience } from "@/lib/db";
-import { motion } from "framer-motion";
+import { Experience, Position } from "@/lib/db";
+import { motion, AnimatePresence } from "framer-motion";
 import SectionHeader from "@/components/UI/SectionHeader";
+import { useState } from "react";
+import { ChevronRight } from "lucide-react";
+import clsx from "clsx";
 
 const entryVariants = {
     hidden: { opacity: 0 },
@@ -74,25 +77,7 @@ export default function ExperienceStack({ experiences }: { experiences: Experien
 
                             <div className="space-y-10">
                                 {role.positions.map((pos, pIdx) => (
-                                    <div key={pIdx} className="relative pl-6 border-l border-border group-hover/pos:border-brand-purple/50 transition-colors">
-                                        {/* Animated Dot */}
-                                        <motion.div
-                                            variants={dotVariants}
-                                            className="absolute left-[-5px] top-2 w-2 h-2 rounded-full bg-border group-hover:bg-brand-purple transition-colors"
-                                        />
-
-                                        <h4 className="text-xl text-primary font-medium">{pos.title}</h4>
-                                        <p className="text-tertiary text-sm font-mono mb-3">{pos.period}</p>
-
-                                        <ul className="space-y-2">
-                                            {pos.achievements.map((item, i) => (
-                                                <li key={i} className="text-secondary text-sm leading-relaxed max-w-3xl flex items-start gap-2">
-                                                    <span className="text-brand-blue/50 mt-1.5 text-[6px]">•</span>
-                                                    <span>{item}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
+                                    <PositionItem key={pIdx} pos={pos} />
                                 ))}
                             </div>
                         </motion.div>
@@ -100,5 +85,67 @@ export default function ExperienceStack({ experiences }: { experiences: Experien
                 ))}
             </div>
         </section>
+    );
+}
+
+function PositionItem({ pos }: { pos: Position }) {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <div
+            className="group/pos relative pl-6 border-l border-border hover:border-brand-purple/50 transition-colors cursor-pointer select-none"
+            onClick={() => setIsOpen(!isOpen)}
+        >
+            {/* Animated Dot */}
+            <motion.div
+                variants={dotVariants}
+                className={clsx(
+                    "absolute left-[-5px] top-2 w-2 h-2 rounded-full transition-colors duration-300",
+                    isOpen ? "bg-brand-purple" : "bg-border group-hover/pos:bg-brand-purple/50"
+                )}
+            />
+
+            {/* Header Content */}
+            <div className="flex items-start justify-between gap-4">
+                <div>
+                    <h4 className="text-xl text-primary font-medium group-hover/pos:text-brand-purple transition-colors">{pos.title}</h4>
+                    <p className="text-tertiary text-[13px] uppercase tracking-wider font-mono mb-2">{pos.period}</p>
+                </div>
+
+                {/* Chevron Toggle */}
+                <div className={clsx(
+                    "p-1.5 md:p-2 rounded-full border transition-all duration-300 flex-shrink-0 mt-1 group-hover/pos:bg-brand-purple/5",
+                    isOpen
+                        ? "rotate-90 bg-brand-purple/10 border-brand-purple/30 text-brand-purple shadow-[0_0_10px_rgba(192,132,252,0.2)]"
+                        : "bg-page border-border text-tertiary group-hover/pos:text-secondary group-hover/pos:border-border/80"
+                )}>
+                    <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
+                </div>
+            </div>
+
+            {/* Expandable Details */}
+            <AnimatePresence initial={false}>
+                {isOpen && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+                        className="overflow-hidden"
+                    >
+                        <div className="pt-4 pb-2">
+                            <ul className="space-y-3">
+                                {pos.achievements.map((item, i) => (
+                                    <li key={i} className="text-secondary text-sm leading-relaxed max-w-3xl flex items-start gap-3">
+                                        <span className="text-brand-purple mt-1.5 text-[8px]">✦</span>
+                                        <span>{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
     );
 }
