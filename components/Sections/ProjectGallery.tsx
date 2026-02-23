@@ -277,9 +277,16 @@ const MobileProjectCard = ({
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { margin: "-40% 0px -40% 0px" });
 
+    // Keep reference to latest callback to avoid triggering effect on every parent render
+    const onActiveChangeRef = useRef(onActiveChange);
     useEffect(() => {
-        onActiveChange(isInView);
-    }, [isInView, onActiveChange]);
+        onActiveChangeRef.current = onActiveChange;
+    }, [onActiveChange]);
+
+    useEffect(() => {
+        // Only trigger the callback when the view intersection state ACTUALLY changes
+        onActiveChangeRef.current(isInView);
+    }, [isInView]);
 
     return (
         <motion.div
