@@ -45,6 +45,7 @@ export default async function Home() {
           experiences={experiences}
           projects={projects}
           certifications={certifications}
+          education={education}
         />
       </section>
 
