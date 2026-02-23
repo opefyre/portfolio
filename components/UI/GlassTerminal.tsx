@@ -35,26 +35,26 @@ export default function GlassTerminal({ skills }: { skills: Skill[] }) {
                 {/* Glossy Screen Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.02] to-white/[0.05] pointer-events-none z-50" />
 
-                {/* Left Sidebar (Categories) */}
+                {/* Left Sidebar / Top Mobile Nav (Categories) */}
                 <div className="w-full md:w-80 bg-white/[0.02] border-b md:border-b-0 md:border-r border-white/5 flex flex-col relative z-20">
-                    <div className="p-6 border-b border-white/5">
+                    <div className="p-4 md:p-6 border-b border-white/5 flex items-center justify-between md:block">
                         <div className="flex gap-2">
                             <div className="w-3 h-3 rounded-full bg-red-500/80" />
                             <div className="w-3 h-3 rounded-full bg-amber-500/80" />
                             <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
                         </div>
-                        <h3 className="mt-8 font-mono text-xs text-tertiary uppercase tracking-widest">
+                        <h3 className="md:mt-8 font-mono text-[10px] md:text-xs text-tertiary uppercase tracking-widest hidden md:block">
                             Competency Matrix
                         </h3>
                     </div>
 
-                    <div className="flex-1 p-4 flex flex-col gap-2 overflow-y-auto">
+                    <div className="flex-1 p-3 md:p-4 flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-y-auto hide-scrollbar">
                         {skills.map((skillGroup) => (
                             <button
                                 key={skillGroup.category}
                                 onClick={() => setActiveCategory(skillGroup.category)}
                                 className={clsx(
-                                    "flex items-center gap-3 w-full p-4 rounded-xl text-left transition-all duration-300 relative group cursor-pointer",
+                                    "flex shrink-0 items-center gap-2 md:gap-3 w-auto md:w-full p-2 md:p-4 rounded-xl text-left transition-all duration-300 relative group cursor-pointer",
                                     activeCategory === skillGroup.category
                                         ? "bg-brand-blue/10 text-white"
                                         : "hover:bg-white/5 text-secondary hover:text-white"
@@ -63,16 +63,16 @@ export default function GlassTerminal({ skills }: { skills: Skill[] }) {
                                 {activeCategory === skillGroup.category && (
                                     <motion.div
                                         layoutId="activeTabIndicator"
-                                        className="absolute left-0 top-0 bottom-0 w-1 bg-brand-blue rounded-full shadow-[0_0_10px_rgba(56,189,248,0.5)]"
+                                        className="absolute left-0 top-0 bottom-0 w-1 bg-brand-blue rounded-full shadow-[0_0_10px_rgba(56,189,248,0.5)] hidden md:block"
                                     />
                                 )}
                                 <div className={clsx(
-                                    "p-2 rounded-lg transition-colors",
+                                    "p-1.5 md:p-2 rounded-lg transition-colors",
                                     activeCategory === skillGroup.category ? "bg-brand-blue/20 text-brand-blue" : "bg-white/5 text-tertiary group-hover:bg-white/10"
                                 )}>
                                     {getCategoryIcon(skillGroup.category)}
                                 </div>
-                                <span className="font-medium text-sm leading-tight pr-4">
+                                <span className="font-medium text-xs md:text-sm leading-tight pr-2 md:pr-4 whitespace-nowrap">
                                     {skillGroup.category}
                                 </span>
                             </button>
@@ -99,7 +99,7 @@ export default function GlassTerminal({ skills }: { skills: Skill[] }) {
                                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                                 exit={{ opacity: 0, y: -20, filter: "blur(4px)" }}
                                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                                className="grid grid-cols-2 lg:grid-cols-3 gap-4"
+                                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4"
                             >
                                 {activeSkills.map((skill, index) => (
                                     <motion.div
@@ -107,11 +107,11 @@ export default function GlassTerminal({ skills }: { skills: Skill[] }) {
                                         initial={{ opacity: 0, scale: 0.9 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: index * 0.03, duration: 0.4 }}
-                                        className="group flex relative overflow-hidden bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-brand-blue/30 p-4 rounded-xl transition-colors"
+                                        className="group flex relative overflow-hidden bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-brand-blue/30 p-3 md:p-4 rounded-xl transition-colors items-start"
                                     >
                                         <div className="absolute inset-0 bg-gradient-to-r from-brand-blue/0 via-brand-blue/5 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
-                                        <div className="w-1.5 h-1.5 rounded-full bg-brand-blue/50 mr-3 mt-1.5 shrink-0 group-hover:bg-brand-blue group-hover:shadow-[0_0_8px_rgba(56,189,248,0.8)] transition-all" />
-                                        <span className="font-mono text-sm tracking-wide text-secondary group-hover:text-white transition-colors">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-brand-blue/50 mr-2 md:mr-3 mt-1.5 shrink-0 group-hover:bg-brand-blue group-hover:shadow-[0_0_8px_rgba(56,189,248,0.8)] transition-all" />
+                                        <span className="font-mono text-xs md:text-sm tracking-wide text-secondary group-hover:text-white transition-colors break-words min-w-0">
                                             {skill}
                                         </span>
                                     </motion.div>
