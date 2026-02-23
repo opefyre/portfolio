@@ -23,7 +23,6 @@ export default function ExpertiseSection({
             <div id="expertise" className="container-wide scroll-mt-32">
                 <SectionHeader
                     title="Technical Command Center"
-                    subtitle="Interactive competency matrix mapping process excellence, project management, and digital strategy."
                 />
 
                 <div className="mt-12 md:mt-24 w-full flex justify-center px-4 md:px-0">

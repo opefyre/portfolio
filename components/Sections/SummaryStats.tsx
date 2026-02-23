@@ -62,32 +62,59 @@ const StatCard = ({ label, value, subtext, delay = 0 }: StatCardProps) => {
     );
 };
 
-export default function SummaryStats() {
+import { Experience, Project, Certification } from "@/lib/db";
+
+export default function SummaryStats({
+    experiences,
+    projects,
+    certifications
+}: {
+    experiences: Experience[],
+    projects: Project[],
+    certifications: Certification[]
+}) {
+    // Calculate Years Experience based on earliest role start date
+    let earliestYear = new Date().getFullYear();
+    experiences.forEach(exp => {
+        exp.positions.forEach(pos => {
+            // Match the first 4-digit number (the start year) from strings like "Jan 2014 - Present"
+            const match = pos.period.match(/\d{4}/);
+            if (match) {
+                const year = parseInt(match[0]);
+                if (year < earliestYear) earliestYear = year;
+            }
+        });
+    });
+    const yearsExperience = new Date().getFullYear() - earliestYear;
+
+    // Calculate total distinct roles representing progression
+    const totalRoles = experiences.reduce((acc, exp) => acc + exp.positions.length, 0);
+
     return (
         <section className="container-wide py-12 md:py-20">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                 <StatCard
-                    value="8+"
+                    value={`${yearsExperience}+`}
                     label="Years Experience"
                     subtext="Process Excellence & Innovation"
                     delay={0.1}
                 />
                 <StatCard
-                    value="50+"
-                    label="Projects Delivered"
-                    subtext="Optimizing Enterprise Workflows"
+                    value={`${projects.length}+`}
+                    label="Major Projects"
+                    subtext="Digital Transformation Delivery"
                     delay={0.2}
                 />
                 <StatCard
-                    value="12%"
-                    label="Cost Reduction"
-                    subtext="Avg savings in Supply Chain"
+                    value={`${totalRoles}`}
+                    label="Distinct Roles"
+                    subtext="Career Progression & Leadership"
                     delay={0.3}
                 />
                 <StatCard
-                    value="60%"
-                    label="Report Time Cut"
-                    subtext="Via Automated Dashboards"
+                    value={`${certifications.length}`}
+                    label="Verified Credentials"
+                    subtext="Industry Standard Authorizations"
                     delay={0.4}
                 />
             </div>

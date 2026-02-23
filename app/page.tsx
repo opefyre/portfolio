@@ -41,7 +41,11 @@ export default async function Home() {
       {/* Scroll Margin corrections included */}
       <section id="overview" className="scroll-mt-0">
         <DigitalHero name={personalInfo.name} title={personalInfo.title} />
-        <SummaryStats />
+        <SummaryStats
+          experiences={experiences}
+          projects={projects}
+          certifications={certifications}
+        />
       </section>
 
       {/* Skills — TINTED section with integrated wave edges */}
