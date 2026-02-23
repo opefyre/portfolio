@@ -29,15 +29,17 @@ const AnimatedCounter = ({ value, duration = 2 }: { value: number; duration?: nu
     return <motion.span ref={ref}>{displayValue}</motion.span>;
 };
 
+// Provide a uniform smooth transition to kill subpixel vibration
+const springTransition = { type: "spring" as const, bounce: 0, duration: 0.4 };
+
 // --- Dynamic Island Segment ---
 interface IslandSegmentProps {
     value: string;
     label: string;
     icon: React.ComponentType<{ className?: string }>;
     isHovered: boolean;
-    onHoverEnter: () => void;
-    onHoverLeave: () => void;
-    isMobile?: boolean;
+    onInteract: () => void;
+    onClick: () => void;
     hideDivider?: boolean;
 }
 
@@ -46,9 +48,8 @@ const IslandSegment = ({
     label,
     icon: Icon,
     isHovered,
-    onHoverEnter,
-    onHoverLeave,
-    isMobile = false,
+    onInteract,
+    onClick,
     hideDivider = false
 }: IslandSegmentProps) => {
     // Extract number for AnimatedCounter
@@ -60,43 +61,44 @@ const IslandSegment = ({
     return (
         <motion.div
             layout
-            onMouseEnter={onHoverEnter}
-            onMouseLeave={onHoverLeave}
+            transition={springTransition}
+            onMouseEnter={onInteract}
+            onClick={onClick}
             className={clsx(
-                "relative flex items-center h-full px-5 lg:px-8 cursor-default transition-colors duration-300",
-                isHovered ? "bg-white/[0.08]" : "bg-transparent",
-                isMobile && "px-4 w-full rounded-2xl bg-white/[0.03]"
+                "relative flex items-center justify-center px-4 sm:px-5 lg:px-8 cursor-pointer md:cursor-default transition-colors duration-300 rounded-2xl md:rounded-none h-16 md:h-full w-full md:w-auto",
+                isHovered ? "bg-white/[0.08]" : "bg-transparent"
             )}
         >
-            <motion.div layout className="flex items-center gap-3 md:gap-4 z-10 w-full justify-center">
+            <motion.div layout transition={springTransition} className="flex items-center gap-3 md:gap-4 z-10 w-full justify-center">
                 {/* Icon */}
-                <motion.div layout className="flex-shrink-0 flex items-center justify-center text-brand-blue drop-shadow-[0_0_8px_rgba(56,189,248,0.5)]">
+                <motion.div layout transition={springTransition} className="flex-shrink-0 flex items-center justify-center text-brand-blue drop-shadow-[0_0_8px_rgba(56,189,248,0.5)]">
                     <Icon className="w-5 h-5 md:w-6 md:h-6" />
                 </motion.div>
 
                 {/* Number */}
-                <motion.div layout className="flex-shrink-0 flex items-baseline text-2xl md:text-3xl font-display font-bold text-white tracking-tight drop-shadow-md">
+                <motion.div layout transition={springTransition} className="flex-shrink-0 flex items-baseline text-2xl md:text-3xl font-display font-bold text-white tracking-tight drop-shadow-md">
                     {isNumber ? (
                         <>
                             <AnimatedCounter value={numValue} />
-                            <span className="text-xl md:text-2xl ml-[2px] text-brand-blue">{suffix}</span>
+                            <motion.span layout transition={springTransition} className="text-xl md:text-2xl ml-[2px] text-brand-blue">{suffix}</motion.span>
                         </>
                     ) : (
                         value
                     )}
                 </motion.div>
 
-                {/* Expanding Label (Only visible on hover or mobile) */}
-                <AnimatePresence>
-                    {(isHovered || isMobile) && (
+                {/* Expanding Label */}
+                <AnimatePresence initial={false}>
+                    {isHovered && (
                         <motion.div
+                            layout
                             initial={{ opacity: 0, width: 0, marginLeft: 0 }}
-                            animate={{ opacity: 1, width: "auto", marginLeft: 8 }}
+                            animate={{ opacity: 1, width: "max-content", marginLeft: 8 }}
                             exit={{ opacity: 0, width: 0, marginLeft: 0 }}
-                            transition={{ duration: 0.3, ease: "easeOut" }}
-                            className="overflow-hidden whitespace-nowrap flex-shrink-0"
+                            transition={springTransition}
+                            className="overflow-hidden whitespace-nowrap flex-shrink-0 origin-left"
                         >
-                            <span className="text-[11px] md:text-sm uppercase tracking-widest text-secondary font-mono font-medium">
+                            <span className="text-[11px] md:text-sm uppercase tracking-widest text-secondary font-mono font-medium block">
                                 {label}
                             </span>
                         </motion.div>
@@ -105,8 +107,8 @@ const IslandSegment = ({
             </motion.div>
 
             {/* Divider */}
-            {!hideDivider && !isMobile && (
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-px h-1/3 bg-white/10" />
+            {!hideDivider && (
+                <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-1/3 bg-white/10" />
             )}
         </motion.div>
     );
@@ -157,36 +159,21 @@ export default function SummaryStats({
 
             <div className="relative z-10 w-full max-w-5xl mx-auto px-4 md:px-0 flex justify-center">
 
-                {/* Mobile View: Vertical Stack of Pills */}
-                <div className="flex md:hidden flex-col gap-3 w-full max-w-[320px]">
-                    {stats.map((stat, i) => (
-                        <div key={i} className="h-[60px] rounded-2xl bg-card/60 backdrop-blur-xl border border-white/5 shadow-lg flex items-center justify-center overflow-hidden">
-                            <IslandSegment
-                                {...stat}
-                                isHovered={true} // Always expanded on mobile
-                                onHoverEnter={() => { }}
-                                onHoverLeave={() => { }}
-                                isMobile={true}
-                                hideDivider={true}
-                            />
-                        </div>
-                    ))}
-                </div>
-
-                {/* Desktop View: The Dynamic Island Strip */}
+                {/* Unified Dynamic Island Container - Responsive Mobile + Desktop */}
                 <motion.div
                     layout
+                    transition={springTransition}
                     onMouseLeave={() => setHoveredIndex(null)}
-                    className="hidden md:flex h-20 rounded-full bg-deep/80 backdrop-blur-2xl border border-white/10 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.1)] overflow-hidden items-center justify-center cursor-default"
+                    className="flex flex-col md:flex-row w-full max-w-[340px] md:max-w-none md:w-auto p-2 md:p-0 md:h-20 rounded-[2rem] md:rounded-full bg-deep/80 backdrop-blur-2xl border border-white/10 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.1)] overflow-hidden items-center justify-center cursor-default gap-2 md:gap-0"
                 >
-                    <AnimatePresence mode="popLayout">
+                    <AnimatePresence mode="popLayout" initial={false}>
                         {stats.map((stat, i) => (
                             <IslandSegment
                                 key={i}
                                 {...stat}
                                 isHovered={hoveredIndex === i}
-                                onHoverEnter={() => setHoveredIndex(i)}
-                                onHoverLeave={() => { }}
+                                onInteract={() => setHoveredIndex(i)}
+                                onClick={() => window.innerWidth < 768 ? setHoveredIndex(hoveredIndex === i ? null : i) : setHoveredIndex(i)}
                                 hideDivider={i === stats.length - 1}
                             />
                         ))}
