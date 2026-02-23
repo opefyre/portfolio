@@ -272,28 +272,13 @@ const MobileProjectCard = ({
     index: number;
     onClick: () => void;
 }) => {
-    const ref = useRef<HTMLDivElement>(null);
-    const isInView = useInView(ref, { margin: "-40% 0px -40% 0px" });
-
     return (
-        <motion.div
-            ref={ref}
-            animate={{
-                opacity: isInView ? 1 : 0.4,
-                scale: isInView ? 1 : 0.95,
-            }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="relative w-full rounded-3xl bg-card border border-border shadow-xl overflow-hidden flex flex-col cursor-pointer mb-8"
+        <div
+            className="relative w-full rounded-3xl bg-card border border-border shadow-xl overflow-hidden flex flex-col cursor-pointer mb-8 transition-transform active:scale-[0.98]"
             onClick={onClick}
         >
             {/* Top overview (always visible) */}
             <div className="p-6 bg-gradient-to-br from-card to-card-hover z-10 relative">
-                {/* Subtle active glow */}
-                <motion.div
-                    animate={{ opacity: isInView ? 1 : 0 }}
-                    className="absolute inset-0 bg-brand-blue/5 pointer-events-none"
-                />
-
                 <div className="flex items-center gap-3 mb-6 relative z-10">
                     <div className="w-8 h-8 rounded-full border border-brand-blue/30 flex items-center justify-center text-brand-blue font-mono text-xs bg-brand-blue/5 shadow-[0_0_10px_rgba(56,189,248,0.2)]">
                         {(index + 1).toString().padStart(2, '0')}
@@ -307,19 +292,13 @@ const MobileProjectCard = ({
                     {project.title}
                 </h3>
 
-                <p className={clsx("text-secondary text-sm leading-relaxed transition-all duration-500 relative z-10", !isInView && "line-clamp-2")}>
+                <p className="text-secondary text-sm leading-relaxed relative z-10">
                     {project.description}
                 </p>
             </div>
 
-            {/* Expandable drawer when in view */}
-            <motion.div
-                animate={{
-                    height: isInView ? "auto" : 0,
-                    opacity: isInView ? 1 : 0,
-                }}
-                className="overflow-hidden bg-deep/80 border-t border-border/50"
-            >
+            {/* Static Content (No height animations!) */}
+            <div className="bg-deep/80 border-t border-border/50">
                 <div className="p-6 space-y-6">
                     <div>
                         <h4 className="text-brand-blue text-[10px] font-bold uppercase tracking-widest mb-3 flex items-center gap-1.5">
@@ -346,8 +325,8 @@ const MobileProjectCard = ({
                         </div>
                     </div>
                 </div>
-            </motion.div>
-        </motion.div>
+            </div>
+        </div>
     );
 };
 
