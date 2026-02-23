@@ -96,7 +96,7 @@ export default function DigitalHero({ name, title }: { name: string; title: stri
     }, []);
 
     return (
-        <section className="relative h-[90vh] w-full flex flex-col justify-center items-center overflow-hidden">
+        <section className="relative min-h-screen w-full flex flex-col justify-center items-center overflow-hidden pt-32 pb-32">
             {/* 3D Background — interactive, responds to mouse */}
             <div className="absolute inset-0 z-0 opacity-40">
                 <Canvas camera={{ position: [0, 0, 1] }}>
@@ -114,7 +114,7 @@ export default function DigitalHero({ name, title }: { name: string; title: stri
                     initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
                     animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                     transition={{ delay: 0.1, duration: 1, ease: [0.25, 0.4, 0.25, 1] }}
-                    className="relative group mx-auto mb-6 md:mb-8 w-28 h-28 md:w-36 md:h-36 perspective-1000"
+                    className="relative group mx-auto mb-6 md:mb-8 w-32 h-32 md:w-40 md:h-40 perspective-1000"
                 >
                     {/* Animated glowing backdrop - pulses and reacts to hover */}
                     <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue via-brand-purple to-[#ff006e] rounded-full blur-xl opacity-40 group-hover:opacity-80 transition-opacity duration-700 animate-pulse" />
