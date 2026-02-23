@@ -7,6 +7,7 @@ import * as random from "maath/random/dist/maath-random.cjs";
 
 import { motion, AnimatePresence } from "framer-motion";
 import * as THREE from "three";
+import Image from "next/image";
 
 function StarField(props: React.ComponentProps<typeof Points>) {
     const ref = useRef<THREE.Points>(null);
@@ -108,6 +109,41 @@ export default function DigitalHero({ name, title }: { name: string; title: stri
 
             {/* Content */}
             <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
+                {/* Creative Avatar Wrapper */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
+                    animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                    transition={{ delay: 0.1, duration: 1, ease: [0.25, 0.4, 0.25, 1] }}
+                    className="relative group mx-auto mb-6 md:mb-8 w-28 h-28 md:w-36 md:h-36 perspective-1000"
+                >
+                    {/* Animated glowing backdrop - pulses and reacts to hover */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue via-brand-purple to-[#ff006e] rounded-full blur-xl opacity-40 group-hover:opacity-80 transition-opacity duration-700 animate-pulse" />
+
+                    {/* Inner wrapper that floats independently */}
+                    <motion.div
+                        animate={{ y: [0, -8, 0] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                        className="relative w-full h-full rounded-full p-[2px] bg-gradient-to-br from-white/20 via-white/5 to-white/20 backdrop-blur-md shadow-[0_0_30px_rgba(56,189,248,0.3)] transition-all duration-500 group-hover:shadow-[0_0_50px_rgba(192,132,252,0.5)] z-10"
+                    >
+                        {/* Spinning border ring */}
+                        <div className="absolute inset-[-1px] rounded-full overflow-hidden opacity-50 z-0 mask-image-circle">
+                            <div className="absolute inset-[-50%] bg-[conic-gradient(from_0deg,transparent_0_300deg,rgba(255,255,255,0.8)_360deg)] animate-[spin_3s_linear_infinite]" />
+                        </div>
+
+                        {/* The Image Container */}
+                        <div className="relative w-full h-full rounded-full overflow-hidden bg-[#0a0f0a] border border-black z-10">
+                            <Image
+                                src="/prof.png"
+                                alt={name}
+                                fill
+                                className="object-cover scale-110 group-hover:scale-100 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] filter saturate-100 group-hover:saturate-110"
+                                priority
+                                sizes="(max-width: 768px) 112px, 144px"
+                            />
+                        </div>
+                    </motion.div>
+                </motion.div>
+
                 {/* Small label */}
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
