@@ -136,7 +136,7 @@ export default function DigitalHero({ name, title }: { name: string; title: stri
                                 src="/prof.png"
                                 alt={name}
                                 fill
-                                className="object-cover scale-110 group-hover:scale-100 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] filter saturate-100 group-hover:saturate-110"
+                                className="object-[center_15%] object-cover scale-110 group-hover:scale-100 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] filter saturate-100 group-hover:saturate-110"
                                 priority
                                 sizes="(max-width: 768px) 112px, 144px"
                             />
