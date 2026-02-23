@@ -1,14 +1,15 @@
 "use client";
 
-import { motion, useInView, useSpring, useTransform, useMotionTemplate, useMotionValue } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { motion, AnimatePresence, useInView, useSpring, useTransform } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { Experience, Project, Certification, Education } from "@/lib/db";
 import { Cpu, Briefcase, GraduationCap, Code } from "lucide-react";
+import clsx from "clsx";
 
 // --- Animated Number Counter ---
 const AnimatedCounter = ({ value, duration = 2 }: { value: number; duration?: number }) => {
     const ref = useRef<HTMLSpanElement>(null);
-    const inView = useInView(ref, { once: true, margin: "-100px" });
+    const inView = useInView(ref, { once: true, margin: "-50px" });
 
     const springValue = useSpring(0, {
         mass: 1,
@@ -28,27 +29,28 @@ const AnimatedCounter = ({ value, duration = 2 }: { value: number; duration?: nu
     return <motion.span ref={ref}>{displayValue}</motion.span>;
 };
 
-// --- Spotlight Bento Card ---
-interface BentoCardProps {
+// --- Dynamic Island Segment ---
+interface IslandSegmentProps {
     value: string;
     label: string;
-    subLabel: string;
     icon: React.ComponentType<{ className?: string }>;
-    delay?: number;
-    className?: string; // For CSS Grid spanning (e.g. col-span-2)
+    isHovered: boolean;
+    onHoverEnter: () => void;
+    onHoverLeave: () => void;
+    isMobile?: boolean;
+    hideDivider?: boolean;
 }
 
-const BentoCard = ({ value, label, subLabel, icon: Icon, delay = 0, className = "" }: BentoCardProps) => {
-    // Spotlight Hover Effect Logic
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
-
-    const handleMouseMove = ({ currentTarget, clientX, clientY }: React.MouseEvent) => {
-        const { left, top } = currentTarget.getBoundingClientRect();
-        mouseX.set(clientX - left);
-        mouseY.set(clientY - top);
-    };
-
+const IslandSegment = ({
+    value,
+    label,
+    icon: Icon,
+    isHovered,
+    onHoverEnter,
+    onHoverLeave,
+    isMobile = false,
+    hideDivider = false
+}: IslandSegmentProps) => {
     // Extract number for AnimatedCounter
     const strValue = String(value);
     const numValue = parseInt(strValue.replace(/\D/g, ''));
@@ -57,61 +59,55 @@ const BentoCard = ({ value, label, subLabel, icon: Icon, delay = 0, className = 
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay, ease: "easeOut" }}
-            onMouseMove={handleMouseMove}
-            className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-card border border-white/5 p-8 transition-all hover:border-white/10 ${className}`}
+            layout
+            onMouseEnter={onHoverEnter}
+            onMouseLeave={onHoverLeave}
+            className={clsx(
+                "relative flex items-center h-full px-5 lg:px-8 cursor-default transition-colors duration-300",
+                isHovered ? "bg-white/[0.08]" : "bg-transparent",
+                isMobile && "px-4 w-full rounded-2xl bg-white/[0.03]"
+            )}
         >
-            {/* The Spotlight Gradient */}
-            <motion.div
-                className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition duration-300 group-hover:opacity-100"
-                style={{
-                    background: useMotionTemplate`
-                        radial-gradient(
-                            600px circle at ${mouseX}px ${mouseY}px,
-                            rgba(56, 189, 248, 0.1),
-                            transparent 80%
-                        )
-                    `,
-                }}
-            />
+            <motion.div layout className="flex items-center gap-3 md:gap-4 z-10 w-full justify-center">
+                {/* Icon */}
+                <motion.div layout className="flex-shrink-0 flex items-center justify-center text-brand-blue drop-shadow-[0_0_8px_rgba(56,189,248,0.5)]">
+                    <Icon className="w-5 h-5 md:w-6 md:h-6" />
+                </motion.div>
 
-            {/* Top Row: Icon & Status Label */}
-            <div className="flex items-start justify-between relative z-10 w-full mb-12">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-blue/10 border border-brand-blue/20 text-brand-blue shadow-[0_0_15px_rgba(56,189,248,0.15)]">
-                    <Icon className="h-5 w-5" />
-                </div>
-
-                {/* Tech Status Pill */}
-                <div className="flex items-center gap-2 rounded-full border border-white/5 bg-white/5 px-3 py-1 backdrop-blur-sm">
-                    <span className="relative flex h-2 w-2">
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-                        <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
-                    </span>
-                    <span className="text-[10px] uppercase tracking-widest text-tertiary font-mono font-medium">
-                        {subLabel}
-                    </span>
-                </div>
-            </div>
-
-            {/* Bottom Row: Data */}
-            <div className="relative z-10">
-                <h3 className="text-sm font-semibold uppercase tracking-widest text-secondary mb-2">
-                    {label}
-                </h3>
-                <div className="flex items-baseline text-5xl md:text-6xl font-display font-medium text-white tracking-tight">
+                {/* Number */}
+                <motion.div layout className="flex-shrink-0 flex items-baseline text-2xl md:text-3xl font-display font-bold text-white tracking-tight drop-shadow-md">
                     {isNumber ? (
                         <>
                             <AnimatedCounter value={numValue} />
-                            <span className="text-4xl ml-1 text-brand-blue">{suffix}</span>
+                            <span className="text-xl md:text-2xl ml-[2px] text-brand-blue">{suffix}</span>
                         </>
                     ) : (
                         value
                     )}
-                </div>
-            </div>
+                </motion.div>
+
+                {/* Expanding Label (Only visible on hover or mobile) */}
+                <AnimatePresence>
+                    {(isHovered || isMobile) && (
+                        <motion.div
+                            initial={{ opacity: 0, width: 0, marginLeft: 0 }}
+                            animate={{ opacity: 1, width: "auto", marginLeft: 8 }}
+                            exit={{ opacity: 0, width: 0, marginLeft: 0 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            className="overflow-hidden whitespace-nowrap flex-shrink-0"
+                        >
+                            <span className="text-[11px] md:text-sm uppercase tracking-widest text-secondary font-mono font-medium">
+                                {label}
+                            </span>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </motion.div>
+
+            {/* Divider */}
+            {!hideDivider && !isMobile && (
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-px h-1/3 bg-white/10" />
+            )}
         </motion.div>
     );
 };
@@ -127,6 +123,8 @@ export default function SummaryStats({
     certifications: Certification[],
     education: Education[]
 }) {
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
     // -- Data Processing --
     let earliestYear = new Date().getFullYear();
     experiences.forEach(exp => {
@@ -143,62 +141,58 @@ export default function SummaryStats({
     const totalCredentials = education.length + certifications.length;
     const credentialsDisplay = totalCredentials >= 10 ? '10+' : totalCredentials.toString();
 
+    const stats = [
+        { value: `${yearsExperience}+`, label: "Years Experience", icon: Briefcase },
+        { value: `${projects.length}+`, label: "Major Projects", icon: Code },
+        { value: `${totalRoles}`, label: "Distinct Roles", icon: Cpu },
+        { value: `${credentialsDisplay}`, label: "Credentials", icon: GraduationCap },
+    ];
+
     return (
-        <section className="container-wide py-16 md:py-32 relative overflow-hidden">
-            {/* Ambient Background Blur for Contrast */}
+        <section className="container-wide py-12 md:py-24 relative flex justify-center w-full my-8">
+            {/* Ambient Background Glow */}
             <div className="absolute inset-0 bg-transparent flex items-center justify-center pointer-events-none">
-                <div className="w-[800px] h-[400px] bg-brand-blue/5 blur-[150px] rounded-full" />
+                <div className="w-[500px] h-[150px] bg-brand-blue/10 blur-[100px] rounded-full" />
             </div>
 
-            <div className="relative z-10 max-w-6xl mx-auto">
-                {/* 
-                  The Bento Grid 
-                  - Mobile: 1 column
-                  - Tablet: 2 columns
-                  - Desktop: 4 columns
-                  Certain cards span 2 columns on larger screens to create the "Bento" aesthetic.
-                */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            <div className="relative z-10 w-full max-w-5xl mx-auto px-4 md:px-0 flex justify-center">
 
-                    {/* Primary Large Card - Spans 2 columns on Tablet+ */}
-                    <BentoCard
-                        value={`${yearsExperience}+`}
-                        label="Industry Experience"
-                        subLabel="SYS.ACTIVE"
-                        icon={Briefcase}
-                        delay={0.1}
-                        className="md:col-span-2"
-                    />
-
-                    {/* Standard Square Card */}
-                    <BentoCard
-                        value={`${projects.length}+`}
-                        label="Major Projects"
-                        subLabel="BUILD.DEPLOYED"
-                        icon={Code}
-                        delay={0.2}
-                    />
-
-                    {/* Standard Square Card */}
-                    <BentoCard
-                        value={`${totalRoles}`}
-                        label="Distinct Roles"
-                        subLabel="CAREER.TRACK"
-                        icon={Cpu}
-                        delay={0.3}
-                    />
-
-                    {/* Wide Footer Card - Spans full width on tablet, 2 cols on desktop */}
-                    <BentoCard
-                        value={`${credentialsDisplay}`}
-                        label="Verified Credentials (Education & Certs)"
-                        subLabel="AUTH.VERIFIED"
-                        icon={GraduationCap}
-                        delay={0.4}
-                        className="md:col-span-2 lg:col-span-2"
-                    />
-
+                {/* Mobile View: Vertical Stack of Pills */}
+                <div className="flex md:hidden flex-col gap-3 w-full max-w-[320px]">
+                    {stats.map((stat, i) => (
+                        <div key={i} className="h-[60px] rounded-2xl bg-card/60 backdrop-blur-xl border border-white/5 shadow-lg flex items-center justify-center overflow-hidden">
+                            <IslandSegment
+                                {...stat}
+                                isHovered={true} // Always expanded on mobile
+                                onHoverEnter={() => { }}
+                                onHoverLeave={() => { }}
+                                isMobile={true}
+                                hideDivider={true}
+                            />
+                        </div>
+                    ))}
                 </div>
+
+                {/* Desktop View: The Dynamic Island Strip */}
+                <motion.div
+                    layout
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    className="hidden md:flex h-20 rounded-full bg-deep/80 backdrop-blur-2xl border border-white/10 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.1)] overflow-hidden items-center justify-center cursor-default"
+                >
+                    <AnimatePresence mode="popLayout">
+                        {stats.map((stat, i) => (
+                            <IslandSegment
+                                key={i}
+                                {...stat}
+                                isHovered={hoveredIndex === i}
+                                onHoverEnter={() => setHoveredIndex(i)}
+                                onHoverLeave={() => { }}
+                                hideDivider={i === stats.length - 1}
+                            />
+                        ))}
+                    </AnimatePresence>
+                </motion.div>
+
             </div>
         </section>
     );
