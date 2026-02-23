@@ -50,11 +50,11 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
-                            className="bg-card w-full max-w-2xl max-h-full flex flex-col rounded-3xl shadow-2xl pointer-events-auto"
+                            className="bg-card w-full max-w-2xl max-h-[85vh] mt-16 md:mt-0 flex flex-col rounded-2xl md:rounded-3xl shadow-2xl pointer-events-auto border border-white/5 relative"
                             onClick={(e) => e.stopPropagation()}
                             onWheel={(e) => e.stopPropagation()} // Block Lenis from intercepting wheel events inside the modal
                         >
-                            <div className="p-6 md:p-8 overflow-y-auto flex-1 min-h-0 custom-scrollbar">
+                            <div className="p-5 md:p-8 overflow-y-auto flex-1 min-h-0 custom-scrollbar relative z-10">
                                 {/* Header */}
                                 <div className="flex justify-between items-start mb-6">
                                     <div>
@@ -63,15 +63,16 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                                                 {project.category}
                                             </span>
                                         </div>
-                                        <h2 className="text-3xl md:text-4xl font-display font-bold text-primary">
+                                        <h2 className="text-2xl md:text-4xl font-display font-bold text-primary">
                                             {project.title}
                                         </h2>
                                     </div>
                                     <button
                                         onClick={onClose}
-                                        className="p-2 rounded-full hover:bg-page transition-colors text-tertiary hover:text-primary shrink-0"
+                                        className="p-2 -mr-2 -mt-2 rounded-full hover:bg-white/5 transition-colors text-tertiary hover:text-white shrink-0"
+                                        aria-label="Close modal"
                                     >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                                     </button>
                                 </div>
 
