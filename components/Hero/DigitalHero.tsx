@@ -96,7 +96,7 @@ export default function DigitalHero({ name, title }: { name: string; title: stri
     }, []);
 
     return (
-        <section className="relative min-h-screen w-full flex flex-col justify-center items-center overflow-hidden pt-32 pb-32">
+        <section className="relative h-[100dvh] w-full flex flex-col justify-center items-center overflow-hidden">
             {/* 3D Background — interactive, responds to mouse */}
             <div className="absolute inset-0 z-0 opacity-40">
                 <Canvas camera={{ position: [0, 0, 1] }}>
@@ -114,7 +114,7 @@ export default function DigitalHero({ name, title }: { name: string; title: stri
                     initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
                     animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                     transition={{ delay: 0.1, duration: 1, ease: [0.25, 0.4, 0.25, 1] }}
-                    className="relative group mx-auto mb-6 md:mb-8 w-32 h-32 md:w-40 md:h-40 perspective-1000"
+                    className="relative group mx-auto mb-4 md:mb-6 w-36 h-36 md:w-44 md:h-44 perspective-1000 mt-12 md:mt-0"
                 >
                     {/* Animated glowing backdrop - pulses and reacts to hover */}
                     <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue via-brand-purple to-[#ff006e] rounded-full blur-xl opacity-40 group-hover:opacity-80 transition-opacity duration-700 animate-pulse" />
@@ -149,7 +149,7 @@ export default function DigitalHero({ name, title }: { name: string; title: stri
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.8 }}
-                    className="text-brand-blue font-mono text-xs md:text-sm uppercase tracking-[0.3em] mb-6"
+                    className="text-brand-blue font-mono text-[10px] md:text-sm uppercase tracking-[0.2em] md:tracking-[0.3em] mb-4 md:mb-6"
                 >
                     {title}
                 </motion.p>
@@ -159,12 +159,12 @@ export default function DigitalHero({ name, title }: { name: string; title: stri
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5, duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-                    className="font-display font-bold leading-[0.9] tracking-tight mb-8"
+                    className="font-display font-bold leading-[0.9] tracking-tight mb-6 md:mb-8"
                 >
-                    <span className="block text-[clamp(3.5rem,12vw,10rem)] bg-clip-text text-transparent bg-gradient-to-b from-[var(--hero-gradient-from)] to-[var(--hero-gradient-to)] transition-colors duration-500">
+                    <span className="block text-[clamp(2.5rem,9vw,7.5rem)] bg-clip-text text-transparent bg-gradient-to-b from-[var(--hero-gradient-from)] to-[var(--hero-gradient-to)] transition-colors duration-500">
                         {firstName}
                     </span>
-                    <span className="block text-[clamp(3.5rem,12vw,10rem)] bg-clip-text text-transparent bg-gradient-to-b from-[var(--hero-gradient-from)] to-[var(--hero-gradient-to)] transition-colors duration-500">
+                    <span className="block text-[clamp(2.5rem,9vw,7.5rem)] bg-clip-text text-transparent bg-gradient-to-b from-[var(--hero-gradient-from)] to-[var(--hero-gradient-to)] transition-colors duration-500">
                         {lastName}
                     </span>
                 </motion.h1>
