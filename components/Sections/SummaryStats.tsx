@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, useSpring, useTransform } from "framer-motion";
+import { motion, useInView, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Experience, Project, Certification, Education } from "@/lib/db";
 import { Cpu, Briefcase, GraduationCap, Code } from "lucide-react";
@@ -113,6 +113,22 @@ const IslandSegment = ({
     );
 };
 
+// Rotating identities for the animated subtitle
+const identities = [
+    "Process Excellence",
+    "Digital Transformation",
+    "Enterprise Systems",
+    "AI & Automation",
+    "Operational Strategy",
+    "Lean Six Sigma",
+    "Data-Driven Decisions",
+    "Intelligent Workflows",
+    "Agile Program Delivery",
+    "Cross-Functional Leadership",
+    "Stakeholder Management",
+    "Risk & Resource Planning",
+];
+
 export default function SummaryStats({
     experiences: _experiences,
     projects: _projects,
@@ -125,6 +141,14 @@ export default function SummaryStats({
     education: Education[]
 }) {
     const [hoveredIndex, setHoveredIndex] = useState<number>(0);
+    const [currentIdentity, setCurrentIdentity] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIdentity((prev) => (prev + 1) % identities.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, []);
 
     // Differentiate precise pointer events so mobile taps don't conflict with mouse hovers
     const handlePointerEnter = (e: React.PointerEvent, i: number) => {
@@ -154,7 +178,46 @@ export default function SummaryStats({
                 <div className="w-[500px] h-[150px] bg-brand-blue/10 blur-[100px] rounded-full" />
             </div>
 
-            <div className="relative z-10 w-full max-w-5xl mx-auto px-4 md:px-0 flex justify-center">
+            <div className="relative z-10 w-full max-w-5xl mx-auto px-4 md:px-0 flex flex-col items-center justify-center gap-8 md:gap-12">
+
+                {/* Terminal-style rotating identity */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="inline-flex items-center justify-center"
+                >
+                    <div className="relative rounded-lg bg-[#0a0f0a] border border-[#00ff41]/20 w-[280px] md:w-[380px] px-5 py-3 shadow-[0_0_20px_rgba(0,255,65,0.08),inset_0_1px_0_rgba(0,255,65,0.05)] overflow-hidden">
+                        {/* Scanline overlay */}
+                        <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,255,65,0.03)_2px,rgba(0,255,65,0.03)_4px)] pointer-events-none" />
+
+                        <div className="relative flex items-center gap-2 font-mono text-left">
+                            <span className="text-[#00ff41]/50 text-xs md:text-sm select-none">&gt;_</span>
+                            <AnimatePresence mode="wait">
+                                <motion.span
+                                    key={currentIdentity}
+                                    initial={{ opacity: 0, filter: "blur(2px)" }}
+                                    animate={{ opacity: 1, filter: "blur(0px)" }}
+                                    exit={{ opacity: 0, filter: "blur(2px)" }}
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                    className="text-[#00ff41] text-sm md:text-base tracking-wide font-medium"
+                                    style={{ textShadow: "0 0 8px rgba(0,255,65,0.5)" }}
+                                >
+                                    {identities[currentIdentity]}
+                                </motion.span>
+                            </AnimatePresence>
+                            <motion.span
+                                animate={{ opacity: [1, 0] }}
+                                transition={{ duration: 0.7, repeat: Infinity, repeatType: "reverse" }}
+                                className="text-[#00ff41] text-sm md:text-base font-mono"
+                                style={{ textShadow: "0 0 8px rgba(0,255,65,0.5)" }}
+                            >
+                                █
+                            </motion.span>
+                        </div>
+                    </div>
+                </motion.div>
 
                 {/* Unified Dynamic Island Container - Responsive Mobile + Desktop */}
                 <div

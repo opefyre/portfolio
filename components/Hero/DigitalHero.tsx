@@ -57,32 +57,7 @@ function StarField(props: React.ComponentProps<typeof Points>) {
     );
 }
 
-// Rotating identities for the animated subtitle
-const identities = [
-    "Process Excellence",
-    "Digital Transformation",
-    "Enterprise Systems",
-    "AI & Automation",
-    "Operational Strategy",
-    "Lean Six Sigma",
-    "Data-Driven Decisions",
-    "Intelligent Workflows",
-    "Agile Program Delivery",
-    "Cross-Functional Leadership",
-    "Stakeholder Management",
-    "Risk & Resource Planning",
-];
-
 export default function DigitalHero({ name, title, linkedin, location }: { name: string; title: string; linkedin?: string; location?: string; }) {
-    const [currentIdentity, setCurrentIdentity] = useState(0);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentIdentity((prev) => (prev + 1) % identities.length);
-        }, 3000);
-        return () => clearInterval(interval);
-    }, []);
-
     // Split the name into first & last for styling
     const nameParts = name.split(" ");
     const firstName = nameParts[0];
@@ -115,7 +90,7 @@ export default function DigitalHero({ name, title, linkedin, location }: { name:
                     initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
                     animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                     transition={{ delay: 0.1, duration: 1, ease: [0.25, 0.4, 0.25, 1] }}
-                    className="relative group mx-auto mb-4 md:mb-6 w-36 h-36 md:w-44 md:h-44 perspective-1000 mt-12 md:mt-0"
+                    className="relative group mx-auto mb-4 md:mb-6 w-36 h-36 md:w-44 md:h-44 perspective-1000 mt-24 md:mt-16"
                 >
                     {/* Animated glowing backdrop - pulses and reacts to hover */}
                     <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue via-brand-purple to-[#ff006e] rounded-full blur-xl opacity-40 group-hover:opacity-80 transition-opacity duration-700 animate-pulse" />
@@ -170,43 +145,6 @@ export default function DigitalHero({ name, title, linkedin, location }: { name:
                     </span>
                 </motion.h1>
 
-                {/* Terminal-style rotating identity */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.9, duration: 0.6 }}
-                    className="inline-flex items-center justify-center mb-6"
-                >
-                    <div className="relative rounded-lg bg-[#0a0f0a] border border-[#00ff41]/20 w-[280px] md:w-[380px] px-5 py-3 shadow-[0_0_20px_rgba(0,255,65,0.08),inset_0_1px_0_rgba(0,255,65,0.05)] overflow-hidden">
-                        {/* Scanline overlay */}
-                        <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,255,65,0.03)_2px,rgba(0,255,65,0.03)_4px)] pointer-events-none" />
-
-                        <div className="relative flex items-center gap-2 font-mono text-left">
-                            <span className="text-[#00ff41]/50 text-xs md:text-sm select-none">&gt;_</span>
-                            <AnimatePresence mode="wait">
-                                <motion.span
-                                    key={currentIdentity}
-                                    initial={{ opacity: 0, filter: "blur(2px)" }}
-                                    animate={{ opacity: 1, filter: "blur(0px)" }}
-                                    exit={{ opacity: 0, filter: "blur(2px)" }}
-                                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                                    className="text-[#00ff41] text-sm md:text-base tracking-wide font-medium"
-                                    style={{ textShadow: "0 0 8px rgba(0,255,65,0.5)" }}
-                                >
-                                    {identities[currentIdentity]}
-                                </motion.span>
-                            </AnimatePresence>
-                            <motion.span
-                                animate={{ opacity: [1, 0] }}
-                                transition={{ duration: 0.7, repeat: Infinity, repeatType: "reverse" }}
-                                className="text-[#00ff41] text-sm md:text-base font-mono"
-                                style={{ textShadow: "0 0 8px rgba(0,255,65,0.5)" }}
-                            >
-                                █
-                            </motion.span>
-                        </div>
-                    </div>
-                </motion.div>
 
                 {/* Interactive Social & Location Pills */}
                 <motion.div
