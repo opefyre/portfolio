@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import clsx from "clsx";
@@ -30,6 +30,7 @@ export default function FloatingNav() {
     const [scrolled, setScrolled] = useState(false);
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
+    const scrollPercentage = useTransform(scaleX, (latest) => `${Math.round(latest * 100)}%`);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -134,7 +135,7 @@ export default function FloatingNav() {
 
                 {/* Circular Scroll Progress */}
                 <div className="relative w-8 h-8 flex items-center justify-center ml-1 bg-page/50 rounded-full border border-border/50">
-                    <svg className="w-8 h-8 transform -rotate-90" viewBox="0 0 36 36">
+                    <svg className="w-8 h-8 transform -rotate-90 absolute" viewBox="0 0 36 36">
                         {/* Background Track */}
                         <circle
                             cx="18"
@@ -164,6 +165,9 @@ export default function FloatingNav() {
                             </linearGradient>
                         </defs>
                     </svg>
+                    <motion.span className="absolute text-[8px] font-mono font-bold text-white z-10 pointer-events-none">
+                        {scrollPercentage}
+                    </motion.span>
                 </div>
             </div>
         </motion.div>

@@ -54,7 +54,11 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                             onClick={(e) => e.stopPropagation()}
                             onWheel={(e) => e.stopPropagation()} // Block Lenis from intercepting wheel events inside the modal
                         >
-                            <div className="p-5 md:p-8 overflow-y-auto flex-1 min-h-0 custom-scrollbar relative z-10">
+                            <div
+                                className="p-5 md:p-8 overflow-y-auto flex-1 min-h-0 custom-scrollbar relative z-10 overscroll-contain"
+                                data-lenis-prevent="true"
+                                onTouchMove={(e) => e.stopPropagation()}
+                            >
                                 {/* Header */}
                                 <div className="flex justify-between items-start mb-6">
                                     <div>
