@@ -13,7 +13,6 @@ import { submitInquiry } from "@/lib/firebase-client";
 export default function ContactPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
-    const [ticketData, setTicketData] = useState<{ id: string; timestamp: string } | null>(null);
     const [copied, setCopied] = useState(false);
 
     const handleCopyEmail = () => {
@@ -38,7 +37,6 @@ export default function ContactPage() {
             // This safely bypasses Next.js static export API limitations
             const ticket = await submitInquiry(data);
 
-            setTicketData({ id: ticket.id, timestamp: data.createdAt as string });
             setIsSuccess(true);
         } catch (error) {
             console.error("Transmission Error:", error);
@@ -177,7 +175,6 @@ export default function ContactPage() {
                                         onClick={() => {
                                             setIsSuccess(false);
                                             setIsSubmitting(false);
-                                            setTicketData(null);
                                         }}
                                         className="mt-4 text-xs tracking-widest uppercase text-tertiary hover:text-white transition-colors self-start flex items-center gap-2 group"
                                     >

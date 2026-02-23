@@ -39,7 +39,7 @@ const CylinderPanel = ({
 }: {
     value: string;
     label: string;
-    icon: React.ElementType;
+    icon: React.ComponentType<{ className?: string }>;
     angle: number;           // The fixed mathematical position of this panel on the cylinder (e.g. 0, 90, 180, 270)
     rotationY: MotionValue<number>;  // The dynamic animated rotation value of the parent cylinder
     radius?: number;         // Distance from the center axis (translateZ)
