@@ -10,7 +10,6 @@ export default function LocationGlobe() {
     const springScroll = useSpring(scrollY, { damping: 20, stiffness: 100 });
 
     useEffect(() => {
-        let phi = 0;
         let width = 0;
 
         const onResize = () => {
@@ -40,9 +39,8 @@ export default function LocationGlobe() {
                 { location: [38.7223, -9.1393], size: 0.08 }
             ],
             onRender: (state) => {
-                // Scroll-linked rotation plus ambient rotation
-                phi += 0.005;
-                state.phi = phi + (springScroll.get() * 0.003);
+                // Scroll-linked rotation strictly
+                state.phi = (springScroll.get() * 0.0015);
 
                 // Keep dimensions exact
                 state.width = width * 2;
@@ -57,27 +55,9 @@ export default function LocationGlobe() {
     }, [springScroll]);
 
     return (
-        <div className="absolute top-1/2 left-full translate-y-[-50%] w-[300px] h-[300px] md:w-[450px] md:h-[450px] pointer-events-none z-[-1]">
-
-            {/* Holographic Tether Line */}
-            {/* The SVG starts at x=16 to give the pill border some breathing room, and runs into the globe */}
-            <svg
-                className="absolute left-[16px] top-1/2 -translate-y-1/2 w-[calc(50%-24px)] md:w-[calc(50%-32px)] h-[20px] overflow-visible pointer-events-none z-10"
-            >
-                {/* Line connecting the pill to the sphere */}
-                <line
-                    x1="0" y1="10"
-                    x2="100%" y2="10"
-                    stroke="#ff006e"
-                    strokeWidth="1.5"
-                    strokeDasharray="4 2"
-                    className="drop-shadow-[0_0_5px_rgba(255,0,110,0.8)] opacity-60"
-                />
-                <circle cx="100%" cy="10" r="3" fill="#ff006e" className="drop-shadow-[0_0_8px_rgba(255,0,110,1)]" />
-            </svg>
-
+        <div className="absolute top-0 left-1/2 translate-x-[-20%] translate-y-[-60%] w-[300px] h-[300px] md:w-[450px] md:h-[450px] pointer-events-none z-[-1]">
             {/* Canvas Container */}
-            <div className="w-full h-full relative z-0 mix-blend-screen drop-shadow-[0_0_30px_rgba(255,0,110,0.1)]">
+            <div className="w-full h-full relative z-0 mix-blend-screen drop-shadow-[0_0_30px_rgba(255,0,110,0.1)] opacity-40">
                 <canvas
                     ref={canvasRef}
                     style={{
