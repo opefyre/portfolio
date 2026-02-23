@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import * as THREE from "three";
 import Image from "next/image";
 import { Linkedin, MapPin } from "lucide-react";
+import LocationGlobe from "./LocationGlobe";
 
 function StarField(props: React.ComponentProps<typeof Points>) {
     const ref = useRef<THREE.Points>(null);
@@ -166,9 +167,11 @@ export default function DigitalHero({ name, title, linkedin, location }: { name:
                     )}
 
                     {location && (
-                        <div className="group flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/[0.03] hover:bg-[#ff006e]/10 border border-white/10 hover:border-[#ff006e]/50 transition-all duration-300 cursor-default">
-                            <MapPin className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#ff006e] group-hover:drop-shadow-[0_0_8px_rgba(255,0,110,0.8)] transition-all duration-300" />
-                            <span className="text-[10px] md:text-xs font-mono text-tertiary group-hover:text-white transition-colors duration-300">{location}</span>
+                        <div className="relative group flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/[0.03] hover:bg-[#ff006e]/10 border border-white/10 hover:border-[#ff006e]/50 transition-all duration-300 cursor-default">
+                            {/* The 3D hologram bounds to this relative container but overflows infinitely */}
+                            <LocationGlobe />
+                            <MapPin className="relative z-10 w-3.5 h-3.5 md:w-4 md:h-4 text-[#ff006e] group-hover:drop-shadow-[0_0_8px_rgba(255,0,110,0.8)] transition-all duration-300" />
+                            <span className="relative z-10 text-[10px] md:text-xs font-mono text-tertiary group-hover:text-white transition-colors duration-300">{location}</span>
                         </div>
                     )}
                 </motion.div>
