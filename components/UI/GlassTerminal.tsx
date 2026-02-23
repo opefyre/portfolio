@@ -30,7 +30,7 @@ export default function GlassTerminal({ skills }: { skills: Skill[] }) {
                 whileInView={{ rotateX: 0, y: 0, opacity: 1, scale: 1 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                className="relative w-full rounded-[2rem] border border-white/10 bg-[#0a0a0c]/80 backdrop-blur-3xl shadow-[0_30px_100px_-20px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.1)] overflow-hidden flex flex-col md:flex-row min-h-[500px]"
+                className="relative w-full rounded-2xl md:rounded-[2rem] border border-white/10 bg-[#0a0a0c]/80 backdrop-blur-3xl shadow-[0_30px_100px_-20px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.1)] overflow-hidden flex flex-col md:flex-row min-h-[500px]"
             >
                 {/* Glossy Screen Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.02] to-white/[0.05] pointer-events-none z-50" />
@@ -81,12 +81,12 @@ export default function GlassTerminal({ skills }: { skills: Skill[] }) {
                 </div>
 
                 {/* Main Content Area (Skills Grid) */}
-                <div className="flex-1 p-8 md:p-12 relative z-20 bg-gradient-to-br from-transparent to-black/20">
-                    <div className="flex items-center justify-between mb-12">
-                        <h2 className="text-2xl md:text-3xl font-display font-medium text-white">
+                <div className="flex-1 p-4 sm:p-6 md:p-12 relative z-20 bg-gradient-to-br from-transparent to-black/20">
+                    <div className="flex items-center justify-between mb-8 md:mb-12">
+                        <h2 className="text-xl md:text-3xl font-display font-medium text-white">
                             {activeCategory}
                         </h2>
-                        <div className="px-3 py-1 bg-white/5 rounded-full border border-white/10 text-xs font-mono text-tertiary">
+                        <div className="px-3 py-1 bg-white/5 rounded-full border border-white/10 text-[10px] md:text-xs font-mono text-tertiary">
                             {activeSkills.length} Nodes detected
                         </div>
                     </div>

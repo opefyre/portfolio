@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { MeshDistortMaterial, Sphere, Torus, Octahedron } from "@react-three/drei";
-import * as THREE from "three";
+import type * as THREE from "three";
 
 export function FloatingGeometry() {
     const torusRef = useRef<THREE.Mesh>(null);
