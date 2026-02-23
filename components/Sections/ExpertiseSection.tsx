@@ -21,7 +21,7 @@ export default function ExpertiseSection({
         target: academicRef,
         offset: ["0 1", "1 0"]
     });
-    const academicY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+    const academicY = useTransform(scrollYProgress, [0, 1], [150, -150]);
 
     return (
         <section className="container-wide section-padding space-y-24 md:space-y-32">
@@ -74,48 +74,49 @@ export default function ExpertiseSection({
             </div>
 
             {/* PART 3: ACADEMIC TIMELINE */}
-            <motion.div
+            <div
                 ref={academicRef}
-                style={{ y: academicY }}
                 className="container max-w-4xl mx-auto px-6 mt-32 relative"
             >
-                <SectionHeader
-                    title="Academic Log"
-                    subtitle="Formal education and foundational knowledge."
-                />
+                <motion.div style={{ y: academicY }}>
+                    <SectionHeader
+                        title="Academic Log"
+                        subtitle="Formal education and foundational knowledge."
+                    />
 
-                <div className="mt-16 md:mt-24 space-y-16 relative before:absolute before:inset-0 before:ml-4 md:before:ml-[50%] before:-translate-x-px md:before:translate-x-0 before:h-full before:w-[2px] before:bg-gradient-to-b before:from-transparent before:via-white/10 before:to-transparent">
-                    {education.map((edu, idx) => (
-                        <motion.div
-                            key={idx}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6, ease: "easeOut" }}
-                            className={`relative flex items-center justify-between md:justify-normal ${idx % 2 === 0 ? "md:flex-row-reverse" : ""
-                                }`}
-                        >
-                            {/* Center Timeline Node */}
-                            <div className="absolute left-4 md:left-1/2 -translate-x-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-deep border border-brand-blue/30 shadow-[0_0_15px_rgba(56,189,248,0.2)] z-10">
-                                <GraduationCap className="w-4 h-4 text-brand-blue" />
-                            </div>
+                    <div className="mt-16 md:mt-24 space-y-16 relative before:absolute before:inset-0 before:ml-4 md:before:ml-[50%] before:-translate-x-px md:before:translate-x-0 before:h-full before:w-[2px] before:bg-gradient-to-b before:from-transparent before:via-white/10 before:to-transparent">
+                        {education.map((edu, idx) => (
+                            <motion.div
+                                key={idx}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-100px" }}
+                                transition={{ duration: 0.6, ease: "easeOut" }}
+                                className={`relative flex items-center justify-between md:justify-normal ${idx % 2 === 0 ? "md:flex-row-reverse" : ""
+                                    }`}
+                            >
+                                {/* Center Timeline Node */}
+                                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-deep border border-brand-blue/30 shadow-[0_0_15px_rgba(56,189,248,0.2)] z-10">
+                                    <GraduationCap className="w-4 h-4 text-brand-blue" />
+                                </div>
 
-                            {/* Content Card */}
-                            <div className={`ml-12 md:ml-0 w-full md:w-[45%] ${idx % 2 === 0 ? "md:pl-16" : "md:pr-16 md:text-right"}`}>
-                                <div className="bg-deep/40 backdrop-blur-xl border border-white/10 p-6 md:p-8 rounded-2xl hover:bg-white/[0.02] hover:border-brand-blue/30 transition-colors">
-                                    <h4 className="text-xl font-display font-medium text-white mb-2">{edu.degree}</h4>
-                                    <div className="text-brand-blue/80 font-mono text-sm uppercase tracking-widest mb-4">
-                                        {edu.institution}
-                                    </div>
-                                    <div className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-tertiary">
-                                        {edu.period}
+                                {/* Content Card */}
+                                <div className={`ml-12 md:ml-0 w-full md:w-[45%] ${idx % 2 === 0 ? "md:pl-16" : "md:pr-16 md:text-right"}`}>
+                                    <div className="bg-deep/40 backdrop-blur-xl border border-white/10 p-6 md:p-8 rounded-2xl hover:bg-white/[0.02] hover:border-brand-blue/30 transition-colors">
+                                        <h4 className="text-xl font-display font-medium text-white mb-2">{edu.degree}</h4>
+                                        <div className="text-brand-blue/80 font-mono text-sm uppercase tracking-widest mb-4">
+                                            {edu.institution}
+                                        </div>
+                                        <div className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-tertiary">
+                                            {edu.period}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
-            </motion.div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </motion.div>
+            </div>
 
         </section>
     );
