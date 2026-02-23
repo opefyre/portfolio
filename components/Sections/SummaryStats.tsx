@@ -124,7 +124,7 @@ export default function SummaryStats({
     certifications: Certification[],
     education: Education[]
 }) {
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+    const [hoveredIndex, setHoveredIndex] = useState<number>(0);
 
     // Differentiate precise pointer events so mobile taps don't conflict with mouse hovers
     const handlePointerEnter = (e: React.PointerEvent, i: number) => {
@@ -132,12 +132,12 @@ export default function SummaryStats({
     };
 
     const handlePointerLeave = (e: React.PointerEvent) => {
-        if (e.pointerType === "mouse") setHoveredIndex(null);
+        // We let the container mouse leave handle the reset to 0 to prevent jitter
     };
 
     const handleClick = (i: number) => {
         // Only toggle via click on touch devices to open/close
-        setHoveredIndex(prev => prev === i ? null : i);
+        setHoveredIndex(i);
     };
 
     const stats = [
@@ -158,7 +158,7 @@ export default function SummaryStats({
 
                 {/* Unified Dynamic Island Container - Responsive Mobile + Desktop */}
                 <div
-                    onPointerLeave={(e) => { if (e.pointerType === "mouse") setHoveredIndex(null) }}
+                    onPointerLeave={(e) => { if (e.pointerType === "mouse") setHoveredIndex(0) }}
                     className="flex flex-col md:flex-row w-full max-w-[340px] md:max-w-none md:w-auto p-2 md:p-0 md:h-20 rounded-[2rem] md:rounded-full bg-deep/80 backdrop-blur-2xl border border-white/10 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.1)] overflow-hidden items-center justify-center cursor-default gap-2 md:gap-0 transition-all duration-500 ease-out"
                 >
                     {stats.map((stat, i) => (

@@ -40,7 +40,12 @@ export default async function Home() {
       <FloatingNav />
       {/* Scroll Margin corrections included */}
       <section id="overview" className="scroll-mt-0">
-        <DigitalHero name={personalInfo.name} title={personalInfo.title} />
+        <DigitalHero
+          name={personalInfo.name}
+          title={personalInfo.title}
+          linkedin={personalInfo.linkedin}
+          location={personalInfo.location}
+        />
         <SummaryStats
           experiences={experiences}
           projects={projects}

@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Skill, Certification, Education } from "@/lib/db";
 import SectionHeader from "@/components/UI/SectionHeader";
 import GlassTerminal from "@/components/UI/GlassTerminal";
@@ -15,6 +16,12 @@ export default function ExpertiseSection({
     certifications: Certification[];
     education: Education[];
 }) {
+    const academicRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: academicRef,
+        offset: ["0 1", "1 0"]
+    });
+    const academicY = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
     return (
         <section className="container-wide section-padding space-y-24 md:space-y-32">
@@ -67,7 +74,11 @@ export default function ExpertiseSection({
             </div>
 
             {/* PART 3: ACADEMIC TIMELINE */}
-            <div className="container max-w-4xl mx-auto px-6 mt-32">
+            <motion.div
+                ref={academicRef}
+                style={{ y: academicY }}
+                className="container max-w-4xl mx-auto px-6 mt-32 relative"
+            >
                 <SectionHeader
                     title="Academic Log"
                     subtitle="Formal education and foundational knowledge."
@@ -104,7 +115,7 @@ export default function ExpertiseSection({
                         </motion.div>
                     ))}
                 </div>
-            </div>
+            </motion.div>
 
         </section>
     );

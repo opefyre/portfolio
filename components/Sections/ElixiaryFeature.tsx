@@ -63,7 +63,7 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
     // Scroll-linked animation
     const { scrollYProgress } = useScroll({
         target: cardRef,
-        offset: ["0 1", "0.6 1"] // Animation finishes when card is 60% above the bottom of the viewport
+        offset: ["0 1", "0.3 1"] // Animation finishes when card is 30% above the bottom of the viewport for a faster trigger
     });
 
     const scale = useTransform(scrollYProgress, [0, 1], [0.85, 1]);
@@ -119,7 +119,7 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
                                     initial={{ opacity: 0, x: -10 }}
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true }}
-                                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-brand-purple text-[10px] font-bold uppercase tracking-wider"
+                                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 text-[10px] font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(245,158,11,0.2)]"
                                 >
                                     <Zap className="w-2.5 h-2.5" />
                                     <span>Featured Project</span>

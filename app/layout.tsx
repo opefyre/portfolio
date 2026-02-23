@@ -16,7 +16,7 @@ const fontDisplay = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "Abolfazl Shirkavand | Digital Architect",
+  title: "Abolfazl Shirkavand | Head of Digital Innovation",
   description: "Process Excellence & Digital Transformation. Creating the future of enterprise operations.",
   icons: {
     icon: "/icon.svg",

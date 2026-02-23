@@ -86,9 +86,6 @@ export default function GlassTerminal({ skills }: { skills: Skill[] }) {
                         <h2 className="text-xl md:text-3xl font-display font-medium text-white">
                             {activeCategory}
                         </h2>
-                        <div className="px-3 py-1 bg-white/5 rounded-full border border-white/10 text-[10px] md:text-xs font-mono text-tertiary">
-                            {activeSkills.length} Nodes detected
-                        </div>
                     </div>
 
                     <div className="relative min-h-[300px]">

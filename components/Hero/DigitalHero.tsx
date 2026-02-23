@@ -8,6 +8,7 @@ import * as random from "maath/random/dist/maath-random.cjs";
 import { motion, AnimatePresence } from "framer-motion";
 import * as THREE from "three";
 import Image from "next/image";
+import { Linkedin, MapPin } from "lucide-react";
 
 function StarField(props: React.ComponentProps<typeof Points>) {
     const ref = useRef<THREE.Points>(null);
@@ -72,7 +73,7 @@ const identities = [
     "Risk & Resource Planning",
 ];
 
-export default function DigitalHero({ name, title }: { name: string; title: string }) {
+export default function DigitalHero({ name, title, linkedin, location }: { name: string; title: string; linkedin?: string; location?: string; }) {
     const [currentIdentity, setCurrentIdentity] = useState(0);
 
     useEffect(() => {
@@ -174,7 +175,7 @@ export default function DigitalHero({ name, title }: { name: string; title: stri
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.9, duration: 0.6 }}
-                    className="inline-flex items-center justify-center mb-8"
+                    className="inline-flex items-center justify-center mb-6"
                 >
                     <div className="relative rounded-lg bg-[#0a0f0a] border border-[#00ff41]/20 w-[280px] md:w-[380px] px-5 py-3 shadow-[0_0_20px_rgba(0,255,65,0.08),inset_0_1px_0_rgba(0,255,65,0.05)] overflow-hidden">
                         {/* Scanline overlay */}
@@ -207,6 +208,32 @@ export default function DigitalHero({ name, title }: { name: string; title: stri
                     </div>
                 </motion.div>
 
+                {/* Interactive Social & Location Pills */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.1, duration: 0.6 }}
+                    className="flex flex-wrap items-center justify-center gap-3 md:gap-4 mb-4"
+                >
+                    {linkedin && (
+                        <a
+                            href={linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/[0.03] hover:bg-brand-blue/10 border border-white/10 hover:border-brand-blue/50 transition-all duration-300"
+                        >
+                            <Linkedin className="w-3.5 h-3.5 md:w-4 md:h-4 text-brand-blue group-hover:drop-shadow-[0_0_8px_rgba(56,189,248,0.8)] transition-all duration-300" />
+                            <span className="text-[10px] md:text-xs font-mono text-tertiary group-hover:text-white transition-colors duration-300">Connect on LinkedIn</span>
+                        </a>
+                    )}
+
+                    {location && (
+                        <div className="group flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/[0.03] hover:bg-[#ff006e]/10 border border-white/10 hover:border-[#ff006e]/50 transition-all duration-300 cursor-default">
+                            <MapPin className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#ff006e] group-hover:drop-shadow-[0_0_8px_rgba(255,0,110,0.8)] transition-all duration-300" />
+                            <span className="text-[10px] md:text-xs font-mono text-tertiary group-hover:text-white transition-colors duration-300">{location}</span>
+                        </div>
+                    )}
+                </motion.div>
             </div>
 
             {/* Scroll indicator — clickable, anchored to section bottom */}
