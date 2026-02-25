@@ -1,7 +1,7 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    
+
     // Explicitly deny default access
     match /{document=**} {
       allow read: if false;
@@ -9,8 +9,6 @@ service cloud.firestore {
     }
 
     // Public Read-Only Collections
-    // Only allow reading complete documents, no listing of entire collections if we wanted to be strict,
-    // but for SSG/portfolio text, list is fine.
     match /meta/{docId} {
         allow read: if true;
         allow write: if false;
@@ -36,11 +34,23 @@ service cloud.firestore {
         allow write: if false;
     }
 
-    // Contact Form Inquiries (Write-Only)
-    // Allows anyone to submit an inquiry, but nobody can read or modify existing ones.
+    // Contact Form Inquiries (write-only with schema validation)
     match /inquiries/{docId} {
-        allow read: if false;
-        allow write: if true;
+      allow read: if false;
+
+      allow create: if request.resource.data.keys().hasOnly(["name", "email", "message", "createdAt"])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 2
+        && request.resource.data.name.size() <= 120
+        && request.resource.data.email is string
+        && request.resource.data.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
+        && request.resource.data.email.size() <= 254
+        && request.resource.data.message is string
+        && request.resource.data.message.size() >= 10
+        && request.resource.data.message.size() <= 5000
+        && request.resource.data.createdAt is timestamp;
+
+      allow update, delete: if false;
     }
   }
 }

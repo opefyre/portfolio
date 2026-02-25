@@ -1,5 +1,5 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -35,7 +35,14 @@ export const submitInquiry = async (data: Record<string, unknown>) => {
     }
 
     try {
-        const docRef = await addDoc(collection(clientDb, "inquiries"), data);
+        const payload = {
+            name: String(data.name ?? "").trim(),
+            email: String(data.email ?? "").trim().toLowerCase(),
+            message: String(data.message ?? "").trim(),
+            createdAt: serverTimestamp(),
+        };
+
+        const docRef = await addDoc(collection(clientDb, "inquiries"), payload);
         return { id: docRef.id };
     } catch (e) {
         console.error("Firestore Write Failed:", e);

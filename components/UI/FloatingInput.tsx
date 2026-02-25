@@ -10,9 +10,11 @@ interface FloatingInputProps {
     type?: string;
     isTextArea?: boolean;
     required?: boolean;
+    maxLength?: number;
+    minLength?: number;
 }
 
-export default function FloatingInput({ label, id, type = "text", isTextArea = false, required = false }: FloatingInputProps) {
+export default function FloatingInput({ label, id, type = "text", isTextArea = false, required = false, maxLength, minLength }: FloatingInputProps) {
     const [isFocused, setIsFocused] = useState(false);
     const [hasValue, setHasValue] = useState(false);
 
@@ -42,6 +44,8 @@ export default function FloatingInput({ label, id, type = "text", isTextArea = f
                     id={id}
                     name={id}
                     required={required}
+                    maxLength={maxLength}
+                    minLength={minLength}
                     onFocus={() => setIsFocused(true)}
                     onBlur={(e) => {
                         setIsFocused(false);
@@ -56,6 +60,8 @@ export default function FloatingInput({ label, id, type = "text", isTextArea = f
                     id={id}
                     name={id}
                     required={required}
+                    maxLength={maxLength}
+                    minLength={minLength}
                     onFocus={() => setIsFocused(true)}
                     onBlur={(e) => {
                         setIsFocused(false);
