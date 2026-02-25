@@ -27,15 +27,29 @@ export default function ContactPage() {
 
         try {
             const formData = new FormData(e.currentTarget);
-            const data = Object.fromEntries(formData.entries());
+            const website = String(formData.get("website") ?? "").trim();
+            if (website) {
+                setIsSubmitting(false);
+                return;
+            }
 
-            // Add ISO timestamp to the incoming form data
-            data.createdAt = new Date().toISOString();
-            data.status = "unread";
+            const data = {
+                name: String(formData.get("name") ?? "").trim(),
+                email: String(formData.get("email") ?? "").trim(),
+                message: String(formData.get("message") ?? "").trim(),
+            };
+
+            if (
+                data.name.length < 2 || data.name.length > 120 ||
+                data.email.length < 5 || data.email.length > 254 ||
+                data.message.length < 10 || data.message.length > 5000
+            ) {
+                throw new Error("Invalid inquiry payload.");
+            }
 
             // Dispatch to the native Client-Side Firebase SDK using our robust abstraction
             // This safely bypasses Next.js static export API limitations
-            const ticket = await submitInquiry(data);
+            await submitInquiry(data);
 
             setIsSuccess(true);
         } catch (error) {
@@ -120,9 +134,17 @@ export default function ContactPage() {
                             isSuccess={isSuccess}
                             formComponent={
                                 <form onSubmit={handleSubmit} className="flex flex-col gap-6 relative z-10 w-full">
-                                    <FloatingInput id="name" label="Your Name" required />
-                                    <FloatingInput id="email" type="email" label="Email Address" required />
-                                    <FloatingInput id="message" label="How can I help you?" isTextArea required />
+                                    <input
+                                        type="text"
+                                        name="website"
+                                        tabIndex={-1}
+                                        autoComplete="off"
+                                        className="hidden"
+                                        aria-hidden="true"
+                                    />
+                                    <FloatingInput id="name" label="Your Name" required maxLength={120} minLength={2} />
+                                    <FloatingInput id="email" type="email" label="Email Address" required maxLength={254} minLength={5} />
+                                    <FloatingInput id="message" label="How can I help you?" isTextArea required maxLength={5000} minLength={10} />
 
                                     <div className="pt-6">
                                         <MagneticButton strength={0.2} className="w-full sm:w-auto">
