@@ -29,8 +29,6 @@ const AnimatedCounter = ({ value, duration = 2 }: { value: number; duration?: nu
     return <motion.span ref={ref}>{displayValue}</motion.span>;
 };
 
-// Provide a uniform smooth transition to kill subpixel vibration
-const springTransition = { type: "spring" as const, bounce: 0, duration: 0.4 };
 
 // --- Dynamic Island Segment ---
 interface IslandSegmentProps {
@@ -130,16 +128,20 @@ const identities = [
 ];
 
 export default function SummaryStats({
-    experiences: _experiences,
-    projects: _projects,
-    certifications: _certifications,
-    education: _education
+    experiences,
+    projects,
+    certifications,
+    education
 }: {
     experiences: Experience[],
     projects: Project[],
     certifications: Certification[],
     education: Education[]
 }) {
+    void experiences;
+    void projects;
+    void certifications;
+    void education;
     const [hoveredIndex, setHoveredIndex] = useState<number>(0);
     const [currentIdentity, setCurrentIdentity] = useState(0);
 
@@ -155,7 +157,7 @@ export default function SummaryStats({
         if (e.pointerType === "mouse") setHoveredIndex(i);
     };
 
-    const handlePointerLeave = (e: React.PointerEvent) => {
+    const handlePointerLeave = () => {
         // We let the container mouse leave handle the reset to 0 to prevent jitter
     };
 
@@ -230,7 +232,7 @@ export default function SummaryStats({
                             {...stat}
                             isHovered={hoveredIndex === i}
                             onPointerEnter={(e) => handlePointerEnter(e, i)}
-                            onPointerLeave={(e) => handlePointerLeave(e)}
+                            onPointerLeave={() => handlePointerLeave()}
                             onClick={() => handleClick(i)}
                             hideDivider={i === stats.length - 1}
                         />
