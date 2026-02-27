@@ -64,14 +64,17 @@ export interface Education {
     period: string;
 }
 
-export interface PersonalInfo {
+export interface PersonalInfoPublic {
     name: string;
     title: string;
-    email: string;
-    phone: string;
     location: string;
     linkedin: string;
     summary: string;
+}
+
+export interface PersonalInfoPrivate {
+    email: string;
+    phone: string;
 }
 
 export interface ElixiaryVenture {
@@ -94,9 +97,24 @@ export interface ElixiaryVenture {
 export const getPersonalInfo = cache(async () => {
     return unstable_cache(
         async () => {
-            const doc = await db.collection("meta").doc("personalInfo").get();
-            if (!doc.exists) throw new Error("PersonalInfo doc not found in Firestore");
-            return doc.data() as PersonalInfo;
+            const publicDoc = await db.collection("meta").doc("personalInfoPublic").get();
+            if (publicDoc.exists) {
+                return publicDoc.data() as PersonalInfoPublic;
+            }
+
+            // Backward-compatible fallback for environments where migration has not run yet.
+            // This prevents CI/static builds from failing while still returning a public-safe shape.
+            const legacyDoc = await db.collection("meta").doc("personalInfo").get();
+            if (!legacyDoc.exists) throw new Error("PersonalInfo public document not found in Firestore");
+
+            const legacyData = legacyDoc.data() as Partial<PersonalInfoPublic>;
+            return {
+                name: legacyData.name ?? "",
+                title: legacyData.title ?? "",
+                location: legacyData.location ?? "",
+                linkedin: legacyData.linkedin ?? "",
+                summary: legacyData.summary ?? ""
+            };
         },
         ["personal-info"],
         { tags: ["meta"] }

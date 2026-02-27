@@ -8,8 +8,12 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    // Public Read-Only Collections
-    match /meta/{docId} {
+    // Public Read-Only Collections / Docs
+    match /meta/personalInfoPublic {
+        allow read: if true;
+        allow write: if false;
+    }
+    match /meta/elixiaryVenture {
         allow read: if true;
         allow write: if false;
     }
@@ -32,6 +36,11 @@ service cloud.firestore {
     match /skills/{docId} {
         allow read: if true;
         allow write: if false;
+    }
+
+    // Private contact details (admin/backend only via Admin SDK + IAM)
+    match /privateMeta/{docId} {
+      allow read, write: if false;
     }
 
     // Contact Form Inquiries

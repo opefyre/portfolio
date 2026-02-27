@@ -50,6 +50,8 @@ next-env.d.ts
 
 # data seeding & scripts
 scripts/
+!scripts/
+!scripts/firestore-migrate-personal-info.ts
 projects - Sheet1.csv
 projects-merged.json
 projects-cleaned.json
