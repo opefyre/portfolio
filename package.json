@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "deploy": "./scripts/secure-deploy.sh",
-    "verify:headers": "./verify-hosting-headers.sh"
+    "verify:headers": "./verify-hosting-headers.sh",
+    "migrate:personal-info": "tsx scripts/firestore-migrate-personal-info.ts"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

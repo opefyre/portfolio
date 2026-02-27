@@ -64,14 +64,17 @@ export interface Education {
     period: string;
 }
 
-export interface PersonalInfo {
+export interface PersonalInfoPublic {
     name: string;
     title: string;
-    email: string;
-    phone: string;
     location: string;
     linkedin: string;
     summary: string;
+}
+
+export interface PersonalInfoPrivate {
+    email: string;
+    phone: string;
 }
 
 export interface ElixiaryVenture {
@@ -94,9 +97,9 @@ export interface ElixiaryVenture {
 export const getPersonalInfo = cache(async () => {
     return unstable_cache(
         async () => {
-            const doc = await db.collection("meta").doc("personalInfo").get();
-            if (!doc.exists) throw new Error("PersonalInfo doc not found in Firestore");
-            return doc.data() as PersonalInfo;
+            const doc = await db.collection("meta").doc("personalInfoPublic").get();
+            if (!doc.exists) throw new Error("PersonalInfoPublic doc not found in Firestore");
+            return doc.data() as PersonalInfoPublic;
         },
         ["personal-info"],
         { tags: ["meta"] }

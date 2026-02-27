@@ -54,3 +54,16 @@ Functions runtime config/secrets:
 - Structured function logs for monitoring and alerting.
 
 See `monitoring/intake-alerting.md` for alert policy guidance.
+
+## Firestore public/private profile schema
+
+Public profile fields now live in `meta/personalInfoPublic` (`name`, `title`, `summary`, `location`, `linkedin`).
+Sensitive contact fields live in `privateMeta/personalContact` (`email`, `phone`) and are not readable by clients.
+
+To migrate existing data:
+
+```bash
+npm run migrate:personal-info
+```
+
+Requires `FIREBASE_SERVICE_ACCOUNT_KEY` in the environment.
