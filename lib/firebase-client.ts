@@ -1,5 +1,5 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { AppCheck, getToken, initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -10,42 +10,46 @@ const firebaseConfig = {
     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
+const intakeEndpoint = process.env.NEXT_PUBLIC_INTAKE_ENDPOINT;
+const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_V3_SITE_KEY;
+
 export const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-export const clientDb = getFirestore(app);
 
-/**
- * Route a contact submission securely to Firestore via the Web SDK,
- * natively supporting NextJS Static Exports ('output: export').
- */
+let appCheckInstance: AppCheck | null = null;
+
+function ensureAppCheck() {
+    if (appCheckInstance || typeof window === "undefined" || !recaptchaSiteKey) {
+        return;
+    }
+
+    appCheckInstance = initializeAppCheck(app, {
+        provider: new ReCaptchaV3Provider(recaptchaSiteKey),
+        isTokenAutoRefreshEnabled: true,
+    });
+}
+
 export const submitInquiry = async (data: Record<string, unknown>) => {
-    // If the Firebase Client config isn't fully set up yet in the user's .env.local, 
-    // gracefully simulate the database write so the UI continues functioning beautifully. 
-    if (!firebaseConfig.apiKey) {
-        console.warn("Client Firebase API Key not found. Simulating Firestore write for demonstration.");
-
-        // Simulate network transit time
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-
-        // Generate a secure-looking ID locally
-        const hexChars = '0123456789ABCDEF';
-        const randomHex = (len: number) => Array.from({ length: len }).map(() => hexChars[Math.floor(Math.random() * 16)]).join('');
-        const fakeId = `REQ-${randomHex(4)}-${randomHex(2)}`;
-
-        return { id: fakeId };
+    if (!intakeEndpoint) {
+        throw new Error("Missing NEXT_PUBLIC_INTAKE_ENDPOINT");
     }
 
-    try {
-        const payload = {
-            name: String(data.name ?? "").trim(),
-            email: String(data.email ?? "").trim().toLowerCase(),
-            message: String(data.message ?? "").trim(),
-            createdAt: serverTimestamp(),
-        };
+    ensureAppCheck();
 
-        const docRef = await addDoc(collection(clientDb, "inquiries"), payload);
-        return { id: docRef.id };
-    } catch (e) {
-        console.error("Firestore Write Failed:", e);
-        throw e;
+    const appCheckToken = appCheckInstance ? (await getToken(appCheckInstance)).token : "";
+
+    const response = await fetch(intakeEndpoint, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            ...(appCheckToken ? { "X-Firebase-AppCheck": appCheckToken } : {}),
+        },
+        body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.error || "Inquiry submission failed");
     }
+
+    return response.json();
 };

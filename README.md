@@ -30,3 +30,27 @@ You can also provide a target URL explicitly:
 ```bash
 ./verify-hosting-headers.sh https://your-site.web.app
 ```
+
+## Secure inquiry intake pipeline
+
+Inquiry writes now flow through a backend-only Cloud Function (`functions/src/index.ts`) instead of direct client Firestore writes.
+
+### Required environment variables
+
+Client (`.env.local`):
+- `NEXT_PUBLIC_INTAKE_ENDPOINT` - HTTPS URL of `intakeInquiry` function.
+- `NEXT_PUBLIC_RECAPTCHA_V3_SITE_KEY` - App Check reCAPTCHA v3 key.
+
+Functions runtime config/secrets:
+- `TURNSTILE_SECRET_KEY` - Cloudflare Turnstile secret for server-side CAPTCHA verification.
+
+### Security controls implemented
+
+- Firestore rules deny all direct client writes to `inquiries`.
+- App Check token verification on backend (`X-Firebase-AppCheck`).
+- CAPTCHA verification (Turnstile) on backend.
+- Request schema validation + body size limits.
+- IP + fingerprint rate limiting persisted in Firestore.
+- Structured function logs for monitoring and alerting.
+
+See `monitoring/intake-alerting.md` for alert policy guidance.
