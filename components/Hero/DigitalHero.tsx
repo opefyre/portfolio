@@ -5,7 +5,7 @@ import { Points, PointMaterial } from "@react-three/drei";
 import { useRef, useState, useEffect, useCallback } from "react";
 import * as random from "maath/random/dist/maath-random.cjs";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import * as THREE from "three";
 import Image from "next/image";
 import { Linkedin, MapPin } from "lucide-react";

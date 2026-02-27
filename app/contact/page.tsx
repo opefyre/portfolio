@@ -14,6 +14,20 @@ export default function ContactPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [copied, setCopied] = useState(false);
+    const [captchaToken, setCaptchaToken] = useState("");
+
+    const createFingerprint = async () => {
+        const raw = [
+            navigator.userAgent,
+            navigator.language,
+            Intl.DateTimeFormat().resolvedOptions().timeZone,
+            `${window.screen.width}x${window.screen.height}`,
+            navigator.platform,
+        ].join("|");
+
+        const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(raw));
+        return Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, "0")).join("");
+    };
 
     const handleCopyEmail = () => {
         navigator.clipboard.writeText("hello@abosh.io");
@@ -37,18 +51,19 @@ export default function ContactPage() {
                 name: String(formData.get("name") ?? "").trim(),
                 email: String(formData.get("email") ?? "").trim(),
                 message: String(formData.get("message") ?? "").trim(),
+                fingerprint: await createFingerprint(),
+                captchaToken,
             };
 
             if (
                 data.name.length < 2 || data.name.length > 120 ||
                 data.email.length < 5 || data.email.length > 254 ||
-                data.message.length < 10 || data.message.length > 5000
+                data.message.length < 10 || data.message.length > 5000 ||
+                data.fingerprint.length < 16 ||
+                data.captchaToken.length < 20
             ) {
                 throw new Error("Invalid inquiry payload.");
             }
-
-            // Dispatch to the native Client-Side Firebase SDK using our robust abstraction
-            // This safely bypasses Next.js static export API limitations
             await submitInquiry(data);
 
             setIsSuccess(true);
@@ -145,6 +160,18 @@ export default function ContactPage() {
                                     <FloatingInput id="name" label="Your Name" required maxLength={120} minLength={2} />
                                     <FloatingInput id="email" type="email" label="Email Address" required maxLength={254} minLength={5} />
                                     <FloatingInput id="message" label="How can I help you?" isTextArea required maxLength={5000} minLength={10} />
+                                    <div className="pt-4">
+                                        <label htmlFor="captchaToken" className="block text-xs tracking-widest uppercase text-tertiary mb-2">Turnstile Token *</label>
+                                        <input
+                                            id="captchaToken"
+                                            name="captchaToken"
+                                            required
+                                            value={captchaToken}
+                                            onChange={(e) => setCaptchaToken(e.target.value)}
+                                            className="w-full bg-transparent border-b border-border text-white px-0 py-3 focus:outline-none focus:border-brand-blue transition-colors"
+                                            placeholder="Paste Turnstile token"
+                                        />
+                                    </div>
 
                                     <div className="pt-6">
                                         <MagneticButton strength={0.2} className="w-full sm:w-auto">

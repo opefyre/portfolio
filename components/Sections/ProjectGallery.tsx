@@ -2,7 +2,7 @@
 
 import { Project } from "@/lib/db";
 import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import ProjectModal from "@/components/UI/ProjectModal";
 import SectionHeader from "@/components/UI/SectionHeader";
 import { ArrowUpRight, Plus, Box, LayoutGrid } from "lucide-react";
