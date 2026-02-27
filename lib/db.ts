@@ -97,9 +97,24 @@ export interface ElixiaryVenture {
 export const getPersonalInfo = cache(async () => {
     return unstable_cache(
         async () => {
-            const doc = await db.collection("meta").doc("personalInfoPublic").get();
-            if (!doc.exists) throw new Error("PersonalInfoPublic doc not found in Firestore");
-            return doc.data() as PersonalInfoPublic;
+            const publicDoc = await db.collection("meta").doc("personalInfoPublic").get();
+            if (publicDoc.exists) {
+                return publicDoc.data() as PersonalInfoPublic;
+            }
+
+            // Backward-compatible fallback for environments where migration has not run yet.
+            // This prevents CI/static builds from failing while still returning a public-safe shape.
+            const legacyDoc = await db.collection("meta").doc("personalInfo").get();
+            if (!legacyDoc.exists) throw new Error("PersonalInfo public document not found in Firestore");
+
+            const legacyData = legacyDoc.data() as Partial<PersonalInfoPublic>;
+            return {
+                name: legacyData.name ?? "",
+                title: legacyData.title ?? "",
+                location: legacyData.location ?? "",
+                linkedin: legacyData.linkedin ?? "",
+                summary: legacyData.summary ?? ""
+            };
         },
         ["personal-info"],
         { tags: ["meta"] }
