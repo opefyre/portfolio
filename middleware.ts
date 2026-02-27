@@ -19,7 +19,7 @@ const CONTENT_SECURITY_POLICY = [
 export function middleware(_request: NextRequest) {
     const response = NextResponse.next();
 
-    // Security Headers
+    // Security Headers (local/dev fallback; production headers are configured in firebase.json)
     response.headers.set("X-Frame-Options", "DENY");
     response.headers.set("X-Content-Type-Options", "nosniff");
     response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
