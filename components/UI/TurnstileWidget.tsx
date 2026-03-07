@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useCallback, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const TURNSTILE_CALLBACK_NAME = "__contactTurnstileSuccess";
 const TURNSTILE_SCRIPT = "https://challenges.cloudflare.com/turnstile/v0/api.js";
@@ -23,7 +23,10 @@ export default function TurnstileWidget({
   invisible = false,
 }: TurnstileWidgetProps) {
   const onTokenRef = useRef(onToken);
-  onTokenRef.current = onToken;
+
+  useEffect(() => {
+    onTokenRef.current = onToken;
+  }, [onToken]);
 
   useEffect(() => {
     (window as unknown as Record<string, (token: string) => void>)[TURNSTILE_CALLBACK_NAME] = (token: string) => {
