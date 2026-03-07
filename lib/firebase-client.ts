@@ -1,4 +1,5 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
+import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { AppCheck, getToken, initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 
 const firebaseConfig = {
@@ -52,4 +53,16 @@ export const submitInquiry = async (data: Record<string, unknown>) => {
     }
 
     return response.json();
+}
+
+/** Submit inquiry by writing directly to Firestore (no Cloud Functions required). */
+export const submitInquiryToFirestore = async (data: { name: string; email: string; message: string }) => {
+    const db = getFirestore(app);
+    const ref = await addDoc(collection(db, "inquiries"), {
+        name: data.name.trim(),
+        email: data.email.trim().toLowerCase(),
+        message: data.message.trim(),
+        createdAt: serverTimestamp(),
+    });
+    return { ok: true, id: ref.id };
 };

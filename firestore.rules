@@ -43,12 +43,23 @@ service cloud.firestore {
       allow read, write: if false;
     }
 
-    // Contact Form Inquiries
-    // Client SDK writes are blocked. Only trusted backend identities (Cloud Functions / service accounts)
-    // can write via Firebase Admin SDK, which bypasses Firestore rules and is enforced through IAM.
+    // Contact Form Inquiries (client can create only; no Functions required)
+    // Strict validation on create. No read/update/delete from client.
     match /inquiries/{docId} {
-      allow read: if false;
-      allow create, update, delete: if false;
+      allow read, update, delete: if false;
+      allow create: if request.auth == null
+        && request.resource.data.keys().hasAll(['name', 'email', 'message', 'createdAt'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 2
+        && request.resource.data.name.size() <= 120
+        && request.resource.data.email is string
+        && request.resource.data.email.size() >= 5
+        && request.resource.data.email.size() <= 254
+        && request.resource.data.message is string
+        && request.resource.data.message.size() >= 10
+        && request.resource.data.message.size() <= 5000
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.keys().hasOnly(['name', 'email', 'message', 'createdAt']);
     }
 
     // Intake rate-limit buckets (backend only)
