@@ -14,7 +14,7 @@ import {
     GraduationCap,
     MessageSquare,
 } from "lucide-react";
-import { useReducedMotion } from "@/lib/motion";
+import { useReducedMotion, easings } from "@/lib/motion";
 
 interface NavItem {
     name: string;
@@ -34,16 +34,31 @@ const navItems: NavItem[] = [
 export default function FloatingNav() {
     const [activeSection, setActiveSection] = useState<string>(navItems[0].id);
     const [scrolled, setScrolled] = useState(false);
+    const [hidden, setHidden] = useState(false);
     const reducedMotion = useReducedMotion();
     const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
+    const lastScrollY = useRef(0);
 
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
     const scrollPercentage = useTransform(scaleX, (latest) => `${Math.round(latest * 100)}%`);
 
-    // Track scrolled state for nav background
+    // Track scrolled state + scroll direction (hide on down, show on up / near top)
     useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 50);
+        const onScroll = () => {
+            const y = window.scrollY;
+            setScrolled(y > 50);
+            const dy = y - lastScrollY.current;
+            // Always show near the top
+            if (y < 120) {
+                setHidden(false);
+            } else if (dy > 6) {
+                setHidden(true);
+            } else if (dy < -6) {
+                setHidden(false);
+            }
+            lastScrollY.current = y;
+        };
         onScroll();
         window.addEventListener("scroll", onScroll, { passive: true });
         return () => window.removeEventListener("scroll", onScroll);
@@ -144,8 +159,8 @@ export default function FloatingNav() {
         <motion.nav
             aria-label="Section navigation"
             initial={{ y: -40, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
+            animate={{ y: hidden ? -100 : 0, opacity: hidden ? 0 : 1 }}
+            transition={{ duration: 0.35, ease: easings.ui }}
             className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4"
         >
             <div

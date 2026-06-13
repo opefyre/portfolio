@@ -21,10 +21,9 @@ function ProjectCard({ project, index, span, onClick }: ProjectCardProps) {
     const cardRef = useRef<HTMLButtonElement>(null);
     const [hovered, setHovered] = useState(false);
 
-    // Scroll-tied entrance
-    const { scrollYProgress } = useScroll({ target: cardRef, offset: ["start 95%", "start 60%"] });
-    const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-    const y = useTransform(scrollYProgress, [0, 1], [40, 0]);
+    // Scroll-tied entrance — opacity-only so cards don't lift and create scroll jumps
+    const { scrollYProgress } = useScroll({ target: cardRef, offset: ["start 95%", "start 75%"] });
+    const opacity = useTransform(scrollYProgress, [0, 1], [0.35, 1]);
 
     return (
         <motion.button
@@ -33,7 +32,7 @@ function ProjectCard({ project, index, span, onClick }: ProjectCardProps) {
             onClick={onClick}
             data-cursor="view"
             aria-label={`View case study: ${project.title}`}
-            style={{ opacity, y }}
+            style={{ opacity }}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             className={clsx(

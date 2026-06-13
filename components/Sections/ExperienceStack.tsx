@@ -1,9 +1,9 @@
 "use client";
 
 import { Experience, Position } from "@/lib/db";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { useReducedMotion, easings } from "@/lib/motion";
 import clsx from "clsx";
 
@@ -18,16 +18,23 @@ function earliestYear(period: string): string {
     return m ? m[0] : "—";
 }
 
-function latestYear(period: string): string {
-    const matches = Array.from(period.matchAll(/\b(19|20)\d{2}\b/g));
-    if (matches.length === 0) return /present/i.test(period) ? "now" : "—";
-    return matches[matches.length - 1][0];
+function stationEndYear(positions: Position[]): string {
+    // If any position is ongoing, the station ends at "Present".
+    if (positions.some((p) => /\b(present|current|now|ongoing)\b/i.test(p.period))) return "Present";
+    const allYears = positions
+        .flatMap((p) => Array.from(p.period.matchAll(/\b(19|20)\d{2}\b/g)).map((m) => parseInt(m[0], 10)))
+        .filter((n) => !Number.isNaN(n));
+    if (allYears.length === 0) return "—";
+    return String(Math.max(...allYears));
 }
 
 function StationCard({ role, index, total }: { role: Experience; index: number; total: number }) {
     const allPositions: Position[] = role.positions ?? [];
     const startYear = earliestYear(allPositions[allPositions.length - 1]?.period ?? "");
-    const endYear = latestYear(allPositions[0]?.period ?? "");
+    const endYear = stationEndYear(allPositions);
+    const isPresent = endYear === "Present";
+
+    const [openIdx, setOpenIdx] = useState(0);
 
     return (
         <article
@@ -64,7 +71,15 @@ function StationCard({ role, index, total }: { role: Experience; index: number; 
 
                     {/* The year — anchored to bottom of column so it always fits on first frame */}
                     <div>
-                        <div className="label-mono text-tertiary mb-2">— TENURE</div>
+                        <div className="label-mono text-tertiary mb-2 flex items-center gap-3">
+                            <span>— TENURE</span>
+                            {isPresent && (
+                                <span className="inline-flex items-center gap-1.5 text-online">
+                                    <span aria-hidden="true" className="inline-block w-1.5 h-1.5 rounded-full online-dot" />
+                                    LIVE
+                                </span>
+                            )}
+                        </div>
                         <div className="flex items-end gap-3 flex-wrap">
                             <span
                                 className="font-editorial italic text-brand-blue leading-[0.8] tabular-nums"
@@ -73,7 +88,10 @@ function StationCard({ role, index, total }: { role: Experience; index: number; 
                                 {startYear}
                             </span>
                             <span
-                                className="font-editorial italic text-tertiary leading-[0.85] tabular-nums pb-2"
+                                className={clsx(
+                                    "font-editorial italic leading-[0.85] pb-2",
+                                    isPresent ? "text-tertiary" : "text-tertiary tabular-nums",
+                                )}
                                 style={{ fontSize: "clamp(1.75rem, min(3.5vw, 7vh), 4rem)" }}
                             >
                                 → {endYear}
@@ -82,37 +100,78 @@ function StationCard({ role, index, total }: { role: Experience; index: number; 
                     </div>
                 </div>
 
-                {/* RIGHT column — positions + achievements, internally scrollable when overflow */}
+                {/* RIGHT column — positions as accordion, only one open at a time */}
                 <div className="lg:col-span-7 min-h-0 flex flex-col">
-                    <div className="overflow-y-auto custom-scrollbar pr-3 -mr-3 space-y-7 flex-1 min-h-0">
-                        {allPositions.map((pos, pIdx) => (
-                            <div
-                                key={pIdx}
-                                className="border-l-2 border-border hover:border-brand-blue/60 transition-colors pl-5 py-1"
-                            >
-                                <div className="flex items-baseline justify-between gap-4 flex-wrap mb-1.5">
-                                    <h4
-                                        className="font-display font-medium text-primary leading-tight"
-                                        style={{ fontSize: "clamp(1rem, min(1.5vw, 2.4vh), 1.5rem)" }}
+                    <div className="overflow-y-auto custom-scrollbar pr-3 -mr-3 flex-1 min-h-0 divide-y divide-border/40">
+                        {allPositions.map((pos, pIdx) => {
+                            const isOpen = openIdx === pIdx;
+                            const panelId = `station-${index}-pos-${pIdx}`;
+                            return (
+                                <div key={pIdx} className="py-3">
+                                    <button
+                                        type="button"
+                                        onClick={() => setOpenIdx(isOpen ? -1 : pIdx)}
+                                        aria-expanded={isOpen}
+                                        aria-controls={panelId}
+                                        className={clsx(
+                                            "group w-full text-left flex items-start gap-4 py-1 px-2 -mx-2 rounded-md transition-colors",
+                                            "hover:bg-white/[0.025] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue",
+                                        )}
                                     >
-                                        {pos.title}
-                                    </h4>
-                                    <span className="label-mono text-tertiary">{pos.period}</span>
+                                        <span className="label-mono text-brand-blue tabular-nums shrink-0 pt-1.5">
+                                            P.{String(pIdx + 1).padStart(2, "0")}
+                                        </span>
+                                        <span className="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-baseline sm:gap-4">
+                                            <h4
+                                                className={clsx(
+                                                    "font-display font-medium leading-tight transition-colors",
+                                                    isOpen ? "text-primary" : "text-secondary group-hover:text-primary",
+                                                )}
+                                                style={{ fontSize: "clamp(1rem, min(1.5vw, 2.4vh), 1.5rem)" }}
+                                            >
+                                                {pos.title}
+                                            </h4>
+                                            <span className="label-mono text-tertiary whitespace-nowrap sm:ml-auto">
+                                                {pos.period}
+                                            </span>
+                                        </span>
+                                        <ChevronDown
+                                            aria-hidden="true"
+                                            className={clsx(
+                                                "w-4 h-4 mt-1.5 shrink-0 transition-transform duration-300",
+                                                isOpen ? "text-brand-blue rotate-180" : "text-tertiary group-hover:text-secondary",
+                                            )}
+                                        />
+                                    </button>
+
+                                    <AnimatePresence initial={false}>
+                                        {isOpen && (
+                                            <motion.div
+                                                id={panelId}
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: "auto", opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.35, ease: easings.ui }}
+                                                className="overflow-hidden"
+                                            >
+                                                <ul className="mt-3 pl-8 pr-2 space-y-2 pb-2 border-l border-brand-blue/30 ml-3">
+                                                    {pos.achievements.map((item, i) => (
+                                                        <li
+                                                            key={i}
+                                                            className="text-secondary leading-relaxed flex items-start gap-3"
+                                                            style={{ fontSize: "clamp(0.8125rem, 1.3vh, 0.95rem)" }}
+                                                        >
+                                                            <span aria-hidden="true" className="text-brand-blue mt-1.5 text-[8px]">◆</span>
+                                                            <span>{item}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
                                 </div>
-                                <ul className="mt-3 space-y-2">
-                                    {pos.achievements.map((item, i) => (
-                                        <li
-                                            key={i}
-                                            className="text-secondary leading-relaxed flex items-start gap-3"
-                                            style={{ fontSize: "clamp(0.8125rem, 1.3vh, 0.95rem)" }}
-                                        >
-                                            <span aria-hidden="true" className="text-brand-blue mt-1.5 text-[8px]">◆</span>
-                                            <span>{item}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             </div>
@@ -282,9 +341,10 @@ export default function ExperienceStack({ experiences }: ExperienceStackProps) {
                                 </h3>
                                 <span className="label-mono text-tertiary">{role.location}</span>
                             </div>
-                            <div className="font-editorial italic text-brand-blue text-5xl leading-none tabular-nums">
-                                {earliestYear(role.positions[role.positions.length - 1]?.period ?? "")} →{" "}
-                                <span className="text-tertiary">{latestYear(role.positions[0]?.period ?? "")}</span>
+                            <div className="font-editorial italic text-brand-blue text-5xl leading-none">
+                                <span className="tabular-nums">{earliestYear(role.positions[role.positions.length - 1]?.period ?? "")}</span>
+                                {" → "}
+                                <span className="text-tertiary">{stationEndYear(role.positions)}</span>
                             </div>
                             <div className="space-y-6 mt-2">
                                 {role.positions.map((pos, pIdx) => (

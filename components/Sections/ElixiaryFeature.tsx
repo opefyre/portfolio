@@ -66,10 +66,8 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
         offset: ["0 1", "0.3 1"] // Animation finishes when card is 30% above the bottom of the viewport for a faster trigger
     });
 
-    const scale = useTransform(scrollYProgress, [0, 1], [0.96, 1]);
-    const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-    const yPulse = useTransform(scrollYProgress, [0, 1], [40, 0]);
-
+    // Calm opacity-only entrance — no y or scale so we don't introduce scroll jumps
+    const opacity = useTransform(scrollYProgress, [0, 1], [0.4, 1]);
     const glowOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.6, 0]);
 
     // Auto-rotate images
@@ -97,11 +95,7 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
 
                 {/* Main card — calm scroll-linked entrance */}
                 <motion.div
-                    style={{
-                        opacity,
-                        scale,
-                        y: yPulse,
-                    }}
+                    style={{ opacity }}
                     className="rounded-2xl border border-border bg-card overflow-hidden"
                 >
                     <div className="grid grid-cols-1 lg:grid-cols-5 gap-0">
