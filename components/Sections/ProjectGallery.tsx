@@ -43,35 +43,41 @@ function ProjectCard({ project, index, span, onClick }: ProjectCardProps) {
                 span === "square" && "md:col-span-1 md:row-span-1 min-h-[240px]",
             )}
         >
-            {/* Background — thumbnail or generated chart-of-bars pattern */}
-            <div className="absolute inset-0 z-0">
+            {/* Background — thumbnail or very subtle decorative chart-grid */}
+            <div className="absolute inset-0 z-0" aria-hidden="true">
                 {project.thumbnail ? (
                     <>
                         <Image
                             src={project.thumbnail}
                             alt=""
                             fill
-                            className="object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-700"
+                            className="object-cover opacity-[0.12] group-hover:opacity-[0.22] transition-opacity duration-700"
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-page via-page/80 to-page/40" />
+                        {/* Strong dark scrim so text stays readable */}
+                        <div className="absolute inset-0 bg-gradient-to-tr from-page via-page/95 to-page/85" />
                     </>
                 ) : (
-                    <div className="absolute inset-0 opacity-60" aria-hidden="true">
-                        {/* Decorative chart-grid for cards without thumbnails */}
-                        <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 200 200" className="text-brand-blue/15">
+                    <div className="absolute inset-0 opacity-100">
+                        <svg
+                            width="100%"
+                            height="100%"
+                            preserveAspectRatio="none"
+                            viewBox="0 0 200 200"
+                            className="text-brand-blue/[0.05]"
+                        >
                             <defs>
                                 <pattern id={`grid-${index}`} width="20" height="20" patternUnits="userSpaceOnUse">
-                                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" strokeWidth="0.5" />
+                                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" strokeWidth="0.4" />
                                 </pattern>
                             </defs>
                             <rect width="200" height="200" fill={`url(#grid-${index})`} />
-                            {/* Decorative bar chart shapes */}
-                            <g className="text-brand-blue/30" fill="currentColor">
-                                <rect x="20" y={140 - (index * 7) % 60} width="14" height={20 + (index * 7) % 60} />
-                                <rect x="40" y={160 - (index * 11) % 50} width="14" height={(index * 11) % 50} />
-                                <rect x="60" y={120 - (index * 13) % 70} width="14" height={40 + (index * 13) % 70} />
-                                <rect x="80" y={150 - (index * 9) % 40} width="14" height={20 + (index * 9) % 40} />
+                            {/* Bar shapes — concentrated bottom-right corner so titles stay clear */}
+                            <g className="text-brand-blue/[0.06]" fill="currentColor">
+                                <rect x="135" y={170 - (index * 7) % 35} width="9" height={10 + (index * 7) % 35} />
+                                <rect x="150" y={175 - (index * 11) % 30} width="9" height={5 + (index * 11) % 30} />
+                                <rect x="165" y={155 - (index * 13) % 45} width="9" height={25 + (index * 13) % 45} />
+                                <rect x="180" y={165 - (index * 9) % 25} width="9" height={15 + (index * 9) % 25} />
                             </g>
                         </svg>
                     </div>
@@ -84,7 +90,7 @@ function ProjectCard({ project, index, span, onClick }: ProjectCardProps) {
                 initial={false}
                 animate={{ y: hovered ? "0%" : "100%" }}
                 transition={{ duration: 0.5, ease: easings.ui }}
-                className="absolute inset-0 z-0 bg-gradient-to-t from-brand-blue/10 via-transparent to-transparent pointer-events-none"
+                className="absolute inset-0 z-0 bg-gradient-to-t from-brand-blue/[0.06] via-transparent to-transparent pointer-events-none"
             />
 
             {/* Content */}

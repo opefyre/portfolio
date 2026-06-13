@@ -126,7 +126,7 @@ export default function DigitalHero({
         <section
             id="overview-hero"
             aria-labelledby="hero-name"
-            className="relative h-[100dvh] min-h-[720px] w-full overflow-hidden grid grid-rows-[auto_1fr_auto]"
+            className="hero-cockpit relative h-[100dvh] min-h-[640px] w-full overflow-hidden grid grid-rows-[auto_1fr_auto]"
         >
             {/* ----- Background stack ----- */}
             {!reducedMotion && (
@@ -158,7 +158,14 @@ export default function DigitalHero({
             {!reducedMotion && <div className="scanline z-0" aria-hidden="true" />}
 
             {/* ----- Top band: corner mission labels (pushed below nav so they never overlap) ----- */}
-            <div className="relative z-10 px-6 md:px-10 pt-28 md:pt-32 pb-2 flex justify-between items-start gap-4 text-tertiary">
+            <div
+                className="relative z-10 flex justify-between items-start gap-4 text-tertiary pb-2"
+                style={{
+                    paddingTop: "var(--hero-pad-top)",
+                    paddingLeft: "var(--hero-pad-x)",
+                    paddingRight: "var(--hero-pad-x)",
+                }}
+            >
                 <motion.div
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -183,9 +190,21 @@ export default function DigitalHero({
             </div>
 
             {/* ----- Main editorial grid ----- */}
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 px-6 md:px-10 py-4 md:py-6 items-center">
+            <div
+                className="relative z-10 grid grid-cols-1 lg:grid-cols-12 items-center"
+                style={{
+                    gap: "var(--hero-col-gap)",
+                    paddingLeft: "var(--hero-pad-x)",
+                    paddingRight: "var(--hero-pad-x)",
+                    paddingTop: "var(--hero-stack-gap)",
+                    paddingBottom: "var(--hero-stack-gap)",
+                }}
+            >
                 {/* LEFT: 7 cols */}
-                <div className="lg:col-span-7 flex flex-col gap-4 md:gap-5">
+                <div
+                    className="lg:col-span-7 flex flex-col"
+                    style={{ gap: "var(--hero-stack-gap)" }}
+                >
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -199,7 +218,11 @@ export default function DigitalHero({
                     {/* Name — editorial display, mask-reveal */}
                     <h1
                         id="hero-name"
-                        className="font-display font-medium leading-[0.86] tracking-[-0.025em] text-[clamp(3rem,7.5vw,7.5rem)] text-primary"
+                        className="font-display font-medium tracking-[-0.025em] text-primary"
+                        style={{
+                            fontSize: "var(--hero-name-size)",
+                            lineHeight: "var(--hero-name-line)" as unknown as number,
+                        }}
                     >
                         <span className="block overflow-hidden">
                             <span
@@ -225,7 +248,8 @@ export default function DigitalHero({
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.55, duration: durations.slow, ease: easings.ui }}
-                        className="text-secondary text-sm md:text-base leading-relaxed max-w-xl border-l border-brand-blue/30 pl-4"
+                        className="text-secondary leading-relaxed max-w-xl border-l border-brand-blue/30 pl-4"
+                        style={{ fontSize: "var(--hero-headline-size)" }}
                     >
                         {headline}
                     </motion.p>
@@ -265,7 +289,10 @@ export default function DigitalHero({
                 </div>
 
                 {/* RIGHT: 5 cols — avatar + metric stacked compactly */}
-                <div className="lg:col-span-5 relative flex flex-col items-center lg:items-end gap-6 md:gap-8">
+                <div
+                    className="lg:col-span-5 relative flex flex-col items-center lg:items-end"
+                    style={{ gap: "var(--hero-stack-gap)" }}
+                >
                     <motion.div
                         style={{ x: sx, y: sy }}
                         initial={{ opacity: 0, scale: 0.94 }}
@@ -278,7 +305,10 @@ export default function DigitalHero({
                         <span aria-hidden="true" className="crosshair-tick" style={{ top: "50%", left: "-12px", height: "1.5px", width: "8px", transform: "translateY(-50%)" }} />
                         <span aria-hidden="true" className="crosshair-tick" style={{ top: "50%", right: "-12px", height: "1.5px", width: "8px", transform: "translateY(-50%)" }} />
 
-                        <div className="relative w-28 h-28 md:w-36 md:h-36 rounded-full p-[2px] bg-gradient-to-br from-white/30 via-white/5 to-white/15 shadow-[0_30px_60px_-30px_rgba(56,189,248,0.45)]">
+                        <div
+                            className="relative rounded-full p-[2px] bg-gradient-to-br from-white/30 via-white/5 to-white/15 shadow-[0_30px_60px_-30px_rgba(56,189,248,0.45)]"
+                            style={{ width: "var(--hero-avatar)", height: "var(--hero-avatar)" }}
+                        >
                             <svg
                                 viewBox="0 0 200 200"
                                 className="absolute inset-[-14px] w-[calc(100%+28px)] h-[calc(100%+28px)] text-brand-blue/40 pointer-events-none"
@@ -309,7 +339,7 @@ export default function DigitalHero({
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.6, duration: durations.slow, ease: easings.ui }}
-                        className="w-full max-w-md mt-6"
+                        className="w-full max-w-md"
                     >
                         <div className="flex items-baseline justify-between gap-4 mb-1.5">
                             <span className="label-mono text-brand-blue">[ SIGNATURE OUTCOME ]</span>
@@ -318,7 +348,11 @@ export default function DigitalHero({
                         <div className="flex items-baseline gap-3">
                             <span
                                 aria-hidden="true"
-                                className="font-editorial italic text-brand-blue text-[clamp(3.5rem,7.5vw,6rem)] leading-[0.85] tabular-nums drop-shadow-[0_0_30px_rgba(56,189,248,0.35)]"
+                                className="font-editorial italic text-brand-blue tabular-nums drop-shadow-[0_0_30px_rgba(56,189,248,0.35)]"
+                                style={{
+                                    fontSize: "var(--hero-metric-size)",
+                                    lineHeight: "var(--hero-metric-line)" as unknown as number,
+                                }}
                             >
                                 <SignatureCounter value={signatureMetricValue} reducedMotion={reducedMotion} />
                             </span>

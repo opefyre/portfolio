@@ -124,6 +124,39 @@ body::before {
   outline-offset: 2px;
 }
 
+/* ====== Cockpit responsive sizing tokens ======
+   These scale by viewport height so the hero + experience timeline always fit
+   on a 14" laptop (≈ 1440×900) without the user needing to scroll.
+*/
+.hero-cockpit {
+  /* Token defaults: tuned for desktops at ≥ 1080p. */
+  --hero-name-size: clamp(2.75rem, min(7vw, 12vh), 7rem);
+  --hero-name-line: 0.86;
+  --hero-headline-size: clamp(0.875rem, 1.4vh, 1.0625rem);
+  --hero-metric-size: clamp(2.75rem, min(6.5vw, 11vh), 5.5rem);
+  --hero-metric-line: 0.85;
+  --hero-avatar: clamp(5.5rem, min(8vw, 13vh), 8.5rem);
+  --hero-pad-top: clamp(5rem, 12vh, 8rem);
+  --hero-pad-x: clamp(1.25rem, 2.5vw, 3rem);
+  --hero-stack-gap: clamp(0.75rem, 2vh, 1.5rem);
+  --hero-col-gap: clamp(1rem, 3vh, 2.25rem);
+}
+@media (max-height: 880px) {
+  .hero-cockpit {
+    --hero-pad-top: clamp(4.5rem, 10vh, 6.5rem);
+    --hero-stack-gap: clamp(0.625rem, 1.6vh, 1.125rem);
+    --hero-col-gap: clamp(0.75rem, 2.2vh, 1.75rem);
+  }
+}
+@media (max-height: 760px) {
+  .hero-cockpit {
+    --hero-name-size: clamp(2.25rem, min(6vw, 11vh), 5.25rem);
+    --hero-metric-size: clamp(2.25rem, min(5.5vw, 10vh), 4.25rem);
+    --hero-avatar: clamp(4.5rem, min(6.5vw, 10vh), 6.5rem);
+    --hero-pad-top: clamp(3.75rem, 9vh, 5.5rem);
+  }
+}
+
 /* ====== Cockpit motion primitives ====== */
 
 /* The slow scan-line that sweeps across hero on load. Pure CSS, GPU-friendly. */

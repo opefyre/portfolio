@@ -30,56 +30,91 @@ function StationCard({ role, index, total }: { role: Experience; index: number; 
     const endYear = latestYear(allPositions[0]?.period ?? "");
 
     return (
-        <article className="station relative h-full w-screen flex-shrink-0 grid grid-cols-1 lg:grid-cols-12 gap-8 px-6 md:px-12 lg:px-20 py-24 lg:py-28">
-            {/* Massive year numerals — editorial display */}
-            <div className="lg:col-span-5 flex flex-col justify-between order-1 lg:order-1">
-                <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                        <span className="label-mono text-brand-blue">
-                            STATION {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-                        </span>
-                        <span aria-hidden="true" className="h-px w-12 bg-brand-blue/40" />
-                    </div>
-                    <h3 className="font-display font-medium text-3xl md:text-5xl text-primary leading-[0.95] tracking-tight">
-                        {role.company}
-                    </h3>
-                    <p className="label-mono text-tertiary">{role.location}</p>
-                </div>
-
-                {/* The year span — editorial italic numerals */}
-                <div className="mt-10 lg:mt-0">
-                    <div className="label-mono text-tertiary mb-2">— TENURE</div>
-                    <div className="flex items-end gap-4">
-                        <span className="font-editorial italic text-brand-blue text-[clamp(5rem,12vw,12rem)] leading-[0.8] tabular-nums">
-                            {startYear}
-                        </span>
-                        <span className="font-editorial italic text-tertiary text-[clamp(2.5rem,5vw,5rem)] leading-[0.8] tabular-nums pb-3">
-                            → {endYear}
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            {/* Positions + achievements — scrollable column */}
-            <div className="lg:col-span-7 order-2 lg:order-2 space-y-8 lg:max-h-[78vh] lg:overflow-y-auto pr-3 custom-scrollbar">
-                {allPositions.map((pos, pIdx) => (
-                    <div key={pIdx} className="border-l-2 border-border hover:border-brand-blue/60 transition-colors pl-5 py-1">
-                        <div className="flex items-baseline justify-between gap-4 flex-wrap mb-1.5">
-                            <h4 className="font-display text-lg md:text-2xl font-medium text-primary leading-tight">
-                                {pos.title}
-                            </h4>
-                            <span className="label-mono text-tertiary">{pos.period}</span>
+        <article
+            className="station relative w-screen flex-shrink-0 flex flex-col"
+            style={{
+                height: "100dvh",
+                paddingLeft: "clamp(1.25rem, 3vw, 5rem)",
+                paddingRight: "clamp(1.25rem, 3vw, 5rem)",
+                paddingTop: "clamp(4rem, 9vh, 7rem)",
+                paddingBottom: "clamp(2rem, 4vh, 3rem)",
+            }}
+        >
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 flex-1 min-h-0 w-full max-w-[1600px] mx-auto">
+                {/* LEFT column — kicker (top) + company name (middle) + year (anchored bottom-left) */}
+                <div className="lg:col-span-5 flex flex-col justify-between min-h-0 gap-6">
+                    <div className="space-y-3">
+                        <div className="flex items-center gap-3">
+                            <span className="label-mono text-brand-blue">
+                                STATION {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+                            </span>
+                            <span aria-hidden="true" className="h-px w-12 bg-brand-blue/40" />
                         </div>
-                        <ul className="mt-3 space-y-2.5">
-                            {pos.achievements.map((item, i) => (
-                                <li key={i} className="text-secondary text-sm leading-relaxed flex items-start gap-3">
-                                    <span aria-hidden="true" className="text-brand-blue mt-1.5 text-[8px]">◆</span>
-                                    <span>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
+                        <h3
+                            className="font-display font-medium text-primary tracking-tight"
+                            style={{
+                                fontSize: "clamp(1.75rem, min(3vw, 4.5vh), 3rem)",
+                                lineHeight: 0.95,
+                            }}
+                        >
+                            {role.company}
+                        </h3>
+                        <p className="label-mono text-tertiary">{role.location}</p>
                     </div>
-                ))}
+
+                    {/* The year — anchored to bottom of column so it always fits on first frame */}
+                    <div>
+                        <div className="label-mono text-tertiary mb-2">— TENURE</div>
+                        <div className="flex items-end gap-3 flex-wrap">
+                            <span
+                                className="font-editorial italic text-brand-blue leading-[0.8] tabular-nums"
+                                style={{ fontSize: "clamp(3.5rem, min(7.5vw, 14vh), 9rem)" }}
+                            >
+                                {startYear}
+                            </span>
+                            <span
+                                className="font-editorial italic text-tertiary leading-[0.85] tabular-nums pb-2"
+                                style={{ fontSize: "clamp(1.75rem, min(3.5vw, 7vh), 4rem)" }}
+                            >
+                                → {endYear}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* RIGHT column — positions + achievements, internally scrollable when overflow */}
+                <div className="lg:col-span-7 min-h-0 flex flex-col">
+                    <div className="overflow-y-auto custom-scrollbar pr-3 -mr-3 space-y-7 flex-1 min-h-0">
+                        {allPositions.map((pos, pIdx) => (
+                            <div
+                                key={pIdx}
+                                className="border-l-2 border-border hover:border-brand-blue/60 transition-colors pl-5 py-1"
+                            >
+                                <div className="flex items-baseline justify-between gap-4 flex-wrap mb-1.5">
+                                    <h4
+                                        className="font-display font-medium text-primary leading-tight"
+                                        style={{ fontSize: "clamp(1rem, min(1.5vw, 2.4vh), 1.5rem)" }}
+                                    >
+                                        {pos.title}
+                                    </h4>
+                                    <span className="label-mono text-tertiary">{pos.period}</span>
+                                </div>
+                                <ul className="mt-3 space-y-2">
+                                    {pos.achievements.map((item, i) => (
+                                        <li
+                                            key={i}
+                                            className="text-secondary leading-relaxed flex items-start gap-3"
+                                            style={{ fontSize: "clamp(0.8125rem, 1.3vh, 0.95rem)" }}
+                                        >
+                                            <span aria-hidden="true" className="text-brand-blue mt-1.5 text-[8px]">◆</span>
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </article>
     );
@@ -164,9 +199,10 @@ export default function ExperienceStack({ experiences }: ExperienceStackProps) {
     }, [isDesktop, reducedMotion, experiences.length]);
 
     return (
-        <section ref={sectionRef} className="relative w-full" id="experience">
-            {/* Section header — visible at start and again on mobile */}
-            <div className="container-wide pt-24 pb-12 lg:pb-8 relative z-20">
+        <section className="relative w-full" id="experience">
+            {/* Section header lives OUTSIDE the pinned region so the first station
+                opens fully on the first frame of horizontal scroll. */}
+            <div className="container-wide pt-20 pb-10 lg:pb-12">
                 <div className="flex items-center gap-3 mb-4">
                     <span className="label-mono bracket text-brand-blue">EXPERIENCE</span>
                     <span aria-hidden="true" className="h-px flex-1 bg-gradient-to-r from-brand-blue/40 to-transparent" />
@@ -187,7 +223,7 @@ export default function ExperienceStack({ experiences }: ExperienceStackProps) {
 
             {/* Desktop: pinned horizontal track */}
             {isDesktop && !reducedMotion ? (
-                <div className="relative">
+                <div ref={sectionRef} className="relative">
                     <div className="overflow-hidden">
                         <div
                             ref={trackRef}
@@ -200,9 +236,9 @@ export default function ExperienceStack({ experiences }: ExperienceStackProps) {
                         </div>
                     </div>
 
-                    {/* Progress indicator — top-fixed inside the pinned viewport */}
+                    {/* Progress indicator — pinned to top INSIDE the horizontal track region only */}
                     <div className="absolute top-0 left-0 right-0 z-30 pointer-events-none">
-                        <div className="container-wide pt-6">
+                        <div className="container-wide pt-5">
                             <div className="flex items-center gap-3">
                                 <span className="label-mono text-tertiary">JOURNEY</span>
                                 <div className="flex-1 relative h-px bg-white/10">
