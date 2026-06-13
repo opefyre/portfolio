@@ -103,23 +103,25 @@ export default async function Home() {
       </section>
 
       {/*
-        STACK-REVEAL: Selected Work is sticky at top of viewport for one full
-        viewport-height of scroll. The footer (also exactly one viewport tall)
-        sits on top of it via z-10, so as the user scrolls, the footer rises
-        UP from below and covers the sticky stage — exactly the 'new page
-        rolling over' effect requested.
+        STACK-REVEAL — 'sticky at the END' pattern.
 
-        Sticky math: parent height = sticky.height (100dvh) + footer.height
-        (100dvh) = 200dvh, so sticky stays pinned for 100dvh of scroll, which
-        is exactly the distance the footer needs to fully cover it.
+        Selected Work scrolls normally. Only when the user reaches its last
+        viewport (its bottom edge meets viewport bottom) does it lock in
+        place via `position: sticky; bottom: 0`. The footer (z-10) is in
+        the same parent, so once SW is locked, continued scrolling drives
+        the footer up FROM BELOW the viewport — it rises over the now-
+        pinned SW until it covers it completely.
+
+        No internal scroll inside SW — page scroll flows through the bento
+        and archive naturally; the lock kicks in only at the very end.
       */}
       <div className="relative">
-        <section className="sticky top-0 h-[100dvh] z-0 overflow-hidden" aria-label="Selected work">
+        <section className="sticky bottom-0 z-0" aria-label="Selected work">
           <SelectedWorkStage totalCount={projects.length}>
             <ProjectGallery projects={projects} />
           </SelectedWorkStage>
         </section>
-        <div className="relative z-10 h-[100dvh] flex">
+        <div className="relative z-10 h-[100dvh]">
           <SiteFooter
             location={personalInfo.location}
             linkedin={personalInfo.linkedin}
