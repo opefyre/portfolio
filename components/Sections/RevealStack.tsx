@@ -8,79 +8,89 @@ interface RevealStackProps {
 }
 
 /**
- * 'New page rolling over' reveal:
- *  - `children` (Selected Work) scrolls normally
- *  - When SW's bottom reaches viewport bottom, SW is visually PINNED in
- *    place via a transform (its scroll-up motion is cancelled)
- *  - At the same time the fixed-positioned footer slides up FROM BELOW
- *    via translateY(100% → 0%), covering SW like a cover sheet
- *  - End of SW = end of website. Document height = SW height + 100vh
- *    of 'reveal scroll room'
+ * 'New page rolling over' reveal — rAF-polled so it survives Lenis.
  *
- * Implemented in JS rather than CSS sticky because Lenis smooth-scroll
- * can interfere with sticky-bottom engagement timing — JS gives us a
- * deterministic, frame-accurate reveal.
+ * Layout:
+ *   wrap (relative)
+ *     ├─ <Selected Work />              (transformed when overshooting)
+ *     ├─ spacer 100dvh                  (NEVER transformed — used as the
+ *     │                                  natural scroll reference)
+ *     └─ footer (position: fixed)       (slides in from below via translateY)
+ *
+ * Math (per frame):
+ *   spacerTop = spacer.getBoundingClientRect().top      (natural scroll ref)
+ *   overshoot = clamp(0, vh - spacerTop, vh)
+ *   sw.transform   = translateY(overshoot)              (visually pins SW)
+ *   footer.transform = translateY((1 - overshoot/vh) * 100%)
+ *
+ * Why poll instead of listen: with Lenis hijacking scroll, neither native
+ * 'scroll' events on window nor Lenis's own 'scroll' event fire reliably
+ * for every visual position change. A continuous rAF tick (one
+ * getBoundingClientRect + two style writes per frame) is cheap and
+ * deterministic.
+ *
+ * Why read the SPACER's rect and not SW's: SW gets transformed each frame,
+ * so its getBoundingClientRect would include the transform and create a
+ * fixed-point feedback loop. The spacer is a plain, never-transformed
+ * sibling.
  */
 export default function RevealStack({ children, footer }: RevealStackProps) {
-    const swWrapRef = useRef<HTMLDivElement>(null);
+    const swRef = useRef<HTMLDivElement>(null);
+    const spacerRef = useRef<HTMLDivElement>(null);
     const footerRef = useRef<HTMLDivElement>(null);
-    const rafRef = useRef<number | null>(null);
-    const lastY = useRef<number>(-1);
 
     useEffect(() => {
-        const update = () => {
-            rafRef.current = null;
-            const swWrap = swWrapRef.current;
-            const footerEl = footerRef.current;
-            if (!swWrap || !footerEl) return;
+        const sw = swRef.current;
+        const spacer = spacerRef.current;
+        const footerEl = footerRef.current;
+        if (!sw || !spacer || !footerEl) return;
 
-            const swRect = swWrap.getBoundingClientRect();
+        let rafId = 0;
+        let lastSwY = -Infinity;
+        let lastFooterY = -Infinity;
+
+        const tick = () => {
+            const spacerRect = spacer.getBoundingClientRect();
             const vh = window.innerHeight;
 
-            if (swRect.bottom > vh) {
-                // SW hasn't reached the end yet — normal scroll
-                if (swWrap.style.transform !== "") swWrap.style.transform = "";
-                if (footerEl.style.transform !== "translateY(100%)") footerEl.style.transform = "translateY(100%)";
-            } else {
-                // SW end reached. PIN it visually at the bottom of viewport by translating
-                // it down by the same amount it would have scrolled past
-                const overshoot = vh - swRect.bottom; // 0 -> vh as user scrolls into the reveal zone
-                const clamped = Math.max(0, Math.min(vh, overshoot));
-                swWrap.style.transform = `translate3d(0, ${clamped}px, 0)`;
+            const raw = vh - spacerRect.top;
+            const overshoot = Math.max(0, Math.min(vh, raw));
 
-                // Footer slides up over the now-pinned SW
-                const progress = clamped / vh; // 0 -> 1
-                footerEl.style.transform = `translate3d(0, ${(1 - progress) * 100}%, 0)`;
+            // Only write to the DOM if the value actually changed by ≥ 0.5px,
+            // so we don't trigger needless style invalidation when idle.
+            if (Math.abs(overshoot - lastSwY) >= 0.5) {
+                lastSwY = overshoot;
+                sw.style.transform = `translate3d(0, ${overshoot}px, 0)`;
             }
+            const footerTranslate = (1 - overshoot / vh) * 100;
+            if (Math.abs(footerTranslate - lastFooterY) >= 0.1) {
+                lastFooterY = footerTranslate;
+                footerEl.style.transform = `translate3d(0, ${footerTranslate}%, 0)`;
+            }
+
+            rafId = window.requestAnimationFrame(tick);
         };
 
-        const onScroll = () => {
-            const y = window.scrollY;
-            if (y === lastY.current) return;
-            lastY.current = y;
-            if (rafRef.current !== null) return;
-            rafRef.current = window.requestAnimationFrame(update);
-        };
+        rafId = window.requestAnimationFrame(tick);
 
-        update();
-        window.addEventListener("scroll", onScroll, { passive: true });
-        window.addEventListener("resize", update);
         return () => {
-            window.removeEventListener("scroll", onScroll);
-            window.removeEventListener("resize", update);
-            if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current);
+            window.cancelAnimationFrame(rafId);
         };
     }, []);
 
     return (
         <div className="relative">
-            {/* SW wrapper — gets translated down when pinned so it stays at viewport bottom */}
-            <div ref={swWrapRef} style={{ willChange: "transform" }} className="relative z-0">
+            {/* Selected Work — gets translated down when overshooting */}
+            <div ref={swRef} style={{ willChange: "transform" }} className="relative z-0">
                 {children}
             </div>
 
-            {/* 100dvh of scroll room AFTER SW so the footer reveal has room to play through */}
-            <div aria-hidden="true" className="h-[100dvh] pointer-events-none" />
+            {/* Spacer — NEVER transformed. Used as the natural-scroll reference. */}
+            <div
+                ref={spacerRef}
+                aria-hidden="true"
+                className="h-[100dvh] pointer-events-none"
+            />
 
             {/* Footer — fixed at viewport bottom, slides up via translate */}
             <div
