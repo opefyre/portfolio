@@ -2,6 +2,8 @@
 
 import { useEffect } from "react";
 import Lenis from "lenis";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useReducedMotion } from "@/lib/motion";
 
 declare global {
@@ -10,43 +12,46 @@ declare global {
     }
 }
 
+if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+}
+
 /**
- * Lenis smooth scroll + opt-in guided slide snap.
+ * Single source of truth for scroll.
  *
- * Snap rules (in order — all must pass):
- *   1. Section carries `data-snap="true"`
- *   2. User stopped scrolling for ~260ms (debounced)
- *   3. Lenis velocity is near zero (the user's gesture has ended)
- *   4. Target section top is within ±22vh of viewport top
- *   5. Candidate matches the last scroll direction
+ *  - GSAP's ticker drives Lenis's raf so we never get two raf loops fighting
+ *  - Lenis 'scroll' event keeps ScrollTrigger in sync with smooth-scrolled position
+ *  - On reduced motion, Lenis becomes a passthrough and snap is disabled
  *
- * On a snap fire, a 900ms cooldown blocks re-snap so the user can never
- * be trapped in a back-and-forth loop.
- *
- * Sections taller than the viewport (Skills, Education, Projects) MUST
- * NOT have `data-snap`, so the user can browse them freely.
+ * Guided slide snap:
+ *  - Fires only when ALL of: section has data-snap, user settled (no input
+ *    for ~260ms), Lenis velocity is near zero, section top is within ±22vh,
+ *    and the candidate matches the user's last scroll direction
+ *  - 900ms cooldown after each snap so the user can never get trapped
  */
 export default function SmoothScroller({ children }: { children: React.ReactNode }) {
     const reducedMotion = useReducedMotion();
 
     useEffect(() => {
         const lenis = new Lenis({
-            duration: 1.1,
+            duration: 1.05,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             orientation: "vertical",
             gestureOrientation: "vertical",
             smoothWheel: !reducedMotion,
             touchMultiplier: 2,
         });
-
         window.__lenis = lenis;
 
-        let rafId = 0;
-        function raf(time: number) {
-            lenis.raf(time);
-            rafId = requestAnimationFrame(raf);
-        }
-        rafId = requestAnimationFrame(raf);
+        // Single ticker. GSAP drives Lenis; Lenis drives ScrollTrigger.
+        const onLenisScroll = () => ScrollTrigger.update();
+        lenis.on("scroll", onLenisScroll);
+
+        const gsapTicker = (time: number) => {
+            lenis.raf(time * 1000);
+        };
+        gsap.ticker.add(gsapTicker);
+        gsap.ticker.lagSmoothing(0);
 
         // ---- Guided slide snap ----
         let snapTimeout: number | null = null;
@@ -55,8 +60,8 @@ export default function SmoothScroller({ children }: { children: React.ReactNode
         let isSnapping = false;
         let cooldownUntil = 0;
 
-        const PROXIMITY_VH = 0.22; // section top must be within ±22vh
-        const VELOCITY_FLOOR = 0.05; // Lenis units; tune so 'still scrolling' doesn't trigger snap
+        const PROXIMITY_VH = 0.22;
+        const VELOCITY_FLOOR = 0.05;
         const SETTLE_MS = 260;
 
         const findSnapTargets = () =>
@@ -66,7 +71,6 @@ export default function SmoothScroller({ children }: { children: React.ReactNode
             if (reducedMotion || isSnapping) return;
             if (performance.now() < cooldownUntil) return;
 
-            // Don't snap while Lenis is still actively interpolating.
             const velocity = Math.abs((lenis as unknown as { velocity?: number }).velocity ?? 0);
             if (velocity > VELOCITY_FLOOR) {
                 scheduleSnap();
@@ -83,7 +87,7 @@ export default function SmoothScroller({ children }: { children: React.ReactNode
                 const rect = el.getBoundingClientRect();
                 const top = rect.top;
                 const abs = Math.abs(top);
-                if (rect.bottom <= 80) continue; // already past this slide
+                if (rect.bottom <= 80) continue;
                 if (abs < vh * PROXIMITY_VH) {
                     if (!best || abs < Math.abs(best.offset)) {
                         best = { el, offset: top };
@@ -92,7 +96,6 @@ export default function SmoothScroller({ children }: { children: React.ReactNode
             }
             if (!best) return;
 
-            // Direction sanity check: don't snap backwards against the user's last gesture.
             if (lastDirection > 0 && best.offset < -16) return;
             if (lastDirection < 0 && best.offset > 16) return;
 
@@ -115,7 +118,7 @@ export default function SmoothScroller({ children }: { children: React.ReactNode
             snapTimeout = window.setTimeout(tryFire, SETTLE_MS);
         };
 
-        const onScroll = () => {
+        const onScrollListener = () => {
             const y = window.scrollY;
             const dy = y - lastY;
             if (Math.abs(dy) > 0) lastDirection = Math.sign(dy);
@@ -123,26 +126,25 @@ export default function SmoothScroller({ children }: { children: React.ReactNode
             if (isSnapping) return;
             scheduleSnap();
         };
+        lenis.on("scroll", onScrollListener);
 
-        // Cancel any pending snap on a fresh user gesture
         const cancelSnap = () => {
             if (snapTimeout !== null) {
                 window.clearTimeout(snapTimeout);
                 snapTimeout = null;
             }
         };
-
-        lenis.on("scroll", onScroll);
         window.addEventListener("wheel", cancelSnap, { passive: true });
         window.addEventListener("touchstart", cancelSnap, { passive: true });
         window.addEventListener("keydown", cancelSnap, { passive: true });
 
         return () => {
             if (snapTimeout !== null) window.clearTimeout(snapTimeout);
-            cancelAnimationFrame(rafId);
             window.removeEventListener("wheel", cancelSnap);
             window.removeEventListener("touchstart", cancelSnap);
             window.removeEventListener("keydown", cancelSnap);
+            gsap.ticker.remove(gsapTicker);
+            ScrollTrigger.getAll().forEach((s) => s.kill());
             lenis.destroy();
             delete window.__lenis;
         };

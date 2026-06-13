@@ -204,6 +204,7 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [showAll, setShowAll] = useState(false);
     const lastInvokerRef = useRef<HTMLElement | null>(null);
+    const archiveAnchorRef = useRef<HTMLDivElement | null>(null);
 
     const openModal = (project: Project) => {
         lastInvokerRef.current = (document.activeElement as HTMLElement) ?? null;
@@ -214,6 +215,25 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
     const closeModal = () => {
         setIsModalOpen(false);
         window.setTimeout(() => lastInvokerRef.current?.focus(), 50);
+    };
+
+    const toggleArchive = () => {
+        const willOpen = !showAll;
+        setShowAll(willOpen);
+        if (willOpen) {
+            // After the new list mounts, smooth-scroll so the FIRST archive item sits
+            // just below the toggle. Uses Lenis when available for a synced glide.
+            window.setTimeout(() => {
+                const anchor = archiveAnchorRef.current;
+                if (!anchor) return;
+                const targetY = anchor.getBoundingClientRect().top + window.scrollY - 120;
+                if (window.__lenis) {
+                    window.__lenis.scrollTo(targetY, { duration: 0.7, easing: (t: number) => 1 - Math.pow(1 - t, 3) });
+                } else {
+                    window.scrollTo({ top: targetY, behavior: "smooth" });
+                }
+            }, 60);
+        }
     };
 
     // Asymmetric bento for the featured strip — cycle through wide/tall/square
@@ -252,11 +272,11 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
                 {/* Reveal-the-archive — compact list of remaining projects */}
                 {additional.length > 0 && (
                     <div className="mt-14 max-w-7xl mx-auto px-4 md:px-0">
-                        <div className="flex items-center justify-between mb-6">
+                        <div ref={archiveAnchorRef} className="flex items-center justify-between mb-6 scroll-mt-32">
                             <span className="label-mono bracket text-brand-blue">ARCHIVE · {String(additional.length).padStart(2, "0")} MORE</span>
                             <button
                                 type="button"
-                                onClick={() => setShowAll((s) => !s)}
+                                onClick={toggleArchive}
                                 data-cursor={showAll ? "collapse" : "expand"}
                                 className="label-mono text-tertiary hover:text-brand-blue transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-md px-2 py-1"
                                 aria-expanded={showAll}
@@ -265,31 +285,48 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
                             </button>
                         </div>
 
-                        {showAll && (
-                            <ul className="divide-y divide-border/40 border-t border-b border-border/40">
-                                {additional.map((project, idx) => (
-                                    <li key={project.id || idx}>
-                                        <button
-                                            type="button"
-                                            onClick={() => openModal(project)}
-                                            data-cursor="view"
-                                            className="group w-full text-left flex items-center gap-5 py-4 hover:bg-white/[0.02] px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-sm transition-colors"
+                        <AnimatePresence initial={false}>
+                            {showAll && (
+                                <motion.ul
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: "auto" }}
+                                    exit={{ opacity: 0, height: 0 }}
+                                    transition={{ duration: 0.45, ease: easings.ui }}
+                                    className="divide-y divide-border/40 border-t border-b border-border/40 overflow-hidden"
+                                >
+                                    {additional.map((project, idx) => (
+                                        <motion.li
+                                            key={project.id || idx}
+                                            initial={{ opacity: 0, x: -8 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{
+                                                duration: 0.3,
+                                                delay: 0.05 + Math.min(idx, 12) * 0.025,
+                                                ease: easings.ui,
+                                            }}
                                         >
-                                            <span className="label-mono text-tertiary w-12 tabular-nums">
-                                                {String(FEATURED_COUNT + idx + 1).padStart(2, "0")}
-                                            </span>
-                                            <span className="label-mono text-brand-blue w-44 shrink-0 truncate">
-                                                {project.category}
-                                            </span>
-                                            <span className="text-secondary text-base md:text-lg flex-1 truncate group-hover:text-primary transition-colors">
-                                                {project.title}
-                                            </span>
-                                            <ArrowUpRight className="w-4 h-4 text-tertiary group-hover:text-brand-blue group-hover:translate-x-0.5 transition-all" aria-hidden="true" />
-                                        </button>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
+                                            <button
+                                                type="button"
+                                                onClick={() => openModal(project)}
+                                                data-cursor="view"
+                                                className="group w-full text-left flex items-center gap-5 py-4 hover:bg-white/[0.02] px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-sm transition-colors"
+                                            >
+                                                <span className="label-mono text-tertiary w-12 tabular-nums">
+                                                    {String(FEATURED_COUNT + idx + 1).padStart(2, "0")}
+                                                </span>
+                                                <span className="label-mono text-brand-blue w-44 shrink-0 truncate">
+                                                    {project.category}
+                                                </span>
+                                                <span className="text-secondary text-base md:text-lg flex-1 truncate group-hover:text-primary transition-colors">
+                                                    {project.title}
+                                                </span>
+                                                <ArrowUpRight className="w-4 h-4 text-tertiary group-hover:text-brand-blue group-hover:translate-x-0.5 transition-all" aria-hidden="true" />
+                                            </button>
+                                        </motion.li>
+                                    ))}
+                                </motion.ul>
+                            )}
+                        </AnimatePresence>
                     </div>
                 )}
             </div>

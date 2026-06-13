@@ -209,19 +209,14 @@ export default function ExperienceStack({ experiences }: ExperienceStackProps) {
             const { ScrollTrigger } = await import("gsap/ScrollTrigger");
             gsapMod.registerPlugin(ScrollTrigger);
 
-            // Bridge Lenis ↔ ScrollTrigger so smooth scroll and pinning stay in sync
-            const lenis = window.__lenis;
-            const lenisHandler = () => ScrollTrigger.update();
-            lenis?.on("scroll", lenisHandler);
-            const gsapTickerFn = (time: number) => lenis?.raf(time * 1000);
-            if (lenis) gsapMod.ticker.add(gsapTickerFn);
-            gsapMod.ticker.lagSmoothing(0);
+            // ScrollTrigger ↔ Lenis bridge is set up ONCE in SmoothScroller. We just
+            // register a ScrollTrigger here. Adding our own gsap.ticker for Lenis would
+            // drive its raf twice per frame and produce visible jitter.
 
             const section = sectionRef.current!;
             const track = trackRef.current!;
             const stations = track.querySelectorAll<HTMLElement>(".station");
 
-            // Compute drift: width of track minus one viewport
             const computeDistance = () => track.scrollWidth - window.innerWidth;
 
             const tween = gsapMod.to(track, {
@@ -232,7 +227,9 @@ export default function ExperienceStack({ experiences }: ExperienceStackProps) {
                     start: "top top",
                     end: () => `+=${computeDistance()}`,
                     pin: true,
-                    scrub: 0.8,
+                    pinType: "transform",
+                    pinSpacing: true,
+                    scrub: 0.6,
                     invalidateOnRefresh: true,
                     anticipatePin: 1,
                     onUpdate: (self) => {
@@ -248,9 +245,6 @@ export default function ExperienceStack({ experiences }: ExperienceStackProps) {
             cleanup = () => {
                 tween.kill();
                 st?.kill();
-                lenis?.off("scroll", lenisHandler);
-                if (lenis) gsapMod.ticker.remove(gsapTickerFn);
-                ScrollTrigger.getAll().forEach((s) => s.kill());
             };
         })();
 

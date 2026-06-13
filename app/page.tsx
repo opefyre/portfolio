@@ -6,6 +6,8 @@ import ProjectGallery from "@/components/Sections/ProjectGallery";
 import FloatingNav from "@/components/Navigation/FloatingNav";
 import ElixiaryFeature from "@/components/Sections/ElixiaryFeature";
 import SectionDivider from "@/components/UI/SectionDivider";
+import SelectedWorkStage from "@/components/Sections/SelectedWorkStage";
+import SiteFooter from "@/components/Sections/SiteFooter";
 import {
   getPersonalInfo,
   getExperiences,
@@ -88,7 +90,7 @@ export default async function Home() {
       {/* Experience — has its own pinned horizontal scroll, not a snap target */}
       <ExperienceStack experiences={experiences} />
 
-      {/* === SLIDE: FEATURED VENTURE (SYS.04 marker on top, venture centered, full viewport) === */}
+      {/* === SLIDE: FEATURED VENTURE === */}
       <section
         className="min-h-[100dvh] flex flex-col justify-between relative"
         data-snap="true"
@@ -100,22 +102,16 @@ export default async function Home() {
         </div>
       </section>
 
-      <SectionDivider code="SYS.05" label="SELECTED WORK" />
+      {/* === SELECTED WORK — distinctive 'stage' entrance === */}
+      <SelectedWorkStage totalCount={projects.length}>
+        <ProjectGallery projects={projects} />
+      </SelectedWorkStage>
 
-      {/* Projects — TALL (bento + archive). NOT a snap target */}
-      <section className="relative bg-section-tinted">
-        <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-brand-blue/10 blur-[120px] rounded-full pointer-events-none" aria-hidden="true" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-brand-purple/10 blur-[120px] rounded-full pointer-events-none" aria-hidden="true" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(255,255,255,0.03)_1px,_transparent_1px)] bg-[size:24px_24px] pointer-events-none" aria-hidden="true" />
-        <div className="relative z-10">
-          <ProjectGallery projects={projects} />
-        </div>
-      </section>
-
-      <footer className="py-12 text-center text-tertiary font-mono text-xs tracking-widest border-t border-border bg-section-tinted">
-        <p>[ END OF TRANSMISSION ]</p>
-        <p className="mt-2 text-tertiary/60">© 2026 ABOLFAZL SHIRKAVAND</p>
-      </footer>
+      <SiteFooter
+        location={personalInfo.location}
+        linkedin={personalInfo.linkedin}
+        resumeUrl={personalInfo.resumeUrl}
+      />
     </main>
   );
 }
