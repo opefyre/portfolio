@@ -13,9 +13,13 @@
   --color-border: var(--border-color);
   --color-border-hover: var(--border-color-hover);
 
-  /* Brand Colors */
+  /* Brand */
   --color-brand-blue: #38BDF8;
   --color-brand-purple: #818CF8;
+  /* Mission-control accent: warning amber, used sparingly */
+  --color-signal: #FF8B3D;
+  /* Status indicator green — mission-control "online" */
+  --color-online: #2EE6A8;
 
   /* Tinted section background */
   --color-section-tinted: #0c1222;
@@ -23,28 +27,29 @@
   /* Fonts */
   --font-display: "Syne", sans-serif;
   --font-body: "Manrope", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-editorial: "Instrument Serif", "Times New Roman", serif;
 }
 
 /*
-  COLOR SYSTEM — Dark Only
-  Deep Space, Neon Accents, AA-compliant Text
+  COLOR SYSTEM — Dark Only — Operator's Cockpit
 */
 
 :root {
-  --bg-page: #030712;            /* Gray-950 */
-  --bg-card: rgba(17, 24, 39, 0.4);   /* Gray-900 w/ alpha */
-  --bg-card-hover: rgba(31, 41, 55, 0.6);
+  --bg-page: #050608;            /* near-black with a hint of cool */
+  --bg-card: rgba(15, 18, 28, 0.6);
+  --bg-card-hover: rgba(28, 32, 44, 0.72);
 
-  --text-primary: #f8fafc;       /* Slate-50 — body/headings */
-  --text-secondary: #d4dae3;     /* Promoted from #cbd5e1 — body on tinted */
-  --text-tertiary: #94a3b8;      /* Promoted from #64748b — passes AA on bg-page & bg-section-tinted */
+  --text-primary: #f8fafc;
+  --text-secondary: #d4dae3;
+  --text-tertiary: #94a3b8;
 
-  --border-color: rgba(255, 255, 255, 0.1);
-  --border-color-hover: rgba(56, 189, 248, 0.3);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-color-hover: rgba(56, 189, 248, 0.4);
 
   /* Hero Gradient */
   --hero-gradient-from: #ffffff;
-  --hero-gradient-to: #cbd5e1;
+  --hero-gradient-to: #c4cbd6;
 }
 
 /* Reset & Base */
@@ -60,14 +65,20 @@ body {
   position: relative;
 }
 
-/* Numeric runs (counters, prices) — opt-in via .tabular-nums (Tailwind v4 includes this utility natively;
-   this rule simply ensures consistent feature flags across our display font.) */
+/* On capable pointer devices, hide the system cursor — SmartCursor takes over */
+@media (hover: hover) and (pointer: fine) {
+  html.smart-cursor-active,
+  html.smart-cursor-active * {
+    cursor: none !important;
+  }
+}
+
 .tabular-nums {
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" on, "lnum" on;
 }
 
-/* Global noise texture overlay — gated by reduced-motion so it doesn't shimmer for sensitive users */
+/* Persistent grain — gives the dashboard surface depth */
 body::before {
   content: "";
   position: fixed;
@@ -89,7 +100,7 @@ body::before {
   }
 }
 
-/* Skip link — visually hidden until focused */
+/* Skip link */
 .skip-link {
   position: fixed;
   top: 0;
@@ -97,17 +108,170 @@ body::before {
   padding: 0.75rem 1rem;
   background: var(--color-brand-blue);
   color: var(--bg-page);
-  font-weight: 600;
-  font-size: 0.875rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   border-bottom-right-radius: 0.5rem;
   z-index: 10000;
-  transform: translateY(-100%);
+  transform: translateY(-110%);
   transition: transform 0.2s ease;
 }
 .skip-link:focus-visible {
   transform: translateY(0);
   outline: 2px solid var(--color-brand-blue);
   outline-offset: 2px;
+}
+
+/* ====== Cockpit motion primitives ====== */
+
+/* The slow scan-line that sweeps across hero on load. Pure CSS, GPU-friendly. */
+@keyframes scanSweep {
+  0% { transform: translateY(-100%); opacity: 0; }
+  20% { opacity: 0.9; }
+  100% { transform: translateY(120vh); opacity: 0; }
+}
+.scanline {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 0%, rgba(56, 189, 248, 0.0) 48%, rgba(56, 189, 248, 0.55) 50%, rgba(56, 189, 248, 0.0) 52%, transparent 100%);
+  filter: blur(0.3px);
+  animation: scanSweep 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s 1 forwards;
+}
+
+/* Grid lines that draw in from center */
+@keyframes gridDrawX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes gridDrawY { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+/* Mask-reveal text — text appears as if from beneath a horizon line */
+@keyframes maskReveal {
+  from { clip-path: inset(100% 0 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+.mask-reveal {
+  animation: maskReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Marquee — used for the bottom ticker tape */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 38s linear infinite;
+  will-change: transform;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* Online status pulse */
+@keyframes onlinePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(46, 230, 168, 0.55); }
+  70% { box-shadow: 0 0 0 8px rgba(46, 230, 168, 0); }
+}
+.online-dot {
+  background: var(--color-online);
+  animation: onlinePulse 1.6s ease-out infinite;
+}
+
+/* Calibration crosshair — tiny ticks around avatar */
+.crosshair-tick {
+  position: absolute;
+  background: var(--color-brand-blue);
+}
+
+/* Bracket frames — used around section headers */
+.bracket {
+  position: relative;
+  display: inline-block;
+}
+.bracket::before, .bracket::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0.5rem;
+  border-color: currentColor;
+  border-style: solid;
+  border-width: 0;
+}
+.bracket::before {
+  left: -0.75rem;
+  border-left-width: 1.5px;
+  border-top-width: 1.5px;
+  border-bottom-width: 1.5px;
+}
+.bracket::after {
+  right: -0.75rem;
+  border-right-width: 1.5px;
+  border-top-width: 1.5px;
+  border-bottom-width: 1.5px;
+}
+
+/* SmartCursor primitives (overrides any native cursor inside specific zones) */
+.smart-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-brand-blue);
+  background: transparent;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition: width 0.22s cubic-bezier(0.16,1,0.3,1), height 0.22s cubic-bezier(0.16,1,0.3,1), border-color 0.2s ease, background-color 0.2s ease;
+}
+.smart-cursor.is-hover {
+  width: 56px;
+  height: 56px;
+  border-color: var(--color-brand-blue);
+  background: rgba(56,189,248,0.08);
+  mix-blend-mode: normal;
+}
+.smart-cursor.is-press {
+  width: 28px;
+  height: 28px;
+}
+.smart-cursor-label {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brand-blue);
+  background: var(--bg-page);
+  padding: 0.25rem 0.5rem;
+  border: 1px solid rgba(56,189,248,0.4);
+  border-radius: 9999px;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  white-space: nowrap;
+}
+.smart-cursor-label.is-visible { opacity: 1; }
+
+/* Editorial display tags */
+.editorial {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+/* Mono labels used throughout the cockpit */
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 
 /* Layout Utilities */
@@ -150,7 +314,7 @@ body::before {
   }
 }
 
-/* Print stylesheet — recruiters often save the page to PDF or screenshot it. Make that experience usable. */
+/* Print stylesheet — recruiters often save the page to PDF or screenshot it. */
 @media print {
   :root {
     --bg-page: #ffffff;
@@ -166,7 +330,7 @@ body::before {
     color: #0f172a !important;
   }
   body::before { display: none !important; }
-  canvas, video, .no-print { display: none !important; }
+  canvas, video, .no-print, .smart-cursor, .smart-cursor-label { display: none !important; }
   a { color: #1e3a8a !important; text-decoration: underline; }
   section { page-break-inside: avoid; }
 }

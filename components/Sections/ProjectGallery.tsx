@@ -1,214 +1,203 @@
 "use client";
 
 import { Project } from "@/lib/db";
-import React, { useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import React, { useRef, useState } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import ProjectModal from "@/components/UI/ProjectModal";
 import SectionHeader from "@/components/UI/SectionHeader";
-import { ArrowUpRight, Sparkles, LayoutGrid } from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import clsx from "clsx";
 import Image from "next/image";
 import { easings, durations } from "@/lib/motion";
 
-// --- Desktop Project Card — outcome visible by default, soft 3D on hover ---
-const DesktopProjectCard = ({
-    project,
-    index,
-    isHovered,
-    isAnyHovered,
-    onHoverStart,
-    onHoverEnd,
-    onClick,
-}: {
+interface ProjectCardProps {
     project: Project;
     index: number;
-    isHovered: boolean;
-    isAnyHovered: boolean;
-    onHoverStart: () => void;
-    onHoverEnd: () => void;
+    span: "wide" | "tall" | "square";
     onClick: () => void;
-}) => {
-    const cardRef = useRef<HTMLDivElement>(null);
+}
 
-    const { scrollYProgress } = useScroll({
-        target: cardRef,
-        offset: ["start 100%", "start 80%"]
-    });
+function ProjectCard({ project, index, span, onClick }: ProjectCardProps) {
+    const cardRef = useRef<HTMLButtonElement>(null);
+    const [hovered, setHovered] = useState(false);
+
+    // Scroll-tied entrance
+    const { scrollYProgress } = useScroll({ target: cardRef, offset: ["start 95%", "start 60%"] });
     const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
     const y = useTransform(scrollYProgress, [0, 1], [40, 0]);
 
-    const isDimmed = isAnyHovered && !isHovered;
-
     return (
-        <motion.div
+        <motion.button
             ref={cardRef}
-            style={{ opacity, y, perspective: "2000px" }}
-            className={clsx(
-                "relative w-full max-w-5xl mx-auto mb-12 lg:mb-16 transition-opacity duration-500",
-                isDimmed ? "opacity-40" : "opacity-100"
-            )}
-            onMouseEnter={onHoverStart}
-            onMouseLeave={onHoverEnd}
-        >
-            <motion.button
-                type="button"
-                onClick={onClick}
-                aria-label={`View case study: ${project.title}`}
-                animate={{
-                    scale: isHovered ? 1.02 : 1,
-                    rotateY: isHovered ? -4 : 0,
-                    rotateX: isHovered ? 2 : 0,
-                }}
-                transition={{ type: "spring", stiffness: 300, damping: 28, mass: 1 }}
-                className="block text-left w-full rounded-2xl md:rounded-[2rem] bg-card border border-border hover:border-brand-blue/40 overflow-hidden shadow-2xl cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-page"
-                style={{ transformStyle: "preserve-3d" }}
-            >
-                <div className="grid grid-cols-1 md:grid-cols-12 min-h-[280px]">
-                    {/* Left: text — always visible */}
-                    <div className={clsx(
-                        "p-8 md:p-12 flex flex-col justify-between relative bg-gradient-to-br from-card to-card-hover",
-                        project.thumbnail ? "md:col-span-7" : "md:col-span-12"
-                    )}>
-                        <div className="flex items-center gap-4 mb-8">
-                            <div className="w-10 h-10 rounded-full border border-brand-blue/30 flex items-center justify-center text-brand-blue font-mono text-sm bg-brand-blue/5 tabular-nums">
-                                {(index + 1).toString().padStart(2, '0')}
-                            </div>
-                            <span className="text-secondary tracking-widest uppercase text-xs font-mono">
-                                {project.category}
-                            </span>
-                        </div>
-
-                        <div className="space-y-5">
-                            <h3 className="text-3xl md:text-4xl font-display font-medium leading-tight text-primary">
-                                {project.title}
-                            </h3>
-
-                            {/* Outcome — the recruiter-scan line */}
-                            {project.outcomeShort && (
-                                <p className="flex items-start gap-2 text-secondary text-sm md:text-base leading-relaxed max-w-prose">
-                                    <Sparkles className="w-4 h-4 text-brand-blue mt-1 shrink-0" aria-hidden="true" />
-                                    <span>{project.outcomeShort}</span>
-                                </p>
-                            )}
-
-                            <p className="text-tertiary text-sm leading-relaxed line-clamp-2 max-w-prose">
-                                {project.description}
-                            </p>
-                        </div>
-
-                        <div className="flex items-center justify-between pt-8 mt-8 border-t border-border/60">
-                            <div className="flex flex-wrap gap-1.5">
-                                {project.skills.slice(0, 4).map((skill) => (
-                                    <span key={skill} className="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs text-tertiary font-mono">
-                                        {skill}
-                                    </span>
-                                ))}
-                                {project.skills.length > 4 && (
-                                    <span className="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs text-brand-blue font-mono">
-                                        +{project.skills.length - 4}
-                                    </span>
-                                )}
-                            </div>
-                            <div className="flex items-center gap-2 text-brand-blue text-sm font-medium tracking-wide group-hover:gap-3 transition-all">
-                                <span>View case study</span>
-                                <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Right: thumbnail when present */}
-                    {project.thumbnail && (
-                        <div className="hidden md:block md:col-span-5 relative border-l border-border/40 overflow-hidden">
-                            <Image
-                                src={project.thumbnail}
-                                alt=""
-                                fill
-                                className="object-cover"
-                                sizes="(max-width: 768px) 100vw, 40vw"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-card/40 pointer-events-none" />
-                        </div>
-                    )}
-                </div>
-            </motion.button>
-        </motion.div>
-    );
-};
-
-// --- Mobile Project Card — flatter, always-on outcome line ---
-const MobileProjectCard = ({
-    project,
-    index,
-    onClick
-}: {
-    project: Project;
-    index: number;
-    onClick: () => void;
-}) => {
-    return (
-        <button
             type="button"
             onClick={onClick}
+            data-cursor="view"
             aria-label={`View case study: ${project.title}`}
-            className="block text-left w-full rounded-3xl bg-card border border-border shadow-xl overflow-hidden mb-6 transition-transform active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-page"
+            style={{ opacity, y }}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            className={clsx(
+                "group relative text-left rounded-3xl overflow-hidden border border-border bg-card hover:border-brand-blue/40 transition-colors duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-page",
+                span === "wide" && "md:col-span-2 md:row-span-1 min-h-[240px]",
+                span === "tall" && "md:col-span-1 md:row-span-2 min-h-[380px] md:min-h-[500px]",
+                span === "square" && "md:col-span-1 md:row-span-1 min-h-[240px]",
+            )}
         >
-            <div className="p-6 bg-gradient-to-br from-card to-card-hover">
-                <div className="flex items-center gap-3 mb-5">
-                    <div className="w-8 h-8 rounded-full border border-brand-blue/30 flex items-center justify-center text-brand-blue font-mono text-xs bg-brand-blue/5 tabular-nums">
-                        {(index + 1).toString().padStart(2, '0')}
+            {/* Background — thumbnail or generated chart-of-bars pattern */}
+            <div className="absolute inset-0 z-0">
+                {project.thumbnail ? (
+                    <>
+                        <Image
+                            src={project.thumbnail}
+                            alt=""
+                            fill
+                            className="object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-700"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-page via-page/80 to-page/40" />
+                    </>
+                ) : (
+                    <div className="absolute inset-0 opacity-60" aria-hidden="true">
+                        {/* Decorative chart-grid for cards without thumbnails */}
+                        <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 200 200" className="text-brand-blue/15">
+                            <defs>
+                                <pattern id={`grid-${index}`} width="20" height="20" patternUnits="userSpaceOnUse">
+                                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" strokeWidth="0.5" />
+                                </pattern>
+                            </defs>
+                            <rect width="200" height="200" fill={`url(#grid-${index})`} />
+                            {/* Decorative bar chart shapes */}
+                            <g className="text-brand-blue/30" fill="currentColor">
+                                <rect x="20" y={140 - (index * 7) % 60} width="14" height={20 + (index * 7) % 60} />
+                                <rect x="40" y={160 - (index * 11) % 50} width="14" height={(index * 11) % 50} />
+                                <rect x="60" y={120 - (index * 13) % 70} width="14" height={40 + (index * 13) % 70} />
+                                <rect x="80" y={150 - (index * 9) % 40} width="14" height={20 + (index * 9) % 40} />
+                            </g>
+                        </svg>
                     </div>
-                    <span className="text-secondary tracking-widest uppercase text-xs font-mono">
+                )}
+            </div>
+
+            {/* Mask-reveal scrim — slides up on hover */}
+            <motion.div
+                aria-hidden="true"
+                initial={false}
+                animate={{ y: hovered ? "0%" : "100%" }}
+                transition={{ duration: 0.5, ease: easings.ui }}
+                className="absolute inset-0 z-0 bg-gradient-to-t from-brand-blue/10 via-transparent to-transparent pointer-events-none"
+            />
+
+            {/* Content */}
+            <div className="relative z-10 h-full flex flex-col justify-between p-6 md:p-8">
+                {/* Top bar — index + category */}
+                <div className="flex items-center justify-between">
+                    <span className="label-mono text-brand-blue tabular-nums">
+                        CASE.{(index + 1).toString().padStart(2, "0")}
+                    </span>
+                    <span className="label-mono text-tertiary truncate ml-2">
                         {project.category}
                     </span>
                 </div>
 
-                <h3 className="text-2xl font-display font-medium leading-tight mb-3 text-white">
-                    {project.title}
-                </h3>
-
-                {project.outcomeShort && (
-                    <p className="flex items-start gap-2 text-secondary text-sm leading-relaxed mb-3">
-                        <Sparkles className="w-3.5 h-3.5 text-brand-blue mt-0.5 shrink-0" aria-hidden="true" />
-                        <span>{project.outcomeShort}</span>
-                    </p>
-                )}
-            </div>
-
-            <div className="bg-deep/80 border-t border-border/50 p-6 space-y-5">
-                <div>
-                    <h4 className="text-brand-blue text-xs font-bold uppercase tracking-widest mb-3 flex items-center gap-1.5">
-                        <LayoutGrid className="w-3 h-3" aria-hidden="true" /> Tech Stack
-                    </h4>
-                    <div className="flex flex-wrap gap-1.5">
-                        {project.skills.slice(0, 4).map((skill) => (
-                            <span key={skill} className="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs text-secondary font-mono">
-                                {skill}
-                            </span>
-                        ))}
-                        {project.skills.length > 4 && (
-                            <span className="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs text-brand-blue font-mono">
-                                +{project.skills.length - 4}
-                            </span>
+                {/* Title + outcome */}
+                <div className="space-y-4 mt-auto">
+                    <h3
+                        className={clsx(
+                            "font-display font-medium text-primary leading-tight tracking-tight transition-colors",
+                            span === "tall" ? "text-3xl md:text-4xl" : "text-2xl md:text-3xl",
+                            hovered && "text-brand-blue",
                         )}
-                    </div>
-                </div>
+                    >
+                        {project.title}
+                    </h3>
 
-                <div className="flex items-center justify-between text-brand-blue pt-4 border-t border-border/30">
-                    <span className="text-xs font-medium tracking-wide">Tap to read case study</span>
-                    <div className="w-6 h-6 rounded-full bg-brand-blue/10 flex items-center justify-center">
-                        <ArrowUpRight className="w-3 h-3" aria-hidden="true" />
+                    {project.outcomeShort && (
+                        <p className="flex items-start gap-2 text-secondary text-sm md:text-base leading-relaxed">
+                            <Sparkles className="w-3.5 h-3.5 text-brand-blue mt-1 shrink-0" aria-hidden="true" />
+                            <span>{project.outcomeShort}</span>
+                        </p>
+                    )}
+
+                    {/* Tech chips — limited to keep scan-speed */}
+                    {project.skills.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5 pt-1">
+                            {project.skills.slice(0, span === "wide" ? 5 : 3).map((skill) => (
+                                <span key={skill} className="label-mono text-tertiary border border-border/60 rounded-full px-2.5 py-0.5">
+                                    {skill}
+                                </span>
+                            ))}
+                            {project.skills.length > (span === "wide" ? 5 : 3) && (
+                                <span className="label-mono text-brand-blue border border-brand-blue/30 rounded-full px-2.5 py-0.5">
+                                    +{project.skills.length - (span === "wide" ? 5 : 3)}
+                                </span>
+                            )}
+                        </div>
+                    )}
+
+                    {/* Bottom action row */}
+                    <div className="flex items-center justify-between pt-4 border-t border-border/40">
+                        <span className="label-mono text-secondary group-hover:text-brand-blue transition-colors">
+                            View case study
+                        </span>
+                        <span
+                            aria-hidden="true"
+                            className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-brand-blue/10 text-brand-blue group-hover:bg-brand-blue group-hover:text-deep transition-colors"
+                        >
+                            <ArrowUpRight className="w-4 h-4" />
+                        </span>
                     </div>
                 </div>
             </div>
-        </button>
+
+            {/* Corner brackets — appear on hover */}
+            <AnimatePresence>
+                {hovered && (
+                    <>
+                        <motion.span
+                            aria-hidden="true"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            transition={{ duration: durations.fast }}
+                            className="absolute top-3 left-3 w-3 h-3 border-l border-t border-brand-blue/60"
+                        />
+                        <motion.span
+                            aria-hidden="true"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            transition={{ duration: durations.fast }}
+                            className="absolute top-3 right-3 w-3 h-3 border-r border-t border-brand-blue/60"
+                        />
+                        <motion.span
+                            aria-hidden="true"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            transition={{ duration: durations.fast }}
+                            className="absolute bottom-3 left-3 w-3 h-3 border-l border-b border-brand-blue/60"
+                        />
+                        <motion.span
+                            aria-hidden="true"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            transition={{ duration: durations.fast }}
+                            className="absolute bottom-3 right-3 w-3 h-3 border-r border-b border-brand-blue/60"
+                        />
+                    </>
+                )}
+            </AnimatePresence>
+        </motion.button>
     );
-};
+}
+
+const FEATURED_COUNT = 6;
 
 export default function ProjectGallery({ projects }: { projects: Project[] }) {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [hoveredProjectIdx, setHoveredProjectIdx] = useState<number | null>(null);
+    const [showAll, setShowAll] = useState(false);
     const lastInvokerRef = useRef<HTMLElement | null>(null);
 
     const openModal = (project: Project) => {
@@ -219,60 +208,85 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
 
     const closeModal = () => {
         setIsModalOpen(false);
-        // Return focus to the invoking element after the modal exit animation settles
-        window.setTimeout(() => {
-            lastInvokerRef.current?.focus();
-        }, 50);
+        window.setTimeout(() => lastInvokerRef.current?.focus(), 50);
     };
 
-    const isAnyHovered = hoveredProjectIdx !== null;
+    // Asymmetric bento for the featured strip — cycle through wide/tall/square
+    const getSpan = (i: number): ProjectCardProps["span"] => {
+        const pattern: ProjectCardProps["span"][] = ["wide", "tall", "square", "square", "wide", "square"];
+        return pattern[i % pattern.length];
+    };
+
+    const featured = projects.slice(0, FEATURED_COUNT);
+    const additional = projects.slice(FEATURED_COUNT);
 
     return (
         <section className="relative py-24 md:py-32 overflow-hidden" id="projects">
-            {/* Subtle ambient backdrop — single static layer, no perpetual orbs */}
-            <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-canvas" aria-hidden="true">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-                <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-brand-blue/10 blur-[120px] rounded-full" />
-                <div className="absolute bottom-1/4 -right-32 w-[400px] h-[400px] bg-brand-purple/10 blur-[100px] rounded-full" />
-            </div>
-
             <div className="container relative z-10">
-                <motion.div
-                    animate={{ opacity: isAnyHovered ? 0.55 : 1 }}
-                    transition={{ duration: durations.slow, ease: easings.ui }}
-                >
-                    <SectionHeader
-                        title="Selected Work"
-                        subtitle="A curated selection of impactful projects driving digital transformation."
-                        centered
-                        className="mb-20"
-                    />
-                </motion.div>
+                <SectionHeader
+                    kicker="CASE STUDIES"
+                    title="Selected work"
+                    subtitle={`A curated index of ${projects.length} programs delivering measurable transformation outcomes.`}
+                    centered
+                    className="mb-16"
+                />
 
-                <div className="flex flex-col gap-8 lg:gap-16 w-full max-w-7xl mx-auto px-4 md:px-0">
-                    {projects.map((project, idx) => (
-                        <div key={project.id || idx}>
-                            <div className="hidden md:block">
-                                <DesktopProjectCard
-                                    project={project}
-                                    index={idx}
-                                    isHovered={hoveredProjectIdx === idx}
-                                    isAnyHovered={isAnyHovered}
-                                    onHoverStart={() => setHoveredProjectIdx(idx)}
-                                    onHoverEnd={() => setHoveredProjectIdx(null)}
-                                    onClick={() => openModal(project)}
-                                />
-                            </div>
-                            <div className="block md:hidden">
-                                <MobileProjectCard
-                                    project={project}
-                                    index={idx}
-                                    onClick={() => openModal(project)}
-                                />
-                            </div>
-                        </div>
+                {/* Featured bento — first N projects, asymmetric layout */}
+                <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-[minmax(220px,_auto)] gap-4 md:gap-6 max-w-7xl mx-auto px-4 md:px-0">
+                    {featured.map((project, idx) => (
+                        <ProjectCard
+                            key={project.id || idx}
+                            project={project}
+                            index={idx}
+                            span={getSpan(idx)}
+                            onClick={() => openModal(project)}
+                        />
                     ))}
                 </div>
+
+                {/* Reveal-the-archive — compact list of remaining projects */}
+                {additional.length > 0 && (
+                    <div className="mt-14 max-w-7xl mx-auto px-4 md:px-0">
+                        <div className="flex items-center justify-between mb-6">
+                            <span className="label-mono bracket text-brand-blue">ARCHIVE · {String(additional.length).padStart(2, "0")} MORE</span>
+                            <button
+                                type="button"
+                                onClick={() => setShowAll((s) => !s)}
+                                data-cursor={showAll ? "collapse" : "expand"}
+                                className="label-mono text-tertiary hover:text-brand-blue transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-md px-2 py-1"
+                                aria-expanded={showAll}
+                            >
+                                {showAll ? "Collapse archive ↑" : "Expand archive ↓"}
+                            </button>
+                        </div>
+
+                        {showAll && (
+                            <ul className="divide-y divide-border/40 border-t border-b border-border/40">
+                                {additional.map((project, idx) => (
+                                    <li key={project.id || idx}>
+                                        <button
+                                            type="button"
+                                            onClick={() => openModal(project)}
+                                            data-cursor="view"
+                                            className="group w-full text-left flex items-center gap-5 py-4 hover:bg-white/[0.02] px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-sm transition-colors"
+                                        >
+                                            <span className="label-mono text-tertiary w-12 tabular-nums">
+                                                {String(FEATURED_COUNT + idx + 1).padStart(2, "0")}
+                                            </span>
+                                            <span className="label-mono text-brand-blue w-44 shrink-0 truncate">
+                                                {project.category}
+                                            </span>
+                                            <span className="text-secondary text-base md:text-lg flex-1 truncate group-hover:text-primary transition-colors">
+                                                {project.title}
+                                            </span>
+                                            <ArrowUpRight className="w-4 h-4 text-tertiary group-hover:text-brand-blue group-hover:translate-x-0.5 transition-all" aria-hidden="true" />
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                )}
             </div>
 
             <ProjectModal

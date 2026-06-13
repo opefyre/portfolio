@@ -1,151 +1,285 @@
 "use client";
 
 import { Experience, Position } from "@/lib/db";
-import { motion, AnimatePresence } from "framer-motion";
-import SectionHeader from "@/components/UI/SectionHeader";
-import { useState } from "react";
-import { ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { ArrowRight } from "lucide-react";
+import { useReducedMotion, easings } from "@/lib/motion";
 import clsx from "clsx";
 
-const entryVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: { staggerChildren: 0.15 },
-    },
-};
+interface ExperienceStackProps {
+    experiences: Experience[];
+}
 
-const numberVariants = {
-    hidden: { opacity: 0, x: -30 },
-    visible: {
-        opacity: 1,
-        x: 0,
-        transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] as const },
-    },
-};
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
-const contentVariants = {
-    hidden: { opacity: 0, x: 30 },
-    visible: {
-        opacity: 1,
-        x: 0,
-        transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] as const },
-    },
-};
+function earliestYear(period: string): string {
+    const m = period.match(/\b(19|20)\d{2}\b/);
+    return m ? m[0] : "—";
+}
 
-const dotVariants = {
-    hidden: { scale: 0 },
-    visible: {
-        scale: 1,
-        transition: { duration: 0.3, ease: "easeOut" as const },
-    },
-};
+function latestYear(period: string): string {
+    const matches = Array.from(period.matchAll(/\b(19|20)\d{2}\b/g));
+    if (matches.length === 0) return /present/i.test(period) ? "now" : "—";
+    return matches[matches.length - 1][0];
+}
 
-export default function ExperienceStack({ experiences }: { experiences: Experience[] }) {
+function StationCard({ role, index, total }: { role: Experience; index: number; total: number }) {
+    const allPositions: Position[] = role.positions ?? [];
+    const startYear = earliestYear(allPositions[allPositions.length - 1]?.period ?? "");
+    const endYear = latestYear(allPositions[0]?.period ?? "");
+
     return (
-        <section className="container-wide section-padding" id="experience">
-            <SectionHeader
-                title="Professional History"
-                subtitle="A chronological record of roles, responsibilities, and key achievements."
-            />
+        <article className="station relative h-full w-screen flex-shrink-0 grid grid-cols-1 lg:grid-cols-12 gap-8 px-6 md:px-12 lg:px-20 py-24 lg:py-28">
+            {/* Massive year numerals — editorial display */}
+            <div className="lg:col-span-5 flex flex-col justify-between order-1 lg:order-1">
+                <div className="space-y-3">
+                    <div className="flex items-center gap-3">
+                        <span className="label-mono text-brand-blue">
+                            STATION {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+                        </span>
+                        <span aria-hidden="true" className="h-px w-12 bg-brand-blue/40" />
+                    </div>
+                    <h3 className="font-display font-medium text-3xl md:text-5xl text-primary leading-[0.95] tracking-tight">
+                        {role.company}
+                    </h3>
+                    <p className="label-mono text-tertiary">{role.location}</p>
+                </div>
 
-            <div className="space-y-16">
-                {experiences.map((role, idx) => (
-                    <motion.div
-                        key={idx}
-                        variants={entryVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, margin: "-80px" }}
-                        className="group relative grid grid-cols-1 md:grid-cols-12 gap-8 border-t border-border pt-12 hover:border-brand-blue/30 transition-colors duration-500"
-                    >
-                        {/* Timeline Number */}
-                        <motion.div variants={numberVariants} className="md:col-span-3">
-                            <span className="text-display text-5xl md:text-6xl text-tertiary/30 group-hover:text-tertiary transition-colors duration-500">
-                                0{experiences.length - idx}
-                            </span>
-                        </motion.div>
+                {/* The year span — editorial italic numerals */}
+                <div className="mt-10 lg:mt-0">
+                    <div className="label-mono text-tertiary mb-2">— TENURE</div>
+                    <div className="flex items-end gap-4">
+                        <span className="font-editorial italic text-brand-blue text-[clamp(5rem,12vw,12rem)] leading-[0.8] tabular-nums">
+                            {startYear}
+                        </span>
+                        <span className="font-editorial italic text-tertiary text-[clamp(2.5rem,5vw,5rem)] leading-[0.8] tabular-nums pb-3">
+                            → {endYear}
+                        </span>
+                    </div>
+                </div>
+            </div>
 
-                        {/* Content */}
-                        <motion.div variants={contentVariants} className="md:col-span-9 space-y-8">
-                            <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2">
-                                <h3 className="text-3xl md:text-4xl font-display font-medium text-primary group-hover:text-brand-blue transition-colors duration-300">
-                                    {role.company}
-                                </h3>
-                                <span className="text-secondary font-mono text-sm">{role.location}</span>
-                            </div>
-
-                            <div className="space-y-10">
-                                {role.positions.map((pos, pIdx) => (
-                                    <PositionItem key={pIdx} pos={pos} />
-                                ))}
-                            </div>
-                        </motion.div>
-                    </motion.div>
+            {/* Positions + achievements — scrollable column */}
+            <div className="lg:col-span-7 order-2 lg:order-2 space-y-8 lg:max-h-[78vh] lg:overflow-y-auto pr-3 custom-scrollbar">
+                {allPositions.map((pos, pIdx) => (
+                    <div key={pIdx} className="border-l-2 border-border hover:border-brand-blue/60 transition-colors pl-5 py-1">
+                        <div className="flex items-baseline justify-between gap-4 flex-wrap mb-1.5">
+                            <h4 className="font-display text-lg md:text-2xl font-medium text-primary leading-tight">
+                                {pos.title}
+                            </h4>
+                            <span className="label-mono text-tertiary">{pos.period}</span>
+                        </div>
+                        <ul className="mt-3 space-y-2.5">
+                            {pos.achievements.map((item, i) => (
+                                <li key={i} className="text-secondary text-sm leading-relaxed flex items-start gap-3">
+                                    <span aria-hidden="true" className="text-brand-blue mt-1.5 text-[8px]">◆</span>
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 ))}
             </div>
-        </section>
+        </article>
     );
 }
 
-function PositionItem({ pos }: { pos: Position }) {
-    const [isOpen, setIsOpen] = useState(false);
+export default function ExperienceStack({ experiences }: ExperienceStackProps) {
+    const reducedMotion = useReducedMotion();
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const trackRef = useRef<HTMLDivElement>(null);
+    const [progress, setProgress] = useState(0);
+    const [activeStation, setActiveStation] = useState(0);
+    const [isDesktop, setIsDesktop] = useState(false);
+
+    // Track viewport size
+    useEffect(() => {
+        const mql = window.matchMedia("(min-width: 1024px)");
+        const update = () => setIsDesktop(mql.matches);
+        update();
+        mql.addEventListener("change", update);
+        return () => mql.removeEventListener("change", update);
+    }, []);
+
+    // GSAP ScrollTrigger pinned horizontal — desktop only, motion-allowed only
+    useIsomorphicLayoutEffect(() => {
+        if (!isDesktop || reducedMotion) return;
+        if (!sectionRef.current || !trackRef.current) return;
+
+        let st: { kill: () => void } | null = null;
+        let cleanup = () => {};
+
+        (async () => {
+            const gsapMod = (await import("gsap")).default;
+            const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+            gsapMod.registerPlugin(ScrollTrigger);
+
+            // Bridge Lenis ↔ ScrollTrigger so smooth scroll and pinning stay in sync
+            const lenis = window.__lenis;
+            const lenisHandler = () => ScrollTrigger.update();
+            lenis?.on("scroll", lenisHandler);
+            const gsapTickerFn = (time: number) => lenis?.raf(time * 1000);
+            if (lenis) gsapMod.ticker.add(gsapTickerFn);
+            gsapMod.ticker.lagSmoothing(0);
+
+            const section = sectionRef.current!;
+            const track = trackRef.current!;
+            const stations = track.querySelectorAll<HTMLElement>(".station");
+
+            // Compute drift: width of track minus one viewport
+            const computeDistance = () => track.scrollWidth - window.innerWidth;
+
+            const tween = gsapMod.to(track, {
+                x: () => -computeDistance(),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top top",
+                    end: () => `+=${computeDistance()}`,
+                    pin: true,
+                    scrub: 0.8,
+                    invalidateOnRefresh: true,
+                    anticipatePin: 1,
+                    onUpdate: (self) => {
+                        setProgress(self.progress);
+                        const idx = Math.min(stations.length - 1, Math.round(self.progress * (stations.length - 1)));
+                        setActiveStation(idx);
+                    },
+                },
+            });
+
+            st = tween.scrollTrigger ?? null;
+
+            cleanup = () => {
+                tween.kill();
+                st?.kill();
+                lenis?.off("scroll", lenisHandler);
+                if (lenis) gsapMod.ticker.remove(gsapTickerFn);
+                ScrollTrigger.getAll().forEach((s) => s.kill());
+            };
+        })();
+
+        return () => cleanup();
+    }, [isDesktop, reducedMotion, experiences.length]);
 
     return (
-        <div
-            className="group/pos relative pl-6 border-l border-border hover:border-brand-purple/50 transition-colors cursor-pointer select-none"
-            onClick={() => setIsOpen(!isOpen)}
-        >
-            {/* Animated Dot */}
-            <motion.div
-                variants={dotVariants}
-                className={clsx(
-                    "absolute left-[-5px] top-2 w-2 h-2 rounded-full transition-colors duration-300",
-                    isOpen ? "bg-brand-purple" : "bg-border group-hover/pos:bg-brand-purple/50"
-                )}
-            />
-
-            {/* Header Content */}
-            <div className="flex items-start justify-between gap-4">
-                <div>
-                    <h4 className="text-xl text-primary font-medium group-hover/pos:text-brand-purple transition-colors">{pos.title}</h4>
-                    <p className="text-tertiary text-[13px] uppercase tracking-wider font-mono mb-2">{pos.period}</p>
+        <section ref={sectionRef} className="relative w-full" id="experience">
+            {/* Section header — visible at start and again on mobile */}
+            <div className="container-wide pt-24 pb-12 lg:pb-8 relative z-20">
+                <div className="flex items-center gap-3 mb-4">
+                    <span className="label-mono bracket text-brand-blue">EXPERIENCE</span>
+                    <span aria-hidden="true" className="h-px flex-1 bg-gradient-to-r from-brand-blue/40 to-transparent" />
                 </div>
-
-                {/* Chevron Toggle */}
-                <div className={clsx(
-                    "p-1.5 md:p-2 rounded-full border transition-all duration-300 flex-shrink-0 mt-1 group-hover/pos:bg-brand-purple/5",
-                    isOpen
-                        ? "rotate-90 bg-brand-purple/10 border-brand-purple/30 text-brand-purple shadow-[0_0_10px_rgba(192,132,252,0.2)]"
-                        : "bg-page border-border text-tertiary group-hover/pos:text-secondary group-hover/pos:border-border/80"
-                )}>
-                    <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
+                <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+                    <h2 className="font-display font-medium text-4xl md:text-6xl tracking-tight leading-[0.95] max-w-2xl">
+                        Professional history,
+                        <br />
+                        <span className="editorial text-tertiary">station by station</span>
+                    </h2>
+                    {isDesktop && !reducedMotion && (
+                        <p className="label-mono text-tertiary max-w-xs">
+                            ↓ scroll to pan the timeline horizontally →
+                        </p>
+                    )}
                 </div>
             </div>
 
-            {/* Expandable Details */}
-            <AnimatePresence initial={false}>
-                {isOpen && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
-                        className="overflow-hidden"
-                    >
-                        <div className="pt-4 pb-2">
-                            <ul className="space-y-3">
-                                {pos.achievements.map((item, i) => (
-                                    <li key={i} className="text-secondary text-sm leading-relaxed max-w-3xl flex items-start gap-3">
-                                        <span className="text-brand-purple mt-1.5 text-[8px]">✦</span>
-                                        <span>{item}</span>
-                                    </li>
-                                ))}
-                            </ul>
+            {/* Desktop: pinned horizontal track */}
+            {isDesktop && !reducedMotion ? (
+                <div className="relative">
+                    <div className="overflow-hidden">
+                        <div
+                            ref={trackRef}
+                            className="flex"
+                            style={{ width: `${experiences.length * 100}vw` }}
+                        >
+                            {experiences.map((role, idx) => (
+                                <StationCard key={idx} role={role} index={idx} total={experiences.length} />
+                            ))}
                         </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </div>
+                    </div>
+
+                    {/* Progress indicator — top-fixed inside the pinned viewport */}
+                    <div className="absolute top-0 left-0 right-0 z-30 pointer-events-none">
+                        <div className="container-wide pt-6">
+                            <div className="flex items-center gap-3">
+                                <span className="label-mono text-tertiary">JOURNEY</span>
+                                <div className="flex-1 relative h-px bg-white/10">
+                                    <motion.div
+                                        className="absolute top-0 left-0 h-full bg-brand-blue origin-left"
+                                        style={{ scaleX: progress }}
+                                        transition={{ ease: easings.ui }}
+                                    />
+                                </div>
+                                <span className="label-mono text-brand-blue tabular-nums">
+                                    {String(activeStation + 1).padStart(2, "0")} / {String(experiences.length).padStart(2, "0")}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                // Mobile / reduced-motion fallback: vertical stack
+                <div className="container-wide space-y-12 pb-12">
+                    {experiences.map((role, idx) => (
+                        <motion.div
+                            key={idx}
+                            initial={{ opacity: 0, y: 40 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6, ease: easings.ui }}
+                            className={clsx(
+                                "relative grid grid-cols-1 gap-6 border-t border-border pt-10",
+                                "hover:border-brand-blue/40 transition-colors"
+                            )}
+                        >
+                            <div className="flex items-center gap-3">
+                                <span className="label-mono text-brand-blue">
+                                    STATION {String(idx + 1).padStart(2, "0")} / {String(experiences.length).padStart(2, "0")}
+                                </span>
+                                <span aria-hidden="true" className="h-px flex-1 bg-brand-blue/30" />
+                            </div>
+                            <div className="flex items-baseline gap-3 flex-wrap">
+                                <h3 className="font-display font-medium text-3xl text-primary tracking-tight leading-tight">
+                                    {role.company}
+                                </h3>
+                                <span className="label-mono text-tertiary">{role.location}</span>
+                            </div>
+                            <div className="font-editorial italic text-brand-blue text-5xl leading-none tabular-nums">
+                                {earliestYear(role.positions[role.positions.length - 1]?.period ?? "")} →{" "}
+                                <span className="text-tertiary">{latestYear(role.positions[0]?.period ?? "")}</span>
+                            </div>
+                            <div className="space-y-6 mt-2">
+                                {role.positions.map((pos, pIdx) => (
+                                    <div key={pIdx} className="border-l border-border pl-4">
+                                        <div className="flex items-baseline justify-between gap-3 flex-wrap mb-1.5">
+                                            <h4 className="font-display text-lg font-medium text-primary leading-tight">
+                                                {pos.title}
+                                            </h4>
+                                            <span className="label-mono text-tertiary">{pos.period}</span>
+                                        </div>
+                                        <ul className="mt-2 space-y-2">
+                                            {pos.achievements.map((item, i) => (
+                                                <li key={i} className="text-secondary text-sm leading-relaxed flex items-start gap-3">
+                                                    <span aria-hidden="true" className="text-brand-blue mt-1.5 text-[8px]">◆</span>
+                                                    <span>{item}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+            )}
+
+            {/* End-of-section flourish */}
+            <div className="container-wide py-8 flex items-center justify-end gap-2 text-tertiary">
+                <span className="label-mono">END OF JOURNEY</span>
+                <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+            </div>
+        </section>
     );
 }

@@ -162,12 +162,12 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
 
                             {/* CTA + Socials — compact row */}
                             <div className="flex items-center justify-between pt-4 border-t border-border">
-                                <MagneticButton as="a" strength={0.4}>
+                                <MagneticButton strength={0.4} className="inline-flex">
                                     <a
                                         href={elixiaryVenture.website}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue hover:bg-brand-blue/90 text-white text-xs font-bold transition-all hover:shadow-[0_0_15px_rgba(56,189,248,0.3)]"
+                                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue hover:bg-brand-blue/90 text-deep text-xs font-bold transition-all hover:shadow-[0_0_15px_rgba(56,189,248,0.3)]"
                                     >
                                         Visit App <ArrowUpRight className="w-3 h-3" />
                                     </a>

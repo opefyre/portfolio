@@ -21,7 +21,9 @@ export default function ExpertiseSection({
             {/* PART 1: PREMIUM GLASS TERMINAL */}
             <div id="expertise" className="container-wide scroll-mt-32">
                 <SectionHeader
-                    title="Technical Command Center"
+                    kicker="COMPETENCIES"
+                    title="Technical command center"
+                    subtitle="The systems, methods and platforms I bring to enterprise transformation work."
                 />
 
                 <div className="mt-12 md:mt-24 w-full flex justify-center px-4 md:px-0">
@@ -32,7 +34,8 @@ export default function ExpertiseSection({
             {/* PART 2: HOLOGRAPHIC CREDENTIALS VAULT */}
             <div id="credentials" className="container max-w-6xl mx-auto px-6 scroll-mt-32">
                 <SectionHeader
-                    title="Verified Credentials"
+                    kicker="AUTHORIZATIONS"
+                    title="Verified credentials"
                     subtitle="Industry-standard certifications and professional authorizations."
                 />
 
@@ -69,7 +72,8 @@ export default function ExpertiseSection({
             <div className="container max-w-4xl mx-auto px-6 mt-32 relative">
                 <motion.div>
                     <SectionHeader
-                        title="Academic Log"
+                        kicker="FORMAL EDUCATION"
+                        title="Academic log"
                         subtitle="Formal education and foundational knowledge."
                     />
 
