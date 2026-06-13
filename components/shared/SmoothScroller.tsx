@@ -11,15 +11,20 @@ declare global {
 }
 
 /**
- * Lenis smooth scroll + opt-in guided snap.
+ * Lenis smooth scroll + opt-in guided slide snap.
  *
- * Snap is applied only to sections that carry `data-snap="true"`. The detection
- * runs after the user stops scrolling for ~220ms; if the closest snap section
- * is within 30vh of the viewport top and the user isn't deep inside the section
- * already, the page smoothly aligns to the section top.
+ * Snap rules (in order — all must pass):
+ *   1. Section carries `data-snap="true"`
+ *   2. User stopped scrolling for ~260ms (debounced)
+ *   3. Lenis velocity is near zero (the user's gesture has ended)
+ *   4. Target section top is within ±22vh of viewport top
+ *   5. Candidate matches the last scroll direction
  *
- * Sections taller than the viewport (skills, education, projects) MUST NOT have
- * `data-snap` so the user can browse them freely.
+ * On a snap fire, a 900ms cooldown blocks re-snap so the user can never
+ * be trapped in a back-and-forth loop.
+ *
+ * Sections taller than the viewport (Skills, Education, Projects) MUST
+ * NOT have `data-snap`, so the user can browse them freely.
  */
 export default function SmoothScroller({ children }: { children: React.ReactNode }) {
     const reducedMotion = useReducedMotion();
@@ -43,61 +48,71 @@ export default function SmoothScroller({ children }: { children: React.ReactNode
         }
         rafId = requestAnimationFrame(raf);
 
-        // ---- Guided section snap ----
+        // ---- Guided slide snap ----
         let snapTimeout: number | null = null;
         let lastDirection = 0;
         let lastY = window.scrollY;
         let isSnapping = false;
         let cooldownUntil = 0;
 
+        const PROXIMITY_VH = 0.22; // section top must be within ±22vh
+        const VELOCITY_FLOOR = 0.05; // Lenis units; tune so 'still scrolling' doesn't trigger snap
+        const SETTLE_MS = 260;
+
         const findSnapTargets = () =>
             Array.from(document.querySelectorAll<HTMLElement>("[data-snap='true']"));
 
-        const scheduleSnap = () => {
-            if (snapTimeout !== null) window.clearTimeout(snapTimeout);
-            snapTimeout = window.setTimeout(() => {
-                if (reducedMotion || isSnapping) return;
-                if (performance.now() < cooldownUntil) return;
+        const tryFire = () => {
+            if (reducedMotion || isSnapping) return;
+            if (performance.now() < cooldownUntil) return;
 
-                const vh = window.innerHeight;
-                const curY = window.scrollY;
-                const targets = findSnapTargets();
-                if (targets.length === 0) return;
+            // Don't snap while Lenis is still actively interpolating.
+            const velocity = Math.abs((lenis as unknown as { velocity?: number }).velocity ?? 0);
+            if (velocity > VELOCITY_FLOOR) {
+                scheduleSnap();
+                return;
+            }
 
-                // Find the closest snap target whose top is within ±35vh of viewport top.
-                let best: { el: HTMLElement; offset: number } | null = null;
-                for (const el of targets) {
-                    const rect = el.getBoundingClientRect();
-                    const top = rect.top; // distance from viewport top
-                    const abs = Math.abs(top);
-                    // Don't snap if we're past the bottom of this section already
-                    if (rect.bottom <= 60) continue;
-                    if (abs < vh * 0.35) {
-                        if (!best || abs < Math.abs(best.offset)) {
-                            best = { el, offset: top };
-                        }
+            const vh = window.innerHeight;
+            const curY = window.scrollY;
+            const targets = findSnapTargets();
+            if (targets.length === 0) return;
+
+            let best: { el: HTMLElement; offset: number } | null = null;
+            for (const el of targets) {
+                const rect = el.getBoundingClientRect();
+                const top = rect.top;
+                const abs = Math.abs(top);
+                if (rect.bottom <= 80) continue; // already past this slide
+                if (abs < vh * PROXIMITY_VH) {
+                    if (!best || abs < Math.abs(best.offset)) {
+                        best = { el, offset: top };
                     }
                 }
-                if (!best) return;
+            }
+            if (!best) return;
 
-                // Direction sanity: if we're scrolling down but the candidate is above us
-                // (already passed), skip — picking it would scroll backwards which feels wrong.
-                if (lastDirection > 0 && best.offset < -10) return;
-                if (lastDirection < 0 && best.offset > 10) return;
+            // Direction sanity check: don't snap backwards against the user's last gesture.
+            if (lastDirection > 0 && best.offset < -16) return;
+            if (lastDirection < 0 && best.offset > 16) return;
 
-                const targetY = best.el.getBoundingClientRect().top + window.scrollY;
-                if (Math.abs(targetY - curY) < 4) return;
+            const targetY = best.el.getBoundingClientRect().top + window.scrollY;
+            if (Math.abs(targetY - curY) < 6) return;
 
-                isSnapping = true;
-                cooldownUntil = performance.now() + 900;
-                lenis.scrollTo(targetY, {
-                    duration: 0.8,
-                    easing: (t: number) => 1 - Math.pow(1 - t, 3),
-                    onComplete: () => {
-                        isSnapping = false;
-                    },
-                });
-            }, 220);
+            isSnapping = true;
+            cooldownUntil = performance.now() + 900;
+            lenis.scrollTo(targetY, {
+                duration: 0.85,
+                easing: (t: number) => 1 - Math.pow(1 - t, 3),
+                onComplete: () => {
+                    isSnapping = false;
+                },
+            });
+        };
+
+        const scheduleSnap = () => {
+            if (snapTimeout !== null) window.clearTimeout(snapTimeout);
+            snapTimeout = window.setTimeout(tryFire, SETTLE_MS);
         };
 
         const onScroll = () => {
@@ -120,12 +135,14 @@ export default function SmoothScroller({ children }: { children: React.ReactNode
         lenis.on("scroll", onScroll);
         window.addEventListener("wheel", cancelSnap, { passive: true });
         window.addEventListener("touchstart", cancelSnap, { passive: true });
+        window.addEventListener("keydown", cancelSnap, { passive: true });
 
         return () => {
             if (snapTimeout !== null) window.clearTimeout(snapTimeout);
             cancelAnimationFrame(rafId);
             window.removeEventListener("wheel", cancelSnap);
             window.removeEventListener("touchstart", cancelSnap);
+            window.removeEventListener("keydown", cancelSnap);
             lenis.destroy();
             delete window.__lenis;
         };
