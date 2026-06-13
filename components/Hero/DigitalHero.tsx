@@ -1,200 +1,194 @@
 "use client";
 
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Points, PointMaterial } from "@react-three/drei";
-import { useRef, useState, useEffect, useCallback } from "react";
-import * as random from "maath/random/dist/maath-random.cjs";
-
+import { useCallback } from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import * as THREE from "three";
 import Image from "next/image";
-import { Linkedin, MapPin } from "lucide-react";
-import LocationGlobe from "./LocationGlobe";
+import { Download, Linkedin, MapPin } from "lucide-react";
+import { useReducedMotion, easings, durations } from "@/lib/motion";
 
-function StarField(props: React.ComponentProps<typeof Points>) {
-    const ref = useRef<THREE.Points>(null);
-    const [sphere] = useState(() => random.inSphere(new Float32Array(6000), { radius: 1.5 }) as Float32Array);
+// Dynamic-load the R3F starfield so its bundle doesn't ship in the main route chunk.
+const StarFieldCanvas = dynamic(() => import("./StarFieldCanvas"), {
+    ssr: false,
+    loading: () => null,
+});
 
-    const mouse = useRef({ x: 0, y: 0 });
-    const { size } = useThree();
-
-    // Listen for mouse movement on the canvas
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            // Normalize to -1 to 1
-            mouse.current.x = (e.clientX / size.width - 0.5) * 2;
-            mouse.current.y = -(e.clientY / size.height - 0.5) * 2;
-        };
-        window.addEventListener("mousemove", handleMouseMove);
-        return () => window.removeEventListener("mousemove", handleMouseMove);
-    }, [size]);
-
-    useFrame((state, delta) => {
-        if (ref.current) {
-            // Base rotation
-            ref.current.rotation.x -= delta / 15;
-            ref.current.rotation.y -= delta / 20;
-
-            // Mouse-responsive tilt (subtle, lerped for smoothness)
-            const targetRotX = mouse.current.y * 0.15;
-            const targetRotZ = mouse.current.x * 0.1;
-            ref.current.rotation.x += (targetRotX - ref.current.rotation.x) * delta * 0.5;
-            ref.current.rotation.z += (targetRotZ - ref.current.rotation.z) * delta * 0.5;
-        }
-    });
-
-    return (
-        <group rotation={[0, 0, Math.PI / 4]}>
-            <Points ref={ref} positions={sphere} stride={3} frustumCulled={false} {...props}>
-                <PointMaterial
-                    transparent
-                    color="#38BDF8"
-                    size={0.002}
-                    sizeAttenuation={true}
-                    depthWrite={false}
-                />
-            </Points>
-        </group>
-    );
+interface DigitalHeroProps {
+    name: string;
+    title: string;
+    headline: string;
+    signatureMetricValue: string;
+    signatureMetricLabel: string;
+    linkedin?: string;
+    location?: string;
+    resumeUrl: string;
 }
 
-export default function DigitalHero({ name, title, linkedin, location }: { name: string; title: string; linkedin?: string; location?: string; }) {
-    // Split the name into first & last for styling
+export default function DigitalHero({
+    name,
+    title,
+    headline,
+    signatureMetricValue,
+    signatureMetricLabel,
+    linkedin,
+    location,
+    resumeUrl,
+}: DigitalHeroProps) {
+    const reducedMotion = useReducedMotion();
     const nameParts = name.split(" ");
     const firstName = nameParts[0];
     const lastName = nameParts.slice(1).join(" ");
 
     const scrollToContent = useCallback(() => {
-        // Scroll past the hero to the first content section
         window.scrollTo({
             top: window.innerHeight * 0.85,
-            behavior: "smooth",
+            behavior: reducedMotion ? "auto" : "smooth",
         });
-    }, []);
+    }, [reducedMotion]);
 
     return (
-        <section className="relative h-[100dvh] w-full flex flex-col justify-center items-center overflow-hidden">
-            {/* 3D Background — interactive, responds to mouse */}
-            <div className="absolute inset-0 z-0 opacity-40">
-                <Canvas camera={{ position: [0, 0, 1] }}>
-                    <StarField />
-                </Canvas>
-            </div>
-
-            {/* Grid Overlay */}
-            <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,black_40%,transparent_100%)] pointer-events-none" />
+        <section
+            id="overview-hero"
+            aria-labelledby="hero-name"
+            className="relative min-h-[100dvh] w-full flex flex-col justify-center items-center overflow-hidden pt-28 pb-12"
+        >
+            {/* Background: starfield (motion-safe, dynamic) + grid overlay */}
+            {!reducedMotion && (
+                <div className="absolute inset-0 z-0 opacity-40" aria-hidden="true">
+                    <StarFieldCanvas />
+                </div>
+            )}
+            <div
+                aria-hidden="true"
+                className="absolute inset-0 z-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_55%_55%_at_50%_50%,black_40%,transparent_100%)] pointer-events-none"
+            />
 
             {/* Content */}
-            <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
-                {/* Creative Avatar Wrapper */}
+            <div className="relative z-10 text-center px-4 max-w-5xl mx-auto flex flex-col items-center gap-6 md:gap-8">
+                {/* Avatar — calm, no perpetual motion */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
-                    animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                    transition={{ delay: 0.1, duration: 1, ease: [0.25, 0.4, 0.25, 1] }}
-                    className="relative group mx-auto mb-4 md:mb-6 w-36 h-36 md:w-44 md:h-44 perspective-1000 mt-24 md:mt-16"
+                    initial={{ opacity: 0, scale: 0.92 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: durations.cinematic, ease: easings.ui }}
+                    className="relative w-28 h-28 md:w-32 md:h-32 rounded-full p-[2px] bg-gradient-to-br from-white/25 via-white/5 to-white/10 shadow-[0_10px_30px_-10px_rgba(56,189,248,0.25)]"
                 >
-                    {/* Animated glowing backdrop - pulses and reacts to hover */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue via-brand-purple to-[#ff006e] rounded-full blur-xl opacity-40 group-hover:opacity-80 transition-opacity duration-700 animate-pulse" />
-
-                    {/* Inner wrapper that floats independently */}
-                    <motion.div
-                        animate={{ y: [0, -8, 0] }}
-                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                        className="relative w-full h-full rounded-full p-[2px] bg-gradient-to-br from-white/20 via-white/5 to-white/20 backdrop-blur-md shadow-[0_0_30px_rgba(56,189,248,0.3)] transition-all duration-500 group-hover:shadow-[0_0_50px_rgba(192,132,252,0.5)] z-10"
-                    >
-                        {/* Spinning border ring */}
-                        <div className="absolute inset-[-1px] rounded-full overflow-hidden opacity-50 z-0 mask-image-circle">
-                            <div className="absolute inset-[-50%] bg-[conic-gradient(from_0deg,transparent_0_300deg,rgba(255,255,255,0.8)_360deg)] animate-[spin_3s_linear_infinite]" />
-                        </div>
-
-                        {/* The Image Container */}
-                        <div className="relative w-full h-full rounded-full overflow-hidden bg-[#0a0f0a] border border-black z-10">
-                            <Image
-                                src="/prof.png"
-                                alt={name}
-                                fill
-                                className="object-[center_15%] object-cover scale-110 group-hover:scale-100 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] filter saturate-100 group-hover:saturate-110"
-                                priority
-                                sizes="(max-width: 768px) 112px, 144px"
-                            />
-                        </div>
-                    </motion.div>
+                    <div className="relative w-full h-full rounded-full overflow-hidden bg-deep">
+                        <Image
+                            src="/prof.png"
+                            alt={name}
+                            fill
+                            className="object-[center_15%] object-cover"
+                            priority
+                            sizes="(max-width: 768px) 112px, 128px"
+                        />
+                    </div>
                 </motion.div>
 
-                {/* Small label */}
+                {/* Title (current role) — quiet mono label */}
                 <motion.p
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3, duration: 0.8 }}
-                    className="text-brand-blue font-mono text-[10px] md:text-sm uppercase tracking-[0.2em] md:tracking-[0.3em] mb-4 md:mb-6"
+                    transition={{ delay: 0.1, duration: durations.slow, ease: easings.ui }}
+                    className="text-brand-blue font-mono text-xs md:text-sm uppercase tracking-[0.3em]"
                 >
                     {title}
                 </motion.p>
 
-                {/* Name — oversized, screen-dominating */}
+                {/* Name — display, slightly dialed back from previous 9vw */}
                 <motion.h1
-                    initial={{ opacity: 0, y: 30 }}
+                    id="hero-name"
+                    initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5, duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-                    className="font-display font-bold leading-[0.9] tracking-tight mb-6 md:mb-8"
+                    transition={{ delay: 0.2, duration: durations.cinematic, ease: easings.ui }}
+                    className="font-display font-medium leading-[0.95] tracking-tight text-[clamp(2.5rem,7.5vw,6rem)] bg-clip-text text-transparent bg-gradient-to-b from-[var(--hero-gradient-from)] to-[var(--hero-gradient-to)]"
                 >
-                    <span className="block text-[clamp(2.5rem,9vw,7.5rem)] bg-clip-text text-transparent bg-gradient-to-b from-[var(--hero-gradient-from)] to-[var(--hero-gradient-to)] transition-colors duration-500">
-                        {firstName}
-                    </span>
-                    <span className="block text-[clamp(2.5rem,9vw,7.5rem)] bg-clip-text text-transparent bg-gradient-to-b from-[var(--hero-gradient-from)] to-[var(--hero-gradient-to)] transition-colors duration-500">
-                        {lastName}
-                    </span>
+                    {firstName}
+                    {lastName && <span className="block">{lastName}</span>}
                 </motion.h1>
 
-
-                {/* Interactive Social & Location Pills */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                {/* Headline — positioning sentence */}
+                <motion.p
+                    initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.1, duration: 0.6 }}
-                    className="flex flex-wrap items-center justify-center gap-3 md:gap-4 mb-4"
+                    transition={{ delay: 0.35, duration: durations.slow, ease: easings.ui }}
+                    className="text-secondary text-base md:text-xl leading-relaxed max-w-2xl"
                 >
+                    {headline}
+                </motion.p>
+
+                {/* Signature metric strip — the proof number */}
+                <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.45, duration: durations.slow, ease: easings.ui }}
+                    className="flex items-baseline gap-3 md:gap-4 px-5 py-3 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md"
+                >
+                    <span
+                        aria-hidden="true"
+                        className="font-display font-bold text-brand-blue text-3xl md:text-4xl tabular-nums drop-shadow-[0_0_18px_rgba(56,189,248,0.35)]"
+                    >
+                        {signatureMetricValue}
+                    </span>
+                    <span className="text-secondary text-xs md:text-sm leading-snug text-left max-w-[16rem] md:max-w-sm">
+                        {signatureMetricLabel}
+                    </span>
+                </motion.div>
+
+                {/* CTAs — primary resume download, secondary linkedin */}
+                <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.55, duration: durations.slow, ease: easings.ui }}
+                    className="flex flex-wrap items-center justify-center gap-3 md:gap-4"
+                >
+                    <a
+                        href={resumeUrl}
+                        download
+                        className="group inline-flex items-center gap-2 px-5 py-3 rounded-full bg-brand-blue text-deep font-bold text-sm tracking-wide hover:bg-brand-blue/90 hover:shadow-[0_0_24px_rgba(56,189,248,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-page transition-all duration-200"
+                    >
+                        <Download className="w-4 h-4" aria-hidden="true" />
+                        Download Résumé
+                    </a>
+
                     {linkedin && (
                         <a
                             href={linkedin}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/[0.03] hover:bg-brand-blue/10 border border-white/10 hover:border-brand-blue/50 transition-all duration-300"
+                            className="group inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-brand-blue/40 text-white font-medium text-sm tracking-wide focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-page transition-all duration-200"
                         >
-                            <Linkedin className="w-3.5 h-3.5 md:w-4 md:h-4 text-brand-blue group-hover:drop-shadow-[0_0_8px_rgba(56,189,248,0.8)] transition-all duration-300" />
-                            <span className="text-[10px] md:text-xs font-mono text-tertiary group-hover:text-white transition-colors duration-300">Connect on LinkedIn</span>
+                            <Linkedin className="w-4 h-4 text-brand-blue" aria-hidden="true" />
+                            Connect on LinkedIn
                         </a>
                     )}
-
-                    {location && (
-                        <div className="relative group flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/[0.03] hover:bg-[#ff006e]/10 border border-white/10 hover:border-[#ff006e]/50 transition-all duration-300 cursor-default">
-                            {/* The 3D hologram bounds to this relative container but overflows infinitely */}
-                            <LocationGlobe />
-                            <MapPin className="relative z-10 w-3.5 h-3.5 md:w-4 md:h-4 text-[#ff006e] group-hover:drop-shadow-[0_0_8px_rgba(255,0,110,0.8)] transition-all duration-300" />
-                            <span className="relative z-10 text-[10px] md:text-xs font-mono text-tertiary group-hover:text-white transition-colors duration-300">{location}</span>
-                        </div>
-                    )}
                 </motion.div>
+
+                {/* Location pill */}
+                {location && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.7, duration: durations.base, ease: easings.ui }}
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/10"
+                    >
+                        <MapPin className="w-3.5 h-3.5 text-tertiary" aria-hidden="true" />
+                        <span className="text-xs font-mono text-tertiary tracking-wide">{location}</span>
+                    </motion.div>
+                )}
             </div>
 
-            {/* Scroll indicator — clickable, anchored to section bottom */}
-            <motion.div
+            {/* Scroll cue */}
+            <motion.button
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 1.5, duration: 0.8 }}
-                className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10"
+                transition={{ delay: 1.0, duration: durations.slow }}
+                onClick={scrollToContent}
+                className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-md p-1"
+                aria-label="Scroll to content"
             >
-                <motion.button
-                    onClick={scrollToContent}
-                    animate={{ y: [0, 8, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    className="flex flex-col items-center gap-2 cursor-pointer group"
-                    aria-label="Scroll to content"
-                >
-                    <span className="text-tertiary group-hover:text-brand-blue font-mono text-[10px] uppercase tracking-widest transition-colors">Scroll</span>
-                    <div className="w-px h-8 bg-gradient-to-b from-tertiary/50 group-hover:from-brand-blue/50 to-transparent transition-colors" />
-                </motion.button>
-            </motion.div>
+                <span className="text-tertiary group-hover:text-brand-blue font-mono text-xs uppercase tracking-widest transition-colors">Scroll</span>
+                <div className="w-px h-8 bg-gradient-to-b from-tertiary/50 group-hover:from-brand-blue/50 to-transparent transition-colors" />
+            </motion.button>
         </section>
     );
 }

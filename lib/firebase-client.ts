@@ -1,6 +1,5 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { AppCheck, getToken, initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -11,51 +10,9 @@ const firebaseConfig = {
     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-const intakeEndpoint = process.env.NEXT_PUBLIC_INTAKE_ENDPOINT;
-const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_V3_SITE_KEY;
-
 export const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
-let appCheckInstance: AppCheck | null = null;
-
-function ensureAppCheck() {
-    if (appCheckInstance || typeof window === "undefined" || !recaptchaSiteKey) {
-        return;
-    }
-
-    appCheckInstance = initializeAppCheck(app, {
-        provider: new ReCaptchaV3Provider(recaptchaSiteKey),
-        isTokenAutoRefreshEnabled: true,
-    });
-}
-
-export const submitInquiry = async (data: Record<string, unknown>) => {
-    if (!intakeEndpoint) {
-        throw new Error("Missing NEXT_PUBLIC_INTAKE_ENDPOINT");
-    }
-
-    ensureAppCheck();
-
-    const appCheckToken = appCheckInstance ? (await getToken(appCheckInstance)).token : "";
-
-    const response = await fetch(intakeEndpoint, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            ...(appCheckToken ? { "X-Firebase-AppCheck": appCheckToken } : {}),
-        },
-        body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-        const err = await response.json().catch(() => ({}));
-        throw new Error(err.error || "Inquiry submission failed");
-    }
-
-    return response.json();
-}
-
-/** Submit inquiry by writing directly to Firestore (no Cloud Functions required). */
+/** Submit a contact inquiry by writing directly to Firestore, guarded by firestore.rules validation. */
 export const submitInquiryToFirestore = async (data: { name: string; email: string; message: string }) => {
     const db = getFirestore(app);
     const ref = await addDoc(collection(db, "inquiries"), {

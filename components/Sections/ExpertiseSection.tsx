@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Skill, Certification, Education } from "@/lib/db";
 import SectionHeader from "@/components/UI/SectionHeader";
 import GlassTerminal from "@/components/UI/GlassTerminal";
@@ -16,13 +15,6 @@ export default function ExpertiseSection({
     certifications: Certification[];
     education: Education[];
 }) {
-    const academicRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: academicRef,
-        offset: ["0 1", "1 0"]
-    });
-    const academicY = useTransform(scrollYProgress, [0, 1], [350, -350]);
-
     return (
         <section className="container-wide section-padding space-y-24 md:space-y-32">
 
@@ -59,7 +51,7 @@ export default function ExpertiseSection({
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-2">
                                             <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
-                                            <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400">Authorized</span>
+                                            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400">Authorized</span>
                                         </div>
                                         <ShieldCheck className="w-5 h-5 text-white/20" />
                                     </div>
@@ -74,11 +66,8 @@ export default function ExpertiseSection({
             </div>
 
             {/* PART 3: ACADEMIC TIMELINE */}
-            <div
-                ref={academicRef}
-                className="container max-w-4xl mx-auto px-6 mt-32 relative"
-            >
-                <motion.div style={{ y: academicY }}>
+            <div className="container max-w-4xl mx-auto px-6 mt-32 relative">
+                <motion.div>
                     <SectionHeader
                         title="Academic Log"
                         subtitle="Formal education and foundational knowledge."

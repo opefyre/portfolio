@@ -43,7 +43,7 @@ export default function GlassTerminal({ skills }: { skills: Skill[] }) {
                             <div className="w-3 h-3 rounded-full bg-amber-500/80" />
                             <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
                         </div>
-                        <h3 className="md:mt-8 font-mono text-[10px] md:text-xs text-tertiary uppercase tracking-widest hidden md:block">
+                        <h3 className="md:mt-8 font-mono text-xs text-tertiary uppercase tracking-widest hidden md:block">
                             Competency Matrix
                         </h3>
                     </div>

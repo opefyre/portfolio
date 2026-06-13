@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import clsx from "clsx";
 import MagneticButton from "@/components/UI/MagneticButton";
@@ -14,9 +14,15 @@ import {
     GraduationCap,
     MessageSquare,
 } from "lucide-react";
+import { useReducedMotion } from "@/lib/motion";
 
-// Nav items with icons for mobile view
-const navItems = [
+interface NavItem {
+    name: string;
+    id: string;
+    icon: typeof LayoutDashboard;
+}
+
+const navItems: NavItem[] = [
     { name: "Overview", id: "overview", icon: LayoutDashboard },
     { name: "Skills", id: "expertise", icon: Wrench },
     { name: "Education", id: "credentials", icon: GraduationCap },
@@ -26,117 +32,191 @@ const navItems = [
 ];
 
 export default function FloatingNav() {
-    const [activeSection, setActiveSection] = useState("overview");
+    const [activeSection, setActiveSection] = useState<string>(navItems[0].id);
     const [scrolled, setScrolled] = useState(false);
+    const reducedMotion = useReducedMotion();
+    const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
+
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
     const scrollPercentage = useTransform(scaleX, (latest) => `${Math.round(latest * 100)}%`);
 
+    // Track scrolled state for nav background
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-
-            // Use getBoundingClientRect for accurate detection of nested elements
-            // Iterate in reverse so the LAST section whose top is above the threshold wins
-            let found = false;
-            for (let i = navItems.length - 1; i >= 0; i--) {
-                const el = document.getElementById(navItems[i].id);
-                if (el) {
-                    const rect = el.getBoundingClientRect();
-                    if (rect.top <= 150) {
-                        setActiveSection(navItems[i].id);
-                        found = true;
-                        break;
-                    }
-                }
-            }
-            if (!found) {
-                setActiveSection("overview");
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => window.removeEventListener("scroll", handleScroll);
+        const onScroll = () => setScrolled(window.scrollY > 50);
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
-    const scrollTo = (id: string) => {
-        const element = document.getElementById(id);
-        if (element) {
-            // getBoundingClientRect gives accurate position even for deeply nested elements
+    // IntersectionObserver-based scroll spy
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+
+        const elements = navItems
+            .map((item) => document.getElementById(item.id))
+            .filter((el): el is HTMLElement => el !== null);
+
+        if (elements.length === 0) return;
+
+        // Cache for later use by scrollTo
+        elements.forEach((el) => sectionRefs.current.set(el.id, el));
+
+        // Visible regions ranked by topmost position above a 35%-from-top threshold
+        const visibleIds = new Set<string>();
+        const updateActive = () => {
+            // Find the section nearest the top of the viewport but past the threshold
+            const sorted = navItems
+                .filter((it) => visibleIds.has(it.id))
+                .map((it) => ({ id: it.id, top: document.getElementById(it.id)?.getBoundingClientRect().top ?? Infinity }))
+                .filter((s) => s.top < window.innerHeight * 0.35);
+
+            if (sorted.length === 0) return;
+            // Take the lowest top value that's still above the threshold (most recently entered)
+            sorted.sort((a, b) => b.top - a.top);
+            const next = sorted[0].id;
+            setActiveSection((prev) => (prev === next ? prev : next));
+        };
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                for (const entry of entries) {
+                    if (entry.isIntersecting) visibleIds.add(entry.target.id);
+                    else visibleIds.delete(entry.target.id);
+                }
+                updateActive();
+            },
+            {
+                // Treat a section as "in" when its top crosses 35% from the viewport top
+                rootMargin: "-35% 0px -55% 0px",
+                threshold: 0,
+            }
+        );
+
+        elements.forEach((el) => observer.observe(el));
+        // Initial pass
+        elements.forEach((el) => {
+            if (el.getBoundingClientRect().top < window.innerHeight * 0.35) visibleIds.add(el.id);
+        });
+        updateActive();
+
+        return () => observer.disconnect();
+    }, []);
+
+    // Hash-based deep linking: read hash on first load and scroll to that section.
+    // The IntersectionObserver effect above takes over from there.
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        const initial = window.location.hash.replace(/^#/, "");
+        if (!initial || !navItems.some((i) => i.id === initial)) return;
+        const el = document.getElementById(initial);
+        if (!el) return;
+        window.setTimeout(() => {
+            const top = el.getBoundingClientRect().top + window.scrollY - 100;
+            window.scrollTo({ top, behavior: "auto" });
+            setActiveSection(initial);
+        }, 30);
+    }, []);
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        const url = new URL(window.location.href);
+        if (url.hash !== `#${activeSection}`) {
+            url.hash = activeSection;
+            window.history.replaceState(null, "", url.toString());
+        }
+    }, [activeSection]);
+
+    const scrollTo = useCallback(
+        (id: string) => {
+            const element = sectionRefs.current.get(id) ?? document.getElementById(id);
+            if (!element) return;
             const absoluteTop = element.getBoundingClientRect().top + window.scrollY;
             window.scrollTo({
                 top: absoluteTop - 100,
-                behavior: "smooth",
+                behavior: reducedMotion ? "auto" : "smooth",
             });
-        }
-    };
+        },
+        [reducedMotion]
+    );
 
     return (
-        <motion.div
-            initial={{ y: -100, opacity: 0 }}
+        <motion.nav
+            aria-label="Section navigation"
+            initial={{ y: -40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 1, duration: 0.8 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
             className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4"
         >
-            <div className={clsx(
-                "pointer-events-auto flex items-center gap-1 p-1.5 rounded-full transition-all duration-500 border backdrop-blur-md",
-                scrolled
-                    ? "bg-page/80 border-border shadow-lg shadow-brand-blue/5"
-                    : "bg-transparent border-transparent"
-            )}>
+            <div
+                className={clsx(
+                    "pointer-events-auto flex items-center gap-1 p-1.5 rounded-full transition-all duration-500 border backdrop-blur-md",
+                    scrolled
+                        ? "bg-page/80 border-border shadow-lg shadow-brand-blue/5"
+                        : "bg-transparent border-transparent"
+                )}
+            >
                 {navItems.map((item) => {
                     const Icon = item.icon;
+                    const isActive = activeSection === item.id;
                     return (
                         <button
                             key={item.id}
+                            type="button"
                             onClick={() => scrollTo(item.id)}
+                            aria-current={isActive ? "true" : undefined}
                             className={clsx(
-                                "relative cursor-pointer px-2 md:px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300",
-                                activeSection !== item.id && "text-tertiary hover:text-white"
+                                "relative cursor-pointer px-2 md:px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue",
+                                !isActive && "text-tertiary hover:text-white"
                             )}
-                            aria-label={item.name}
+                            aria-label={`Jump to ${item.name}`}
                         >
-                            {activeSection === item.id && (
+                            {isActive && (
                                 <motion.div
                                     layoutId="nav-pill"
                                     className="absolute inset-0 bg-white rounded-full border border-border shadow-sm"
                                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                 />
                             )}
-                            {/* Icon on mobile, text on desktop */}
-                            <span className={clsx(
-                                "relative z-10 font-bold transition-colors duration-300 md:hidden flex items-center justify-center",
-                                activeSection === item.id ? "text-black" : ""
-                            )}>
-                                <Icon className="w-4 h-4" />
+                            <span
+                                className={clsx(
+                                    "relative z-10 font-bold transition-colors duration-300 md:hidden flex items-center justify-center",
+                                    isActive ? "text-black" : ""
+                                )}
+                            >
+                                <Icon className="w-4 h-4" aria-hidden="true" />
                             </span>
-                            <span className={clsx(
-                                "relative z-10 font-bold transition-colors duration-300 hidden md:inline",
-                                activeSection === item.id ? "text-black" : ""
-                            )}>
+                            <span
+                                className={clsx(
+                                    "relative z-10 font-bold transition-colors duration-300 hidden md:inline",
+                                    isActive ? "text-black" : ""
+                                )}
+                            >
                                 {item.name}
                             </span>
                         </button>
                     );
                 })}
 
-                <div className="w-px h-4 bg-border mx-1" />
+                <div className="w-px h-4 bg-border mx-1" aria-hidden="true" />
 
                 {/* Primary CTA */}
                 <MagneticButton strength={0.3}>
                     <Link
                         href="/contact"
-                        className="flex cursor-pointer items-center px-2.5 md:px-4 py-2 rounded-full bg-brand-blue text-white text-xs font-bold uppercase tracking-wider hover:bg-brand-blue/90 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] transition-all duration-300 mr-1"
+                        className="flex cursor-pointer items-center px-2.5 md:px-4 py-2 rounded-full bg-brand-blue text-deep text-xs font-bold uppercase tracking-wider hover:bg-brand-blue/90 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-page transition-all duration-300 mr-1"
                     >
-                        <MessageSquare className="w-4 h-4 md:hidden" />
-                        <span className="hidden md:inline">Let&apos;s Chat</span>
+                        <MessageSquare className="w-4 h-4 md:hidden" aria-hidden="true" />
+                        <span className="hidden md:inline">Contact</span>
                     </Link>
                 </MagneticButton>
 
-                {/* Circular Scroll Progress */}
-                <div className="relative w-8 h-8 flex items-center justify-center ml-1 bg-page/50 rounded-full border border-border/50">
+                {/* Circular scroll progress */}
+                <div
+                    className="relative w-8 h-8 flex items-center justify-center ml-1 bg-page/50 rounded-full border border-border/50"
+                    aria-hidden="true"
+                >
                     <svg className="w-8 h-8 transform -rotate-90 absolute" viewBox="0 0 36 36">
-                        {/* Background Track */}
                         <circle
                             cx="18"
                             cy="18"
@@ -146,7 +226,6 @@ export default function FloatingNav() {
                             strokeWidth="2"
                             className="text-border"
                         />
-                        {/* Progress Fill */}
                         <motion.circle
                             cx="18"
                             cy="18"
@@ -165,11 +244,11 @@ export default function FloatingNav() {
                             </linearGradient>
                         </defs>
                     </svg>
-                    <motion.span className="absolute text-[8px] font-mono font-bold text-white z-10 pointer-events-none">
+                    <motion.span className="absolute text-[10px] font-mono font-bold text-white z-10 pointer-events-none tabular-nums">
                         {scrollPercentage}
                     </motion.span>
                 </div>
             </div>
-        </motion.div>
+        </motion.nav>
     );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Syne } from "next/font/google";
 import "./globals.css";
 import SmoothScroller from "@/components/shared/SmoothScroller";
+import { ThemeProvider } from "@/components/shared/ThemeProvider";
 
 const fontBody = Manrope({
   subsets: ["latin"],
@@ -17,13 +18,11 @@ const fontDisplay = Syne({
 
 export const metadata: Metadata = {
   title: "Abolfazl Shirkavand | Head of Digital Innovation",
-  description: "Process Excellence & Digital Transformation. Creating the future of enterprise operations.",
+  description: "Process Excellence & Digital Transformation. Engineering measurable outcomes at enterprise scale.",
   icons: {
     icon: "/icon.svg",
   },
 };
-
-import { ThemeProvider } from "@/components/shared/ThemeProvider";
 
 export default function RootLayout({
   children,
@@ -33,9 +32,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${fontBody.variable} ${fontDisplay.variable}`} suppressHydrationWarning>
       <body className="antialiased" suppressHydrationWarning>
+        <a href="#main-content" className="skip-link">Skip to content</a>
         <ThemeProvider>
           <SmoothScroller>
-            {children}
+            <div id="main-content">{children}</div>
           </SmoothScroller>
         </ThemeProvider>
       </body>

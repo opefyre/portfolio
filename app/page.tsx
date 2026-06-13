@@ -43,8 +43,12 @@ export default async function Home() {
         <DigitalHero
           name={personalInfo.name}
           title={personalInfo.title}
+          headline={personalInfo.headline}
+          signatureMetricValue={personalInfo.signatureMetricValue}
+          signatureMetricLabel={personalInfo.signatureMetricLabel}
           linkedin={personalInfo.linkedin}
           location={personalInfo.location}
+          resumeUrl={personalInfo.resumeUrl}
         />
         <SummaryStats
           experiences={experiences}
@@ -122,7 +126,7 @@ export default async function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 text-center text-tertiary font-mono text-[10px] tracking-widest border-t border-border bg-section-tinted">
+      <footer className="py-12 text-center text-tertiary font-mono text-xs tracking-widest border-t border-border bg-section-tinted">
         <p>PROCESS EXCELLENCE // DIGITAL TRANSFORMATION</p>
         <p className="mt-2 text-tertiary/60">© 2026 ABOLFAZL SHIRKAVAND</p>
       </footer>

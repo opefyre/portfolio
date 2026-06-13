@@ -66,14 +66,11 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
         offset: ["0 1", "0.3 1"] // Animation finishes when card is 30% above the bottom of the viewport for a faster trigger
     });
 
-    const scale = useTransform(scrollYProgress, [0, 1], [0.85, 1]);
-    const rotateX = useTransform(scrollYProgress, [0, 1], [40, 0]);
+    const scale = useTransform(scrollYProgress, [0, 1], [0.96, 1]);
     const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-    const yPulse = useTransform(scrollYProgress, [0, 1], [100, 0]);
-    const blur = useTransform(scrollYProgress, [0, 1], ["blur(20px)", "blur(0px)"]);
+    const yPulse = useTransform(scrollYProgress, [0, 1], [40, 0]);
 
-    const glowOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
-    const glowScale = useTransform(scrollYProgress, [0, 1], [0.8, 1.2]);
+    const glowOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.6, 0]);
 
     // Auto-rotate images
     const nextImage = useCallback(() => {
@@ -91,22 +88,19 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
         <section className="container-wide section-padding">
 
             <div ref={cardRef} className="relative">
-                {/* Glow flash behind the card linked to scroll */}
+                {/* Subtle scroll-linked glow behind the card */}
                 <motion.div
-                    style={{ opacity: glowOpacity, scale: glowScale }}
-                    className="absolute inset-0 rounded-2xl bg-brand-blue/30 blur-3xl -z-10"
+                    style={{ opacity: glowOpacity }}
+                    className="absolute inset-0 rounded-2xl bg-brand-blue/20 blur-3xl -z-10"
+                    aria-hidden="true"
                 />
 
-                {/* Main card with Scroll-tied 3D Holographic Parallax */}
+                {/* Main card — calm scroll-linked entrance */}
                 <motion.div
                     style={{
                         opacity,
-                        rotateX,
                         scale,
                         y: yPulse,
-                        filter: blur,
-                        transformPerspective: 2000,
-                        transformStyle: "preserve-3d"
                     }}
                     className="rounded-2xl border border-border bg-card overflow-hidden"
                 >
@@ -119,7 +113,7 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
                                     initial={{ opacity: 0, x: -10 }}
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true }}
-                                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 text-[10px] font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(245,158,11,0.2)]"
+                                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(245,158,11,0.2)]"
                                 >
                                     <Zap className="w-2.5 h-2.5" />
                                     <span>Featured Project</span>
@@ -143,7 +137,7 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
                                             href={mod.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="px-3 py-1.5 rounded-lg bg-brand-purple/5 border border-brand-purple/10 text-brand-purple text-[10px] font-bold uppercase tracking-wider hover:bg-brand-purple/10 transition-colors flex items-center gap-1.5"
+                                            className="px-3 py-1.5 rounded-lg bg-brand-purple/5 border border-brand-purple/10 text-brand-purple text-xs font-bold uppercase tracking-wider hover:bg-brand-purple/10 transition-colors flex items-center gap-1.5"
                                         >
                                             {mod.name} <ArrowUpRight className="w-2.5 h-2.5" />
                                         </a>
@@ -153,7 +147,7 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
 
                             {/* Tech Stack — compact inline */}
                             <div className="space-y-2">
-                                <h4 className="text-[10px] uppercase tracking-widest text-tertiary">Tech Stack</h4>
+                                <h4 className="text-xs uppercase tracking-widest text-tertiary">Tech Stack</h4>
                                 <div className="flex flex-wrap gap-1.5">
                                     {elixiaryVenture.techStack.map((tech: string) => (
                                         <span
@@ -204,20 +198,8 @@ export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: 
 
                         {/* Right: Screenshot Showcase — 3 columns */}
                         <div className="lg:col-span-3 relative border-t lg:border-t-0 lg:border-l border-border p-4 md:p-6 flex flex-col bg-[#060d1b]">
-                            {/* Browser-style top bar */}
-                            <div className="flex items-center gap-2 mb-3">
-                                <div className="flex gap-1.5">
-                                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-                                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-                                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
-                                </div>
-                                <div className="flex-1 h-5 rounded-md bg-white/5 border border-white/10 flex items-center px-2">
-                                    <span className="text-[9px] text-tertiary/60 font-mono">elixiary.com</span>
-                                </div>
-                            </div>
-
-                            {/* Image container with clear border */}
-                            <div className="relative flex-1 rounded-lg overflow-hidden ring-1 ring-white/10 shadow-[inset_0_2px_20px_rgba(0,0,0,0.3)] min-h-[260px] md:min-h-[360px]">
+                            {/* Image container — clean bezel-less frame */}
+                            <div className="relative flex-1 rounded-xl overflow-hidden ring-1 ring-white/10 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.06)] min-h-[260px] md:min-h-[360px]">
                                 {showcaseImages.map((img, i) => (
                                     <motion.div
                                         key={img.src}
