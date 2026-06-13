@@ -8,6 +8,7 @@ import ElixiaryFeature from "@/components/Sections/ElixiaryFeature3D";
 import SectionDivider from "@/components/UI/SectionDivider";
 import SelectedWorkStage from "@/components/Sections/SelectedWorkStage";
 import SiteFooter from "@/components/Sections/SiteFooter";
+import RevealStack from "@/components/Sections/RevealStack";
 import {
   getPersonalInfo,
   getExperiences,
@@ -103,32 +104,29 @@ export default async function Home() {
       </section>
 
       {/*
-        STACK-REVEAL — 'sticky at the END' pattern.
+        REVEAL STACK — JS-controlled 'new page rolls over' pattern.
 
-        Selected Work scrolls normally. Only when the user reaches its last
-        viewport (its bottom edge meets viewport bottom) does it lock in
-        place via `position: sticky; bottom: 0`. The footer (z-10) is in
-        the same parent, so once SW is locked, continued scrolling drives
-        the footer up FROM BELOW the viewport — it rises over the now-
-        pinned SW until it covers it completely.
-
-        No internal scroll inside SW — page scroll flows through the bento
-        and archive naturally; the lock kicks in only at the very end.
+        - Selected Work scrolls normally
+        - When SW.bottom hits viewport.bottom, SW is pinned visually via
+          a transform — it does not move further while the user scrolls
+        - The fixed-positioned footer slides UP from viewport.bottom to
+          viewport.top via translateY, covering the pinned SW like a sheet
+        - The 'end of SW' is effectively the 'end of the website' — the
+          extra 100dvh of scroll only drives the footer reveal
       */}
-      <div className="relative">
-        <section className="sticky bottom-0 z-0" aria-label="Selected work">
-          <SelectedWorkStage totalCount={projects.length}>
-            <ProjectGallery projects={projects} />
-          </SelectedWorkStage>
-        </section>
-        <div className="relative z-10 h-[100dvh]">
+      <RevealStack
+        footer={
           <SiteFooter
             location={personalInfo.location}
             linkedin={personalInfo.linkedin}
             resumeUrl={personalInfo.resumeUrl}
           />
-        </div>
-      </div>
+        }
+      >
+        <SelectedWorkStage totalCount={projects.length}>
+          <ProjectGallery projects={projects} />
+        </SelectedWorkStage>
+      </RevealStack>
     </main>
   );
 }

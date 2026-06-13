@@ -260,16 +260,16 @@ export default function ElixiaryFeature3D({ elixiaryVenture }: { elixiaryVenture
                             </Suspense>
                         )}
 
-                        {/* Scan-line overlay */}
+                        {/* Very faint scan-line — kept just to suggest the holo aesthetic without dimming the image */}
                         <div
                             aria-hidden="true"
-                            className="absolute inset-0 pointer-events-none opacity-[0.08] mix-blend-overlay"
+                            className="absolute inset-0 pointer-events-none opacity-[0.025]"
                             style={{
-                                backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(56,189,248,0.4) 2px, rgba(56,189,248,0.4) 3px)",
+                                backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(56,189,248,0.6) 3px, rgba(56,189,248,0.6) 4px)",
                             }}
                         />
-                        {/* Vignette */}
-                        <div aria-hidden="true" className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.6)_100%)]" />
+                        {/* Soft edge vignette only — center stays clean for the screenshot */}
+                        <div aria-hidden="true" className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_60%,rgba(0,0,0,0.45)_100%)]" />
 
                         {/* Dot indicators */}
                         <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">

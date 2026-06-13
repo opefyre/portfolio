@@ -24,22 +24,19 @@ function ScreenPlane({
     targetRotation,
     targetScale,
     targetOpacity,
-    targetEmissive,
 }: {
     texture: THREE.Texture;
     targetPosition: THREE.Vector3;
     targetRotation: THREE.Euler;
     targetScale: number;
     targetOpacity: number;
-    targetEmissive: number;
 }) {
     const meshRef = useRef<THREE.Mesh>(null);
-    const matRef = useRef<THREE.MeshStandardMaterial>(null);
+    const matRef = useRef<THREE.MeshBasicMaterial>(null);
     const currentPos = useRef(targetPosition.clone());
     const currentRot = useRef(new THREE.Euler().copy(targetRotation));
     const currentScale = useRef(targetScale);
     const currentOpacity = useRef(targetOpacity);
-    const currentEmissive = useRef(targetEmissive);
 
     useFrame((_, delta) => {
         if (!meshRef.current || !matRef.current) return;
@@ -58,22 +55,16 @@ function ScreenPlane({
 
         currentOpacity.current = THREE.MathUtils.lerp(currentOpacity.current, targetOpacity, k);
         matRef.current.opacity = currentOpacity.current;
-
-        currentEmissive.current = THREE.MathUtils.lerp(currentEmissive.current, targetEmissive, k);
-        matRef.current.emissiveIntensity = currentEmissive.current;
     });
 
     return (
         <mesh ref={meshRef} position={targetPosition} rotation={targetRotation} scale={targetScale}>
-            {/* Larger plane — fills most of the canvas at z≈0.6 */}
-            <planeGeometry args={[4.4, 2.8]} />
-            <meshStandardMaterial
+            {/* Big plane fills most of the canvas at z ≈ 0.6 */}
+            <planeGeometry args={[4.6, 2.9]} />
+            {/* MeshBasicMaterial — no emissive blue tint. Texture renders true-to-source. */}
+            <meshBasicMaterial
                 ref={matRef}
                 map={texture}
-                emissive="#38BDF8"
-                emissiveIntensity={targetEmissive}
-                roughness={0.35}
-                metalness={0.25}
                 transparent
                 opacity={targetOpacity}
                 side={THREE.DoubleSide}
@@ -145,20 +136,14 @@ function ScreenFan({ images, activeIndex }: VentureScene3DProps) {
 
                 const isActive = rel === 0;
                 const distance = Math.abs(rel);
-                if (distance > 1) {
-                    // Far siblings: tucked far behind, very faded — only render closest neighbours
-                    if (distance > 2) return null;
-                }
+                if (distance > 2) return null;
 
-                // Active screen: front and center, big
-                // Siblings: smaller, behind, off to the sides, dimmer
-                const x = rel * 2.7;
-                const y = isActive ? 0 : -0.15;
-                const z = isActive ? 0.6 : -1.4 - (distance - 1) * 1.0;
+                const x = rel * 2.85;
+                const y = isActive ? 0 : -0.18;
+                const z = isActive ? 0.7 : -1.6 - (distance - 1) * 1.0;
                 const rotY = -rel * 0.42;
-                const scale = isActive ? 1.0 : 0.62 - Math.max(0, distance - 1) * 0.15;
-                const opacity = isActive ? 1.0 : Math.max(0.18, 0.55 - (distance - 1) * 0.3);
-                const emissive = isActive ? 0.6 : 0.1;
+                const scale = isActive ? 1.0 : 0.6 - Math.max(0, distance - 1) * 0.15;
+                const opacity = isActive ? 1.0 : Math.max(0.18, 0.5 - (distance - 1) * 0.3);
 
                 return (
                     <ScreenPlane
@@ -168,7 +153,6 @@ function ScreenFan({ images, activeIndex }: VentureScene3DProps) {
                         targetRotation={new THREE.Euler(0, rotY, 0)}
                         targetScale={scale}
                         targetOpacity={opacity}
-                        targetEmissive={emissive}
                     />
                 );
             })}
@@ -185,11 +169,10 @@ export default function VentureScene3D({ images, activeIndex }: VentureScene3DPr
             className="!absolute inset-0"
         >
             <color attach="background" args={["#03070f"]} />
-            <fog attach="fog" args={["#03070f", 6, 16]} />
+            <fog attach="fog" args={["#03070f", 6, 18]} />
 
-            <ambientLight intensity={0.55} />
-            <pointLight position={[3, 3, 4]} color="#38BDF8" intensity={1.5} />
-            <pointLight position={[-4, -2, 2]} color="#818CF8" intensity={0.6} />
+            {/* MeshBasicMaterial ignores lights — keep one tiny ambient for safety only */}
+            <ambientLight intensity={0.5} />
 
             <Particles />
             <ScreenFan images={images} activeIndex={activeIndex} />
