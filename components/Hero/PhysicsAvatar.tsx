@@ -11,9 +11,11 @@ interface PhysicsAvatarProps {
     size?: number;
     /** id of the parent canvas element. The avatar is constrained to its bounds. */
     canvasId: string;
-    /** Initial X position (px from canvas left). Defaults to right side. */
+    /** Px from canvas LEFT. Wins if both left + right are provided. */
+    initialOffsetLeft?: number;
+    /** Px from canvas RIGHT. Used when initialOffsetLeft is undefined. */
     initialOffsetRight?: number;
-    /** Initial Y position (px from canvas top). Defaults to middle. */
+    /** Px from canvas TOP. */
     initialOffsetTop?: number;
 }
 
@@ -41,8 +43,9 @@ interface PhysicsAvatarProps {
 export default function PhysicsAvatar({
     src,
     alt,
-    size = 144,
+    size = 156,
     canvasId,
+    initialOffsetLeft,
     initialOffsetRight = 80,
     initialOffsetTop,
 }: PhysicsAvatarProps) {
@@ -65,18 +68,19 @@ export default function PhysicsAvatar({
     const initialized = useRef(false);
 
     // --- physics constants -----------------------------------------------
-    const GRAVITY = 1400;         // px/s², gives a satisfying fall
-    const AIR_DRAG = 0.6;         // exponential per second (vel *= exp(-drag*dt))
-    const GROUND_FRICTION = 1.8;  // exponential per second on the X axis when grounded
-    const WALL_RESTITUTION = 0.78;
-    const FLOOR_RESTITUTION = 0.62;
-    const CEIL_RESTITUTION = 0.5;
-    const REST_SPEED = 14;        // below this on floor → settle (no float)
+    // Lighter, calmer ball — less gravity, more air drag, smaller bounce
+    const GRAVITY = 850;          // px/s² — lighter fall
+    const AIR_DRAG = 1.0;         // exponential per second (vel *= exp(-drag*dt))
+    const GROUND_FRICTION = 2.4;  // exponential per second on the X axis when grounded
+    const WALL_RESTITUTION = 0.45;
+    const FLOOR_RESTITUTION = 0.28;
+    const CEIL_RESTITUTION = 0.35;
+    const REST_SPEED = 18;        // below this on floor → settle (no float)
     const FLOAT_AMP_PX = 4;
     const FLOAT_HZ = 0.5;         // ~1 cycle per 2s
-    const MAX_THROW_SPEED = 3000; // px/s, prevents tunneling
-    const SQUISH_RECOVER = 9;     // 1/s recovery rate of squish toward 0
-    const SQUISH_GAIN = 0.00045;  // velocity (px/s) → unit deformation
+    const MAX_THROW_SPEED = 2400; // px/s, prevents tunneling
+    const SQUISH_RECOVER = 10;    // 1/s recovery rate of squish toward 0
+    const SQUISH_GAIN = 0.00028;  // velocity (px/s) → unit deformation (gentler)
 
     // Initial placement: wait until the canvas has a real measured size.
     // Use a ResizeObserver AND a rAF retry — iframes / dev hot-reload often
@@ -91,14 +95,16 @@ export default function PhysicsAvatar({
         const place = (): boolean => {
             const r = canvas.getBoundingClientRect();
             if (r.width <= 0 || r.height <= 0) return false;
-            const startX = Math.max(0, r.width - size - initialOffsetRight);
+            const startX = initialOffsetLeft !== undefined
+                ? Math.max(0, Math.min(r.width - size, initialOffsetLeft))
+                : Math.max(0, r.width - size - initialOffsetRight);
             const startY = initialOffsetTop ?? Math.max(0, r.height * 0.35);
             pos.current.x = startX;
             pos.current.y = startY;
-            // Switch from CSS right/top to JS-driven translate
+            // Switch from CSS right/top/left to JS-driven translate
             avatar.style.right = "auto";
-            avatar.style.top = "0px";
             avatar.style.left = "0px";
+            avatar.style.top = "0px";
             avatar.style.transform = `translate3d(${startX}px, ${startY}px, 0)`;
             initialized.current = true;
             return true;
@@ -125,7 +131,7 @@ export default function PhysicsAvatar({
             ro.disconnect();
             if (raf) cancelAnimationFrame(raf);
         };
-    }, [canvasId, size, initialOffsetRight, initialOffsetTop]);
+    }, [canvasId, size, initialOffsetLeft, initialOffsetRight, initialOffsetTop]);
 
     // Physics loop
     useEffect(() => {
@@ -374,7 +380,9 @@ export default function PhysicsAvatar({
                 height: size,
                 willChange: "transform",
                 transformOrigin: "50% 50%",
-                right: `${initialOffsetRight}px`,
+                ...(initialOffsetLeft !== undefined
+                    ? { left: `${initialOffsetLeft}px` }
+                    : { right: `${initialOffsetRight}px` }),
                 top: `${initialOffsetTop ?? 140}px`,
             }}
             role="button"
@@ -389,7 +397,7 @@ export default function PhysicsAvatar({
 // Pure visual sub-component (the photo capsule + ring decoration)
 function AvatarVisual({ src, alt, size }: { src: string; alt: string; size: number }) {
     return (
-        <div className="relative w-full h-full rounded-full p-[2px] bg-gradient-to-br from-white/30 via-white/5 to-white/15 shadow-[0_30px_60px_-30px_rgba(56,189,248,0.45)] group-hover/avatar:shadow-[0_30px_70px_-25px_rgba(56,189,248,0.7)] transition-shadow duration-300 pointer-events-none">
+        <div className="relative w-full h-full rounded-full p-[2px] bg-gradient-to-br from-white/30 via-white/5 to-white/15 pointer-events-none">
             {/* Dashed ring decoration — purely visual, sticks out beyond the body */}
             <svg
                 viewBox="0 0 200 200"

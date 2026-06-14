@@ -150,11 +150,43 @@ export default function DigitalHero({
             <PhysicsAvatar
                 src="/prof.png"
                 alt={name}
-                size={144}
+                size={156}
                 canvasId="overview-hero"
-                initialOffsetRight={96}
-                initialOffsetTop={140}
+                initialOffsetLeft={60}
+                initialOffsetTop={150}
             />
+
+            {/* ----- Signature outcome — pinned to the upper-right so a falling avatar can't overlap ----- */}
+            <motion.div
+                initial={{ opacity: 0, y: -12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: durations.slow, ease: easings.ui }}
+                className="absolute z-10 w-full max-w-md"
+                style={{
+                    right: "var(--hero-pad-x)",
+                    top: "calc(var(--hero-pad-top, 96px) + 0.5rem)",
+                }}
+            >
+                <div className="flex items-baseline justify-between gap-4 mb-1.5">
+                    <span className="label-mono text-brand-blue">[ SIGNATURE OUTCOME ]</span>
+                    <span className="label-mono text-tertiary">M.01</span>
+                </div>
+                <div className="flex items-baseline gap-3 justify-end">
+                    <span
+                        aria-hidden="true"
+                        className="font-editorial italic text-brand-blue tabular-nums drop-shadow-[0_0_30px_rgba(56,189,248,0.35)]"
+                        style={{
+                            fontSize: "var(--hero-metric-size)",
+                            lineHeight: "var(--hero-metric-line)" as unknown as number,
+                        }}
+                    >
+                        <SignatureCounter value={signatureMetricValue} reducedMotion={reducedMotion} />
+                    </span>
+                </div>
+                <p className="text-secondary text-xs md:text-sm leading-snug mt-1.5 max-w-sm text-right ml-auto">
+                    {signatureMetricLabel}
+                </p>
+            </motion.div>
 
             {/* ----- Main editorial content (lower-left of hero) ----- */}
             <div
@@ -166,7 +198,7 @@ export default function DigitalHero({
                 }}
             >
                 <div
-                    className="lg:col-span-8 flex flex-col"
+                    className="lg:col-span-12 flex flex-col"
                     style={{ gap: "var(--hero-stack-gap)" }}
                 >
                     {/* Name — editorial display, mask-reveal */}
@@ -241,33 +273,6 @@ export default function DigitalHero({
                     </motion.div>
                 </div>
 
-                {/* RIGHT: signature metric — sits in the lower right of the canvas */}
-                <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6, duration: durations.slow, ease: easings.ui }}
-                    className="lg:col-span-4 w-full max-w-md lg:justify-self-end"
-                >
-                    <div className="flex items-baseline justify-between gap-4 mb-1.5">
-                        <span className="label-mono text-brand-blue">[ SIGNATURE OUTCOME ]</span>
-                        <span className="label-mono text-tertiary">M.01</span>
-                    </div>
-                    <div className="flex items-baseline gap-3">
-                        <span
-                            aria-hidden="true"
-                            className="font-editorial italic text-brand-blue tabular-nums drop-shadow-[0_0_30px_rgba(56,189,248,0.35)]"
-                            style={{
-                                fontSize: "var(--hero-metric-size)",
-                                lineHeight: "var(--hero-metric-line)" as unknown as number,
-                            }}
-                        >
-                            <SignatureCounter value={signatureMetricValue} reducedMotion={reducedMotion} />
-                        </span>
-                    </div>
-                    <p className="text-secondary text-xs md:text-sm leading-snug mt-1.5 max-w-sm">
-                        {signatureMetricLabel}
-                    </p>
-                </motion.div>
             </div>
 
             {/* ----- Bottom band: ticker tape ----- */}
