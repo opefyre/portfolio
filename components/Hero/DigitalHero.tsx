@@ -2,8 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import Image from "next/image";
+import { motion } from "framer-motion";
 import { Download, Linkedin, ArrowDown } from "lucide-react";
 import { useReducedMotion, easings, durations } from "@/lib/motion";
 
@@ -11,6 +10,9 @@ const StarFieldCanvas = dynamic(() => import("./StarFieldCanvas"), {
     ssr: false,
     loading: () => null,
 });
+
+// Physics avatar — client-only, no SSR (window APIs)
+const PhysicsAvatar = dynamic(() => import("./PhysicsAvatar"), { ssr: false, loading: () => null });
 
 interface DigitalHeroProps {
     name: string;
@@ -85,14 +87,18 @@ function SignatureCounter({ value, reducedMotion }: { value: string; reducedMoti
 
 export default function DigitalHero({
     name,
-    title,
+    title: _title,
     headline,
     signatureMetricValue,
     signatureMetricLabel,
     linkedin,
-    location,
+    location: _location,
     resumeUrl,
 }: DigitalHeroProps) {
+    // _title and _location intentionally unused — see strip-out request
+    void _title;
+    void _location;
+
     const reducedMotion = useReducedMotion();
     const nameParts = name.split(" ");
     const firstName = nameParts[0];
@@ -105,28 +111,11 @@ export default function DigitalHero({
         });
     }, [reducedMotion]);
 
-    const px = useMotionValue(0);
-    const py = useMotionValue(0);
-    const sx = useSpring(px, { stiffness: 90, damping: 18 });
-    const sy = useSpring(py, { stiffness: 90, damping: 18 });
-
-    useEffect(() => {
-        if (reducedMotion) return;
-        const onMove = (e: PointerEvent) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 12;
-            const y = (e.clientY / window.innerHeight - 0.5) * 12;
-            px.set(x);
-            py.set(y);
-        };
-        window.addEventListener("pointermove", onMove, { passive: true });
-        return () => window.removeEventListener("pointermove", onMove);
-    }, [px, py, reducedMotion]);
-
     return (
         <section
             id="overview-hero"
             aria-labelledby="hero-name"
-            className="hero-cockpit relative h-[100dvh] min-h-[640px] w-full overflow-hidden grid grid-rows-[auto_1fr_auto]"
+            className="hero-cockpit relative h-[100dvh] min-h-[640px] w-full overflow-hidden grid grid-rows-[1fr_auto]"
         >
             {/* ----- Background stack ----- */}
             {!reducedMotion && (
@@ -157,64 +146,29 @@ export default function DigitalHero({
             </div>
             {!reducedMotion && <div className="scanline z-0" aria-hidden="true" />}
 
-            {/* ----- Top band: corner mission labels (pushed below nav so they never overlap) ----- */}
-            <div
-                className="relative z-10 flex justify-between items-start gap-4 text-tertiary pb-2"
-                style={{
-                    paddingTop: "var(--hero-pad-top)",
-                    paddingLeft: "var(--hero-pad-x)",
-                    paddingRight: "var(--hero-pad-x)",
-                }}
-            >
-                <motion.div
-                    initial={{ opacity: 0, x: -8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.05, duration: 0.5, ease: easings.ui }}
-                    className="flex flex-col gap-1.5"
-                >
-                    <span className="label-mono text-tertiary">[ PROFILE.01 / 04 ]</span>
-                    <span className="label-mono inline-flex items-center gap-2 text-online">
-                        <span aria-hidden="true" className="inline-block w-1.5 h-1.5 rounded-full online-dot" />
-                        SYSTEM ONLINE
-                    </span>
-                </motion.div>
-                <motion.div
-                    initial={{ opacity: 0, x: 8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.05, duration: 0.5, ease: easings.ui }}
-                    className="flex flex-col gap-1.5 text-right items-end"
-                >
-                    <span className="label-mono text-tertiary">{location ? `[ ${location.toUpperCase()} ]` : "[ —— ]"}</span>
-                    <span className="label-mono text-brand-blue">STATUS: AVAILABLE</span>
-                </motion.div>
-            </div>
+            {/* ----- Physics avatar — free to roam the entire hero canvas ----- */}
+            <PhysicsAvatar
+                src="/prof.png"
+                alt={name}
+                size={144}
+                canvasId="overview-hero"
+                initialOffsetRight={96}
+                initialOffsetTop={140}
+            />
 
-            {/* ----- Main editorial grid ----- */}
+            {/* ----- Main editorial content (lower-left of hero) ----- */}
             <div
-                className="relative z-10 grid grid-cols-1 lg:grid-cols-12 items-center"
+                className="relative z-10 grid grid-cols-1 lg:grid-cols-12 items-end pb-10 md:pb-12"
                 style={{
                     gap: "var(--hero-col-gap)",
                     paddingLeft: "var(--hero-pad-x)",
                     paddingRight: "var(--hero-pad-x)",
-                    paddingTop: "var(--hero-stack-gap)",
-                    paddingBottom: "var(--hero-stack-gap)",
                 }}
             >
-                {/* LEFT: 7 cols */}
                 <div
-                    className="lg:col-span-7 flex flex-col"
+                    className="lg:col-span-8 flex flex-col"
                     style={{ gap: "var(--hero-stack-gap)" }}
                 >
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1, duration: 0.5, ease: easings.ui }}
-                        className="flex items-center gap-3"
-                    >
-                        <span aria-hidden="true" className="h-px w-10 bg-brand-blue/60" />
-                        <span className="label-mono text-brand-blue">{title}</span>
-                    </motion.div>
-
                     {/* Name — editorial display, mask-reveal */}
                     <h1
                         id="hero-name"
@@ -254,6 +208,7 @@ export default function DigitalHero({
                         {headline}
                     </motion.p>
 
+                    {/* CTAs */}
                     <motion.div
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -264,13 +219,11 @@ export default function DigitalHero({
                             href={resumeUrl}
                             download
                             data-cursor="download"
-                            className="group inline-flex items-center gap-3 pl-2 pr-5 py-2 rounded-full bg-brand-blue text-deep font-bold text-sm tracking-wide hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-page transition-colors duration-200"
+                            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-blue text-deep font-bold text-sm tracking-wide hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-page transition-colors duration-200"
+                            aria-label="Download CV (PDF)"
                         >
-                            <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-deep text-brand-blue group-hover:bg-page transition-colors">
-                                <Download className="w-3.5 h-3.5" aria-hidden="true" />
-                            </span>
-                            Download Résumé
-                            <span className="label-mono text-deep/60 group-hover:text-deep/80 transition-colors">PDF</span>
+                            <Download className="w-4 h-4 text-deep" aria-hidden="true" strokeWidth={2.5} />
+                            CV
                         </a>
 
                         {linkedin && (
@@ -279,89 +232,42 @@ export default function DigitalHero({
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 data-cursor="connect"
-                                className="group inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-brand-blue/40 text-white font-medium text-sm tracking-wide focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-page transition-colors duration-200"
+                                aria-label="LinkedIn"
+                                className="group inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-brand-blue/40 text-brand-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-page transition-colors duration-200"
                             >
-                                <Linkedin className="w-4 h-4 text-brand-blue" aria-hidden="true" />
-                                LinkedIn
+                                <Linkedin className="w-4 h-4" aria-hidden="true" />
                             </a>
                         )}
                     </motion.div>
                 </div>
 
-                {/* RIGHT: 5 cols — avatar + metric stacked compactly */}
-                <div
-                    className="lg:col-span-5 relative flex flex-col items-center lg:items-end"
-                    style={{ gap: "var(--hero-stack-gap)" }}
+                {/* RIGHT: signature metric — sits in the lower right of the canvas */}
+                <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6, duration: durations.slow, ease: easings.ui }}
+                    className="lg:col-span-4 w-full max-w-md lg:justify-self-end"
                 >
-                    <motion.div
-                        style={{ x: sx, y: sy }}
-                        initial={{ opacity: 0, scale: 0.94 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.3, duration: durations.cinematic, ease: easings.ui }}
-                        className="relative"
-                    >
-                        <span aria-hidden="true" className="crosshair-tick" style={{ top: "-12px", left: "50%", width: "1.5px", height: "8px", transform: "translateX(-50%)" }} />
-                        <span aria-hidden="true" className="crosshair-tick" style={{ bottom: "-12px", left: "50%", width: "1.5px", height: "8px", transform: "translateX(-50%)" }} />
-                        <span aria-hidden="true" className="crosshair-tick" style={{ top: "50%", left: "-12px", height: "1.5px", width: "8px", transform: "translateY(-50%)" }} />
-                        <span aria-hidden="true" className="crosshair-tick" style={{ top: "50%", right: "-12px", height: "1.5px", width: "8px", transform: "translateY(-50%)" }} />
-
-                        <div
-                            className="relative rounded-full p-[2px] bg-gradient-to-br from-white/30 via-white/5 to-white/15 shadow-[0_30px_60px_-30px_rgba(56,189,248,0.45)]"
-                            style={{ width: "var(--hero-avatar)", height: "var(--hero-avatar)" }}
+                    <div className="flex items-baseline justify-between gap-4 mb-1.5">
+                        <span className="label-mono text-brand-blue">[ SIGNATURE OUTCOME ]</span>
+                        <span className="label-mono text-tertiary">M.01</span>
+                    </div>
+                    <div className="flex items-baseline gap-3">
+                        <span
+                            aria-hidden="true"
+                            className="font-editorial italic text-brand-blue tabular-nums drop-shadow-[0_0_30px_rgba(56,189,248,0.35)]"
+                            style={{
+                                fontSize: "var(--hero-metric-size)",
+                                lineHeight: "var(--hero-metric-line)" as unknown as number,
+                            }}
                         >
-                            <svg
-                                viewBox="0 0 200 200"
-                                className="absolute inset-[-14px] w-[calc(100%+28px)] h-[calc(100%+28px)] text-brand-blue/40 pointer-events-none"
-                                aria-hidden="true"
-                            >
-                                <circle cx="100" cy="100" r="96" fill="none" stroke="currentColor" strokeWidth="0.6" strokeDasharray="2 4" />
-                            </svg>
-                            <div className="relative w-full h-full rounded-full overflow-hidden bg-deep">
-                                <Image
-                                    src="/prof.png"
-                                    alt={name}
-                                    fill
-                                    className="object-[center_15%] object-cover"
-                                    priority
-                                    sizes="(max-width: 768px) 112px, 144px"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 label-mono text-tertiary whitespace-nowrap">
-                            <span aria-hidden="true" className="inline-block w-1 h-1 rounded-full bg-brand-blue" />
-                            CAPTURE · 2026
-                        </div>
-                    </motion.div>
-
-                    {/* Signature metric */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 12 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.6, duration: durations.slow, ease: easings.ui }}
-                        className="w-full max-w-md"
-                    >
-                        <div className="flex items-baseline justify-between gap-4 mb-1.5">
-                            <span className="label-mono text-brand-blue">[ SIGNATURE OUTCOME ]</span>
-                            <span className="label-mono text-tertiary">M.01</span>
-                        </div>
-                        <div className="flex items-baseline gap-3">
-                            <span
-                                aria-hidden="true"
-                                className="font-editorial italic text-brand-blue tabular-nums drop-shadow-[0_0_30px_rgba(56,189,248,0.35)]"
-                                style={{
-                                    fontSize: "var(--hero-metric-size)",
-                                    lineHeight: "var(--hero-metric-line)" as unknown as number,
-                                }}
-                            >
-                                <SignatureCounter value={signatureMetricValue} reducedMotion={reducedMotion} />
-                            </span>
-                        </div>
-                        <p className="text-secondary text-xs md:text-sm leading-snug mt-1.5 max-w-sm">
-                            {signatureMetricLabel}
-                        </p>
-                    </motion.div>
-                </div>
+                            <SignatureCounter value={signatureMetricValue} reducedMotion={reducedMotion} />
+                        </span>
+                    </div>
+                    <p className="text-secondary text-xs md:text-sm leading-snug mt-1.5 max-w-sm">
+                        {signatureMetricLabel}
+                    </p>
+                </motion.div>
             </div>
 
             {/* ----- Bottom band: ticker tape ----- */}
