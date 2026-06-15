@@ -3,19 +3,23 @@ import * as admin from "firebase-admin";
 import { cache } from "react";
 import { unstable_cache } from "next/cache";
 
-// Initialize Admin with credentials for build time
-// Service account must be provided via env var in CI/CD (GitHub Secrets)
-// Local dev can use .env.local
-if (!process.env.FIREBASE_SERVICE_ACCOUNT_KEY) {
-    throw new Error("🚨 CRITICAL: FIREBASE_SERVICE_ACCOUNT_KEY environment variable is missing. The application requires Firebase to run.");
-}
-
-const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
-
+// Initialize Admin SDK. Supports two credential sources:
+//   1. FIREBASE_SERVICE_ACCOUNT_KEY — the entire service-account JSON inlined as a string. Used by CI.
+//   2. GOOGLE_APPLICATION_CREDENTIALS — a filesystem path to the service-account JSON. Recommended for
+//      local dev because dotenv parsers mangle the `\n` escapes inside the private key when inlined.
 if (!admin.apps.length) {
-    admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount)
-    });
+    if (process.env.FIREBASE_SERVICE_ACCOUNT_KEY) {
+        const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
+        admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+    } else if (process.env.GOOGLE_APPLICATION_CREDENTIALS) {
+        // Admin SDK auto-reads GOOGLE_APPLICATION_CREDENTIALS when no credential is passed.
+        admin.initializeApp();
+    } else {
+        throw new Error(
+            "🚨 CRITICAL: No Firebase credentials. Set FIREBASE_SERVICE_ACCOUNT_KEY (inline JSON) " +
+            "or GOOGLE_APPLICATION_CREDENTIALS (file path) before running."
+        );
+    }
 }
 
 export const db = admin.firestore();
@@ -45,6 +49,10 @@ export interface Project {
     problem: string;
     solution: string;
     skills: string[];
+    /** ≤90 char outcome line shown on the card by default. Falls back to a truncation of `impact`. */
+    outcomeShort: string;
+    /** Optional public path or absolute URL to a project thumbnail. */
+    thumbnail?: string;
 }
 
 export interface Skill {
@@ -70,6 +78,14 @@ export interface PersonalInfoPublic {
     location: string;
     linkedin: string;
     summary: string;
+    /** 1-sentence positioning headline, ≤14 words. Rendered prominently in the hero. */
+    headline: string;
+    /** e.g. "40%" — the leading numeric value shown in the hero metric strip. */
+    signatureMetricValue: string;
+    /** e.g. "average cycle-time reduction across 70+ programs" */
+    signatureMetricLabel: string;
+    /** Public path or absolute URL to the résumé PDF. Defaults to `/resume.pdf`. */
+    resumeUrl: string;
 }
 
 export interface PersonalInfoPrivate {
@@ -94,29 +110,48 @@ export interface ElixiaryVenture {
     metrics?: Array<{ label: string; value: string }>;
 }
 
+const PERSONAL_INFO_FALLBACK = {
+    headline: "Process Excellence & Digital Transformation — engineering measurable outcomes at enterprise scale.",
+    signatureMetricValue: "40%",
+    signatureMetricLabel: "avg cycle-time reduction across 70+ transformation programs",
+    resumeUrl: "/resume.pdf",
+} as const;
+
+function shortenImpactForCard(impact: string | undefined, limit = 110): string {
+    if (!impact) return "";
+    const single = impact.replace(/\s+/g, " ").trim();
+    if (single.length <= limit) return single;
+    const cut = single.slice(0, limit);
+    const lastSpace = cut.lastIndexOf(" ");
+    return (lastSpace > 40 ? cut.slice(0, lastSpace) : cut).replace(/[.,;:!?]*$/, "") + "…";
+}
+
 export const getPersonalInfo = cache(async () => {
     return unstable_cache(
         async () => {
             const publicDoc = await db.collection("meta").doc("personalInfoPublic").get();
-            if (publicDoc.exists) {
-                return publicDoc.data() as PersonalInfoPublic;
-            }
+            const raw: Partial<PersonalInfoPublic> = publicDoc.exists
+                ? (publicDoc.data() as Partial<PersonalInfoPublic>)
+                : await (async () => {
+                    // Backward-compatible fallback for environments where migration has not run yet.
+                    const legacyDoc = await db.collection("meta").doc("personalInfo").get();
+                    if (!legacyDoc.exists) throw new Error("PersonalInfo public document not found in Firestore");
+                    return legacyDoc.data() as Partial<PersonalInfoPublic>;
+                })();
 
-            // Backward-compatible fallback for environments where migration has not run yet.
-            // This prevents CI/static builds from failing while still returning a public-safe shape.
-            const legacyDoc = await db.collection("meta").doc("personalInfo").get();
-            if (!legacyDoc.exists) throw new Error("PersonalInfo public document not found in Firestore");
-
-            const legacyData = legacyDoc.data() as Partial<PersonalInfoPublic>;
             return {
-                name: legacyData.name ?? "",
-                title: legacyData.title ?? "",
-                location: legacyData.location ?? "",
-                linkedin: legacyData.linkedin ?? "",
-                summary: legacyData.summary ?? ""
+                name: raw.name ?? "",
+                title: raw.title ?? "",
+                location: raw.location ?? "",
+                linkedin: raw.linkedin ?? "",
+                summary: raw.summary ?? "",
+                headline: raw.headline?.trim() || PERSONAL_INFO_FALLBACK.headline,
+                signatureMetricValue: raw.signatureMetricValue?.trim() || PERSONAL_INFO_FALLBACK.signatureMetricValue,
+                signatureMetricLabel: raw.signatureMetricLabel?.trim() || PERSONAL_INFO_FALLBACK.signatureMetricLabel,
+                resumeUrl: raw.resumeUrl?.trim() || PERSONAL_INFO_FALLBACK.resumeUrl,
             };
         },
-        ["personal-info"],
+        ["personal-info-v2"],
         { tags: ["meta"] }
     )();
 });
@@ -152,12 +187,23 @@ export const getProjects = cache(async () => {
             const snapshot = await db.collection("projects").get();
             if (snapshot.empty) throw new Error("Projects collection empty in Firestore");
             return snapshot.docs.map(d => {
-                const data = d.data() as Project;
-                data.id = d.id; // Include the Firestore document ID to allow UI interactions/referencing.
-                return data;
+                const raw = d.data() as Partial<Project>;
+                const outcomeShort = raw.outcomeShort?.trim() || shortenImpactForCard(raw.impact);
+                return {
+                    id: d.id,
+                    title: raw.title ?? "",
+                    description: raw.description ?? "",
+                    impact: raw.impact ?? "",
+                    category: raw.category ?? "",
+                    problem: raw.problem ?? "",
+                    solution: raw.solution ?? "",
+                    skills: raw.skills ?? [],
+                    outcomeShort,
+                    thumbnail: raw.thumbnail,
+                } as Project;
             });
         },
-        ["projects"],
+        ["projects-v2"],
         { tags: ["content"] }
     )();
 });
@@ -181,7 +227,6 @@ export const getEducation = cache(async () => {
             if (snapshot.empty) throw new Error("Education collection empty in Firestore");
             const docs = snapshot.docs.map(d => d.data() as Education);
             // Sort by period descending (newest at the top, oldest at the bottom)
-            // Extracts the last 4-digit number (end year) from strings like "2012 - 2016" or "2020"
             return docs.sort((a, b) => {
                 const yearA = parseInt(a.period.match(/\d{4}/g)?.pop() || "0");
                 const yearB = parseInt(b.period.match(/\d{4}/g)?.pop() || "0");

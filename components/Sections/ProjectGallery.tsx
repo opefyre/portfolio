@@ -1,444 +1,346 @@
 "use client";
 
 import { Project } from "@/lib/db";
-import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import React, { useRef, useState } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import ProjectModal from "@/components/UI/ProjectModal";
 import SectionHeader from "@/components/UI/SectionHeader";
-import { ArrowUpRight, Plus, Box, LayoutGrid } from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import clsx from "clsx";
+import Image from "next/image";
+import { easings, durations } from "@/lib/motion";
 
-// --- Ambient Particles Component ---
-const generateParticles = () =>
-    Array.from({ length: 15 }).map(() => ({
-        size: Math.random() * 6 + 2,
-        left: `${Math.random() * 100}%`,
-        top: `${Math.random() * 100}%`,
-        yEnd: Math.random() * -100 - 50,
-        xEnd: (Math.random() - 0.5) * 50,
-        opacityMid: Math.random() * 0.5 + 0.2,
-        duration: Math.random() * 10 + 10,
-        delay: Math.random() * 10,
-    }));
-
-const AmbientParticles = () => {
-    // Lazy state initialization runs generateParticles EXACTLY once on mount
-    const [particles] = useState(generateParticles);
-
-    // Prevent Hydration error by tracking mount state
-    const [isMounted, setIsMounted] = useState(false);
-    useEffect(() => {
-        // eslint-disable-next-line
-        setIsMounted(true);
-    }, []);
-
-    if (!isMounted || particles.length === 0) return null;
-
-    return (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none mix-blend-screen opacity-40">
-            {particles.map((p, i) => (
-                <motion.div
-                    key={i}
-                    className="absolute bg-brand-blue rounded-full blur-[1px]"
-                    style={{
-                        width: p.size,
-                        height: p.size,
-                        left: p.left,
-                        top: p.top,
-                    }}
-                    animate={{
-                        y: [0, p.yEnd],
-                        x: [0, p.xEnd],
-                        opacity: [0, p.opacityMid, 0],
-                        scale: [0, 1, 0],
-                    }}
-                    transition={{
-                        duration: p.duration,
-                        repeat: Infinity,
-                        ease: "linear",
-                        delay: p.delay,
-                    }}
-                />
-            ))}
-        </div>
-    );
-};
-
-
-// --- The 3D Cinematic Desktop Project Card ---
-const DesktopProjectCard = ({
-    project,
-    index,
-    isHovered,
-    isAnyHovered,
-    onHoverStart,
-    onHoverEnd,
-    onClick,
-}: {
+interface ProjectCardProps {
     project: Project;
     index: number;
-    isHovered: boolean;
-    isAnyHovered: boolean;
-    onHoverStart: () => void;
-    onHoverEnd: () => void;
+    span: "wide" | "tall" | "square";
     onClick: () => void;
-}) => {
-    const cardRef = useRef<HTMLDivElement>(null);
+}
 
-    // Scroll-based entrance purely for sliding into the page
-    const { scrollYProgress } = useScroll({
-        target: cardRef,
-        offset: ["start 100%", "start 80%"]
-    });
-    const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-    const y = useTransform(scrollYProgress, [0, 1], [50, 0]);
+function ProjectCard({ project, index, span, onClick }: ProjectCardProps) {
+    const cardRef = useRef<HTMLButtonElement>(null);
+    const [hovered, setHovered] = useState(false);
 
-    // Handle global dimming when something else is hovered
-    const isDimmed = isAnyHovered && !isHovered;
+    // Scroll-tied entrance — opacity-only so cards don't lift and create scroll jumps
+    const { scrollYProgress } = useScroll({ target: cardRef, offset: ["start 95%", "start 75%"] });
+    const opacity = useTransform(scrollYProgress, [0, 1], [0.35, 1]);
 
     return (
-        <motion.div
+        <motion.button
             ref={cardRef}
-            style={{ opacity, y, perspective: "2000px" }}
-            className={clsx(
-                "relative w-full max-w-4xl mx-auto mb-12 lg:mb-20 transition-opacity duration-700",
-                isDimmed ? "opacity-30 grayscale-[50%]" : "opacity-100"
-            )}
-            onMouseEnter={onHoverStart}
-            onMouseLeave={onHoverEnd}
-        >
-            <motion.div
-                animate={{
-                    // Cinematic 3D hover physics
-                    scale: isHovered ? 1.05 : 0.9,
-                    rotateY: isHovered ? -12 : 0,
-                    rotateX: isHovered ? 5 : 0,
-                    z: isHovered ? 50 : 0,
-                }}
-                transition={{
-                    type: "spring",
-                    stiffness: 250,
-                    damping: 25,
-                    mass: 1.2
-                }}
-                className="relative w-full rounded-2xl md:rounded-[2rem] bg-card border border-border overflow-hidden shadow-2xl cursor-pointer group"
-                style={{ transformStyle: "preserve-3d" }}
-                onClick={onClick}
-            >
-                {/* 3D Depth Shadow (simulates physical light blocking behind card) */}
-                <motion.div
-                    animate={{ opacity: isHovered ? 0.3 : 0, x: isHovered ? 20 : 0, y: isHovered ? 20 : 0 }}
-                    className="absolute inset-0 bg-black blur-2xl -z-10 rounded-[2rem] pointer-events-none"
-                    style={{ transform: "translateZ(-50px)" }}
-                />
-
-                <div className="grid grid-cols-1 md:grid-cols-12 min-h-[300px] md:min-h-[400px]">
-
-                    {/* Left Panel: Primary Overview (Always Visible) */}
-                    <div className="md:col-span-12 p-8 md:p-12 flex flex-col justify-between relative z-10 transition-all duration-500 bg-gradient-to-br from-card to-card-hover"
-                        style={{ gridColumn: isHovered ? "span 7" : "span 12" }}
-                    >
-                        {/* Number & Category */}
-                        <div className="flex items-center gap-4 mb-12">
-                            <motion.div
-                                animate={{ rotate: isHovered ? 360 : 0, scale: isHovered ? 1.1 : 1 }}
-                                transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                                className="w-10 h-10 rounded-full border border-brand-blue/30 flex items-center justify-center text-brand-blue font-mono text-sm bg-brand-blue/5"
-                            >
-                                {(index + 1).toString().padStart(2, '0')}
-                            </motion.div>
-                            <span className="text-secondary tracking-widest uppercase text-xs font-mono">
-                                {project.category}
-                            </span>
-                        </div>
-
-                        <div className="max-w-xl">
-                            <motion.h3
-                                animate={{
-                                    scale: isHovered ? 1.05 : 1,
-                                    transformOrigin: "left bottom",
-                                    color: isHovered ? "#fff" : "#e2e8f0"
-                                }}
-                                className="text-3xl md:text-5xl font-display font-medium leading-tight mb-4"
-                            >
-                                {project.title}
-                            </motion.h3>
-
-                            {/* Detailed description only fully visible on hover */}
-                            <motion.div
-                                animate={{
-                                    height: isHovered ? "auto" : 0,
-                                    opacity: isHovered ? 1 : 0,
-                                    marginTop: isHovered ? 24 : 0
-                                }}
-                                className="overflow-hidden text-secondary text-lg leading-relaxed"
-                            >
-                                {project.description}
-                            </motion.div>
-                        </div>
-
-                        {/* Expand prompt (visible when NOT hovered) */}
-                        <motion.div
-                            animate={{ opacity: isHovered ? 0 : 1, y: isHovered ? 20 : 0 }}
-                            className="absolute bottom-8 right-12 flex items-center gap-2 text-tertiary"
-                        >
-                            <span className="text-sm font-mono tracking-widest uppercase">Explore</span>
-                            <ArrowUpRight className="w-5 h-5" />
-                        </motion.div>
-                    </div>
-
-                    {/* Right Panel: The Unhinge Reveal (Only Visible on Hover) */}
-                    <motion.div
-                        className="hidden md:flex flex-col bg-deep/80 backdrop-blur-xl border-l border-border/50 p-10 overflow-hidden relative"
-                        initial={{ opacity: 0, x: 50, rotateY: 90 }}
-                        animate={{
-                            opacity: isHovered ? 1 : 0,
-                            x: isHovered ? 0 : 50,
-                            rotateY: isHovered ? 0 : 90,
-                        }}
-                        transition={{ type: "spring", stiffness: 200, damping: 25, delay: 0.1 }}
-                        style={{
-                            transformOrigin: "left",
-                            gridColumn: isHovered ? "span 5 / span 5" : "span 0",
-                            display: isHovered ? "flex" : "none"
-                        }}
-                    >
-                        <div className="absolute inset-0 bg-gradient-to-b from-brand-blue/5 to-transparent pointer-events-none" />
-
-                        <div className="flex-1 space-y-8 relative z-10">
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
-                                transition={{ delay: 0.2 }}
-                            >
-                                <h4 className="text-brand-purple text-xs font-bold uppercase tracking-widest mb-3 flex items-center gap-2">
-                                    <Box className="w-4 h-4" /> Challenge
-                                </h4>
-                                <p className="text-secondary text-sm leading-relaxed line-clamp-3">
-                                    {project.problem}
-                                </p>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
-                                transition={{ delay: 0.3 }}
-                            >
-                                <h4 className="text-brand-blue text-xs font-bold uppercase tracking-widest mb-3 flex items-center gap-2">
-                                    <LayoutGrid className="w-4 h-4" /> Tech Stack
-                                </h4>
-                                <div className="flex flex-wrap gap-2">
-                                    {project.skills.slice(0, 5).map((skill, i) => (
-                                        <span key={i} className="px-2.5 py-1 bg-white/5 border border-white/10 rounded text-xs text-secondary font-mono">
-                                            {skill}
-                                        </span>
-                                    ))}
-                                    {project.skills.length > 5 && (
-                                        <span className="px-2.5 py-1 bg-white/5 border border-white/10 rounded text-xs text-brand-blue font-mono">
-                                            +{project.skills.length - 5}
-                                        </span>
-                                    )}
-                                </div>
-                            </motion.div>
-                        </div>
-
-                        {/* Action Bar */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
-                            transition={{ delay: 0.4 }}
-                            className="pt-6 border-t border-border mt-auto flex items-center justify-between"
-                        >
-                            <span className="text-sm text-white font-medium">View Case Study</span>
-                            <div className="w-8 h-8 rounded-full bg-brand-blue text-white flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <Plus className="w-4 h-4" />
-                            </div>
-                        </motion.div>
-                    </motion.div>
-                </div>
-            </motion.div>
-        </motion.div>
-    );
-};
-
-
-// --- The Viewport-Driven Smart Stack Mobile Card ---
-const MobileProjectCard = ({
-    project,
-    index,
-    onClick
-}: {
-    project: Project;
-    index: number;
-    onClick: () => void;
-}) => {
-    return (
-        <div
-            className="relative w-full rounded-3xl bg-card border border-border shadow-xl overflow-hidden flex flex-col cursor-pointer mb-8 transition-transform active:scale-[0.98]"
+            type="button"
             onClick={onClick}
+            data-cursor="view"
+            aria-label={`View case study: ${project.title}`}
+            style={{ opacity }}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            className={clsx(
+                "group relative text-left rounded-3xl overflow-hidden border border-border bg-card hover:border-brand-blue/40 transition-colors duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-page",
+                span === "wide" && "md:col-span-2 md:row-span-1 min-h-[240px]",
+                span === "tall" && "md:col-span-1 md:row-span-2 min-h-[380px] md:min-h-[500px]",
+                span === "square" && "md:col-span-1 md:row-span-1 min-h-[240px]",
+            )}
         >
-            {/* Top overview (always visible) */}
-            <div className="p-6 bg-gradient-to-br from-card to-card-hover z-10 relative">
-                <div className="flex items-center gap-3 mb-6 relative z-10">
-                    <div className="w-8 h-8 rounded-full border border-brand-blue/30 flex items-center justify-center text-brand-blue font-mono text-xs bg-brand-blue/5 shadow-[0_0_10px_rgba(56,189,248,0.2)]">
-                        {(index + 1).toString().padStart(2, '0')}
+            {/* Background — thumbnail or very subtle decorative chart-grid */}
+            <div className="absolute inset-0 z-0" aria-hidden="true">
+                {project.thumbnail ? (
+                    <>
+                        <Image
+                            src={project.thumbnail}
+                            alt=""
+                            fill
+                            className="object-cover opacity-[0.12] group-hover:opacity-[0.22] transition-opacity duration-700"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                        {/* Strong dark scrim so text stays readable */}
+                        <div className="absolute inset-0 bg-gradient-to-tr from-page via-page/95 to-page/85" />
+                    </>
+                ) : (
+                    <div className="absolute inset-0 opacity-100">
+                        <svg
+                            width="100%"
+                            height="100%"
+                            preserveAspectRatio="none"
+                            viewBox="0 0 200 200"
+                            className="text-brand-blue/[0.05]"
+                        >
+                            <defs>
+                                <pattern id={`grid-${index}`} width="20" height="20" patternUnits="userSpaceOnUse">
+                                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" strokeWidth="0.4" />
+                                </pattern>
+                            </defs>
+                            <rect width="200" height="200" fill={`url(#grid-${index})`} />
+                            {/* Bar shapes — concentrated bottom-right corner so titles stay clear */}
+                            <g className="text-brand-blue/[0.06]" fill="currentColor">
+                                <rect x="135" y={170 - (index * 7) % 35} width="9" height={10 + (index * 7) % 35} />
+                                <rect x="150" y={175 - (index * 11) % 30} width="9" height={5 + (index * 11) % 30} />
+                                <rect x="165" y={155 - (index * 13) % 45} width="9" height={25 + (index * 13) % 45} />
+                                <rect x="180" y={165 - (index * 9) % 25} width="9" height={15 + (index * 9) % 25} />
+                            </g>
+                        </svg>
                     </div>
-                    <span className="text-secondary tracking-widest uppercase text-[10px] font-mono">
+                )}
+            </div>
+
+            {/* Mask-reveal scrim — slides up on hover */}
+            <motion.div
+                aria-hidden="true"
+                initial={false}
+                animate={{ y: hovered ? "0%" : "100%" }}
+                transition={{ duration: 0.5, ease: easings.ui }}
+                className="absolute inset-0 z-0 bg-gradient-to-t from-brand-blue/[0.06] via-transparent to-transparent pointer-events-none"
+            />
+
+            {/* Content */}
+            <div className="relative z-10 h-full flex flex-col justify-between p-6 md:p-8">
+                {/* Top bar — index + category */}
+                <div className="flex items-center justify-between">
+                    <span className="label-mono text-brand-blue tabular-nums">
+                        CASE.{(index + 1).toString().padStart(2, "0")}
+                    </span>
+                    <span className="label-mono text-tertiary truncate ml-2">
                         {project.category}
                     </span>
                 </div>
 
-                <h3 className="text-2xl font-display font-medium leading-tight mb-3 text-white relative z-10">
-                    {project.title}
-                </h3>
+                {/* Title + outcome */}
+                <div className="space-y-4 mt-auto">
+                    <h3
+                        className={clsx(
+                            "font-display font-medium text-primary leading-tight tracking-tight transition-colors",
+                            span === "tall" ? "text-3xl md:text-4xl" : "text-2xl md:text-3xl",
+                            hovered && "text-brand-blue",
+                        )}
+                    >
+                        {project.title}
+                    </h3>
 
-                <p className="text-secondary text-sm leading-relaxed relative z-10">
-                    {project.description}
-                </p>
-            </div>
+                    {project.outcomeShort && (
+                        <p className="flex items-start gap-2 text-secondary text-sm md:text-base leading-relaxed">
+                            <Sparkles className="w-3.5 h-3.5 text-brand-blue mt-1 shrink-0" aria-hidden="true" />
+                            <span>{project.outcomeShort}</span>
+                        </p>
+                    )}
 
-            {/* Static Content (No height animations!) */}
-            <div className="bg-deep/80 border-t border-border/50">
-                <div className="p-6 space-y-6">
-                    <div>
-                        <h4 className="text-brand-blue text-[10px] font-bold uppercase tracking-widest mb-3 flex items-center gap-1.5">
-                            <LayoutGrid className="w-3 h-3" /> Tech Stack
-                        </h4>
-                        <div className="flex flex-wrap gap-1.5">
-                            {project.skills.slice(0, 4).map((skill, i) => (
-                                <span key={i} className="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-secondary font-mono">
+                    {/* Tech chips — limited to keep scan-speed */}
+                    {project.skills.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5 pt-1">
+                            {project.skills.slice(0, span === "wide" ? 5 : 3).map((skill) => (
+                                <span key={skill} className="label-mono text-tertiary border border-border/60 rounded-full px-2.5 py-0.5">
                                     {skill}
                                 </span>
                             ))}
-                            {project.skills.length > 4 && (
-                                <span className="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-brand-blue font-mono">
-                                    +{project.skills.length - 4}
+                            {project.skills.length > (span === "wide" ? 5 : 3) && (
+                                <span className="label-mono text-brand-blue border border-brand-blue/30 rounded-full px-2.5 py-0.5">
+                                    +{project.skills.length - (span === "wide" ? 5 : 3)}
                                 </span>
                             )}
                         </div>
-                    </div>
+                    )}
 
-                    <div className="flex items-center justify-between text-brand-blue pt-4 border-t border-border/30">
-                        <span className="text-xs font-medium tracking-wide">Tap to Read Case Study</span>
-                        <div className="w-6 h-6 rounded-full bg-brand-blue/10 flex items-center justify-center">
-                            <ArrowUpRight className="w-3 h-3" />
-                        </div>
+                    {/* Bottom action row */}
+                    <div className="flex items-center justify-between pt-4 border-t border-border/40">
+                        <span className="label-mono text-secondary group-hover:text-brand-blue transition-colors">
+                            View case study
+                        </span>
+                        <span
+                            aria-hidden="true"
+                            className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/[0.06] border border-white/10 text-primary group-hover:bg-brand-blue group-hover:border-brand-blue group-hover:text-deep group-hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] transition-all duration-300"
+                        >
+                            <ArrowUpRight className="w-4 h-4" strokeWidth={2.5} />
+                        </span>
                     </div>
                 </div>
             </div>
-        </div>
-    );
-};
 
-// --- The Main Section Container ---
+            {/* Corner brackets — appear on hover */}
+            <AnimatePresence>
+                {hovered && (
+                    <>
+                        <motion.span
+                            aria-hidden="true"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            transition={{ duration: durations.fast }}
+                            className="absolute top-3 left-3 w-3 h-3 border-l border-t border-brand-blue/60"
+                        />
+                        <motion.span
+                            aria-hidden="true"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            transition={{ duration: durations.fast }}
+                            className="absolute top-3 right-3 w-3 h-3 border-r border-t border-brand-blue/60"
+                        />
+                        <motion.span
+                            aria-hidden="true"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            transition={{ duration: durations.fast }}
+                            className="absolute bottom-3 left-3 w-3 h-3 border-l border-b border-brand-blue/60"
+                        />
+                        <motion.span
+                            aria-hidden="true"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            transition={{ duration: durations.fast }}
+                            className="absolute bottom-3 right-3 w-3 h-3 border-r border-b border-brand-blue/60"
+                        />
+                    </>
+                )}
+            </AnimatePresence>
+        </motion.button>
+    );
+}
+
+const FEATURED_COUNT = 6;
+
 export default function ProjectGallery({ projects }: { projects: Project[] }) {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    // Track globally which project is hovered for the background shift
-    const [hoveredProjectIdx, setHoveredProjectIdx] = useState<number | null>(null);
+    const [showAll, setShowAll] = useState(false);
+    const lastInvokerRef = useRef<HTMLElement | null>(null);
+    const archiveAnchorRef = useRef<HTMLDivElement | null>(null);
 
     const openModal = (project: Project) => {
+        lastInvokerRef.current = (document.activeElement as HTMLElement) ?? null;
         setSelectedProject(project);
         setIsModalOpen(true);
     };
 
-    const isAnyHovered = hoveredProjectIdx !== null;
+    const closeModal = () => {
+        setIsModalOpen(false);
+        window.setTimeout(() => lastInvokerRef.current?.focus(), 50);
+    };
+
+    const toggleArchive = () => {
+        const willOpen = !showAll;
+        setShowAll(willOpen);
+        if (willOpen) {
+            // After the new list mounts, smooth-scroll so the FIRST archive item sits
+            // just below the toggle. Uses Lenis when available for a synced glide.
+            window.setTimeout(() => {
+                const anchor = archiveAnchorRef.current;
+                if (!anchor) return;
+                const targetY = anchor.getBoundingClientRect().top + window.scrollY - 120;
+                if (window.__lenis) {
+                    window.__lenis.scrollTo(targetY, { duration: 0.7, easing: (t: number) => 1 - Math.pow(1 - t, 3) });
+                } else {
+                    window.scrollTo({ top: targetY, behavior: "smooth" });
+                }
+            }, 60);
+        }
+    };
+
+    // Asymmetric bento for the featured strip — cycle through wide/tall/square
+    const getSpan = (i: number): ProjectCardProps["span"] => {
+        const pattern: ProjectCardProps["span"][] = ["wide", "tall", "square", "square", "wide", "square"];
+        return pattern[i % pattern.length];
+    };
+
+    const featured = projects.slice(0, FEATURED_COUNT);
+    const additional = projects.slice(FEATURED_COUNT);
 
     return (
-        <section className="relative min-h-screen py-32 overflow-hidden" id="projects">
-
-            {/* 🌌 Cinematic Immersive Background Layer */}
-            <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-canvas">
-                {/* 
-                  Base ambient grid. Will be tinted by the active project color. 
-                  Currently using static brand-blue/purple since we don't have project-specific color data yet.
-                */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-
-                <AnimatePresence>
-                    {isAnyHovered && (
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.7, ease: "easeInOut" }}
-                            className="absolute inset-0"
-                        >
-                            {/* Huge blurry shifting gradient orb */}
-                            <motion.div
-                                animate={{
-                                    scale: [1, 1.2, 1],
-                                    opacity: [0.6, 0.8, 0.6],
-                                }}
-                                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                                className="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-brand-blue/30 blur-[120px] rounded-full mix-blend-screen"
-                            />
-                            <motion.div
-                                animate={{
-                                    scale: [1, 1.5, 1],
-                                    opacity: [0.4, 0.6, 0.4],
-                                }}
-                                transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                                className="absolute bottom-1/4 right-1/4 w-1/3 h-1/3 bg-brand-purple/20 blur-[100px] rounded-full mix-blend-screen"
-                            />
-
-                            {/* Vignette mask to keep edges dark and text readable */}
-                            <div className="absolute inset-0 bg-radial-gradient from-transparent via-canvas/80 to-canvas" />
-
-                            <AmbientParticles />
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-
-            {/* Foreground Content */}
+        <section className="relative py-24 md:py-32 overflow-hidden" id="projects">
             <div className="container relative z-10">
-                <motion.div
-                    animate={{ opacity: isAnyHovered ? 0.3 : 1 }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <SectionHeader
-                        title="Selected Work"
-                        subtitle="A curated selection of impactful projects driving digital transformation."
-                        centered
-                        className="mb-24"
-                    />
-                </motion.div>
+                <SectionHeader
+                    kicker="CASE STUDIES"
+                    title="Selected work"
+                    subtitle={`A curated index of ${projects.length} programs delivering measurable transformation outcomes.`}
+                    centered
+                    className="mb-16"
+                />
 
-                <div className="flex flex-col gap-12 lg:gap-32 w-full max-w-7xl mx-auto px-4 md:px-0">
-                    {projects.map((project, idx) => (
-                        <div key={project.id || idx}>
-                            {/* Desktop View */}
-                            <div className="hidden md:block">
-                                <DesktopProjectCard
-                                    project={project}
-                                    index={idx}
-                                    isHovered={hoveredProjectIdx === idx}
-                                    isAnyHovered={isAnyHovered}
-                                    onHoverStart={() => setHoveredProjectIdx(idx)}
-                                    onHoverEnd={() => setHoveredProjectIdx(null)}
-                                    onClick={() => openModal(project)}
-                                />
-                            </div>
-
-                            {/* Mobile View */}
-                            <div className="block md:hidden">
-                                <MobileProjectCard
-                                    project={project}
-                                    index={idx}
-                                    onClick={() => openModal(project)}
-                                />
-                            </div>
-                        </div>
+                {/* Featured bento — first N projects, asymmetric layout */}
+                <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-[minmax(220px,_auto)] gap-4 md:gap-6 max-w-7xl mx-auto px-4 md:px-0">
+                    {featured.map((project, idx) => (
+                        <ProjectCard
+                            key={project.id || idx}
+                            project={project}
+                            index={idx}
+                            span={getSpan(idx)}
+                            onClick={() => openModal(project)}
+                        />
                     ))}
                 </div>
+
+                {/* Reveal-the-archive — compact list of remaining projects */}
+                {additional.length > 0 && (
+                    <div className="mt-14 max-w-7xl mx-auto px-4 md:px-0">
+                        <div ref={archiveAnchorRef} className="flex items-center justify-between mb-6 scroll-mt-32">
+                            <span className="label-mono bracket text-brand-blue">ARCHIVE · {String(additional.length).padStart(2, "0")} MORE</span>
+                            <button
+                                type="button"
+                                onClick={toggleArchive}
+                                data-cursor={showAll ? "collapse" : "expand"}
+                                className="label-mono text-tertiary hover:text-brand-blue transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-md px-2 py-1"
+                                aria-expanded={showAll}
+                            >
+                                {showAll ? "Collapse archive ↑" : "Expand archive ↓"}
+                            </button>
+                        </div>
+
+                        <AnimatePresence initial={false}>
+                            {showAll && (
+                                <motion.ul
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: "auto" }}
+                                    exit={{ opacity: 0, height: 0 }}
+                                    transition={{ duration: 0.45, ease: easings.ui }}
+                                    className="divide-y divide-border/40 border-t border-b border-border/40 overflow-hidden"
+                                >
+                                    {additional.map((project, idx) => (
+                                        <motion.li
+                                            key={project.id || idx}
+                                            initial={{ opacity: 0, x: -8 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{
+                                                duration: 0.3,
+                                                delay: 0.05 + Math.min(idx, 12) * 0.025,
+                                                ease: easings.ui,
+                                            }}
+                                        >
+                                            <button
+                                                type="button"
+                                                onClick={() => openModal(project)}
+                                                data-cursor="view"
+                                                className="group w-full text-left py-4 px-2 hover:bg-white/[0.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-sm transition-colors"
+                                            >
+                                                {/* Mobile: stacks vertically so the title can breathe.
+                                                    md+: original single-row layout. */}
+                                                <div className="flex md:items-center gap-2 md:gap-5 flex-col md:flex-row">
+                                                    <div className="flex items-center gap-3 md:gap-5 md:contents">
+                                                        <span className="label-mono text-tertiary w-12 tabular-nums shrink-0">
+                                                            {String(FEATURED_COUNT + idx + 1).padStart(2, "0")}
+                                                        </span>
+                                                        <span className="label-mono text-brand-blue md:w-44 shrink-0 truncate">
+                                                            {project.category}
+                                                        </span>
+                                                    </div>
+                                                    <span className="text-secondary text-base md:text-lg flex-1 min-w-0 group-hover:text-primary transition-colors break-words md:truncate">
+                                                        {project.title}
+                                                    </span>
+                                                    <ArrowUpRight className="w-4 h-4 text-secondary group-hover:text-brand-blue group-hover:translate-x-0.5 transition-all shrink-0 self-end md:self-auto -mt-5 md:mt-0" aria-hidden="true" strokeWidth={2.5} />
+                                                </div>
+                                            </button>
+                                        </motion.li>
+                                    ))}
+                                </motion.ul>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                )}
             </div>
 
             <ProjectModal
                 project={selectedProject}
                 isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
+                onClose={closeModal}
             />
         </section>
     );

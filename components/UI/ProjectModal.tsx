@@ -2,7 +2,9 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { Project } from "@/lib/db";
-import { useEffect } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { easings, durations } from "@/lib/motion";
 
 interface ProjectModalProps {
     project: Project | null;
@@ -10,79 +12,135 @@ interface ProjectModalProps {
     onClose: () => void;
 }
 
+const FOCUSABLE = [
+    "a[href]",
+    "button:not([disabled])",
+    "textarea:not([disabled])",
+    "input:not([disabled])",
+    "select:not([disabled])",
+    "[tabindex]:not([tabindex='-1'])",
+].join(",");
+
 export default function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
-    // Prevent body scroll AND stop Lenis smooth scroll when modal is open
+    const dialogRef = useRef<HTMLDivElement>(null);
+    const titleId = useId();
+    // Portal the modal to <body> — ancestor sections (RevealStack, pinned
+    // ScrollTrigger sections) carry transforms that become the containing
+    // block for `position: fixed`, which would otherwise anchor the dialog
+    // to the section's frame (~2700px tall) instead of the viewport.
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
+
+    // Body scroll lock + Lenis pause + Esc-to-close + focus trap
     useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = "hidden";
-            // Stop Lenis so native overflow-y-auto works inside the modal
-            window.__lenis?.stop();
-        } else {
+        if (!isOpen) {
             document.body.style.overflow = "unset";
-            // Resume Lenis smooth scrolling
             window.__lenis?.start();
+            return;
         }
+
+        document.body.style.overflow = "hidden";
+        window.__lenis?.stop();
+
+        // Initial focus on the close button when the dialog opens
+        const focusFirst = () => {
+            const el = dialogRef.current?.querySelector<HTMLElement>("[data-autofocus]");
+            el?.focus();
+        };
+        const t = window.setTimeout(focusFirst, 50);
+
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                e.stopPropagation();
+                onClose();
+                return;
+            }
+            if (e.key !== "Tab" || !dialogRef.current) return;
+            // Focus trap
+            const nodes = dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE);
+            if (nodes.length === 0) return;
+            const first = nodes[0];
+            const last = nodes[nodes.length - 1];
+            const active = document.activeElement as HTMLElement | null;
+            if (e.shiftKey && active === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && active === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        };
+        document.addEventListener("keydown", onKeyDown);
+
         return () => {
             document.body.style.overflow = "unset";
             window.__lenis?.start();
+            window.clearTimeout(t);
+            document.removeEventListener("keydown", onKeyDown);
         };
-    }, [isOpen]);
+    }, [isOpen, onClose]);
 
     if (!project) return null;
+    if (!mounted) return null;
 
-    return (
+    return createPortal(
         <AnimatePresence>
             {isOpen && (
                 <>
-                    {/* Backdrop */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
+                        transition={{ duration: durations.base, ease: easings.ui }}
                         onClick={onClose}
                         className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm cursor-pointer"
+                        aria-hidden="true"
                     />
 
-                    {/* Modal Content - onWheel stopPropagation prevents Lenis from eating scroll events */}
-                    <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 md:p-8 pointer-events-none">
+                    <div
+                        className="fixed inset-0 z-[70] flex items-center justify-center p-4 md:p-8 pointer-events-none"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby={titleId}
+                    >
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            ref={dialogRef}
+                            initial={{ opacity: 0, scale: 0.96, y: 16 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
-                            className="bg-card w-full max-w-2xl max-h-[80vh] mb-4 md:mb-0 md:max-h-[85vh] mt-16 md:mt-0 flex flex-col rounded-2xl md:rounded-3xl shadow-2xl pointer-events-auto border border-white/5 relative"
+                            exit={{ opacity: 0, scale: 0.96, y: 16 }}
+                            transition={{ type: "spring", duration: durations.slow, bounce: 0.2 }}
+                            className="bg-card w-full max-w-2xl max-h-[85vh] flex flex-col rounded-2xl md:rounded-3xl shadow-2xl pointer-events-auto border border-white/10 relative"
                             onClick={(e) => e.stopPropagation()}
-                            onWheel={(e) => e.stopPropagation()} // Block Lenis from intercepting wheel events inside the modal
+                            onWheel={(e) => e.stopPropagation()}
                         >
                             <div
                                 className="p-5 md:p-8 overflow-y-auto flex-1 min-h-0 custom-scrollbar relative z-10 overscroll-contain"
                                 data-lenis-prevent="true"
                                 onTouchMove={(e) => e.stopPropagation()}
                             >
-                                {/* Header */}
-                                <div className="flex justify-between items-start mb-6">
-                                    <div>
+                                <div className="flex justify-between items-start mb-6 gap-4">
+                                    <div className="min-w-0">
                                         <div className="flex items-center gap-3 mb-2">
-                                            <span className="text-[10px] uppercase tracking-widest px-2 py-1 bg-brand-blue/10 text-brand-blue border border-brand-blue/20 rounded font-bold">
+                                            <span className="text-xs uppercase tracking-widest px-2 py-1 bg-brand-blue/10 text-brand-blue border border-brand-blue/20 rounded font-bold">
                                                 {project.category}
                                             </span>
                                         </div>
-                                        <h2 className="text-2xl md:text-4xl font-display font-bold text-primary">
+                                        <h2 id={titleId} className="text-2xl md:text-4xl font-display font-bold text-primary">
                                             {project.title}
                                         </h2>
                                     </div>
                                     <button
+                                        type="button"
                                         onClick={onClose}
-                                        className="p-2 -mr-2 -mt-2 rounded-full hover:bg-white/5 transition-colors text-tertiary hover:text-white shrink-0"
-                                        aria-label="Close modal"
+                                        data-autofocus
+                                        className="p-2 -mr-2 -mt-2 rounded-full hover:bg-white/5 transition-colors text-tertiary hover:text-white shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
+                                        aria-label="Close case study"
                                     >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                                     </button>
                                 </div>
 
-                                {/* Content Grid */}
                                 <div className="space-y-8">
-                                    {/* Problem & Solution */}
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                         <div className="space-y-3">
                                             <h3 className="text-sm font-mono uppercase tracking-widest text-secondary border-b border-border pb-2">The Challenge</h3>
@@ -98,7 +156,6 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                                         </div>
                                     </div>
 
-                                    {/* Tech Stack */}
                                     <div className="space-y-3">
                                         <h3 className="text-sm font-mono uppercase tracking-widest text-secondary border-b border-border pb-2">Tools & Skills</h3>
                                         <div className="flex flex-wrap gap-2">
@@ -110,9 +167,8 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                                         </div>
                                     </div>
 
-                                    {/* Impact Box */}
-                                    <div className="bg-brand-blue/5 border border-brand-blue/10 rounded-xl p-6 relative overflow-hidden mt-8">
-                                        <div className="absolute top-0 right-0 p-4 opacity-10">
+                                    <div className="bg-brand-blue/5 border border-brand-blue/20 rounded-xl p-6 relative overflow-hidden mt-8">
+                                        <div className="absolute top-0 right-0 p-4 opacity-10" aria-hidden="true">
                                             <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor">
                                                 <path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z" />
                                             </svg>
@@ -128,6 +184,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     </div>
                 </>
             )}
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.body,
     );
 }

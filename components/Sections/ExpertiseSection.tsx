@@ -1,123 +1,233 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
 import { Skill, Certification, Education } from "@/lib/db";
 import SectionHeader from "@/components/UI/SectionHeader";
 import GlassTerminal from "@/components/UI/GlassTerminal";
-import HolographicCard from "@/components/UI/HolographicCard";
-import { GraduationCap, ShieldCheck } from "lucide-react";
+import { ShieldCheck, GraduationCap } from "lucide-react";
+import { easings } from "@/lib/motion";
+
+// ---------- helpers --------------------------------------------------------
+
+function eduRange(period: string): { start: string; end: string; isPresent: boolean } {
+    const matches = Array.from(period.matchAll(/\b(19|20)\d{2}\b/g)).map((m) => m[0]);
+    const isPresent = /\b(present|current|now|ongoing)\b/i.test(period);
+    if (matches.length === 0) return { start: "—", end: "", isPresent };
+    return {
+        start: matches[0],
+        end: isPresent ? "Present" : matches.length > 1 ? matches[matches.length - 1] : "",
+        isPresent,
+    };
+}
+
+function certSortKey(c: Certification): number {
+    const y = parseInt(c.year ?? "", 10);
+    return Number.isFinite(y) ? y : 0;
+}
+
+// ---------- marquee badge --------------------------------------------------
+
+function CertBadge({ cert, idx }: { cert: Certification; idx: number }) {
+    return (
+        <div
+            className={[
+                "group/badge relative shrink-0 inline-flex items-center gap-3 pl-3 pr-4 py-2 rounded-full",
+                "bg-deep/60 border border-border hover:border-brand-blue/50 hover:bg-deep",
+                "transition-colors duration-300 cursor-default",
+            ].join(" ")}
+        >
+            <span className="label-mono text-brand-blue tabular-nums shrink-0">
+                CRT.{String(idx + 1).padStart(2, "0")}
+            </span>
+            <span aria-hidden="true" className="inline-block w-px h-3 bg-border" />
+            <span className="text-sm md:text-base text-primary font-medium whitespace-nowrap">
+                {cert.name}
+            </span>
+            {cert.year && (
+                <span className="font-editorial italic text-brand-blue/80 text-lg tabular-nums leading-none">
+                    {cert.year}
+                </span>
+            )}
+            {cert.issuer && (
+                <span className="label-mono text-tertiary whitespace-nowrap hidden md:inline">
+                    · {cert.issuer}
+                </span>
+            )}
+        </div>
+    );
+}
+
+// ---------- main section --------------------------------------------------
+
 export default function ExpertiseSection({
     skills,
     certifications,
-    education
+    education,
 }: {
     skills: Skill[];
     certifications: Certification[];
     education: Education[];
 }) {
-    const academicRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: academicRef,
-        offset: ["0 1", "1 0"]
-    });
-    const academicY = useTransform(scrollYProgress, [0, 1], [350, -350]);
+    // Sort certs by year desc (undated drift naturally to the end)
+    const certsSorted = useMemo(() => {
+        return [...certifications].sort((a, b) => certSortKey(b) - certSortKey(a));
+    }, [certifications]);
+
+    const eduSorted = useMemo(() => {
+        return [...education].sort((a, b) => {
+            const ay = parseInt(eduRange(a.period).end || eduRange(a.period).start || "0", 10);
+            const by = parseInt(eduRange(b.period).end || eduRange(b.period).start || "0", 10);
+            return by - ay;
+        });
+    }, [education]);
+
+    // Mobile narrower viewport → shorter cycle so the marquee actually feels
+    // like it's moving (long durations on a small viewport look stalled).
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const mql = window.matchMedia("(max-width: 768px)");
+        const update = () => setIsMobile(mql.matches);
+        update();
+        mql.addEventListener("change", update);
+        return () => mql.removeEventListener("change", update);
+    }, []);
+    const certMarqueeDuration = isMobile
+        ? Math.max(10, certsSorted.length * 2.4)
+        : Math.max(20, certsSorted.length * 4);
 
     return (
         <section className="container-wide section-padding space-y-24 md:space-y-32">
-
-            {/* PART 1: PREMIUM GLASS TERMINAL */}
+            {/* PART 1: SKILLS — unchanged */}
             <div id="expertise" className="container-wide scroll-mt-32">
                 <SectionHeader
-                    title="Technical Command Center"
+                    kicker="COMPETENCIES"
+                    title="Skills & competencies"
                 />
 
-                <div className="mt-12 md:mt-24 w-full flex justify-center px-4 md:px-0">
+                <div className="mt-12 md:mt-24 w-full flex justify-center px-1 sm:px-4 md:px-0">
                     <GlassTerminal skills={skills} />
                 </div>
             </div>
 
-            {/* PART 2: HOLOGRAPHIC CREDENTIALS VAULT */}
-            <div id="credentials" className="container max-w-6xl mx-auto px-6 scroll-mt-32">
+            {/* PART 2: CREDENTIALS — one-viewport compact panel */}
+            <div
+                id="credentials"
+                className="container max-w-6xl mx-auto px-4 md:px-6 scroll-mt-32"
+            >
                 <SectionHeader
-                    title="Verified Credentials"
-                    subtitle="Industry-standard certifications and professional authorizations."
+                    kicker="CREDENTIALS"
+                    title="Authorizations & academia"
                 />
 
-                <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {certifications.map((cert, idx) => (
-                        <motion.div
-                            key={idx}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ duration: 0.5, delay: idx * 0.1 }}
-                            className="h-32" // Fixed height for consistent cards
-                        >
-                            <HolographicCard>
-                                <div className="flex flex-col h-full justify-between">
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center gap-2">
-                                            <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
-                                            <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400">Authorized</span>
-                                        </div>
-                                        <ShieldCheck className="w-5 h-5 text-white/20" />
-                                    </div>
-                                    <h4 className="font-display text-lg md:text-xl font-medium text-white leading-tight">
-                                        {cert.name}
-                                    </h4>
-                                </div>
-                            </HolographicCard>
-                        </motion.div>
-                    ))}
-                </div>
-            </div>
-
-            {/* PART 3: ACADEMIC TIMELINE */}
-            <div
-                ref={academicRef}
-                className="container max-w-4xl mx-auto px-6 mt-32 relative"
-            >
-                <motion.div style={{ y: academicY }}>
-                    <SectionHeader
-                        title="Academic Log"
-                        subtitle="Formal education and foundational knowledge."
+                <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-80px" }}
+                    transition={{ duration: 0.5, ease: easings.ui }}
+                    className="mt-10 relative rounded-3xl border border-border bg-deep/40 backdrop-blur-md overflow-hidden"
+                >
+                    {/* Ambient backlight */}
+                    <div
+                        aria-hidden="true"
+                        className="absolute -top-32 left-1/4 w-[420px] h-[280px] bg-brand-blue/12 blur-[120px] rounded-full pointer-events-none"
                     />
 
-                    <div className="mt-16 md:mt-24 space-y-16 relative before:absolute before:inset-0 before:ml-4 md:before:ml-[50%] before:-translate-x-px md:before:translate-x-0 before:h-full before:w-[2px] before:bg-gradient-to-b before:from-transparent before:via-white/10 before:to-transparent">
-                        {education.map((edu, idx) => (
-                            <motion.div
-                                key={idx}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-100px" }}
-                                transition={{ duration: 0.6, ease: "easeOut" }}
-                                className={`relative flex items-center justify-between md:justify-normal ${idx % 2 === 0 ? "md:flex-row-reverse" : ""
-                                    }`}
-                            >
-                                {/* Center Timeline Node */}
-                                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-deep border border-brand-blue/30 shadow-[0_0_15px_rgba(56,189,248,0.2)] z-10">
-                                    <GraduationCap className="w-4 h-4 text-brand-blue" />
-                                </div>
+                    {/* Decorative corner brackets */}
+                    <span aria-hidden="true" className="absolute top-3 left-3 w-3 h-3 border-l border-t border-brand-blue/40" />
+                    <span aria-hidden="true" className="absolute top-3 right-3 w-3 h-3 border-r border-t border-brand-blue/40" />
+                    <span aria-hidden="true" className="absolute bottom-3 left-3 w-3 h-3 border-l border-b border-brand-blue/40" />
+                    <span aria-hidden="true" className="absolute bottom-3 right-3 w-3 h-3 border-r border-b border-brand-blue/40" />
 
-                                {/* Content Card */}
-                                <div className={`ml-12 md:ml-0 w-full md:w-[45%] ${idx % 2 === 0 ? "md:pl-16" : "md:pr-16 md:text-right"}`}>
-                                    <div className="bg-deep/40 backdrop-blur-xl border border-white/10 p-6 md:p-8 rounded-2xl hover:bg-white/[0.02] hover:border-brand-blue/30 transition-colors">
-                                        <h4 className="text-xl font-display font-medium text-white mb-2">{edu.degree}</h4>
-                                        <div className="text-brand-blue/80 font-mono text-sm uppercase tracking-widest mb-4">
+                    {/* Mission control header bar */}
+                    <div className="relative flex items-center justify-between gap-3 border-b border-border/60 px-5 md:px-7 py-3 text-tertiary">
+                        <div className="flex items-center gap-3">
+                            <span className="label-mono bracket text-brand-blue">ARCHIVE.03</span>
+                            <span className="label-mono hidden sm:inline">CREDENTIALS · LIVE</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                            <span aria-hidden="true" className="inline-block w-1.5 h-1.5 rounded-full online-dot" />
+                            <span className="label-mono tabular-nums">
+                                {String(certifications.length + education.length).padStart(2, "0")} ENTRIES
+                            </span>
+                        </div>
+                    </div>
+
+                    {/* AUTHORIZATIONS — auto-scrolling marquee */}
+                    <div className="relative py-6 md:py-7 border-b border-border/60">
+                        <div className="flex items-center justify-between px-5 md:px-7 mb-4">
+                            <div className="flex items-center gap-2.5">
+                                <ShieldCheck className="w-4 h-4 text-brand-blue" aria-hidden="true" />
+                                <span className="label-mono text-brand-blue">AUTHORIZATIONS</span>
+                            </div>
+                            <span className="label-mono text-tertiary tabular-nums">
+                                {String(certsSorted.length).padStart(2, "0")}
+                            </span>
+                        </div>
+
+                        {/* Marquee — pauses on hover. Edge gradients keep the tape feel. */}
+                        <div className="group/marquee relative overflow-hidden">
+                            <div
+                                className="flex gap-3 whitespace-nowrap will-change-transform marquee-track group-hover/marquee:[animation-play-state:paused]"
+                                style={{ animationDuration: `${certMarqueeDuration}s` }}
+                            >
+                                {/* Doubled list for seamless loop */}
+                                {[...certsSorted, ...certsSorted].map((cert, i) => (
+                                    <CertBadge
+                                        key={`${cert.name}-${i}`}
+                                        cert={cert}
+                                        idx={i % certsSorted.length}
+                                    />
+                                ))}
+                            </div>
+                            {/* Edge fades */}
+                            <div aria-hidden="true" className="absolute inset-y-0 left-0 w-12 md:w-20 bg-gradient-to-r from-deep/95 to-transparent pointer-events-none" />
+                            <div aria-hidden="true" className="absolute inset-y-0 right-0 w-12 md:w-20 bg-gradient-to-l from-deep/95 to-transparent pointer-events-none" />
+                        </div>
+                    </div>
+
+                    {/* ACADEMIA — compact, supporting */}
+                    <div className="relative py-6 md:py-7 px-5 md:px-7">
+                        <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center gap-2.5">
+                                <GraduationCap className="w-4 h-4 text-brand-purple" aria-hidden="true" />
+                                <span className="label-mono text-brand-purple">ACADEMIA</span>
+                            </div>
+                            <span className="label-mono text-tertiary tabular-nums">
+                                {String(eduSorted.length).padStart(2, "0")}
+                            </span>
+                        </div>
+
+                        <ol className="divide-y divide-border/40">
+                            {eduSorted.map((edu, idx) => {
+                                const { start, end, isPresent } = eduRange(edu.period);
+                                return (
+                                    <li
+                                        key={idx}
+                                        className="group/edu grid grid-cols-12 gap-3 md:gap-4 items-baseline py-3 first:pt-1 last:pb-1 hover:bg-white/[0.02] -mx-2 px-2 rounded transition-colors"
+                                    >
+                                        <span className="col-span-12 sm:col-span-3 lg:col-span-2 font-editorial italic text-brand-blue text-base md:text-lg leading-none tabular-nums">
+                                            {start}
+                                            {end && (
+                                                <>
+                                                    <span className="mx-1.5 text-tertiary/60 not-italic">→</span>
+                                                    <span className={isPresent ? "text-online" : ""}>{end}</span>
+                                                </>
+                                            )}
+                                        </span>
+                                        <span className="col-span-12 sm:col-span-6 lg:col-span-7 text-primary font-medium text-base md:text-lg leading-snug">
+                                            {edu.degree}
+                                        </span>
+                                        <span className="col-span-12 sm:col-span-3 lg:col-span-3 label-mono text-tertiary truncate sm:text-right">
                                             {edu.institution}
-                                        </div>
-                                        <div className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-tertiary">
-                                            {edu.period}
-                                        </div>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
+                                        </span>
+                                    </li>
+                                );
+                            })}
+                        </ol>
                     </div>
                 </motion.div>
             </div>
-
         </section>
     );
 }

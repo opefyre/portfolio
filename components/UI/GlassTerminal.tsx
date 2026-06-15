@@ -37,18 +37,18 @@ export default function GlassTerminal({ skills }: { skills: Skill[] }) {
 
                 {/* Left Sidebar / Top Mobile Nav (Categories) */}
                 <div className="w-full md:w-80 bg-white/[0.02] border-b md:border-b-0 md:border-r border-white/5 flex flex-col relative z-20">
-                    <div className="p-4 md:p-6 border-b border-white/5 flex items-center justify-between md:block">
-                        <div className="flex gap-2">
-                            <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                            <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-                            <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
+                    <div className="px-2.5 py-2 md:p-6 border-b border-white/5 flex items-center justify-between md:block">
+                        <div className="flex gap-1.5 md:gap-2">
+                            <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-red-500/80" />
+                            <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-amber-500/80" />
+                            <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-emerald-500/80" />
                         </div>
-                        <h3 className="md:mt-8 font-mono text-[10px] md:text-xs text-tertiary uppercase tracking-widest hidden md:block">
+                        <h3 className="md:mt-8 font-mono text-xs text-tertiary uppercase tracking-widest hidden md:block">
                             Competency Matrix
                         </h3>
                     </div>
 
-                    <div className="flex-1 p-3 md:p-4 flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-y-auto hide-scrollbar">
+                    <div className="flex-1 p-2 md:p-4 flex flex-row md:flex-col gap-1.5 md:gap-2 overflow-x-auto md:overflow-y-auto hide-scrollbar">
                         {skills.map((skillGroup) => (
                             <button
                                 key={skillGroup.category}
@@ -81,8 +81,8 @@ export default function GlassTerminal({ skills }: { skills: Skill[] }) {
                 </div>
 
                 {/* Main Content Area (Skills Grid) */}
-                <div className="flex-1 p-4 sm:p-6 md:p-12 relative z-20 bg-gradient-to-br from-transparent to-black/20">
-                    <div className="flex items-center justify-between mb-8 md:mb-12">
+                <div className="flex-1 p-3 sm:p-6 md:p-12 relative z-20 bg-gradient-to-br from-transparent to-black/20">
+                    <div className="flex items-center justify-between mb-5 md:mb-12">
                         <h2 className="text-xl md:text-3xl font-display font-medium text-white">
                             {activeCategory}
                         </h2>
@@ -96,7 +96,7 @@ export default function GlassTerminal({ skills }: { skills: Skill[] }) {
                                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                                 exit={{ opacity: 0, y: -20, filter: "blur(4px)" }}
                                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4"
+                                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4"
                             >
                                 {activeSkills.map((skill, index) => (
                                     <motion.div
@@ -104,7 +104,7 @@ export default function GlassTerminal({ skills }: { skills: Skill[] }) {
                                         initial={{ opacity: 0, scale: 0.9 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: index * 0.03, duration: 0.4 }}
-                                        className="group flex relative overflow-hidden bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-brand-blue/30 p-3 md:p-4 rounded-xl transition-colors items-start"
+                                        className="group flex relative overflow-hidden bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-brand-blue/30 px-2.5 py-2 md:p-4 rounded-lg md:rounded-xl transition-colors items-start"
                                     >
                                         <div className="absolute inset-0 bg-gradient-to-r from-brand-blue/0 via-brand-blue/5 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
                                         <div className="w-1.5 h-1.5 rounded-full bg-brand-blue/50 mr-2 md:mr-3 mt-1.5 shrink-0 group-hover:bg-brand-blue group-hover:shadow-[0_0_8px_rgba(56,189,248,0.8)] transition-all" />

@@ -1,200 +1,335 @@
 "use client";
 
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Points, PointMaterial } from "@react-three/drei";
-import { useRef, useState, useEffect, useCallback } from "react";
-import * as random from "maath/random/dist/maath-random.cjs";
-
+import { useCallback, useEffect, useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import * as THREE from "three";
-import Image from "next/image";
-import { Linkedin, MapPin } from "lucide-react";
-import LocationGlobe from "./LocationGlobe";
+import { Download, Linkedin, ArrowDown } from "lucide-react";
+import { useReducedMotion, easings, durations } from "@/lib/motion";
 
-function StarField(props: React.ComponentProps<typeof Points>) {
-    const ref = useRef<THREE.Points>(null);
-    const [sphere] = useState(() => random.inSphere(new Float32Array(6000), { radius: 1.5 }) as Float32Array);
+const StarFieldCanvas = dynamic(() => import("./StarFieldCanvas"), {
+    ssr: false,
+    loading: () => null,
+});
 
-    const mouse = useRef({ x: 0, y: 0 });
-    const { size } = useThree();
+// Physics avatar — client-only, no SSR (window APIs)
+const PhysicsAvatar = dynamic(() => import("./PhysicsAvatar"), { ssr: false, loading: () => null });
 
-    // Listen for mouse movement on the canvas
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            // Normalize to -1 to 1
-            mouse.current.x = (e.clientX / size.width - 0.5) * 2;
-            mouse.current.y = -(e.clientY / size.height - 0.5) * 2;
-        };
-        window.addEventListener("mousemove", handleMouseMove);
-        return () => window.removeEventListener("mousemove", handleMouseMove);
-    }, [size]);
+interface DigitalHeroProps {
+    name: string;
+    title: string;
+    headline: string;
+    signatureMetricValue: string;
+    signatureMetricLabel: string;
+    linkedin?: string;
+    location?: string;
+    resumeUrl: string;
+}
 
-    useFrame((state, delta) => {
-        if (ref.current) {
-            // Base rotation
-            ref.current.rotation.x -= delta / 15;
-            ref.current.rotation.y -= delta / 20;
+const TICKER_TAGS = [
+    "Process Excellence",
+    "Lean Six Sigma",
+    "Digital Transformation",
+    "AI & Automation",
+    "Enterprise Systems",
+    "Operational Strategy",
+    "Cross-Functional Leadership",
+    "Stakeholder Management",
+    "Program Delivery",
+    "Data-Driven Decisions",
+    "Risk & Resource Planning",
+    "Intelligent Workflows",
+];
 
-            // Mouse-responsive tilt (subtle, lerped for smoothness)
-            const targetRotX = mouse.current.y * 0.15;
-            const targetRotZ = mouse.current.x * 0.1;
-            ref.current.rotation.x += (targetRotX - ref.current.rotation.x) * delta * 0.5;
-            ref.current.rotation.z += (targetRotZ - ref.current.rotation.z) * delta * 0.5;
-        }
+function useNumericPart(value: string) {
+    return useMemo(() => {
+        const m = /^(\d+(?:\.\d+)?)(.*)$/.exec(value.trim());
+        if (!m) return { num: null as number | null, suffix: value };
+        return { num: parseFloat(m[1]), suffix: m[2] };
+    }, [value]);
+}
+
+function SignatureCounter({ value, reducedMotion }: { value: string; reducedMotion: boolean }) {
+    const { num, suffix } = useNumericPart(value);
+    const [display, setDisplay] = useState<string>(() => {
+        if (num === null) return value;
+        if (reducedMotion) return String(num);
+        return "0";
     });
 
+    useEffect(() => {
+        if (num === null || reducedMotion) return;
+        const duration = 1100;
+        const start = performance.now();
+        let raf = 0;
+        const step = (t: number) => {
+            const k = Math.min(1, (t - start) / duration);
+            const e = 1 - Math.pow(1 - k, 3);
+            const cur = num * e;
+            setDisplay(num % 1 === 0 ? String(Math.round(cur)) : cur.toFixed(1));
+            if (k < 1) raf = requestAnimationFrame(step);
+        };
+        const startDelay = window.setTimeout(() => {
+            raf = requestAnimationFrame(step);
+        }, 800);
+        return () => {
+            window.clearTimeout(startDelay);
+            if (raf) cancelAnimationFrame(raf);
+        };
+    }, [num, reducedMotion]);
+
     return (
-        <group rotation={[0, 0, Math.PI / 4]}>
-            <Points ref={ref} positions={sphere} stride={3} frustumCulled={false} {...props}>
-                <PointMaterial
-                    transparent
-                    color="#38BDF8"
-                    size={0.002}
-                    sizeAttenuation={true}
-                    depthWrite={false}
-                />
-            </Points>
-        </group>
+        <span className="tabular-nums">
+            {display}
+            {num !== null && <span className="editorial not-italic">{suffix}</span>}
+        </span>
     );
 }
 
-export default function DigitalHero({ name, title, linkedin, location }: { name: string; title: string; linkedin?: string; location?: string; }) {
-    // Split the name into first & last for styling
+export default function DigitalHero({
+    name,
+    title: _title,
+    headline,
+    signatureMetricValue,
+    signatureMetricLabel,
+    linkedin,
+    location: _location,
+    resumeUrl,
+}: DigitalHeroProps) {
+    // _title and _location intentionally unused — see strip-out request
+    void _title;
+    void _location;
+
+    const reducedMotion = useReducedMotion();
     const nameParts = name.split(" ");
     const firstName = nameParts[0];
     const lastName = nameParts.slice(1).join(" ");
 
-    const scrollToContent = useCallback(() => {
-        // Scroll past the hero to the first content section
-        window.scrollTo({
-            top: window.innerHeight * 0.85,
-            behavior: "smooth",
-        });
+    // Mobile narrower viewport → shorter cycle so the ticker actually feels alive.
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const mql = window.matchMedia("(max-width: 768px)");
+        const update = () => setIsMobile(mql.matches);
+        update();
+        mql.addEventListener("change", update);
+        return () => mql.removeEventListener("change", update);
     }, []);
+    const tickerDuration = isMobile ? 16 : 38;
+
+    const scrollToContent = useCallback(() => {
+        window.scrollTo({
+            top: window.innerHeight * 0.95,
+            behavior: reducedMotion ? "auto" : "smooth",
+        });
+    }, [reducedMotion]);
 
     return (
-        <section className="relative h-[100dvh] w-full flex flex-col justify-center items-center overflow-hidden">
-            {/* 3D Background — interactive, responds to mouse */}
-            <div className="absolute inset-0 z-0 opacity-40">
-                <Canvas camera={{ position: [0, 0, 1] }}>
-                    <StarField />
-                </Canvas>
+        <section
+            id="overview-hero"
+            aria-labelledby="hero-name"
+            className="hero-cockpit relative h-[100dvh] min-h-[640px] w-full overflow-hidden grid grid-rows-[1fr_auto]"
+        >
+            {/* ----- Background stack ----- */}
+            {!reducedMotion && (
+                <div className="absolute inset-0 z-0 opacity-25 pointer-events-none" aria-hidden="true">
+                    <StarFieldCanvas />
+                </div>
+            )}
+            <div
+                aria-hidden="true"
+                className="absolute inset-0 z-0 pointer-events-none"
+                style={{
+                    backgroundImage:
+                        "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
+                    backgroundSize: "80px 80px",
+                    maskImage: "radial-gradient(ellipse 60% 60% at 50% 50%, black 30%, transparent 90%)",
+                    WebkitMaskImage: "radial-gradient(ellipse 60% 60% at 50% 50%, black 30%, transparent 90%)",
+                }}
+            />
+            <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+                <div
+                    className="absolute left-1/2 top-0 h-full w-px bg-gradient-to-b from-transparent via-brand-blue/15 to-transparent origin-center"
+                    style={{ animation: "gridDrawY 1.2s cubic-bezier(0.16,1,0.3,1) 0.15s both" }}
+                />
+                <div
+                    className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-blue/15 to-transparent origin-center"
+                    style={{ animation: "gridDrawX 1.2s cubic-bezier(0.16,1,0.3,1) 0.15s both" }}
+                />
             </div>
+            {!reducedMotion && <div className="scanline z-0" aria-hidden="true" />}
 
-            {/* Grid Overlay */}
-            <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,black_40%,transparent_100%)] pointer-events-none" />
+            {/* ----- Physics avatar — free to roam the entire hero canvas ----- */}
+            <PhysicsAvatar
+                src="/prof.png"
+                alt={name}
+                size={156}
+                canvasId="overview-hero"
+                // Right-side, pulled in 250px from the right edge so a natural fall
+                // lands clear of the SCROLL button at bottom-right. Top offset is
+                // tuned to sit BELOW the SIGNATURE OUTCOME panel so the two never overlap.
+                initialOffsetRight={250}
+                initialOffsetTop={380}
+                // Floor is the top of the CAPABILITIES ticker — keeps the
+                // resting/falling avatar from ever overlapping the marquee.
+                floorAnchorId="overview-hero-ticker"
+            />
 
-            {/* Content */}
-            <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
-                {/* Creative Avatar Wrapper */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
-                    animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                    transition={{ delay: 0.1, duration: 1, ease: [0.25, 0.4, 0.25, 1] }}
-                    className="relative group mx-auto mb-4 md:mb-6 w-36 h-36 md:w-44 md:h-44 perspective-1000 mt-24 md:mt-16"
-                >
-                    {/* Animated glowing backdrop - pulses and reacts to hover */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue via-brand-purple to-[#ff006e] rounded-full blur-xl opacity-40 group-hover:opacity-80 transition-opacity duration-700 animate-pulse" />
-
-                    {/* Inner wrapper that floats independently */}
-                    <motion.div
-                        animate={{ y: [0, -8, 0] }}
-                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                        className="relative w-full h-full rounded-full p-[2px] bg-gradient-to-br from-white/20 via-white/5 to-white/20 backdrop-blur-md shadow-[0_0_30px_rgba(56,189,248,0.3)] transition-all duration-500 group-hover:shadow-[0_0_50px_rgba(192,132,252,0.5)] z-10"
-                    >
-                        {/* Spinning border ring */}
-                        <div className="absolute inset-[-1px] rounded-full overflow-hidden opacity-50 z-0 mask-image-circle">
-                            <div className="absolute inset-[-50%] bg-[conic-gradient(from_0deg,transparent_0_300deg,rgba(255,255,255,0.8)_360deg)] animate-[spin_3s_linear_infinite]" />
-                        </div>
-
-                        {/* The Image Container */}
-                        <div className="relative w-full h-full rounded-full overflow-hidden bg-[#0a0f0a] border border-black z-10">
-                            <Image
-                                src="/prof.png"
-                                alt={name}
-                                fill
-                                className="object-[center_15%] object-cover scale-110 group-hover:scale-100 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] filter saturate-100 group-hover:saturate-110"
-                                priority
-                                sizes="(max-width: 768px) 112px, 144px"
-                            />
-                        </div>
-                    </motion.div>
-                </motion.div>
-
-                {/* Small label */}
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3, duration: 0.8 }}
-                    className="text-brand-blue font-mono text-[10px] md:text-sm uppercase tracking-[0.2em] md:tracking-[0.3em] mb-4 md:mb-6"
-                >
-                    {title}
-                </motion.p>
-
-                {/* Name — oversized, screen-dominating */}
-                <motion.h1
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5, duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-                    className="font-display font-bold leading-[0.9] tracking-tight mb-6 md:mb-8"
-                >
-                    <span className="block text-[clamp(2.5rem,9vw,7.5rem)] bg-clip-text text-transparent bg-gradient-to-b from-[var(--hero-gradient-from)] to-[var(--hero-gradient-to)] transition-colors duration-500">
-                        {firstName}
-                    </span>
-                    <span className="block text-[clamp(2.5rem,9vw,7.5rem)] bg-clip-text text-transparent bg-gradient-to-b from-[var(--hero-gradient-from)] to-[var(--hero-gradient-to)] transition-colors duration-500">
-                        {lastName}
-                    </span>
-                </motion.h1>
-
-
-                {/* Interactive Social & Location Pills */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.1, duration: 0.6 }}
-                    className="flex flex-wrap items-center justify-center gap-3 md:gap-4 mb-4"
-                >
-                    {linkedin && (
-                        <a
-                            href={linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/[0.03] hover:bg-brand-blue/10 border border-white/10 hover:border-brand-blue/50 transition-all duration-300"
-                        >
-                            <Linkedin className="w-3.5 h-3.5 md:w-4 md:h-4 text-brand-blue group-hover:drop-shadow-[0_0_8px_rgba(56,189,248,0.8)] transition-all duration-300" />
-                            <span className="text-[10px] md:text-xs font-mono text-tertiary group-hover:text-white transition-colors duration-300">Connect on LinkedIn</span>
-                        </a>
-                    )}
-
-                    {location && (
-                        <div className="relative group flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/[0.03] hover:bg-[#ff006e]/10 border border-white/10 hover:border-[#ff006e]/50 transition-all duration-300 cursor-default">
-                            {/* The 3D hologram bounds to this relative container but overflows infinitely */}
-                            <LocationGlobe />
-                            <MapPin className="relative z-10 w-3.5 h-3.5 md:w-4 md:h-4 text-[#ff006e] group-hover:drop-shadow-[0_0_8px_rgba(255,0,110,0.8)] transition-all duration-300" />
-                            <span className="relative z-10 text-[10px] md:text-xs font-mono text-tertiary group-hover:text-white transition-colors duration-300">{location}</span>
-                        </div>
-                    )}
-                </motion.div>
-            </div>
-
-            {/* Scroll indicator — clickable, anchored to section bottom */}
+            {/* ----- Signature outcome — pinned to the upper-right so a falling avatar can't overlap ----- */}
             <motion.div
+                initial={{ opacity: 0, y: -12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: durations.slow, ease: easings.ui }}
+                className="absolute z-10 w-full max-w-md"
+                style={{
+                    right: "var(--hero-pad-x)",
+                    top: "calc(var(--hero-pad-top, 96px) + 0.5rem)",
+                }}
+            >
+                <div className="flex items-baseline justify-between gap-4 mb-1.5">
+                    <span className="label-mono text-brand-blue">[ SIGNATURE OUTCOME ]</span>
+                    <span className="label-mono text-tertiary">M.01</span>
+                </div>
+                <div className="flex items-baseline gap-3 justify-end">
+                    <span
+                        aria-hidden="true"
+                        className="font-editorial italic text-brand-blue tabular-nums drop-shadow-[0_0_30px_rgba(56,189,248,0.35)]"
+                        style={{
+                            fontSize: "var(--hero-metric-size)",
+                            lineHeight: "var(--hero-metric-line)" as unknown as number,
+                        }}
+                    >
+                        <SignatureCounter value={signatureMetricValue} reducedMotion={reducedMotion} />
+                    </span>
+                </div>
+                <p className="text-secondary text-xs md:text-sm leading-snug mt-1.5 max-w-sm text-right ml-auto">
+                    {signatureMetricLabel}
+                </p>
+            </motion.div>
+
+            {/* ----- Main editorial content (lower-left of hero) -----
+                  On mobile, anchored just below the SIGNATURE OUTCOME (top-third
+                  of the viewport) so the avatar gets a clear lower band to fall
+                  into without overlapping the name and CTAs. */}
+            <div
+                className="relative z-10 grid grid-cols-1 lg:grid-cols-12 items-start lg:items-end pt-[clamp(15rem,30vh,17rem)] pb-6 md:pt-0 md:pb-12"
+                style={{
+                    gap: "var(--hero-col-gap)",
+                    paddingLeft: "var(--hero-pad-x)",
+                    paddingRight: "var(--hero-pad-x)",
+                }}
+            >
+                <div
+                    className="lg:col-span-12 flex flex-col"
+                    style={{ gap: "var(--hero-stack-gap)" }}
+                >
+                    {/* Name — editorial display, mask-reveal */}
+                    <h1
+                        id="hero-name"
+                        className="font-display font-medium tracking-[-0.025em] text-primary"
+                        style={{
+                            fontSize: "var(--hero-name-size)",
+                            lineHeight: "var(--hero-name-line)" as unknown as number,
+                        }}
+                    >
+                        <span className="block overflow-hidden">
+                            <span
+                                className="block mask-reveal"
+                                style={{ animationDelay: "0.25s" }}
+                            >
+                                {firstName.toLowerCase()}
+                            </span>
+                        </span>
+                        {lastName && (
+                            <span className="block overflow-hidden">
+                                <span
+                                    className="block mask-reveal"
+                                    style={{ animationDelay: "0.4s" }}
+                                >
+                                    <span className="editorial text-secondary/90">{lastName.toLowerCase()}</span>
+                                </span>
+                            </span>
+                        )}
+                    </h1>
+
+                    <motion.p
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.55, duration: durations.slow, ease: easings.ui }}
+                        className="text-secondary leading-relaxed max-w-xl border-l border-brand-blue/30 pl-4"
+                        style={{ fontSize: "var(--hero-headline-size)" }}
+                    >
+                        {headline}
+                    </motion.p>
+
+                    {/* CTAs */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.7, duration: durations.slow, ease: easings.ui }}
+                        className="flex flex-wrap items-center gap-3"
+                    >
+                        <a
+                            href={resumeUrl}
+                            download
+                            data-cursor="download"
+                            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-blue text-deep font-bold text-sm tracking-wide hover:bg-brand-blue/90 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-page transition-all duration-300"
+                            aria-label="Download CV (PDF)"
+                        >
+                            <Download className="w-4 h-4 text-deep" aria-hidden="true" strokeWidth={2.5} />
+                            CV
+                        </a>
+
+                        {linkedin && (
+                            <a
+                                href={linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                data-cursor="connect"
+                                aria-label="LinkedIn"
+                                className="group inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-brand-blue/40 text-brand-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-page transition-colors duration-200"
+                            >
+                                <Linkedin className="w-4 h-4" aria-hidden="true" />
+                            </a>
+                        )}
+                    </motion.div>
+                </div>
+
+            </div>
+
+            {/* ----- Bottom band: ticker tape ----- */}
+            <div id="overview-hero-ticker" className="relative z-10 border-t border-white/5 overflow-hidden">
+                <div className="flex items-center gap-3 px-4 md:px-6 py-3 text-tertiary">
+                    <span aria-hidden="true" className="label-mono text-brand-blue whitespace-nowrap">CAPABILITIES //</span>
+                    <div className="relative overflow-hidden flex-1">
+                        <div
+                            className={`flex ${reducedMotion ? "" : "marquee-track"} gap-10 whitespace-nowrap will-change-transform`}
+                            style={reducedMotion ? undefined : { animationDuration: `${tickerDuration}s` }}
+                        >
+                            {[...TICKER_TAGS, ...TICKER_TAGS].map((tag, i) => (
+                                <span key={`${tag}-${i}`} className="label-mono text-tertiary inline-flex items-center gap-3">
+                                    {tag}
+                                    <span aria-hidden="true" className="text-brand-blue">·</span>
+                                </span>
+                            ))}
+                        </div>
+                        <div aria-hidden="true" className="absolute top-0 left-0 h-full w-16 bg-gradient-to-r from-page to-transparent pointer-events-none" />
+                        <div aria-hidden="true" className="absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-page to-transparent pointer-events-none" />
+                    </div>
+                </div>
+            </div>
+
+            {/* Scroll cue */}
+            <motion.button
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 1.5, duration: 0.8 }}
-                className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10"
+                transition={{ delay: 1.0, duration: durations.slow }}
+                onClick={scrollToContent}
+                data-cursor="scroll"
+                className="absolute bottom-16 left-6 right-auto md:left-auto md:right-10 z-20 flex items-center gap-2 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-md p-1"
+                aria-label="Scroll to content"
             >
-                <motion.button
-                    onClick={scrollToContent}
-                    animate={{ y: [0, 8, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    className="flex flex-col items-center gap-2 cursor-pointer group"
-                    aria-label="Scroll to content"
-                >
-                    <span className="text-tertiary group-hover:text-brand-blue font-mono text-[10px] uppercase tracking-widest transition-colors">Scroll</span>
-                    <div className="w-px h-8 bg-gradient-to-b from-tertiary/50 group-hover:from-brand-blue/50 to-transparent transition-colors" />
-                </motion.button>
-            </motion.div>
+                <span className="label-mono text-secondary group-hover:text-brand-blue transition-colors">Scroll</span>
+                <ArrowDown className="w-3.5 h-3.5 text-secondary group-hover:text-brand-blue transition-colors animate-bounce" aria-hidden="true" strokeWidth={2.5} />
+            </motion.button>
         </section>
     );
 }

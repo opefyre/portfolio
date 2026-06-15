@@ -2,52 +2,70 @@
 
 import { motion } from "framer-motion";
 import clsx from "clsx";
+import { easings } from "@/lib/motion";
 
 interface SectionHeaderProps {
     title: string;
     subtitle?: string;
+    kicker?: string;
     centered?: boolean;
     className?: string;
 }
 
-const wordVariants = {
-    hidden: { opacity: 0, y: 15, filter: "blur(4px)" },
-    visible: (i: number) => ({
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-        transition: {
-            delay: i * 0.04,
-            duration: 0.4,
-            ease: [0.25, 0.4, 0.25, 1] as const,
-        },
-    }),
-};
-
-export default function SectionHeader({ title, subtitle, centered = false, className }: SectionHeaderProps) {
+export default function SectionHeader({
+    title,
+    subtitle,
+    kicker,
+    centered = false,
+    className,
+}: SectionHeaderProps) {
     const words = title.split(" ");
 
     return (
-        <div className={clsx(
-            "mb-12 md:mb-16",
-            centered ? "text-center mx-auto max-w-3xl" : "text-left",
-            className
-        )}>
+        <div
+            className={clsx(
+                "mb-12 md:mb-16",
+                centered ? "text-center mx-auto max-w-3xl" : "text-left",
+                className,
+            )}
+        >
+            {/* Mono kicker with bracket frame */}
+            {kicker && (
+                <motion.div
+                    initial={{ opacity: 0, y: 6 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, ease: easings.ui }}
+                    className={clsx(
+                        "flex items-center gap-3 mb-5",
+                        centered ? "justify-center" : "justify-start",
+                    )}
+                >
+                    <span className="label-mono bracket text-brand-blue">{kicker}</span>
+                    {!centered && (
+                        <span aria-hidden="true" className="h-px flex-1 bg-gradient-to-r from-brand-blue/40 to-transparent" />
+                    )}
+                </motion.div>
+            )}
+
             <h2
                 className={clsx(
                     "font-display font-medium text-primary",
-                    "text-3xl md:text-5xl tracking-tight leading-tight"
+                    "text-4xl md:text-6xl tracking-[-0.02em] leading-[0.95]",
                 )}
             >
                 {words.map((word, i) => (
                     <motion.span
                         key={`${word}-${i}`}
-                        custom={i}
-                        variants={wordVariants}
-                        initial="hidden"
-                        whileInView="visible"
+                        initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+                        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                         viewport={{ once: true }}
-                        className="inline-block mr-[0.3em]"
+                        transition={{
+                            delay: i * 0.06,
+                            duration: 0.5,
+                            ease: easings.ui,
+                        }}
+                        className="inline-block mr-[0.25em]"
                     >
                         {word}
                     </motion.span>
@@ -55,13 +73,13 @@ export default function SectionHeader({ title, subtitle, centered = false, class
             </h2>
             {subtitle && (
                 <motion.p
-                    initial={{ opacity: 0, y: 15 }}
+                    initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: words.length * 0.04 + 0.1 }}
+                    transition={{ duration: 0.5, delay: words.length * 0.06 + 0.1, ease: easings.ui }}
                     className={clsx(
-                        "mt-4 text-secondary text-base md:text-lg leading-relaxed",
-                        centered ? "mx-auto" : "max-w-2xl"
+                        "mt-5 text-secondary text-base md:text-lg leading-relaxed",
+                        centered ? "mx-auto max-w-2xl" : "max-w-2xl",
                     )}
                 >
                     {subtitle}
