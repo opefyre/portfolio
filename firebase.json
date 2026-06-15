@@ -61,6 +61,15 @@
         ]
       },
       {
+        "source": "/elixiary/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=300, must-revalidate"
+          }
+        ]
+      },
+      {
         "source": "**/*.@(jpg|jpeg|gif|png|webp|svg|ico|avif)",
         "headers": [
           {
