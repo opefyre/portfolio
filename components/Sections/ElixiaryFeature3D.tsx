@@ -40,11 +40,10 @@ interface ElixiaryVenture {
 
 const showcaseImages = [
     { src: "/elixiary/hero.png", alt: "Elixiary AI Landing Page" },
-    { src: "/elixiary/cocktail-cards.png", alt: "AI-Generated Cocktail Cards" },
-    { src: "/elixiary/recipe-detail.png", alt: "Recipe Detail View" },
-    { src: "/elixiary/collection.png", alt: "My Cocktail Collection" },
-    { src: "/elixiary/achievements.png", alt: "Achievements" },
-    { src: "/elixiary/featured-card.png", alt: "Featured Cocktail" },
+    { src: "/elixiary/cocktail-cards.png", alt: "Curated Cocktails Grid" },
+    { src: "/elixiary/recipe-detail.png", alt: "Cocktail Recipe Details" },
+    { src: "/elixiary/collection.png", alt: "My Recipes Collection" },
+    { src: "/elixiary/blog-history.png", alt: "Cocktail Articles" },
 ];
 
 // Dynamic-load the R3F scene so the three.js bundle stays out of the main route chunk.

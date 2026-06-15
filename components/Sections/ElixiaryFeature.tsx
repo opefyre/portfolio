@@ -47,13 +47,10 @@ interface ElixiaryVenture {
 
 const showcaseImages = [
     { src: "/elixiary/hero.png", alt: "Elixiary AI Landing Page" },
-    { src: "/elixiary/cocktail-cards.png", alt: "AI-Generated Cocktail Cards" },
-    { src: "/elixiary/recipe-detail.png", alt: "Recipe Detail View" },
-    { src: "/elixiary/collection.png", alt: "My Cocktail Collection" },
-    { src: "/elixiary/blog-history.png", alt: "Cocktail History Articles" },
-    { src: "/elixiary/achievements.png", alt: "Gamification & Achievements" },
-    { src: "/elixiary/featured-card.png", alt: "Featured Cocktail Highlight" },
-    { src: "/elixiary/cocktail-grid.png", alt: "AI-Generated Cocktail Gallery" },
+    { src: "/elixiary/cocktail-cards.png", alt: "Curated Cocktails Grid" },
+    { src: "/elixiary/recipe-detail.png", alt: "Cocktail Recipe Details" },
+    { src: "/elixiary/collection.png", alt: "My Recipes Collection" },
+    { src: "/elixiary/blog-history.png", alt: "Cocktail Articles" },
 ];
 
 export default function ElixiaryFeature({ elixiaryVenture }: { elixiaryVenture: ElixiaryVenture }) {
