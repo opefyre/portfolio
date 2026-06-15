@@ -43,7 +43,7 @@ interface ElixiaryVenture {
 // with `Cache-Control: immutable`, which would otherwise keep browsers showing
 // the previous bytes for a year. The R3F TextureLoader loads via `Image()`,
 // which a page hard-refresh doesn't bypass.
-const SHOWCASE_VERSION = "2";
+const SHOWCASE_VERSION = "3";
 const showcaseImages = [
     { src: `/elixiary/hero.png?v=${SHOWCASE_VERSION}`, alt: "Elixiary AI Landing Page" },
     { src: `/elixiary/cocktail-cards.png?v=${SHOWCASE_VERSION}`, alt: "Curated Cocktails Grid" },
