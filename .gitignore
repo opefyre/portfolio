@@ -49,10 +49,7 @@ INFRASTRUCTURE.md
 *.tsbuildinfo
 next-env.d.ts
 
-# data seeding & scripts
-scripts/
-!scripts/
-!scripts/firestore-migrate-personal-info.ts
+# local data dumps (CSV / JSON exports of scraped content — never commit)
 projects - Sheet1.csv
 projects-merged.json
 projects-cleaned.json
