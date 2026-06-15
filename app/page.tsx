@@ -70,8 +70,13 @@ export default async function Home() {
             education={education}
           />
         </div>
-        <SectionDivider code="SYS.02" label="COMPETENCY MATRIX" />
+        <SectionDivider code="SYS.02" label="PROFESSIONAL HISTORY" />
       </section>
+
+      {/* Experience — pinned horizontal scroll */}
+      <ExperienceStack experiences={experiences} />
+
+      <SectionDivider code="SYS.03" label="COMPETENCY MATRIX" />
 
       {/* Skills + Credentials + Academic Log — tall, free-scroll */}
       <section className="relative bg-section-tinted">
@@ -85,11 +90,6 @@ export default async function Home() {
           />
         </div>
       </section>
-
-      <SectionDivider code="SYS.03" label="PROFESSIONAL HISTORY" />
-
-      {/* Experience — pinned horizontal scroll */}
-      <ExperienceStack experiences={experiences} />
 
       {/* === SLIDE: FEATURED VENTURE === */}
       <section

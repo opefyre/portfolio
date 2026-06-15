@@ -198,6 +198,15 @@ body::before {
 }
 .marquee-track:hover { animation-play-state: paused; }
 
+/* Mobile: shorter viewport means fewer visible pixels per loop — speed up
+   the marquee so the perceived motion is comparable to desktop. */
+@media (max-width: 768px) {
+  .marquee-track { animation-duration: 16s; }
+  /* Mobile avatar pre-position — overridden CSS var keeps the avatar on
+     the RIGHT side of the hero before the JS physics takes over. */
+  .avatar-physics { --avatar-right: 16px; }
+}
+
 /* Online status pulse */
 @keyframes onlinePulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(46, 230, 168, 0.55); }

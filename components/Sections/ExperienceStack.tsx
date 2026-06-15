@@ -34,7 +34,8 @@ function StationCard({ role, index, total }: { role: Experience; index: number; 
     const endYear = stationEndYear(allPositions);
     const isPresent = endYear === "Present";
 
-    const [openIdx, setOpenIdx] = useState(0);
+    // -1 = all collapsed by default; user opens what they want
+    const [openIdx, setOpenIdx] = useState(-1);
 
     return (
         <article
@@ -139,7 +140,7 @@ function StationCard({ role, index, total }: { role: Experience; index: number; 
                                             aria-hidden="true"
                                             className={clsx(
                                                 "w-4 h-4 mt-1.5 shrink-0 transition-transform duration-300",
-                                                isOpen ? "text-brand-blue rotate-180" : "text-tertiary group-hover:text-secondary",
+                                                isOpen ? "text-brand-blue rotate-180" : "text-secondary group-hover:text-brand-blue",
                                             )}
                                         />
                                     </button>
@@ -176,6 +177,109 @@ function StationCard({ role, index, total }: { role: Experience; index: number; 
                 </div>
             </div>
         </article>
+    );
+}
+
+function MobileStation({ role, index, total }: { role: Experience; index: number; total: number }) {
+    const allPositions: Position[] = role.positions ?? [];
+    const startYear = earliestYear(allPositions[allPositions.length - 1]?.period ?? "");
+    const endYear = stationEndYear(allPositions);
+    const isPresent = endYear === "Present";
+    // -1 = all collapsed by default; user opens what they want
+    const [openIdx, setOpenIdx] = useState(-1);
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: easings.ui }}
+            className="relative grid grid-cols-1 gap-5 border-t border-border pt-10"
+        >
+            <div className="flex items-center gap-3">
+                <span className="label-mono text-brand-blue">
+                    STATION {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+                </span>
+                <span aria-hidden="true" className="h-px flex-1 bg-brand-blue/30" />
+                {isPresent && (
+                    <span className="label-mono inline-flex items-center gap-1.5 text-online">
+                        <span aria-hidden="true" className="inline-block w-1.5 h-1.5 rounded-full online-dot" />
+                        LIVE
+                    </span>
+                )}
+            </div>
+            <div className="flex items-baseline gap-3 flex-wrap">
+                <h3 className="font-display font-medium text-3xl text-primary tracking-tight leading-tight">
+                    {role.company}
+                </h3>
+                <span className="label-mono text-tertiary">{role.location}</span>
+            </div>
+            <div className="font-editorial italic text-brand-blue text-5xl leading-none">
+                <span className="tabular-nums">{startYear}</span>
+                {" → "}
+                <span className="text-tertiary">{endYear}</span>
+            </div>
+
+            {/* Accordion list — same one-open-at-a-time pattern as desktop */}
+            <div className="mt-2 divide-y divide-border/40">
+                {allPositions.map((pos, pIdx) => {
+                    const isOpen = openIdx === pIdx;
+                    const panelId = `mobile-station-${index}-pos-${pIdx}`;
+                    return (
+                        <div key={pIdx} className="py-3">
+                            <button
+                                type="button"
+                                onClick={() => setOpenIdx(isOpen ? -1 : pIdx)}
+                                aria-expanded={isOpen}
+                                aria-controls={panelId}
+                                className="group w-full text-left flex items-start gap-3 py-1 px-1 -mx-1 rounded-md transition-colors hover:bg-white/[0.025] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
+                            >
+                                <span className="label-mono text-brand-blue tabular-nums shrink-0 pt-1">
+                                    P.{String(pIdx + 1).padStart(2, "0")}
+                                </span>
+                                <span className="flex-1 min-w-0">
+                                    <h4 className={clsx(
+                                        "font-display font-medium leading-tight transition-colors text-lg",
+                                        isOpen ? "text-primary" : "text-secondary group-hover:text-primary",
+                                    )}>
+                                        {pos.title}
+                                    </h4>
+                                    <span className="label-mono text-tertiary block mt-0.5">{pos.period}</span>
+                                </span>
+                                <ChevronDown
+                                    aria-hidden="true"
+                                    className={clsx(
+                                        "w-4 h-4 mt-1.5 shrink-0 transition-transform duration-300",
+                                        isOpen ? "text-brand-blue rotate-180" : "text-secondary group-hover:text-brand-blue",
+                                    )}
+                                />
+                            </button>
+                            <AnimatePresence initial={false}>
+                                {isOpen && (
+                                    <motion.div
+                                        id={panelId}
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: "auto", opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        transition={{ duration: 0.35, ease: easings.ui }}
+                                        className="overflow-hidden"
+                                    >
+                                        <ul className="mt-3 pl-7 pr-1 space-y-2 pb-2 border-l border-brand-blue/30 ml-2">
+                                            {pos.achievements.map((item, i) => (
+                                                <li key={i} className="text-secondary text-sm leading-relaxed flex items-start gap-3">
+                                                    <span aria-hidden="true" className="text-brand-blue mt-1.5 text-[8px]">◆</span>
+                                                    <span>{item}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+                    );
+                })}
+            </div>
+        </motion.div>
     );
 }
 
@@ -262,15 +366,8 @@ export default function ExperienceStack({ experiences }: ExperienceStackProps) {
                 </div>
                 <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
                     <h2 className="font-display font-medium text-4xl md:text-6xl tracking-tight leading-[0.95] max-w-2xl">
-                        Professional history,
-                        <br />
-                        <span className="editorial text-tertiary">station by station</span>
+                        Professional history
                     </h2>
-                    {isDesktop && !reducedMotion && (
-                        <p className="label-mono text-tertiary max-w-xs">
-                            ↓ scroll to pan the timeline horizontally →
-                        </p>
-                    )}
                 </div>
             </div>
 
@@ -309,58 +406,11 @@ export default function ExperienceStack({ experiences }: ExperienceStackProps) {
                     </div>
                 </div>
             ) : (
-                // Mobile / reduced-motion fallback: vertical stack
+                // Mobile / reduced-motion fallback: vertical stack with accordions
+                // mirroring the desktop StationCard behavior (one position open at a time).
                 <div className="container-wide space-y-12 pb-12">
                     {experiences.map((role, idx) => (
-                        <motion.div
-                            key={idx}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6, ease: easings.ui }}
-                            className={clsx(
-                                "relative grid grid-cols-1 gap-6 border-t border-border pt-10",
-                                "hover:border-brand-blue/40 transition-colors"
-                            )}
-                        >
-                            <div className="flex items-center gap-3">
-                                <span className="label-mono text-brand-blue">
-                                    STATION {String(idx + 1).padStart(2, "0")} / {String(experiences.length).padStart(2, "0")}
-                                </span>
-                                <span aria-hidden="true" className="h-px flex-1 bg-brand-blue/30" />
-                            </div>
-                            <div className="flex items-baseline gap-3 flex-wrap">
-                                <h3 className="font-display font-medium text-3xl text-primary tracking-tight leading-tight">
-                                    {role.company}
-                                </h3>
-                                <span className="label-mono text-tertiary">{role.location}</span>
-                            </div>
-                            <div className="font-editorial italic text-brand-blue text-5xl leading-none">
-                                <span className="tabular-nums">{earliestYear(role.positions[role.positions.length - 1]?.period ?? "")}</span>
-                                {" → "}
-                                <span className="text-tertiary">{stationEndYear(role.positions)}</span>
-                            </div>
-                            <div className="space-y-6 mt-2">
-                                {role.positions.map((pos, pIdx) => (
-                                    <div key={pIdx} className="border-l border-border pl-4">
-                                        <div className="flex items-baseline justify-between gap-3 flex-wrap mb-1.5">
-                                            <h4 className="font-display text-lg font-medium text-primary leading-tight">
-                                                {pos.title}
-                                            </h4>
-                                            <span className="label-mono text-tertiary">{pos.period}</span>
-                                        </div>
-                                        <ul className="mt-2 space-y-2">
-                                            {pos.achievements.map((item, i) => (
-                                                <li key={i} className="text-secondary text-sm leading-relaxed flex items-start gap-3">
-                                                    <span aria-hidden="true" className="text-brand-blue mt-1.5 text-[8px]">◆</span>
-                                                    <span>{item}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                ))}
-                            </div>
-                        </motion.div>
+                        <MobileStation key={idx} role={role} index={idx} total={experiences.length} />
                     ))}
                 </div>
             )}

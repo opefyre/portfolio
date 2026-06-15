@@ -2,7 +2,8 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { Project } from "@/lib/db";
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { easings, durations } from "@/lib/motion";
 
 interface ProjectModalProps {
@@ -23,6 +24,12 @@ const FOCUSABLE = [
 export default function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
     const dialogRef = useRef<HTMLDivElement>(null);
     const titleId = useId();
+    // Portal the modal to <body> — ancestor sections (RevealStack, pinned
+    // ScrollTrigger sections) carry transforms that become the containing
+    // block for `position: fixed`, which would otherwise anchor the dialog
+    // to the section's frame (~2700px tall) instead of the viewport.
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
 
     // Body scroll lock + Lenis pause + Esc-to-close + focus trap
     useEffect(() => {
@@ -74,8 +81,9 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
     }, [isOpen, onClose]);
 
     if (!project) return null;
+    if (!mounted) return null;
 
-    return (
+    return createPortal(
         <AnimatePresence>
             {isOpen && (
                 <>
@@ -101,7 +109,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.96, y: 16 }}
                             transition={{ type: "spring", duration: durations.slow, bounce: 0.2 }}
-                            className="bg-card w-full max-w-2xl max-h-[80vh] mb-4 md:mb-0 md:max-h-[85vh] mt-16 md:mt-0 flex flex-col rounded-2xl md:rounded-3xl shadow-2xl pointer-events-auto border border-white/10 relative"
+                            className="bg-card w-full max-w-2xl max-h-[85vh] flex flex-col rounded-2xl md:rounded-3xl shadow-2xl pointer-events-auto border border-white/10 relative"
                             onClick={(e) => e.stopPropagation()}
                             onWheel={(e) => e.stopPropagation()}
                         >
@@ -176,6 +184,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     </div>
                 </>
             )}
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.body,
     );
 }

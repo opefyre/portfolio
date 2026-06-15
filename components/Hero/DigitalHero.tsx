@@ -104,6 +104,17 @@ export default function DigitalHero({
     const firstName = nameParts[0];
     const lastName = nameParts.slice(1).join(" ");
 
+    // Mobile narrower viewport → shorter cycle so the ticker actually feels alive.
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const mql = window.matchMedia("(max-width: 768px)");
+        const update = () => setIsMobile(mql.matches);
+        update();
+        mql.addEventListener("change", update);
+        return () => mql.removeEventListener("change", update);
+    }, []);
+    const tickerDuration = isMobile ? 16 : 38;
+
     const scrollToContent = useCallback(() => {
         window.scrollTo({
             top: window.innerHeight * 0.95,
@@ -152,8 +163,14 @@ export default function DigitalHero({
                 alt={name}
                 size={156}
                 canvasId="overview-hero"
-                initialOffsetLeft={60}
-                initialOffsetTop={150}
+                // Right-side, pulled in 250px from the right edge so a natural fall
+                // lands clear of the SCROLL button at bottom-right. Top offset is
+                // tuned to sit BELOW the SIGNATURE OUTCOME panel so the two never overlap.
+                initialOffsetRight={250}
+                initialOffsetTop={380}
+                // Floor is the top of the CAPABILITIES ticker — keeps the
+                // resting/falling avatar from ever overlapping the marquee.
+                floorAnchorId="overview-hero-ticker"
             />
 
             {/* ----- Signature outcome — pinned to the upper-right so a falling avatar can't overlap ----- */}
@@ -188,9 +205,12 @@ export default function DigitalHero({
                 </p>
             </motion.div>
 
-            {/* ----- Main editorial content (lower-left of hero) ----- */}
+            {/* ----- Main editorial content (lower-left of hero) -----
+                  On mobile, anchored just below the SIGNATURE OUTCOME (top-third
+                  of the viewport) so the avatar gets a clear lower band to fall
+                  into without overlapping the name and CTAs. */}
             <div
-                className="relative z-10 grid grid-cols-1 lg:grid-cols-12 items-end pb-10 md:pb-12"
+                className="relative z-10 grid grid-cols-1 lg:grid-cols-12 items-start lg:items-end pt-[clamp(15rem,30vh,17rem)] pb-6 md:pt-0 md:pb-12"
                 style={{
                     gap: "var(--hero-col-gap)",
                     paddingLeft: "var(--hero-pad-x)",
@@ -251,7 +271,7 @@ export default function DigitalHero({
                             href={resumeUrl}
                             download
                             data-cursor="download"
-                            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-blue text-deep font-bold text-sm tracking-wide hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-page transition-colors duration-200"
+                            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-blue text-deep font-bold text-sm tracking-wide hover:bg-brand-blue/90 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-page transition-all duration-300"
                             aria-label="Download CV (PDF)"
                         >
                             <Download className="w-4 h-4 text-deep" aria-hidden="true" strokeWidth={2.5} />
@@ -276,11 +296,14 @@ export default function DigitalHero({
             </div>
 
             {/* ----- Bottom band: ticker tape ----- */}
-            <div className="relative z-10 border-t border-white/5 overflow-hidden">
+            <div id="overview-hero-ticker" className="relative z-10 border-t border-white/5 overflow-hidden">
                 <div className="flex items-center gap-3 px-4 md:px-6 py-3 text-tertiary">
                     <span aria-hidden="true" className="label-mono text-brand-blue whitespace-nowrap">CAPABILITIES //</span>
                     <div className="relative overflow-hidden flex-1">
-                        <div className={`flex ${reducedMotion ? "" : "marquee-track"} gap-10 whitespace-nowrap will-change-transform`}>
+                        <div
+                            className={`flex ${reducedMotion ? "" : "marquee-track"} gap-10 whitespace-nowrap will-change-transform`}
+                            style={reducedMotion ? undefined : { animationDuration: `${tickerDuration}s` }}
+                        >
                             {[...TICKER_TAGS, ...TICKER_TAGS].map((tag, i) => (
                                 <span key={`${tag}-${i}`} className="label-mono text-tertiary inline-flex items-center gap-3">
                                     {tag}
@@ -301,11 +324,11 @@ export default function DigitalHero({
                 transition={{ delay: 1.0, duration: durations.slow }}
                 onClick={scrollToContent}
                 data-cursor="scroll"
-                className="absolute bottom-16 right-6 md:right-10 z-20 flex items-center gap-2 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-md p-1"
+                className="absolute bottom-16 left-6 right-auto md:left-auto md:right-10 z-20 flex items-center gap-2 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-md p-1"
                 aria-label="Scroll to content"
             >
-                <span className="label-mono text-tertiary group-hover:text-brand-blue transition-colors">Scroll</span>
-                <ArrowDown className="w-3.5 h-3.5 text-tertiary group-hover:text-brand-blue transition-colors animate-bounce" aria-hidden="true" />
+                <span className="label-mono text-secondary group-hover:text-brand-blue transition-colors">Scroll</span>
+                <ArrowDown className="w-3.5 h-3.5 text-secondary group-hover:text-brand-blue transition-colors animate-bounce" aria-hidden="true" strokeWidth={2.5} />
             </motion.button>
         </section>
     );

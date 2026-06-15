@@ -75,10 +75,7 @@ export default function ElixiaryFeature3D({ elixiaryVenture }: { elixiaryVenture
         <section className="container-wide w-full py-8 md:py-12">
             {/* Top mission labels */}
             <div className="flex items-center justify-between gap-4 mb-5 text-tertiary">
-                <div className="flex items-center gap-3">
-                    <span className="label-mono bracket text-brand-blue">SUBSYSTEM</span>
-                    <span className="label-mono">VENTURE_01 · HOLOGRAPHIC READOUT</span>
-                </div>
+                <span className="label-mono bracket text-brand-blue">SUBSYSTEM</span>
                 <div className="flex items-center gap-3">
                     <span aria-hidden="true" className="inline-block w-1.5 h-1.5 rounded-full online-dot" />
                     <span className="label-mono text-online">PROJECT.STATUS: LIVE</span>
@@ -166,7 +163,7 @@ export default function ElixiaryFeature3D({ elixiaryVenture }: { elixiaryVenture
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     data-cursor="visit"
-                                    className="inline-flex items-center gap-2 pl-2 pr-5 py-2 rounded-full bg-brand-blue hover:bg-white text-deep text-xs font-bold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-deep"
+                                    className="inline-flex items-center gap-2 pl-2 pr-5 py-2 rounded-full bg-brand-blue hover:bg-brand-blue/90 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] text-deep text-xs font-bold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-deep"
                                 >
                                     <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-deep text-brand-blue">
                                         <ArrowUpRight className="w-3 h-3" aria-hidden="true" />
@@ -188,7 +185,7 @@ export default function ElixiaryFeature3D({ elixiaryVenture }: { elixiaryVenture
                                         href={social.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-tertiary hover:text-brand-blue transition-colors"
+                                        className="text-secondary hover:text-brand-blue transition-colors"
                                         aria-label={social.name}
                                     >
                                         <social.icon className="w-4 h-4" />

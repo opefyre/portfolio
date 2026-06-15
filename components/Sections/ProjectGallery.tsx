@@ -146,9 +146,9 @@ function ProjectCard({ project, index, span, onClick }: ProjectCardProps) {
                         </span>
                         <span
                             aria-hidden="true"
-                            className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-brand-blue/10 text-brand-blue group-hover:bg-brand-blue group-hover:text-deep transition-colors"
+                            className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/[0.06] border border-white/10 text-primary group-hover:bg-brand-blue group-hover:border-brand-blue group-hover:text-deep group-hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] transition-all duration-300"
                         >
-                            <ArrowUpRight className="w-4 h-4" />
+                            <ArrowUpRight className="w-4 h-4" strokeWidth={2.5} />
                         </span>
                     </div>
                 </div>
@@ -309,18 +309,24 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
                                                 type="button"
                                                 onClick={() => openModal(project)}
                                                 data-cursor="view"
-                                                className="group w-full text-left flex items-center gap-5 py-4 hover:bg-white/[0.02] px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-sm transition-colors"
+                                                className="group w-full text-left py-4 px-2 hover:bg-white/[0.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-sm transition-colors"
                                             >
-                                                <span className="label-mono text-tertiary w-12 tabular-nums">
-                                                    {String(FEATURED_COUNT + idx + 1).padStart(2, "0")}
-                                                </span>
-                                                <span className="label-mono text-brand-blue w-44 shrink-0 truncate">
-                                                    {project.category}
-                                                </span>
-                                                <span className="text-secondary text-base md:text-lg flex-1 truncate group-hover:text-primary transition-colors">
-                                                    {project.title}
-                                                </span>
-                                                <ArrowUpRight className="w-4 h-4 text-tertiary group-hover:text-brand-blue group-hover:translate-x-0.5 transition-all" aria-hidden="true" />
+                                                {/* Mobile: stacks vertically so the title can breathe.
+                                                    md+: original single-row layout. */}
+                                                <div className="flex md:items-center gap-2 md:gap-5 flex-col md:flex-row">
+                                                    <div className="flex items-center gap-3 md:gap-5 md:contents">
+                                                        <span className="label-mono text-tertiary w-12 tabular-nums shrink-0">
+                                                            {String(FEATURED_COUNT + idx + 1).padStart(2, "0")}
+                                                        </span>
+                                                        <span className="label-mono text-brand-blue md:w-44 shrink-0 truncate">
+                                                            {project.category}
+                                                        </span>
+                                                    </div>
+                                                    <span className="text-secondary text-base md:text-lg flex-1 min-w-0 group-hover:text-primary transition-colors break-words md:truncate">
+                                                        {project.title}
+                                                    </span>
+                                                    <ArrowUpRight className="w-4 h-4 text-secondary group-hover:text-brand-blue group-hover:translate-x-0.5 transition-all shrink-0 self-end md:self-auto -mt-5 md:mt-0" aria-hidden="true" strokeWidth={2.5} />
+                                                </div>
                                             </button>
                                         </motion.li>
                                     ))}

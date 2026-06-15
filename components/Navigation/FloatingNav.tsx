@@ -24,9 +24,9 @@ interface NavItem {
 
 const navItems: NavItem[] = [
     { name: "Overview", id: "overview", icon: LayoutDashboard },
+    { name: "History", id: "experience", icon: Briefcase },
     { name: "Skills", id: "expertise", icon: Wrench },
     { name: "Education", id: "credentials", icon: GraduationCap },
-    { name: "History", id: "experience", icon: Briefcase },
     { name: "Venture", id: "venture", icon: Rocket },
     { name: "Projects", id: "projects", icon: FolderKanban },
 ];

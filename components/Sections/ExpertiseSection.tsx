@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Skill, Certification, Education } from "@/lib/db";
 import SectionHeader from "@/components/UI/SectionHeader";
@@ -82,17 +82,30 @@ export default function ExpertiseSection({
         });
     }, [education]);
 
+    // Mobile narrower viewport → shorter cycle so the marquee actually feels
+    // like it's moving (long durations on a small viewport look stalled).
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const mql = window.matchMedia("(max-width: 768px)");
+        const update = () => setIsMobile(mql.matches);
+        update();
+        mql.addEventListener("change", update);
+        return () => mql.removeEventListener("change", update);
+    }, []);
+    const certMarqueeDuration = isMobile
+        ? Math.max(10, certsSorted.length * 2.4)
+        : Math.max(20, certsSorted.length * 4);
+
     return (
         <section className="container-wide section-padding space-y-24 md:space-y-32">
             {/* PART 1: SKILLS — unchanged */}
             <div id="expertise" className="container-wide scroll-mt-32">
                 <SectionHeader
                     kicker="COMPETENCIES"
-                    title="Technical command center"
-                    subtitle="The systems, methods and platforms I bring to enterprise transformation work."
+                    title="Skills & competencies"
                 />
 
-                <div className="mt-12 md:mt-24 w-full flex justify-center px-4 md:px-0">
+                <div className="mt-12 md:mt-24 w-full flex justify-center px-1 sm:px-4 md:px-0">
                     <GlassTerminal skills={skills} />
                 </div>
             </div>
@@ -105,7 +118,6 @@ export default function ExpertiseSection({
                 <SectionHeader
                     kicker="CREDENTIALS"
                     title="Authorizations & academia"
-                    subtitle="The certifications and degrees that back the work — at a glance."
                 />
 
                 <motion.div
@@ -157,7 +169,7 @@ export default function ExpertiseSection({
                         <div className="group/marquee relative overflow-hidden">
                             <div
                                 className="flex gap-3 whitespace-nowrap will-change-transform marquee-track group-hover/marquee:[animation-play-state:paused]"
-                                style={{ animationDuration: `${Math.max(20, certsSorted.length * 4)}s` }}
+                                style={{ animationDuration: `${certMarqueeDuration}s` }}
                             >
                                 {/* Doubled list for seamless loop */}
                                 {[...certsSorted, ...certsSorted].map((cert, i) => (
@@ -194,7 +206,7 @@ export default function ExpertiseSection({
                                         key={idx}
                                         className="group/edu grid grid-cols-12 gap-3 md:gap-4 items-baseline py-3 first:pt-1 last:pb-1 hover:bg-white/[0.02] -mx-2 px-2 rounded transition-colors"
                                     >
-                                        <span className="col-span-12 sm:col-span-3 lg:col-span-2 font-editorial italic text-brand-blue/85 text-base md:text-lg leading-none tabular-nums">
+                                        <span className="col-span-12 sm:col-span-3 lg:col-span-2 font-editorial italic text-brand-blue text-base md:text-lg leading-none tabular-nums">
                                             {start}
                                             {end && (
                                                 <>

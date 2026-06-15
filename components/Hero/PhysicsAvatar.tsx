@@ -17,6 +17,13 @@ interface PhysicsAvatarProps {
     initialOffsetRight?: number;
     /** Px from canvas TOP. */
     initialOffsetTop?: number;
+    /**
+     * Optional id of an element whose TOP edge defines the avatar's floor.
+     * When provided, the avatar bounces off that element's top instead of the
+     * canvas bottom. Lets a section keep a real floor above a sibling band
+     * (ticker, footer strip) without overlapping it.
+     */
+    floorAnchorId?: string;
 }
 
 /**
@@ -48,6 +55,7 @@ export default function PhysicsAvatar({
     initialOffsetLeft,
     initialOffsetRight = 80,
     initialOffsetTop,
+    floorAnchorId,
 }: PhysicsAvatarProps) {
     const reducedMotion = useReducedMotion();
     const avatarRef = useRef<HTMLDivElement>(null);
@@ -68,19 +76,19 @@ export default function PhysicsAvatar({
     const initialized = useRef(false);
 
     // --- physics constants -----------------------------------------------
-    // Lighter, calmer ball — less gravity, more air drag, smaller bounce
-    const GRAVITY = 850;          // px/s² — lighter fall
-    const AIR_DRAG = 1.0;         // exponential per second (vel *= exp(-drag*dt))
-    const GROUND_FRICTION = 2.4;  // exponential per second on the X axis when grounded
-    const WALL_RESTITUTION = 0.45;
-    const FLOOR_RESTITUTION = 0.28;
-    const CEIL_RESTITUTION = 0.35;
-    const REST_SPEED = 18;        // below this on floor → settle (no float)
+    // Light ball, generous bounce, minimal cartoon squish.
+    const GRAVITY = 720;          // px/s² — light, floaty fall
+    const AIR_DRAG = 0.55;        // exponential per second (vel *= exp(-drag*dt)) — bleed energy slowly
+    const GROUND_FRICTION = 1.4;  // exponential per second on X when grounded — slides a bit
+    const WALL_RESTITUTION = 0.68;
+    const FLOOR_RESTITUTION = 0.62;
+    const CEIL_RESTITUTION = 0.55;
+    const REST_SPEED = 22;        // below this on floor → settle
     const FLOAT_AMP_PX = 4;
-    const FLOAT_HZ = 0.5;         // ~1 cycle per 2s
+    const FLOAT_HZ = 0.5;
     const MAX_THROW_SPEED = 2400; // px/s, prevents tunneling
-    const SQUISH_RECOVER = 10;    // 1/s recovery rate of squish toward 0
-    const SQUISH_GAIN = 0.00028;  // velocity (px/s) → unit deformation (gentler)
+    const SQUISH_RECOVER = 14;    // faster recovery → impact reads quick, not goofy
+    const SQUISH_GAIN = 0.00009;  // ~3x less deformation per impact velocity
 
     // Initial placement: wait until the canvas has a real measured size.
     // Use a ResizeObserver AND a rAF retry — iframes / dev hot-reload often
@@ -95,10 +103,23 @@ export default function PhysicsAvatar({
         const place = (): boolean => {
             const r = canvas.getBoundingClientRect();
             if (r.width <= 0 || r.height <= 0) return false;
+            // Floor = top of anchor element if present, else canvas bottom
+            const anchor = floorAnchorId ? document.getElementById(floorAnchorId) : null;
+            const floorH = anchor ? Math.max(0, anchor.getBoundingClientRect().top - r.top) : r.height;
+            // On narrow viewports (< 640px), the desktop right-offset would push
+            // the avatar off the left edge. Use a tight 16px gutter on mobile so
+            // it stays on the RIGHT side of the screen.
+            const isNarrow = r.width < 640;
+            const effectiveRight = isNarrow ? 16 : initialOffsetRight;
             const startX = initialOffsetLeft !== undefined
                 ? Math.max(0, Math.min(r.width - size, initialOffsetLeft))
-                : Math.max(0, r.width - size - initialOffsetRight);
-            const startY = initialOffsetTop ?? Math.max(0, r.height * 0.35);
+                : Math.max(0, r.width - size - effectiveRight);
+            // Mobile starts the avatar in the lower band (below the editorial
+            // content), so a natural fall stays away from the name and CTAs.
+            const desiredTop = isNarrow
+                ? Math.max(initialOffsetTop ?? 0, floorH - size - 24)
+                : (initialOffsetTop ?? Math.max(0, floorH * 0.35));
+            const startY = Math.max(0, Math.min(floorH - size, desiredTop));
             pos.current.x = startX;
             pos.current.y = startY;
             // Switch from CSS right/top/left to JS-driven translate
@@ -131,7 +152,7 @@ export default function PhysicsAvatar({
             ro.disconnect();
             if (raf) cancelAnimationFrame(raf);
         };
-    }, [canvasId, size, initialOffsetLeft, initialOffsetRight, initialOffsetTop]);
+    }, [canvasId, size, initialOffsetLeft, initialOffsetRight, initialOffsetTop, floorAnchorId]);
 
     // Physics loop
     useEffect(() => {
@@ -151,8 +172,10 @@ export default function PhysicsAvatar({
                 return;
             }
             const r = canvas.getBoundingClientRect();
+            const anchor = floorAnchorId ? document.getElementById(floorAnchorId) : null;
+            const floorH = anchor ? Math.max(0, anchor.getBoundingClientRect().top - r.top) : r.height;
             const maxX = Math.max(0, r.width - size);
-            const maxY = Math.max(0, r.height - size);
+            const maxY = Math.max(0, floorH - size);
 
             // Decay squish toward neutral
             const squishDecay = Math.exp(-SQUISH_RECOVER * dt);
@@ -241,7 +264,7 @@ export default function PhysicsAvatar({
             rafId.current = null;
             lastTick.current = null;
         };
-    }, [reducedMotion, size]);
+    }, [reducedMotion, size, floorAnchorId]);
 
     // Pointer handlers
     useEffect(() => {
@@ -280,8 +303,10 @@ export default function PhysicsAvatar({
             const canvas = canvasRef.current;
             if (!canvas) return;
             const r = canvas.getBoundingClientRect();
+            const anchor = floorAnchorId ? document.getElementById(floorAnchorId) : null;
+            const floorH = anchor ? Math.max(0, anchor.getBoundingClientRect().top - r.top) : r.height;
             const maxX = Math.max(0, r.width - size);
-            const maxY = Math.max(0, r.height - size);
+            const maxY = Math.max(0, floorH - size);
             const p = localPointer(e);
             const newX = Math.max(0, Math.min(maxX, p.x - dragOffset.current.x));
             const newY = Math.max(0, Math.min(maxY, p.y - dragOffset.current.y));
@@ -337,7 +362,7 @@ export default function PhysicsAvatar({
             document.removeEventListener("pointerup", finishDrag);
             document.removeEventListener("pointercancel", finishDrag);
         };
-    }, [reducedMotion, size]);
+    }, [reducedMotion, size, floorAnchorId]);
 
     // Window resize → clamp position inside the new canvas
     useEffect(() => {
@@ -345,14 +370,16 @@ export default function PhysicsAvatar({
             const canvas = canvasRef.current;
             if (!canvas) return;
             const r = canvas.getBoundingClientRect();
+            const anchor = floorAnchorId ? document.getElementById(floorAnchorId) : null;
+            const floorH = anchor ? Math.max(0, anchor.getBoundingClientRect().top - r.top) : r.height;
             const maxX = Math.max(0, r.width - size);
-            const maxY = Math.max(0, r.height - size);
+            const maxY = Math.max(0, floorH - size);
             pos.current.x = Math.max(0, Math.min(maxX, pos.current.x));
             pos.current.y = Math.max(0, Math.min(maxY, pos.current.y));
         };
         window.addEventListener("resize", onResize);
         return () => window.removeEventListener("resize", onResize);
-    }, [size]);
+    }, [size, floorAnchorId]);
 
     // Reduced-motion fallback: static, no rAF
     if (reducedMotion) {
@@ -382,7 +409,10 @@ export default function PhysicsAvatar({
                 transformOrigin: "50% 50%",
                 ...(initialOffsetLeft !== undefined
                     ? { left: `${initialOffsetLeft}px` }
-                    : { right: `${initialOffsetRight}px` }),
+                    // CSS var lets a global media query override the right
+                    // offset on narrow viewports, killing the pre-hydration
+                    // flash where the avatar would sit on the left edge.
+                    : { right: `var(--avatar-right, ${initialOffsetRight}px)` }),
                 top: `${initialOffsetTop ?? 140}px`,
             }}
             role="button"
