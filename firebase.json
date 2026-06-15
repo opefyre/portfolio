@@ -61,7 +61,7 @@
         ]
       },
       {
-        "source": "/elixiary/**",
+        "source": "/elixiary/**/*.@(jpg|jpeg|gif|png|webp|svg|ico|avif)",
         "headers": [
           {
             "key": "Cache-Control",
