@@ -2,9 +2,18 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { Project } from "@/lib/db";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { easings, durations } from "@/lib/motion";
+
+// React-19-friendly "are we on the client?" — no setState-in-effect.
+// SSR returns false; client first render returns true; hydration matches.
+const subscribeNoop = () => () => {};
+const getClientSnap = () => true;
+const getServerSnap = () => false;
+function useIsClient() {
+    return useSyncExternalStore(subscribeNoop, getClientSnap, getServerSnap);
+}
 
 interface ProjectModalProps {
     project: Project | null;
@@ -28,8 +37,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
     // ScrollTrigger sections) carry transforms that become the containing
     // block for `position: fixed`, which would otherwise anchor the dialog
     // to the section's frame (~2700px tall) instead of the viewport.
-    const [mounted, setMounted] = useState(false);
-    useEffect(() => setMounted(true), []);
+    const isClient = useIsClient();
 
     // Body scroll lock + Lenis pause + Esc-to-close + focus trap
     useEffect(() => {
@@ -81,7 +89,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
     }, [isOpen, onClose]);
 
     if (!project) return null;
-    if (!mounted) return null;
+    if (!isClient) return null;
 
     return createPortal(
         <AnimatePresence>
