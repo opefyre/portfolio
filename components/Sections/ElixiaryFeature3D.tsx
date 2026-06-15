@@ -38,12 +38,18 @@ interface ElixiaryVenture {
     socials: Socials;
 }
 
+// Bump this when the image bytes at these paths change. Cache-buster query
+// string forces a fresh fetch even though Firebase Hosting serves these PNGs
+// with `Cache-Control: immutable`, which would otherwise keep browsers showing
+// the previous bytes for a year. The R3F TextureLoader loads via `Image()`,
+// which a page hard-refresh doesn't bypass.
+const SHOWCASE_VERSION = "2";
 const showcaseImages = [
-    { src: "/elixiary/hero.png", alt: "Elixiary AI Landing Page" },
-    { src: "/elixiary/cocktail-cards.png", alt: "Curated Cocktails Grid" },
-    { src: "/elixiary/recipe-detail.png", alt: "Cocktail Recipe Details" },
-    { src: "/elixiary/collection.png", alt: "My Recipes Collection" },
-    { src: "/elixiary/blog-history.png", alt: "Cocktail Articles" },
+    { src: `/elixiary/hero.png?v=${SHOWCASE_VERSION}`, alt: "Elixiary AI Landing Page" },
+    { src: `/elixiary/cocktail-cards.png?v=${SHOWCASE_VERSION}`, alt: "Curated Cocktails Grid" },
+    { src: `/elixiary/recipe-detail.png?v=${SHOWCASE_VERSION}`, alt: "Cocktail Recipe Details" },
+    { src: `/elixiary/collection.png?v=${SHOWCASE_VERSION}`, alt: "My Recipes Collection" },
+    { src: `/elixiary/blog-history.png?v=${SHOWCASE_VERSION}`, alt: "Cocktail Articles" },
 ];
 
 // Dynamic-load the R3F scene so the three.js bundle stays out of the main route chunk.
