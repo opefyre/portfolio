@@ -59,8 +59,8 @@ function ScreenPlane({
 
     return (
         <mesh ref={meshRef} position={targetPosition} rotation={targetRotation} scale={targetScale}>
-            {/* Big plane fills most of the canvas at z ≈ 0.6 */}
-            <planeGeometry args={[4.6, 2.9]} />
+            {/* Big plane fills most of the canvas at z ≈ 0.6. 4.278 × 2.697 = 4.6 × 2.9 × 0.93 (7% smaller). */}
+            <planeGeometry args={[4.278, 2.697]} />
             {/* MeshBasicMaterial — no emissive blue tint. Texture renders true-to-source. */}
             <meshBasicMaterial
                 ref={matRef}
