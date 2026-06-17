@@ -19,7 +19,6 @@ export interface CvPersonalInfo {
     signatureMetricValue: string;
     signatureMetricLabel: string;
     email?: string;
-    phone?: string;
     portfolio?: string;
 }
 export interface CvPosition {
@@ -258,7 +257,6 @@ function HeaderBlock({ p }: { p: CvPersonalInfo }) {
         portfolioShort,
         linkedinShort,
         p.email,
-        p.phone,
     ].filter(Boolean);
     return (
         <View style={s.header}>
@@ -305,14 +303,6 @@ function Sidebar({ data }: { data: CvData }) {
             {p.email ? (
                 <Link style={[s.rowLabel, s.link, { marginTop: 1 }]} src={`mailto:${p.email}`}>
                     {p.email}
-                </Link>
-            ) : null}
-            {p.phone ? (
-                <Link
-                    style={[s.rowLabel, s.link, { marginTop: 1 }]}
-                    src={`tel:${p.phone.replace(/[^+\d]/g, "")}`}
-                >
-                    {p.phone}
                 </Link>
             ) : null}
 
