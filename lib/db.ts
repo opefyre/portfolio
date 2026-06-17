@@ -77,6 +77,10 @@ export interface PersonalInfoPublic {
     title: string;
     location: string;
     linkedin: string;
+    /** GitHub profile URL (e.g. https://github.com/opefyre). */
+    github?: string;
+    /** Personal portfolio URL (e.g. https://abosh.io). Shown in CV header + sidebar. */
+    portfolio?: string;
     summary: string;
     /** 1-sentence positioning headline, ≤14 words. Rendered prominently in the hero. */
     headline: string;
@@ -144,6 +148,8 @@ export const getPersonalInfo = cache(async () => {
                 title: raw.title ?? "",
                 location: raw.location ?? "",
                 linkedin: raw.linkedin ?? "",
+                github: raw.github?.trim() || undefined,
+                portfolio: raw.portfolio?.trim() || undefined,
                 summary: raw.summary ?? "",
                 headline: raw.headline?.trim() || PERSONAL_INFO_FALLBACK.headline,
                 signatureMetricValue: raw.signatureMetricValue?.trim() || PERSONAL_INFO_FALLBACK.signatureMetricValue,

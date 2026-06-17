@@ -51,6 +51,7 @@ export default async function Home() {
           signatureMetricValue={personalInfo.signatureMetricValue}
           signatureMetricLabel={personalInfo.signatureMetricLabel}
           linkedin={personalInfo.linkedin}
+          github={personalInfo.github}
           location={personalInfo.location}
           resumeUrl={personalInfo.resumeUrl}
         />
@@ -119,6 +120,7 @@ export default async function Home() {
           <SiteFooter
             location={personalInfo.location}
             linkedin={personalInfo.linkedin}
+            github={personalInfo.github}
             resumeUrl={personalInfo.resumeUrl}
           />
         }

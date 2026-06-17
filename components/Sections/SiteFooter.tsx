@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { Mail, Linkedin, Download } from "lucide-react";
+import { Mail, Linkedin, Github, Download } from "lucide-react";
 import { easings } from "@/lib/motion";
 
 // Client-only — listens to pointer events, owns a canvas + rAF loop.
@@ -15,6 +15,7 @@ const FooterSketchTrail = dynamic(() => import("./FooterSketchTrail"), {
 interface SiteFooterProps {
     location?: string;
     linkedin?: string;
+    github?: string;
     resumeUrl: string;
 }
 
@@ -43,7 +44,7 @@ const INK_MUTED = "rgba(10,10,10,0.62)";
 const INK_FAINT = "rgba(10,10,10,0.42)";
 const INK_HAIR = "rgba(10,10,10,0.12)";
 
-export default function SiteFooter({ linkedin, resumeUrl }: SiteFooterProps) {
+export default function SiteFooter({ linkedin, github, resumeUrl }: SiteFooterProps) {
     return (
         <footer
             aria-labelledby="footer-cta"
@@ -122,6 +123,20 @@ export default function SiteFooter({ linkedin, resumeUrl }: SiteFooterProps) {
                             style={{ border: `1px solid ${INK_HAIR}`, color: INK, ['--tw-ring-offset-color' as string]: '#F5EFE3' }}
                         >
                             <Linkedin className="w-5 h-5" aria-hidden="true" />
+                        </a>
+                    )}
+
+                    {github && (
+                        <a
+                            href={github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-cursor="connect"
+                            aria-label="GitHub"
+                            className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-transparent hover:bg-[rgba(10,10,10,0.06)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 transition-colors duration-200"
+                            style={{ border: `1px solid ${INK_HAIR}`, color: INK, ['--tw-ring-offset-color' as string]: '#F5EFE3' }}
+                        >
+                            <Github className="w-5 h-5" aria-hidden="true" />
                         </a>
                     )}
 
