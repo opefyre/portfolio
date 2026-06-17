@@ -25,6 +25,7 @@ import {
     type CvSkill,
     type CvCertification,
     type CvEducation,
+    type CvProject,
 } from "../lib/cv/document.js";
 import { registerCvFonts } from "../lib/cv/fonts.js";
 
@@ -45,14 +46,27 @@ function initAdmin() {
     }
 }
 
+// Lightweight version of shortenImpactForCard from lib/db.ts (which is
+// `server-only` so we can't import it here). Falls back when a project
+// doc has no outcomeShort but has an impact line.
+function shortImpact(impact: string | undefined, limit = 110): string {
+    if (!impact) return "";
+    const single = impact.replace(/\s+/g, " ").trim();
+    if (single.length <= limit) return single;
+    const cut = single.slice(0, limit);
+    const lastSpace = cut.lastIndexOf(" ");
+    return (lastSpace > 40 ? cut.slice(0, lastSpace) : cut).replace(/[.,;:!?]*$/, "") + "…";
+}
+
 async function fetchData(db: FirebaseFirestore.Firestore): Promise<CvData> {
-    const [pubSnap, privSnap, expSnap, skillSnap, certSnap, eduSnap] = await Promise.all([
+    const [pubSnap, privSnap, expSnap, skillSnap, certSnap, eduSnap, projSnap] = await Promise.all([
         db.collection("meta").doc("personalInfoPublic").get(),
         db.collection("privateMeta").doc("personalContact").get(),
         db.collection("experiences").get(),
         db.collection("skills").get(),
         db.collection("certifications").get(),
         db.collection("education").get(),
+        db.collection("projects").get(),
     ]);
 
     if (!pubSnap.exists) throw new Error("meta/personalInfoPublic missing in Firestore");
@@ -68,6 +82,8 @@ async function fetchData(db: FirebaseFirestore.Firestore): Promise<CvData> {
         signatureMetricValue: String(pub.signatureMetricValue ?? ""),
         signatureMetricLabel: String(pub.signatureMetricLabel ?? ""),
         email: priv.email ? String(priv.email) : undefined,
+        phone: priv.phone ? String(priv.phone) : undefined,
+        portfolio: pub.portfolio ? String(pub.portfolio) : undefined,
     };
 
     const experiences: CvExperience[] = expSnap.docs
@@ -78,8 +94,17 @@ async function fetchData(db: FirebaseFirestore.Firestore): Promise<CvData> {
         .sort((a, b) => ((a.order ?? 0) as number) - ((b.order ?? 0) as number));
     const certifications: CvCertification[] = certSnap.docs.map((d) => d.data() as CvCertification);
     const education: CvEducation[] = eduSnap.docs.map((d) => d.data() as CvEducation);
+    const projects: CvProject[] = projSnap.docs.map((d) => {
+        const raw = d.data() as { title?: string; category?: string; impact?: string; outcomeShort?: string };
+        return {
+            title: String(raw.title ?? ""),
+            category: String(raw.category ?? ""),
+            impact: String(raw.impact ?? ""),
+            outcomeShort: raw.outcomeShort?.trim() || shortImpact(raw.impact),
+        };
+    });
 
-    return { personalInfo, experiences, skills, certifications, education };
+    return { personalInfo, experiences, skills, certifications, education, projects };
 }
 
 async function main() {
@@ -90,7 +115,7 @@ async function main() {
     console.log(
         `[generate-resume-pdf] Loaded: ${data.experiences.length} experiences, ` +
             `${data.skills.length} skill groups, ${data.certifications.length} certs, ` +
-            `${data.education.length} education entries.`
+            `${data.education.length} education entries, ${data.projects.length} projects.`
     );
 
     registerCvFonts();
