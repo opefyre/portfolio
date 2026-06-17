@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { Download, Linkedin, ArrowDown } from "lucide-react";
+import { Download, Linkedin, Github, ArrowDown } from "lucide-react";
 import { useReducedMotion, easings, durations } from "@/lib/motion";
 
 const StarFieldCanvas = dynamic(() => import("./StarFieldCanvas"), {
@@ -21,6 +21,7 @@ interface DigitalHeroProps {
     signatureMetricValue: string;
     signatureMetricLabel: string;
     linkedin?: string;
+    github?: string;
     location?: string;
     resumeUrl: string;
 }
@@ -92,6 +93,7 @@ export default function DigitalHero({
     signatureMetricValue,
     signatureMetricLabel,
     linkedin,
+    github,
     location: _location,
     resumeUrl,
 }: DigitalHeroProps) {
@@ -288,6 +290,19 @@ export default function DigitalHero({
                                 className="group inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-brand-blue/40 text-brand-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-page transition-colors duration-200"
                             >
                                 <Linkedin className="w-4 h-4" aria-hidden="true" />
+                            </a>
+                        )}
+
+                        {github && (
+                            <a
+                                href={github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                data-cursor="connect"
+                                aria-label="GitHub"
+                                className="group inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-brand-blue/40 text-brand-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-page transition-colors duration-200"
+                            >
+                                <Github className="w-4 h-4" aria-hidden="true" />
                             </a>
                         )}
                     </motion.div>

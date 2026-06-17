@@ -82,8 +82,8 @@ async function fetchData(db: FirebaseFirestore.Firestore): Promise<CvData> {
         signatureMetricValue: String(pub.signatureMetricValue ?? ""),
         signatureMetricLabel: String(pub.signatureMetricLabel ?? ""),
         email: priv.email ? String(priv.email) : undefined,
-        phone: priv.phone ? String(priv.phone) : undefined,
         portfolio: pub.portfolio ? String(pub.portfolio) : undefined,
+        github: pub.github ? String(pub.github) : undefined,
     };
 
     const experiences: CvExperience[] = expSnap.docs

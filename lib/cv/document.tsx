@@ -19,8 +19,8 @@ export interface CvPersonalInfo {
     signatureMetricValue: string;
     signatureMetricLabel: string;
     email?: string;
-    phone?: string;
     portfolio?: string;
+    github?: string;
 }
 export interface CvPosition {
     title: string;
@@ -253,12 +253,13 @@ function HeaderBlock({ p }: { p: CvPersonalInfo }) {
     const cvStamp = `CV · ${new Date().toLocaleDateString("en-GB", { month: "short", year: "numeric" }).toUpperCase()}`;
     const portfolioShort = shortenUrl(p.portfolio);
     const linkedinShort = shortenUrl(p.linkedin);
+    const githubShort = shortenUrl(p.github);
     const metaParts = [
         p.location,
         portfolioShort,
         linkedinShort,
+        githubShort,
         p.email,
-        p.phone,
     ].filter(Boolean);
     return (
         <View style={s.header}>
@@ -302,17 +303,14 @@ function Sidebar({ data }: { data: CvData }) {
             <Link style={[s.rowLabel, s.link, p.portfolio ? { marginTop: 1 } : {}]} src={p.linkedin}>
                 {linkedinShort}
             </Link>
+            {p.github ? (
+                <Link style={[s.rowLabel, s.link, { marginTop: 1 }]} src={p.github}>
+                    {shortenUrl(p.github)}
+                </Link>
+            ) : null}
             {p.email ? (
                 <Link style={[s.rowLabel, s.link, { marginTop: 1 }]} src={`mailto:${p.email}`}>
                     {p.email}
-                </Link>
-            ) : null}
-            {p.phone ? (
-                <Link
-                    style={[s.rowLabel, s.link, { marginTop: 1 }]}
-                    src={`tel:${p.phone.replace(/[^+\d]/g, "")}`}
-                >
-                    {p.phone}
                 </Link>
             ) : null}
 
