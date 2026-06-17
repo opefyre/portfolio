@@ -19,6 +19,8 @@ export interface CvPersonalInfo {
     signatureMetricValue: string;
     signatureMetricLabel: string;
     email?: string;
+    phone?: string;
+    portfolio?: string;
 }
 export interface CvPosition {
     title: string;
@@ -45,12 +47,19 @@ export interface CvEducation {
     institution: string;
     period: string;
 }
+export interface CvProject {
+    title: string;
+    category: string;
+    impact: string;
+    outcomeShort?: string;
+}
 export interface CvData {
     personalInfo: CvPersonalInfo;
     experiences: CvExperience[];
     skills: CvSkill[];
     certifications: CvCertification[];
     education: CvEducation[];
+    projects: CvProject[];
 }
 
 // ─── Tokens ─────────────────────────────────────────────────────────────
@@ -103,7 +112,7 @@ const s = StyleSheet.create({
     headerTop: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-end" },
     name: { fontFamily: f.display, fontWeight: 700, fontSize: 22, letterSpacing: -0.5, color: c.ink },
     cvStamp: { fontFamily: f.mono, fontSize: 7.5, color: c.inkFaint, letterSpacing: 1.2 },
-    headerTitle: { fontFamily: f.body, fontSize: 10.5, color: c.inkMuted, marginTop: 3 },
+    headerTitle: { fontFamily: f.body, fontSize: 10.5, color: c.inkMuted, marginTop: 8 },
     headerMeta: { fontFamily: f.mono, fontSize: 7.5, color: c.inkFaint, letterSpacing: 0.8, marginTop: 6 },
     headerRule: { height: 1.2, backgroundColor: c.blue, marginTop: 8, marginBottom: 10 },
 
@@ -180,6 +189,21 @@ const s = StyleSheet.create({
     eduDegree: { fontFamily: f.body, fontWeight: 600, fontSize: 9.5, color: c.ink },
     eduInst: { fontFamily: f.mono, fontSize: 7, color: c.inkMuted, letterSpacing: 0.4, marginTop: 1 },
 
+    // selected projects
+    projectRow: { marginBottom: 7 },
+    projectHead: { flexDirection: "row", justifyContent: "space-between", alignItems: "baseline" },
+    projectIdx: { fontFamily: f.mono, fontSize: 7, color: c.blue, letterSpacing: 0.4, width: 24 },
+    projectTitle: { flex: 1, fontFamily: f.body, fontWeight: 600, fontSize: 9.5, color: c.ink },
+    projectCategory: { fontFamily: f.mono, fontSize: 7, color: c.inkMuted, letterSpacing: 0.6, marginLeft: 6 },
+    projectOutcome: {
+        fontFamily: f.body,
+        fontSize: 8.4,
+        color: c.inkMuted,
+        lineHeight: 1.4,
+        marginTop: 1.5,
+        marginLeft: 24,
+    },
+
     // footer (every page)
     pageFooter: {
         position: "absolute",
@@ -220,9 +244,22 @@ function Achievement({ children }: { children: string }) {
 }
 
 // ─── Header (page 1) ────────────────────────────────────────────────────
+function shortenUrl(u: string | undefined): string {
+    if (!u) return "";
+    return u.replace(/^https?:\/\//, "").replace(/\/$/, "");
+}
+
 function HeaderBlock({ p }: { p: CvPersonalInfo }) {
     const cvStamp = `CV · ${new Date().toLocaleDateString("en-GB", { month: "short", year: "numeric" }).toUpperCase()}`;
-    const linkedinShort = p.linkedin.replace(/^https?:\/\//, "").replace(/\/$/, "");
+    const portfolioShort = shortenUrl(p.portfolio);
+    const linkedinShort = shortenUrl(p.linkedin);
+    const metaParts = [
+        p.location,
+        portfolioShort,
+        linkedinShort,
+        p.email,
+        p.phone,
+    ].filter(Boolean);
     return (
         <View style={s.header}>
             <View style={s.headerTop}>
@@ -230,10 +267,7 @@ function HeaderBlock({ p }: { p: CvPersonalInfo }) {
                 <Text style={s.cvStamp}>{cvStamp}</Text>
             </View>
             <Text style={s.headerTitle}>{p.title}</Text>
-            <Text style={s.headerMeta}>
-                {p.location} · {linkedinShort}
-                {p.email ? `  ·  ${p.email}` : ""}
-            </Text>
+            <Text style={s.headerMeta}>{metaParts.join("  ·  ")}</Text>
             <View style={s.headerRule} />
         </View>
     );
@@ -260,12 +294,25 @@ function Sidebar({ data }: { data: CvData }) {
             <Text style={s.rowLabel}>{p.location}</Text>
 
             <Kicker>CONTACT</Kicker>
-            <Link style={[s.rowLabel, s.link]} src={p.linkedin}>
+            {p.portfolio ? (
+                <Link style={[s.rowLabel, s.link]} src={p.portfolio}>
+                    {shortenUrl(p.portfolio)}
+                </Link>
+            ) : null}
+            <Link style={[s.rowLabel, s.link, p.portfolio ? { marginTop: 1 } : {}]} src={p.linkedin}>
                 {linkedinShort}
             </Link>
             {p.email ? (
                 <Link style={[s.rowLabel, s.link, { marginTop: 1 }]} src={`mailto:${p.email}`}>
                     {p.email}
+                </Link>
+            ) : null}
+            {p.phone ? (
+                <Link
+                    style={[s.rowLabel, s.link, { marginTop: 1 }]}
+                    src={`tel:${p.phone.replace(/[^+\d]/g, "")}`}
+                >
+                    {p.phone}
                 </Link>
             ) : null}
 
@@ -282,7 +329,7 @@ function Sidebar({ data }: { data: CvData }) {
 
             {topCerts.length ? (
                 <>
-                    <Kicker>AUTHORIZATIONS</Kicker>
+                    <Kicker>CERTIFICATIONS</Kicker>
                     <View style={s.chipList}>
                         {topCerts.map((cert) => (
                             <BulletRow key={cert.name}>
@@ -324,7 +371,7 @@ function MainColumn({ data }: { data: CvData }) {
                                 </Text>
                                 <Text style={s.stationYears}>
                                     {startYear}
-                                    {endYear && endYear !== startYear ? ` → ${endYear}` : ""}
+                                    {endYear && endYear !== startYear ? ` – ${endYear}` : ""}
                                 </Text>
                             </View>
                             <Text style={s.company}>{exp.company}</Text>
@@ -379,6 +426,34 @@ function MainColumn({ data }: { data: CvData }) {
                     </View>
                 </View>
             ))}
+
+            {data.projects.length ? <SelectedProjects projects={data.projects} /> : null}
+        </View>
+    );
+}
+
+const PROJECT_COUNT = 12;
+
+function SelectedProjects({ projects }: { projects: CvProject[] }) {
+    const picked = projects.slice(0, PROJECT_COUNT);
+    return (
+        <View break>
+            <Kicker first>SELECTED PROJECTS</Kicker>
+            {picked.map((proj, idx) => {
+                const outcome = (proj.outcomeShort || proj.impact || "").trim();
+                return (
+                    <View key={`${proj.title}-${idx}`} style={s.projectRow} wrap={false}>
+                        <View style={s.projectHead}>
+                            <Text style={s.projectIdx}>P.{String(idx + 1).padStart(2, "0")}</Text>
+                            <Text style={s.projectTitle}>{proj.title}</Text>
+                            {proj.category ? (
+                                <Text style={s.projectCategory}>{proj.category.toUpperCase()}</Text>
+                            ) : null}
+                        </View>
+                        {outcome ? <Text style={s.projectOutcome}>{outcome}</Text> : null}
+                    </View>
+                );
+            })}
         </View>
     );
 }
