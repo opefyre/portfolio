@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "tsx scripts/generate-resume-pdf.tsx",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "deploy": "./scripts/secure-deploy.sh",
     "verify:headers": "./verify-hosting-headers.sh",
-    "migrate:personal-info": "tsx scripts/firestore-migrate-personal-info.ts"
+    "migrate:personal-info": "tsx scripts/firestore-migrate-personal-info.ts",
+    "generate:resume": "tsx scripts/generate-resume-pdf.tsx"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
@@ -36,6 +38,11 @@
     "three-stdlib": "^2.36.1"
   },
   "devDependencies": {
+    "@fontsource/instrument-serif": "^5.2.8",
+    "@fontsource/jetbrains-mono": "^5.2.8",
+    "@fontsource/manrope": "^5.2.8",
+    "@fontsource/syne": "^5.2.7",
+    "@react-pdf/renderer": "^4.5.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
