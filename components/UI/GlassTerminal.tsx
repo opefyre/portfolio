@@ -82,13 +82,22 @@ export default function GlassTerminal({ skills }: { skills: Skill[] }) {
 
                 {/* Main Content Area (Skills Grid) */}
                 <div className="flex-1 p-3 sm:p-6 md:p-12 relative z-20 bg-gradient-to-br from-transparent to-black/20">
-                    <div className="flex items-center justify-between mb-5 md:mb-12">
-                        <h2 className="text-xl md:text-3xl font-display font-medium text-white">
+                    {/* Fixed title-area height so a 2-line category name ("Project & Program
+                        Management") doesn't grow the card taller than 1-line names. `items-start`
+                        keeps shorter names top-aligned; longer ones fill the box. `line-clamp-2`
+                        is a safety net for any future category with a longer name. */}
+                    <div className="flex items-start justify-between mb-5 md:mb-8 h-[52px] md:h-[72px]">
+                        <h2 className="text-xl md:text-3xl font-display font-medium text-white leading-tight line-clamp-2">
                             {activeCategory}
                         </h2>
                     </div>
 
-                    <div className="relative min-h-[300px]">
+                    {/* Fixed height + internal scroll so the whole terminal card doesn't
+                        grow / shrink when switching between categories with different item
+                        counts. Categories that overflow scroll inside; shorter ones just
+                        leave breathing room at the bottom. Mobile height is smaller so the
+                        card doesn't dominate a small viewport. */}
+                    <div className="relative h-[320px] md:h-[380px] overflow-y-auto overflow-x-hidden custom-scrollbar pr-1">
                         {/* mode="wait" so the outgoing grid fully exits before the incoming one
                             mounts — with popLayout, the incoming grid was rendering `position:
                             static` while the outgoing sat `position: absolute`, and the incoming
