@@ -58,6 +58,8 @@ export interface Project {
 export interface Skill {
     category: string;
     items: string[];
+    /** Sort key. Lower renders first. Missing values sort to the end. */
+    order?: number;
 }
 
 export interface Certification {
@@ -219,9 +221,12 @@ export const getSkills = cache(async () => {
         async () => {
             const snapshot = await db.collection("skills").get();
             if (snapshot.empty) throw new Error("Skills collection empty in Firestore");
-            return snapshot.docs.map(d => d.data() as Skill);
+            const skills = snapshot.docs.map(d => d.data() as Skill);
+            // Sort by `order` field (lower first); missing order sinks to the end.
+            const rank = (o?: number) => (typeof o === "number" ? o : Number.MAX_SAFE_INTEGER);
+            return skills.sort((a, b) => rank(a.order) - rank(b.order));
         },
-        ["skills"],
+        ["skills-v2"],
         { tags: ["content"] }
     )();
 });
