@@ -89,13 +89,20 @@ export default function GlassTerminal({ skills }: { skills: Skill[] }) {
                     </div>
 
                     <div className="relative min-h-[300px]">
-                        <AnimatePresence mode="popLayout">
+                        {/* mode="wait" so the outgoing grid fully exits before the incoming one
+                            mounts — with popLayout, the incoming grid was rendering `position:
+                            static` while the outgoing sat `position: absolute`, and the incoming
+                            grid started its initial y=+20 translate 20px below its final position,
+                            which read as "skills briefly show at the bottom and jump to the top".
+                            Dropping the y translation on the parent avoids that entirely; the child
+                            stagger below still gives the reveal a rhythm. */}
+                        <AnimatePresence mode="wait">
                             <motion.div
                                 key={activeCategory}
-                                initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
-                                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                                exit={{ opacity: 0, y: -20, filter: "blur(4px)" }}
-                                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                                initial={{ opacity: 0, filter: "blur(4px)" }}
+                                animate={{ opacity: 1, filter: "blur(0px)" }}
+                                exit={{ opacity: 0, filter: "blur(4px)" }}
+                                transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4"
                             >
                                 {activeSkills.map((skill, index) => (
