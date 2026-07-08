@@ -9,7 +9,8 @@ import {
     LayoutDashboard,
     Wrench,
     Briefcase,
-    Rocket,
+    // FEATURED_VENTURE (hidden) — restore the Rocket icon alongside the nav item below.
+    // Rocket,
     FolderKanban,
     GraduationCap,
     MessageSquare,
@@ -27,7 +28,8 @@ const navItems: NavItem[] = [
     { name: "History", id: "experience", icon: Briefcase },
     { name: "Skills", id: "expertise", icon: Wrench },
     { name: "Education", id: "credentials", icon: GraduationCap },
-    { name: "Venture", id: "venture", icon: Rocket },
+    // FEATURED_VENTURE (hidden) — restore alongside the section in app/page.tsx.
+    // { name: "Venture", id: "venture", icon: Rocket },
     { name: "Projects", id: "projects", icon: FolderKanban },
 ];
 
