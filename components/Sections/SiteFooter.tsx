@@ -24,7 +24,8 @@ const QUICK_LINKS = [
     { name: "History", id: "experience" },
     { name: "Skills", id: "expertise" },
     { name: "Education", id: "credentials" },
-    { name: "Venture", id: "venture" },
+    // FEATURED_VENTURE (hidden) — restore alongside the section in app/page.tsx.
+    // { name: "Venture", id: "venture" },
     { name: "Projects", id: "projects" },
 ];
 
