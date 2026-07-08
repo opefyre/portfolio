@@ -18,10 +18,22 @@ interface RevealStackProps {
  *     └─ footer (position: fixed)       (slides in from below via translateY)
  *
  * Math (per frame):
- *   spacerTop = spacer.getBoundingClientRect().top      (natural scroll ref)
- *   overshoot = clamp(0, vh - spacerTop, vh)
- *   sw.transform   = translateY(overshoot)              (visually pins SW)
- *   footer.transform = translateY((1 - overshoot/vh) * 100%)
+ *   spacerRect = spacer.getBoundingClientRect()          (natural scroll ref)
+ *   overshoot  = clamp(0, spacerRect.height - spacerRect.top, spacerRect.height)
+ *   sw.transform     = translateY(overshoot px)          (visually pins SW)
+ *   footer.transform = translateY((spacerRect.height - overshoot) px)
+ *
+ * Why the spacer's own height is the reference (not window.innerHeight):
+ * on mobile Chrome the URL bar collapses/expands during scroll, which
+ * makes window.innerHeight oscillate. If we mix `spacer.top` (from a
+ * layout snapshot) with `window.innerHeight` (from another moment), the
+ * math shifts under the animation and the footer stutters. Reading BOTH
+ * numbers from the same getBoundingClientRect call keeps them consistent.
+ *
+ * Why the footer transform is in px, not %: with `h-[100dvh]`, the
+ * footer's own height changes with the URL bar too, so a percent
+ * translate resolves to a different pixel offset frame-to-frame. Pixels
+ * decouple the transform from the element's own size.
  *
  * Why poll instead of listen: with Lenis hijacking scroll, neither native
  * 'scroll' events on window nor Lenis's own 'scroll' event fire reliably
@@ -45,28 +57,29 @@ export default function RevealStack({ children, footer }: RevealStackProps) {
         const footerEl = footerRef.current;
         if (!sw || !spacer || !footerEl) return;
 
+        // iOS rubber-band bounces during overscroll feed weird bounding-rect
+        // values into the math (top can go below 0 with velocity). Locking
+        // overscroll on the root scroller stops the bounce and makes the
+        // reveal always start from the same reference point.
+        const prevBehavior = document.documentElement.style.overscrollBehaviorY;
+        document.documentElement.style.overscrollBehaviorY = "none";
+
         let rafId = 0;
-        let lastSwY = -Infinity;
-        let lastFooterY = -Infinity;
 
         const tick = () => {
+            // Read BOTH values from the same layout snapshot so they are
+            // internally consistent even while the URL bar is animating.
             const spacerRect = spacer.getBoundingClientRect();
-            const vh = window.innerHeight;
+            const refH = spacerRect.height;
+            const raw = refH - spacerRect.top;
+            const overshoot = Math.max(0, Math.min(refH, raw));
+            const footerPx = refH - overshoot;
 
-            const raw = vh - spacerRect.top;
-            const overshoot = Math.max(0, Math.min(vh, raw));
-
-            // Only write to the DOM if the value actually changed by ≥ 0.5px,
-            // so we don't trigger needless style invalidation when idle.
-            if (Math.abs(overshoot - lastSwY) >= 0.5) {
-                lastSwY = overshoot;
-                sw.style.transform = `translate3d(0, ${overshoot}px, 0)`;
-            }
-            const footerTranslate = (1 - overshoot / vh) * 100;
-            if (Math.abs(footerTranslate - lastFooterY) >= 0.1) {
-                lastFooterY = footerTranslate;
-                footerEl.style.transform = `translate3d(0, ${footerTranslate}%, 0)`;
-            }
+            // No threshold — GPU-composited transform writes are effectively
+            // free once the layer exists, and gating them by cumulative delta
+            // caused visible sub-pixel stepping on slow mobile scrolls.
+            sw.style.transform = `translate3d(0, ${overshoot}px, 0)`;
+            footerEl.style.transform = `translate3d(0, ${footerPx}px, 0)`;
 
             rafId = window.requestAnimationFrame(tick);
         };
@@ -75,6 +88,7 @@ export default function RevealStack({ children, footer }: RevealStackProps) {
 
         return () => {
             window.cancelAnimationFrame(rafId);
+            document.documentElement.style.overscrollBehaviorY = prevBehavior;
         };
     }, []);
 
@@ -92,10 +106,13 @@ export default function RevealStack({ children, footer }: RevealStackProps) {
                 className="h-[100dvh] pointer-events-none"
             />
 
-            {/* Footer — fixed at viewport bottom, slides up via translate */}
+            {/* Footer — fixed at viewport bottom, slides up via translate. Initial
+                transform is huge (10_000px) so the first paint keeps it fully
+                offscreen even before the rAF sets a real value; this avoids a
+                one-frame flash if the tick lands after the browser paints. */}
             <div
                 ref={footerRef}
-                style={{ transform: "translate3d(0, 100%, 0)", willChange: "transform" }}
+                style={{ transform: "translate3d(0, 10000px, 0)", willChange: "transform" }}
                 className="fixed bottom-0 left-0 right-0 h-[100dvh] z-50"
             >
                 {footer}
