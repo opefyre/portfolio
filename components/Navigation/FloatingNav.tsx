@@ -147,10 +147,15 @@ export default function FloatingNav() {
             const element = sectionRefs.current.get(id) ?? document.getElementById(id);
             if (!element) return;
             const absoluteTop = element.getBoundingClientRect().top + window.scrollY;
-            window.scrollTo({
-                top: absoluteTop - 100,
-                behavior: reducedMotion ? "auto" : "smooth",
-            });
+            const target = absoluteTop - 100;
+            // Lenis owns scroll via its own raf loop — a plain window.scrollTo()
+            // gets fought and snapped back to Lenis's internal target on the
+            // very next frame, so nav clicks must go through Lenis directly.
+            if (window.__lenis) {
+                window.__lenis.scrollTo(target, { immediate: reducedMotion });
+            } else {
+                window.scrollTo({ top: target, behavior: reducedMotion ? "auto" : "smooth" });
+            }
         },
         [reducedMotion]
     );
