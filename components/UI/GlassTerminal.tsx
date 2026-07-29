@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Skill } from "@/lib/db";
-import { Network, Database, Layers, Layout, Combine } from "lucide-react";
+import { Network, Database, Layers, Layout, Combine, Target } from "lucide-react";
 import clsx from "clsx";
 
 export default function GlassTerminal({ skills }: { skills: Skill[] }) {
@@ -11,6 +11,7 @@ export default function GlassTerminal({ skills }: { skills: Skill[] }) {
     const [activeCategory, setActiveCategory] = useState<string>(skills[0]?.category || "");
 
     const getCategoryIcon = (category: string) => {
+        if (category.includes("Product")) return <Target className="w-4 h-4" />;
         if (category.includes("Process")) return <Combine className="w-4 h-4" />;
         if (category.includes("Project")) return <Layers className="w-4 h-4" />;
         if (category.includes("Data")) return <Database className="w-4 h-4" />;
