@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { Download, Linkedin, Github, ArrowDown } from "lucide-react";
+import { Linkedin, Github, ArrowDown } from "lucide-react";
 import { useReducedMotion, easings, durations } from "@/lib/motion";
 
 const StarFieldCanvas = dynamic(() => import("./StarFieldCanvas"), {
@@ -23,13 +23,13 @@ interface DigitalHeroProps {
     linkedin?: string;
     github?: string;
     location?: string;
-    resumeUrl: string;
 }
 
 const TICKER_TAGS = [
     "Process Excellence",
     "Lean Six Sigma",
     "Digital Transformation",
+    "Product Strategy",
     "AI & Automation",
     "Enterprise Systems",
     "Operational Strategy",
@@ -95,7 +95,6 @@ export default function DigitalHero({
     linkedin,
     github,
     location: _location,
-    resumeUrl,
 }: DigitalHeroProps) {
     // _title and _location intentionally unused — see strip-out request
     void _title;
@@ -269,17 +268,6 @@ export default function DigitalHero({
                         transition={{ delay: 0.7, duration: durations.slow, ease: easings.ui }}
                         className="flex flex-wrap items-center gap-3"
                     >
-                        <a
-                            href={resumeUrl}
-                            download
-                            data-cursor="download"
-                            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-blue text-deep font-bold text-sm tracking-wide hover:bg-brand-blue/90 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-page transition-all duration-300"
-                            aria-label="Download CV (PDF)"
-                        >
-                            <Download className="w-4 h-4 text-deep" aria-hidden="true" strokeWidth={2.5} />
-                            CV
-                        </a>
-
                         {linkedin && (
                             <a
                                 href={linkedin}

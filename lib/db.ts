@@ -115,7 +115,7 @@ export interface ElixiaryVenture {
 }
 
 const PERSONAL_INFO_FALLBACK = {
-    headline: "Process Excellence & Digital Transformation — engineering measurable outcomes at enterprise scale.",
+    headline: "Process Excellence, Digital Transformation & Product Strategy — engineering measurable outcomes at enterprise scale.",
     signatureMetricValue: "67%",
     signatureMetricLabel: "avg cycle-time reduction across 70+ transformation programs",
     resumeUrl: "/resume.pdf",
