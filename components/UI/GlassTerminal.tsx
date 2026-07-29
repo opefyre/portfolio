@@ -97,7 +97,10 @@ export default function GlassTerminal({ skills }: { skills: Skill[] }) {
                         counts. Categories that overflow scroll inside; shorter ones just
                         leave breathing room at the bottom. Mobile height is smaller so the
                         card doesn't dominate a small viewport. */}
-                    <div className="relative h-[320px] md:h-[380px] overflow-y-auto overflow-x-hidden custom-scrollbar pr-1">
+                    <div
+                        data-lenis-prevent
+                        className="relative h-[320px] md:h-[380px] overflow-y-auto overflow-x-hidden custom-scrollbar pr-1"
+                    >
                         {/* mode="wait" so the outgoing grid fully exits before the incoming one
                             mounts — with popLayout, the incoming grid was rendering `position:
                             static` while the outgoing sat `position: absolute`, and the incoming
