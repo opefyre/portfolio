@@ -53,6 +53,12 @@ export interface Project {
     outcomeShort: string;
     /** Optional public path or absolute URL to a project thumbnail. */
     thumbnail?: string;
+    /** Sort key. Lower renders first. Missing values sort to the end. */
+    order?: number;
+    /** Optional badge, e.g. "Live", "In Progress", "Launching Sep 2026", "Live · Private". */
+    status?: string;
+    /** Optional live/demo/repo URL shown as a "Visit" button on the card + modal. */
+    link?: string;
 }
 
 export interface Skill {
@@ -194,7 +200,8 @@ export const getProjects = cache(async () => {
         async () => {
             const snapshot = await db.collection("projects").get();
             if (snapshot.empty) throw new Error("Projects collection empty in Firestore");
-            return snapshot.docs.map(d => {
+            const rank = (o?: number) => (typeof o === "number" ? o : Number.MAX_SAFE_INTEGER);
+            const projects = snapshot.docs.map(d => {
                 const raw = d.data() as Partial<Project>;
                 const outcomeShort = raw.outcomeShort?.trim() || shortenImpactForCard(raw.impact);
                 return {
@@ -208,10 +215,14 @@ export const getProjects = cache(async () => {
                     skills: raw.skills ?? [],
                     outcomeShort,
                     thumbnail: raw.thumbnail,
+                    order: raw.order,
+                    status: raw.status,
+                    link: raw.link,
                 } as Project;
             });
+            return projects.sort((a, b) => rank(a.order) - rank(b.order));
         },
-        ["projects-v2"],
+        ["projects-v3"],
         { tags: ["content"] }
     )();
 });
