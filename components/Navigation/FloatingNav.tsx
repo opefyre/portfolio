@@ -38,6 +38,12 @@ export default function FloatingNav() {
     const reducedMotion = useReducedMotion();
     const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
     const lastScrollY = useRef(0);
+    // True while a nav-triggered scroll is animating. The scroll spy below
+    // must ignore intersection changes during this window — sections between
+    // the click origin and the destination (e.g. the pinned History section)
+    // legitimately intersect the viewport in transit and would otherwise
+    // clobber the section the user actually chose before the scroll settles.
+    const isNavigatingRef = useRef(false);
 
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
@@ -80,6 +86,10 @@ export default function FloatingNav() {
         // Visible regions ranked by topmost position above a 35%-from-top threshold
         const visibleIds = new Set<string>();
         const updateActive = () => {
+            // A nav click already committed to a destination — don't let transit
+            // sections (anything the animated scroll passes over on the way)
+            // override it before the scroll actually settles there.
+            if (isNavigatingRef.current) return;
             // Find the section nearest the top of the viewport but past the threshold
             const sorted = navItems
                 .filter((it) => visibleIds.has(it.id))
@@ -148,20 +158,32 @@ export default function FloatingNav() {
             if (!element) return;
             const absoluteTop = element.getBoundingClientRect().top + window.scrollY;
             const target = absoluteTop - 100;
+            // A nav click is an unambiguous statement of intent — don't wait for
+            // the IntersectionObserver to notice mid-animation (or risk it never
+            // firing at all if the destination section is short/pinned, or
+            // getting clobbered by a pinned section it passes through in
+            // transit). Setting it here mirrors the hash deep-link effect
+            // below, which does the same for the initial-load case. The scroll
+            // spy stays suppressed (isNavigatingRef) until the scroll actually
+            // arrives, so it can't override this with a transit section.
+            setActiveSection(id);
+            isNavigatingRef.current = true;
             // Lenis owns scroll via its own raf loop — a plain window.scrollTo()
             // gets fought and snapped back to Lenis's internal target on the
             // very next frame, so nav clicks must go through Lenis directly.
             if (window.__lenis) {
-                window.__lenis.scrollTo(target, { immediate: reducedMotion });
+                window.__lenis.scrollTo(target, {
+                    immediate: reducedMotion,
+                    onComplete: () => {
+                        isNavigatingRef.current = false;
+                    },
+                });
             } else {
                 window.scrollTo({ top: target, behavior: reducedMotion ? "auto" : "smooth" });
+                window.setTimeout(() => {
+                    isNavigatingRef.current = false;
+                }, reducedMotion ? 0 : 1000);
             }
-            // A nav click is an unambiguous statement of intent — don't wait for
-            // the IntersectionObserver to notice mid-animation (or risk it never
-            // firing at all if the destination section is short/pinned). Setting
-            // it here mirrors the hash deep-link effect below, which does the
-            // same for the initial-load case.
-            setActiveSection(id);
         },
         [reducedMotion]
     );
