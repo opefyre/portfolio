@@ -3,7 +3,8 @@ import ExpertiseSection from "@/components/Sections/ExpertiseSection";
 import ExperienceStack from "@/components/Sections/ExperienceStack";
 import ProjectGallery from "@/components/Sections/ProjectGallery";
 import FloatingNav from "@/components/Navigation/FloatingNav";
-import ElixiaryFeature from "@/components/Sections/ElixiaryFeature3D";
+// FEATURED_VENTURE (hidden) — restore this import to bring back the section.
+// import ElixiaryFeature from "@/components/Sections/ElixiaryFeature3D";
 import SectionDivider from "@/components/UI/SectionDivider";
 import SelectedWorkStage from "@/components/Sections/SelectedWorkStage";
 import SiteFooter from "@/components/Sections/SiteFooter";
@@ -13,7 +14,8 @@ import {
   getExperiences,
   getProjects,
   getSkills,
-  getElixiaryVenture,
+  // FEATURED_VENTURE (hidden) — restore alongside the section below.
+  // getElixiaryVenture,
 } from "@/lib/db";
 
 export default async function Home() {
@@ -22,13 +24,14 @@ export default async function Home() {
     experiences,
     projects,
     skills,
-    elixiaryVenture,
+    // FEATURED_VENTURE (hidden) — restore the destructured slot + Promise.all entry.
+    // elixiaryVenture,
   ] = await Promise.all([
     getPersonalInfo(),
     getExperiences(),
     getProjects(),
     getSkills(),
-    getElixiaryVenture(),
+    // getElixiaryVenture(),
   ]);
 
   return (
@@ -60,7 +63,13 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* === SLIDE: FEATURED VENTURE === */}
+      {/* === SLIDE: FEATURED VENTURE (hidden) ===
+          To restore: uncomment this section AND re-enable the ElixiaryFeature
+          import, the getElixiaryVenture data fetch, and the elixiaryVenture
+          destructure at the top of this file. Also uncomment the "Venture"
+          entry in components/Navigation/FloatingNav.tsx and in
+          components/Sections/SiteFooter.tsx (QUICK_LINKS).
+
       <section
         className="min-h-[100dvh] flex flex-col justify-between relative"
         data-snap="true"
@@ -71,6 +80,7 @@ export default async function Home() {
           <ElixiaryFeature elixiaryVenture={elixiaryVenture} />
         </div>
       </section>
+      */}
 
       {/* === SELECTED WORK — promoted ahead of Professional History so the
             portfolio leads with the work itself, not the resume history. === */}

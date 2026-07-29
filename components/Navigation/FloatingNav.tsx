@@ -9,7 +9,8 @@ import {
     LayoutDashboard,
     Wrench,
     Briefcase,
-    Rocket,
+    // FEATURED_VENTURE (hidden) — restore the Rocket icon alongside the nav item below.
+    // Rocket,
     FolderKanban,
     MessageSquare,
 } from "lucide-react";
@@ -24,7 +25,8 @@ interface NavItem {
 const navItems: NavItem[] = [
     { name: "Overview", id: "overview", icon: LayoutDashboard },
     { name: "Skills", id: "expertise", icon: Wrench },
-    { name: "Venture", id: "venture", icon: Rocket },
+    // FEATURED_VENTURE (hidden) — restore alongside the section in app/page.tsx.
+    // { name: "Venture", id: "venture", icon: Rocket },
     { name: "Projects", id: "projects", icon: FolderKanban },
     { name: "History", id: "experience", icon: Briefcase },
 ];

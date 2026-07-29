@@ -21,7 +21,8 @@ interface SiteFooterProps {
 const QUICK_LINKS = [
     { name: "Overview", id: "overview" },
     { name: "Skills", id: "expertise" },
-    { name: "Venture", id: "venture" },
+    // FEATURED_VENTURE (hidden) — restore alongside the section in app/page.tsx.
+    // { name: "Venture", id: "venture" },
     { name: "Projects", id: "projects" },
     { name: "History", id: "experience" },
 ];
