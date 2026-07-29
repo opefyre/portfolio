@@ -156,6 +156,12 @@ export default function FloatingNav() {
             } else {
                 window.scrollTo({ top: target, behavior: reducedMotion ? "auto" : "smooth" });
             }
+            // A nav click is an unambiguous statement of intent — don't wait for
+            // the IntersectionObserver to notice mid-animation (or risk it never
+            // firing at all if the destination section is short/pinned). Setting
+            // it here mirrors the hash deep-link effect below, which does the
+            // same for the initial-load case.
+            setActiveSection(id);
         },
         [reducedMotion]
     );
