@@ -1,5 +1,4 @@
 import DigitalHero from "@/components/Hero/DigitalHero";
-import SummaryStats from "@/components/Sections/SummaryStats";
 import ExpertiseSection from "@/components/Sections/ExpertiseSection";
 import ExperienceStack from "@/components/Sections/ExperienceStack";
 import ProjectGallery from "@/components/Sections/ProjectGallery";
@@ -15,8 +14,6 @@ import {
   getExperiences,
   getProjects,
   getSkills,
-  getEducation,
-  getCertifications,
   // FEATURED_VENTURE (hidden) — restore alongside the section below.
   // getElixiaryVenture,
 } from "@/lib/db";
@@ -27,8 +24,6 @@ export default async function Home() {
     experiences,
     projects,
     skills,
-    education,
-    certifications,
     // FEATURED_VENTURE (hidden) — restore the destructured slot + Promise.all entry.
     // elixiaryVenture,
   ] = await Promise.all([
@@ -36,8 +31,6 @@ export default async function Home() {
     getExperiences(),
     getProjects(),
     getSkills(),
-    getEducation(),
-    getCertifications(),
     // getElixiaryVenture(),
   ]);
 
@@ -56,42 +49,17 @@ export default async function Home() {
           linkedin={personalInfo.linkedin}
           github={personalInfo.github}
           location={personalInfo.location}
-          resumeUrl={personalInfo.resumeUrl}
         />
       </section>
 
-      {/* === SLIDE 2: DASHBOARD SUMMARY === */}
-      <section
-        className="min-h-[100dvh] flex flex-col justify-between relative"
-        data-snap="true"
-        aria-label="At-a-glance dashboard"
-      >
-        <div className="flex-1 flex items-center w-full">
-          <SummaryStats
-            experiences={experiences}
-            projects={projects}
-            certifications={certifications}
-            education={education}
-          />
-        </div>
-        <SectionDivider code="SYS.02" label="PROFESSIONAL HISTORY" />
-      </section>
+      <SectionDivider code="SYS.02" label="COMPETENCY MATRIX" />
 
-      {/* Experience — pinned horizontal scroll */}
-      <ExperienceStack experiences={experiences} />
-
-      <SectionDivider code="SYS.03" label="COMPETENCY MATRIX" />
-
-      {/* Skills + Credentials + Academic Log — tall, free-scroll */}
+      {/* Skills — tall, free-scroll */}
       <section className="relative bg-section-tinted">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-blue/10 blur-[120px] rounded-full pointer-events-none" aria-hidden="true" />
         <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(255,255,255,0.03)_1px,_transparent_1px)] bg-[size:24px_24px] pointer-events-none" aria-hidden="true" />
         <div className="relative z-10">
-          <ExpertiseSection
-            skills={skills}
-            certifications={certifications}
-            education={education}
-          />
+          <ExpertiseSection skills={skills} />
         </div>
       </section>
 
@@ -107,23 +75,32 @@ export default async function Home() {
         data-snap="true"
         aria-label="Featured venture"
       >
-        <SectionDivider code="SYS.04" label="FEATURED VENTURE" />
+        <SectionDivider code="SYS.03" label="FEATURED VENTURE" />
         <div id="venture" className="flex-1 flex items-center w-full scroll-mt-32">
           <ElixiaryFeature elixiaryVenture={elixiaryVenture} />
         </div>
       </section>
       */}
 
+      {/* === SELECTED WORK — promoted ahead of Professional History so the
+            portfolio leads with the work itself, not the resume history. === */}
+      <SelectedWorkStage totalCount={projects.length}>
+        <ProjectGallery projects={projects} />
+      </SelectedWorkStage>
+
+      <SectionDivider code="SYS.05" label="PROFESSIONAL HISTORY" />
+
       {/*
         REVEAL STACK — JS-controlled 'new page rolls over' pattern.
 
-        - Selected Work scrolls normally
-        - When SW.bottom hits viewport.bottom, SW is pinned visually via
+        - Professional History scrolls normally
+        - When its bottom hits viewport.bottom, it is pinned visually via
           a transform — it does not move further while the user scrolls
         - The fixed-positioned footer slides UP from viewport.bottom to
-          viewport.top via translateY, covering the pinned SW like a sheet
-        - The 'end of SW' is effectively the 'end of the website' — the
-          extra 100dvh of scroll only drives the footer reveal
+          viewport.top via translateY, covering the pinned section like a sheet
+        - This is now the site's closing beat: Selected Work was promoted
+          earlier in the flow, so the reveal stack finishes on Professional
+          History instead of Projects.
       */}
       <RevealStack
         footer={
@@ -131,13 +108,10 @@ export default async function Home() {
             location={personalInfo.location}
             linkedin={personalInfo.linkedin}
             github={personalInfo.github}
-            resumeUrl={personalInfo.resumeUrl}
           />
         }
       >
-        <SelectedWorkStage totalCount={projects.length}>
-          <ProjectGallery projects={projects} />
-        </SelectedWorkStage>
+        <ExperienceStack experiences={experiences} />
       </RevealStack>
     </main>
   );

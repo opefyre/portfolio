@@ -12,7 +12,6 @@ import {
     // FEATURED_VENTURE (hidden) — restore the Rocket icon alongside the nav item below.
     // Rocket,
     FolderKanban,
-    GraduationCap,
     MessageSquare,
 } from "lucide-react";
 import { useReducedMotion, easings } from "@/lib/motion";
@@ -25,12 +24,11 @@ interface NavItem {
 
 const navItems: NavItem[] = [
     { name: "Overview", id: "overview", icon: LayoutDashboard },
-    { name: "History", id: "experience", icon: Briefcase },
     { name: "Skills", id: "expertise", icon: Wrench },
-    { name: "Education", id: "credentials", icon: GraduationCap },
     // FEATURED_VENTURE (hidden) — restore alongside the section in app/page.tsx.
     // { name: "Venture", id: "venture", icon: Rocket },
     { name: "Projects", id: "projects", icon: FolderKanban },
+    { name: "History", id: "experience", icon: Briefcase },
 ];
 
 export default function FloatingNav() {

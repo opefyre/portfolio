@@ -33,7 +33,7 @@ const fontEditorial = Instrument_Serif({
 
 export const metadata: Metadata = {
   title: "Abolfazl Shirkavand | Head of Digital Innovation",
-  description: "Process Excellence & Digital Transformation. Engineering measurable outcomes at enterprise scale.",
+  description: "Process Excellence, Digital Transformation & Product Strategy. Engineering measurable outcomes at enterprise scale.",
   icons: {
     icon: "/icon.svg",
   },

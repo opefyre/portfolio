@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { Mail, Linkedin, Github, Download } from "lucide-react";
+import { Mail, Linkedin, Github } from "lucide-react";
 import { easings } from "@/lib/motion";
 
 // Client-only — listens to pointer events, owns a canvas + rAF loop.
@@ -16,17 +16,15 @@ interface SiteFooterProps {
     location?: string;
     linkedin?: string;
     github?: string;
-    resumeUrl: string;
 }
 
 const QUICK_LINKS = [
     { name: "Overview", id: "overview" },
-    { name: "History", id: "experience" },
     { name: "Skills", id: "expertise" },
-    { name: "Education", id: "credentials" },
     // FEATURED_VENTURE (hidden) — restore alongside the section in app/page.tsx.
     // { name: "Venture", id: "venture" },
     { name: "Projects", id: "projects" },
+    { name: "History", id: "experience" },
 ];
 
 /**
@@ -45,7 +43,7 @@ const INK_MUTED = "rgba(10,10,10,0.62)";
 const INK_FAINT = "rgba(10,10,10,0.42)";
 const INK_HAIR = "rgba(10,10,10,0.12)";
 
-export default function SiteFooter({ linkedin, github, resumeUrl }: SiteFooterProps) {
+export default function SiteFooter({ linkedin, github }: SiteFooterProps) {
     return (
         <footer
             aria-labelledby="footer-cta"
@@ -140,18 +138,6 @@ export default function SiteFooter({ linkedin, github, resumeUrl }: SiteFooterPr
                             <Github className="w-5 h-5" aria-hidden="true" />
                         </a>
                     )}
-
-                    <a
-                        href={resumeUrl}
-                        download
-                        data-cursor="download"
-                        aria-label="Download CV"
-                        className="group inline-flex items-center gap-2 h-12 px-5 rounded-full bg-transparent hover:bg-[rgba(10,10,10,0.06)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 transition-colors duration-200 font-bold text-sm tracking-wide"
-                        style={{ border: `1px solid ${INK_HAIR}`, color: INK, ['--tw-ring-offset-color' as string]: '#F5EFE3' }}
-                    >
-                        <Download className="w-4 h-4" aria-hidden="true" strokeWidth={2.4} />
-                        CV
-                    </a>
                 </div>
             </div>
 
