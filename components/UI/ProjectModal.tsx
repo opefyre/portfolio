@@ -4,7 +4,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Project } from "@/lib/db";
 import { useEffect, useId, useRef, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
+import Image from "next/image";
+import { ArrowUpRight, Github } from "lucide-react";
 import { easings, durations } from "@/lib/motion";
+
+function statusDotClass(status: string): string {
+    if (/^live/i.test(status)) return "bg-online";
+    if (/^launching/i.test(status)) return "bg-brand-blue";
+    if (/in progress/i.test(status)) return "bg-amber-400";
+    return "bg-tertiary";
+}
 
 // React-19-friendly "are we on the client?" — no setState-in-effect.
 // SSR returns false; client first render returns true; hydration matches.
@@ -117,10 +126,23 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.96, y: 16 }}
                             transition={{ type: "spring", duration: durations.slow, bounce: 0.2 }}
-                            className="bg-card w-full max-w-2xl max-h-[85vh] flex flex-col rounded-2xl md:rounded-3xl shadow-2xl pointer-events-auto border border-white/10 relative"
+                            className="bg-card w-full max-w-2xl max-h-[85vh] flex flex-col rounded-2xl md:rounded-3xl shadow-2xl pointer-events-auto border border-white/10 relative overflow-hidden"
                             onClick={(e) => e.stopPropagation()}
                             onWheel={(e) => e.stopPropagation()}
                         >
+                            {project.thumbnail && (
+                                <div className="relative w-full h-40 md:h-56 shrink-0 bg-page">
+                                    <Image
+                                        src={project.thumbnail}
+                                        alt=""
+                                        fill
+                                        className="object-cover"
+                                        sizes="(max-width: 768px) 100vw, 672px"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-card via-card/10 to-transparent" />
+                                </div>
+                            )}
+
                             <div
                                 className="p-5 md:p-8 overflow-y-auto flex-1 min-h-0 custom-scrollbar relative z-10 overscroll-contain"
                                 data-lenis-prevent="true"
@@ -128,14 +150,36 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                             >
                                 <div className="flex justify-between items-start mb-6 gap-4">
                                     <div className="min-w-0">
-                                        <div className="flex items-center gap-3 mb-2">
+                                        <div className="flex items-center gap-3 mb-2 flex-wrap">
                                             <span className="text-xs uppercase tracking-widest px-2 py-1 bg-brand-blue/10 text-brand-blue border border-brand-blue/20 rounded font-bold">
                                                 {project.category}
                                             </span>
+                                            {project.status && (
+                                                <span className="label-mono text-tertiary inline-flex items-center gap-1.5">
+                                                    <span aria-hidden="true" className={`inline-block w-1.5 h-1.5 rounded-full ${statusDotClass(project.status)}`} />
+                                                    {project.status}
+                                                </span>
+                                            )}
                                         </div>
                                         <h2 id={titleId} className="text-2xl md:text-4xl font-display font-bold text-primary">
                                             {project.title}
                                         </h2>
+                                        {project.link && (
+                                            <a
+                                                href={project.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                data-cursor="view"
+                                                className="mt-3 inline-flex items-center gap-1.5 label-mono text-brand-blue hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-sm"
+                                            >
+                                                {project.link.includes("github.com") ? (
+                                                    <Github className="w-3.5 h-3.5" aria-hidden="true" />
+                                                ) : (
+                                                    <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                                                )}
+                                                {project.link.includes("github.com") ? "View source" : "Visit project"}
+                                            </a>
+                                        )}
                                     </div>
                                     <button
                                         type="button"

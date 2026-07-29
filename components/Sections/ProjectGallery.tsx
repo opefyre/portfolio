@@ -1,7 +1,7 @@
 "use client";
 
 import { Project } from "@/lib/db";
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import ProjectModal from "@/components/UI/ProjectModal";
 import SectionHeader from "@/components/UI/SectionHeader";
@@ -15,6 +15,22 @@ interface ProjectCardProps {
     index: number;
     span: "wide" | "tall" | "square";
     onClick: () => void;
+}
+
+function statusDotClass(status: string): string {
+    if (/^live/i.test(status)) return "bg-online";
+    if (/^launching/i.test(status)) return "bg-brand-blue";
+    if (/in progress/i.test(status)) return "bg-amber-400";
+    return "bg-tertiary";
+}
+
+function StatusBadge({ status }: { status: string }) {
+    return (
+        <span className="label-mono text-tertiary inline-flex items-center gap-1.5 shrink-0">
+            <span aria-hidden="true" className={clsx("inline-block w-1.5 h-1.5 rounded-full", statusDotClass(status))} />
+            {status}
+        </span>
+    );
 }
 
 function ProjectCard({ project, index, span, onClick }: ProjectCardProps) {
@@ -94,15 +110,20 @@ function ProjectCard({ project, index, span, onClick }: ProjectCardProps) {
 
             {/* Content */}
             <div className="relative z-10 h-full flex flex-col justify-between p-6 md:p-8">
-                {/* Top bar — index + category */}
-                <div className="flex items-center justify-between">
-                    <span className="label-mono text-brand-blue tabular-nums">
+                {/* Top bar — index + category + status */}
+                <div className="flex items-center justify-between gap-3">
+                    <span className="label-mono text-brand-blue tabular-nums shrink-0">
                         CASE.{(index + 1).toString().padStart(2, "0")}
                     </span>
-                    <span className="label-mono text-tertiary truncate ml-2">
+                    <span className="label-mono text-tertiary truncate ml-auto text-right">
                         {project.category}
                     </span>
                 </div>
+                {project.status && (
+                    <div className="mt-1">
+                        <StatusBadge status={project.status} />
+                    </div>
+                )}
 
                 {/* Title + outcome */}
                 <div className="space-y-4 mt-auto">
@@ -197,12 +218,13 @@ function ProjectCard({ project, index, span, onClick }: ProjectCardProps) {
     );
 }
 
-const FEATURED_COUNT = 6;
+const FEATURED_COUNT = 10;
 
 export default function ProjectGallery({ projects }: { projects: Project[] }) {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [showAll, setShowAll] = useState(false);
+    const [activeCategory, setActiveCategory] = useState<string>("All");
     const lastInvokerRef = useRef<HTMLElement | null>(null);
     const archiveAnchorRef = useRef<HTMLDivElement | null>(null);
 
@@ -236,14 +258,32 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
         }
     };
 
+    // Category quick-filter — ordered by first appearance, so "Product" (the
+    // newest, order-1..10 entries) leads since it's what should feel primary.
+    const categories = useMemo(() => {
+        const counts = new Map<string, number>();
+        for (const p of projects) counts.set(p.category, (counts.get(p.category) ?? 0) + 1);
+        return [
+            { key: "All", count: projects.length },
+            ...Array.from(counts.entries()).map(([key, count]) => ({ key, count })),
+        ];
+    }, [projects]);
+
+    const selectCategory = (key: string) => {
+        setActiveCategory(key);
+        setShowAll(false);
+    };
+
+    const filtered = activeCategory === "All" ? projects : projects.filter((p) => p.category === activeCategory);
+
     // Asymmetric bento for the featured strip — cycle through wide/tall/square
     const getSpan = (i: number): ProjectCardProps["span"] => {
         const pattern: ProjectCardProps["span"][] = ["wide", "tall", "square", "square", "wide", "square"];
         return pattern[i % pattern.length];
     };
 
-    const featured = projects.slice(0, FEATURED_COUNT);
-    const additional = projects.slice(FEATURED_COUNT);
+    const featured = filtered.slice(0, FEATURED_COUNT);
+    const additional = filtered.slice(FEATURED_COUNT);
 
     return (
         <section className="relative py-24 md:py-32 overflow-hidden" id="projects">
@@ -253,8 +293,28 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
                     title="Selected work"
                     subtitle={`A curated index of ${projects.length} programs delivering measurable transformation outcomes.`}
                     centered
-                    className="mb-16"
+                    className="mb-10"
                 />
+
+                {/* Category quick-filter */}
+                <div className="flex flex-wrap items-center justify-center gap-2 mb-12 max-w-4xl mx-auto px-4 md:px-0">
+                    {categories.map(({ key, count }) => (
+                        <button
+                            key={key}
+                            type="button"
+                            onClick={() => selectCategory(key)}
+                            aria-pressed={activeCategory === key}
+                            className={clsx(
+                                "label-mono rounded-full px-3.5 py-1.5 border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue",
+                                activeCategory === key
+                                    ? "bg-brand-blue text-deep border-brand-blue"
+                                    : "text-tertiary border-border/60 hover:text-primary hover:border-brand-blue/40",
+                            )}
+                        >
+                            {key} <span className="tabular-nums opacity-70">· {count}</span>
+                        </button>
+                    ))}
+                </div>
 
                 {/* Featured bento — first N projects, asymmetric layout */}
                 <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-[minmax(220px,_auto)] gap-4 md:gap-6 max-w-7xl mx-auto px-4 md:px-0">
@@ -268,6 +328,10 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
                         />
                     ))}
                 </div>
+
+                {featured.length === 0 && (
+                    <p className="text-center text-secondary py-16">No projects in this category yet.</p>
+                )}
 
                 {/* Reveal-the-archive — compact list of remaining projects */}
                 {additional.length > 0 && (
@@ -325,6 +389,11 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
                                                     <span className="text-secondary text-base md:text-lg flex-1 min-w-0 group-hover:text-primary transition-colors break-words md:truncate">
                                                         {project.title}
                                                     </span>
+                                                    {project.status && (
+                                                        <span className="hidden md:block shrink-0">
+                                                            <StatusBadge status={project.status} />
+                                                        </span>
+                                                    )}
                                                     <ArrowUpRight className="w-4 h-4 text-secondary group-hover:text-brand-blue group-hover:translate-x-0.5 transition-all shrink-0 self-end md:self-auto -mt-5 md:mt-0" aria-hidden="true" strokeWidth={2.5} />
                                                 </div>
                                             </button>
