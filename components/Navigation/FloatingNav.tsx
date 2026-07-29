@@ -24,11 +24,11 @@ interface NavItem {
 
 const navItems: NavItem[] = [
     { name: "Overview", id: "overview", icon: LayoutDashboard },
-    { name: "Skills", id: "expertise", icon: Wrench },
     // FEATURED_VENTURE (hidden) — restore alongside the section in app/page.tsx.
     // { name: "Venture", id: "venture", icon: Rocket },
     { name: "Projects", id: "projects", icon: FolderKanban },
     { name: "History", id: "experience", icon: Briefcase },
+    { name: "Skills", id: "expertise", icon: Wrench },
 ];
 
 export default function FloatingNav() {

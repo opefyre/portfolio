@@ -52,17 +52,6 @@ export default async function Home() {
         />
       </section>
 
-      <SectionDivider code="SYS.02" label="COMPETENCY MATRIX" />
-
-      {/* Skills — tall, free-scroll */}
-      <section className="relative bg-section-tinted">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-blue/10 blur-[120px] rounded-full pointer-events-none" aria-hidden="true" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(255,255,255,0.03)_1px,_transparent_1px)] bg-[size:24px_24px] pointer-events-none" aria-hidden="true" />
-        <div className="relative z-10">
-          <ExpertiseSection skills={skills} />
-        </div>
-      </section>
-
       {/* === SLIDE: FEATURED VENTURE (hidden) ===
           To restore: uncomment this section AND re-enable the ElixiaryFeature
           import, the getElixiaryVenture data fetch, and the elixiaryVenture
@@ -82,25 +71,33 @@ export default async function Home() {
       </section>
       */}
 
-      {/* === SELECTED WORK — promoted ahead of Professional History so the
-            portfolio leads with the work itself, not the resume history. === */}
+      {/* === SELECTED WORK — leads right after the hero so the portfolio
+            opens with the work itself, not the resume history. === */}
       <SelectedWorkStage totalCount={projects.length}>
         <ProjectGallery projects={projects} />
       </SelectedWorkStage>
 
-      <SectionDivider code="SYS.05" label="PROFESSIONAL HISTORY" />
+      <SectionDivider code="SYS.03" label="PROFESSIONAL HISTORY" />
+
+      {/* Experience — pinned horizontal scroll on desktop (its own
+          ScrollTrigger pin). Kept OUT of RevealStack: nesting it inside
+          RevealStack's translate-based pin fought with GSAP's own pin
+          math and clipped the top of the pinned station content. */}
+      <ExperienceStack experiences={experiences} />
+
+      <SectionDivider code="SYS.04" label="COMPETENCY MATRIX" />
 
       {/*
         REVEAL STACK — JS-controlled 'new page rolls over' pattern.
 
-        - Professional History scrolls normally
+        - Skills & competencies scrolls normally
         - When its bottom hits viewport.bottom, it is pinned visually via
           a transform — it does not move further while the user scrolls
         - The fixed-positioned footer slides UP from viewport.bottom to
           viewport.top via translateY, covering the pinned section like a sheet
-        - This is now the site's closing beat: Selected Work was promoted
-          earlier in the flow, so the reveal stack finishes on Professional
-          History instead of Projects.
+        - This is the site's closing beat. GlassTerminal has no competing
+          scroll-jack pin of its own, so it's safe to wrap here (unlike
+          ExperienceStack above).
       */}
       <RevealStack
         footer={
@@ -111,7 +108,13 @@ export default async function Home() {
           />
         }
       >
-        <ExperienceStack experiences={experiences} />
+        <section className="relative bg-section-tinted">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-blue/10 blur-[120px] rounded-full pointer-events-none" aria-hidden="true" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(255,255,255,0.03)_1px,_transparent_1px)] bg-[size:24px_24px] pointer-events-none" aria-hidden="true" />
+          <div className="relative z-10">
+            <ExpertiseSection skills={skills} />
+          </div>
+        </section>
       </RevealStack>
     </main>
   );
