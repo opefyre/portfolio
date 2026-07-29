@@ -21,7 +21,7 @@ export default function SelectedWorkStage({ children, totalCount }: SelectedWork
             <div className="relative border-b border-brand-blue/15 bg-[linear-gradient(180deg,rgba(56,189,248,0.06),transparent)]">
                 <div className="container-wide flex items-center justify-between gap-4 py-3 text-tertiary">
                     <div className="flex items-center gap-3">
-                        <span className="label-mono bracket text-brand-blue">STAGE.04</span>
+                        <span className="label-mono bracket text-brand-blue">STAGE.02</span>
                         <span className="label-mono">SELECTED WORK · NOW PROJECTING</span>
                     </div>
                     <div className="flex items-center gap-3">
