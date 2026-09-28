@@ -123,7 +123,7 @@ export interface ElixiaryVenture {
 }
 
 const PERSONAL_INFO_FALLBACK = {
-    headline: "Process Excellence, Digital Transformation & Product Strategy — engineering measurable outcomes at enterprise scale.",
+    headline: "Founder, Vrolen | Continuous Improvement - Operational Excellence - Industrial AI - Digital Transformation",
     signatureMetricValue: "67%",
     signatureMetricLabel: "avg cycle-time reduction across 70+ transformation programs",
     resumeUrl: "/resume.pdf",
