@@ -2,125 +2,150 @@
 
 import { useLayoutEffect, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { RoundedBox, Text } from "@react-three/drei";
+import { Text } from "@react-three/drei";
 import * as THREE from "three";
 import { LAYER } from "./layers";
-import { useFragmentEntries, type FragmentEntry, type FragmentStyle } from "./fragments";
+import { useFragmentEntries, type FragmentEntry } from "./fragments";
 import { lensStore } from "./lensStore";
+import { spring, stepSpring } from "./physics";
 
-const FONTS: Record<FragmentStyle, string> = {
-  display: "/fonts/funnel-display-500.woff",
-  chip: "/fonts/funnel-display-500.woff",
-  serif: "/fonts/newsreader-300-italic.woff",
-  mono: "/fonts/fragment-mono-400.woff",
-};
-
-/** Letter-spacing (em) matching the CSS for each style. */
-const TRACKING: Record<FragmentStyle, number> = { display: -0.035, chip: -0.01, serif: -0.01, mono: 0.01 };
-
+const FONT = "/fonts/funnel-display-500.woff";
+const TRACKING = -0.04;
 const SURFACE_COLOR = "#ecebe6";
-const THROUGH_COLOR = "#f6f3ea";
-const THROUGH_ACCENT = "#d3ff3b";
+/** The old value, only ever seen through the glass. */
+const BEFORE_COLOR = "#a3a8ad";
 
-type TroikaText = { fontSize: number; maxWidth: number; sync: () => void };
+type TroikaText = THREE.Mesh & {
+  fontSize: number;
+  maxWidth: number;
+  fillOpacity: number;
+  sync: (callback?: () => void) => void;
+  textRenderInfo?: { blockBounds: [number, number, number, number]; visibleBounds?: [number, number, number, number] };
+};
 
 function setLayer(obj: THREE.Object3D | null, layer: number) {
   obj?.traverse((o) => o.layers.set(layer));
 }
 
 /**
- * One fragment: the surface text (visible normally, hidden from the glass)
- * and the through text (exists only in the transmission buffer).
+ * One fragment: the surface text (seen normally, hidden from the glass) and
+ * the text underneath it (exists only in the transmission buffer, so only the
+ * lens can show it). For figures, the text underneath is the old value,
+ * struck through: the lens shows what things were before.
  */
-function Fragment({ entry }: { entry: FragmentEntry }) {
+function Fragment({ entry, index }: { entry: FragmentEntry; index: number }) {
   const group = useRef<THREE.Group>(null!);
-  const surface = useRef<THREE.Mesh>(null!);
-  const through = useRef<THREE.Mesh>(null!);
-  const chip = useRef<THREE.Mesh>(null);
+  const surface = useRef<TroikaText>(null!);
+  const through = useRef<TroikaText>(null!);
+  const strike = useRef<THREE.Mesh>(null!);
+  const strikeMat = useRef<THREE.MeshBasicMaterial>(null!);
   const camera = useThree((s) => s.camera) as THREE.PerspectiveCamera;
   const size = useThree((s) => s.size);
-  const fontPx = useRef(32);
   const lastLayout = useRef("");
+  const appear = useRef({ s: spring(0), seenAt: -1 });
 
   useLayoutEffect(() => {
     setLayer(surface.current, LAYER.SURFACE);
     setLayer(through.current, LAYER.THROUGH);
-    if (chip.current) setLayer(chip.current, LAYER.DEFAULT);
+    setLayer(strike.current, LAYER.THROUGH);
   }, []);
 
-  useFrame(() => {
+  const placeStrike = () => {
+    const info = through.current?.textRenderInfo;
+    if (!info || entry.style !== "figure") {
+      if (strike.current) strike.current.visible = false;
+      return;
+    }
+    const [x0, y0, x1, y1] = info.visibleBounds ?? info.blockBounds;
+    const fs = through.current.fontSize;
+    strike.current.visible = true;
+    strike.current.scale.set(x1 - x0 + fs * 0.06, Math.max(fs * 0.03, 0.003), 1);
+    strike.current.position.set((x0 + x1) / 2, (y0 + y1) / 2 - fs * 0.02, 0.001);
+  };
+
+  useFrame((state, dt) => {
+    const W = size.width;
+    const H = size.height;
     const r = entry.el.getBoundingClientRect();
-    const onScreen = r.bottom > -200 && r.top < size.height + 200;
+    const onScreen = r.bottom > -200 && r.top < H + 200;
     group.current.visible = onScreen;
     if (!onScreen) return;
+
     const worldH = 2 * camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
-    const upp = worldH / size.height;
-    const x = (r.left + r.width / 2 - size.width / 2) * upp;
-    const y = -(r.top + r.height / 2 - size.height / 2) * upp;
+    const upp = worldH / H;
+
+    // Arrive once, when the fragment first comes into view (staggered).
+    const a = appear.current;
+    const t = state.clock.elapsedTime;
+    if (a.seenAt < 0 && r.top < H * 0.9 && r.bottom > 0) a.seenAt = t + index * 0.09;
+    const target = a.seenAt >= 0 && t >= a.seenAt ? 1 : 0;
+    if (lensStore.reducedMotion) a.s.x = target;
+    else stepSpring(a.s, target, dt, 70, 14);
+    if (Math.abs(a.s.x - target) > 0.001) lensStore.dirty = true;
+    const k = THREE.MathUtils.clamp(a.s.x, 0, 1.05);
+
+    const x = (r.left + r.width / 2 - W / 2) * upp;
+    const y = -(r.top + r.height / 2 - H / 2) * upp - (1 - k) * 28 * upp;
     group.current.position.set(x, y, 0);
+    surface.current.fillOpacity = Math.min(1, k);
+
+    // Re-layout the SDF text only when the DOM box or the lens size changed.
+    const lensPx = lensStore.placement.size || 300;
+    const layoutKey = `${Math.round(r.width)}x${Math.round(r.height)}@${H}/${Math.round(lensPx / 8)}`;
+    if (layoutKey !== lastLayout.current) {
+      lastLayout.current = layoutKey;
+      const fontPx = parseFloat(getComputedStyle(entry.el).fontSize) || 32;
+      const fs = fontPx * upp;
+      const s = surface.current;
+      const th = through.current;
+      s.fontSize = fs;
+      s.maxWidth = getComputedStyle(entry.el).whiteSpace === "nowrap" ? Infinity : r.width * upp * 1.04;
+      if (entry.style === "figure") {
+        // Same size as the value it replaces, unless the glass is too small for it.
+        const fit = (lensPx * 0.56) / Math.max(1, entry.through.length * 0.56);
+        th.fontSize = Math.min(fontPx, fit) * upp;
+        th.maxWidth = Infinity;
+      } else {
+        th.fontSize = lensPx * 0.098 * upp;
+        th.maxWidth = lensPx * 0.5 * upp;
+      }
+      s.sync();
+      th.sync(placeStrike);
+    }
 
     // The hidden line is ink under the surface: only what's near the glass is
     // lit enough to read, so neighbours don't crowd the lens.
     const pl = lensStore.placement;
     const rad = Math.max(1, (pl.size || 300) / 2);
     const d = Math.hypot(r.left + r.width / 2 - pl.x, r.top + r.height / 2 - pl.y);
-    const k = THREE.MathUtils.clamp((rad * 1.25 - d) / (rad * 0.75), 0, 1);
-    (through.current as unknown as { fillOpacity: number }).fillOpacity = k * k * (3 - 2 * k);
-
-    // Re-layout the SDF text only when the DOM box or the lens size changed.
-    const lensPx = lensStore.placement.size || 300;
-    const layoutKey = `${Math.round(r.width)}x${Math.round(r.height)}@${size.height}/${Math.round(lensPx / 8)}`;
-    if (layoutKey !== lastLayout.current) {
-      lastLayout.current = layoutKey;
-      fontPx.current = parseFloat(getComputedStyle(entry.el).fontSize) || 32;
-      const fs = fontPx.current * upp;
-      const s = surface.current as unknown as TroikaText;
-      const t = through.current as unknown as TroikaText;
-      s.fontSize = fs;
-      // Match the DOM: unwrapped text stays on one line, wrapped text wraps at the box.
-      s.maxWidth = getComputedStyle(entry.el).whiteSpace === "nowrap" ? Infinity : r.width * upp * 1.04;
-      // The hidden line is set to the lens, not to the surface word: it has
-      // to fit inside the glass (which magnifies ~1.3x at its centre).
-      t.fontSize = lensPx * 0.098 * upp;
-      t.maxWidth = lensPx * 0.5 * upp;
-      s.sync();
-      t.sync();
-      if (chip.current) chip.current.scale.set(r.width * upp, r.height * upp, 1);
-    }
+    const n = THREE.MathUtils.clamp((rad * 1.25 - d) / (rad * 0.75), 0, 1);
+    const vis = n * n * (3 - 2 * n) * Math.min(1, k);
+    through.current.fillOpacity = vis;
+    strikeMat.current.opacity = vis;
   });
-
-  const accent = entry.style === "mono" || entry.style === "chip";
 
   return (
     <group ref={group}>
-      {entry.style === "chip" && (
-        <RoundedBox ref={chip} args={[1, 1, 0.04]} radius={0.02} smoothness={4} position={[0, 0, -0.03]}>
-          <meshStandardMaterial color="#1b1e21" metalness={0.2} roughness={0.35} envMapIntensity={0.9} />
-        </RoundedBox>
-      )}
-      <Text
-        ref={surface}
-        font={FONTS[entry.style]}
-        color={SURFACE_COLOR}
-        anchorX="center"
-        anchorY="middle"
-        textAlign="center"
-        letterSpacing={TRACKING[entry.style]}
-        lineHeight={1}
-      >
+      <Text ref={surface as never} font={FONT} color={SURFACE_COLOR} anchorX="center" anchorY="middle" textAlign="center" letterSpacing={TRACKING} lineHeight={1}>
         {entry.surface}
       </Text>
       <Text
-        ref={through}
-        font={FONTS.serif}
-        color={accent ? THROUGH_ACCENT : THROUGH_COLOR}
+        ref={through as never}
+        font={FONT}
+        color={BEFORE_COLOR}
         anchorX="center"
         anchorY="middle"
         textAlign="center"
-        lineHeight={1.08}
+        letterSpacing={TRACKING}
+        lineHeight={1.05}
+        onSync={placeStrike}
       >
         {entry.through}
       </Text>
+      <mesh ref={strike} visible={false}>
+        <planeGeometry args={[1, 1]} />
+        <meshBasicMaterial ref={strikeMat} color={BEFORE_COLOR} transparent toneMapped={false} />
+      </mesh>
     </group>
   );
 }
@@ -129,8 +154,8 @@ export function FragmentsLayer() {
   const entries = useFragmentEntries();
   return (
     <>
-      {entries.map((e) => (
-        <Fragment key={e.key} entry={e} />
+      {entries.map((e, i) => (
+        <Fragment key={e.key} entry={e} index={i} />
       ))}
     </>
   );

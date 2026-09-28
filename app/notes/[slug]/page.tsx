@@ -46,37 +46,29 @@ export default async function NotePage({ params }: Params) {
 
   return (
     <>
-      <div className="paper">
-        <article className="note" data-nav-tone="light">
-          <header className="note-head frame">
-            <nav className="t-mono note-crumbs" aria-label="Breadcrumb">
-              <TLink href="/notes/">Notes</TLink>
-              <span aria-hidden="true">/</span>
+      <div className="paper" data-nav-tone="light">
+        <article className="note frame">
+          <header className="note-head">
+            <TLink href="/notes/" className="text-link note-back">
+              <span aria-hidden="true">←</span> Notes
+            </TLink>
+            <h1 className="note-title">{n.title}</h1>
+            <p className="note-meta">
               <time dateTime={n.date}>{formatDate(n.date)}</time>
-              <span aria-hidden="true">·</span>
               <span>{n.readingMinutes} min read</span>
-            </nav>
-            <h1 className="note-h1">{n.title}</h1>
-            <p className="note-dek">{n.summary}</p>
-          </header>
-          <div className="note-body frame">
-            <div className="prose" dangerouslySetInnerHTML={{ __html: n.html }} />
-            <p className="note-sign t-mono">
-              — {site.nickname}, {site.location.split(",")[0]}
             </p>
-          </div>
+          </header>
+          <div className="prose" dangerouslySetInnerHTML={{ __html: n.html }} />
           {next && next.slug !== n.slug && (
-            <nav className="note-next frame" aria-label="Next note">
-              <TLink href={`/notes/${next.slug}/`} className="note-next-link">
-                <span className="t-label">Next note</span>
-                <span className="note-next-title">{next.title}</span>
-              </TLink>
-            </nav>
+            <TLink href={`/notes/${next.slug}/`} className="note-next">
+              <span className="note-next-label">Next</span>
+              <span className="note-next-title">{next.title}</span>
+            </TLink>
           )}
         </article>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </div>
-      <SiteFooter index="—" />
+      <SiteFooter />
     </>
   );
 }

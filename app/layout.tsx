@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fragment_Mono, Funnel_Display, Funnel_Sans, Newsreader } from "next/font/google";
+import { Funnel_Display, Funnel_Sans } from "next/font/google";
 import { SiteShell } from "@/components/shell/SiteShell";
 import { site } from "@/content/site";
 import "./globals.css";
@@ -7,9 +7,7 @@ import "@/styles/home.css";
 import "@/styles/pages.css";
 
 const funnelDisplay = Funnel_Display({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-funnel-display", display: "swap" });
-const funnelSans = Funnel_Sans({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-funnel-sans", display: "swap" });
-const newsreader = Newsreader({ subsets: ["latin"], style: ["normal", "italic"], axes: ["opsz"], variable: "--font-newsreader", display: "swap" });
-const fragmentMono = Fragment_Mono({ subsets: ["latin"], weight: "400", variable: "--font-fragment-mono", display: "swap" });
+const funnelSans = Funnel_Sans({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-funnel-sans", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -58,9 +56,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html
       lang="en"
-      className={`${funnelDisplay.variable} ${funnelSans.variable} ${newsreader.variable} ${fragmentMono.variable}`}
+      className={`${funnelDisplay.variable} ${funnelSans.variable}`}
+      suppressHydrationWarning
       data-lens="pending"
     >
+      <head>
+        {/* Before first paint: lets CSS stage reveals without hiding anything from no-JS visitors. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.dataset.js=''" }} />
+      </head>
       <body>
         <a href="#main" className="skip-link">
           Skip to content

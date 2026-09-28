@@ -16,9 +16,9 @@ if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
  * ScrollTrigger). Native scroll semantics stay intact: the page is a normal
  * document, Lenis only interpolates the wheel.
  *
- * Lessons baked in from the previous site: never call window.scrollTo while
- * Lenis is running (it gets fought) — use `scrollToTarget` below; nested
- * scrollers opt out with `data-lenis-prevent`.
+ * Never call window.scrollTo while Lenis is running (it gets fought); use
+ * `scrollToTarget` below. Nested scrollers opt out with `data-lenis-prevent`.
+ * With reduced motion there is no smoothing at all: native scroll.
  */
 export const scrollStore: { lenis: Lenis | null } = { lenis: null };
 
@@ -35,6 +35,10 @@ export function scrollToTarget(target: number | string | HTMLElement, opts: { im
 
 export function SmoothScroll() {
   useEffect(() => {
+    // Layout settles when webfonts arrive; re-measure so nothing jumps later.
+    document.fonts?.ready.then(() => ScrollTrigger.refresh());
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const lenis = new Lenis({
       autoRaf: false,
       lerp: 0.11,

@@ -5,7 +5,7 @@ import { forwardRef, useEffect, useId, useImperativeHandle, useRef, useState, ty
 /**
  * Liquid Glass surface for the functional UI layer (nav, controls, sheets).
  *
- * Everywhere: real translucency — backdrop blur + saturation, layered
+ * Everywhere: real translucency: backdrop blur + saturation, layered
  * edge highlights, and a specular highlight that follows the pointer.
  *
  * Chromium: real refraction of what's underneath. We compute a displacement

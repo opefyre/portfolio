@@ -20,13 +20,15 @@ export type LensAnchorOptions = {
   plateHalo?: number;
   /** Lower bound for the diameter in CSS px (keeps the lens usable on phones). */
   minSize?: number;
-  /** Glass thickness — lower means less magnification (used where the lens must read text). */
+  /** Glass thickness: lower means less magnification (used where the lens must read text). */
   thickness?: number;
   /**
    * Interactive anchors let the lens follow the pointer (or a touch drag)
-   * within the anchor's bounds — used where the lens reads hidden text.
+   * within the anchor's bounds: used where the lens reads hidden text.
    */
   interactive?: boolean;
+  /** Where the lens rests inside an interactive anchor before any input, as fractions [x, y]. */
+  rest?: [number, number] | null;
   /** Tie-breaker when two anchors score similarly. */
   priority?: number;
 };
@@ -35,7 +37,7 @@ export type AnchorEntry = {
   el: HTMLElement;
   opts: Required<LensAnchorOptions>;
   near: boolean;
-  /** Last touch/tap target within an interactive anchor, in CSS px. */
+  /** Last touch/tap/focus target, in CSS px relative to the anchor's top-left (survives scrolling). */
   touch: { x: number; y: number; active: boolean };
 };
 
@@ -46,6 +48,7 @@ const DEFAULTS: Omit<Required<LensAnchorOptions>, "id"> = {
   plateHalo: 1,
   thickness: 0.95,
   minSize: 0,
+  rest: null,
   interactive: false,
   priority: 0,
 };
@@ -74,7 +77,9 @@ export function anyAnchorNear() {
 }
 
 export function useLensAnchor(ref: RefObject<HTMLElement | null>, options: LensAnchorOptions) {
-  const { id, sizeRatio, darkness, plateLines, plateHalo, thickness, minSize, interactive, priority } = options;
+  const { id, sizeRatio, darkness, plateLines, plateHalo, thickness, minSize, rest, interactive, priority } = options;
+  const restX = rest?.[0];
+  const restY = rest?.[1];
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -89,6 +94,7 @@ export function useLensAnchor(ref: RefObject<HTMLElement | null>, options: LensA
         ...(plateHalo !== undefined && { plateHalo }),
         ...(thickness !== undefined && { thickness }),
         ...(minSize !== undefined && { minSize }),
+        ...(restX !== undefined && restY !== undefined && { rest: [restX, restY] as [number, number] }),
         ...(interactive !== undefined && { interactive }),
         ...(priority !== undefined && { priority }),
       },
@@ -101,8 +107,9 @@ export function useLensAnchor(ref: RefObject<HTMLElement | null>, options: LensA
     // Touch: drag the lens with a finger inside interactive anchors.
     const onTouch = (e: PointerEvent) => {
       if (!entry.opts.interactive || e.pointerType === "mouse") return;
-      entry.touch.x = e.clientX;
-      entry.touch.y = e.clientY;
+      const r = el.getBoundingClientRect();
+      entry.touch.x = e.clientX - r.left;
+      entry.touch.y = e.clientY - r.top;
       entry.touch.active = true;
       lensStore.dirty = true;
     };
@@ -117,15 +124,16 @@ export function useLensAnchor(ref: RefObject<HTMLElement | null>, options: LensA
       if (anchors.get(id)?.el === el) anchors.delete(id);
       lensStore.dirty = true;
     };
-  }, [ref, id, sizeRatio, darkness, plateLines, plateHalo, thickness, minSize, interactive, priority]);
+  }, [ref, id, sizeRatio, darkness, plateLines, plateHalo, thickness, minSize, restX, restY, interactive, priority]);
 }
 
 /** Programmatically point the lens at a spot inside an interactive anchor (keyboard focus). */
 export function focusLensAt(id: string, x: number, y: number) {
   const a = anchors.get(id);
   if (!a) return;
-  a.touch.x = x;
-  a.touch.y = y;
+  const r = a.el.getBoundingClientRect();
+  a.touch.x = x - r.left;
+  a.touch.y = y - r.top;
   a.touch.active = true;
   lensStore.dirty = true;
 }

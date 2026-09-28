@@ -1,65 +1,57 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
-import { useReducedMotionSafe } from "@/components/shell/useReducedMotionSafe";
+import { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { LensAnchor } from "@/components/lens/LensAnchor";
+import { SplitChars } from "@/components/motion/SplitChars";
 import { hero, site } from "@/content/site";
 
-export function Hero({ first, last }: { first: string; last: string }) {
-  const ref = useRef<HTMLElement>(null);
-  const reduced = useReducedMotionSafe();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  // Typography separates in depth as the hero leaves: lines travel at
-  // slightly different rates, never more than a few percent.
-  const y1 = useTransform(scrollYProgress, [0, 1], ["0%", reduced ? "0%" : "-38%"]);
-  const y2 = useTransform(scrollYProgress, [0, 1], ["0%", reduced ? "0%" : "-18%"]);
-  const y3 = useTransform(scrollYProgress, [0, 1], ["0%", reduced ? "0%" : "-6%"]);
-  const fade = useTransform(scrollYProgress, [0, 0.75], [1, reduced ? 1 : 0.15]);
+if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
+
+/** Stable pseudo-random per index, so every letter keeps its own rate. */
+const rand = (i: number) => {
+  const x = Math.sin(i * 12.9898 + 4.1) * 43758.5453;
+  return x - Math.floor(x);
+};
+
+export function Hero() {
+  const root = useRef<HTMLElement>(null);
+
+  useLayoutEffect(() => {
+    const el = root.current;
+    if (!el) return;
+    const mm = gsap.matchMedia();
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const chars = gsap.utils.toArray<HTMLElement>(".hero-name .ch", el);
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: el, start: "top top", end: "bottom 20%", scrub: true },
+      });
+      // Leaving the hero, the name comes apart: each letter lifts at its own rate.
+      chars.forEach((c, i) => {
+        tl.to(c, { yPercent: -(40 + rand(i) * 110), rotate: (rand(i + 7) - 0.5) * 10, opacity: 0, ease: "none" }, 0);
+      });
+      tl.to(".hero-line", { y: -40, opacity: 0, ease: "none" }, 0);
+    });
+    return () => mm.revert();
+  }, []);
+
+  const [first, ...rest] = site.name.split(" ");
+  const last = rest.join(" ");
 
   return (
-    <section ref={ref} className="hero" data-nav-tone="dark" aria-labelledby="hero-name">
+    <section ref={root} className="hero" data-nav-tone="dark">
       <div className="frame hero-frame">
-        <div className="hero-copy">
-          <p className="hero-kicker t-mono">
-            <span className="hero-kicker-aka">{site.nickname}</span>
-            <span aria-hidden="true" className="hero-kicker-rule" />
-            <span>{site.role}</span>
-          </p>
-
-          <h1 id="hero-name" className="t-name hero-name">
-            <motion.span className="hero-line" style={{ y: y1, opacity: fade }}>
-              <span className="hero-line-inner">{first}</span>
-            </motion.span>{" "}
-            <motion.span className="hero-line hero-line--2" style={{ y: y2, opacity: fade }}>
-              <span className="hero-line-inner">{last}</span>
-            </motion.span>
-          </h1>
-
-          <motion.div className="hero-sub" style={{ y: y3 }}>
-            <p className="t-lead hero-statement">{hero.statement}</p>
-            <ul className="hero-disciplines t-mono" aria-label="Disciplines">
-              {hero.disciplines.map((d) => (
-                <li key={d}>{d}</li>
-              ))}
-            </ul>
-          </motion.div>
-        </div>
-
-        <div className="hero-lens-area">
-          <LensAnchor id="hero" className="hero-lens" sizeRatio={0.92} plateLines={1} plateHalo={1} priority={1} />
-          <p className="hero-fig t-mono" aria-hidden="true">
-            <span>Fig. 01</span> The Abosh Lens — real-time glass, n&nbsp;=&nbsp;1.50
-          </p>
-        </div>
-      </div>
-
-      <div className="frame hero-foot t-mono" aria-hidden="true">
-        <span>{site.location}</span>
-        <span className="hero-foot-coords">{site.coordinates}</span>
-        <span className="hero-scroll">
-          Scroll <span className="hero-scroll-line" />
-        </span>
+        <h1 className="hero-name">
+          <span className="hero-row">
+            <SplitChars text={first} />
+          </span>
+          <span className="hero-row hero-row--2">
+            <SplitChars text={last} offset={first.length} />
+          </span>
+        </h1>
+        <p className="hero-line">{hero.line}</p>
+        <LensAnchor id="hero" className="hero-lens" sizeRatio={0.9} plateLines={1} plateHalo={1} priority={1} />
       </div>
     </section>
   );

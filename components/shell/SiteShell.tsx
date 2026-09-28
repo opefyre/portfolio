@@ -58,7 +58,6 @@ export function SiteShell() {
       <LiquidNav />
       <SmoothScroll />
       <RouteChangeHandler />
-      <div className="studio-grain" aria-hidden="true" />
     </>
   );
 }

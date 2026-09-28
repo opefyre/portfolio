@@ -8,7 +8,7 @@ import { lensStore } from "./lensStore";
  * refract them. The DOM element provides layout (and the accessible text);
  * the stage mirrors it into the scene every frame.
  */
-export type FragmentStyle = "display" | "serif" | "mono" | "chip";
+export type FragmentStyle = "display" | "figure";
 
 export type FragmentEntry = {
   key: string;

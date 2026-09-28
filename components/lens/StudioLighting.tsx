@@ -7,7 +7,7 @@ import * as THREE from "three";
 /**
  * Soft-edged emissive faces for the light panels. A hard-edged Lightformer
  * reflects as a flat "sticker" shape; a diffused face reflects the way a real
- * softbox does — bright core, soft falloff.
+ * softbox does: bright core, soft falloff.
  */
 function makeSoftTexture(kind: "radial" | "strip") {
   const size = 256;
@@ -37,7 +37,7 @@ function makeSoftTexture(kind: "radial" | "strip") {
 }
 
 /**
- * Studio environment rendered once into a cube map from emissive panels —
+ * Studio environment rendered once into a cube map from emissive panels -
  * no HDR download (the site CSP only allows same-origin requests anyway).
  *
  * The composition mimics a product-photography studio: a big diffused key
@@ -52,7 +52,7 @@ export function StudioLighting({ intensity = 1 }: { intensity?: number }) {
     <Environment resolution={256} frames={1} environmentIntensity={intensity}>
       {/* Key: large diffused overhead softbox */}
       <Lightformer form="rect" map={radial} intensity={2.4} color="#ffffff" position={[-1.4, 6, 1.5]} rotation-x={Math.PI / 2} scale={[9, 6, 1]} />
-      {/* Strip light — one long specular line along the left edge */}
+      {/* Strip light: one long specular line along the left edge */}
       <Lightformer form="rect" map={strip} intensity={3.6} color="#f4f5f7" position={[-6, 1.5, 3]} rotation-y={Math.PI / 2} rotation-z={0.18} scale={[0.9, 10, 1]} />
       {/* Cool fill from the right */}
       <Lightformer form="rect" map={radial} intensity={0.7} color="#e3eaf4" position={[6, -1.2, -1.5]} rotation-y={-Math.PI / 2.4} scale={[3, 4, 1]} />

@@ -11,10 +11,10 @@ import { LAYER } from "./layers";
  * automatic render).
  *
  * Every frame:
- *  1. Transmission pass — render everything the glass should "see" into an
+ *  1. Transmission pass: render everything the glass should "see" into an
  *     off-screen buffer: DEFAULT + THROUGH layers, never SURFACE (so the lens
  *     is excluded from its own refraction, and hidden text appears only here).
- *  2. Main pass — DEFAULT + SURFACE layers to the screen.
+ *  2. Main pass: DEFAULT + SURFACE layers to the screen.
  *
  * The buffer's background is the page's base colour, so regions of the glass
  * with nothing behind them refract a colour identical to the CSS background.

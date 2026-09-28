@@ -51,7 +51,7 @@ check_cache_header() {
 }
 
 check_headers "/"
-check_headers "/work/"
+check_headers "/about/"
 check_headers "/lens/lens-still.webp"
 
 check_cache_header "/" "no-cache"

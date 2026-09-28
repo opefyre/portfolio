@@ -9,6 +9,9 @@ import { CalibrationPlate, type PlateHandle } from "./CalibrationPlate";
 import { LensRenderer, useLensBuffer } from "./LensRenderer";
 import { StudioLighting } from "./StudioLighting";
 import { FragmentsLayer } from "./FragmentsLayer";
+import { GLImagesLayer } from "./GLImagesLayer";
+import { glImagesActive } from "./glImages";
+import gsap from "gsap";
 import { anchors, anyAnchorNear, type AnchorEntry } from "./anchors";
 import { lensStore, startPointerTracking } from "./lensStore";
 import { spring, stepSpring, decay } from "./physics";
@@ -121,16 +124,22 @@ function LensRig({ children }: { children: React.ReactNode }) {
       let tx: number | null = null;
       let ty: number | null = null;
       if (next.touch.active) {
-        tx = next.touch.x;
-        ty = next.touch.y;
+        tx = r.left + next.touch.x;
+        ty = r.top + next.touch.y;
+      } else if (next.opts.rest) {
+        tx = r.left + r.width * next.opts.rest[0];
+        ty = r.top + r.height * next.opts.rest[1];
       }
       if (p.seen) {
         const px = ((p.x + 1) / 2) * W;
         const py = ((1 - p.y) / 2) * H;
         if (px >= r.left && px <= r.right && py >= r.top && py <= r.bottom) {
+          // Follow the pointer, and stay where it leaves the field.
           tx = px;
           ty = py;
-          next.touch.active = false;
+          next.touch.x = px - r.left;
+          next.touch.y = py - r.top;
+          next.touch.active = true;
         }
       }
       if (tx !== null && ty !== null) {
@@ -183,26 +192,33 @@ function LensRig({ children }: { children: React.ReactNode }) {
   );
 }
 
-/** Decides when a new frame is needed (frameloop="demand"). */
-function FrameDriver() {
-  const invalidate = useThree((s) => s.invalidate);
+/**
+ * Renders on GSAP's ticker, after Lenis has applied this frame's scroll.
+ * DOM and WebGL therefore always describe the same scroll position: no
+ * one-frame lag, no shimmer between the page and the planes behind it.
+ */
+function TickerDriver() {
+  const advance = useThree((s) => s.advance);
   useEffect(() => {
-    let raf = 0;
-    const loop = () => {
-      const near = anyAnchorNear() || lensStore.placement.visible;
-      if (near && (!lensStore.reducedMotion || lensStore.dirty)) {
-        lensStore.dirty = false;
-        invalidate();
-      }
-      raf = requestAnimationFrame(loop);
+    let clock = 0;
+    let last = 0;
+    const tick = (time: number) => {
+      const real = last ? time - last : 1 / 60;
+      last = time;
+      const needed = anyAnchorNear() || lensStore.placement.visible || glImagesActive();
+      if (!needed) return;
+      if (lensStore.reducedMotion && !lensStore.dirty) return;
+      lensStore.dirty = false;
+      clock += Math.min(Math.max(real, 0), 1 / 30);
+      advance(clock);
     };
-    raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
-  }, [invalidate]);
+    gsap.ticker.add(tick);
+    return () => gsap.ticker.remove(tick);
+  }, [advance]);
   return null;
 }
 
-function Scene({ quality }: { quality: LensQuality }) {
+function Scene({ quality, images }: { quality: LensQuality; images: boolean }) {
   const buffer = useLensBuffer(quality === "high" ? 0.8 : 0.6);
   return (
     <>
@@ -212,8 +228,9 @@ function Scene({ quality }: { quality: LensQuality }) {
         <AboshLens buffer={buffer.texture} quality={quality} />
       </LensRig>
       <FragmentsLayer />
+      {images && <GLImagesLayer />}
       <LensRenderer buffer={buffer} background={BG} onAfterRender={process.env.NODE_ENV === "production" ? undefined : devCaptureAfterRender} />
-      <FrameDriver />
+      <TickerDriver />
     </>
   );
 }
@@ -228,6 +245,9 @@ function detectQuality(): LensQuality {
 
 export default function LensStage({ onUnavailable }: { onUnavailable: () => void }) {
   const [quality] = useState(detectQuality);
+  // Touch scrolling is native and asynchronous: planes can't stay glued to it,
+  // so on coarse pointers the images stay in the DOM and only the lens is WebGL.
+  const [images] = useState(() => typeof window !== "undefined" && !window.matchMedia("(pointer: coarse)").matches);
   const maxDpr = quality === "high" ? 1.75 : 1.5;
   const [dpr, setDpr] = useState(Math.min(typeof window !== "undefined" ? window.devicePixelRatio : 1, maxDpr));
   const lostRef = useRef(false);
@@ -243,7 +263,15 @@ export default function LensStage({ onUnavailable }: { onUnavailable: () => void
     };
     apply();
     mq.addEventListener("change", apply);
-    return () => mq.removeEventListener("change", apply);
+    // Native scroll (reduced motion, touch) must also wake the renderer.
+    const onScroll = () => {
+      lensStore.dirty = true;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      mq.removeEventListener("change", apply);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   const gl = useMemo(
@@ -255,7 +283,7 @@ export default function LensStage({ onUnavailable }: { onUnavailable: () => void
     <div className="lens-stage" aria-hidden="true">
       <Canvas
         flat
-        frameloop="demand"
+        frameloop="never"
         dpr={dpr}
         gl={gl}
         camera={{ fov: 30, position: [0, 0, 8], near: 0.1, far: 50 }}
@@ -274,7 +302,7 @@ export default function LensStage({ onUnavailable }: { onUnavailable: () => void
           onDecline={() => setDpr((d) => Math.max(1, d - 0.25))}
           onIncline={() => setDpr((d) => Math.min(maxDpr, d + 0.25))}
         />
-        <Scene quality={quality} />
+        <Scene quality={quality} images={images} />
       </Canvas>
     </div>
   );

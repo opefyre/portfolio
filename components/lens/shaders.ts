@@ -5,7 +5,7 @@
  * direction by `lensRadius(n)`: a fixed, seeded asymmetry (the "pebble")
  * plus a slow living deformation plus a pointer-velocity bulge. Normals are
  * rebuilt from two neighbouring samples on the deformed surface so the
- * refraction and reflections follow the real, deformed shape — not the
+ * refraction and reflections follow the real, deformed shape: not the
  * original sphere.
  */
 
@@ -99,7 +99,7 @@ vec3 lensSurface(vec3 n) {
 }
 `;
 
-/** Replaces `#include <beginnormal_vertex>` — computes deformed position AND its normal. */
+/** Replaces `#include <beginnormal_vertex>`: computes deformed position AND its normal. */
 export const lensBeginNormal = /* glsl */ `
 vec3 lnsDir = normalize(position);
 vec3 lnsRef = abs(lnsDir.y) < 0.98 ? vec3(0.0, 1.0, 0.0) : vec3(1.0, 0.0, 0.0);

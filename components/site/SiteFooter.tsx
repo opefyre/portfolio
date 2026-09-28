@@ -1,52 +1,39 @@
 import { LensAnchor } from "@/components/lens/LensAnchor";
-import { TLink } from "@/components/shell/transitions";
 import { closing, site } from "@/content/site";
 
-/** Closing statement + links, shared by every page. The lens returns small and dark. */
-export function SiteFooter({ index = "08" }: { index?: string }) {
+/** Closing statement and contact, shared by every page. The lens returns small and dark. */
+export function SiteFooter() {
   return (
-    <footer className="closing" data-nav-tone="dark" aria-labelledby="closing-line">
+    <footer className="closing" data-nav-tone="dark">
       <div className="frame">
-        <p className="section-index">
-          <span>{index}</span>
-        </p>
-        <div className="closing-body">
-          <p id="closing-line" className="closing-line">
-            <span>{closing.lines[0]}</span>
-            <span className="closing-line-2">{closing.lines[1]}</span>
+        <div className="closing-top">
+          <p className="closing-line">
+            <span>{closing[0]}</span>
+            <span>{closing[1]}</span>
           </p>
           <LensAnchor id="closing" className="closing-lens" sizeRatio={0.8} darkness={0.9} plateLines={0} plateHalo={0.35} />
         </div>
-
-        <nav className="closing-links" aria-label="Footer">
-          <ul>
+        <div className="closing-contact">
+          <a href={`mailto:${site.email}`} className="closing-email">
+            {site.email}
+          </a>
+          <ul className="closing-links">
             <li>
-              <TLink href="/work/" className="underline-draw">Work</TLink>
-            </li>
-            <li>
-              <TLink href="/notes/" className="underline-draw">Notes</TLink>
-            </li>
-            <li>
-              <TLink href="/about/" className="underline-draw">About</TLink>
-            </li>
-            <li>
-              <a href={site.linkedin} className="underline-draw" target="_blank" rel="noopener noreferrer">
-                LinkedIn
+              <a href={site.linkedin} target="_blank" rel="noopener noreferrer">
+                LinkedIn <span aria-hidden="true">↗</span>
               </a>
             </li>
             <li>
-              <a href={`mailto:${site.email}`} className="underline-draw">
-                Email
+              <a href={site.github} target="_blank" rel="noopener noreferrer">
+                GitHub <span aria-hidden="true">↗</span>
               </a>
             </li>
           </ul>
-        </nav>
-
-        <div className="site-foot t-mono">
-          <span>© 2026 {site.name}</span>
-          <span>abosh.io</span>
-          <span>{site.location}</span>
         </div>
+        <p className="site-foot">
+          <span>© 2026 {site.name}</span>
+          <span>{site.location}</span>
+        </p>
       </div>
     </footer>
   );

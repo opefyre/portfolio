@@ -7,8 +7,8 @@ import { LAYER } from "./layers";
 /**
  * An engraved optical calibration plate that sits behind the lens.
  *
- * It is deliberately almost invisible on its own — fine graphite lines on a
- * graphite halo — and only reads clearly where the glass bends and magnifies
+ * It is deliberately almost invisible on its own: fine graphite lines on a
+ * graphite halo: and only reads clearly where the glass bends and magnifies
  * it. Straight lines curving through the lens is the honest proof that the
  * refraction is real.
  *
@@ -54,7 +54,7 @@ void main() {
   float halo = pow(1.0 - smoothstep(0.0, 0.95, r), 2.2);
   vec3 col = mix(uBase, uHalo, halo * uHaloStrength);
 
-  // Studio strip light behind the object — a soft vertical band, slightly
+  // Studio strip light behind the object: a soft vertical band, slightly
   // off-centre. Seen directly it's a quiet glow; through the glass it bends
   // into a bright curved highlight, the way glass is lit in product photos.
   float strip = exp(-pow((p.x - 0.55) / 0.42, 2.0)) * (1.0 - smoothstep(0.1, 0.9, abs(q.y)));
@@ -73,10 +73,13 @@ void main() {
   float engrave = lines * uLineStrength * (0.15 + 0.85 * halo);
   col = mix(col, uLine, engrave);
 
-  // Fade the whole plate into the page background.
+  // Fade the whole plate into the page background. When neither the engraving
+  // nor the halo is wanted (over screenshots), the plate disappears entirely,
+  // so the glass refracts what's really behind it.
   float alpha = 1.0 - smoothstep(0.35, 1.0, r);
+  alpha *= clamp(max(uLineStrength * 2.5, uHaloStrength * 1.25), 0.0, 1.0);
 
-  // Grain / dither — kills banding in the dark gradient.
+  // Grain / dither: kills banding in the dark gradient.
   col += (hash(gl_FragCoord.xy) - 0.5) / 255.0;
 
   gl_FragColor = vec4(col, alpha);

@@ -4,41 +4,45 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useLayoutEffect, type ComponentProps, type MouseEvent } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { scrollStore } from "./SmoothScroll";
+import { glNav } from "@/components/lens/glImages";
+import { scrollStore, scrollToTarget } from "./SmoothScroll";
 
 /**
- * View Transition navigation.
+ * Page transitions.
  *
- * Clicking a project should feel like opening the same object: elements that
- * share a `view-transition-name` on both pages (e.g. `work-vrolen`) morph
- * into each other while the rest of the page recedes. Falls back to a normal
- * navigation where the API is missing or motion is reduced.
+ * The DOM content steps back and fades while the WebGL scene stays alive:
+ * the lens springs to the next page's anchor, and the image you clicked
+ * (`keep`) flies from its box into the next page's hero. Everything else
+ * dissolves. With reduced motion, navigation is instant.
  */
-const pending: { resolve: (() => void) | null } = { resolve: null };
+const LEAVE_MS = 300;
 
-function canTransition() {
-  if (typeof document === "undefined") return false;
-  if (!("startViewTransition" in document)) return false;
-  return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
+const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/** Mounted once in the root layout: completes transitions & resets scroll on route change. */
+/** Mounted once in the shell: finishes transitions and resets scroll on route change. */
 export function RouteChangeHandler() {
   const pathname = usePathname();
   useLayoutEffect(() => {
+    const root = document.documentElement;
     const hash = window.location.hash;
     const target = hash ? document.querySelector(hash) : null;
-    if (target instanceof HTMLElement) {
-      scrollStore.lenis?.scrollTo(target, { immediate: true, force: true, offset: -88 });
-    } else {
-      window.scrollTo(0, 0);
-      scrollStore.lenis?.scrollTo(0, { immediate: true, force: true });
-    }
-    pending.resolve?.();
-    pending.resolve = null;
-    // Layout changed under ScrollTrigger — recompute after paint.
-    const id = requestAnimationFrame(() => ScrollTrigger.refresh());
-    return () => cancelAnimationFrame(id);
+    if (target instanceof HTMLElement) scrollToTarget(target, { immediate: true, offset: -24 });
+    else if (scrollStore.lenis) scrollStore.lenis.scrollTo(0, { immediate: true, force: true });
+    else window.scrollTo(0, 0);
+
+    const arriving = root.classList.contains("is-leaving");
+    root.classList.remove("is-leaving");
+    glNav.leaving = false;
+    if (arriving) root.classList.add("is-entering");
+    const done = window.setTimeout(() => {
+      root.classList.remove("is-entering");
+      glNav.keep = null;
+    }, 1100);
+    const raf = requestAnimationFrame(() => ScrollTrigger.refresh());
+    return () => {
+      cancelAnimationFrame(raf);
+      window.clearTimeout(done);
+    };
   }, [pathname]);
   return null;
 }
@@ -47,40 +51,39 @@ export function useTransitionNavigate() {
   const router = useRouter();
   const pathname = usePathname();
   return useCallback(
-    (href: string) => {
+    (href: string, keep?: string) => {
       const url = new URL(href, window.location.href);
-      const samePath = url.pathname.replace(/\/$/, "") === pathname.replace(/\/$/, "");
-      if (samePath || !canTransition()) {
-        router.push(href);
+      if (url.pathname.replace(/\/$/, "") === pathname.replace(/\/$/, "")) {
+        scrollToTarget(url.hash ? url.hash : 0, { offset: -24 });
         return;
       }
-      document.startViewTransition(
-        () =>
-          new Promise<void>((resolve) => {
-            pending.resolve = resolve;
-            router.push(href);
-            // Safety net: never leave the page frozen if the route change stalls.
-            setTimeout(resolve, 1800);
-          }),
-      );
+      if (reduced()) {
+        router.push(href, { scroll: false });
+        return;
+      }
+      glNav.keep = keep ?? null;
+      glNav.leaving = true;
+      document.documentElement.classList.add("is-leaving");
+      window.setTimeout(() => router.push(href, { scroll: false }), LEAVE_MS);
     },
     [router, pathname],
   );
 }
 
-/** next/link with a View Transition. Modifier-clicks behave like a normal link. */
-export function TLink({ href, onClick, ...props }: ComponentProps<typeof Link> & { href: string }) {
+/** next/link with a page transition. `keep` names the WebGL image that should fly to the next page. */
+export function TLink({ href, onClick, keep, ...props }: ComponentProps<typeof Link> & { href: string; keep?: string }) {
   const navigate = useTransitionNavigate();
   return (
     <Link
       href={href}
+      scroll={false}
       {...props}
       onClick={(e: MouseEvent<HTMLAnchorElement>) => {
         onClick?.(e);
         if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
         if (href.startsWith("http") || href.startsWith("mailto:")) return;
         e.preventDefault();
-        navigate(href);
+        navigate(href, keep);
       }}
     />
   );
