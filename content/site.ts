@@ -165,7 +165,7 @@ export const works: Work[] = [
     slug: "chanshambe",
     name: "Chanshambe",
     line: "One private app for a family's calendar, chores, meals, bills and whereabouts.",
-    status: "In progress",
+    status: "Built, pre-launch",
     image: { src: "/work/chanshambe/overview.webp", alt: "Chanshambe overview: today's three priorities, chores, events, shopping and bills", width: 2400, height: 1500 },
     gallery: [
       { src: "/work/chanshambe/map.webp", alt: "Chanshambe family map with saved places and safe zones", width: 2400, height: 1500 },
@@ -174,7 +174,8 @@ export const works: Work[] = [
       { src: "/work/chanshambe/approvals.webp", alt: "Chanshambe approvals: an assistant's plan waiting for a person to approve it", width: 2400, height: 1500 },
     ],
     stats: [
-      { value: "95", label: "screens" },
+      { value: "4,061", label: "tests, all passing" },
+      { value: "96", label: "routes" },
       { value: "2", label: "languages, English and Persian, right to left" },
     ],
     body: [
