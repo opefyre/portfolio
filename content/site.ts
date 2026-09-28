@@ -331,16 +331,23 @@ export const programs: { headline: { value: string; label: string }; items: Prog
       years: "2016 to 2020",
       role: "Operations improvement",
       line: "World Class Manufacturing on live production lines: OEE, MTBF, changeovers and quality defects.",
-      hero: { value: "60%", label: "less time preparing production reports" },
-      stats: [{ value: "10+", label: "line improvement projects" }],
+      hero: { value: "~75%", before: "~60%", label: "OEE on the lines I worked on" },
+      stats: [
+        { value: "~45 min", label: "changeover time, down from ~90 min" },
+        { value: "60%", label: "less time preparing production reports" },
+        { value: "10+", label: "line improvement projects" },
+      ],
     },
     {
       company: "Smart Factory Planning",
       years: "2024 to now",
       role: "AI product team lead",
       line: "Product lead for manufacturing software sold to industrial customers: planning, live monitoring, skills and MRP.",
-      hero: { value: "4", label: "product modules taken from discovery to launch" },
-      stats: [],
+      hero: { value: "Live", before: "Next day", label: "OEE and downtime, seen as they happen" },
+      stats: [
+        { value: "6+", label: "industrial customers on the modules" },
+        { value: "4", label: "product modules taken from discovery to launch" },
+      ],
     },
   ],
 };
