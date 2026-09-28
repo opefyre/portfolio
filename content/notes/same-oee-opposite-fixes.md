@@ -83,11 +83,11 @@ That third question is where OEE and flow meet, and it's the subject of my note 
 
 ## Where software can help
 
-This is the logic I'm building into [Vrolen](/work/vrolen/): connect the score to the events underneath it, check whether the loss sits at the constraint, and test a countermeasure on a model of the line before anyone changes the real one.
+This is the logic I'm building into [Vrolen](https://vrolen.com) ([more about it here](/work/vrolen/)): connect the score to the events underneath it, check whether the loss sits at the constraint, and test a countermeasure on a model of the line before anyone changes the real one.
 
 ::image /work/vrolen/what-if.webp | Vrolen's guided what-if comparing cautious, balanced and ambitious options | Testing a countermeasure in Vrolen before touching the line. Cautious, balanced and ambitious options, side by side.
 
-The tool is the easy part, though. The habit that matters is asking "which minutes?" every time someone quotes a percentage.
+The tool is the easy part, though. The habit that matters is asking "which minutes?" every time someone quotes a percentage. If you want to try the translation on your own line, the free [OEE calculator](https://vrolen.com/tools/oee-calculator/) shows the minutes behind each factor.
 
 ## Sources
 

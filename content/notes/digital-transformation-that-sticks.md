@@ -61,6 +61,15 @@ How far up the ladder a decision goes depends on four things:
 
 I'd keep a person in the loop wherever safety, product quality, compliance, customer commitments or big production changes are involved. Everything else can climb, one step at a time, as the evidence builds.
 
+I apply the same ladder to what I build:
+
+| Product | Where it sits | Why |
+| --- | --- | --- |
+| [Vrolen](/work/vrolen/) | Recommend | It tests countermeasures and suggests one; a person approves any change to the line |
+| [Foreviq](/work/foreviq/) | Recommend | The assistant can propose a new forecast but can't publish one |
+| [Chanshambe](/work/chanshambe/) | Recommend | The family assistant drafts plans; nothing happens until someone approves |
+| [Content engine](/work/content-engine/) | Orchestrate | It writes, renders and schedules posts, which mostly wait as drafts for my approval |
+
 ## If you're starting a transformation program
 
 - Pick three processes that repeat every week and touch at least two systems.

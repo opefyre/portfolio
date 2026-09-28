@@ -72,13 +72,17 @@ What worked for us at BAT was treating readiness as a gate every launch had to p
 
 Put simply: fewer things in flight, each one moving. That's Little's Law applied to a project portfolio.
 
+If you'd rather feel this than read it, I built a free browser game about exactly this: [Cargo & Consequence](https://playcargo.vrolen.com). You run a small company's supply chain one shift at a time, and the cheap supplier you pick on day one comes back as returns and delays weeks later. It's used in classrooms, and it's a surprisingly honest way to show a team why "just start more" backfires. More about it [here](/work/cargo-and-consequence/).
+
 ## A few questions for your own operation
 
 1. What decides when work is released: a due date, material availability, a WIP limit or the constraint's capacity?
 2. Do you know your takt time, and do your teams see the gap in units rather than percentages?
 3. If demand went up 10% tomorrow, would you release more work, or protect flow at the constraint?
 
-If you'd like to play with the numbers, the free [takt time calculator](https://vrolen.com/tools/takt-time-calculator/) on the Vrolen site runs entirely in your browser.
+Release decisions start with a demand number, and that number is often the weakest link. It's why I'm also building [Foreviq](/work/foreviq/), which forecasts demand per customer and product and nets open orders against it, so the same demand isn't counted twice.
+
+If you'd like to play with the numbers, the free [takt time calculator](https://vrolen.com/tools/takt-time-calculator/) on the [Vrolen](https://vrolen.com) site runs entirely in your browser. Testing release and scheduling rules on a model of the line, before changing the real one, is what [Vrolen](/work/vrolen/) is for.
 
 ## Sources
 
