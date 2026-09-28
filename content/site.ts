@@ -287,13 +287,61 @@ export const works: Work[] = [
   },
 ];
 
-/** Career results. The lens shows the "before". */
-export const results = {
+export type Program = {
+  company: string;
+  years: string;
+  role: string;
+  /** What the program changed, in one line. */
+  line: string;
+  /** The headline result. With `before`, the lens reveals the old value. */
+  hero: { value: string; before?: string; label: string };
+  stats: { value: string; label: string }[];
+};
+
+/** Transformation programs inside companies. Numbers only, no screenshots. */
+export const programs: { headline: { value: string; label: string }; items: Program[] } = {
   headline: { value: "67%", label: "average cycle-time reduction across 70+ transformation programs" },
-  pairs: [
-    { after: "2 months", before: "5 months", label: "to launch a new product at British American Tobacco" },
-    { after: "< 1 hour", before: "4 days", label: "to calculate payroll, after a custom Odoo module" },
-    { after: "300+ apps", before: "Shadow IT", label: "under access governance with Lumos" },
+  items: [
+    {
+      company: "Snoonu",
+      years: "2023 to 2026",
+      role: "Head of Digital Innovation",
+      line: "Automated the back office across every department: payroll, expenses, access, onboarding and IT, with a team of 12+.",
+      hero: { value: "< 1 hour", before: "4 days", label: "to calculate payroll" },
+      stats: [
+        { value: "50+", label: "automation and process projects" },
+        { value: "300+", label: "apps brought under access governance" },
+        { value: "70%", label: "faster expense reimbursement" },
+      ],
+    },
+    {
+      company: "British American Tobacco",
+      years: "2020 to 2023",
+      role: "Supply chain, new product introduction",
+      line: "Rebuilt how new products reach the market: readiness gates, supplier sourcing and MRP planning across nine lines.",
+      hero: { value: "2 months", before: "5 months", label: "launch lead time" },
+      stats: [
+        { value: "12%", label: "average procurement saving" },
+        { value: "40+", label: "SKUs planned across 9 lines and 5 warehouses" },
+        { value: "70%", label: "less manual launch reporting" },
+      ],
+    },
+    {
+      company: "Unilever",
+      years: "2016 to 2020",
+      role: "Operations improvement",
+      line: "World Class Manufacturing on live production lines: OEE, MTBF, changeovers and quality defects.",
+      hero: { value: "60%", label: "less time preparing production reports" },
+      stats: [{ value: "10+", label: "line improvement projects" }],
+    },
+    {
+      company: "Smart Factory Planning",
+      years: "2024 to now",
+      role: "AI product team lead",
+      line: "Product lead for manufacturing software sold to industrial customers: planning, live monitoring, skills and MRP.",
+      hero: { value: "4", label: "product modules taken from discovery to launch" },
+      stats: [],
+    },
   ],
 };
 

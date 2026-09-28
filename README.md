@@ -9,7 +9,7 @@ object travels through the site and refracts what is actually in the scene behin
 | --- | --- |
 | Hero | Sits large beside the name, over an engraved plate. It reacts to pointer position and velocity and to scroll, and deforms slowly while idle. |
 | Work | Rides the corner of each featured screenshot and refracts it. The screenshots are WebGL planes, not DOM images. Below them, an index of more work: hovering a row brings its screenshot up as a WebGL card that trails the cursor. |
-| Results | Shows the "before": move it over "2 months" and the glass shows "5 months", struck through. Pointer, touch and keyboard focus all move it. |
+| Programs | Transformation programs at Snoonu, BAT, Unilever and Smart Factory Planning, in numbers only. Over a headline figure the glass shows the "before": "2 months" reveals "5 months", struck through. Pointer, touch and keyboard focus all move it. |
 | Case studies, About | Sits on the hero image and refracts it. |
 | Footer | Returns small and dark. |
 
@@ -75,7 +75,7 @@ npm run verify:headers # security and cache headers on the live site
 
 | What | Where |
 | --- | --- |
-| Hero line, all works (copy, stats, screenshots; `featured: true` for a full homepage block, otherwise the hover index), results, About text, closing line | `content/site.ts` |
+| Hero line, all works (copy, stats, screenshots; `featured: true` for a full homepage block, otherwise the hover index), programs (numbers only), About text, closing line | `content/site.ts` |
 | Notes | `content/notes/*.md` (frontmatter: `title`, `date`, `summary`, `status`) |
 | Career list on About | Firestore `experiences` collection |
 
@@ -97,11 +97,11 @@ components/lens/       the WebGL scene: one persistent canvas for the whole site
   AboshLens.tsx        deformed icosahedron + MeshTransmissionMaterial, GPU noise deformation
   LensRenderer.tsx     custom transmission pass (buffer: scene + hidden layer, then screen)
   GLImagesLayer.tsx    screenshot planes: reveal, scroll bend, pointer press, parallax, page-to-page flight
-  FragmentsLayer.tsx   WebGL text for the results; the "before" exists only inside the glass
+  FragmentsLayer.tsx   WebGL text for the program figures; the "before" exists only inside the glass
   anchors.ts           DOM anchors telling the one lens where to be, how big, how thick, how dark
 components/media/      GLImage: DOM <img> that hands over to a WebGL plane
 components/motion/     SplitChars (letter choreography), CountUp (real figures)
-components/home/       Hero, Works, WorksIndex, Results, HomeNotes
+components/home/       Hero, Works, WorksIndex, Programs, HomeNotes
 components/shell/      Lenis + GSAP ticker, page transitions, hydration-safe reduced motion
 ```
 
