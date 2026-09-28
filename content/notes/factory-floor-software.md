@@ -1,6 +1,6 @@
 ---
 title: Three factory habits I use in software
-date: 2026-09-28
+date: 2026-09-14
 summary: Standard work, inspection at the station, and readiness before launch.
 status: draft
 ---

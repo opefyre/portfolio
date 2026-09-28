@@ -20,6 +20,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: n.title,
     description: n.summary,
+    keywords: n.keywords,
     alternates: { canonical: `/notes/${slug}/` },
     openGraph: { title: n.title, description: n.summary, type: "article", publishedTime: n.date, authors: [site.name], url: `/notes/${slug}/`, images: [ogImage] },
     twitter: { card: "summary_large_image", title: n.title, description: n.summary, images: [ogImage] },
@@ -40,7 +41,9 @@ export default async function NotePage({ params }: Params) {
     headline: n.title,
     description: n.summary,
     datePublished: n.date,
-    author: { "@type": "Person", name: site.name, url: site.url },
+    keywords: n.keywords.join(", "),
+    image: `${site.url}${ogImage.url}`,
+    author: { "@type": "Person", name: site.name, url: site.url, jobTitle: site.role, knowsAbout: site.expertise },
     mainEntityOfPage: `${site.url}/notes/${n.slug}/`,
   };
 
@@ -59,6 +62,22 @@ export default async function NotePage({ params }: Params) {
             </p>
           </header>
           <div className="prose" dangerouslySetInnerHTML={{ __html: n.html }} />
+          <aside className="note-cta" aria-label="Work together">
+            <p className="note-cta-title">Working on something like this?</p>
+            <p className="note-cta-text">
+              I work with operations and transformation teams on continuous improvement, operational excellence, supply
+              chains and industrial AI. If this sounds like your line, your program or your problem, I&rsquo;d be glad to
+              compare notes.
+            </p>
+            <p className="note-cta-links">
+              <a href={`mailto:${site.email}`} className="text-link">
+                {site.email}
+              </a>
+              <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="text-link">
+                LinkedIn <span aria-hidden="true">↗</span>
+              </a>
+            </p>
+          </aside>
           {next && next.slug !== n.slug && (
             <TLink href={`/notes/${next.slug}/`} className="note-next">
               <span className="note-next-label">Next</span>

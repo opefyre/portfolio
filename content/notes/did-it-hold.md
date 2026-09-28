@@ -1,6 +1,6 @@
 ---
 title: Did the improvement hold?
-date: 2026-09-28
+date: 2026-09-21
 summary: Most improvement work stops when the fix is agreed. The useful question comes weeks later.
 status: draft
 ---

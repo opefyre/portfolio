@@ -6,7 +6,8 @@ import { formatDate, getNotes } from "@/lib/notes";
 
 export const metadata: Metadata = {
   title: "Notes",
-  description: "Notes by Abolfazl Shirkavand (Abosh) on improvement, operations and building software.",
+  description:
+    "Notes by Abolfazl Shirkavand on operational excellence, continuous improvement, OEE, supply chains, digital transformation and AI in operations.",
   alternates: { canonical: "/notes/" },
   openGraph: { title: "Notes by Abolfazl Shirkavand", url: "/notes/", images: [ogImage] },
   twitter: { card: "summary_large_image", title: "Notes by Abolfazl Shirkavand", images: [ogImage] },
@@ -21,6 +22,10 @@ export default function NotesPage() {
           <h1 id="notes-title" className="notes-title">
             Notes
           </h1>
+          <p className="notes-intro">
+            On operational excellence, continuous improvement, supply chains and digital transformation. Written from the
+            floor, with the numbers and sources.
+          </p>
           <ol className="note-rows note-rows--page">
             {notes.map((n) => (
               <li key={n.slug}>

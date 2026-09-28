@@ -326,7 +326,16 @@
 }
 .prose ul,
 .prose ol {
-  padding-left: 1.2em;
+  padding-left: 1.3em;
+}
+.prose ul {
+  list-style: disc;
+}
+.prose ol {
+  list-style: decimal;
+}
+.prose li::marker {
+  color: var(--fg-3);
 }
 .prose li + li {
   margin-top: 0.5em;
@@ -335,6 +344,91 @@
   margin-inline: 0;
   padding-left: 1em;
   border-left: 2px solid var(--color-ink);
+}
+.prose table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 15px;
+  line-height: 1.45;
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+}
+.prose th,
+.prose td {
+  padding: 10px 14px 10px 0;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+.prose th {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--color-ink);
+  border-bottom-color: var(--rule-strong);
+  white-space: nowrap;
+}
+.prose td strong {
+  font-weight: 600;
+}
+.note-figure {
+  margin: 2.2em 0;
+}
+.note-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.note-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+.note-figure figcaption {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--fg-3);
+}
+.prose h2 + .note-figure {
+  margin-top: 1.2em;
+}
+.note-cta {
+  margin-top: clamp(48px, 7vh, 72px);
+  padding: 28px;
+  border-radius: 12px;
+  background: rgba(15, 16, 17, 0.05);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.note-cta-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(22px, 2vw, 28px);
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+.note-cta-text {
+  max-width: 56ch;
+  margin-top: 10px;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--fg-2);
+}
+.note-cta-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  margin-top: 18px;
+}
+.notes-intro {
+  max-width: 52ch;
+  margin: -20px 0 clamp(40px, 6vh, 64px);
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.45;
+  color: var(--fg-2);
 }
 .note-next {
   display: flex;
