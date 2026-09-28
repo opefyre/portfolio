@@ -82,6 +82,8 @@ export interface Education {
 
 export interface PersonalInfoPublic {
     name: string;
+    /** Short nickname shown under the hero name (e.g. "Abosh"). */
+    nickname?: string;
     title: string;
     location: string;
     linkedin: string;
@@ -153,6 +155,7 @@ export const getPersonalInfo = cache(async () => {
 
             return {
                 name: raw.name ?? "",
+                nickname: raw.nickname?.trim() || undefined,
                 title: raw.title ?? "",
                 location: raw.location ?? "",
                 linkedin: raw.linkedin ?? "",
@@ -165,7 +168,7 @@ export const getPersonalInfo = cache(async () => {
                 resumeUrl: raw.resumeUrl?.trim() || PERSONAL_INFO_FALLBACK.resumeUrl,
             };
         },
-        ["personal-info-v2"],
+        ["personal-info-v3"],
         { tags: ["meta"] }
     )();
 });

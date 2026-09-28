@@ -16,6 +16,7 @@ const PhysicsAvatar = dynamic(() => import("./PhysicsAvatar"), { ssr: false, loa
 
 interface DigitalHeroProps {
     name: string;
+    nickname?: string;
     title: string;
     headline: string;
     signatureMetricValue: string;
@@ -88,6 +89,7 @@ function SignatureCounter({ value, reducedMotion }: { value: string; reducedMoti
 
 export default function DigitalHero({
     name,
+    nickname,
     title: _title,
     headline,
     signatureMetricValue,
@@ -222,34 +224,52 @@ export default function DigitalHero({
                     className="lg:col-span-12 flex flex-col"
                     style={{ gap: "var(--hero-stack-gap)" }}
                 >
-                    {/* Name — editorial display, mask-reveal */}
-                    <h1
-                        id="hero-name"
-                        className="font-display font-medium tracking-[-0.025em] text-primary"
-                        style={{
-                            fontSize: "var(--hero-name-size)",
-                            lineHeight: "var(--hero-name-line)" as unknown as number,
-                        }}
-                    >
-                        <span className="block overflow-hidden">
-                            <span
-                                className="block mask-reveal"
-                                style={{ animationDelay: "0.25s" }}
-                            >
-                                {firstName.toLowerCase()}
-                            </span>
-                        </span>
-                        {lastName && (
+                    {/* Name — editorial display, mask-reveal. Name renders with its
+                        real casing; the nickname sits directly under it (wrapped
+                        together so the stack gap doesn't separate them). */}
+                    <div>
+                        <h1
+                            id="hero-name"
+                            className="font-display font-medium tracking-[-0.025em] text-primary"
+                            style={{
+                                fontSize: "var(--hero-name-size)",
+                                lineHeight: "var(--hero-name-line)" as unknown as number,
+                            }}
+                        >
                             <span className="block overflow-hidden">
                                 <span
                                     className="block mask-reveal"
-                                    style={{ animationDelay: "0.4s" }}
+                                    style={{ animationDelay: "0.25s" }}
                                 >
-                                    <span className="editorial text-secondary/90">{lastName.toLowerCase()}</span>
+                                    {firstName}
                                 </span>
                             </span>
+                            {/* Real space between the two block lines so screen readers and
+                                search engines read "Abolfazl Shirkavand", not one run-on word. */}
+                            {lastName && " "}
+                            {lastName && (
+                                <span className="block overflow-hidden">
+                                    <span
+                                        className="block mask-reveal"
+                                        style={{ animationDelay: "0.4s" }}
+                                    >
+                                        <span className="editorial text-secondary/90">{lastName}</span>
+                                    </span>
+                                </span>
+                            )}
+                        </h1>
+                        {nickname && (
+                            <motion.p
+                                initial={{ opacity: 0, y: 6 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5, duration: durations.slow, ease: easings.ui }}
+                                className="mt-3 font-mono tracking-[0.18em] text-brand-blue"
+                                style={{ fontSize: "0.8125rem" }}
+                            >
+                                aka <span className="text-primary">{nickname}</span>
+                            </motion.p>
                         )}
-                    </h1>
+                    </div>
 
                     <motion.p
                         initial={{ opacity: 0, y: 8 }}

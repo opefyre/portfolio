@@ -32,7 +32,7 @@ const fontEditorial = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Abolfazl Shirkavand | Founder, Vrolen",
+  title: "Abolfazl Shirkavand (Abosh) | Founder, Vrolen",
   description: "Founder of Vrolen. Continuous Improvement, Operational Excellence, Industrial AI & Digital Transformation.",
 };
 
