@@ -1,6 +1,7 @@
 import "server-only";
 import { cache } from "react";
-import * as admin from "firebase-admin";
+import { cert, getApps, initializeApp } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
 
 /**
  * Build-time content access. The site is a static export, so Firestore is
@@ -11,18 +12,18 @@ import * as admin from "firebase-admin";
  * says is curated in content/site.ts.
  */
 function db() {
-  if (!admin.apps.length) {
+  if (!getApps().length) {
     if (process.env.FIREBASE_SERVICE_ACCOUNT_KEY) {
-      admin.initializeApp({ credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY)) });
+      initializeApp({ credential: cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY)) });
     } else if (process.env.GOOGLE_APPLICATION_CREDENTIALS) {
-      admin.initializeApp({ projectId: process.env.GOOGLE_CLOUD_PROJECT || "abosh-portfolio" });
+      initializeApp({ projectId: process.env.GOOGLE_CLOUD_PROJECT || "abosh-portfolio" });
     } else {
       throw new Error(
         "No Firebase credentials. Set FIREBASE_SERVICE_ACCOUNT_KEY (inline JSON) or GOOGLE_APPLICATION_CREDENTIALS (file path).",
       );
     }
   }
-  return admin.firestore();
+  return getFirestore();
 }
 
 export type Position = { title: string; period: string; achievements: string[] };

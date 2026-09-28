@@ -11,6 +11,16 @@ updates:
     groups:
       npm-minor-and-patch:
         update-types: [minor, patch]
+    ignore:
+      # Node types track the runtime (Node 22 in CI and on the host).
+      - dependency-name: "@types/node"
+        versions: [">=23"]
+      # Held until eslint-config-next and typescript-eslint support them
+      # (both crash the linter as of Sep 2026). Remove to re-enable.
+      - dependency-name: eslint
+        update-types: ["version-update:semver-major"]
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
