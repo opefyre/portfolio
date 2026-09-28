@@ -147,7 +147,8 @@ export default function SiteFooter({ linkedin, github }: SiteFooterProps) {
                 style={{ borderTop: `1px solid ${INK_HAIR}` }}
             >
                 {/* Left: single copyright (one name only) */}
-                <span className="label-mono" style={{ color: INK_FAINT }}>
+                {/* textTransform override: label-mono uppercases, but the name must keep its real casing. */}
+                <span className="label-mono" style={{ color: INK_FAINT, textTransform: "none" }}>
                     © 2026 · Abolfazl Shirkavand
                 </span>
 

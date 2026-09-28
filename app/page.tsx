@@ -42,6 +42,7 @@ export default async function Home() {
       <section id="overview" className="min-h-[100dvh] scroll-mt-0" data-snap="true">
         <DigitalHero
           name={personalInfo.name}
+          nickname={personalInfo.nickname}
           title={personalInfo.title}
           headline={personalInfo.headline}
           signatureMetricValue={personalInfo.signatureMetricValue}
