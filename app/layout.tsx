@@ -32,8 +32,8 @@ const fontEditorial = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Abolfazl Shirkavand | Head of Digital Innovation",
-  description: "Process Excellence, Digital Transformation & Product Strategy. Engineering measurable outcomes at enterprise scale.",
+  title: "Abolfazl Shirkavand | Founder, Vrolen",
+  description: "Founder of Vrolen. Continuous Improvement, Operational Excellence, Industrial AI & Digital Transformation.",
 };
 
 export default function RootLayout({
