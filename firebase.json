@@ -6,19 +6,13 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ],
     "headers": [
       {
         "source": "/staging/**",
         "headers": [
           {
             "key": "Content-Security-Policy-Report-Only",
-            "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firebaseinstallations.googleapis.com https://www.googleapis.com https://*.firebaseio.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none'; upgrade-insecure-requests; report-uri /__/csp-report"
+            "value": "default-src 'self'; script-src 'self' 'unsafe-inline' blob:; worker-src 'self' blob:; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none'; upgrade-insecure-requests; report-uri /__/csp-report"
           }
         ]
       },
@@ -27,7 +21,7 @@
         "headers": [
           {
             "key": "Content-Security-Policy",
-            "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firebaseinstallations.googleapis.com https://www.googleapis.com https://*.firebaseio.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none'; upgrade-insecure-requests"
+            "value": "default-src 'self'; script-src 'self' 'unsafe-inline' blob:; worker-src 'self' blob:; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none'; upgrade-insecure-requests"
           },
           {
             "key": "Strict-Transport-Security",
@@ -57,15 +51,6 @@
           {
             "key": "Cache-Control",
             "value": "public, max-age=31536000, immutable"
-          }
-        ]
-      },
-      {
-        "source": "/elixiary/**/*.@(jpg|jpeg|gif|png|webp|svg|ico|avif)",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "public, max-age=300, must-revalidate"
           }
         ]
       },
@@ -104,15 +89,64 @@
             "value": "no-cache, no-store, must-revalidate"
           }
         ]
-      },
+      }
+    ],
+    "trailingSlash": true,
+    "redirects": [
       {
         "source": "/contact",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
-          }
-        ]
+        "destination": "/about/",
+        "type": 301
+      },
+      {
+        "source": "/contact/",
+        "destination": "/about/",
+        "type": 301
+      },
+      {
+        "source": "/resume.pdf",
+        "destination": "/about/",
+        "type": 302
+      },
+      {
+        "source": "/work",
+        "destination": "/#work",
+        "type": 301
+      },
+      {
+        "source": "/work/",
+        "destination": "/#work",
+        "type": 301
+      },
+      {
+        "source": "/archive",
+        "destination": "/#work",
+        "type": 301
+      },
+      {
+        "source": "/archive/",
+        "destination": "/#work",
+        "type": 301
+      },
+      {
+        "source": "/work/freeloader-coder",
+        "destination": "/#work",
+        "type": 301
+      },
+      {
+        "source": "/work/freeloader-coder/",
+        "destination": "/#work",
+        "type": 301
+      },
+      {
+        "source": "/work/household-app",
+        "destination": "/work/chanshambe/",
+        "type": 301
+      },
+      {
+        "source": "/work/household-app/",
+        "destination": "/work/chanshambe/",
+        "type": 301
       }
     ]
   },

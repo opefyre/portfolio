@@ -51,10 +51,10 @@ check_cache_header() {
 }
 
 check_headers "/"
-check_headers "/contact"
-check_headers "/icon.svg"
+check_headers "/about/"
+check_headers "/lens/lens-still.webp"
 
 check_cache_header "/" "no-cache"
-check_cache_header "/icon.svg" "max-age=31536000"
+check_cache_header "/lens/lens-still.webp" "max-age=31536000"
 
 echo "All required production hosting headers are present."

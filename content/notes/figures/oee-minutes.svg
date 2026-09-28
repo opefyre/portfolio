@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 230" role="img" aria-label="Of 450 planned minutes, 345 were fully productive. 60 were lost to stops, 30 to slow running and small stops, and 15 to rejects and rework.">
+<text x="0" y="20" font-size="14" fill="#5a5d60">450 planned minutes, one illustrative shift</text>
+<rect x="0" y="40" width="582.7" height="64" rx="4" fill="#0f1011"/>
+<rect x="584.7" y="40" width="99.3" height="64" fill="#b4532a"/>
+<rect x="686" y="40" width="48.7" height="64" fill="#c98f1d"/>
+<rect x="736.7" y="40" width="23.3" height="64" rx="2" fill="#6f7f8c"/>
+<text x="16" y="80" font-size="18" font-weight="600" fill="#eeebe4">345 min fully productive</text>
+<rect x="0" y="146" width="14" height="14" fill="#b4532a"/>
+<text x="22" y="158" font-size="14" fill="#0f1011"><tspan font-weight="600">60 min</tspan> stops (Availability)</text>
+<rect x="250" y="146" width="14" height="14" fill="#c98f1d"/>
+<text x="272" y="158" font-size="14" fill="#0f1011"><tspan font-weight="600">30 min</tspan> slow running, small stops (Performance)</text>
+<rect x="0" y="182" width="14" height="14" fill="#6f7f8c"/>
+<text x="22" y="194" font-size="14" fill="#0f1011"><tspan font-weight="600">15 min</tspan> rejects and rework (Quality)</text>
+<text x="760" y="194" font-size="14" fill="#5a5d60" text-anchor="end">OEE = 345 / 450 = 76.7%</text>
+</svg>

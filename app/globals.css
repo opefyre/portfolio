@@ -1,410 +1,528 @@
 @import "tailwindcss";
 
+/* =========================================================================
+   abosh.io
+   Graphite, soft metal, warm off-white, one rare acid-lime accent.
+   Two typefaces from one family: Funnel Display for headlines and figures,
+   Funnel Sans for everything you read.
+   ========================================================================= */
+
 @theme {
-  /* Semantic Palette Mapping */
-  --color-page: var(--bg-page);
-  --color-card: var(--bg-card);
-  --color-card-hover: var(--bg-card-hover);
+  --color-graphite-950: #0b0c0d;
+  --color-graphite-900: #101213;
+  --color-graphite-850: #141618;
+  --color-graphite-800: #191c1e;
+  --color-graphite-700: #24282b;
+  --color-metal-500: #6c7176;
+  --color-metal-400: #8b9095;
+  --color-metal-300: #aeb2b6;
+  --color-paper: #ecebe6;
+  --color-paper-bg: #eeebe4;
+  --color-ink: #0f1011;
+  --color-accent: #d3ff3b;
 
-  --color-primary: var(--text-primary);
-  --color-secondary: var(--text-secondary);
-  --color-tertiary: var(--text-tertiary);
-
-  --color-border: var(--border-color);
-  --color-border-hover: var(--border-color-hover);
-
-  /* Brand */
-  --color-brand-blue: #38BDF8;
-  --color-brand-purple: #818CF8;
-  /* Mission-control accent: warning amber, used sparingly */
-  --color-signal: #FF8B3D;
-  /* Status indicator green — mission-control "online" */
-  --color-online: #2EE6A8;
-
-  /* Tinted section background */
-  --color-section-tinted: #0c1222;
-
-  /* Fonts */
-  --font-display: "Syne", sans-serif;
-  --font-body: "Manrope", sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --font-editorial: "Instrument Serif", "Times New Roman", serif;
+  --font-display: var(--font-funnel-display), "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-funnel-sans), "Helvetica Neue", Arial, sans-serif;
 }
-
-/*
-  COLOR SYSTEM — Dark Only — Operator's Cockpit
-*/
 
 :root {
-  --bg-page: #050608;            /* near-black with a hint of cool */
-  --bg-card: rgba(15, 18, 28, 0.6);
-  --bg-card-hover: rgba(28, 32, 44, 0.72);
+  --bg: var(--color-graphite-950);
+  --fg: var(--color-paper);
+  --fg-2: var(--color-metal-300);
+  --fg-3: var(--color-metal-400);
+  --rule: rgba(236, 235, 230, 0.1);
+  --rule-strong: rgba(236, 235, 230, 0.18);
+  --accent: var(--color-accent);
 
-  --text-primary: #f8fafc;
-  --text-secondary: #d4dae3;
-  --text-tertiary: #94a3b8;
+  --gutter: clamp(20px, 4.4vw, 76px);
+  --max: 1560px;
+  --nav-h: 54px;
 
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-color-hover: rgba(56, 189, 248, 0.4);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-back: cubic-bezier(0.34, 1.4, 0.64, 1);
 
-  /* Hero Gradient */
-  --hero-gradient-from: #ffffff;
-  --hero-gradient-to: #c4cbd6;
+  color-scheme: dark;
 }
 
-/* Reset & Base */
-html,
-body {
-  background-color: var(--bg-page);
-  color: var(--text-primary);
-  font-family: var(--font-body);
+/* ------------------------------------------------------------------------ */
+/* Base                                                                      */
+/* ------------------------------------------------------------------------ */
+
+html {
+  overflow-x: clip;
+  background: var(--bg);
+  color: var(--fg);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden !important;
-  max-width: 100vw !important;
-  width: 100vw !important;
-  position: relative;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-/* On capable pointer devices, hide the system cursor — SmartCursor takes over */
-@media (hover: hover) and (pointer: fine) {
-  html.smart-cursor-active,
-  html.smart-cursor-active * {
-    cursor: none !important;
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.55;
+  min-height: 100dvh;
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+::selection {
+  background: rgba(211, 255, 59, 0.9);
+  color: #0b0c0d;
+}
+
+:focus-visible {
+  outline: 1.5px solid var(--fg);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+.skip-link {
+  position: fixed;
+  left: 16px;
+  top: -80px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 14px;
+  transition: top 0.2s var(--ease-out);
+}
+.skip-link:focus {
+  top: 16px;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* The studio: soft key light from above-left, fixed, so pages move through one lit space. */
+.studio-light {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(1100px 760px at 14% -12%, rgba(214, 219, 224, 0.08), transparent 62%),
+    radial-gradient(900px 700px at 108% 38%, rgba(160, 176, 196, 0.035), transparent 60%);
+}
+
+/* WebGL stage: behind the content, above the light. */
+.lens-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.lens-stage canvas {
+  display: block;
+}
+
+.site-main {
+  position: relative;
+  z-index: 2;
+}
+
+.frame {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ------------------------------------------------------------------------ */
+/* Type                                                                      */
+/* ------------------------------------------------------------------------ */
+
+.h-section {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(40px, 5.4vw, 88px);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  font-size: 16px;
+  color: var(--fg);
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  padding-bottom: 2px;
+  transition: background-size 0.5s var(--ease-out);
+}
+.text-link:hover,
+.text-link:focus-visible {
+  background-size: 100% 1px;
+}
+
+/* Per-character choreography (SplitChars). */
+.split-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+.ch {
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+  vertical-align: top;
+}
+.ch-in {
+  display: inline-block;
+  will-change: transform;
+}
+.ch-space {
+  width: 0.26em;
+}
+
+/* ------------------------------------------------------------------------ */
+/* Liquid Glass (nav and transient UI only)                                  */
+/* ------------------------------------------------------------------------ */
+
+.glass {
+  --glass-tint: rgba(24, 26, 29, 0.46);
+  --glass-edge: rgba(255, 255, 255, 0.2);
+  --gx: 30%;
+  --gy: 0%;
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(160px 60px at var(--gx) var(--gy), rgba(255, 255, 255, 0.14), transparent 70%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.015) 55%, rgba(255, 255, 255, 0.04)),
+    var(--glass-tint);
+  -webkit-backdrop-filter: blur(16px) saturate(175%);
+  backdrop-filter: blur(16px) saturate(175%);
+  box-shadow:
+    inset 0 1px 0 var(--glass-edge),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.28),
+    inset 1px 0 0 rgba(255, 255, 255, 0.05),
+    inset -1px 0 0 rgba(255, 255, 255, 0.05),
+    0 18px 40px -18px rgba(0, 0, 0, 0.7),
+    0 2px 8px rgba(0, 0, 0, 0.28);
+  transition:
+    background-color 0.5s var(--ease-out),
+    box-shadow 0.5s var(--ease-out);
+}
+.glass[data-refract="on"] {
+  -webkit-backdrop-filter: var(--glass-refract) blur(9px) saturate(175%);
+  backdrop-filter: var(--glass-refract) blur(9px) saturate(175%);
+}
+.glass[data-tone="light"] {
+  --glass-tint: rgba(246, 244, 239, 0.52);
+  --glass-edge: rgba(255, 255, 255, 0.75);
+  color: var(--color-ink);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+    0 18px 40px -20px rgba(0, 0, 0, 0.35),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+}
+@media (prefers-reduced-transparency: reduce) {
+  .glass,
+  .glass[data-refract="on"] {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: #17191b;
+  }
+  .glass[data-tone="light"] {
+    background: #f4f2ed;
+  }
+}
+@media (prefers-contrast: more), (forced-colors: active) {
+  .glass {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--bg);
+    box-shadow: inset 0 0 0 1px var(--fg);
   }
 }
 
-.tabular-nums {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" on, "lnum" on;
+/* ------------------------------------------------------------------------ */
+/* Navigation                                                                */
+/* ------------------------------------------------------------------------ */
+
+.nav-wrap {
+  position: fixed;
+  inset: 16px 0 auto 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  padding-inline: 12px;
+}
+.nav-pill {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: var(--nav-h);
+  padding: 0 7px 0 22px;
+  font-size: 15px;
+  color: var(--fg);
+  transition:
+    height 0.5s var(--ease-out),
+    padding 0.5s var(--ease-out);
+}
+.nav-wrap[data-scrolled] .nav-pill {
+  height: 48px;
+  padding-left: 18px;
+}
+.nav-brand {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: -0.03em;
+  padding-right: 14px;
+  transition: transform 0.15s var(--ease-out);
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+.glass[data-tone="light"] .nav-links {
+  border-left-color: rgba(0, 0, 0, 0.1);
+}
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 999px;
+  color: var(--fg-2);
+  transition:
+    color 0.3s var(--ease-out),
+    transform 0.15s var(--ease-out);
+}
+.glass[data-tone="light"] .nav-link {
+  color: rgba(15, 16, 17, 0.62);
+}
+.nav-link:hover,
+.nav-link[aria-current="page"] {
+  color: var(--fg);
+}
+.glass[data-tone="light"] .nav-link:hover,
+.glass[data-tone="light"] .nav-link[aria-current="page"] {
+  color: var(--color-ink);
+}
+.nav-link:active,
+.nav-brand:active {
+  transform: scale(0.95);
+}
+.nav-link-label {
+  position: relative;
+  z-index: 1;
+}
+.nav-active {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+.glass[data-tone="light"] .nav-active {
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.nav-menu-trigger {
+  display: none;
+  place-content: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  color: inherit;
+}
+.nav-menu-trigger span {
+  display: block;
+  width: 15px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: currentColor;
+}
+.nav-sheet-positioner {
+  z-index: 60;
+}
+.nav-sheet {
+  --glass-tint: rgba(20, 22, 25, 0.72);
+  min-width: 220px;
+  padding: 10px;
+  border-radius: 22px;
+}
+.nav-sheet ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-sheet-link {
+  display: block;
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: -0.02em;
+}
+.nav-sheet-link[aria-current="page"],
+.nav-sheet-link:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+@media (max-width: 720px) {
+  .nav-wrap {
+    justify-content: flex-end;
+  }
+  .nav-links {
+    display: none;
+  }
+  .nav-menu-trigger {
+    display: inline-grid;
+  }
+  .nav-pill,
+  .nav-wrap[data-scrolled] .nav-pill {
+    height: 48px;
+    padding-left: 18px;
+  }
 }
 
-/* Persistent grain — gives the dashboard surface depth */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px 256px;
+/* ------------------------------------------------------------------------ */
+/* Page transitions: content steps back, the WebGL scene carries on          */
+/* ------------------------------------------------------------------------ */
+
+html.is-leaving .site-main {
+  opacity: 0;
+  transform: translateY(-14px) scale(0.99);
+  filter: blur(4px);
+  transition:
+    opacity 0.28s var(--ease-in-out),
+    transform 0.28s var(--ease-in-out),
+    filter 0.28s var(--ease-in-out);
 }
+html.is-entering .site-main {
+  animation: page-in 0.8s var(--ease-out) both;
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(4px);
+  }
+}
+
+/* ------------------------------------------------------------------------ */
+/* WebGL images: the <img> holds the place until the plane takes over        */
+/* ------------------------------------------------------------------------ */
+
+.gl-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius, 10px);
+  background: rgba(255, 255, 255, 0.02);
+}
+.gl-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+.gl-image[data-gl="ready"] {
+  background: none;
+}
+.gl-image[data-gl="ready"] img {
+  opacity: 0;
+}
+/* Without the plane (touch devices, no WebGL) the image still arrives with a reveal. */
+html[data-js] .gl-image:not([data-gl="ready"]) img {
+  clip-path: inset(100% 0 0 0 round var(--radius, 10px));
+  transform: scale(1.12);
+  transition:
+    clip-path 1.3s var(--ease-out),
+    transform 1.6s var(--ease-out);
+}
+html[data-js] .gl-image[data-inview="true"]:not([data-gl="ready"]) img {
+  clip-path: inset(0 0 0 0 round var(--radius, 10px));
+  transform: none;
+}
+
+/* ------------------------------------------------------------------------ */
+/* No WebGL: a still of the lens in the hero, and fragments printed as text  */
+/* ------------------------------------------------------------------------ */
+
+html[data-lens="fallback"] [data-lens-anchor="hero"]::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background: url("/lens/lens-still.webp") center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------------ */
+/* Reduced motion                                                            */
+/* ------------------------------------------------------------------------ */
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* Skip link */
-.skip-link {
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding: 0.75rem 1rem;
-  background: var(--color-brand-blue);
-  color: var(--bg-page);
-  font-weight: 700;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border-bottom-right-radius: 0.5rem;
-  z-index: 10000;
-  transform: translateY(-110%);
-  transition: transform 0.2s ease;
-}
-.skip-link:focus-visible {
-  transform: translateY(0);
-  outline: 2px solid var(--color-brand-blue);
-  outline-offset: 2px;
-}
-
-/* ====== Cockpit responsive sizing tokens ======
-   These scale by viewport height so the hero + experience timeline always fit
-   on a 14" laptop (≈ 1440×900) without the user needing to scroll.
-*/
-.hero-cockpit {
-  /* Token defaults: tuned for desktops at ≥ 1080p. */
-  --hero-name-size: clamp(2.75rem, min(7vw, 12vh), 7rem);
-  --hero-name-line: 0.86;
-  --hero-headline-size: clamp(0.875rem, 1.4vh, 1.0625rem);
-  --hero-metric-size: clamp(2.75rem, min(6.5vw, 11vh), 5.5rem);
-  --hero-metric-line: 0.85;
-  --hero-avatar: clamp(5.5rem, min(8vw, 13vh), 8.5rem);
-  --hero-pad-top: clamp(5rem, 12vh, 8rem);
-  --hero-pad-x: clamp(1.25rem, 2.5vw, 3rem);
-  --hero-stack-gap: clamp(0.75rem, 2vh, 1.5rem);
-  --hero-col-gap: clamp(1rem, 3vh, 2.25rem);
-}
-@media (max-height: 880px) {
-  .hero-cockpit {
-    --hero-pad-top: clamp(4.5rem, 10vh, 6.5rem);
-    --hero-stack-gap: clamp(0.625rem, 1.6vh, 1.125rem);
-    --hero-col-gap: clamp(0.75rem, 2.2vh, 1.75rem);
-  }
-}
-@media (max-height: 760px) {
-  .hero-cockpit {
-    --hero-name-size: clamp(2.25rem, min(6vw, 11vh), 5.25rem);
-    --hero-metric-size: clamp(2.25rem, min(5.5vw, 10vh), 4.25rem);
-    --hero-avatar: clamp(4.5rem, min(6.5vw, 10vh), 6.5rem);
-    --hero-pad-top: clamp(3.75rem, 9vh, 5.5rem);
+  html[data-js] .gl-image:not([data-gl="ready"]) img {
+    clip-path: none;
+    transform: none;
   }
 }
 
-/* ====== Cockpit motion primitives ====== */
-
-/* The slow scan-line that sweeps across hero on load. Pure CSS, GPU-friendly. */
-@keyframes scanSweep {
-  0% { transform: translateY(-100%); opacity: 0; }
-  20% { opacity: 0.9; }
-  100% { transform: translateY(120vh); opacity: 0; }
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
 }
-.scanline {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, transparent 0%, rgba(56, 189, 248, 0.0) 48%, rgba(56, 189, 248, 0.55) 50%, rgba(56, 189, 248, 0.0) 52%, transparent 100%);
-  filter: blur(0.3px);
-  animation: scanSweep 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s 1 forwards;
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
 }
-
-/* Grid lines that draw in from center */
-@keyframes gridDrawX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@keyframes gridDrawY { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-
-/* Mask-reveal text — text appears as if from beneath a horizon line */
-@keyframes maskReveal {
-  from { clip-path: inset(100% 0 0 0); }
-  to { clip-path: inset(0 0 0 0); }
-}
-.mask-reveal {
-  animation: maskReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* Marquee — used for the bottom ticker tape */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.marquee-track {
-  animation: marquee 38s linear infinite;
-  will-change: transform;
-}
-.marquee-track:hover { animation-play-state: paused; }
-
-/* Mobile: shorter viewport means fewer visible pixels per loop — speed up
-   the marquee so the perceived motion is comparable to desktop. */
-@media (max-width: 768px) {
-  .marquee-track { animation-duration: 16s; }
-  /* Mobile avatar pre-position — overridden CSS var keeps the avatar on
-     the RIGHT side of the hero before the JS physics takes over. */
-  .avatar-physics { --avatar-right: 16px; }
-}
-
-/* Online status pulse */
-@keyframes onlinePulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(46, 230, 168, 0.55); }
-  70% { box-shadow: 0 0 0 8px rgba(46, 230, 168, 0); }
-}
-.online-dot {
-  background: var(--color-online);
-  animation: onlinePulse 1.6s ease-out infinite;
-}
-
-/* Calibration crosshair — tiny ticks around avatar */
-.crosshair-tick {
-  position: absolute;
-  background: var(--color-brand-blue);
-}
-
-/* Bracket frames — used around section headers */
-.bracket {
-  position: relative;
-  display: inline-block;
-}
-.bracket::before, .bracket::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 0.5rem;
-  border-color: currentColor;
-  border-style: solid;
-  border-width: 0;
-}
-.bracket::before {
-  left: -0.75rem;
-  border-left-width: 1.5px;
-  border-top-width: 1.5px;
-  border-bottom-width: 1.5px;
-}
-.bracket::after {
-  right: -0.75rem;
-  border-right-width: 1.5px;
-  border-top-width: 1.5px;
-  border-bottom-width: 1.5px;
-}
-
-/* SmartCursor primitives (overrides any native cursor inside specific zones) */
-.smart-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 1.5px solid var(--color-brand-blue);
-  background: transparent;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  mix-blend-mode: difference;
-  transition: width 0.22s cubic-bezier(0.16,1,0.3,1), height 0.22s cubic-bezier(0.16,1,0.3,1), border-color 0.2s ease, background-color 0.2s ease;
-}
-.smart-cursor.is-hover {
-  width: 56px;
-  height: 56px;
-  border-color: var(--color-brand-blue);
-  background: rgba(56,189,248,0.08);
-  mix-blend-mode: normal;
-}
-.smart-cursor.is-press {
-  width: 28px;
-  height: 28px;
-}
-.smart-cursor-label {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-brand-blue);
-  background: var(--bg-page);
-  padding: 0.25rem 0.5rem;
-  border: 1px solid rgba(56,189,248,0.4);
-  border-radius: 9999px;
-  opacity: 0;
-  transition: opacity 0.18s ease;
-  white-space: nowrap;
-}
-.smart-cursor-label.is-visible { opacity: 1; }
-
-/* Editorial display tags */
-.editorial {
-  font-family: var(--font-editorial);
-  font-style: italic;
-  letter-spacing: -0.01em;
-}
-
-/* Mono labels used throughout the cockpit */
-.label-mono {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-/* Layout Utilities */
-@layer utilities {
-  .container-wide {
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    .container-wide {
-      padding-left: 3rem;
-      padding-right: 3rem;
-    }
-  }
-
-  .section-padding {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
-
-  @media (min-width: 768px) {
-    .section-padding {
-      padding-top: 8rem;
-      padding-bottom: 8rem;
-    }
-  }
-
-  .glass-card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    backdrop-filter: blur(8px);
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.2),
-      0 4px 16px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  }
-}
-
-/* Thin, subtle scrollbar for scroll regions inside dark cards.
-   Referenced by GlassTerminal skills panel, ProjectModal, ExperienceStack.
-   Was silently no-op until now (class name referenced but never defined).
-   Firefox uses scrollbar-width/color; webkit gets a full custom track. */
-.custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
-}
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.14);
-  border-radius: 999px;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(255, 255, 255, 0.28);
-}
-
-/* Hide scrollbars entirely (used for the horizontal category tab strip on mobile). */
-.hide-scrollbar {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-/* Print stylesheet — recruiters often save the page to PDF or screenshot it. */
-@media print {
-  :root {
-    --bg-page: #ffffff;
-    --bg-card: #ffffff;
-    --bg-card-hover: #f8fafc;
-    --text-primary: #0f172a;
-    --text-secondary: #334155;
-    --text-tertiary: #475569;
-    --border-color: #cbd5e1;
-  }
-  html, body {
-    background: #fff !important;
-    color: #0f172a !important;
-  }
-  body::before { display: none !important; }
-  canvas, video, .no-print, .smart-cursor, .smart-cursor-label { display: none !important; }
-  a { color: #1e3a8a !important; text-decoration: underline; }
-  section { page-break-inside: avoid; }
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }

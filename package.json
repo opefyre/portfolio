@@ -1,49 +1,38 @@
 {
   "name": "abosh-portfolio",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "tsx scripts/generate-resume-pdf.tsx",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "deploy": "./scripts/secure-deploy.sh",
-    "verify:headers": "./verify-hosting-headers.sh",
-    "migrate:personal-info": "tsx scripts/firestore-migrate-personal-info.ts",
-    "generate:resume": "tsx scripts/generate-resume-pdf.tsx"
+    "verify:headers": "./verify-hosting-headers.sh"
   },
   "dependencies": {
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.5.0",
+    "@base-ui/react": "1.8.0",
+    "@react-three/drei": "10.7.9",
+    "@react-three/fiber": "9.8.1",
     "clsx": "^2.1.1",
-    "firebase": "^12.9.0",
     "firebase-admin": "^13.6.1",
-    "framer-motion": "^12.33.0",
-    "gsap": "^3.14.2",
-    "lenis": "^1.3.17",
-    "lucide-react": "^0.563.0",
-    "maath": "^0.10.8",
-    "next": "16.3.4",
-    "next-themes": "^0.4.6",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
+    "gsap": "3.15.0",
+    "lenis": "1.3.26",
+    "marked": "18.0.14",
+    "motion": "13.4.4",
+    "next": "16.3.6",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
     "server-only": "^0.0.1",
-    "three": "0.170.0"
+    "three": "0.186.1"
   },
   "devDependencies": {
-    "@fontsource/instrument-serif": "^5.2.8",
-    "@fontsource/jetbrains-mono": "^5.2.8",
-    "@fontsource/manrope": "^5.2.8",
-    "@fontsource/syne": "^5.2.7",
-    "@react-pdf/renderer": "^4.5.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@types/three": "^0.170.0",
+    "@types/three": "0.186.0",
     "eslint": "^9",
-    "eslint-config-next": "16.3.4",
+    "eslint-config-next": "16.3.6",
     "firebase-tools": "^15.31.0",
     "sharp": "^0.35.1",
     "tailwindcss": "^4",
@@ -51,7 +40,6 @@
     "typescript": "^5"
   },
   "overrides": {
-    "three": "0.170.0",
     "fast-xml-parser": ">=5.3.8",
     "basic-ftp": ">=5.2.0",
     "minimatch": ">=3.1.3",
@@ -75,8 +63,5 @@
     "nanoid": ">=3.3.18",
     "re2": ">=1.26.1",
     "@opentelemetry/core": ">=2.8.0"
-  },
-  "resolutions": {
-    "three": "0.170.0"
   }
 }

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 190" role="img" aria-label="Customer demand is 210 units per shift. At a 144-second cycle the line can make 175, so it finishes 35 units short before any downtime.">
+<text x="0" y="46" font-size="15" font-weight="600" fill="#0f1011">Demand</text>
+<rect x="150" y="24" width="600" height="36" rx="3" fill="#cfc9bb"/>
+<text x="738" y="48" font-size="15" font-weight="600" fill="#0f1011" text-anchor="end">210 units</text>
+<text x="0" y="112" font-size="15" font-weight="600" fill="#0f1011">Capacity</text>
+<text x="0" y="130" font-size="13" fill="#5a5d60">at a 144 s cycle</text>
+<rect x="150" y="90" width="500" height="36" rx="3" fill="#0f1011"/>
+<text x="638" y="114" font-size="15" font-weight="600" fill="#eeebe4" text-anchor="end">175 units</text>
+<rect x="652" y="90" width="98" height="36" rx="3" fill="none" stroke="#b4532a" stroke-width="2" stroke-dasharray="5 4"/>
+<text x="701" y="114" font-size="15" font-weight="600" fill="#b4532a" text-anchor="middle">35 short</text>
+<text x="0" y="178" font-size="14" fill="#5a5d60">420 available minutes, takt 120 s, observed cycle 144 s. Before any downtime, changeover or quality loss.</text>
+</svg>
