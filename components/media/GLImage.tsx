@@ -19,6 +19,7 @@ export function GLImage({
   priority = false,
   className = "",
   ratio,
+  follow = false,
 }: {
   id: string;
   src: string;
@@ -30,6 +31,8 @@ export function GLImage({
   className?: string;
   /** Box aspect ratio when it should differ from the image's own (cover-cropped). */
   ratio?: string;
+  /** Hover preview: starts hidden, leans with the pointer (toggle data-gl-visible to show). */
+  follow?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   useGLImage(ref, id, src, radius);
@@ -54,6 +57,8 @@ export function GLImage({
     <div
       ref={ref}
       className={`gl-image ${className}`}
+      data-gl-follow={follow ? "true" : undefined}
+      data-gl-visible={follow ? "false" : undefined}
       style={{ aspectRatio: ratio ?? `${width} / ${height}`, "--radius": `${radius}px` } as CSSProperties}
     >
       <img

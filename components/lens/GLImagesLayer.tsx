@@ -127,6 +127,8 @@ function markReady(el: HTMLElement) {
 
 type PlaneState = {
   lastEl: HTMLElement | null;
+  shownPrev: boolean;
+  lean: Spring;
   x: Spring;
   y: Spring;
   w: Spring;
@@ -170,6 +172,8 @@ function Plane({ entry }: { entry: GLImageEntry }) {
 
   const st = useRef<PlaneState>({
     lastEl: null,
+    shownPrev: false,
+    lean: spring(),
     x: spring(),
     y: spring(),
     w: spring(),
@@ -259,7 +263,15 @@ function Plane({ entry }: { entry: GLImageEntry }) {
     // ---- opacity: survive a page change only if this is the kept image ---------
     const kept = glNav.keep === entry.id;
     const leaving = (glNav.leaving && !kept) || (!el && !kept);
-    const targetOpacity = tex && s.placed && !leaving ? 1 : 0;
+    // Elements can hide their plane (hover previews) with data-gl-visible="false".
+    const follow = !!el && el.dataset.glFollow === "true";
+    const shown = !el || el.dataset.glVisible !== "false";
+    if (follow && shown && !s.shownPrev && tex) {
+      s.revealStart = t;
+      s.instant = false;
+    }
+    s.shownPrev = shown;
+    const targetOpacity = tex && s.placed && !leaving && shown ? 1 : 0;
     if (reduced) s.opacity.x = targetOpacity;
     else stepSpring(s.opacity, targetOpacity, dt, leaving ? 160 : 120, leaving ? 24 : 22);
     if (Math.abs(s.opacity.x - targetOpacity) > 0.002) busy = true;
@@ -272,11 +284,11 @@ function Plane({ entry }: { entry: GLImageEntry }) {
         s.revealStart = t;
         s.opacity.x = 1;
         s.opacity.v = 0;
-      } else if (onScreen && top < H * 0.88) {
+      } else if (onScreen && top < H * 0.88 && !follow) {
         s.revealStart = t;
       }
     }
-    const rp = s.revealStart < 0 ? 0 : s.instant || reduced ? 1 : Math.min(1, (t - s.revealStart) / 1.6);
+    const rp = s.revealStart < 0 ? 0 : s.instant || reduced ? 1 : Math.min(1, (t - s.revealStart) / (follow ? 0.7 : 1.6));
     const reveal = 1 - Math.pow(1 - rp, 3);
     if (rp > 0 && rp < 1) busy = true;
 
@@ -302,6 +314,13 @@ function Plane({ entry }: { entry: GLImageEntry }) {
     const m = mesh.current;
     m.visible = onScreen && s.opacity.x > 0.003 && !!tex;
     m.position.set((s.x.x - W / 2) * upp, -(s.y.x - H / 2) * upp, Z);
+    // Hover previews lean into the pointer's motion, like a card on a string.
+    const lean = follow && !reduced ? THREE.MathUtils.clamp(-p.vx * 0.05, -0.2, 0.2) : 0;
+    stepSpring(s.lean, lean, dt, 80, 11);
+    m.rotation.z = s.lean.x;
+    m.rotation.y = s.lean.x * -0.6;
+    m.renderOrder = follow ? -5 : -20;
+    if (Math.abs(s.lean.v) > 0.001) busy = true;
     m.scale.set(Math.max(1e-4, s.w.x * upp), Math.max(1e-4, s.h.x * upp), 1);
 
     if (tex) {

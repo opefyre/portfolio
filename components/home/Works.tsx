@@ -6,6 +6,7 @@ import { GLImage } from "@/components/media/GLImage";
 import { CountUp } from "@/components/motion/CountUp";
 import { SplitChars } from "@/components/motion/SplitChars";
 import { TLink } from "@/components/shell/transitions";
+import { WorksIndex } from "./WorksIndex";
 import { works, type Work } from "@/content/site";
 
 /** Composition per work: screenshots are placed by their own proportions. */
@@ -40,7 +41,13 @@ function WorkBlock({ work, index }: { work: Work; index: number }) {
   const glId = `work-${work.slug}`;
 
   return (
-    <article ref={ref} className="work" data-layout={layout} aria-labelledby={`${work.slug}-name`}>
+    <article
+      ref={ref}
+      className="work"
+      data-layout={layout}
+      data-long={work.name.length > 12 || undefined}
+      aria-labelledby={`${work.slug}-name`}
+    >
       <TLink href={href} keep={glId} className="work-media" aria-label={`${work.name} case study`} tabIndex={-1}>
         <GLImage id={glId} src={work.image.src} alt={work.image.alt} width={work.image.width} height={work.image.height} radius={10} />
         <LensAnchor id={`lens-${work.slug}`} className="work-lens" sizeRatio={1} plateLines={0} plateHalo={0} thickness={0.8} />
@@ -80,12 +87,20 @@ function WorkBlock({ work, index }: { work: Work; index: number }) {
 }
 
 export function Works() {
+  const featured = works.filter((w) => w.featured);
+  const more = works.filter((w) => !w.featured);
   return (
     <section id="work" className="works" data-nav-tone="dark" aria-label="Work">
       <div className="frame">
-        {works.map((w, i) => (
+        {featured.map((w, i) => (
           <WorkBlock key={w.slug} work={w} index={i} />
         ))}
+        {more.length > 0 && (
+          <div className="index">
+            <h2 className="sr-only">More work</h2>
+            <WorksIndex works={more} />
+          </div>
+        )}
       </div>
     </section>
   );

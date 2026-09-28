@@ -17,7 +17,7 @@ Software has the same thing under other names: conventions, templates, a shared 
 
 One of the most useful things I did in manufacturing was moving inspection into the process: checkpoints during scale-up and fast feedback to operators, instead of finding defects at the end, when they're expensive and the context is gone.
 
-In software that means tests, reviews and checks as close to the change as possible. In [Freeloader Coder](/work/freeloader-coder/), every change must pass three independent reviewers, for function, design and security, before it gets near a repository. Stop the defect at the station that made it.
+In software that means tests, reviews and checks as close to the change as possible. [Cargo & Consequence](/work/cargo-and-consequence/) runs 161 engine tests, lint and a formatting check on every push. Stop the defect at the station that made it.
 
 ## 3. Readiness before launch
 

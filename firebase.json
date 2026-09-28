@@ -136,6 +136,26 @@
         "source": "/archive/",
         "destination": "/#work",
         "type": 301
+      },
+      {
+        "source": "/work/freeloader-coder",
+        "destination": "/#work",
+        "type": 301
+      },
+      {
+        "source": "/work/freeloader-coder/",
+        "destination": "/#work",
+        "type": 301
+      },
+      {
+        "source": "/work/household-app",
+        "destination": "/work/chanshambe/",
+        "type": 301
+      },
+      {
+        "source": "/work/household-app/",
+        "destination": "/work/chanshambe/",
+        "type": 301
       }
     ]
   },

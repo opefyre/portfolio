@@ -8,7 +8,7 @@ object travels through the site and refracts what is actually in the scene behin
 | Where | What the lens does |
 | --- | --- |
 | Hero | Sits large beside the name, over an engraved plate. It reacts to pointer position and velocity and to scroll, and deforms slowly while idle. |
-| Work | Rides the corner of each product screenshot and refracts it. The screenshots are WebGL planes, not DOM images. |
+| Work | Rides the corner of each featured screenshot and refracts it. The screenshots are WebGL planes, not DOM images. Below them, an index of more work: hovering a row brings its screenshot up as a WebGL card that trails the cursor. |
 | Results | Shows the "before": move it over "2 months" and the glass shows "5 months", struck through. Pointer, touch and keyboard focus all move it. |
 | Case studies, About | Sits on the hero image and refracts it. |
 | Footer | Returns small and dark. |
@@ -75,7 +75,7 @@ npm run verify:headers # security and cache headers on the live site
 
 | What | Where |
 | --- | --- |
-| Hero line, the four works (copy, stats, screenshots), results, About text, closing line | `content/site.ts` |
+| Hero line, all works (copy, stats, screenshots; `featured: true` for a full homepage block, otherwise the hover index), results, About text, closing line | `content/site.ts` |
 | Notes | `content/notes/*.md` (frontmatter: `title`, `date`, `summary`, `status`) |
 | Career list on About | Firestore `experiences` collection |
 
@@ -91,7 +91,7 @@ three.js, React Three Fiber, drei · Motion · GSAP ScrollTrigger · Lenis · Ba
 Type: Funnel Display for headlines and figures, Funnel Sans for text.
 
 ```
-app/                   /, /work/[slug] (4), /notes, /notes/[slug], /about, 404, sitemap, robots, OG image
+app/                   /, /work/[slug] (9), /notes, /notes/[slug], /about, 404, sitemap, robots, OG image
 components/lens/       the WebGL scene: one persistent canvas for the whole site
   LensStage.tsx        canvas, anchor selection and spring physics, render loop on GSAP's ticker
   AboshLens.tsx        deformed icosahedron + MeshTransmissionMaterial, GPU noise deformation
@@ -101,7 +101,7 @@ components/lens/       the WebGL scene: one persistent canvas for the whole site
   anchors.ts           DOM anchors telling the one lens where to be, how big, how thick, how dark
 components/media/      GLImage: DOM <img> that hands over to a WebGL plane
 components/motion/     SplitChars (letter choreography), CountUp (real figures)
-components/home/       Hero, Works, Results, HomeNotes
+components/home/       Hero, Works, WorksIndex, Results, HomeNotes
 components/shell/      Lenis + GSAP ticker, page transitions, hydration-safe reduced motion
 ```
 

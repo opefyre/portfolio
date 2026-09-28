@@ -165,6 +165,9 @@
 .work-name a {
   display: inline-block;
 }
+.work[data-long] .work-name {
+  font-size: clamp(44px, 5.8vw, 104px);
+}
 .work-line {
   max-width: 34ch;
   margin-top: clamp(20px, 3vh, 32px);
@@ -261,6 +264,101 @@ html[data-js] .work:not([data-in]) .ch-in {
 html[data-js] .work:not([data-in]) :is(.work-line, .work-stats, .work-foot) {
   opacity: 0;
   transform: translateY(20px);
+}
+
+/* ---------- Index (the rest of the work) --------------------------------- */
+
+.index {
+  padding-top: 0;
+}
+.index-title {
+  margin-bottom: clamp(28px, 5vh, 48px);
+}
+.index-list {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule-strong);
+}
+.index-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) 190px;
+  align-items: baseline;
+  gap: 10px 32px;
+  padding: clamp(22px, 3.4vh, 36px) 0;
+  border-bottom: 1px solid var(--rule);
+  transition: opacity 0.5s var(--ease-out);
+}
+.index-name {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(34px, 4.4vw, 76px);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  transition: transform 0.7s var(--ease-out);
+}
+.index-line {
+  max-width: 44ch;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--fg-2);
+}
+.index-line,
+.index-status {
+  transition: opacity 0.45s var(--ease-out);
+}
+.index-status {
+  font-size: 14px;
+  color: var(--fg-3);
+  white-space: nowrap;
+  text-align: right;
+}
+/* The card takes the place of the description while it's up. */
+.index-row.is-active :is(.index-line, .index-status) {
+  opacity: 0;
+}
+.index-list.has-active .index-row:not(.is-active) {
+  opacity: 0.22;
+}
+.index-row.is-active .index-name {
+  transform: translateX(16px);
+}
+/* The trailing card: positioned by JS relative to the list, drawn in WebGL. */
+.index-preview {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  width: clamp(280px, 26vw, 440px);
+  pointer-events: none;
+  opacity: 0;
+}
+.index-row.is-active .index-preview {
+  opacity: 1;
+}
+.index-preview-inner {
+  display: block;
+  transform: translate(-50%, -54%);
+}
+.index-preview-inner[data-wide] {
+  width: 150%;
+}
+@media (hover: none), (pointer: coarse) {
+  .index-row {
+    grid-template-columns: 1fr;
+  }
+  .index-preview {
+    position: static;
+    width: 100%;
+    margin-top: 14px;
+    opacity: 1;
+  }
+  .index-preview-inner,
+  .index-preview-inner[data-wide] {
+    width: 100%;
+    transform: none;
+  }
 }
 
 /* ---------- Results (the lens shows the "before") ------------------------ */
