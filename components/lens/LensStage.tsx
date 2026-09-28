@@ -248,7 +248,9 @@ export default function LensStage({ onUnavailable }: { onUnavailable: () => void
   // Touch scrolling is native and asynchronous: planes can't stay glued to it,
   // so on coarse pointers the images stay in the DOM and only the lens is WebGL.
   const [images] = useState(() => typeof window !== "undefined" && !window.matchMedia("(pointer: coarse)").matches);
-  const maxDpr = quality === "high" ? 1.75 : 1.5;
+  // Images live in this canvas too, so on high-quality devices it renders at
+  // the screen's full density (up to 2x) rather than being upscaled.
+  const maxDpr = quality === "high" ? 2 : 1.5;
   const [dpr, setDpr] = useState(Math.min(typeof window !== "undefined" ? window.devicePixelRatio : 1, maxDpr));
   const lostRef = useRef(false);
 
@@ -299,7 +301,7 @@ export default function LensStage({ onUnavailable }: { onUnavailable: () => void
         }}
       >
         <PerformanceMonitor
-          onDecline={() => setDpr((d) => Math.max(1, d - 0.25))}
+          onDecline={() => setDpr((d) => Math.max(1.25, d - 0.25))}
           onIncline={() => setDpr((d) => Math.min(maxDpr, d + 0.25))}
         />
         <Scene quality={quality} images={images} />

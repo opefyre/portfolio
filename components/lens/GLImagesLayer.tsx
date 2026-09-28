@@ -79,10 +79,13 @@ const fragmentShader = /* glsl */ `
     vec2 uv = (vUv - 0.5) * uCover / zoom + 0.5;
 
     float s = uVelocity * 0.0045;
+    // Negative LOD bias: sample the sharper mip level. Default trilinear
+    // filtering blurs screenshots and photos noticeably when they're shown
+    // at 50-80% of their source size.
     vec3 col = vec3(
-      texture2D(uMap, uv + vec2(0.0, s)).r,
-      texture2D(uMap, uv).g,
-      texture2D(uMap, uv - vec2(0.0, s)).b
+      texture2D(uMap, uv + vec2(0.0, s), -0.9).r,
+      texture2D(uMap, uv, -0.9).g,
+      texture2D(uMap, uv - vec2(0.0, s), -0.9).b
     );
 
     // A thin line of light rides the reveal front.
