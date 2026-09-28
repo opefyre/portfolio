@@ -166,14 +166,14 @@
 }
 .about-media {
   position: relative;
-  max-width: 380px;
+  max-width: 460px;
 }
 .about-lens {
   position: absolute;
-  width: 54%;
+  width: 44%;
   aspect-ratio: 1;
-  right: -24%;
-  bottom: -8%;
+  left: -7%;
+  bottom: -18%;
   pointer-events: none;
 }
 .about-title {
@@ -410,7 +410,12 @@
     grid-template-columns: 1fr;
   }
   .about-media {
-    max-width: 240px;
+    max-width: 360px;
+  }
+  .about-lens {
+    width: 34%;
+    left: -3%;
+    bottom: -4%;
   }
   .career-row {
     grid-template-columns: 1fr auto;

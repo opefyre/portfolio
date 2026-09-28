@@ -47,6 +47,7 @@ const personJsonLd = {
   name: site.name,
   alternateName: site.nickname,
   url: site.url,
+  image: `${site.url}/about/portrait.webp`,
   jobTitle: site.role,
   address: { "@type": "PostalAddress", addressLocality: "Lisbon", addressCountry: "PT" },
   sameAs: [site.linkedin, site.github],

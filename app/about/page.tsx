@@ -39,7 +39,7 @@ export default async function AboutPage() {
       <section className="about" data-nav-tone="dark" aria-labelledby="about-title">
         <div className="frame about-grid">
           <div className="about-media">
-            <GLImage id="portrait" src="/prof.webp" alt="Illustrated portrait of Abosh" width={320} height={480} radius={14} priority />
+            <GLImage id="portrait" src="/about/portrait.webp" alt="Abolfazl Shirkavand" width={1335} height={1178} radius={14} priority />
             <LensAnchor id="about" className="about-lens" sizeRatio={1} plateLines={0} plateHalo={0} thickness={0.7} />
           </div>
           <div className="about-copy">
