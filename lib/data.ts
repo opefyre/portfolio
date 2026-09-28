@@ -35,3 +35,10 @@ export const getExperiences = cache(async (): Promise<Experience[]> => {
     .map((d) => ({ id: d.id, ...(d.data() as Omit<Experience, "id">) }))
     .sort((a, b) => b.order - a.order);
 });
+
+export type Certification = { name: string };
+
+export const getCertifications = cache(async (): Promise<Certification[]> => {
+  const snap = await db().collection("certifications").get();
+  return snap.docs.map((d) => d.data() as Certification).sort((a, b) => a.name.localeCompare(b.name));
+});

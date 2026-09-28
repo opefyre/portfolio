@@ -394,7 +394,7 @@ html[data-js] .work:not([data-in]) :is(.work-line, .work-stats, .work-foot) {
   font-variant-numeric: tabular-nums;
 }
 .programs-big-label {
-  max-width: 21ch;
+  max-width: 26ch;
   padding-bottom: 0.3em;
   font-size: clamp(20px, 1.9vw, 30px);
   line-height: 1.25;

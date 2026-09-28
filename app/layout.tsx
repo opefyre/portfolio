@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Funnel_Display, Funnel_Sans } from "next/font/google";
 import { SiteShell } from "@/components/shell/SiteShell";
 import { site } from "@/content/site";
+import { getCertifications } from "@/lib/data";
 import "./globals.css";
 import "@/styles/home.css";
 import "@/styles/pages.css";
@@ -12,7 +13,7 @@ const funnelSans = Funnel_Sans({ subsets: ["latin"], weight: ["400", "500"], var
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} (${site.nickname}) · ${site.role}`,
+    default: site.title,
     template: `%s · ${site.name}`,
   },
   description: site.description,
@@ -24,13 +25,13 @@ export const metadata: Metadata = {
     type: "website",
     url: site.url,
     siteName: "abosh.io",
-    title: `${site.name} (${site.nickname})`,
+    title: site.title,
     description: site.description,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} (${site.nickname})`,
+    title: site.title,
     description: site.description,
   },
   robots: { index: true, follow: true },
@@ -41,19 +42,27 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-const personJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: site.name,
-  alternateName: site.nickname,
-  url: site.url,
-  image: `${site.url}/about/portrait.webp`,
-  jobTitle: site.role,
-  address: { "@type": "PostalAddress", addressLocality: "Lisbon", addressCountry: "PT" },
-  sameAs: [site.linkedin, site.github],
-};
+async function personJsonLd() {
+  const certifications = await getCertifications();
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: site.name,
+    alternateName: site.nickname,
+    url: site.url,
+    image: `${site.url}/about/portrait.webp`,
+    jobTitle: site.role,
+    description: site.description,
+    knowsAbout: site.expertise,
+    worksFor: { "@type": "Organization", name: "Vrolen", url: "https://vrolen.com" },
+    hasCredential: certifications.map((c) => ({ "@type": "EducationalOccupationalCredential", name: c.name })),
+    address: { "@type": "PostalAddress", addressLocality: "Lisbon", addressCountry: "PT" },
+    sameAs: [site.linkedin, site.github],
+  };
+}
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const person = await personJsonLd();
   return (
     <html
       lang="en"
@@ -73,7 +82,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main id="main" className="site-main">
           {children}
         </main>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} />
       </body>
     </html>
   );

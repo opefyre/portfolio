@@ -15,8 +15,29 @@ export const site = {
   location: "Lisbon",
   linkedin: "https://www.linkedin.com/in/abolfazl-shirkavand/",
   github: "https://github.com/opefyre",
+  /** Page title for the homepage and default share title. */
+  title: "Abolfazl Shirkavand: Operational Excellence, Digital Transformation & Industrial AI",
   description:
-    "Abolfazl Shirkavand (Abosh), founder of Vrolen. Ten years making factories and companies run measurably better, now building the software for it.",
+    "Founder of Vrolen. Ten years of digital transformation, operational excellence and supply chain programs, now building industrial AI and automation.",
+  /** What search engines should associate with the name (schema.org knowsAbout). From Firestore skills. */
+  expertise: [
+    "Digital transformation",
+    "Operational excellence",
+    "Continuous improvement",
+    "Industrial AI",
+    "Artificial intelligence",
+    "Process automation",
+    "Supply chain management",
+    "New product introduction",
+    "Program management",
+    "Project management",
+    "Product management",
+    "Lean manufacturing",
+    "Six Sigma",
+    "World Class Manufacturing",
+    "Overall equipment effectiveness (OEE)",
+    "Change management",
+  ],
 } as const;
 
 /** Share image (app/opengraph-image.jpg, a capture of the real hero render). */
@@ -31,7 +52,7 @@ export const hero = {
   /** Rendered as: before + linked company + after. */
   before: "Founder of ",
   company: { name: "Vrolen", href: "https://vrolen.com" },
-  after: ". I make operations measurably better, and build the software that does it.",
+  after: ". I lead digital transformation and operational excellence, and build the AI that makes improvement last.",
 };
 
 export type Shot = { src: string; alt: string; width: number; height: number };
@@ -58,7 +79,7 @@ export const works: Work[] = [
     slug: "vrolen",
     featured: true,
     name: "Vrolen",
-    line: "See how work actually flows, find what matters, improve it, then prove the result held.",
+    line: "A continuous improvement platform: see how work actually flows, find what matters, improve it, then prove the result held.",
     status: "Launching November 2026",
     href: "https://vrolen.com",
     hrefLabel: "vrolen.com",
@@ -300,13 +321,13 @@ export type Program = {
 
 /** Transformation programs inside companies. Numbers only, no screenshots. */
 export const programs: { headline: { value: string; label: string }; items: Program[] } = {
-  headline: { value: "67%", label: "average cycle-time reduction across 70+ transformation programs" },
+  headline: { value: "67%", label: "average cycle-time reduction across 70+ digital transformation and operational excellence programs" },
   items: [
     {
       company: "Snoonu",
       years: "2023 to 2026",
       role: "Head of Digital Innovation",
-      line: "Automated the back office across every department: payroll, expenses, access, onboarding and IT, with a team of 12+.",
+      line: "Led digital transformation across every department: automated payroll, expenses, access, onboarding and IT, and brought in AI assistants, with a team of 12+.",
       hero: { value: "< 1 hour", before: "4 days", label: "to calculate payroll" },
       stats: [
         { value: "50+", label: "automation and process projects" },
@@ -318,7 +339,7 @@ export const programs: { headline: { value: string; label: string }; items: Prog
       company: "British American Tobacco",
       years: "2020 to 2023",
       role: "Supply chain, new product introduction",
-      line: "Rebuilt how new products reach the market: readiness gates, supplier sourcing and MRP planning across nine lines.",
+      line: "Ran new product launches as a supply chain program: readiness gates, supplier sourcing and MRP planning across nine lines.",
       hero: { value: "2 months", before: "5 months", label: "launch lead time" },
       stats: [
         { value: "12%", label: "average procurement saving" },
@@ -329,8 +350,8 @@ export const programs: { headline: { value: string; label: string }; items: Prog
     {
       company: "Unilever",
       years: "2016 to 2020",
-      role: "Operations improvement",
-      line: "World Class Manufacturing on live production lines: OEE, MTBF, changeovers and quality defects.",
+      role: "Operational excellence",
+      line: "World Class Manufacturing and Lean on live production lines: OEE, MTBF, changeovers and quality defects.",
       hero: { value: "~75%", before: "~60%", label: "OEE on the lines I worked on" },
       stats: [
         { value: "~45 min", label: "changeover time, down from ~90 min" },
@@ -342,7 +363,7 @@ export const programs: { headline: { value: string; label: string }; items: Prog
       company: "Smart Factory Planning",
       years: "2024 to now",
       role: "AI product team lead",
-      line: "Product lead for manufacturing software sold to industrial customers: planning, live monitoring, skills and MRP.",
+      line: "Product lead for industrial AI software used by manufacturers: planning, live monitoring, skills and MRP.",
       hero: { value: "Live", before: "Next day", label: "OEE and downtime, seen as they happen" },
       stats: [
         { value: "6+", label: "industrial customers on the modules" },
@@ -355,10 +376,13 @@ export const programs: { headline: { value: string; label: string }; items: Prog
 export const about = {
   bio: [
     "I'm Abolfazl Shirkavand. Most people call me Abosh.",
-    "I'm an engineer who has spent ten years making operations run better: production lines at Unilever, product launches at British American Tobacco, automation at Snoonu, and factory software at Smart Factory Planning. Across 70+ transformation programs, cycle time came down 67% on average.",
+    "I'm an engineer who has spent ten years on operational excellence and digital transformation: continuous improvement on production lines at Unilever, supply chain and product launches at British American Tobacco, automation and AI at Snoonu, and industrial AI products at Smart Factory Planning.",
+    "My toolkit is Lean, Six Sigma and World Class Manufacturing on the floor, program and project management to deliver the change, and software, data and AI to make it last. Across 70+ transformation programs, cycle time came down 67% on average.",
     "The part I care about most is checking that an improvement actually held. That's why I'm building Vrolen. I live in Lisbon, and I build small products I want to use myself.",
   ],
   education: "B.Sc. in Engineering, an MBA, and a master's in technology and engineering management.",
+  /** Shown after the certifications fetched from Firestore. */
+  certificationsNote: "Preparing for the PMP.",
 };
 
 export const closing = ["Curiosity in systems,", "for a better tomorrow."];

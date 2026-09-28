@@ -13,7 +13,7 @@ export function Programs() {
     <section className="programs" data-nav-tone="dark" aria-labelledby="programs-title">
       <div className="frame">
         <h2 id="programs-title" className="sr-only">
-          Programs
+          Digital transformation and operational excellence programs
         </h2>
         <p className="programs-lead">
           <CountUp value={programs.headline.value} className="programs-big" />

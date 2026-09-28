@@ -193,9 +193,13 @@
   line-height: 1.5;
   color: var(--fg-2);
 }
-.about-edu {
+.about-edu,
+.about-certs {
   font-size: 17px;
   color: var(--fg-3);
+}
+.about-edu {
+  margin-bottom: 8px;
 }
 .about-contact {
   display: flex;

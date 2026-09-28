@@ -3,11 +3,12 @@ import { LensAnchor } from "@/components/lens/LensAnchor";
 import { GLImage } from "@/components/media/GLImage";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { about, ogImage, site } from "@/content/site";
-import { getExperiences } from "@/lib/data";
+import { getCertifications, getExperiences } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Abolfazl Shirkavand (Abosh): engineer, operator and founder of Vrolen, based in Lisbon.",
+  description:
+    "Operational excellence, digital transformation and supply chain programs at Unilever, British American Tobacco and Snoonu. Founder of Vrolen, based in Lisbon.",
   alternates: { canonical: "/about/" },
   openGraph: { title: "About Abolfazl Shirkavand (Abosh)", url: "/about/", images: [ogImage] },
   twitter: { card: "summary_large_image", title: "About Abolfazl Shirkavand (Abosh)", images: [ogImage] },
@@ -21,7 +22,7 @@ function years(period: string): [number, number | null] {
 }
 
 export default async function AboutPage() {
-  const experiences = await getExperiences();
+  const [experiences, certifications] = await Promise.all([getExperiences(), getCertifications()]);
   const rows = experiences.map((e) => {
     const spans = e.positions.map((p) => years(p.period));
     const start = Math.min(...spans.map((s) => s[0]));
@@ -52,6 +53,9 @@ export default async function AboutPage() {
               </p>
             ))}
             <p className="about-p about-edu">{about.education}</p>
+            <p className="about-p about-certs">
+              Certified: {certifications.map((c) => c.name).join(", ")}. {about.certificationsNote}
+            </p>
             <p className="about-contact">
               <a href={`mailto:${site.email}`} className="text-link">
                 {site.email}
