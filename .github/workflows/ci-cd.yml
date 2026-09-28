@@ -8,20 +8,26 @@ on:
     branches:
       - main
 
+# Least privilege by default; jobs widen only what they need.
+permissions:
+  contents: read
+
 jobs:
   # 1. Verification Job (Lint & Build)
   verify:
     name: Verify & Build
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     env:
         # Provide the service account key so the build can fetch data from Firestore
         FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: 'npm'
@@ -40,7 +46,7 @@ jobs:
       # Upload build artifacts to pass to the deploy job (saves rebuilding)
       - name: Upload Build Artifact
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: out-build
           path: out
@@ -52,12 +58,15 @@ jobs:
     needs: verify
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      checks: write # the Firebase deploy action reports its result as a check
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Download Build Artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: out-build
           path: out
