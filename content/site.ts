@@ -207,7 +207,7 @@ export const works: Work[] = [
     slug: "azshambe",
     name: "Azshambe",
     line: "Turns \u201cI'll start on Saturday\u201d into a commitment you schedule, lock and prove.",
-    status: "In progress",
+    status: "Built, pre-launch",
     image: { src: "/work/azshambe/screens.webp", alt: "Four Azshambe screens in Persian: home, writing a commitment, Friday planning and a timer proof", width: 2400, height: 1200 },
     gallery: [
       { src: "/work/azshambe/more-screens.webp", alt: "Four more Azshambe screens: group progress, private notes, who can see a commitment and quiet hours", width: 2400, height: 1200 },
@@ -223,7 +223,9 @@ export const works: Work[] = [
     slug: "elsewhere-hotel",
     name: "Elsewhere Hotel",
     line: "A drawn hotel room for a real city. The view, radio, book and painting inside it are live and real.",
-    status: "In progress",
+    status: "Running",
+    href: "https://elsewherehotel.abosh.io",
+    hrefLabel: "elsewherehotel.abosh.io",
     image: { src: "/work/elsewhere-hotel/paris.webp", alt: "Elsewhere Hotel: the Paris room, with a live view of Pont Alexandre III and Van Gogh's Bedroom on the wall", width: 2400, height: 1500 },
     gallery: [
       { src: "/work/elsewhere-hotel/lobby.webp", alt: "Elsewhere Hotel lobby: tell the concierge a mood to check in", width: 2400, height: 1500 },
@@ -240,6 +242,27 @@ export const works: Work[] = [
       "Tell the concierge a mood, like \u201csomewhere it's getting dark, with rain\u201d, and it checks live weather and daylight to pick one of 20 rooms.",
       "The room is illustrated, but everything in it is real: a photo of the view taken within 120 km, the local weather and sunset, a live local radio station, a public-domain book, a painting from a museum's open collection and a snack from an open food database.",
       "Some objects are doors. Van Gogh's Bedroom on the wall in Paris leads to Arles, and the Jules Verne on the bed leads to Reykjavik. A travel journal keeps your stamps, and you can send the route to a friend.",
+    ],
+  },
+  {
+    slug: "bad-timing",
+    name: "Bad Timing",
+    line: "Check the date before you send the invitation. It finds what could clash with your event.",
+    status: "Running",
+    href: "https://badtiming.abosh.io",
+    hrefLabel: "badtiming.abosh.io",
+    image: { src: "/work/bad-timing/home.webp", alt: "Bad Timing: what might interfere with your event? A map pinned on Lisbon", width: 2400, height: 1500 },
+    gallery: [
+      { src: "/work/bad-timing/report.webp", alt: "A Bad Timing report: 3 overlaps to consider, two road closures and sunset, each with avoid it, doesn't matter or plan around it", width: 2400, height: 1500 },
+      { src: "/work/bad-timing/form.webp", alt: "The Bad Timing form: venue, indoor or outdoor, kind of event, start and duration", width: 2400, height: 1500 },
+      { src: "/work/bad-timing/alternatives.webp", alt: "Bad Timing suggests another time: earlier the same day, or the same time on another day", width: 2400, height: 1500 },
+      { src: "/work/bad-timing/phones.webp", alt: "Bad Timing on a phone", width: 2400, height: 1400 },
+    ],
+    stats: [{ value: "34", label: "public data sources checked" }],
+    body: [
+      "You pick a date for a birthday or a meetup, send the invitations, and only then find out there's a derby, a road closure or a storm that evening.",
+      "Bad Timing checks a place and time against 34 public data sources: football and TV schedules, ticketed events, public and school holidays, weather warnings, road closures and transit alerts, even earthquakes and wildfires. Every finding links to its source and says how much to trust it.",
+      "For each clash you choose: avoid it, doesn't matter, or plan around it. Ask for alternatives and it re-checks earlier times the same day, or the same time on other days. A source it couldn't reach is never counted as all clear.",
     ],
   },
   {

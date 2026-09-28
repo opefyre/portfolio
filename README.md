@@ -91,7 +91,7 @@ three.js, React Three Fiber, drei · Motion · GSAP ScrollTrigger · Lenis · Ba
 Type: Funnel Display for headlines and figures, Funnel Sans for text.
 
 ```
-app/                   /, /work/[slug] (9), /notes, /notes/[slug], /about, 404, sitemap, robots, OG image
+app/                   /, /work/[slug] (10), /notes, /notes/[slug], /about, 404, sitemap, robots, OG image
 components/lens/       the WebGL scene: one persistent canvas for the whole site
   LensStage.tsx        canvas, anchor selection and spring physics, render loop on GSAP's ticker
   AboshLens.tsx        deformed icosahedron + MeshTransmissionMaterial, GPU noise deformation
