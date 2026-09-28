@@ -50,7 +50,14 @@ export function Hero() {
             <SplitChars text={last} offset={first.length} />
           </span>
         </h1>
-        <p className="hero-line">{hero.line}</p>
+        <p className="hero-line">
+          {hero.before}
+          <a href={hero.company.href} target="_blank" rel="noopener noreferrer" className="hero-company">
+            {hero.company.name}
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>
+          {hero.after}
+        </p>
         <LensAnchor id="hero" className="hero-lens" sizeRatio={0.9} plateLines={1} plateHalo={1} priority={1} />
       </div>
     </section>

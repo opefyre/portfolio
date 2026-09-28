@@ -28,7 +28,10 @@ export const ogImage = {
 };
 
 export const hero = {
-  line: "Founder of Vrolen. I make operations measurably better, and build the software that does it.",
+  /** Rendered as: before + linked company + after. */
+  before: "Founder of ",
+  company: { name: "Vrolen", href: "https://vrolen.com" },
+  after: ". I make operations measurably better, and build the software that does it.",
 };
 
 export type Shot = { src: string; alt: string; width: number; height: number };

@@ -58,6 +58,17 @@
   color: var(--fg-2);
   animation: fade-up 1s var(--ease-out) 0.9s both;
 }
+/* Vrolen's own brand green, used only for its name. */
+.hero-company {
+  color: #5ee800;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  padding-bottom: 1px;
+  transition: background-size 0.45s var(--ease-out);
+}
+.hero-company:hover,
+.hero-company:focus-visible {
+  background-size: 100% 1px;
+}
 .hero-lens {
   position: absolute;
   z-index: 1;
