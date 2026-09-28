@@ -57,9 +57,6 @@ const fragmentShader = /* glsl */ `
   uniform float uReveal;
   uniform float uVelocity;
   uniform float uOpacity;
-  uniform float uParallax;
-  uniform float uDrift;
-  uniform float uHover;
   uniform float uTime;
   varying vec2 vUv;
 
@@ -76,10 +73,10 @@ const fragmentShader = /* glsl */ `
     float front = uReveal * 1.4 - 0.2 + n * 0.18;
     float shown = smoothstep(vUv.y - 0.1, vUv.y, front);
 
-    // Cover-fit, then settle the zoom as it reveals; parallax room grows in.
-    float zoom = 1.0 + (1.0 - uReveal) * 0.16 + uDrift * 0.035 + uHover * 0.02;
+    // Cover-fit. The zoom only exists while revealing and settles to exactly 1,
+    // so a screenshot is always shown edge to edge, never cropped.
+    float zoom = 1.0 + (1.0 - uReveal) * 0.12;
     vec2 uv = (vUv - 0.5) * uCover / zoom + 0.5;
-    uv.y += uParallax;
 
     float s = uVelocity * 0.0045;
     vec3 col = vec3(
@@ -112,8 +109,6 @@ function makeUniforms() {
     uReveal: { value: 0 },
     uVelocity: { value: 0 },
     uOpacity: { value: 0 },
-    uParallax: { value: 0 },
-    uDrift: { value: 0 },
     uHover: { value: 0 },
     uMouse: { value: new THREE.Vector2(0.5, 0.5) },
     uTime: { value: 0 },
@@ -141,7 +136,6 @@ type PlaneState = {
   vel: Spring;
   hover: Spring;
   opacity: Spring;
-  drift: Spring;
 };
 
 function Plane({ entry }: { entry: GLImageEntry }) {
@@ -186,7 +180,6 @@ function Plane({ entry }: { entry: GLImageEntry }) {
     vel: spring(),
     hover: spring(),
     opacity: spring(),
-    drift: spring(),
   });
 
   useFrame((state, dt) => {
@@ -305,9 +298,7 @@ function Plane({ entry }: { entry: GLImageEntry }) {
     const inside = !!el && p.seen && !reduced && px > left && px < left + s.w.x && py > top && py < bottom;
     stepSpring(s.hover, inside ? 1 : 0, dt, 110, 18);
     if (inside) u.uMouse.value.set((px - left) / s.w.x, 1 - (py - top) / s.h.x);
-    // parallax room fades in after a swap, so the swap itself is pixel-identical
-    stepSpring(s.drift, reduced || s.flying ? 0 : 1, dt, 20, 9);
-    if (Math.abs(s.vel.x) > 0.002 || Math.abs(s.hover.v) > 0.002 || Math.abs(s.drift.v) > 0.002) busy = true;
+    if (Math.abs(s.vel.x) > 0.002 || Math.abs(s.hover.v) > 0.002) busy = true;
 
     // ---- world transform ------------------------------------------------------
     const upp = (2 * (camera.position.z - Z) * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2))) / H;
@@ -335,8 +326,6 @@ function Plane({ entry }: { entry: GLImageEntry }) {
     u.uReveal.value = reveal;
     u.uVelocity.value = s.vel.x;
     u.uHover.value = s.hover.x;
-    u.uDrift.value = s.drift.x;
-    u.uParallax.value = THREE.MathUtils.clamp((s.y.x - H / 2) / H, -1, 1) * 0.016 * s.drift.x;
     u.uOpacity.value = s.opacity.x;
     u.uTime.value = t;
 
