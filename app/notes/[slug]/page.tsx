@@ -41,6 +41,7 @@ export default async function NotePage({ params }: Params) {
     headline: n.title,
     description: n.summary,
     datePublished: n.date,
+    ...(n.topic ? { articleSection: n.topic } : {}),
     keywords: n.keywords.join(", "),
     image: `${site.url}${ogImage.url}`,
     author: { "@type": "Person", name: site.name, url: site.url, jobTitle: site.role, knowsAbout: site.expertise },
@@ -57,17 +58,29 @@ export default async function NotePage({ params }: Params) {
             </TLink>
             <h1 className="note-title">{n.title}</h1>
             <p className="note-meta">
+              {n.topic && <span className="note-meta-topic">{n.topic}</span>}
               <time dateTime={n.date}>{formatDate(n.date)}</time>
               <span>{n.readingMinutes} min read</span>
             </p>
           </header>
+          {n.toc.length > 0 && (
+            <nav className="note-toc" aria-label="Contents">
+              <ol>
+                {n.toc.map((t) => (
+                  <li key={t.id}>
+                    <a href={`#${t.id}`}>{t.text}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          )}
           <div className="prose" dangerouslySetInnerHTML={{ __html: n.html }} />
           <aside className="note-cta" aria-label="Work together">
             <p className="note-cta-title">Working on something like this?</p>
             <p className="note-cta-text">
-              I work with operations and transformation teams on continuous improvement, operational excellence, supply
-              chains and industrial AI. If this sounds like your line, your program or your problem, I&rsquo;d be glad to
-              compare notes.
+              I work with operations and transformation teams on operational excellence, digital transformation programs,
+              supply chains and industrial AI. If this sounds like your line, your program or your problem, I&rsquo;d be
+              glad to compare notes.
             </p>
             <p className="note-cta-links">
               <a href={`mailto:${site.email}`} className="text-link">

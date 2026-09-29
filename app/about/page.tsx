@@ -54,7 +54,7 @@ export default async function AboutPage() {
             ))}
             <p className="about-p about-edu">{about.education}</p>
             <p className="about-p about-certs">
-              Certified: {certifications.map((c) => c.name).join(", ")}. {about.certificationsNote}
+              Certified: {certifications.map((c) => c.name).join(", ")}.
             </p>
             <p className="about-contact">
               <a href={`mailto:${site.email}`} className="text-link">

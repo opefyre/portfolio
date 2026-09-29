@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 262" role="img" aria-label="Activity-on-node network. Each box shows the activity, its duration, earliest start and finish on top and latest start and finish below. The critical path runs A, B, D, F, G, H.">
+<defs><marker id="cpm-ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#5a5d60"/></marker><marker id="cpm-ark" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#0f1011"/></marker></defs>
+<path d="M96.0,131.0 C105.4,131.0 105.4,131.0 114.8,131.0" fill="none" stroke="#0f1011" stroke-width="2" marker-end="url(#cpm-ark)"/>
+<path d="M212.8,131.0 C222.2,131.0 222.2,39.0 231.6,39.0" fill="none" stroke="#5a5d60" stroke-width="1.2" marker-end="url(#cpm-ar)"/>
+<path d="M212.8,131.0 C222.2,131.0 222.2,131.0 231.6,131.0" fill="none" stroke="#0f1011" stroke-width="2" marker-end="url(#cpm-ark)"/>
+<path d="M96.0,131.0 C105.4,131.0 105.4,223.0 114.8,223.0" fill="none" stroke="#5a5d60" stroke-width="1.2" marker-end="url(#cpm-ar)"/>
+<path d="M329.6,39.0 C339.0,39.0 339.0,131.0 348.4,131.0" fill="none" stroke="#5a5d60" stroke-width="1.2" marker-end="url(#cpm-ar)"/>
+<path d="M329.6,131.0 C339.0,131.0 339.0,131.0 348.4,131.0" fill="none" stroke="#0f1011" stroke-width="2" marker-end="url(#cpm-ark)"/>
+<path d="M212.8,223.0 L503.2,223.0 Q515.2,223.0 515.2,211.0 L515.2,169.0" fill="none" stroke="#5a5d60" stroke-width="1.2" marker-end="url(#cpm-ar)"/>
+<path d="M446.4,131.0 C455.8,131.0 455.8,131.0 465.2,131.0" fill="none" stroke="#0f1011" stroke-width="2" marker-end="url(#cpm-ark)"/>
+<path d="M563.2,131.0 C572.6,131.0 572.6,131.0 582.0,131.0" fill="none" stroke="#0f1011" stroke-width="2" marker-end="url(#cpm-ark)"/>
+<rect x="0.0" y="96" width="96" height="70" rx="6" fill="#0f1011" stroke="#0f1011" stroke-width="1.2"/>
+<text x="8.0" y="113" font-size="12" fill="#b9b8b2">0</text><text x="88.0" y="113" font-size="12" fill="#b9b8b2" text-anchor="end">5</text>
+<text x="48.0" y="137" font-size="17" font-weight="600" fill="#eeebe4" text-anchor="middle">A · 5d</text>
+<text x="8.0" y="158" font-size="12" fill="#b9b8b2">0</text><text x="88.0" y="158" font-size="12" fill="#b9b8b2" text-anchor="end">5</text>
+<rect x="116.8" y="96" width="96" height="70" rx="6" fill="#0f1011" stroke="#0f1011" stroke-width="1.2"/>
+<text x="124.8" y="113" font-size="12" fill="#b9b8b2">5</text><text x="204.8" y="113" font-size="12" fill="#b9b8b2" text-anchor="end">15</text>
+<text x="164.8" y="137" font-size="17" font-weight="600" fill="#eeebe4" text-anchor="middle">B · 10d</text>
+<text x="124.8" y="158" font-size="12" fill="#b9b8b2">5</text><text x="204.8" y="158" font-size="12" fill="#b9b8b2" text-anchor="end">15</text>
+<rect x="233.6" y="4" width="96" height="70" rx="6" fill="#eeebe4" stroke="#0f1011" stroke-width="1.2"/>
+<text x="241.6" y="21" font-size="12" fill="#5a5d60">15</text><text x="321.6" y="21" font-size="12" fill="#5a5d60" text-anchor="end">23</text>
+<text x="281.6" y="45" font-size="17" font-weight="600" fill="#0f1011" text-anchor="middle">C · 8d</text>
+<text x="241.6" y="66" font-size="12" fill="#5a5d60">19</text><text x="321.6" y="66" font-size="12" fill="#5a5d60" text-anchor="end">27</text>
+<rect x="233.6" y="96" width="96" height="70" rx="6" fill="#0f1011" stroke="#0f1011" stroke-width="1.2"/>
+<text x="241.6" y="113" font-size="12" fill="#b9b8b2">15</text><text x="321.6" y="113" font-size="12" fill="#b9b8b2" text-anchor="end">27</text>
+<text x="281.6" y="137" font-size="17" font-weight="600" fill="#eeebe4" text-anchor="middle">D · 12d</text>
+<text x="241.6" y="158" font-size="12" fill="#b9b8b2">15</text><text x="321.6" y="158" font-size="12" fill="#b9b8b2" text-anchor="end">27</text>
+<rect x="116.8" y="188" width="96" height="70" rx="6" fill="#eeebe4" stroke="#0f1011" stroke-width="1.2"/>
+<text x="124.8" y="205" font-size="12" fill="#5a5d60">5</text><text x="204.8" y="205" font-size="12" fill="#5a5d60" text-anchor="end">11</text>
+<text x="164.8" y="229" font-size="17" font-weight="600" fill="#0f1011" text-anchor="middle">E · 6d</text>
+<text x="124.8" y="250" font-size="12" fill="#5a5d60">26</text><text x="204.8" y="250" font-size="12" fill="#5a5d60" text-anchor="end">32</text>
+<rect x="350.4" y="96" width="96" height="70" rx="6" fill="#0f1011" stroke="#0f1011" stroke-width="1.2"/>
+<text x="358.4" y="113" font-size="12" fill="#b9b8b2">27</text><text x="438.4" y="113" font-size="12" fill="#b9b8b2" text-anchor="end">32</text>
+<text x="398.4" y="137" font-size="17" font-weight="600" fill="#eeebe4" text-anchor="middle">F · 5d</text>
+<text x="358.4" y="158" font-size="12" fill="#b9b8b2">27</text><text x="438.4" y="158" font-size="12" fill="#b9b8b2" text-anchor="end">32</text>
+<rect x="467.2" y="96" width="96" height="70" rx="6" fill="#0f1011" stroke="#0f1011" stroke-width="1.2"/>
+<text x="475.2" y="113" font-size="12" fill="#b9b8b2">32</text><text x="555.2" y="113" font-size="12" fill="#b9b8b2" text-anchor="end">36</text>
+<text x="515.2" y="137" font-size="17" font-weight="600" fill="#eeebe4" text-anchor="middle">G · 4d</text>
+<text x="475.2" y="158" font-size="12" fill="#b9b8b2">32</text><text x="555.2" y="158" font-size="12" fill="#b9b8b2" text-anchor="end">36</text>
+<rect x="584.0" y="96" width="96" height="70" rx="6" fill="#0f1011" stroke="#0f1011" stroke-width="1.2"/>
+<text x="592.0" y="113" font-size="12" fill="#b9b8b2">36</text><text x="672.0" y="113" font-size="12" fill="#b9b8b2" text-anchor="end">39</text>
+<text x="632.0" y="137" font-size="17" font-weight="600" fill="#eeebe4" text-anchor="middle">H · 3d</text>
+<text x="592.0" y="158" font-size="12" fill="#b9b8b2">36</text><text x="672.0" y="158" font-size="12" fill="#b9b8b2" text-anchor="end">39</text>
+</svg>

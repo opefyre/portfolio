@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 330" role="img" aria-label="Individuals control chart of 30 days. The first 20 days vary randomly between the limits of 10.5 and 13.7 minutes. Day 21 is above the upper limit, and days 22 to 30 all sit above the centre line, a shift.">
+<text x="34" y="258.6" font-size="13" fill="#5a5d60" text-anchor="end">11</text>
+<text x="34" y="206.2" font-size="13" fill="#5a5d60" text-anchor="end">12</text>
+<text x="34" y="153.8" font-size="13" fill="#5a5d60" text-anchor="end">13</text>
+<text x="34" y="101.4" font-size="13" fill="#5a5d60" text-anchor="end">14</text>
+<text x="34" y="49.0" font-size="13" fill="#5a5d60" text-anchor="end">15</text>
+<rect x="409.8" y="24" width="186.2" height="262" fill="#0f1011" opacity="0.045"/>
+<line x1="44" y1="115.1" x2="596" y2="115.1" stroke="#b4532a" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="602" y="119.1" font-size="13" fill="#b4532a">UCL 13.7</text>
+<line x1="44" y1="198.0" x2="596" y2="198.0" stroke="#0f1011" stroke-width="1.5" stroke-dasharray=""/>
+<text x="602" y="202.0" font-size="13" fill="#0f1011">Mean 12.1</text>
+<line x1="44" y1="280.9" x2="596" y2="280.9" stroke="#b4532a" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="602" y="284.9" font-size="13" fill="#b4532a">LCL 10.5</text>
+<polyline points="44.0,196.9 62.8,223.1 81.5,181.2 100.3,207.4 119.0,160.2 137.8,217.9 156.6,191.7 175.3,202.2 194.1,233.6 212.8,170.7 231.6,186.4 250.3,212.6 269.1,176.0 287.9,207.4 306.6,196.9 325.4,165.5 344.1,223.1 362.9,191.7 381.7,202.2 400.4,212.6 419.2,50.2 437.9,170.7 456.7,155.0 475.4,176.0 494.2,160.2 513.0,165.5 531.7,149.8 550.5,170.7 569.2,155.0 588.0,165.5" fill="none" stroke="#6f7f8c" stroke-width="1.5"/>
+<circle cx="44.0" cy="196.9" r="3.6" fill="#0f1011"/>
+<circle cx="62.8" cy="223.1" r="3.6" fill="#0f1011"/>
+<circle cx="81.5" cy="181.2" r="3.6" fill="#0f1011"/>
+<circle cx="100.3" cy="207.4" r="3.6" fill="#0f1011"/>
+<circle cx="119.0" cy="160.2" r="3.6" fill="#0f1011"/>
+<circle cx="137.8" cy="217.9" r="3.6" fill="#0f1011"/>
+<circle cx="156.6" cy="191.7" r="3.6" fill="#0f1011"/>
+<circle cx="175.3" cy="202.2" r="3.6" fill="#0f1011"/>
+<circle cx="194.1" cy="233.6" r="3.6" fill="#0f1011"/>
+<circle cx="212.8" cy="170.7" r="3.6" fill="#0f1011"/>
+<circle cx="231.6" cy="186.4" r="3.6" fill="#0f1011"/>
+<circle cx="250.3" cy="212.6" r="3.6" fill="#0f1011"/>
+<circle cx="269.1" cy="176.0" r="3.6" fill="#0f1011"/>
+<circle cx="287.9" cy="207.4" r="3.6" fill="#0f1011"/>
+<circle cx="306.6" cy="196.9" r="3.6" fill="#0f1011"/>
+<circle cx="325.4" cy="165.5" r="3.6" fill="#0f1011"/>
+<circle cx="344.1" cy="223.1" r="3.6" fill="#0f1011"/>
+<circle cx="362.9" cy="191.7" r="3.6" fill="#0f1011"/>
+<circle cx="381.7" cy="202.2" r="3.6" fill="#0f1011"/>
+<circle cx="400.4" cy="212.6" r="3.6" fill="#0f1011"/>
+<circle cx="419.2" cy="50.2" r="5" fill="#b4532a"/>
+<circle cx="437.9" cy="170.7" r="5" fill="#b4532a"/>
+<circle cx="456.7" cy="155.0" r="5" fill="#b4532a"/>
+<circle cx="475.4" cy="176.0" r="5" fill="#b4532a"/>
+<circle cx="494.2" cy="160.2" r="5" fill="#b4532a"/>
+<circle cx="513.0" cy="165.5" r="5" fill="#b4532a"/>
+<circle cx="531.7" cy="149.8" r="5" fill="#b4532a"/>
+<circle cx="550.5" cy="170.7" r="5" fill="#b4532a"/>
+<circle cx="569.2" cy="155.0" r="5" fill="#b4532a"/>
+<circle cx="588.0" cy="165.5" r="5" fill="#b4532a"/>
+<text x="44.0" y="308" font-size="13" fill="#5a5d60" text-anchor="middle">Day 1</text>
+<text x="119.0" y="308" font-size="13" fill="#5a5d60" text-anchor="middle">5</text>
+<text x="212.8" y="308" font-size="13" fill="#5a5d60" text-anchor="middle">10</text>
+<text x="306.6" y="308" font-size="13" fill="#5a5d60" text-anchor="middle">15</text>
+<text x="400.4" y="308" font-size="13" fill="#5a5d60" text-anchor="middle">20</text>
+<text x="494.2" y="308" font-size="13" fill="#5a5d60" text-anchor="middle">25</text>
+<text x="588.0" y="308" font-size="13" fill="#5a5d60" text-anchor="middle">30</text>
+<text x="429.2" y="55.2" font-size="13" fill="#b4532a">Day 21: outside the limits</text>
+<text x="419.8" y="257.2" font-size="13" fill="#5a5d60">Judged against those limits</text>
+<text x="44.0" y="257.2" font-size="13" fill="#5a5d60">Days 1 to 20 set the limits</text>
+<text x="505.5" y="222.1" font-size="13" fill="#b4532a" text-anchor="middle">10 days in a row above the mean</text>
+</svg>

@@ -3,6 +3,7 @@ title: Why busy machines make customers wait: Little's Law and takt time on the 
 date: 2026-09-24
 summary: Keeping every resource busy feels productive and often makes lead times worse. Two simple formulas explain why, and how launch times fell from five months to two.
 status: draft
+topic: Supply chain
 keywords: Little's Law, takt time, lead time, WIP, supply chain, lean manufacturing, new product introduction, operational excellence
 ---
 
