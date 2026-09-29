@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 314" role="img" aria-label="RACI matrix for a product launch: six tasks by six roles. Each task has exactly one A, accountable, and at least one R, responsible.">
+<text x="249.2" y="50" font-size="13" fill="#5a5d60" text-anchor="middle">Sponsor</text>
+<text x="327.5" y="50" font-size="13" fill="#5a5d60" text-anchor="middle">Project lead</text>
+<text x="405.8" y="50" font-size="13" fill="#5a5d60" text-anchor="middle">Marketing</text>
+<text x="484.2" y="50" font-size="13" fill="#5a5d60" text-anchor="middle">Supply chain</text>
+<text x="562.5" y="50" font-size="13" fill="#5a5d60" text-anchor="middle">Quality</text>
+<text x="640.8" y="50" font-size="13" fill="#5a5d60" text-anchor="middle">Finance</text>
+<line x1="0" y1="64" x2="680" y2="64" stroke="#d6d3cb"/>
+<text x="0" y="89" font-size="14" fill="#0f1011">Approve the business case</text>
+<rect x="234.2" y="71" width="30" height="26" rx="5" fill="#b4532a"/>
+<text x="249.2" y="89" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">A</text>
+<rect x="312.5" y="71" width="30" height="26" rx="5" fill="#6f7f8c"/>
+<text x="327.5" y="89" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">C</text>
+<rect x="390.8" y="71" width="30" height="26" rx="5" fill="#6f7f8c"/>
+<text x="405.8" y="89" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">C</text>
+<rect x="469.2" y="71" width="30" height="26" rx="5" fill="#6f7f8c"/>
+<text x="484.2" y="89" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">C</text>
+<rect x="625.8" y="71" width="30" height="26" rx="5" fill="#0f1011"/>
+<text x="640.8" y="89" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">R</text>
+<line x1="0" y1="104" x2="680" y2="104" stroke="#d6d3cb"/>
+<text x="0" y="129" font-size="14" fill="#0f1011">Define the product spec</text>
+<rect x="234.2" y="111" width="30" height="26" rx="5" fill="#b9b6ae"/>
+<text x="249.2" y="129" font-size="14" font-weight="600" fill="#0f1011" text-anchor="middle">I</text>
+<rect x="312.5" y="111" width="30" height="26" rx="5" fill="#b4532a"/>
+<text x="327.5" y="129" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">A</text>
+<rect x="390.8" y="111" width="30" height="26" rx="5" fill="#0f1011"/>
+<text x="405.8" y="129" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">R</text>
+<rect x="469.2" y="111" width="30" height="26" rx="5" fill="#6f7f8c"/>
+<text x="484.2" y="129" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">C</text>
+<rect x="547.5" y="111" width="30" height="26" rx="5" fill="#6f7f8c"/>
+<text x="562.5" y="129" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">C</text>
+<line x1="0" y1="144" x2="680" y2="144" stroke="#d6d3cb"/>
+<text x="0" y="169" font-size="14" fill="#0f1011">Plan materials and capacity</text>
+<rect x="312.5" y="151" width="30" height="26" rx="5" fill="#b4532a"/>
+<text x="327.5" y="169" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">A</text>
+<rect x="390.8" y="151" width="30" height="26" rx="5" fill="#b9b6ae"/>
+<text x="405.8" y="169" font-size="14" font-weight="600" fill="#0f1011" text-anchor="middle">I</text>
+<rect x="469.2" y="151" width="30" height="26" rx="5" fill="#0f1011"/>
+<text x="484.2" y="169" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">R</text>
+<rect x="547.5" y="151" width="30" height="26" rx="5" fill="#6f7f8c"/>
+<text x="562.5" y="169" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">C</text>
+<rect x="625.8" y="151" width="30" height="26" rx="5" fill="#6f7f8c"/>
+<text x="640.8" y="169" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">C</text>
+<line x1="0" y1="184" x2="680" y2="184" stroke="#d6d3cb"/>
+<text x="0" y="209" font-size="14" fill="#0f1011">Approve packaging artwork</text>
+<rect x="312.5" y="191" width="30" height="26" rx="5" fill="#b4532a"/>
+<text x="327.5" y="209" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">A</text>
+<rect x="390.8" y="191" width="30" height="26" rx="5" fill="#0f1011"/>
+<text x="405.8" y="209" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">R</text>
+<rect x="469.2" y="191" width="30" height="26" rx="5" fill="#6f7f8c"/>
+<text x="484.2" y="209" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">C</text>
+<rect x="547.5" y="191" width="30" height="26" rx="5" fill="#0f1011"/>
+<text x="562.5" y="209" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">R</text>
+<line x1="0" y1="224" x2="680" y2="224" stroke="#d6d3cb"/>
+<text x="0" y="249" font-size="14" fill="#0f1011">Run the production trial</text>
+<rect x="312.5" y="231" width="30" height="26" rx="5" fill="#b4532a"/>
+<text x="327.5" y="249" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">A</text>
+<rect x="390.8" y="231" width="30" height="26" rx="5" fill="#b9b6ae"/>
+<text x="405.8" y="249" font-size="14" font-weight="600" fill="#0f1011" text-anchor="middle">I</text>
+<rect x="469.2" y="231" width="30" height="26" rx="5" fill="#0f1011"/>
+<text x="484.2" y="249" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">R</text>
+<rect x="547.5" y="231" width="30" height="26" rx="5" fill="#0f1011"/>
+<text x="562.5" y="249" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">R</text>
+<line x1="0" y1="264" x2="680" y2="264" stroke="#d6d3cb"/>
+<text x="0" y="289" font-size="14" fill="#0f1011">Release for sale</text>
+<rect x="234.2" y="271" width="30" height="26" rx="5" fill="#b4532a"/>
+<text x="249.2" y="289" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">A</text>
+<rect x="312.5" y="271" width="30" height="26" rx="5" fill="#0f1011"/>
+<text x="327.5" y="289" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">R</text>
+<rect x="390.8" y="271" width="30" height="26" rx="5" fill="#b9b6ae"/>
+<text x="405.8" y="289" font-size="14" font-weight="600" fill="#0f1011" text-anchor="middle">I</text>
+<rect x="469.2" y="271" width="30" height="26" rx="5" fill="#6f7f8c"/>
+<text x="484.2" y="289" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">C</text>
+<rect x="547.5" y="271" width="30" height="26" rx="5" fill="#6f7f8c"/>
+<text x="562.5" y="289" font-size="14" font-weight="600" fill="#eeebe4" text-anchor="middle">C</text>
+<rect x="625.8" y="271" width="30" height="26" rx="5" fill="#b9b6ae"/>
+<text x="640.8" y="289" font-size="14" font-weight="600" fill="#0f1011" text-anchor="middle">I</text>
+<line x1="0" y1="304" x2="680" y2="304" stroke="#d6d3cb"/>
+</svg>

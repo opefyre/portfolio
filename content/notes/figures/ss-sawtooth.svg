@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" role="img" aria-label="Inventory sawtooth. Stock falls by 120 units a day. When it reaches the reorder point of 1,502, an order is placed; it arrives 9 days later, just as stock reaches the safety stock of 422.">
+<rect x="56" y="205.3" width="474" height="56.7" fill="#d3ff3b" fill-opacity="0.5"/>
+<line x1="56" y1="60.1" x2="530" y2="60.1" stroke="#b4532a" stroke-width="1.5" stroke-dasharray="6 4"/><text x="538" y="64.1" font-size="13" fill="#b4532a">Reorder point 1,502</text>
+<line x1="56" y1="205.3" x2="530" y2="205.3" stroke="#0f1011" stroke-width="1.5" stroke-dasharray="6 4"/><text x="538" y="209.3" font-size="13" fill="#0f1011">Safety stock 422</text>
+<line x1="56" y1="262" x2="530" y2="262" stroke="#0f1011"/><line x1="56" y1="20" x2="56" y2="262" stroke="#0f1011"/>
+<polyline points="56.0,43.9 214.0,205.3 214.0,43.9 372.0,205.3 372.0,43.9 530.0,205.3" fill="none" stroke="#6f7f8c" stroke-width="2"/>
+<circle cx="71.8" cy="60.1" r="5" fill="#b4532a"/>
+<line x1="71.8" y1="42.1" x2="214.0" y2="42.1" stroke="#0f1011" stroke-width="1.2"/>
+<line x1="71.8" y1="36.1" x2="71.8" y2="48.1" stroke="#0f1011" stroke-width="1.2"/>
+<line x1="214.0" y1="36.1" x2="214.0" y2="48.1" stroke="#0f1011" stroke-width="1.2"/>
+<text x="142.9" y="34.1" font-size="13" fill="#0f1011" text-anchor="middle">Lead time, 9 days</text>
+<text x="85.8" y="86.1" font-size="13" fill="#b4532a">Order placed</text>
+<text x="56.0" y="282" font-size="13" fill="#5a5d60" text-anchor="middle">0</text>
+<text x="214.0" y="282" font-size="13" fill="#5a5d60" text-anchor="middle">Day 10</text>
+<text x="372.0" y="282" font-size="13" fill="#5a5d60" text-anchor="middle">Day 20</text>
+<text x="530.0" y="282" font-size="13" fill="#5a5d60" text-anchor="middle">Day 30</text>
+<text x="48" y="266.0" font-size="13" fill="#5a5d60" text-anchor="end">0</text>
+<text x="48" y="185.3" font-size="13" fill="#5a5d60" text-anchor="end">600</text>
+<text x="48" y="104.7" font-size="13" fill="#5a5d60" text-anchor="end">1,200</text>
+<text x="48" y="24.0" font-size="13" fill="#5a5d60" text-anchor="end">1,800</text>
+<text x="376.7" y="238.6" font-size="13" fill="#0f1011">Buffer for bad days</text>
+</svg>
