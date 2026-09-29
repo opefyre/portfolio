@@ -675,10 +675,10 @@
 }
 .note-cta-lens {
   position: absolute;
-  width: 70%;
+  width: 56%;
   aspect-ratio: 1;
-  left: -16%;
-  bottom: -12%;
+  left: -34%;
+  bottom: -24%;
   pointer-events: none;
 }
 .note-author-card {
