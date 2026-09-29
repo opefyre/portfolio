@@ -94,8 +94,9 @@ const fragmentShader = /* glsl */ `
     // Rounded corners in pixels.
     vec2 px = vUv * uSize;
     vec2 hs = uSize * 0.5;
-    vec2 q = abs(px - hs) - (hs - uRadius);
-    float sd = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - uRadius;
+    float rad = min(uRadius, min(hs.x, hs.y));
+    vec2 q = abs(px - hs) - (hs - rad);
+    float sd = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - rad;
     float corner = clamp(0.5 - sd, 0.0, 1.0);
 
     gl_FragColor = vec4(col, shown * corner * uOpacity);

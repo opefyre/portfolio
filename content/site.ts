@@ -372,6 +372,13 @@ export const programs: { headline: { value: string; label: string }; items: Prog
   ],
 };
 
+/** The author block on notes (byline, bio card and Person JSON-LD). */
+export const author = {
+  avatar: "/about/avatar.webp",
+  line: "Founder of Vrolen · Operational excellence and digital transformation",
+  bio: "Engineer and founder of Vrolen. Ten years leading operational excellence, supply chain and digital transformation programs at Unilever, British American Tobacco and Snoonu, now building industrial AI. Based in Lisbon.",
+};
+
 export const about = {
   bio: [
     "I'm Abolfazl Shirkavand. Most people call me Abosh.",
