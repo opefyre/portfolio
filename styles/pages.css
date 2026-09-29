@@ -329,10 +329,6 @@
   border-radius: 50%;
   object-fit: cover;
 }
-.note-avatar--lg {
-  width: 64px;
-  height: 64px;
-}
 .note-author-text {
   display: flex;
   flex-direction: column;
@@ -680,30 +676,6 @@
   left: -34%;
   bottom: -24%;
   pointer-events: none;
-}
-.note-author-card {
-  display: flex;
-  gap: 18px;
-  align-items: flex-start;
-  margin-top: clamp(40px, 6vh, 56px);
-}
-.note-author-card-name {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 18px;
-  color: var(--color-ink);
-}
-.note-author-card-name a {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-}
-.note-author-card-bio {
-  max-width: 58ch;
-  margin-top: 6px;
-  font-size: 16px;
-  line-height: 1.55;
-  color: var(--fg-2);
 }
 @media (max-width: 640px) {
   .note-cta-inner {
