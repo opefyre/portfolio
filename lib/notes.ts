@@ -83,6 +83,17 @@ function expandBlocks(body: string) {
     });
 }
 
+/** Plain text of a rendered heading, for the contents list (React escapes it again when rendering). */
+function headingText(html: string) {
+  let text = html;
+  for (let prev = ""; prev !== text; ) {
+    prev = text;
+    text = text.replace(/<[^<>]*>/g, "");
+  }
+  const entities: Record<string, string> = { "&lt;": "<", "&gt;": ">", "&quot;": '"', "&#39;": "'", "&amp;": "&" };
+  return text.replace(/&(?:lt|gt|quot|#39|amp);/g, (e) => entities[e]);
+}
+
 function parse(file: string): Note {
   const raw = readFileSync(path.join(DIR, file), "utf8");
   const m = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
@@ -98,7 +109,7 @@ function parse(file: string): Note {
   const html = (marked.parse(expandBlocks(body), { async: false, gfm: true }) as string).replace(
     /<h2>([\s\S]*?)<\/h2>/g,
     (_, inner: string) => {
-      const text = inner.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&#39;/g, "'").replace(/&quot;/g, '"');
+      const text = headingText(inner);
       const base = text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "section";
       let id = base;
       for (let n = 2; toc.some((t) => t.id === id); n++) id = `${base}-${n}`;
