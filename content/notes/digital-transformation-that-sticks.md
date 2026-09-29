@@ -3,6 +3,7 @@ title: Digital transformation that sticks: automate the loop first, then decide 
 date: 2026-09-26
 summary: What 50+ automation projects taught me about digital transformation, and a simple four-step ladder for deciding how much to let AI agents do.
 status: draft
+topic: Digital transformation
 keywords: digital transformation, process automation, AI in operations, agentic AI, change management, program management, operational excellence
 ---
 

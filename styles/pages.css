@@ -271,6 +271,10 @@
   align-items: flex-end;
   gap: 4px;
 }
+.note-row-topic {
+  color: var(--color-ink);
+  white-space: nowrap;
+}
 
 .note {
   max-width: calc(760px + 2 * var(--gutter));
@@ -395,6 +399,171 @@
 }
 .prose h2 + .note-figure {
   margin-top: 1.2em;
+}
+.prose h2 {
+  scroll-margin-top: 96px;
+}
+.prose h3 {
+  margin-top: 1.7em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(20px, 1.5vw, 23px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+.prose code {
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: rgba(15, 16, 17, 0.06);
+}
+.note-meta-topic {
+  color: var(--color-ink);
+}
+
+/* Contents: only on notes with four or more sections. */
+.note-toc {
+  margin: 0 0 clamp(36px, 6vh, 52px);
+  font-size: 15px;
+  line-height: 1.4;
+}
+.note-toc ol {
+  columns: 2 260px;
+  column-gap: 40px;
+  counter-reset: toc;
+}
+.note-toc li {
+  break-inside: avoid;
+  counter-increment: toc;
+  display: flex;
+  gap: 12px;
+  padding: 7px 0;
+}
+.note-toc li::before {
+  content: counter(toc, decimal-leading-zero);
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-3);
+}
+.note-toc a {
+  color: var(--fg-2);
+  transition: color 0.2s;
+}
+.note-toc a:hover {
+  color: var(--color-ink);
+}
+
+/* Card: a summary or a rule of thumb. */
+.prose .note-card {
+  margin: 2em 0;
+  padding: 24px 26px;
+  border-radius: 12px;
+  background: var(--color-ink);
+  color: #d9d8d2;
+  font-size: 0.92em;
+  line-height: 1.62;
+}
+.note-card > * + * {
+  margin-top: 0.8em;
+}
+.prose .note-card strong,
+.prose .note-card a {
+  color: var(--color-paper);
+}
+.prose .note-card li::marker {
+  color: var(--color-accent);
+}
+.note-card-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.15em;
+  letter-spacing: -0.015em;
+  color: var(--color-accent);
+}
+
+/* Formula panel. */
+.prose .note-formula {
+  margin: 1.8em 0;
+  padding: 22px 26px;
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.note-formula-title {
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: var(--fg-3);
+}
+.note-formula-line {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
+}
+.note-formula-line + .note-formula-line {
+  margin-top: 6px;
+}
+.prose .note-formula strong {
+  font-weight: 600;
+}
+
+/* Grid: a list shown as small cards. */
+.prose .note-grid {
+  margin: 1.8em 0;
+}
+.prose .note-grid ul,
+.prose .note-grid ol {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+}
+.prose .note-grid li {
+  margin: 0;
+  padding: 18px 20px;
+  border-radius: 10px;
+  background: rgba(15, 16, 17, 0.05);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--fg-2);
+}
+.prose .note-grid li > strong:first-child {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--font-display);
+  font-size: 19px;
+  letter-spacing: -0.015em;
+}
+
+/* Link card: tools, products, contact. */
+.prose .note-link {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 2em 0;
+  padding: 22px 26px;
+  border-radius: 12px;
+  background: var(--color-accent);
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
+}
+.prose .note-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -18px rgba(15, 16, 17, 0.55);
+}
+.note-link-label {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(20px, 1.7vw, 25px);
+  letter-spacing: -0.02em;
+}
+.note-link-text {
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(15, 16, 17, 0.72);
 }
 .note-cta {
   margin-top: clamp(48px, 7vh, 72px);

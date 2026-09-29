@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 400" role="img" aria-label="Automation priority matrix. Horizontal axis: automation fit score from 1 to 5. Vertical axis: hours spent per month. Supplier invoices and customer refunds score high on both and go first. Month-end close and contract review take many hours but need redesign before automation. Onboarding and travel bookings are small, easy wins.">
+<rect x="386.0" y="24" width="270.0" height="205.0" fill="#d3ff3b" fill-opacity="0.55"/>
+<line x1="386.0" y1="24" x2="386.0" y2="352" stroke="#d6d3cb" stroke-width="1.5"/><line x1="56" y1="229.0" x2="656" y2="229.0" stroke="#d6d3cb" stroke-width="1.5"/>
+<line x1="56" y1="352" x2="656" y2="352" stroke="#0f1011"/><line x1="56" y1="24" x2="56" y2="352" stroke="#0f1011"/>
+<text x="646.0" y="217.0" font-size="13" fill="#5a5d60" text-anchor="end" font-weight="600">Automate first</text>
+<text x="66.0" y="44.0" font-size="13" fill="#5a5d60" text-anchor="start" font-weight="600">Fix the process, then automate</text>
+<text x="646.0" y="340.0" font-size="13" fill="#5a5d60" text-anchor="end" font-weight="600">Quick wins, if cheap</text>
+<text x="66.0" y="340.0" font-size="13" fill="#5a5d60" text-anchor="start" font-weight="600">Leave for now</text>
+<text x="56.0" y="372" font-size="13" fill="#5a5d60" text-anchor="middle">1</text>
+<text x="206.0" y="372" font-size="13" fill="#5a5d60" text-anchor="middle">2</text>
+<text x="356.0" y="372" font-size="13" fill="#5a5d60" text-anchor="middle">3</text>
+<text x="506.0" y="372" font-size="13" fill="#5a5d60" text-anchor="middle">4</text>
+<text x="656.0" y="372" font-size="13" fill="#5a5d60" text-anchor="middle">5</text>
+<text x="356.0" y="392" font-size="13" fill="#0f1011" text-anchor="middle">Automation fit score</text>
+<text x="48" y="356.0" font-size="13" fill="#5a5d60" text-anchor="end">0</text>
+<text x="48" y="253.5" font-size="13" fill="#5a5d60" text-anchor="end">100</text>
+<text x="48" y="151.0" font-size="13" fill="#5a5d60" text-anchor="end">200</text>
+<text x="48" y="48.5" font-size="13" fill="#5a5d60" text-anchor="end">300</text>
+<text x="48" y="28" font-size="13" fill="#0f1011" text-anchor="end">h/mo</text>
+<circle cx="551.0" cy="44.5" r="7" fill="#0f1011"/>
+<text x="539.0" y="49.5" font-size="14" fill="#0f1011" text-anchor="end">Supplier invoices</text>
+<circle cx="491.0" cy="259.8" r="7" fill="#6f7f8c"/>
+<text x="503.0" y="264.8" font-size="14" fill="#0f1011" text-anchor="start">Employee onboarding</text>
+<circle cx="461.0" cy="182.9" r="7" fill="#0f1011"/>
+<text x="473.0" y="187.9" font-size="14" fill="#0f1011" text-anchor="start">Customer refunds</text>
+<circle cx="176.0" cy="213.6" r="7" fill="#6f7f8c"/>
+<text x="188.0" y="218.6" font-size="14" fill="#0f1011" text-anchor="start">Contract review</text>
+<circle cx="296.0" cy="136.8" r="7" fill="#6f7f8c"/>
+<text x="308.0" y="141.8" font-size="14" fill="#0f1011" text-anchor="start">Month-end close</text>
+<circle cx="521.0" cy="311.0" r="7" fill="#6f7f8c"/>
+<text x="509.0" y="316.0" font-size="14" fill="#0f1011" text-anchor="end">Travel bookings</text>
+<circle cx="236.0" cy="295.6" r="7" fill="#6f7f8c"/>
+<text x="248.0" y="300.6" font-size="14" fill="#0f1011" text-anchor="start">Sales quotes</text>
+</svg>

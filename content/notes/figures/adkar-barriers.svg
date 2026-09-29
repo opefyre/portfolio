@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 236" role="img" aria-label="ADKAR scores from 1 to 5 for four teams. The barrier point is the first element scoring 3 or less: Sales at Awareness, Warehouse at Knowledge, HR at Ability. Finance has no barrier.">
+<text x="168.8" y="18" font-size="13" fill="#5a5d60" text-anchor="middle">Awareness</text>
+<text x="282.4" y="18" font-size="13" fill="#5a5d60" text-anchor="middle">Desire</text>
+<text x="396.0" y="18" font-size="13" fill="#5a5d60" text-anchor="middle">Knowledge</text>
+<text x="509.6" y="18" font-size="13" fill="#5a5d60" text-anchor="middle">Ability</text>
+<text x="623.2" y="18" font-size="13" fill="#5a5d60" text-anchor="middle">Reinforcement</text>
+<line x1="112" y1="63.0" x2="633.2" y2="63.0" stroke="#d6d3cb"/>
+<text x="0" y="68.0" font-size="14" fill="#0f1011" font-weight="600">Finance</text>
+<circle cx="168.8" cy="63.0" r="19.0" fill="#0f1011" fill-opacity="1"/>
+<text x="168.8" y="67.5" font-size="13" font-weight="600" fill="#eeebe4" text-anchor="middle">5</text>
+<circle cx="282.4" cy="63.0" r="16.4" fill="#0f1011" fill-opacity="1"/>
+<text x="282.4" y="67.5" font-size="13" font-weight="600" fill="#eeebe4" text-anchor="middle">4</text>
+<circle cx="396.0" cy="63.0" r="16.4" fill="#0f1011" fill-opacity="1"/>
+<text x="396.0" y="67.5" font-size="13" font-weight="600" fill="#eeebe4" text-anchor="middle">4</text>
+<circle cx="509.6" cy="63.0" r="16.4" fill="#0f1011" fill-opacity="1"/>
+<text x="509.6" y="67.5" font-size="13" font-weight="600" fill="#eeebe4" text-anchor="middle">4</text>
+<circle cx="623.2" cy="63.0" r="16.4" fill="#0f1011" fill-opacity="1"/>
+<text x="623.2" y="67.5" font-size="13" font-weight="600" fill="#eeebe4" text-anchor="middle">4</text>
+<line x1="112" y1="109.0" x2="633.2" y2="109.0" stroke="#d6d3cb"/>
+<text x="0" y="114.0" font-size="14" fill="#0f1011" font-weight="600">Sales</text>
+<circle cx="168.8" cy="109.0" r="18.8" fill="none" stroke="#b4532a" stroke-width="2"/>
+<circle cx="168.8" cy="109.0" r="13.8" fill="#b4532a" fill-opacity="1"/>
+<text x="168.8" y="113.5" font-size="13" font-weight="600" fill="#eeebe4" text-anchor="middle">3</text>
+<circle cx="282.4" cy="109.0" r="16.4" fill="#6f7f8c" fill-opacity="0.35"/>
+<text x="282.4" y="113.5" font-size="13" font-weight="600" fill="#0f1011" text-anchor="middle">4</text>
+<circle cx="396.0" cy="109.0" r="11.2" fill="#6f7f8c" fill-opacity="0.35"/>
+<text x="396.0" y="113.5" font-size="13" font-weight="600" fill="#0f1011" text-anchor="middle">2</text>
+<circle cx="509.6" cy="109.0" r="11.2" fill="#6f7f8c" fill-opacity="0.35"/>
+<text x="509.6" y="113.5" font-size="13" font-weight="600" fill="#0f1011" text-anchor="middle">2</text>
+<circle cx="623.2" cy="109.0" r="11.2" fill="#6f7f8c" fill-opacity="0.35"/>
+<text x="623.2" y="113.5" font-size="13" font-weight="600" fill="#0f1011" text-anchor="middle">2</text>
+<line x1="112" y1="155.0" x2="633.2" y2="155.0" stroke="#d6d3cb"/>
+<text x="0" y="160.0" font-size="14" fill="#0f1011" font-weight="600">Warehouse</text>
+<circle cx="168.8" cy="155.0" r="16.4" fill="#0f1011" fill-opacity="1"/>
+<text x="168.8" y="159.5" font-size="13" font-weight="600" fill="#eeebe4" text-anchor="middle">4</text>
+<circle cx="282.4" cy="155.0" r="16.4" fill="#0f1011" fill-opacity="1"/>
+<text x="282.4" y="159.5" font-size="13" font-weight="600" fill="#eeebe4" text-anchor="middle">4</text>
+<circle cx="396.0" cy="155.0" r="16.2" fill="none" stroke="#b4532a" stroke-width="2"/>
+<circle cx="396.0" cy="155.0" r="11.2" fill="#b4532a" fill-opacity="1"/>
+<text x="396.0" y="159.5" font-size="13" font-weight="600" fill="#eeebe4" text-anchor="middle">2</text>
+<circle cx="509.6" cy="155.0" r="13.8" fill="#6f7f8c" fill-opacity="0.35"/>
+<text x="509.6" y="159.5" font-size="13" font-weight="600" fill="#0f1011" text-anchor="middle">3</text>
+<circle cx="623.2" cy="155.0" r="11.2" fill="#6f7f8c" fill-opacity="0.35"/>
+<text x="623.2" y="159.5" font-size="13" font-weight="600" fill="#0f1011" text-anchor="middle">2</text>
+<line x1="112" y1="201.0" x2="633.2" y2="201.0" stroke="#d6d3cb"/>
+<text x="0" y="206.0" font-size="14" fill="#0f1011" font-weight="600">HR</text>
+<circle cx="168.8" cy="201.0" r="16.4" fill="#0f1011" fill-opacity="1"/>
+<text x="168.8" y="205.5" font-size="13" font-weight="600" fill="#eeebe4" text-anchor="middle">4</text>
+<circle cx="282.4" cy="201.0" r="19.0" fill="#0f1011" fill-opacity="1"/>
+<text x="282.4" y="205.5" font-size="13" font-weight="600" fill="#eeebe4" text-anchor="middle">5</text>
+<circle cx="396.0" cy="201.0" r="16.4" fill="#0f1011" fill-opacity="1"/>
+<text x="396.0" y="205.5" font-size="13" font-weight="600" fill="#eeebe4" text-anchor="middle">4</text>
+<circle cx="509.6" cy="201.0" r="18.8" fill="none" stroke="#b4532a" stroke-width="2"/>
+<circle cx="509.6" cy="201.0" r="13.8" fill="#b4532a" fill-opacity="1"/>
+<text x="509.6" y="205.5" font-size="13" font-weight="600" fill="#eeebe4" text-anchor="middle">3</text>
+<circle cx="623.2" cy="201.0" r="13.8" fill="#6f7f8c" fill-opacity="0.35"/>
+<text x="623.2" y="205.5" font-size="13" font-weight="600" fill="#0f1011" text-anchor="middle">3</text>
+</svg>

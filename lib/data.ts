@@ -2,6 +2,7 @@ import "server-only";
 import { cache } from "react";
 import { cert, getApps, initializeApp } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
+import { about } from "@/content/site";
 
 /**
  * Build-time content access. The site is a static export, so Firestore is
@@ -41,5 +42,8 @@ export type Certification = { name: string };
 
 export const getCertifications = cache(async (): Promise<Certification[]> => {
   const snap = await db().collection("certifications").get();
-  return snap.docs.map((d) => d.data() as Certification).sort((a, b) => a.name.localeCompare(b.name));
+  return snap.docs
+    .map((d) => d.data() as Certification)
+    .filter((c) => !about.hiddenCertifications.includes(c.name))
+    .sort((a, b) => a.name.localeCompare(b.name));
 });

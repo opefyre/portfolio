@@ -117,14 +117,14 @@ export const works: Work[] = [
       { src: "/work/elixiary/web-learn.webp", alt: "Elixiary's education hub: essays, technique guides and reading paths", width: 2400, height: 1500 },
     ],
     stats: [
-      { value: "37K+", label: "Google Search impressions" },
-      { value: "~200", label: "organic users, $0 on marketing" },
-      { value: "1,000+", label: "recipes" },
+      { value: "100K+", label: "Google Search impressions" },
+      { value: "1,400+", label: "clicks from search in three months" },
+      { value: "300+", label: "users, all organic, $0 on marketing" },
     ],
     body: [
       "Home bartenders stick to the few recipes they remember, or use recipe sites that ignore what's actually in their cabinet.",
       "Marlow, the AI bartender, builds a recipe from whatever you have. Behind it sit a library of 1,000+ classic and modern recipes, a home bar that knows what you can pour tonight and what's running low, and an education hub of essays and reading paths.",
-      "I built it end to end: the website on Next.js, Firebase and Gemini, and a native iPhone app in SwiftUI on the same backend. The site launched in April 2026 and, with no marketing spend, reached about 200 organic users and 37K+ Google Search impressions.",
+      "I built it end to end: the website on Next.js, Firebase and Gemini, and a native iPhone app in SwiftUI on the same backend. The site launched in April 2026. With no marketing spend, it has earned 100K+ Google Search impressions, 1,400+ clicks in three months and 300+ users, all organic.",
     ],
   },
   {
@@ -380,8 +380,8 @@ export const about = {
     "The part I care about most is checking that an improvement actually held. That's why I'm building Vrolen. I live in Lisbon, and I build small products I want to use myself.",
   ],
   education: "B.Sc. in Engineering, an MBA, and a master's in technology and engineering management.",
-  /** Shown after the certifications fetched from Firestore. */
-  certificationsNote: "Preparing for the PMP.",
+  /** Certifications in Firestore that the site doesn't show. */
+  hiddenCertifications: ["Aha! Product Management Professional", "Google Cloud Digital Leader", "Mastering Jira Administration"],
 };
 
 export const closing = ["Curiosity in systems,", "for a better tomorrow."];

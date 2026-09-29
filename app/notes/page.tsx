@@ -7,7 +7,7 @@ import { formatDate, getNotes } from "@/lib/notes";
 export const metadata: Metadata = {
   title: "Notes",
   description:
-    "Notes by Abolfazl Shirkavand on operational excellence, continuous improvement, OEE, supply chains, digital transformation and AI in operations.",
+    "Free, practical guides by Abolfazl Shirkavand on operational excellence, Lean Six Sigma, project management, supply chains, digital transformation and AI in operations, with worked examples.",
   alternates: { canonical: "/notes/" },
   openGraph: { title: "Notes by Abolfazl Shirkavand", url: "/notes/", images: [ogImage] },
   twitter: { card: "summary_large_image", title: "Notes by Abolfazl Shirkavand", images: [ogImage] },
@@ -23,8 +23,8 @@ export default function NotesPage() {
             Notes
           </h1>
           <p className="notes-intro">
-            On operational excellence, continuous improvement, supply chains and digital transformation. Written from the
-            floor, with the numbers and sources.
+            Practical guides to operational excellence, project management, supply chains and digital transformation.
+            Worked examples, real numbers and sources.
           </p>
           <ol className="note-rows note-rows--page">
             {notes.map((n) => (
@@ -35,6 +35,7 @@ export default function NotesPage() {
                     <span className="note-row-summary">{n.summary}</span>
                   </span>
                   <span className="note-row-date">
+                    {n.topic && <span className="note-row-topic">{n.topic}</span>}
                     <time dateTime={n.date}>{formatDate(n.date)}</time>
                     <span>{n.readingMinutes} min</span>
                   </span>

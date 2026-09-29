@@ -3,6 +3,7 @@ title: Same OEE, opposite fixes: turning the percentage back into minutes
 date: 2026-09-28
 summary: Two machines can report the same OEE and need completely different work. Here's how I turn the score back into minutes a team can act on.
 status: draft
+topic: Operational excellence
 keywords: OEE, overall equipment effectiveness, operational excellence, continuous improvement, World Class Manufacturing, six big losses, SMED
 ---
 
