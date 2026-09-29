@@ -146,16 +146,6 @@ export default async function NotePage({ params }: Params) {
             <div className="note-body">
               <div className="prose" dangerouslySetInnerHTML={{ __html: n.html }} />
 
-              <aside className="note-author-card" aria-label="About the author">
-                <img src={author.avatar} alt="" width={64} height={64} className="note-avatar note-avatar--lg" />
-                <div>
-                  <p className="note-author-card-name">
-                    Written by <TLink href="/about/" rel="author">{site.name}</TLink>
-                  </p>
-                  <p className="note-author-card-bio">{author.bio}</p>
-                </div>
-              </aside>
-
               {next && next.slug !== n.slug && (
                 <TLink href={`/notes/${next.slug}/`} className="note-next">
                   <span className="note-next-label">Next</span>
