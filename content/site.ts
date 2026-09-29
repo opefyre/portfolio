@@ -290,19 +290,19 @@ export const works: Work[] = [
     name: "Content engine",
     line: "The system that writes, films, scores and schedules posts for my products, from a spare Mac.",
     status: "Running",
-    image: { src: "/work/content-engine/posts.webp", alt: "Four finished posts: an Elixiary reel, an Azshambe explainer, a Vrolen LinkedIn visual and a Dr. Quackpot cover", width: 2400, height: 1040 },
+    image: { src: "/work/content-engine/posts.webp", alt: "Three finished posts: an Elixiary reel, an Azshambe explainer and a Vrolen LinkedIn visual", width: 2400, height: 1040 },
     gallery: [
       { src: "/work/content-engine/cast.webp", alt: "Finkavo's cast of nine illustrated characters", width: 2800, height: 406 },
       { src: "/work/content-engine/posts-2.webp", alt: "Four more posts: a 104-cocktail data reel, an Azshambe explainer, a Vrolen OEE visual and an Elixiary skit", width: 2400, height: 1040 },
     ],
     stats: [
-      { value: "5", label: "brands on Instagram, TikTok and LinkedIn" },
+      { value: "4", label: "brands on Instagram, TikTok and LinkedIn" },
       { value: "60+", label: "finished videos" },
     ],
     body: [
       "Each of my products needs a steady stream of posts, and I didn't want to spend my evenings making them.",
       "So I built a pipeline. Claude and ChatGPT write from real facts, like recipes from Elixiary's database or tax rules checked against primary sources. Higgsfield generates the shots, ElevenLabs the voices, and ffmpeg cuts everything to music.",
-      "It runs on a spare Mac at home, with n8n and Buffer handling the schedule, and most posts wait as drafts for my approval. It covers Elixiary, Finkavo, Vrolen, Azshambe and a comedy channel starring a duck professor, Dr. Quackpot.",
+      "It runs on a spare Mac at home, with n8n and Buffer handling the schedule, and most posts wait as drafts for my approval. It covers Elixiary, Finkavo, Vrolen and Azshambe.",
     ],
   },
 ];
