@@ -11,6 +11,7 @@ import { marked } from "marked";
  *   title: …
  *   date: 2026-09-28
  *   summary: …
+ *   updated: 2026-10-02            (optional)
  *   status: draft | published
  *   keywords: comma, separated, terms
  *   ---
@@ -33,10 +34,13 @@ export type Note = {
   slug: string;
   title: string;
   date: string;
+  /** Last meaningful edit (frontmatter `updated`), defaults to `date`. */
+  updated: string;
   summary: string;
   status: "draft" | "published";
   html: string;
   readingMinutes: number;
+  words: number;
   keywords: string[];
   topic: string;
   toc: { id: string; text: string }[];
@@ -121,10 +125,12 @@ function parse(file: string): Note {
     slug: file.replace(/\.md$/, ""),
     title: meta.title ?? file,
     date: meta.date ?? "",
+    updated: meta.updated ?? meta.date ?? "",
     summary: meta.summary ?? "",
     status: meta.status === "published" ? "published" : "draft",
     html,
     readingMinutes: Math.max(1, Math.ceil(words / 230)),
+    words,
     keywords: (meta.keywords ?? "").split(",").map((k) => k.trim()).filter(Boolean),
     topic: meta.topic ?? "",
     toc: toc.length >= 4 ? toc.filter((t) => t.id !== "sources") : [],

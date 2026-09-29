@@ -47,6 +47,7 @@ async function personJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": `${site.url}/#person`,
     name: site.name,
     alternateName: site.nickname,
     url: site.url,
