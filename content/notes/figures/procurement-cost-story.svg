@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 440" role="img" aria-label="We saved money. Just not as a company. Purchasing saves 200 euros. Production waits for parts. Logistics pays 350 euros extra freight. Finance finds the company spent 150 euros more.">
+<style>text{font-family:var(--font-funnel-sans),Arial,sans-serif;fill:#0f1011}.label{font-size:12px;fill:#5a5d60;letter-spacing:1px}.body{font-size:15px}.amount{font-family:var(--font-funnel-display),Arial,sans-serif;font-size:30px;font-weight:500}.muted{fill:#5a5d60}.loss{fill:#b4532a}</style>
+<text x="20" y="30" style="font-family:var(--font-funnel-display),Arial,sans-serif;font-size:26px;font-weight:500;letter-spacing:-.6px">We saved money. Just not as a company.</text>
+<line x1="20" y1="54" x2="660" y2="54" stroke="#d6d3cb"/>
+<line x1="52" y1="94" x2="52" y2="333" stroke="#d6d3cb"/>
+<circle cx="52" cy="100" r="4" fill="#0f1011"/>
+<text x="20" y="104" class="label">01</text><text x="80" y="92" class="label">PURCHASING</text>
+<text x="80" y="118" class="body">Same part. Cheaper supplier.</text><text x="80" y="141" class="body">We saved €200.</text>
+<text x="646" y="126" text-anchor="end" class="amount">€200 saved</text>
+<circle cx="52" cy="180" r="4" fill="#0f1011"/>
+<text x="20" y="184" class="label">02</text><text x="80" y="172" class="label">PRODUCTION</text>
+<text x="80" y="198" class="body">Where are the parts?</text><text x="646" y="204" text-anchor="end" class="body muted">Delivery late</text>
+<circle cx="52" cy="260" r="4" fill="#0f1011"/>
+<text x="20" y="264" class="label">03</text><text x="80" y="252" class="label">LOGISTICS</text>
+<text x="80" y="278" class="body">Express shipping sorted.</text><text x="80" y="301" class="body">That’ll be an extra €350.</text>
+<text x="646" y="286" text-anchor="end" class="amount loss">€350 extra</text>
+<circle cx="52" cy="340" r="4" fill="#b4532a"/>
+<text x="20" y="344" class="label">04</text><text x="80" y="332" class="label">FINANCE</text>
+<text x="80" y="358" class="body">Congratulations. Our €200 saving</text><text x="80" y="381" class="body">cost us €150.</text>
+<text x="646" y="366" text-anchor="end" class="amount loss">€150 more spent</text>
+<line x1="20" y1="406" x2="660" y2="406" stroke="#d6d3cb"/>
+<text x="20" y="433" class="label">FICTIONAL SCENARIO</text>
+</svg>
