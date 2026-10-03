@@ -13,6 +13,23 @@ export function generateStaticParams() {
   return getNotes().map((n) => ({ slug: n.slug }));
 }
 
+type NoteCta = { title: string; text: string };
+
+const vrolenCtas: Partial<Record<string, NoteCta>> = {
+  "smed-changeover-smaller-batches": {
+    title: "What should your faster changeovers make possible?",
+    text: "More output or more frequent runs? Vrolen helps operations teams model the process and compare proposed changes before trying them on the line.",
+  },
+  "value-stream-mapping-example": {
+    title: "Which change would actually shorten your lead time?",
+    text: "Take the current-state map into a model you can test. Vrolen helps teams compare changes to capacity, buffers and schedules, with the assumptions visible.",
+  },
+  "5-whys-example": {
+    title: "Where is the loss really coming from?",
+    text: "Vrolen helps teams follow losses across the operation and test whether a proposed explanation fits the system. Confirm the cause with evidence from the process.",
+  },
+};
+
 type Params = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
@@ -48,6 +65,7 @@ export default async function NotePage({ params }: Params) {
   if (i < 0) notFound();
   const n = notes[i];
   const next = notes[(i + 1) % notes.length];
+  const cta = vrolenCtas[n.slug];
 
   const url = `${site.url}/notes/${n.slug}/`;
   const personId = `${site.url}/#person`;
@@ -161,20 +179,32 @@ export default async function NotePage({ params }: Params) {
         <div className="frame note-cta-inner">
           <div className="note-cta-copy">
             <h2 id="note-cta-title" className="note-cta-title">
-              Working on something like this?
+              {cta?.title ?? "Working on something like this?"}
             </h2>
             <p className="note-cta-text">
-              I work with operations and transformation teams on operational excellence, digital transformation programs,
-              supply chains and industrial AI. If this sounds like your line, your program or your problem, I&rsquo;d be
-              glad to compare notes.
+              {cta ? cta.text : (
+                <>
+                  I work with operations and transformation teams on operational excellence, digital transformation programs,
+                  supply chains and industrial AI. If this sounds like your line, your program or your problem, I&rsquo;d be
+                  glad to compare notes.
+                </>
+              )}
             </p>
             <p className="note-cta-links">
-              <a href={`mailto:${site.email}`} className="text-link">
-                {site.email}
-              </a>
-              <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="text-link">
-                LinkedIn <span aria-hidden="true">↗</span>
-              </a>
+              {cta ? (
+                <a href="https://vrolen.com/" target="_blank" rel="noopener noreferrer" className="text-link">
+                  Explore Vrolen&rsquo;s private pilot <span aria-hidden="true">↗</span>
+                </a>
+              ) : (
+                <>
+                  <a href={`mailto:${site.email}`} className="text-link">
+                    {site.email}
+                  </a>
+                  <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="text-link">
+                    LinkedIn <span aria-hidden="true">↗</span>
+                  </a>
+                </>
+              )}
             </p>
           </div>
           <div className="note-cta-media">
