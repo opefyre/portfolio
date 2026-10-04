@@ -20,6 +20,7 @@ import { marked } from "marked";
  *
  *   ::figure <name> | <caption>          inline SVG from content/notes/figures/<name>.svg
  *   ::image </public/path> | <alt> | <caption>
+ *   ::interactive <name> | <caption>   reviewed interactive figure
  *
  * Containers (Markdown inside, closed by a line with just :::):
  *
@@ -78,6 +79,9 @@ function expandContainers(body: string) {
 /** Expand ::figure and ::image lines into <figure> blocks (kept on one line so Markdown passes them through). */
 function expandBlocks(body: string) {
   return expandContainers(body)
+    .replace(/^::interactive\s+([\w-]+)\s*\|\s*(.+)$/gm, (_, name: string, caption: string) => {
+      return `\n<div data-note-interactive="${name}" data-caption="${escapeHtml(caption.trim())}"></div>\n`;
+    })
     .replace(/^::figure\s+([\w-]+)\s*\|\s*(.+)$/gm, (_, name: string, caption: string) => {
       const svg = readFileSync(path.join(FIGURES, `${name}.svg`), "utf8").replace(/\s*\n\s*/g, " ").trim();
       return `\n<figure class="note-figure">${svg}<figcaption>${escapeHtml(caption.trim())}</figcaption></figure>\n`;
