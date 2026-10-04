@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { NoteArticleContent } from "@/components/notes/NoteArticleContent";
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { TLink } from "@/components/shell/transitions";
@@ -162,7 +163,7 @@ export default async function NotePage({ params }: Params) {
             )}
 
             <div className="note-body">
-              <div className="prose" dangerouslySetInnerHTML={{ __html: n.html }} />
+              <NoteArticleContent html={n.html} />
 
               {next && next.slug !== n.slug && (
                 <TLink href={`/notes/${next.slug}/`} className="note-next">
