@@ -7,6 +7,10 @@ on:
   pull_request:
     branches:
       - main
+  # Daily rebuild so the Instagram strip picks up new posts (and the token stays fresh).
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
 
 # Least privilege by default; jobs widen only what they need.
 permissions:
@@ -22,6 +26,8 @@ jobs:
     env:
         # Provide the service account key so the build can fetch data from Firestore
         FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
+        # Read-only Instagram token (seed); the refreshed one lives in Firestore.
+        INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v7
@@ -45,7 +51,7 @@ jobs:
 
       # Upload build artifacts to pass to the deploy job (saves rebuilding)
       - name: Upload Build Artifact
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v7
         with:
           name: out-build
@@ -57,7 +63,7 @@ jobs:
     name: Deploy to Firebase
     needs: verify
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     permissions:
       contents: read
       checks: write # the Firebase deploy action reports its result as a check

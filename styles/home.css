@@ -721,3 +721,46 @@ html[data-lens="fallback"] .frag--figure::after {
     width: 150px;
   }
 }
+
+/* ---------- Instagram (dark, so the posts are WebGL planes like the works) */
+
+.home-ig {
+  padding: clamp(100px, 16vh, 180px) 0 0;
+}
+.home-ig-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: clamp(36px, 6vh, 64px);
+}
+.ig-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(8px, 1vw, 16px);
+  list-style: none;
+  padding: 0;
+}
+.ig-post {
+  position: relative;
+  display: block;
+}
+.ig-play {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(11, 12, 13, 0.55);
+  color: var(--color-paper);
+  pointer-events: none;
+}
+@media (max-width: 900px) {
+  .ig-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
