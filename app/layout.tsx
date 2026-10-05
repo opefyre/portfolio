@@ -58,7 +58,7 @@ async function personJsonLd() {
     worksFor: { "@type": "Organization", name: "Vrolen", url: "https://vrolen.com" },
     hasCredential: certifications.map((c) => ({ "@type": "EducationalOccupationalCredential", name: c.name })),
     address: { "@type": "PostalAddress", addressLocality: "Lisbon", addressCountry: "PT" },
-    sameAs: [site.linkedin, site.github],
+    sameAs: [site.linkedin, site.instagram, site.github],
   };
 }
 

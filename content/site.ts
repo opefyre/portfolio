@@ -15,6 +15,7 @@ export const site = {
   location: "Lisbon",
   linkedin: "https://www.linkedin.com/in/abolfazl-shirkavand/",
   github: "https://github.com/opefyre",
+  instagram: "https://www.instagram.com/abosh.io/",
   /** Page title for the homepage and default share title. */
   title: "Abolfazl Shirkavand: Operational Excellence, Digital Transformation & Industrial AI",
   description:
