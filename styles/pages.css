@@ -360,8 +360,14 @@
   line-height: 1.72;
   color: #26282a;
 }
-.prose > * + * {
+.prose > * + *,
+.prose > :where(.note-copy) > * + * {
   margin-top: 1.15em;
+}
+/* Preserve paragraph separation around embedded note figures. */
+.prose > p + p,
+.prose > :where(.note-copy) > p + p {
+  margin-top: 1.35em;
 }
 .prose h2 {
   margin-top: 2.1em;
