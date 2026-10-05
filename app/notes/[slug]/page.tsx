@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import { TLink } from "@/components/shell/transitions";
 import { LensAnchor } from "@/components/lens/LensAnchor";
 import { GLImage } from "@/components/media/GLImage";
+import { SocialLinks } from "@/components/site/SocialLinks";
 import { author, ogImage, site } from "@/content/site";
 import { formatDate, getNote, getNotes } from "@/lib/notes";
 
@@ -191,7 +192,7 @@ export default async function NotePage({ params }: Params) {
                 </>
               )}
             </p>
-            <p className="note-cta-links">
+            <div className="note-cta-links">
               {cta ? (
                 <a href="https://vrolen.com/" target="_blank" rel="noopener noreferrer" className="text-link">
                   Explore Vrolen&rsquo;s private pilot <span aria-hidden="true">↗</span>
@@ -201,15 +202,10 @@ export default async function NotePage({ params }: Params) {
                   <a href={`mailto:${site.email}`} className="text-link">
                     {site.email}
                   </a>
-                  <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="text-link">
-                    LinkedIn <span aria-hidden="true">↗</span>
-                  </a>
-                  <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="text-link">
-                    Instagram <span aria-hidden="true">↗</span>
-                  </a>
+                  <SocialLinks only={["linkedin", "instagram"]} />
                 </>
               )}
-            </p>
+            </div>
           </div>
           <div className="note-cta-media">
             <GLImage id="note-cta-portrait" src={author.avatar} alt={site.name} width={480} height={480} radius={999} />

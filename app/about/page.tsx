@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { LensAnchor } from "@/components/lens/LensAnchor";
 import { GLImage } from "@/components/media/GLImage";
 import { SiteFooter } from "@/components/site/SiteFooter";
+import { SocialLinks } from "@/components/site/SocialLinks";
 import { about, ogImage, site } from "@/content/site";
 import { getCertifications, getExperiences } from "@/lib/data";
 
@@ -56,17 +57,12 @@ export default async function AboutPage() {
             <p className="about-p about-certs">
               Certified: {certifications.map((c) => c.name).join(", ")}.
             </p>
-            <p className="about-contact">
+            <div className="about-contact">
               <a href={`mailto:${site.email}`} className="text-link">
                 {site.email}
               </a>
-              <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="text-link">
-                LinkedIn <span aria-hidden="true">↗</span>
-              </a>
-              <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="text-link">
-                Instagram <span aria-hidden="true">↗</span>
-              </a>
-            </p>
+              <SocialLinks only={["linkedin", "instagram"]} />
+            </div>
           </div>
         </div>
       </section>
