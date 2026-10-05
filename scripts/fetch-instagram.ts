@@ -19,7 +19,7 @@ import sharp from "sharp";
 
 const GRAPH = "https://graph.instagram.com";
 const COUNT = 6;
-const SIZE = 900;
+const WIDTH = 720;
 const REFRESH_AFTER_MS = 7 * 24 * 3600 * 1000;
 
 const ROOT = process.cwd();
@@ -97,18 +97,22 @@ async function main() {
       `${GRAPH}/me/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp&limit=${COUNT * 2}&access_token=${t}`,
     );
 
+    // One shape for the whole strip: reel covers (9:16) when most posts are reels, else 4:5.
+    const picked = media.data.filter((m) => (m.media_type === "VIDEO" ? m.thumbnail_url : m.media_url)).slice(0, COUNT);
+    const reels = picked.filter((m) => m.media_type === "VIDEO").length;
+    const height = Math.round(reels * 2 > picked.length ? (WIDTH * 16) / 9 : (WIDTH * 5) / 4);
+
     await rm(OUT_DIR, { recursive: true, force: true });
     await mkdir(OUT_DIR, { recursive: true });
     const posts: InstagramPost[] = [];
-    for (const m of media.data) {
-      if (posts.length >= COUNT) break;
+    for (const m of picked) {
       const url = m.media_type === "VIDEO" ? m.thumbnail_url : m.media_url;
       if (!url) continue;
       const res = await fetch(url, { signal: AbortSignal.timeout(20_000) });
       if (!res.ok) continue;
       const file = `${m.id}.webp`;
       await sharp(Buffer.from(await res.arrayBuffer()))
-        .resize(SIZE, SIZE, { fit: "cover" })
+        .resize(WIDTH, height, { fit: "cover" })
         .webp({ quality: 84 })
         .toFile(path.join(OUT_DIR, file));
       posts.push({
@@ -118,8 +122,8 @@ async function main() {
         timestamp: m.timestamp,
         video: m.media_type === "VIDEO",
         src: `/instagram/${file}`,
-        width: SIZE,
-        height: SIZE,
+        width: WIDTH,
+        height,
       });
     }
     const feed: InstagramFeed = { username: me.username, profile: `https://www.instagram.com/${me.username}/`, posts };
