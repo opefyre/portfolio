@@ -1,0 +1,70 @@
+.prose .control-explanation { border-left: 2px solid #b4532a; padding: 4px 0 4px 18px; }
+.prose .control-explanation h4 { font-family: var(--font-display); font-size: 24px; font-weight: 500; line-height: 1.2; margin: 8px 0 14px; }
+.prose .control-explanation p { font-size: 15px; margin: 0 0 13px; }
+.control-explanation a { font-size: 13px; }
+.control-kind { font-size: 12px; color: var(--fg-3); }
+.control-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.prose .control-comparison { display: table; overflow: visible; width: 100%; table-layout: fixed; margin: 0; border-collapse: collapse; }
+.prose .control-comparison th, .prose .control-comparison td { padding: 18px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; text-align: left; white-space: normal; font-size: 14px; line-height: 1.55; overflow-wrap: break-word; }
+.prose .control-comparison thead th { font-size: 12px; font-weight: 500; color: var(--fg-3); border-top: 1px solid var(--rule-strong); border-bottom: 1px solid var(--rule-strong); padding-top: 12px; padding-bottom: 12px; }
+.prose .control-comparison thead th:first-child { width: 27%; }
+.prose .control-comparison thead th:nth-child(2) { width: 32%; }
+.prose .control-comparison tbody th { font-weight: 400; padding-left: 0; }
+.prose .control-comparison tbody th strong { display: block; font-family: var(--font-display); font-size: 17px; font-weight: 500; line-height: 1.3; }
+.prose .control-comparison tbody th > span { display: block; color: var(--fg-3); font-size: 12px; margin-top: 6px; }
+.prose .control-comparison td:last-child { padding-right: 0; }
+.prose .control-comparison p { font-size: 14px; line-height: 1.55; margin: 6px 0; }
+.control-comparison .control-kind { display: block; color: #a24d28; font-size: 11px; }
+.control-comparison a, .control-event-sources a { font-size: 12px; }
+.control-legend { display: flex; flex-wrap: wrap; gap: 12px 22px; font-size: 12px; color: var(--fg-3); margin: 0 0 28px; }
+.control-legend > span { display: inline-flex; align-items: center; gap: 9px; }
+.control-node { display: inline-block; width: 11px; height: 11px; border: 1.5px solid var(--color-ink); border-radius: 50%; background: var(--color-paper-bg); flex: none; }
+.control-node-real { border-color: #b4532a; border-radius: 1px; background: #b4532a; }
+.prose .control-timeline { list-style: none; padding: 0 0 0 27px; margin: 0; position: relative; }
+.control-timeline::before { content: ""; position: absolute; top: 9px; bottom: 22px; left: 5px; width: 1px; background: var(--rule-strong); }
+.prose .control-event { margin: 0 0 26px; padding: 0; position: relative; }
+.control-event > .control-node { position: absolute; top: 4px; left: -27px; z-index: 1; }
+.control-event-date { font-size: 13px; font-weight: 500; margin-bottom: 11px; }
+.control-event-date small { font-size: 11px; font-weight: 400; color: var(--fg-3); margin-left: 12px; }
+.control-event-card { border: 1px solid var(--rule); border-radius: 5px; padding: 20px; background: color-mix(in srgb,var(--color-paper-bg) 70%,white 30%); }
+.control-event-real .control-event-card { border-left: 2px solid #b4532a; }
+.control-event-heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 18px; margin-bottom: 20px; }
+.prose .control-event-heading h4 { font-family: var(--font-display); font-size: 21px; line-height: 1.2; font-weight: 500; margin: 0; }
+.control-event-heading > span { font-size: 11px; color: var(--fg-3); }
+.control-event-result { display: grid; grid-template-columns: minmax(130px,0.8fr) minmax(0,1.6fr); gap: 24px; align-items: start; }
+.control-event-stat strong { display: block; font-family: var(--font-display); font-size: 31px; line-height: 1.15; font-weight: 500; letter-spacing: -0.03em; }
+.control-event-real .control-event-stat strong { color: #a24d28; }
+.control-event-stat > span { display: block; font-size: 12px; line-height: 1.5; margin-top: 7px; color: var(--fg-3); max-width: 180px; }
+.prose .control-event-result > p { font-size: 14px; line-height: 1.6; margin: 0; }
+.prose .control-event-limit { font-size: 12px; line-height: 1.6; margin: 18px 0 10px; padding-top: 12px; border-top: 1px solid var(--rule); color: var(--fg-3); }
+.control-event-limit > span { display: block; font-size: 11px; font-weight: 500; color: var(--color-ink); margin-bottom: 4px; }
+.control-event-sources { font-size: 12px; }
+.prose .control-timeline-note { font-size: 13px; line-height: 1.6; margin: 6px 0 0; color: var(--fg-3); }
+.control-ladder { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; margin-bottom: 20px; }
+.control-ladder button { text-align: left; padding: 14px 10px; border: 1px solid var(--rule-strong); background: transparent; border-radius: 5px; font-size: 14px; cursor: pointer; min-height: 94px; }
+.control-ladder button span { display: block; margin-bottom: 8px; color: #b4532a; font-size: 12px; }
+.control-ladder button[aria-pressed="true"] { background: var(--color-ink); color: var(--color-paper-bg); }
+.control-ladder button[aria-pressed="true"] span { color: var(--color-paper-bg); }
+.control-explanation dl { margin: 10px 0 0; }
+.control-explanation dt { font-size: 13px; font-weight: 500; margin-top: 14px; }
+.control-explanation dd { font-size: 15px; margin: 5px 0 0; }
+.control-plot > svg { display: block; width: 100%; height: auto; font-family: var(--font-sans); }
+@media(max-width:540px){ .control-ladder { grid-template-columns:repeat(2,minmax(0,1fr)); } .prose .control-explanation h4 { font-size: 22px; } }
+
+@media(max-width:540px){
+ .prose .control-comparison, .control-comparison tbody, .control-comparison tr, .control-comparison th, .control-comparison td { display: block; width: 100%; }
+ .control-comparison thead { display: none; }
+ .prose .control-comparison tbody tr { padding: 18px 0; border-top: 1px solid var(--rule); }
+ .prose .control-comparison tbody th, .prose .control-comparison tbody td { border: 0; padding: 0; }
+ .prose .control-comparison tbody td { margin-top: 13px; }
+ .control-comparison td::before { content: attr(data-label); display: block; font-size: 11px; color: var(--fg-3); margin-bottom: 4px; }
+ .prose .control-comparison tbody th strong { font-size: 19px; }
+ .control-event-card { padding: 16px; }
+ .control-event-result { grid-template-columns: 1fr; gap: 14px; }
+ .control-event-stat { display: grid; grid-template-columns: minmax(90px,0.7fr) minmax(0,1.3fr); gap: 16px; align-items: start; }
+ .control-event-stat strong { font-size: 28px; }
+ .control-event-stat > span { margin-top: 0; }
+ .control-event-date small { display: block; margin: 4px 0 0; }
+ .prose .control-event-heading h4 { font-size: 20px; }
+ .control-event-heading { margin-bottom: 17px; }
+}
