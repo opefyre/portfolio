@@ -24,6 +24,11 @@ export function SiteFooter() {
               </a>
             </li>
             <li>
+              <a href={site.instagram} target="_blank" rel="noopener noreferrer">
+                Instagram <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li>
               <a href={site.github} target="_blank" rel="noopener noreferrer">
                 GitHub <span aria-hidden="true">↗</span>
               </a>

@@ -104,7 +104,7 @@ export default async function NotePage({ params }: Params) {
         description: author.bio,
         worksFor: { "@type": "Organization", name: "Vrolen", url: "https://vrolen.com" },
         knowsAbout: site.expertise,
-        sameAs: [site.linkedin, site.github],
+        sameAs: [site.linkedin, site.instagram, site.github],
       },
       {
         "@type": "BreadcrumbList",
@@ -203,6 +203,9 @@ export default async function NotePage({ params }: Params) {
                   </a>
                   <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="text-link">
                     LinkedIn <span aria-hidden="true">↗</span>
+                  </a>
+                  <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="text-link">
+                    Instagram <span aria-hidden="true">↗</span>
                   </a>
                 </>
               )}

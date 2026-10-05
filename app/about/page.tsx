@@ -63,6 +63,9 @@ export default async function AboutPage() {
               <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="text-link">
                 LinkedIn <span aria-hidden="true">↗</span>
               </a>
+              <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="text-link">
+                Instagram <span aria-hidden="true">↗</span>
+              </a>
             </p>
           </div>
         </div>
