@@ -526,3 +526,63 @@ html.lenis body {
 .lenis [data-lenis-prevent] {
   overscroll-behavior: contain;
 }
+
+/* ---------- Social links: brand marks in glass chips --------------------- */
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.social {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--fg-2);
+  transition: color 0.3s;
+}
+.social:hover,
+.social:focus-visible {
+  color: var(--fg);
+}
+.social-chip {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: var(--fg);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background 0.4s var(--ease-out),
+    color 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out),
+    transform 0.5s var(--ease-back);
+}
+.social:hover .social-chip,
+.social:focus-visible .social-chip {
+  transform: translateY(-2px) rotate(-8deg);
+  box-shadow: inset 0 0 0 1px transparent, 0 10px 24px -12px rgba(0, 0, 0, 0.6);
+}
+.social[data-brand="linkedin"]:is(:hover, :focus-visible) .social-chip {
+  background: #0a66c2;
+  color: #fff;
+}
+.social[data-brand="instagram"]:is(:hover, :focus-visible) .social-chip {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+  color: #fff;
+}
+.social[data-brand="github"]:is(:hover, :focus-visible) .social-chip {
+  background: #f0f6fc;
+  color: #0d1117;
+}
+@media (prefers-reduced-motion: reduce) {
+  .social:hover .social-chip,
+  .social:focus-visible .social-chip {
+    transform: none;
+  }
+}
