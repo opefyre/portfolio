@@ -1,0 +1,48 @@
+.prose .planning-decision { margin: 2.2em 0; padding: clamp(20px, 4vw, 32px); border: 1px solid var(--rule-strong); border-radius: 12px; font-size: 16px; line-height: 1.5; color: var(--color-ink); }
+.planning-decision .planning-heading h3 { margin: 8px 0 10px; font-family: var(--font-display); font-size: clamp(25px, 3vw, 34px); font-weight: 500; letter-spacing: -.03em; line-height: 1.12; }
+.planning-decision .planning-heading p { margin: 0; color: var(--fg-2); }
+.planning-decision .planning-kicker { font-size: 12px; letter-spacing: .045em; text-transform: uppercase; }
+.planning-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin: 28px 0 18px; }
+.planning-controls label { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 14px; }
+.planning-controls output { font-family: var(--font-display); font-weight: 600; font-variant-numeric: tabular-nums; }
+.planning-controls input { width: 100%; accent-color: #b4532a; margin: 14px 0 0; min-height: 28px; cursor: pointer; }
+.planning-scale { display: flex; justify-content: space-between; font-size: 12px; color: var(--fg-2); }
+.planning-decision .planning-context { margin: 0; font-size: 14px; color: var(--fg-2); }
+.planning-presets { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 22px; }
+.planning-presets button { padding: 8px 12px; min-height: 44px; border: 1px solid var(--rule-strong); border-radius: 6px; font: inherit; font-size: 13px; background: transparent; color: inherit; cursor: pointer; }
+.planning-presets button[aria-pressed="true"] { background: var(--color-ink); color: var(--color-paper); }
+.planning-presets .planning-reset { margin-left: auto; border-color: transparent; text-decoration: underline; text-underline-offset: 3px; }
+.planning-result { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 16px 18px; background: rgba(15, 16, 17, .055); border-radius: 8px; }
+.planning-result span { grid-column: 1; font-size: 12px; color: var(--fg-2); }
+.planning-result strong { font-family: var(--font-display); font-size: 21px; font-weight: 500; }
+.planning-result b { grid-column: 2; grid-row: 1 / 3; align-self: center; font-family: var(--font-display); font-weight: 500; font-size: 28px; font-variant-numeric: tabular-nums; }
+.planning-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 24px 0 12px; font-size: 12px; color: var(--fg-2); }
+.planning-legend span { display: inline-flex; align-items: center; gap: 7px; }
+.planning-legend i { width: 10px; height: 10px; border-radius: 1px; }
+.planning-premium { background: #0f1011; }
+.planning-late { background: #b4532a; }
+.planning-carry { background: #b0ada5; }
+.planning-bars { display: grid; gap: 8px; }
+.planning-bar-option { display: block; text-align: left; width: 100%; padding: 12px 10px; border: 1px solid transparent; border-radius: 6px; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.planning-bar-option.is-focused { border-color: var(--rule-strong); background: rgba(15,16,17,.025); }
+.planning-bar-name { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; font-family: var(--font-display); }
+.planning-bar-name strong { font-weight: 500; font-variant-numeric: tabular-nums; }
+.planning-bar-track { display: flex; height: 22px; margin: 9px 0; background: rgba(15,16,17,.055); border-radius: 2px; overflow: hidden; }
+.planning-bar-track > span { display: block; height: 100%; }
+.planning-bar-note { display: block; font-size: 12px; color: var(--fg-2); font-variant-numeric: tabular-nums; }
+.planning-decision .planning-axis { margin: 12px 0 20px; font-size: 12px; color: var(--fg-2); }
+.planning-breakdown { padding: 16px 0; border-block: 1px solid var(--rule); }
+.planning-breakdown > span { font-family: var(--font-display); font-weight: 500; }
+.planning-decision .planning-breakdown p { margin: 6px 0 0; font-size: 14px; font-variant-numeric: tabular-nums; }
+.planning-methods { margin: 22px 0 0; }
+.planning-methods summary { cursor: pointer; min-height: 44px; display: list-item; font-size: 14px; padding: 10px 0; text-decoration: underline; text-underline-offset: 3px; }
+.planning-decision .planning-methods p { margin: 14px 0; font-size: 14px; line-height: 1.6; }
+.planning-decision .planning-methods ul { margin: 14px 0; padding-left: 20px; font-size: 14px; }
+.planning-table-wrap { overflow-x: auto; }
+.planning-decision table { display: table; font-size: 12px; margin: 18px 0; }
+.planning-decision table caption { text-align: left; font-family: var(--font-display); padding-bottom: 10px; font-size: 14px; }
+.planning-decision td { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.planning-decision th { min-width: 65px; }
+.planning-decision figcaption { margin: 20px 0 0; font-size: 13px; line-height: 1.6; color: var(--fg-2); }
+.planning-decision button:focus-visible, .planning-decision input:focus-visible, .planning-methods summary:focus-visible { outline: 2px solid #b4532a; outline-offset: 3px; }
+@media (max-width: 520px) { .planning-controls { grid-template-columns: 1fr; gap: 20px; } .planning-result { padding: 14px 12px; gap: 6px 10px; } .planning-result strong { font-size: 18px; } .planning-result b { font-size: 24px; } .planning-presets .planning-reset { margin-left: 0; } .planning-bar-option { padding: 12px 0; } .planning-bar-option.is-focused { border-color: transparent; background: transparent; } .planning-bar-note { font-size: 11px; } }

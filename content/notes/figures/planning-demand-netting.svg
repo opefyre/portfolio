@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 310" role="img" aria-labelledby="planning-net-title planning-net-desc">
+<title id="planning-net-title">Orders belong inside the forecast</title>
+<desc id="planning-net-desc">Fictional example: adding 1000 forecast units and 600 confirmed units would overstate demand as 1600. Consuming the orders leaves 600 confirmed units and 400 units still expected, totalling 1000.</desc>
+<style>text{font-family:inherit;fill:#0f1011;font-size:21px}.small{font-size:18px;fill:#5a5d60}.value{font-weight:600}.inside{fill:#eeece6;font-size:19px}</style>
+<text x="0" y="30" style="font-size:25px;font-weight:500">Orders belong inside the forecast</text>
+<text x="0" y="76">Adding both: 1,600 units</text>
+<rect x="0" y="92" width="275" height="45" fill="#5a5d60" rx="3"/>
+<rect x="279" y="92" width="165" height="45" fill="#b4532a" rx="3"/>
+<text x="12" y="121" class="inside">1,000 forecast</text><text x="291" y="121" class="inside">600 orders</text>
+<text x="279" y="164" class="small" style="fill:#b4532a">Counted twice</text>
+<text x="0" y="207">Counted once: 1,000 units</text>
+<rect x="0" y="225" width="165" height="45" fill="#0f1011" rx="3"/>
+<rect x="169" y="225" width="110" height="45" fill="#d6d3cb" rx="3"/>
+<text x="12" y="254" class="inside">600 ordered</text><text x="224" y="254" text-anchor="middle" style="font-size:19px">400</text>
+<text x="169" y="300" class="small">Still to be ordered</text>
+</svg>
