@@ -18,6 +18,10 @@ export function generateStaticParams() {
 type NoteCta = { title: string; text: string };
 
 const vrolenCtas: Partial<Record<string, NoteCta>> = {
+  "ai-supply-chain-planning": {
+    title: "Test the change before committing",
+    text: "Vrolen’s private pilot helps operations teams compare proposed changes and check whether the expected improvement held. Bring the capacity assumptions behind your planning decision.",
+  },
   "smed-changeover-smaller-batches": {
     title: "What should your faster changeovers make possible?",
     text: "More output or more frequent runs? Vrolen helps operations teams model the process and compare proposed changes before trying them on the line.",
