@@ -5,6 +5,7 @@ summary: Follow an order from release to dispatch. Map its work, queues and inst
 status: published
 topic: Operational excellence
 keywords: value stream mapping example, current state value stream map, value stream mapping lead time, value stream mapping template Excel, VSM cycle time vs lead time
+seoTitle: Value stream mapping: work time vs waiting time
 ---
 
 Orders take nearly two working weeks to get through the operation. The first request is for faster preparation equipment. It is the most visible place where people are busy.

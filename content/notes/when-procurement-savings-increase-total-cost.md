@@ -5,6 +5,8 @@ summary: A cheaper part saves €200. One late delivery adds €350 in freight. 
 status: published
 topic: Supply chain
 keywords: procurement savings, total cost of ownership, supplier comparison, supplier selection, purchasing KPIs, premium freight, supply chain costs
+seoTitle: When procurement savings increase total cost
+seoDescription: A €200 saving becomes €150 more spent after extra freight. Compare suppliers on total cost, with a worked example and an editable comparison sheet.
 ---
 
 Purchasing finds another supplier for the same part. The specification matches, the quote is lower, and the order saves €200. The saving goes into the monthly report.

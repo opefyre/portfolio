@@ -5,6 +5,8 @@ summary: A control chart tells you when a change in your numbers is real and whe
 status: published
 topic: Operational excellence
 keywords: control chart, statistical process control, SPC, I-MR chart, individuals chart, Western Electric rules, common cause variation, special cause variation, Shewhart chart, control limits
+seoTitle: How to read a control chart: rules and example
+seoDescription: Build an individuals control chart with a worked example. Learn common and special causes, the Western Electric rules and which chart fits your data.
 ---
 
 Every Monday, someone looks at last week's number, sees it went up, and asks what happened. Often, nothing happened. Numbers wobble. But the question sends a team off to investigate, explain and "fix" something that was never broken, and fixing a stable process often makes it worse.

@@ -5,6 +5,8 @@ summary: Two forecasts, two metrics, two different winners. Calculate MAPE, WAPE
 status: published
 topic: Supply chain
 keywords: MAPE vs WAPE, forecast accuracy calculation, forecast bias, forecast accuracy Excel, demand planning, demand forecast accuracy
+seoTitle: Forecast accuracy: MAPE vs WAPE worked example
+seoDescription: Calculate MAPE, WAPE and bias with two forecasts that give different winners. Check what averages hide and use an Excel sheet to review your data.
 ---
 
 The planning team brings two forecasts to the review. Forecast A has the lower average percentage error. Forecast B misses far fewer units. Both teams can point to a number that says their forecast is better.

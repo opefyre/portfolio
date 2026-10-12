@@ -17,7 +17,7 @@ export const site = {
   github: "https://github.com/opefyre",
   instagram: "https://www.instagram.com/abosh.io/",
   /** Page title for the homepage and default share title. */
-  title: "Abolfazl Shirkavand: Operational Excellence, Digital Transformation & Industrial AI",
+  title: "Abolfazl Shirkavand | Operations & industrial AI",
   description:
     "Founder of Vrolen. Ten years of digital transformation, operational excellence and supply chain programs, now building industrial AI and automation.",
   /** What search engines should associate with the name (schema.org knowsAbout). From Firestore skills. */
@@ -63,6 +63,9 @@ export type Work = {
   name: string;
   /** One sentence. What it is, in plain words. */
   line: string;
+  /** Search description; the shorter line remains visible on the page. */
+  seoDescription: string;
+  seoTitle: string;
   status: string;
   href?: string;
   hrefLabel?: string;
@@ -78,6 +81,8 @@ export type Work = {
 export const works: Work[] = [
   {
     slug: "vrolen",
+    seoTitle: "Vrolen: continuous improvement software",
+    seoDescription: "Vrolen connects process maps, evidence, what-if analysis and results so operations teams can test changes and check whether improvements held.",
     featured: true,
     name: "Vrolen",
     line: "A continuous improvement platform: see how work actually flows, find what matters, improve it, then prove the result held.",
@@ -103,6 +108,8 @@ export const works: Work[] = [
   },
   {
     slug: "elixiary-ai-bartender",
+    seoTitle: "Elixiary: AI bartender for your home bar",
+    seoDescription: "Elixiary mixes cocktails from ingredients in your cabinet. Explore the AI bartender, recipe library and home bar on the web and on iPhone.",
     featured: true,
     name: "Elixiary",
     line: "An AI bartender that mixes from what's already in your cabinet, on the web and on iPhone.",
@@ -130,6 +137,8 @@ export const works: Work[] = [
   },
   {
     slug: "cargo-and-consequence",
+    seoTitle: "Cargo & Consequence: supply chain game",
+    seoDescription: "A free browser game about running a headphone supply chain. Buy parts, build, test and ship, then trace the costs of shortcuts across departments.",
     featured: true,
     name: "Cargo & Consequence",
     line: "A free browser game about running a supply chain, where every cheap shortcut comes back as a cost later.",
@@ -156,6 +165,8 @@ export const works: Work[] = [
   },
   {
     slug: "finkavo",
+    seoTitle: "Finkavo: Portuguese tax and life admin",
+    seoDescription: "Finkavo explains Portuguese tax and life admin with official sources. Explore bilingual guides, free tools and a personal deadline calendar.",
     featured: true,
     name: "Finkavo",
     line: "Tax answers for people living in Portugal, cited to the exact article, in Portuguese or English.",
@@ -182,6 +193,8 @@ export const works: Work[] = [
   },
   {
     slug: "foreviq",
+    seoTitle: "Foreviq: demand forecasting and order planning",
+    seoDescription: "Foreviq compares forecasting methods for each customer and product, checks later-period accuracy and nets open orders against expected demand.",
     name: "Foreviq",
     line: "Monthly demand forecasts for every customer and product, built from sales history and open orders.",
     status: "In progress",
@@ -203,6 +216,8 @@ export const works: Work[] = [
   },
   {
     slug: "chanshambe",
+    seoTitle: "Chanshambe: family planning and organisation",
+    seoDescription: "Chanshambe brings family calendars, chores, allowances, trips, meals and bills together, with plans reviewed by people and support for Persian.",
     name: "Chanshambe",
     line: "One calm place for a family's calendar, chores, kids' allowances, trips, meals and bills.",
     status: "Built, pre-launch",
@@ -227,6 +242,8 @@ export const works: Work[] = [
   },
   {
     slug: "azshambe",
+    seoTitle: "Azshambe: commitments you schedule and prove",
+    seoDescription: "Azshambe turns postponed plans into commitments. Schedule a first step on the Persian calendar, lock it and record proof with friends or groups.",
     name: "Azshambe",
     line: "Turns \u201cI'll start on Saturday\u201d into a commitment you schedule, lock and prove.",
     status: "Built, pre-launch",
@@ -243,6 +260,8 @@ export const works: Work[] = [
   },
   {
     slug: "elsewhere-hotel",
+    seoTitle: "Elsewhere Hotel: explore rooms in real cities",
+    seoDescription: "Explore illustrated hotel rooms connected to real cities, with local weather, radio, books and museum artworks. Each object identifies its source.",
     name: "Elsewhere Hotel",
     line: "A painted hotel room for a real city. The view, radio, book and painting inside it are live and real.",
     status: "Running",
@@ -267,6 +286,8 @@ export const works: Work[] = [
   },
   {
     slug: "bad-timing",
+    seoTitle: "Bad Timing: check clashes before an event",
+    seoDescription: "Bad Timing checks your event date and place against public sources for weather, holidays, sports, closures and other clashes before you invite people.",
     name: "Bad Timing",
     line: "Check the date before you send the invitation. It finds what could clash with your event.",
     status: "Running",
@@ -288,6 +309,8 @@ export const works: Work[] = [
   },
   {
     slug: "content-engine",
+    seoTitle: "Content engine: from sources to social posts",
+    seoDescription: "A content pipeline built on a spare Mac: turn sourced facts into scripts, images, voices and videos, with scheduling and draft approval for four brands.",
     name: "Content engine",
     line: "The system that writes, films, scores and schedules posts for my products, from a spare Mac.",
     status: "Running",

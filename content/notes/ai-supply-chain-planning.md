@@ -5,6 +5,8 @@ summary: Turn a demand forecast into a decision about stock, capacity and delive
 status: published
 topic: Supply chain
 keywords: AI supply chain planning, AI demand forecasting, forecast consumption, demand planning, production planning, human oversight
+seoTitle: AI supply chain planning: forecast to decision
+seoDescription: Compare stock, overtime and supplier costs in an interactive worked example. See what AI supply chain planning needs beyond forecast accuracy.
 ---
 
 The forecast says next month's demand will reach 1,000 units. Sales wants to promise delivery. Production can make 600. There are another 200 in stock.

@@ -5,6 +5,7 @@ summary: What 50+ automation projects taught me about digital transformation, an
 status: draft
 topic: Digital transformation
 keywords: digital transformation, process automation, AI in operations, agentic AI, change management, program management, operational excellence
+seoTitle: Digital transformation: automate the loop first
 ---
 
 At Snoonu I led digital innovation and process improvement across the company: more than 50 automation and process projects, with a team of 12+ people. Some of them were flashy. Most of the value came from the unflashy ones.

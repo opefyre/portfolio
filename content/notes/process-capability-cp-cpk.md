@@ -5,6 +5,8 @@ summary: What Cp and Cpk actually measure, how to calculate them by hand, why a 
 status: published
 topic: Operational excellence
 keywords: process capability, Cpk, Cp, Ppk, Pp, Cpk formula, capability index, six sigma, statistical process control, specification limits, ppm defects
+seoTitle: Process capability: Cp, Cpk, Pp and Ppk explained
+seoDescription: Calculate Cp, Cpk, Pp and Ppk with a worked example. Learn what process capability measures and what to check before trusting the result.
 ---
 
 "All the parts are in spec" sounds like good news. But it doesn't tell you whether they'll stay in spec next week, or how close to the edge they already are. Process capability answers that. It compares how much your process varies with how much the customer allows, and turns it into one number that suppliers, customers and auditors all understand.

@@ -5,6 +5,7 @@ summary: Two machines can report the same OEE and need completely different work
 status: draft
 topic: Operational excellence
 keywords: OEE, overall equipment effectiveness, operational excellence, continuous improvement, World Class Manufacturing, six big losses, SMED
+seoTitle: Same OEE, opposite fixes: turn scores into minutes
 ---
 
 I've spent a good part of my career staring at OEE. On the Unilever lines I worked on, it moved from roughly 60% to roughly 75%, and I'm proud of that. But if I'm honest, the percentage never told us what to do on Monday morning. The minutes did.

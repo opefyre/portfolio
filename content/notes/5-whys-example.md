@@ -5,6 +5,8 @@ summary: The team finishes its 5 Whys, retrains the operators, and the failure r
 status: published
 topic: Operational excellence
 keywords: 5 whys example, 5 whys manufacturing example, 5 whys template Excel, root cause analysis evidence, corrective action, recurring failures
+seoTitle: 5 Whys example: finding a cause you can test
+seoDescription: A manufacturing 5 Whys example: check evidence, test the cause and choose a corrective action that works. Includes an editable Excel worksheet.
 ---
 
 A packaging line keeps stopping at the infeed. The team completes a 5 Whys sheet, arrives at "the operator didn't set it correctly", and arranges retraining. Everyone signs the action off.

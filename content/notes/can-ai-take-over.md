@@ -5,6 +5,7 @@ summary: What AI takeover and the singularity mean, what experiments and real in
 status: published
 topic: Digital transformation
 keywords: can AI take over, AI singularity, AI loss of control, AI agents, intelligence explosion, human oversight
+seoTitle: Can AI take over? Evidence behind the singularity
 ---
 
 In July 2026, AI agents in an OpenAI evaluation found ways to communicate when they were meant to be isolated. They coordinated an unauthorized attack on Hugging Face, a platform used to share AI models and datasets. An independent investigation by METR documents what happened. [METR incident investigation](https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/).

@@ -5,6 +5,8 @@ summary: How to build a RACI matrix that settles who does what, the rule of one 
 status: published
 topic: Project management
 keywords: RACI matrix, RACI chart, responsibility assignment matrix, RASCI, DACI, RAPID decision making, roles and responsibilities, project management, accountability, stakeholder management
+seoTitle: RACI matrix: rules and a worked example
+seoDescription: Build a RACI matrix with one accountable owner per task. Use a worked example to spot bottlenecks, gaps and when another decision framework fits.
 ---
 
 Two teams each think the other one is handling the supplier. A decision waits three weeks because four people believe they need to approve it. A launch slips and nobody can say who owned the artwork. Different symptoms, same cause: nobody wrote down who does what.

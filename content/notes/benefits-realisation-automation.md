@@ -5,6 +5,8 @@ summary: The automation is live and processing time is down. Adjust for volume, 
 status: published
 topic: Digital transformation
 keywords: benefits realisation, benefits realization template, benefits realisation plan, automation savings tracking, digital transformation benefits measurement
+seoTitle: Benefits realisation: did automation save money?
+seoDescription: Check whether automation delivered its promised savings. Separate released capacity from cash and review the evidence with an Excel benefits sheet.
 ---
 
 The automation is live. Operations says processing time has halved. The project report calls that a saving, and Finance asks which expense fell.

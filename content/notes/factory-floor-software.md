@@ -4,6 +4,8 @@ date: 2026-09-14
 summary: Standard work, inspection at the station, and readiness before launch.
 status: draft
 topic: Digital transformation
+seoTitle: Three factory habits I use in software
+seoDescription: How standard work, inspection during the process and launch readiness carry over from manufacturing to software, with examples from my own work.
 ---
 
 I spent my first years on production lines, World Class Manufacturing at Unilever and product launches at BAT, before moving into digital systems and then building software. The longer I build software, the more of the factory I see in it. Three habits carry over almost unchanged.

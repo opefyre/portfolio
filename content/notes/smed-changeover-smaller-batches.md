@@ -5,6 +5,8 @@ summary: A changeover falls from 45 to 15 minutes. Use a worked schedule to deci
 status: published
 topic: Operational excellence
 keywords: SMED example, changeover time reduction, SMED internal and external activities, SMED Excel template, changeover reduction batch size
+seoTitle: SMED example: faster changeovers, smaller batches
+seoDescription: A SMED changeover falls from 45 to 15 minutes. Compare more output with smaller batches using a worked schedule and an editable Excel sheet.
 ---
 
 The team cuts a changeover from 45 minutes to 15. The before-and-after chart looks good. The production plan stays exactly the same: three days of one product cycle before the next cycle begins.

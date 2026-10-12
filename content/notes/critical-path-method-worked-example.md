@@ -5,6 +5,8 @@ summary: How to find the critical path by hand: build the network, run the forwa
 status: published
 topic: Project management
 keywords: critical path method, CPM, critical path, total float, free float, forward pass, backward pass, project scheduling, project management, network diagram
+seoTitle: Critical path method: a step-by-step worked example
+seoDescription: Find the critical path with a worked example. Build a network, calculate early and late dates and float, then see which tasks shorten the project.
 ---
 
 Every project plan answers one question sooner or later: *what is the earliest we can finish, and what exactly decides that date?* The critical path method (CPM) answers it with simple arithmetic. It came out of a joint project between DuPont and Remington Rand in the late 1950s, led by Morgan Walker and James Kelley. Its first real test was maintenance shutdowns at a DuPont plant, where it cut downtime by about a quarter. It's still the backbone of every scheduling tool you've used.
