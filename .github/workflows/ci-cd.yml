@@ -55,7 +55,7 @@ jobs:
         run: node --import tsx --test components/notes/forecast-metrics.test.ts
 
       - name: Verify rendering compatibility
-        run: node --import tsx --test scripts/fiber-timer.test.mjs scripts/instagram-assets.test.ts components/lens/image-ready.test.ts
+        run: node --import tsx --test scripts/fiber-timer.test.mjs scripts/instagram-assets.test.ts components/lens/image-ready.test.ts lib/note-figure.test.ts
 
       - name: Verify Build
         # This runs 'next build' which does the static export.
