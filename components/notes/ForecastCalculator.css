@@ -1,0 +1,50 @@
+.prose .forecast-calculator { margin: 2em 0; padding: clamp(18px, 3.5vw, 30px); border: 1px solid var(--rule-strong); border-radius: 12px; font-size: 15px; line-height: 1.5; color: var(--color-ink); }
+.forecast-calculator .forecast-heading h3 { margin: 8px 0 10px; font-family: var(--font-display); font-size: clamp(24px, 3vw, 32px); font-weight: 500; letter-spacing: -.03em; line-height: 1.12; }
+.forecast-calculator .forecast-heading p { margin: 0; color: var(--fg-2); }
+.forecast-kicker { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; }
+.forecast-presets, .forecast-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
+.forecast-calculator button { font: inherit; color: inherit; background: transparent; cursor: pointer; }
+.forecast-presets button, .forecast-actions button { min-height: 44px; padding: 8px 12px; border: 1px solid var(--rule-strong); border-radius: 6px; font-size: 13px; }
+.forecast-presets button[aria-pressed="true"] { background: var(--color-ink); color: var(--color-paper); }
+.forecast-actions { margin: 14px 0; }
+.forecast-actions button:last-child { margin-left: auto; border-color: transparent; text-decoration: underline; text-underline-offset: 3px; }
+.forecast-calculator button:disabled { opacity: .4; cursor: default; }
+.forecast-inputs { display: grid; gap: 14px; }
+.forecast-inputs fieldset { border: 0; min-width: 0; padding: 0; margin: 0; }
+.forecast-inputs legend { font-family: var(--font-display); padding: 0; margin-bottom: 5px; }
+.forecast-input-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) 36px; gap: 10px; align-items: end; }
+.forecast-input-row label { min-width: 0; }
+.forecast-input-row label > span { display: block; font-size: 12px; margin: 0 0 4px; color: var(--fg-2); }
+.forecast-input-row input { width: 100%; min-width: 0; padding: 9px 10px; min-height: 44px; border: 1px solid var(--rule-strong); border-radius: 4px; background: rgba(255,255,255,.25); color: inherit; font: inherit; font-variant-numeric: tabular-nums; }
+.forecast-input-row input[aria-invalid="true"] { border: 2px solid #b4532a; }
+.forecast-remove { min-height: 44px; font-size: 22px !important; border: 0; }
+.forecast-calculator .forecast-row-warning { margin: 6px 0 0; color: #914422; font-size: 12px; }
+.forecast-calculator .forecast-help, .forecast-calculator .forecast-direction, .forecast-calculator .forecast-axis { font-size: 12px; color: var(--fg-2); margin: 12px 0; }
+.forecast-status { margin-top: 18px; padding: 12px 14px; border-left: 3px solid #b4532a; background: rgba(15,16,17,.04); font-size: 13px; }
+.forecast-results-wrap { overflow-x: auto; }
+.forecast-calculator .forecast-results { display: table; font-size: 14px; margin: 20px 0 10px; }
+.forecast-results caption { text-align: left; font-size: 12px; color: var(--fg-2); padding-bottom: 10px; }
+.forecast-results td { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.forecast-results td:last-child { font-size: 12px; white-space: normal; }
+.forecast-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 12px; margin: 24px 0 8px; color: var(--fg-2); }
+.forecast-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.forecast-legend i { width: 10px; height: 10px; }
+.forecast-a { background: #0f1011; }
+.forecast-b { background: #b4532a; }
+.forecast-bars { display: grid; gap: 4px; }
+.forecast-bar { text-align: left; padding: 12px; border: 1px solid transparent; border-radius: 6px; width: 100%; }
+.forecast-bar.is-focused { border-color: var(--rule-strong); background: rgba(15,16,17,.025); }
+.forecast-bar-label { display: block; font-family: var(--font-display); margin-bottom: 8px; }
+.forecast-bar-line { display: grid; grid-template-columns: 14px minmax(0,1fr) 52px; gap: 10px; align-items: center; margin-top: 5px; font-size: 12px; }
+.forecast-track { height: 14px; background: rgba(15,16,17,.055); border-radius: 2px; overflow: hidden; }
+.forecast-track > span { display: block; height: 100%; }
+.forecast-bar-line b { font-weight: 500; text-align: right; font-variant-numeric: tabular-nums; }
+.forecast-inspect { padding: 14px 0; border-block: 1px solid var(--rule); }
+.forecast-inspect > strong { font-family: var(--font-display); }
+.forecast-calculator .forecast-inspect p { margin: 6px 0 0; font-size: 13px; }
+.forecast-method { margin: 18px 0 0; }
+.forecast-method summary { cursor: pointer; min-height: 44px; padding: 10px 0; text-decoration: underline; text-underline-offset: 3px; }
+.forecast-calculator .forecast-method p { margin: 14px 0; font-size: 13px; line-height: 1.6; }
+.forecast-calculator figcaption { margin: 18px 0 0; font-size: 12px; line-height: 1.6; color: var(--fg-2); }
+.forecast-calculator :is(button,input,summary):focus-visible { outline: 2px solid #b4532a; outline-offset: 3px; }
+@media (max-width: 520px) { .forecast-input-row { grid-template-columns: repeat(3, minmax(0,1fr)) 28px; gap: 6px; } .forecast-input-row input { padding: 8px 6px; font-size: 16px; } .forecast-calculator .forecast-results { font-size: 12px; } .forecast-results :is(th,td) { padding-right: 8px; } .forecast-bar { padding: 10px 6px; } }

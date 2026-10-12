@@ -1,6 +1,7 @@
 ---
 title: Safety stock and reorder point: the formulas, a worked example, and what service level really costs
 date: 2026-09-29
+updated: 2026-10-12
 summary: How to calculate safety stock and the reorder point step by step, why lead-time variability usually matters more than demand, how cycle service level differs from fill rate, and what each extra point of service costs in inventory.
 status: published
 topic: Supply chain
@@ -123,6 +124,8 @@ The formula is only as good as what you feed it:
 - **Check the normal assumption for slow movers.** For items that sell a few units a month, the normal distribution fits poorly. Poisson-based or simulation methods work better.
 - **Be careful at low service levels.** Research by Chopra, Reinhardt and Dada found that below roughly 50% to 70% cycle service level, the normal approximation can give the wrong advice, even suggesting that more reliable suppliers need a *higher* reorder point. The formulas here are for the 90% to 99% range most planners work in.
 - **Recalculate regularly.** Monthly or quarterly, and after any big change in supplier or demand pattern.
+
+Before claiming the forecast improved, check what its score measures. The [MAPE/WAPE comparison and calculator](/notes/forecast-accuracy-mape-wape/) shows why two metrics can choose different winners. For slow movers with quiet weeks, see [forecast accuracy with zero demand](/notes/forecast-accuracy-zero-demand/).
 
 ## Where the real savings are
 

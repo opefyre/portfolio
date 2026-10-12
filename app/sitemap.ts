@@ -19,7 +19,7 @@ function noteImages(html: string) {
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const notes = getNotes();
-  const latestNote = notes.length ? new Date(`${notes[0].date}T12:00:00Z`) : now;
+  const latestNote = notes.length ? new Date(`${notes.map(n => n.updated).sort().at(-1)}T12:00:00Z`) : now;
 
   const home: Entry = {
     url: abs("/"),
@@ -56,7 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const images = noteImages(n.html);
     return {
       url: abs(`/notes/${n.slug}/`),
-      lastModified: new Date(`${n.date}T12:00:00Z`),
+      lastModified: new Date(`${n.updated}T12:00:00Z`),
       changeFrequency: "yearly",
       priority: 0.8,
       ...(images.length ? { images } : {}),
