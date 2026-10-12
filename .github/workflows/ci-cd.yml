@@ -44,6 +44,9 @@ jobs:
       - name: Lint Code
         run: npm run lint
 
+      - name: Verify forecast calculator
+        run: node --import tsx --test components/notes/forecast-metrics.test.ts
+
       - name: Verify Build
         # This runs 'next build' which does the static export.
         # It needs DB access to fetch content.

@@ -3,6 +3,7 @@ import { AiJobsChart, type AiJobsChartName } from "./AiJobsCharts";
 import { AiControlChart, type AiControlChartName } from "./AiControlCharts";
 
 import { PlanningDecision } from "./PlanningDecision";
+import { ForecastCalculator } from "./ForecastCalculator";
 
 const controlNames: AiControlChartName[] = ["ai-control-theories", "ai-control-evidence", "ai-control-horizons", "ai-control-authority"];
 
@@ -29,6 +30,8 @@ export function NoteArticleContent({ html }: { html: string }) {
       parts.push(<AiControlChart key={index} name={match[1] as AiControlChartName} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "planning-decision") {
       parts.push(<PlanningDecision key={index} caption={decodeCaption(match[2])} />);
+    } else if (match[1] === "forecast-calculator") {
+      parts.push(<ForecastCalculator key={index} caption={decodeCaption(match[2])} />);
     } else {
       throw new Error(`Unknown interactive note figure: ${match[1]}`);
     }

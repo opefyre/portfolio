@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 440" role="img" aria-labelledby="zero-error-title zero-error-desc">
+  <title id="zero-error-title">The weeks MAPE cannot score still contain forecast errors</title>
+  <desc id="zero-error-desc">Fictional absolute errors in units. Week 1: A zero, B two. Week 2: A zero, B two. Week 3: A two, B two. Total A two, B six. Only week 3 has positive actual demand.</desc>
+  <style>text{font-family:var(--font-funnel-sans),Arial,sans-serif;fill:#0f1011}.display{font-family:var(--font-funnel-display),Arial,sans-serif;font-weight:500}.muted{fill:#5a5d60}.rust{fill:#b4532a}</style>
+  <text x="12" y="30" class="display" font-size="26">Quiet weeks still count.</text>
+  <text x="12" y="58" class="muted" font-size="17">Absolute error in units · fictional inputs</text>
+  <rect x="12" y="79" width="12" height="12" fill="#0f1011"/><text x="32" y="90" font-size="16">A</text>
+  <rect x="82" y="79" width="12" height="12" fill="#b4532a"/><text x="102" y="90" font-size="16">B</text>
+  <text x="140" y="90" class="muted" font-size="16">Each full bar = 2 units missed</text>
+  <rect x="0" y="108" width="560" height="176" rx="8" fill="#0f1011" opacity=".035"/>
+  <text x="12" y="136" class="display" font-size="19">Week 1</text><text x="548" y="136" text-anchor="end" class="muted" font-size="16">Actual demand: 0</text>
+  <text x="12" y="164" font-size="16">A</text><line x1="42" y1="158" x2="448" y2="158" stroke="#d6d3cb"/><text x="476" y="164" font-size="17">0</text>
+  <text x="12" y="190" font-size="16">B</text><rect x="42" y="176" width="406" height="16" fill="#b4532a"/><text x="476" y="190" class="rust" font-size="17">2</text>
+  <text x="12" y="223" class="display" font-size="19">Week 2</text><text x="548" y="223" text-anchor="end" class="muted" font-size="16">Actual demand: 0</text>
+  <text x="12" y="250" font-size="16">A</text><line x1="42" y1="244" x2="448" y2="244" stroke="#d6d3cb"/><text x="476" y="250" font-size="17">0</text>
+  <text x="12" y="276" font-size="16">B</text><rect x="42" y="262" width="406" height="16" fill="#b4532a"/><text x="476" y="276" class="rust" font-size="17">2</text>
+  <text x="12" y="314" class="display" font-size="19">Week 3</text><text x="548" y="314" text-anchor="end" class="muted" font-size="16">Actual demand: 12</text>
+  <text x="12" y="342" font-size="16">A</text><rect x="42" y="328" width="406" height="16" fill="#0f1011"/><text x="476" y="342" font-size="17">2</text>
+  <text x="12" y="368" font-size="16">B</text><rect x="42" y="354" width="406" height="16" fill="#b4532a"/><text x="476" y="368" class="rust" font-size="17">2</text>
+  <line x1="12" y1="391" x2="548" y2="391" stroke="#d6d3cb"/>
+  <text x="12" y="422" class="display" font-size="22">A: 2 units missed</text><text x="548" y="422" text-anchor="end" class="display rust" font-size="22">B: 6 units missed</text>
+</svg>
