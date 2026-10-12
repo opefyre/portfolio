@@ -7,26 +7,28 @@ import { glNav, useGLImages, type GLImageEntry } from "./glImages";
 import { LAYER } from "./layers";
 import { lensStore } from "./lensStore";
 import { spring, stepSpring, type Spring } from "./physics";
+import { imageReady } from "./image-ready";
 
 /** Image planes sit behind the lens and its plate, so the glass refracts them. */
 const Z = -3;
 
 const geometry = new THREE.PlaneGeometry(1, 1, 48, 24);
-const textures = new Map<string, Promise<THREE.Texture>>();
+const textures = new WeakMap<THREE.WebGLRenderer, Map<string, THREE.Texture>>();
 
-function loadTexture(src: string, gl: THREE.WebGLRenderer) {
-  let p = textures.get(src);
-  if (!p) {
-    p = new THREE.TextureLoader().loadAsync(src).then((t) => {
-      t.colorSpace = THREE.SRGBColorSpace;
-      t.anisotropy = Math.min(8, gl.capabilities.getMaxAnisotropy());
-      t.wrapS = t.wrapT = THREE.ClampToEdgeWrapping;
-      gl.initTexture(t);
-      return t;
-    });
-    textures.set(src, p);
+function textureFor(image: HTMLImageElement, src: string, gl: THREE.WebGLRenderer) {
+  let cache = textures.get(gl);
+  if (!cache) { cache = new Map(); textures.set(gl, cache); }
+  let texture = cache.get(src);
+  if (!texture) {
+    texture = new THREE.Texture(image);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.anisotropy = Math.min(8, gl.capabilities.getMaxAnisotropy());
+    texture.wrapS = texture.wrapT = THREE.ClampToEdgeWrapping;
+    texture.needsUpdate = true;
+    gl.initTexture(texture);
+    cache.set(src, texture);
   }
-  return p;
+  return texture;
 }
 
 const vertexShader = /* glsl */ `
@@ -150,16 +152,20 @@ function Plane({ entry }: { entry: GLImageEntry }) {
   const [tex, setTex] = useState<THREE.Texture | null>(null);
 
   useEffect(() => {
-    let live = true;
-    loadTexture(entry.src, gl).then((t) => {
-      if (!live) return;
-      setTex(t);
+    const image = entry.el?.querySelector("img");
+    if (!image) return;
+    const controller = new AbortController();
+    imageReady(image, controller.signal).then(ready => {
+      if (controller.signal.aborted) return;
+      setTex(ready ? textureFor(image, entry.src, gl) : null);
       lensStore.dirty = true;
+    }).catch(error => {
+      // Unexpected renderer failures remain visible; ordinary image errors
+      // resolve false and leave the DOM image/fallback in place.
+      if (!controller.signal.aborted) console.warn(`WebGL image enhancement failed: ${entry.src}`, error);
     });
-    return () => {
-      live = false;
-    };
-  }, [entry.src, gl]);
+    return () => controller.abort();
+  }, [entry.src, entry.el, gl]);
 
   // Mutated every frame through the ref, as three.js materials are meant to be.
   const matRef = useRef<THREE.ShaderMaterial>(null!);

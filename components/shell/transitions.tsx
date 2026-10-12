@@ -63,6 +63,9 @@ export function useTransitionNavigate() {
       }
       glNav.keep = keep ?? null;
       glNav.leaving = true;
+      // Warm the chosen route during its exit animation, rather than loading
+      // every offscreen case study and its image hints on the homepage.
+      router.prefetch(href);
       document.documentElement.classList.add("is-leaving");
       window.setTimeout(() => router.push(href, { scroll: false }), LEAVE_MS);
     },
@@ -77,6 +80,7 @@ export function TLink({ href, onClick, keep, ...props }: ComponentProps<typeof L
     <Link
       href={href}
       scroll={false}
+      prefetch={false}
       {...props}
       onClick={(e: MouseEvent<HTMLAnchorElement>) => {
         onClick?.(e);

@@ -41,11 +41,21 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
+      - name: Restore recent Instagram thumbnails
+        uses: actions/cache/restore@v6
+        with:
+          path: public/instagram
+          key: portfolio-instagram-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: portfolio-instagram-
+
       - name: Lint Code
         run: npm run lint
 
       - name: Verify forecast calculator
         run: node --import tsx --test components/notes/forecast-metrics.test.ts
+
+      - name: Verify rendering compatibility
+        run: node --import tsx --test scripts/fiber-timer.test.mjs scripts/instagram-assets.test.ts components/lens/image-ready.test.ts
 
       - name: Verify Build
         # This runs 'next build' which does the static export.
@@ -54,6 +64,16 @@ jobs:
 
       - name: Verify search metadata
         run: npm run verify:seo
+
+      - name: Verify exported assets and styles
+        run: node scripts/check-render-assets.mjs
+
+      - name: Save recent Instagram thumbnails
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/cache/save@v6
+        with:
+          path: public/instagram
+          key: portfolio-instagram-${{ github.run_id }}-${{ github.run_attempt }}
 
       # Upload build artifacts to pass to the deploy job (saves rebuilding)
       - name: Upload Build Artifact

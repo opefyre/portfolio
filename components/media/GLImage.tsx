@@ -69,7 +69,10 @@ export function GLImage({
         loading={priority ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : undefined}
         decoding="async"
+        onError={() => { if (ref.current) ref.current.dataset.imageError = "true"; }}
+        onLoad={() => { if (ref.current) delete ref.current.dataset.imageError; }}
       />
+      <span className="gl-image-unavailable" role="img" aria-label={alt || "Image preview unavailable"}>Image preview unavailable</span>
     </div>
   );
 }

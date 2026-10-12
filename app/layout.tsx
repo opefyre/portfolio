@@ -6,6 +6,7 @@ import { getCertifications } from "@/lib/data";
 import "./globals.css";
 import "@/styles/home.css";
 import "@/styles/pages.css";
+import "@/styles/note-figures.generated.css";
 
 const funnelDisplay = Funnel_Display({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-funnel-display", display: "swap" });
 const funnelSans = Funnel_Sans({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-funnel-sans", display: "swap" });

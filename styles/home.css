@@ -764,3 +764,8 @@ html[data-lens="fallback"] .frag--figure::after {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+/* Keep the image box and an honest label if a thumbnail is unavailable. */
+.gl-image-unavailable { display: none; }
+.gl-image[data-image-error="true"] img { visibility: hidden; }
+.gl-image[data-image-error="true"] .gl-image-unavailable { position: absolute; inset: 0; display: grid; place-items: center; padding: 20px; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--bg); color: var(--fg-2); text-align: center; font-size: 14px; line-height: 1.5; }
