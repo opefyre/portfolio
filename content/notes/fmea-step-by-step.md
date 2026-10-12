@@ -5,6 +5,8 @@ summary: A practical guide to process FMEA: the seven steps, how to rate severit
 status: published
 topic: Operational excellence
 keywords: FMEA, failure mode and effects analysis, process FMEA, PFMEA, RPN, risk priority number, action priority, AIAG VDA FMEA, severity occurrence detection, risk analysis
+seoTitle: FMEA step by step: ratings and a worked example
+seoDescription: Build a process FMEA with a worked example. Rate severity, occurrence and detection, compare RPN with action priority, and choose what to fix first.
 ---
 
 Most problem-solving starts after something has gone wrong. Failure mode and effects analysis (FMEA) starts before. It began as a US military procedure in 1949, helped NASA through the Apollo program in the 1960s, and has been standard in the automotive industry for decades. It asks a team to walk through a process step by step and imagine, systematically, every way each step could fail, what that failure would cause, and how likely you'd be to catch it.

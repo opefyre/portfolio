@@ -4,13 +4,14 @@ import { TLink } from "@/components/shell/transitions";
 import { ogImage } from "@/content/site";
 import { formatDate, getNotes } from "@/lib/notes";
 
+const description = "Practical guides to operations, supply chains, Lean Six Sigma and AI by Abolfazl Shirkavand, with worked examples, interactive charts and sources.";
+
 export const metadata: Metadata = {
-  title: "Notes",
-  description:
-    "Free, practical guides by Abolfazl Shirkavand on operational excellence, Lean Six Sigma, project management, supply chains, digital transformation and AI in operations, with worked examples.",
+  title: "Operations & supply chain notes",
+  description,
   alternates: { canonical: "/notes/" },
-  openGraph: { title: "Notes by Abolfazl Shirkavand", url: "/notes/", images: [ogImage] },
-  twitter: { card: "summary_large_image", title: "Notes by Abolfazl Shirkavand", images: [ogImage] },
+  openGraph: { title: "Operations & supply chain notes", description, type: "website", url: "/notes/", images: [ogImage] },
+  twitter: { card: "summary_large_image", title: "Operations & supply chain notes", description, images: [ogImage] },
 };
 
 export default function NotesPage() {

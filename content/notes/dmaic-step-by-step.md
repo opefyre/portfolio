@@ -5,6 +5,8 @@ summary: A practical walk through Define, Measure, Analyze, Improve and Control 
 status: published
 topic: Operational excellence
 keywords: DMAIC, Lean Six Sigma, Six Sigma, define measure analyze improve control, process improvement, root cause analysis, SIPOC, measurement system analysis, control plan, operational excellence
+seoTitle: DMAIC step by step: a Lean Six Sigma example
+seoDescription: Follow a Lean Six Sigma project through Define, Measure, Analyze, Improve and Control, with a worked example, phase tools and tollgate questions.
 ---
 
 Most improvement projects fail in one of two ways. Either the team jumps to a solution before understanding the problem, or it understands the problem beautifully and the gain quietly fades six months later. DMAIC is designed to stop both.

@@ -5,6 +5,8 @@ summary: Keeping every resource busy feels productive and often makes lead times
 status: draft
 topic: Supply chain
 keywords: Little's Law, takt time, lead time, WIP, supply chain, lean manufacturing, new product introduction, operational excellence
+seoTitle: Little's Law and takt time: why busy work waits
+seoDescription: See how Little's Law and takt time explain longer queues and slower orders, with an example of reducing product launch lead time.
 ---
 
 When I ran the supply chain side of new product launches at British American Tobacco, launch lead time came down from about five months to two. People sometimes assume that meant everyone worked faster. Very little of it did.

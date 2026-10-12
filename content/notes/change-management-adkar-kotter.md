@@ -5,6 +5,8 @@ summary: Go-live is not adoption. How Kotter's eight steps and the ADKAR model w
 status: published
 topic: Digital transformation
 keywords: change management, ADKAR, Kotter 8 steps, digital transformation, user adoption, organisational change, transformation program, change management plan, adoption metrics
+seoTitle: ADKAR and Kotter: change management that gets used
+seoDescription: Use ADKAR and Kotter together in digital transformation. Find barriers to adoption, match actions to each barrier and measure whether people use the change.
 ---
 
 The system went live on time and on budget. Three months later, half the team is still using the old spreadsheet, the other half uses the new tool in ways nobody intended, and the promised benefits are nowhere to be seen. Technically, the project succeeded. In every way that matters, it didn't.

@@ -5,6 +5,8 @@ summary: How to write risks people can act on, score them on a probability and i
 status: published
 topic: Project management
 keywords: risk register, project risk management, probability impact matrix, expected monetary value, EMV, contingency reserve, risk response strategies, risk assessment, decision tree, PMP
+seoTitle: Project risk register: probability, impact and EMV
+seoDescription: Build a project risk register with probability, impact and expected monetary value. Use worked examples to compare responses and plan contingency.
 ---
 
 Most risk registers are written once, at kickoff, and then left to age. They list vague worries ("resources", "scope creep", "vendor issues"), each tagged red, amber or green, and nobody makes a decision because of them.

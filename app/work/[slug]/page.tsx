@@ -21,11 +21,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const w = works.find((x) => x.slug === slug);
   if (!w) return {};
   return {
-    title: w.name,
-    description: w.line,
+    title: w.seoTitle,
+    description: w.seoDescription,
     alternates: { canonical: `/work/${slug}/` },
-    openGraph: { title: w.name, description: w.line, type: "article", url: `/work/${slug}/`, images: [ogImage] },
-    twitter: { card: "summary_large_image", title: w.name, description: w.line, images: [ogImage] },
+    openGraph: { title: w.seoTitle, description: w.seoDescription, type: "article", url: `/work/${slug}/`, images: [ogImage] },
+    twitter: { card: "summary_large_image", title: w.seoTitle, description: w.seoDescription, images: [ogImage] },
   };
 }
 

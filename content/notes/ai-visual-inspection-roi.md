@@ -5,6 +5,8 @@ summary: A pilot reports 98% accuracy. Translate that into missed defects, false
 status: published
 topic: Industrial AI
 keywords: AI visual inspection ROI, AI inspection business case, automated visual inspection cost, false positives quality inspection, AI quality control ROI, inspection payback
+seoTitle: AI visual inspection ROI: a worked business case
+seoDescription: Turn AI inspection accuracy into missed defects, false alarms, annual cost and payback. A worked business case with an editable Excel model.
 ---
 
 An AI inspection pilot reports 98% accuracy. The quality team sees a promising detector. Finance sees a budget request. The line team wants to know how often it will have to stop and check a part.

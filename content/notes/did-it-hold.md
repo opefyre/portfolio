@@ -4,6 +4,8 @@ date: 2026-09-21
 summary: Most improvement work stops when the fix is agreed. The useful question comes weeks later.
 status: draft
 topic: Operational excellence
+seoTitle: Did the improvement hold?
+seoDescription: Check whether an operational improvement lasted. Connect observations, evidence, decisions and results, and keep the fixes that become a new standard.
 ---
 
 Most improvement work I've seen, on production lines at Unilever, in launches at BAT and in operations teams since, is organised around the fix. Someone maps the process, someone finds the loss, a countermeasure is agreed, a task is closed. The dashboard turns green for a week.

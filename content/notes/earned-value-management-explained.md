@@ -5,6 +5,8 @@ summary: Earned value turns "we're roughly on track" into three numbers and two 
 status: published
 topic: Project management
 keywords: earned value management, EVM, CPI, SPI, estimate at completion, EAC, TCPI, earned schedule, cost performance index, project controls, PMP
+seoTitle: Earned value management: CPI, SPI and EAC formulas
+seoDescription: Calculate CPI, SPI and EAC with a €200k project example. Learn PV, EV, AC and TCPI, compare forecast formulas and understand where SPI misleads.
 ---
 
 "We've spent 40% of the budget and we're about 40% done." It sounds like a project on track. It's also the sentence that precedes most budget overruns, because it compares money spent with a feeling about progress.

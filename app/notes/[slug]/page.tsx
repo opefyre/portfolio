@@ -43,14 +43,14 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const n = getNote(slug);
   if (!n) return {};
   return {
-    title: n.title,
-    description: n.summary,
+    title: n.seoTitle,
+    description: n.seoDescription,
     keywords: n.keywords,
     alternates: { canonical: `/notes/${slug}/` },
     authors: [{ name: site.name, url: `${site.url}/about/` }],
     openGraph: {
-      title: n.title,
-      description: n.summary,
+      title: n.seoTitle,
+      description: n.seoDescription,
       type: "article",
       publishedTime: n.date,
       modifiedTime: n.updated,
@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       url: `/notes/${slug}/`,
       images: [ogImage],
     },
-    twitter: { card: "summary_large_image", title: n.title, description: n.summary, images: [ogImage] },
+    twitter: { card: "summary_large_image", title: n.seoTitle, description: n.seoDescription, images: [ogImage] },
   };
 }
 

@@ -11,6 +11,8 @@ import { marked } from "marked";
  *   title: …
  *   date: 2026-09-28
  *   summary: …
+ *   seoTitle: …                  (optional search title; includes brand via layout)
+ *   seoDescription: …            (optional search description)
  *   updated: 2026-10-02            (optional)
  *   status: draft | published
  *   keywords: comma, separated, terms
@@ -34,6 +36,8 @@ import { marked } from "marked";
 export type Note = {
   slug: string;
   title: string;
+  seoTitle: string;
+  seoDescription: string;
   date: string;
   /** Last meaningful edit (frontmatter `updated`), defaults to `date`. */
   updated: string;
@@ -128,6 +132,8 @@ function parse(file: string): Note {
   return {
     slug: file.replace(/\.md$/, ""),
     title: meta.title ?? file,
+    seoTitle: meta.seoTitle ?? meta.title ?? file,
+    seoDescription: meta.seoDescription ?? meta.summary ?? "",
     date: meta.date ?? "",
     updated: meta.updated ?? meta.date ?? "",
     summary: meta.summary ?? "",

@@ -6,13 +6,14 @@ import { SocialLinks } from "@/components/site/SocialLinks";
 import { about, ogImage, site } from "@/content/site";
 import { getCertifications, getExperiences } from "@/lib/data";
 
+const description = "Operational excellence, digital transformation and supply chain programs at Unilever, British American Tobacco and Snoonu. Founder of Vrolen, based in Lisbon.";
+
 export const metadata: Metadata = {
-  title: "About",
-  description:
-    "Operational excellence, digital transformation and supply chain programs at Unilever, British American Tobacco and Snoonu. Founder of Vrolen, based in Lisbon.",
+  title: "About Abolfazl Shirkavand",
+  description,
   alternates: { canonical: "/about/" },
-  openGraph: { title: "About Abolfazl Shirkavand (Abosh)", url: "/about/", images: [ogImage] },
-  twitter: { card: "summary_large_image", title: "About Abolfazl Shirkavand (Abosh)", images: [ogImage] },
+  openGraph: { title: "About Abolfazl Shirkavand", description, type: "website", url: "/about/", images: [ogImage] },
+  twitter: { card: "summary_large_image", title: "About Abolfazl Shirkavand", description, images: [ogImage] },
 };
 
 /** "Sep 2016 to Aug 2017" → [2016, 2017]; "Present" → null. */

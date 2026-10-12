@@ -5,6 +5,8 @@ summary: Two proven ways to connect strategy to daily work. How Hoshin Kanri cas
 status: published
 topic: Operational excellence
 keywords: Hoshin Kanri, OKRs, objectives and key results, strategy deployment, policy deployment, X-matrix, catchball, strategy execution, bowling chart, operational excellence
+seoTitle: Hoshin Kanri vs OKRs: a worked comparison
+seoDescription: Compare Hoshin Kanri and OKRs with one worked example. Connect strategy to daily work, understand catchball and decide when to combine the methods.
 ---
 
 Most companies don't lack strategy. They lack the connection between the strategy slide and what a team lead decides to do on Monday morning. In a survey of 7,600 managers across 262 companies, only 55% of middle managers could name even one of their company's top five priorities. By the time a five-year ambition has passed through three layers of management, it has usually turned into forty initiatives, each with its own dashboard, and nobody can say which three matter most.

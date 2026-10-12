@@ -49,6 +49,9 @@ jobs:
         # It needs DB access to fetch content.
         run: npm run build
 
+      - name: Verify search metadata
+        run: npm run verify:seo
+
       # Upload build artifacts to pass to the deploy job (saves rebuilding)
       - name: Upload Build Artifact
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'

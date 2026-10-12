@@ -5,6 +5,8 @@ summary: How to calculate safety stock and the reorder point step by step, why l
 status: published
 topic: Supply chain
 keywords: safety stock formula, reorder point, safety stock calculation, service level, fill rate, lead time variability, inventory management, supply chain planning, z-score
+seoTitle: Safety stock and reorder point: formulas and example
+seoDescription: Calculate safety stock and reorder point with a worked example. Compare demand and lead-time variability, service level and the cost of inventory.
 ---
 
 Every planner has been in this meeting. Stock ran out, a customer was let down, and someone says "we need more safety stock". Six months later, the warehouse is full, cash is tied up, and someone else says "we need less". Both are guessing.

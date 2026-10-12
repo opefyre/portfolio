@@ -5,6 +5,8 @@ summary: A practical way to choose which processes to automate, score them, pick
 status: published
 topic: Digital transformation
 keywords: process automation, what to automate, automation roadmap, RPA vs AI agents, workflow automation, agentic AI, automation business case, process mining, digital transformation, intelligent automation
+seoTitle: What to automate first: a process scoring model
+seoDescription: Score processes before automating them. Compare APIs, workflows, RPA and AI agents, then build a business case with a worked payback example.
 ---
 
 Most automation programs don't fail because the technology doesn't work. They fail at the start, by automating the wrong things: a process nobody understood, one that changes every quarter, or one that only takes a few hours a month. Then the bots break, the savings never show up, and the next budget request is harder.

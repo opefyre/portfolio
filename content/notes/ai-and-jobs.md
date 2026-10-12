@@ -5,6 +5,7 @@ summary: Is AI taking jobs? Explore employment data, lessons from past automatio
 status: published
 topic: Digital transformation
 keywords: is AI taking jobs, AI and jobs, AI and entry-level jobs, AI adoption, automation and jobs, AI productivity
+seoTitle: Is AI taking jobs? What the data and history show
 ---
 
 A layoff is easy to see. Fewer new hires are easier to miss.
