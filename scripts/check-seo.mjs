@@ -13,8 +13,9 @@ const descriptions = new Set();
 
 for (const url of urls) {
   const html = readFileSync(path.join(out, new URL(url).pathname, "index.html"), "utf8");
-  const title = decode(html.match(/<title>(.*?)<\/title>/s)?.[1] ?? "");
-  const tags = [...html.matchAll(/<(meta|link)\b([^>]+)>/g)].map((match) => {
+  const head = html.match(/<head>([\s\S]*?)<\/head>/)?.[1] ?? "";
+  const title = decode(head.match(/<title>(.*?)<\/title>/s)?.[1] ?? "");
+  const tags = [...head.matchAll(/<(meta|link)\b([^>]+)>/g)].map((match) => {
     const attrs = Object.fromEntries([...match[2].matchAll(/([\w:-]+)="([^"]*)"/g)].map((attr) => [attr[1], decode(attr[2])]));
     return { tag: match[1], ...attrs };
   });
@@ -25,7 +26,7 @@ for (const url of urls) {
     return found[0]?.content ?? "";
   };
   const description = requireMeta("description");
-  if ([...html.matchAll(/<title>/g)].length !== 1 || title.length < 30 || title.length > 60) errors.push(`${url}: title has ${title.length} characters (budget 30–60)`);
+  if ([...head.matchAll(/<title>/g)].length !== 1 || title.length < 30 || title.length > 60) errors.push(`${url}: missing, duplicate or out-of-budget title (${title.length} characters; budget 30–60)`);
   if (description.length < 110 || description.length > 160) errors.push(`${url}: description has ${description.length} characters (budget 110–160)`);
   if (titles.has(title)) errors.push(`${url}: duplicate title`);
   if (descriptions.has(description)) errors.push(`${url}: duplicate description`);
