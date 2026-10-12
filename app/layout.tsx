@@ -1,14 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Funnel_Display, Funnel_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import { SiteShell } from "@/components/shell/SiteShell";
 import { site } from "@/content/site";
 import { getCertifications } from "@/lib/data";
 import "./globals.css";
 import "@/styles/home.css";
 import "@/styles/pages.css";
+import "@/styles/note-figures.generated.css";
 
-const funnelDisplay = Funnel_Display({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-funnel-display", display: "swap" });
-const funnelSans = Funnel_Sans({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-funnel-sans", display: "swap" });
+const funnelDisplay = localFont({ src: "../public/fonts/funnel-display-latin.woff2", weight: "400 600", style: "normal", variable: "--font-funnel-display", display: "swap" });
+const funnelSans = localFont({ src: "../public/fonts/funnel-sans-latin.woff2", weight: "400 500", style: "normal", variable: "--font-funnel-sans", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),

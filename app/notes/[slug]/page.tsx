@@ -134,7 +134,7 @@ export default async function NotePage({ params }: Params) {
             <p className="note-dek">{n.summary}</p>
             <div className="note-byline">
               <TLink href="/about/" className="note-author" rel="author">
-                <img src={author.avatar} alt="" width={48} height={48} className="note-avatar" />
+                <img src={author.avatar} alt="" width={48} height={48} className="note-avatar" loading="eager" fetchPriority="low" decoding="async" />
                 <span className="note-author-text">
                   <span className="note-author-name">{site.name}</span>
                   <span className="note-author-role">{author.line}</span>

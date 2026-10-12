@@ -11,11 +11,12 @@
  * Never fails the build: without a token or on any API error the strip is
  * simply left out. The token is never logged.
  */
-import { mkdir, rm, writeFile } from "node:fs/promises";
+import { access, mkdir, utimes, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { cert, getApps, initializeApp } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 import sharp from "sharp";
+import { seedInstagramAssets, pruneInstagramAssets } from "./instagram-assets";
 
 const GRAPH = "https://graph.instagram.com";
 const COUNT = 6;
@@ -94,28 +95,39 @@ async function main() {
     const t = encodeURIComponent(token);
     const me = await api<{ username: string }>(`${GRAPH}/me?fields=username&access_token=${t}`);
     const media = await api<{ data: Media[] }>(
-      `${GRAPH}/me/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp&limit=${COUNT * 2}&access_token=${t}`,
+      `${GRAPH}/me/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp&limit=${COUNT * 3}&access_token=${t}`,
     );
 
     // One shape for the whole strip: reel covers (9:16) when most posts are reels, else 4:5.
-    const picked = media.data.filter((m) => (m.media_type === "VIDEO" ? m.thumbnail_url : m.media_url)).slice(0, COUNT);
+    const available = media.data.filter((m) => /^\d+$/.test(m.id) && (m.media_type === "VIDEO" ? m.thumbnail_url : m.media_url));
+    const picked = available.slice(0, COUNT);
+    const visibleIds = new Set(picked.map(m => m.id));
     const reels = picked.filter((m) => m.media_type === "VIDEO").length;
     const height = Math.round(reels * 2 > picked.length ? (WIDTH * 16) / 9 : (WIDTH * 5) / 4);
 
-    await rm(OUT_DIR, { recursive: true, force: true });
-    await mkdir(OUT_DIR, { recursive: true });
+    await seedInstagramAssets(OUT_DIR);
     const posts: InstagramPost[] = [];
-    for (const m of picked) {
+    // The strip shows six; a small recent archive also serves older prefetched
+    // pages. Their modification date records when the API last listed them.
+    for (const m of available) {
       const url = m.media_type === "VIDEO" ? m.thumbnail_url : m.media_url;
       if (!url) continue;
+      const file = `${m.id}.webp`;
+      if (!visibleIds.has(m.id)) {
+        try {
+          await access(path.join(OUT_DIR, file));
+          const seen = new Date();
+          await utimes(path.join(OUT_DIR, file), seen, seen);
+          continue;
+        } catch { /* Fetch this older thumbnail once. */ }
+      }
       const res = await fetch(url, { signal: AbortSignal.timeout(20_000) });
       if (!res.ok) continue;
-      const file = `${m.id}.webp`;
       await sharp(Buffer.from(await res.arrayBuffer()))
         .resize(WIDTH, height, { fit: "cover" })
         .webp({ quality: 84 })
         .toFile(path.join(OUT_DIR, file));
-      posts.push({
+      if (visibleIds.has(m.id)) posts.push({
         id: m.id,
         permalink: m.permalink,
         caption: (m.caption ?? "").replace(/\s+/g, " ").trim().slice(0, 140),
@@ -126,6 +138,7 @@ async function main() {
         height,
       });
     }
+    await pruneInstagramAssets(OUT_DIR, new Set(posts.map(post => `${post.id}.webp`)));
     const feed: InstagramFeed = { username: me.username, profile: `https://www.instagram.com/${me.username}/`, posts };
     await writeFile(OUT_JSON, JSON.stringify(feed, null, 2));
     console.log(`Instagram: ${posts.length} posts from @${me.username}`);

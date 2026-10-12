@@ -3,6 +3,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { cache } from "react";
 import { marked } from "marked";
+import { inlineNoteFigure } from "./note-figure";
 
 /**
  * Notes are Markdown files in content/notes with a tiny frontmatter block:
@@ -87,8 +88,8 @@ function expandBlocks(body: string) {
       return `\n<div data-note-interactive="${name}" data-caption="${escapeHtml(caption.trim())}"></div>\n`;
     })
     .replace(/^::figure\s+([\w-]+)\s*\|\s*(.+)$/gm, (_, name: string, caption: string) => {
-      const svg = readFileSync(path.join(FIGURES, `${name}.svg`), "utf8").replace(/\s*\n\s*/g, " ").trim();
-      return `\n<figure class="note-figure">${svg}<figcaption>${escapeHtml(caption.trim())}</figcaption></figure>\n`;
+      const svg = inlineNoteFigure(readFileSync(path.join(FIGURES, `${name}.svg`), "utf8")).replace(/\s*\n\s*/g, " ").trim();
+      return `\n<figure class="note-figure note-figure--${name}">${svg}<figcaption>${escapeHtml(caption.trim())}</figcaption></figure>\n`;
     })
     .replace(/^::image\s+(\S+)\s*\|\s*([^|]+?)\s*\|\s*(.+)$/gm, (_, src: string, alt: string, caption: string) => {
       return `\n<figure class="note-figure note-figure--image"><img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async"><figcaption>${escapeHtml(caption.trim())}</figcaption></figure>\n`;
