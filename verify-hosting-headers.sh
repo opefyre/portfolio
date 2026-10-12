@@ -55,6 +55,9 @@ check_headers "/about/"
 check_headers "/lens/lens-still.webp"
 
 check_cache_header "/" "no-cache"
+check_cache_header "/about/" "no-cache"
+check_cache_header "/notes/ai-supply-chain-planning/" "no-cache"
+check_cache_header "/notes/ai-supply-chain-planning/index.txt" "no-cache"
 check_cache_header "/lens/lens-still.webp" "max-age=31536000"
 
 echo "All required production hosting headers are present."
