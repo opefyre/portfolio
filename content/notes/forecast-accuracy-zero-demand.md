@@ -9,6 +9,8 @@ topic: Supply chain
 keywords: MAPE zero actual, forecast accuracy zero demand, intermittent demand, WAPE, MASE, RMSSE
 ---
 
+MAPE (mean absolute percentage error) averages absolute percentage errors across products or periods. WAPE (weighted absolute percentage error) divides total absolute error by total actual demand. The [MAPE/WAPE guide](/notes/forecast-accuracy-mape-wape/) explains the difference with a worked example and calculator.
+
 A spare part sells nothing for two weeks. In the third week, a customer buys 12. The forecast review now has a problem: dividing an error by zero does not produce a usable percentage.
 
 **MAPE is undefined when actual demand is zero.** WAPE can still work if the evaluation period has some demand. Absolute error stays readable even when the whole period is quiet. The useful choice depends on what you need to compare.

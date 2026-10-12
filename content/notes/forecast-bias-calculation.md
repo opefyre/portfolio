@@ -9,11 +9,13 @@ topic: Supply chain
 keywords: forecast bias calculation, forecast bias formula, forecast bias vs accuracy, positive negative forecast bias, demand planning
 ---
 
+MAPE (mean absolute percentage error) averages absolute percentage errors across products or periods. WAPE (weighted absolute percentage error) divides total absolute error by total actual demand. Bias tells you whether forecasts run high or low overall. The [MAPE/WAPE guide](/notes/forecast-accuracy-mape-wape/) introduces all three with a worked example.
+
 The monthly forecast was 400 units. Actual demand was 400. The report shows zero bias, so the team moves on.
 
 Yet every weekly forecast was wrong.
 
-**Forecast bias measures direction. It does not measure the size of all the misses.** Overforecasting and underforecasting can cancel in the total, even when the timing is poor. You need an absolute-error measure beside it.
+Overforecasting and underforecasting can cancel in the total, even when the timing is poor. That is why a zero-bias result needs an absolute-error measure beside it.
 
 ## The forecast bias formula, with the sign stated
 
