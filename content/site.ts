@@ -86,7 +86,7 @@ export const works: Work[] = [
     featured: true,
     name: "Vrolen",
     line: "A continuous improvement platform: see how work actually flows, find what matters, improve it, then prove the result held.",
-    status: "Launching November 2026",
+    status: "Launching December 2026",
     href: "https://vrolen.com",
     hrefLabel: "vrolen.com",
     image: { src: "/work/vrolen/hub.webp", alt: "Vrolen Improvement Hub: team cadence, improvement opportunities and operation health for a bottling plant", width: 2400, height: 1500 },
