@@ -1,0 +1,39 @@
+.operations-example{margin:2.2em 0;padding:24px 0;border-block:1px solid var(--rule-strong);color:#26282a}
+.operations-example *{box-sizing:border-box}
+.operations-example header>p:first-child{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:#62676a;margin:0 0 10px}
+.operations-example h3{margin:0;font-size:clamp(23px,3vw,31px);line-height:1.15;font-family:var(--font-display);font-weight:500}
+.operations-example header>p:last-child{font-size:16px;line-height:1.5;margin:12px 0 0;max-width:57ch}
+.operations-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:25px 0}
+.operations-controls--three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.operations-controls label{display:block;font-size:14px;line-height:1.4}
+.operations-controls output{display:block;font-size:23px;font-family:var(--font-display);font-weight:500;color:#101213;margin:5px 0 8px}
+.operations-controls input{display:block;width:100%;accent-color:#b4532a;min-height:28px;cursor:pointer}
+.operations-scale{display:flex;justify-content:space-between;font-size:11px;color:#62676a}
+.operations-presets{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 22px}
+.operations-example button{font:inherit;color:inherit;cursor:pointer}
+.operations-presets button{border:1px solid var(--rule-strong);background:transparent;padding:8px 12px;border-radius:4px;font-size:13px;line-height:1.4}
+.operations-presets button[aria-pressed=true]{background:#101213;color:#eeebe4;border-color:#101213}
+.operations-example :focus-visible{outline:2px solid #b4532a;outline-offset:4px}
+.operations-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:20px 0;padding:18px 0;border-block:1px solid var(--rule)}
+.operations-results p{margin:0;font-size:13px;line-height:1.4;color:#62676a}
+.operations-results strong{display:block;font:500 clamp(25px,4vw,36px)/1.2 var(--font-display);margin:5px 0;color:#101213}
+.operations-results .is-cost{color:#b4532a}
+.operations-results span{display:block;font-size:12px;line-height:1.45;color:#62676a;margin-top:4px}
+.operations-bars{display:grid;gap:16px;margin-top:22px}
+.operations-bar{display:block;width:100%;text-align:left;background:none;border:0;padding:5px 0;border-radius:0}
+.operations-bar-top{display:flex;justify-content:space-between;gap:10px;font-size:15px;line-height:1.4;margin-bottom:7px}
+.operations-bar-top b{font-weight:500;white-space:nowrap}
+.operations-track{display:flex;height:17px;width:100%;background:#deddd6;border-radius:2px;overflow:hidden}
+.operations-fill{height:100%;background:#101213;flex-shrink:0;min-width:0}
+.operations-fill--rust{background:#b4532a}.operations-fill--grey{background:#767b7f}.operations-fill--light{background:#aaa79c}
+.operations-axis,.operations-inspection{font-size:13px;line-height:1.5;margin-top:14px!important;color:#62676a}
+.operations-inspection{min-height:3em;padding:12px 0;border-bottom:1px solid var(--rule);color:#26282a}
+.operations-example details{font-size:14px;line-height:1.55;margin-top:20px}
+.operations-example summary{cursor:pointer;font-family:var(--font-display);font-weight:500;color:#101213}
+.operations-example details p{margin-top:12px;font-size:14px;line-height:1.55}
+.operations-example table{font-size:13px!important;line-height:1.5;margin-block:14px!important}
+.operations-example th,.operations-example td{padding:8px 14px 8px 0!important}
+.operations-example figcaption{font-size:13px;color:#62676a;margin-top:20px;line-height:1.5}
+.operations-legend{display:flex;gap:8px 20px;flex-wrap:wrap;font-size:12px;color:#62676a;line-height:1.4}
+.operations-legend span{display:inline-flex;align-items:center;gap:7px}.operations-legend i{width:11px;height:11px;display:inline-block}
+@media(max-width:560px){.operations-controls,.operations-controls--three{grid-template-columns:1fr;gap:17px}.operations-results{gap:12px}.operations-example{padding:22px 0}.operations-results strong{font-size:25px}.operations-bar-top{font-size:14px}.operations-results p{font-size:12px}.operations-presets button{font-size:12px}}
