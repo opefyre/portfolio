@@ -1,3 +1,4 @@
+import { FoundationFigure, type FoundationFigureName } from "./FoundationFigures";
 import { FundamentalsExample, type FundamentalsName } from "./FundamentalsExamples";
 
 import { AbcXyzInventory } from "./AbcXyzInventory";
@@ -40,6 +41,8 @@ export function NoteArticleContent({ html }: { html: string }) {
       parts.push(<AbcXyzInventory key={index} name={match[1]} caption={decodeCaption(match[2])} />);
     } else if (["standard-work-cycle", "wbs-deliverables", "mrp-netting"].includes(match[1])) {
       parts.push(<FundamentalsExample key={index} name={match[1] as FundamentalsName} caption={decodeCaption(match[2])} />);
+    } else if (["digital-invoice-map", "data-quality-records", "pareto-measures"].includes(match[1])) {
+      parts.push(<FoundationFigure key={index} name={match[1] as FoundationFigureName} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "planning-decision") {
       parts.push(<PlanningDecision key={index} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "forecast-calculator") {
