@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 240" role="img" aria-label="Fictional plan measured at the start of each week. Release extra bracket supply in week 3, receive it and start assembly in week 5, and finish 50 stands for week 6. Bracket supply takes two weeks and assembly takes one week.">
+<title>Work back from when the stands must be ready</title><desc>Components are needed at assembly start, rather than at the finished-product due date.</desc>
+<line x1="70" y1="110" x2="610" y2="110" stroke="#aaa79c" stroke-width="2"/>
+<line x1="70" y1="110" x2="430" y2="110" stroke="#b4532a" stroke-width="3"/>
+<circle cx="70" cy="110" r="6" fill="#b4532a"/><circle cx="430" cy="110" r="6" fill="#101213"/><circle cx="610" cy="110" r="6" fill="#101213"/>
+<text x="250" y="55" text-anchor="middle" fill="#b4532a" font-size="26">2 weeks for brackets</text><text x="520" y="83" text-anchor="middle" fill="#62676a" font-size="24">1 week assembly</text>
+<text x="70" y="161" text-anchor="middle" fill="#101213" font-size="32">W3</text><text x="70" y="196" text-anchor="middle" fill="#62676a" font-size="26">Release</text>
+<text x="430" y="161" text-anchor="middle" fill="#101213" font-size="32">W5</text><text x="430" y="196" text-anchor="middle" fill="#62676a" font-size="26">Parts usable</text>
+<text x="610" y="161" text-anchor="middle" fill="#101213" font-size="32">W6</text><text x="610" y="196" text-anchor="middle" fill="#62676a" font-size="26">Stands ready</text>
+</svg>

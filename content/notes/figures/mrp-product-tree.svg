@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" role="img" aria-label="Bill of materials for 50 fictional display stands. Each stand needs two brackets, one base and four bolts. Gross component requirements are 100 brackets, 50 bases and 200 bolts.">
+<title>From stands to component quantities</title><desc>One-level bill of materials. Multiply each per-stand quantity by the 50 stands to build.</desc>
+<rect x="170" y="15" width="340" height="85" fill="#101213"/>
+<text x="340" y="67" text-anchor="middle" fill="#eeebe4" font-size="34" font-weight="500">50 display stands</text>
+<path d="M340 100v30H115v40 M340 130v40 M340 130h225v40" fill="none" stroke="#aaa79c" stroke-width="1.5"/>
+<rect x="80" y="140" width="70" height="32" fill="#eeebe4"/><text x="115" y="163" text-anchor="middle" font-size="24" fill="#62676a">× 2</text>
+<rect x="305" y="140" width="70" height="32" fill="#eeebe4"/><text x="340" y="163" text-anchor="middle" font-size="24" fill="#62676a">× 1</text>
+<rect x="530" y="140" width="70" height="32" fill="#eeebe4"/><text x="565" y="163" text-anchor="middle" font-size="24" fill="#62676a">× 4</text>
+<text x="115" y="230" text-anchor="middle" fill="#b4532a" font-size="48" font-weight="500">100</text><text x="115" y="266" text-anchor="middle" fill="#101213" font-size="30">brackets</text>
+<text x="340" y="230" text-anchor="middle" fill="#101213" font-size="48" font-weight="500">50</text><text x="340" y="266" text-anchor="middle" fill="#101213" font-size="30">bases</text>
+<text x="565" y="230" text-anchor="middle" fill="#101213" font-size="48" font-weight="500">200</text><text x="565" y="266" text-anchor="middle" fill="#101213" font-size="30">bolts</text>
+</svg>
