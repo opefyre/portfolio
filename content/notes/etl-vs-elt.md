@@ -3,7 +3,7 @@ title: ETL vs ELT: the data arrived, but can you use it?
 date: 2026-10-14
 summary: Two cases, five pieces and a blank quantity arrive in a stock file. Follow them through ETL and ELT to see what changes, what doesn't, and what a planner should receive.
 seoTitle: ETL vs ELT explained with an inventory example
-seoDescription: Compare ETL and ELT using the same inventory records. See where transformation happens, how units are converted, and why loading data doesn't make it usable.
+seoDescription: Compare ETL and ELT using inventory records. See where transformation happens, how to convert units, and why loaded data may still be unusable.
 status: published
 topic: Digital transformation
 keywords: ETL vs ELT, ETL meaning, ELT meaning, data transformation example, data integration manufacturing
