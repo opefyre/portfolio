@@ -1,3 +1,4 @@
+import { RecordFigure, type RecordName } from "./RecordFigures";
 import { MethodFigure, type MethodName } from "./MethodFigures";
 import { PerformanceFigure, type PerformanceName } from "./PerformanceFigures";
 import { DecisionFigure, type DecisionName } from "./DecisionFigures";
@@ -70,6 +71,8 @@ export function NoteArticleContent({ html }: { html: string }) {
       parts.push(<PerformanceFigure key={index} name={match[1] as PerformanceName} caption={decodeCaption(match[2])} />);
     } else if (["fifo-fefo-lots", "poka-yoke-coverage", "assumption-window"].includes(match[1])) {
       parts.push(<MethodFigure key={index} name={match[1] as MethodName} caption={decodeCaption(match[2])} />);
+    } else if (["cycle-count-ledger", "quality-cost-threshold", "etl-elt-records"].includes(match[1])) {
+      parts.push(<RecordFigure key={index} name={match[1] as RecordName} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "planning-decision") {
       parts.push(<PlanningDecision key={index} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "forecast-calculator") {
