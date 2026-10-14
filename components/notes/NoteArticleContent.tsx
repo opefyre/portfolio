@@ -1,3 +1,4 @@
+import { SupplyPlanningFigure, type SupplyPlanningName } from "./SupplyPlanningFigures";
 import { FoundationFigure, type FoundationFigureName } from "./FoundationFigures";
 import { FundamentalsExample, type FundamentalsName } from "./FundamentalsExamples";
 
@@ -43,6 +44,8 @@ export function NoteArticleContent({ html }: { html: string }) {
       parts.push(<FundamentalsExample key={index} name={match[1] as FundamentalsName} caption={decodeCaption(match[2])} />);
     } else if (["digital-invoice-map", "data-quality-records", "pareto-measures"].includes(match[1])) {
       parts.push(<FoundationFigure key={index} name={match[1] as FoundationFigureName} caption={decodeCaption(match[2])} />);
+    } else if (["bullwhip-batching", "eoq-costs", "sop-supply-gap"].includes(match[1])) {
+      parts.push(<SupplyPlanningFigure key={index} name={match[1] as SupplyPlanningName} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "planning-decision") {
       parts.push(<PlanningDecision key={index} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "forecast-calculator") {
