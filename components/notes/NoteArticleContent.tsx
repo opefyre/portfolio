@@ -1,3 +1,4 @@
+import { ImprovementFigure, type ImprovementName } from "./ImprovementFigures";
 import { SupplyPlanningFigure, type SupplyPlanningName } from "./SupplyPlanningFigures";
 import { FoundationFigure, type FoundationFigureName } from "./FoundationFigures";
 import { FundamentalsExample, type FundamentalsName } from "./FundamentalsExamples";
@@ -46,6 +47,8 @@ export function NoteArticleContent({ html }: { html: string }) {
       parts.push(<FoundationFigure key={index} name={match[1] as FoundationFigureName} caption={decodeCaption(match[2])} />);
     } else if (["bullwhip-batching", "eoq-costs", "sop-supply-gap"].includes(match[1])) {
       parts.push(<SupplyPlanningFigure key={index} name={match[1] as SupplyPlanningName} caption={decodeCaption(match[2])} />);
+    } else if (["pdca-trial", "kanban-loop", "charter-authority"].includes(match[1])) {
+      parts.push(<ImprovementFigure key={index} name={match[1] as ImprovementName} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "planning-decision") {
       parts.push(<PlanningDecision key={index} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "forecast-calculator") {
