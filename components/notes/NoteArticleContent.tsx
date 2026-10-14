@@ -1,3 +1,4 @@
+import { MeasurementFigure, type MeasurementName } from "./MeasurementFigures";
 import { PracticeFigure, type PracticeName } from "./PracticeFigures";
 import { SystemsFigure, type SystemsName } from "./SystemsFigures";
 import { ImprovementFigure, type ImprovementName } from "./ImprovementFigures";
@@ -55,6 +56,8 @@ export function NoteArticleContent({ html }: { html: string }) {
       parts.push(<SystemsFigure key={index} name={match[1] as SystemsName} caption={decodeCaption(match[2])} />);
     } else if (["lean-waste-order", "five-s-station", "portfolio-capacity"].includes(match[1])) {
       parts.push(<PracticeFigure key={index} name={match[1] as PracticeName} caption={decodeCaption(match[2])} />);
+    } else if (["twin-state-freshness", "service-metric-cycles", "yield-unit-history"].includes(match[1])) {
+      parts.push(<MeasurementFigure key={index} name={match[1] as MeasurementName} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "planning-decision") {
       parts.push(<PlanningDecision key={index} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "forecast-calculator") {
