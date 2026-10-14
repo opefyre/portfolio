@@ -1,3 +1,5 @@
+import { FundamentalsExample, type FundamentalsName } from "./FundamentalsExamples";
+
 import { AbcXyzInventory } from "./AbcXyzInventory";
 
 import { OperationsExample, type OperationsExampleName } from "./OperationsExamples";
@@ -36,6 +38,8 @@ export function NoteArticleContent({ html }: { html: string }) {
       parts.push(<OperationsExample key={index} name={match[1] as OperationsExampleName} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "abc-inventory-value" || match[1] === "abc-xyz-inventory") {
       parts.push(<AbcXyzInventory key={index} name={match[1]} caption={decodeCaption(match[2])} />);
+    } else if (["standard-work-cycle", "wbs-deliverables", "mrp-netting"].includes(match[1])) {
+      parts.push(<FundamentalsExample key={index} name={match[1] as FundamentalsName} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "planning-decision") {
       parts.push(<PlanningDecision key={index} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "forecast-calculator") {
