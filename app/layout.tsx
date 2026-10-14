@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
     default: site.title,
-    template: `%s · ${site.nickname}`,
+    template: `%s | ${site.nickname}`,
   },
   description: site.description,
   applicationName: "abosh.io",

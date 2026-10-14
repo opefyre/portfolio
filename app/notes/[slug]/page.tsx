@@ -18,6 +18,10 @@ export function generateStaticParams() {
 type NoteCta = { title: string; text: string };
 
 const vrolenCtas: Partial<Record<string, NoteCta>> = {
+  "scaling-ai-manufacturing": {
+    title: "Check the next plant before copying the proposal",
+    text: "Bring one recurring production problem to Vrolen’s private pilot. Connect its records to a proposed change and check the assumptions before planning a wider rollout.",
+  },
   "ai-supply-chain-planning": {
     title: "Test the change before committing",
     text: "Vrolen’s private pilot helps operations teams compare proposed changes and check whether the expected improvement held. Bring the capacity assumptions behind your planning decision.",

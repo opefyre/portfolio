@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 460" role="img" aria-labelledby="stock-title stock-desc">
+<title id="stock-title">How a stockout can repeat</title><desc id="stock-desc">Fictional one-day loop with 100 units of demand. Sixty units of stock produce 60 sales and leave 40 units unfilled. If a model learns sales as complete demand and the next order follows it, the order stays at 60. The loop shows a possible mechanism, not a measured business result.</desc>
+<g font-family="inherit" fill="#0f1011">
+<text x="0" y="30" font-size="27" font-weight="500">How a stockout can repeat</text>
+<text x="0" y="62" font-size="17" fill="#62676a">Fictional demand: 100 units a day</text>
+<path d="M0 82H480" stroke="#cbc8bf"/>
+<rect x="0" y="106" width="210" height="127" rx="3" fill="#dedbd3"/>
+<text x="17" y="133" font-size="16">Stock available</text><text x="17" y="176" font-size="37" font-weight="500">60</text>
+<path d="M18 202h17m7 0h17m7 0h17m7 0h17m7 0h17m7 0h17" stroke="#101213" stroke-width="9"/>
+<path d="M230 168h20m-7-5 7 5-7 5" fill="none" stroke="#767b7f"/>
+<rect x="270" y="106" width="210" height="127" rx="3" fill="none" stroke="#b4532a"/>
+<text x="287" y="133" font-size="16">Sales recorded</text><text x="287" y="176" font-size="37" font-weight="500">60</text>
+<text x="287" y="212" font-size="17" fill="#b4532a">40 wanted, not sold</text>
+<path d="M375 246v22m-5-7 5 7 5-7" fill="none" stroke="#767b7f"/>
+<rect x="270" y="284" width="210" height="112" rx="3" fill="#dedbd3"/>
+<text x="287" y="312" font-size="16">Forecast learns sales</text><text x="287" y="357" font-size="37" font-weight="500">60</text>
+<path d="M250 340h-20m7-5-7 5 7 5" fill="none" stroke="#767b7f"/>
+<rect x="0" y="284" width="210" height="112" rx="3" fill="none" stroke="#101213"/>
+<text x="17" y="312" font-size="16">Next order follows</text><text x="17" y="357" font-size="37" font-weight="500">60</text>
+<path d="M105 268v-22m-5 7 5-7 5 7" fill="none" stroke="#b4532a"/>
+<text x="0" y="445" font-size="17" fill="#62676a">Availability tells the model where sales were limited.</text>
+</g></svg>
