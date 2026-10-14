@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { NotesField } from "@/components/notes/NotesField";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { TLink } from "@/components/shell/transitions";
 import { ogImage } from "@/content/site";
@@ -18,15 +19,13 @@ export default function NotesPage() {
   const notes = getNotes();
   return (
     <>
-      <div className="paper" data-nav-tone="light">
-        <section className="notes-page frame" aria-labelledby="notes-title">
-          <h1 id="notes-title" className="notes-title">
-            Notes
-          </h1>
-          <p className="notes-intro">
-            Practical guides to operational excellence, project management, supply chains and digital transformation.
-            Worked examples, real numbers and sources.
-          </p>
+      <div className="paper notes-index" data-nav-tone="light">
+        <NotesField />
+        <section className="notes-index-list frame" id="latest" aria-labelledby="latest-title">
+          <header className="notes-index-head">
+            <h2 id="latest-title">Latest writing</h2>
+            <p>{notes.length} notes</p>
+          </header>
           <ol className="note-rows note-rows--page">
             {notes.map((n) => (
               <li key={n.slug}>
