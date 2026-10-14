@@ -1,3 +1,4 @@
+import { PlanningBasic, type PlanningBasicName } from "./PlanningBasics";
 import { RecordFigure, type RecordName } from "./RecordFigures";
 import { MethodFigure, type MethodName } from "./MethodFigures";
 import { PerformanceFigure, type PerformanceName } from "./PerformanceFigures";
@@ -73,6 +74,8 @@ export function NoteArticleContent({ html }: { html: string }) {
       parts.push(<MethodFigure key={index} name={match[1] as MethodName} caption={decodeCaption(match[2])} />);
     } else if (["cycle-count-ledger", "quality-cost-threshold", "etl-elt-records"].includes(match[1])) {
       parts.push(<RecordFigure key={index} name={match[1] as RecordName} caption={decodeCaption(match[2])} />);
+    } else if (["inventory-position-dates", "takt-station-pace", "resource-load-plans"].includes(match[1])) {
+      parts.push(<PlanningBasic key={index} name={match[1] as PlanningBasicName} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "planning-decision") {
       parts.push(<PlanningDecision key={index} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "forecast-calculator") {
