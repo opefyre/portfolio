@@ -52,7 +52,7 @@ jobs:
         run: npm run lint
 
       - name: Verify forecast and operations calculators
-        run: node --import tsx --test components/notes/forecast-metrics.test.ts components/notes/operations-models.test.ts components/notes/abc-xyz-model.test.ts components/notes/fundamentals-models.test.ts components/notes/foundation-data.test.ts components/notes/supply-planning-models.test.ts components/notes/improvement-models.test.ts components/notes/systems-models.test.ts components/notes/practice-models.test.ts components/notes/measurement-models.test.ts components/notes/boundary-models.test.ts components/notes/decision-models.test.ts components/notes/performance-models.test.ts components/notes/method-models.test.ts
+        run: node --import tsx --test components/notes/forecast-metrics.test.ts components/notes/operations-models.test.ts components/notes/abc-xyz-model.test.ts components/notes/fundamentals-models.test.ts components/notes/foundation-data.test.ts components/notes/supply-planning-models.test.ts components/notes/improvement-models.test.ts components/notes/systems-models.test.ts components/notes/practice-models.test.ts components/notes/measurement-models.test.ts components/notes/boundary-models.test.ts components/notes/decision-models.test.ts components/notes/performance-models.test.ts components/notes/method-models.test.ts components/notes/record-models.test.ts
 
       - name: Verify rendering compatibility
         run: node --import tsx --test scripts/fiber-timer.test.mjs scripts/instagram-assets.test.ts components/lens/image-ready.test.ts lib/note-figure.test.ts
