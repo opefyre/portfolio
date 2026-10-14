@@ -1,3 +1,4 @@
+import { PerformanceFigure, type PerformanceName } from "./PerformanceFigures";
 import { DecisionFigure, type DecisionName } from "./DecisionFigures";
 import { BoundaryFigure, type BoundaryName } from "./BoundaryFigures";
 import { MeasurementFigure, type MeasurementName } from "./MeasurementFigures";
@@ -64,6 +65,8 @@ export function NoteArticleContent({ html }: { html: string }) {
       parts.push(<BoundaryFigure key={index} name={match[1] as BoundaryName} caption={decodeCaption(match[2])} />);
     } else if (["order-strategy-timing", "a3-quote-evidence", "risk-issue-recovery"].includes(match[1])) {
       parts.push(<DecisionFigure key={index} name={match[1] as DecisionName} caption={decodeCaption(match[2])} />);
+    } else if (["inventory-turns-days", "indicator-order-history", "acceptance-order-evidence"].includes(match[1])) {
+      parts.push(<PerformanceFigure key={index} name={match[1] as PerformanceName} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "planning-decision") {
       parts.push(<PlanningDecision key={index} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "forecast-calculator") {
