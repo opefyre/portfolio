@@ -1,3 +1,5 @@
+import { AbcXyzInventory } from "./AbcXyzInventory";
+
 import { OperationsExample, type OperationsExampleName } from "./OperationsExamples";
 
 import { AiJobsChart, type AiJobsChartName } from "./AiJobsCharts";
@@ -32,6 +34,8 @@ export function NoteArticleContent({ html }: { html: string }) {
       parts.push(<AiControlChart key={index} name={match[1] as AiControlChartName} caption={decodeCaption(match[2])} />);
     } else if (["scale-ai-rollout", "stockout-demand", "robot-task-cost"].includes(match[1])) {
       parts.push(<OperationsExample key={index} name={match[1] as OperationsExampleName} caption={decodeCaption(match[2])} />);
+    } else if (match[1] === "abc-inventory-value" || match[1] === "abc-xyz-inventory") {
+      parts.push(<AbcXyzInventory key={index} name={match[1]} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "planning-decision") {
       parts.push(<PlanningDecision key={index} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "forecast-calculator") {

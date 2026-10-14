@@ -52,7 +52,7 @@ jobs:
         run: npm run lint
 
       - name: Verify forecast and operations calculators
-        run: node --import tsx --test components/notes/forecast-metrics.test.ts components/notes/operations-models.test.ts
+        run: node --import tsx --test components/notes/forecast-metrics.test.ts components/notes/operations-models.test.ts components/notes/abc-xyz-model.test.ts
 
       - name: Verify rendering compatibility
         run: node --import tsx --test scripts/fiber-timer.test.mjs scripts/instagram-assets.test.ts components/lens/image-ready.test.ts lib/note-figure.test.ts
