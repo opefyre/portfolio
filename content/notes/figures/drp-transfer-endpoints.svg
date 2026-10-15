@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 495" role="img" aria-labelledby="drp-transfer-title drp-transfer-desc" font-family="var(--font-funnel-display), Arial, sans-serif">
+<title id="drp-transfer-title">Two dated entries, one 30-piece transfer</title>
+<desc id="drp-transfer-desc">In the fictional on-time plan, Central dispatches 30 pieces to South at the start of week 2. The same pieces are in transit for one week and arrive at South at the start of week 3. They are not two separate 30-piece supply quantities. North has a separate 30-piece transfer.</desc>
+<text x="12" y="36" font-size="30" fill="#26282a">One transfer, two endpoints</text>
+<line x1="12" y1="58" x2="508" y2="58" stroke="#bab8af"/>
+<g fill="none" stroke="#26282a" stroke-width="3"><path d="M22 126L68 99L114 126V184H22Z M49 184V141H87V184"/><path d="M33 132H44 M92 132H103"/></g>
+<text x="151" y="114" font-size="25" fill="#26282a">Central warehouse</text>
+<text x="151" y="148" font-size="23" fill="#62676a">Start of week 2</text>
+<text x="151" y="182" font-size="27" fill="#a35736">Dispatch 30 pieces</text>
+<path d="M68 204V303 M61 293L68 305L75 293" fill="none" stroke="#a35736" stroke-width="3"/>
+<path d="M151 223H493 M151 286H493" stroke="#bab8af"/>
+<text x="151" y="250" font-size="24" fill="#26282a">The same 30 pieces</text>
+<text x="151" y="275" font-size="20" fill="#62676a">In transit for one week</text>
+<g fill="none" stroke="#26282a" stroke-width="3"><path d="M22 351L68 324L114 351V409H22Z M49 409V366H87V409"/><path d="M33 357H44 M92 357H103"/></g>
+<text x="151" y="339" font-size="25" fill="#26282a">South depot</text>
+<text x="151" y="373" font-size="23" fill="#62676a">Start of week 3</text>
+<text x="151" y="407" font-size="27" fill="#a35736">Receive 30 pieces</text>
+<line x1="12" y1="443" x2="508" y2="443" stroke="#bab8af"/>
+<text x="12" y="473" font-size="20" fill="#62676a">One stock movement, recorded at both locations</text>
+</svg>

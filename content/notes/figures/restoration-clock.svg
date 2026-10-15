@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" role="img" aria-label="Fictional ten-hour restoration on machine B: six hours waiting for a spare, three repairing, and one checking restart. The full ten hours are counted in this article's restoration clock." font-family="var(--font-funnel-display), Arial, sans-serif">
+<text x="12" y="30" font-size="27" fill="#0f1011">Ten hours stopped. Three hours repairing.</text>
+<text x="12" y="65" font-size="18" fill="#62676a">One fictional event, from failure to return to production</text>
+<rect x="12" y="98" width="336" height="50" fill="#b4532a"/><rect x="348" y="98" width="168" height="50" fill="#26282a"/><rect x="516" y="98" width="56" height="50" fill="#91938d"/>
+<text x="12" y="189" font-size="24" fill="#b4532a">6 h waiting</text><text x="12" y="218" font-size="18" fill="#62676a">Spare not yet available</text>
+<text x="235" y="189" font-size="24" fill="#26282a">3 h repairing</text><text x="235" y="218" font-size="18" fill="#62676a">Hands-on work</text>
+<text x="440" y="189" font-size="24" fill="#62676a">1 h checking</text><text x="440" y="218" font-size="18" fill="#62676a">Return to production</text>
+<line x1="12" y1="244" x2="572" y2="244" stroke="#aaa79c"/><text x="12" y="278" font-size="20" fill="#26282a">Restoration clock: all 10 hours. Active repair: 3 hours.</text>
+</svg>

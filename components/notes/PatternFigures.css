@@ -1,0 +1,56 @@
+.pattern-chart { min-width: 620px; }
+.pattern-figure .pattern-panel-label { font-size: 16px; fill: #26282a; }
+.pattern-observed { fill: none; stroke: #26282a; stroke-width: 2.5; }
+.pattern-component { fill: none; stroke: #b4532a; stroke-width: 2; }
+.pattern-reference { fill: none; stroke: #b4532a; stroke-width: 1.6; stroke-dasharray: 5 4; }
+.pattern-cursor { stroke: #777c7e; stroke-width: 1; stroke-dasharray: 2 3; }
+.pattern-dot { fill: #b4532a; stroke: #eeebe4; stroke-width: 2; }
+.pattern-legend,.pattern-scope { font-size: 13px; line-height: 1.65; color: #62676a; }
+.pattern-equation { border-block: 1px solid var(--rule); padding: 18px 0 22px; margin-top: 24px; }
+.pattern-equation > p { font-size: 14px; margin: 0 0 20px; }
+.pattern-equation > div { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.pattern-equation span { font-size: 12px; }
+.pattern-equation strong { display: block; font: 500 32px/1.2 var(--font-display); margin-bottom: 8px; }
+.pattern-equation b { font-weight: 400; color: #777c7e; }
+.pattern-check { display: flex; align-items: center; gap: 12px; font-size: 14px; line-height: 1.5; margin: 22px 0; }
+.pattern-check input { width: 20px; height: 20px; flex-shrink: 0; accent-color: #b4532a; }
+.pattern-estimates { margin: 28px 0; }
+.pattern-estimates section { border-top: 1px solid var(--rule-strong); padding: 24px 0; }
+.pattern-estimate-heading { display: flex; justify-content: space-between; gap: 20px; align-items: end; }
+.pattern-estimate-heading p { color: #62676a; font-size: 12px; margin: 0 0 8px; }
+.pattern-estimate-heading h4 { font: 500 27px/1.2 var(--font-display); margin: 0; }
+.pattern-estimate-heading > strong { font: 500 32px/1.2 var(--font-display); color: #b4532a; white-space: nowrap; }
+.pattern-estimates dl { margin: 22px 0 0; font-size: 14px; line-height: 1.55; }
+.pattern-estimates dl > div { display: flex; justify-content: space-between; gap: 22px; padding: 6px 0; }
+.pattern-estimates dd { margin: 0; white-space: nowrap; }
+.pattern-subtotal { border-top: 1px solid var(--rule); margin-top: 12px; font-weight: 500; }
+.prose .pattern-route { padding: 0; list-style: none; margin: 28px 0; }
+.prose .pattern-route > li { display: grid; grid-template-columns: 38px minmax(0,1fr); gap: 16px; margin: 0; padding: 0 0 28px; }
+.pattern-step { font: 500 22px/1.3 var(--font-display); color: #b4532a; }
+.pattern-route section { border-left: 1px solid #aaa79c; padding-left: 20px; }
+.pattern-route h4 { font: 500 24px/1.25 var(--font-display); margin: 8px 0 20px; }
+.pattern-route .pattern-system { font-size: 12px; color: #62676a; margin: 0; }
+.pattern-route dl { margin: 0; font-size: 14px; line-height: 1.6; }
+.pattern-route dl > div { display: grid; grid-template-columns: 150px minmax(0,1fr); gap: 14px; padding: 5px 0; }
+.pattern-route dt { color: #62676a; }
+.pattern-route dd { margin: 0; overflow-wrap: anywhere; }
+.pattern-route .pattern-transfer { border-top: 1px solid var(--rule); padding-top: 14px; margin: 20px 0 0; font-size: 13px; color: #b4532a; }
+.pattern-retry { border-block: 1px solid var(--rule-strong); padding: 20px 0; }
+.pattern-retry p { font-size: 14px; line-height: 1.65; margin: 14px 0 0; }
+.pattern-retry p:first-child { margin: 0 0 12px; }
+.pattern-retry strong { font: 500 24px/1.3 var(--font-display); }
+@media(max-width:600px) {
+ .pattern-route dl > div { grid-template-columns: 1fr; gap: 0; padding: 7px 0; }
+ .pattern-estimate-heading { align-items: start; }
+ .pattern-estimate-heading h4 { font-size: 24px; }
+ .pattern-estimate-heading > strong { font-size: 27px; }
+ .pattern-estimate-heading p { max-width: 170px; }
+}
+@media(max-width:380px) {
+ .pattern-equation > div { flex-wrap: wrap; justify-content: start; gap: 12px; }
+ .pattern-equation span { min-width: 45px; }
+ .pattern-equation strong { font-size: 27px; }
+ .pattern-estimate-heading { flex-direction: column; gap: 12px; }
+ .pattern-route section { padding-left: 12px; }
+ .prose .pattern-route > li { grid-template-columns: 28px minmax(0,1fr); gap: 10px; }
+}
