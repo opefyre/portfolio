@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 490" role="img" aria-labelledby="stakeholder-change-title stakeholder-change-desc" font-family="var(--font-funnel-display), Arial, sans-serif">
+<title id="stakeholder-change-title">From a night-shift concern to a checked change</title>
+<desc id="stakeholder-change-desc">Fictional proposed follow-up: a night trial reveals that replacing a damaged label needs daytime approval. Agree an authorised night-shift route, then retest it overnight and report the result before rollout.</desc>
+<text x="12" y="36" font-size="30" fill="#26282a">Let the input change the plan</text>
+<line x1="12" y1="58" x2="508" y2="58" stroke="#bab8af"/>
+<path d="M38 118V191 M32 183L38 192L44 183 M38 250V323 M32 315L38 324L44 315" fill="none" stroke="#a35736" stroke-width="2"/>
+<circle cx="38" cy="104" r="24" fill="#26282a"/><text x="38" y="112" font-size="22" fill="#eeece5" text-anchor="middle">01</text>
+<text x="85" y="99" font-size="24" fill="#a35736">Night-shift trial</text>
+<text x="85" y="132" font-size="23" fill="#26282a">A damaged label needs</text><text x="85" y="162" font-size="23" fill="#26282a">daytime approval.</text>
+<circle cx="38" cy="236" r="24" fill="#26282a"/><text x="38" y="244" font-size="22" fill="#eeece5" text-anchor="middle">02</text>
+<text x="85" y="231" font-size="24" fill="#a35736">Agreed change</text>
+<text x="85" y="264" font-size="23" fill="#26282a">Define an authorised route</text><text x="85" y="294" font-size="23" fill="#26282a">for the night shift.</text>
+<circle cx="38" cy="368" r="24" fill="#26282a"/><text x="38" y="376" font-size="22" fill="#eeece5" text-anchor="middle">03</text>
+<text x="85" y="363" font-size="24" fill="#a35736">Overnight retest</text>
+<text x="85" y="396" font-size="23" fill="#26282a">Try the route. Record the result.</text><text x="85" y="426" font-size="23" fill="#26282a">Tell the team what changed.</text>
+<line x1="12" y1="455" x2="508" y2="455" stroke="#bab8af"/>
+<text x="12" y="482" font-size="20" fill="#62676a">Proposed follow-up before the rollout decision</text>
+</svg>

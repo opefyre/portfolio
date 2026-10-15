@@ -1,0 +1,18 @@
+.wr-chart { min-width: 640px; }
+.wr-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.wr-three { grid-template-columns: repeat(3,minmax(0,1fr)); }
+.wr-ink { fill: #26282a; }
+.wr-rust { fill: #b4532a; }
+.wr-muted { fill: #c7c3b8; }
+.wr-outline { fill: #e0ddd3; stroke: #777c7e; stroke-width: 1.2; }
+.wr-marker { stroke: #777c7e; stroke-width: 1.3; stroke-dasharray: 3 3; }
+.wr-figure .wr-row { fill: #26282a; font-size: 14px; }
+.wr-figure .wr-item { fill: #26282a; font-size: 17px; }
+.wr-figure .wr-light { fill: #eeebe4; font-size: 12px; }
+.wr-figure .wr-dark { fill: #26282a; font-size: 12px; }
+.wr-legend { font-size: 13px; line-height: 1.65; color: #62676a; }
+.wr-checks { margin: 26px 0; }
+.wr-check { display: flex; align-items: center; gap: 12px; min-height: 48px; margin: 18px 0; font-size: 14px; line-height: 1.5; }
+.wr-check input { width: 20px; height: 20px; accent-color: #b4532a; flex-shrink: 0; }
+.wr-difference { color: #9c4421; font-weight: 500; }
+@media(max-width:600px) { .wr-controls,.wr-three { grid-template-columns: 1fr; } .wr-controls { gap: 0; } .wr-three > p > span:first-child { min-height: 0; } }

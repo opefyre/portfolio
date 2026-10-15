@@ -1,3 +1,14 @@
+import { FinalFundamental, type FinalFundamentalName } from "./FinalFundamentals";
+import { CommitmentExample, type CommitmentExampleName } from "./CommitmentExamples";
+import { WorkingRecords, type WorkingRecordsName } from "./WorkingRecords";
+import { RoutesRisksTime, type RoutesRisksTimeName } from "./RoutesRisksTime";
+import { FlowBalance, type FlowBalanceName } from "./FlowBalance";
+import { SupplyCareTrace, type SupplyCareTraceName } from "./SupplyCareTrace";
+import { PatternFigure, type PatternFigureName } from "./PatternFigures";
+import { OperatingRule, type OperatingRuleName } from "./OperatingRules";
+import { DeliveryConcept, type DeliveryConceptName } from "./DeliveryConcepts";
+import { FieldConcept, type FieldConceptName } from "./FieldConcepts";
+import { CoreConcept, type CoreConceptName } from "./CoreConcepts";
 import { PlanningBasic, type PlanningBasicName } from "./PlanningBasics";
 import { RecordFigure, type RecordName } from "./RecordFigures";
 import { MethodFigure, type MethodName } from "./MethodFigures";
@@ -76,6 +87,28 @@ export function NoteArticleContent({ html }: { html: string }) {
       parts.push(<RecordFigure key={index} name={match[1] as RecordName} caption={decodeCaption(match[2])} />);
     } else if (["inventory-position-dates", "takt-station-pace", "resource-load-plans"].includes(match[1])) {
       parts.push(<PlanningBasic key={index} name={match[1] as PlanningBasicName} caption={decodeCaption(match[2])} />);
+    } else if (["promise-routes", "failure-patterns", "master-record-history"].includes(match[1])) {
+      parts.push(<CoreConcept key={index} name={match[1] as CoreConceptName} caption={decodeCaption(match[2])} />);
+    } else if (["inventory-review-replay", "rollout-stakeholders", "gemba-order-journey"].includes(match[1])) {
+      parts.push(<FieldConcept key={index} name={match[1] as FieldConceptName} caption={decodeCaption(match[2])} />);
+    } else if (["ownership-arrangements", "vmi-ownership", "gage-reading-patterns", "delivery-approach-routes"].includes(match[1])) {
+      parts.push(<DeliveryConcept key={index} name={match[1] as DeliveryConceptName} caption={decodeCaption(match[2])} />);
+    } else if (["drp-network", "jidoka-response", "governed-stock-definition", "data-definition-change"].includes(match[1])) {
+      parts.push(<OperatingRule key={index} name={match[1] as OperatingRuleName} caption={decodeCaption(match[2])} />);
+    } else if (["demand-components", "estimate-builds", "order-exchange-route"].includes(match[1])) {
+      parts.push(<PatternFigure key={index} name={match[1] as PatternFigureName} caption={decodeCaption(match[2])} />);
+    } else if (["purchasing-portfolio", "equipment-care-week", "requirements-evidence-map"].includes(match[1])) {
+      parts.push(<SupplyCareTrace key={index} name={match[1] as SupplyCareTraceName} caption={decodeCaption(match[2])} />);
+    } else if (["planning-fence-calendar", "ctq-requirements-tree", "ctq-delivery-check", "phase-gate-record"].includes(match[1])) {
+      parts.push(<CommitmentExample key={index} name={match[1] as CommitmentExampleName} caption={decodeCaption(match[2])} />);
+    } else if (["cash-cycle-timing", "eight-d-verification", "migration-reconciliation"].includes(match[1])) {
+      parts.push(<WorkingRecords key={index} name={match[1] as WorkingRecordsName} caption={decodeCaption(match[2])} />);
+    } else if (["crossdock-window", "sampling-oc-curve", "schedule-compression"].includes(match[1])) {
+      parts.push(<RoutesRisksTime key={index} name={match[1] as RoutesRisksTimeName} caption={decodeCaption(match[2])} />);
+    } else if (["pooling-correlation", "heijunka-buffer", "data-freshness-clock"].includes(match[1])) {
+      parts.push(<FlowBalance key={index} name={match[1] as FlowBalanceName} caption={decodeCaption(match[2])} />);
+    } else if (["doe-interaction", "scrum-work-map", "software-route-cost", "handover-evidence-map", "cloud-responsibility-stack", "it-ot-paths", "lesson-reuse-map", "project-npv-comparison", "warehouse-access-matrix", "debt-change-history", "debt-effort-comparison"].includes(match[1])) {
+      parts.push(<FinalFundamental key={index} name={match[1] as FinalFundamentalName} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "planning-decision") {
       parts.push(<PlanningDecision key={index} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "forecast-calculator") {
