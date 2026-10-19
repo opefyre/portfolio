@@ -7,6 +7,7 @@ const description = "How abosh.io and the abosh publisher handle data: no tracke
 export const metadata: Metadata = {
   title: "Privacy policy",
   description,
+  robots: { index: false, follow: false },
   alternates: { canonical: "/privacy/" },
 };
 

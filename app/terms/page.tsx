@@ -7,6 +7,7 @@ const description = "Terms for abosh.io and the abosh publisher, a private singl
 export const metadata: Metadata = {
   title: "Terms of service",
   description,
+  robots: { index: false, follow: false },
   alternates: { canonical: "/terms/" },
 };
 
