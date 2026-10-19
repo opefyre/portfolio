@@ -23,6 +23,9 @@ export function SiteFooter() {
         <p className="site-foot">
           <span>© 2026 {site.name}</span>
           <span>{site.location}</span>
+          {/* Temporary (2026-10-19) for the YouTube API audit; remove after approval. */}
+          <a href="/privacy/" className="text-link">Privacy</a>
+          <a href="/terms/" className="text-link">Terms</a>
         </p>
       </div>
     </footer>

@@ -580,6 +580,10 @@ html.lenis body {
   background: #f0f6fc;
   color: #0d1117;
 }
+.social[data-brand="youtube"]:is(:hover, :focus-visible) .social-chip {
+  background: #ff0000;
+  color: #fff;
+}
 @media (prefers-reduced-motion: reduce) {
   .social:hover .social-chip,
   .social:focus-visible .social-chip {
