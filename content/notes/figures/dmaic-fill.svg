@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" role="img" aria-label="Fill weight distributions. Before: mean 507.4 grams, standard deviation 3.1. After: mean 503.0 grams, standard deviation 1.2. Both stay above the 495 gram minimum; the after curve is narrower, so the target can move closer to 500.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" role="img" aria-label="Fill weight distributions. Before: mean 507.4 grams, standard deviation 3.1. After: mean 503.0 grams, standard deviation 1.2. Fictional normal curves illustrate a lower mean and less variation. Neither curve guarantees every pack is above the assumed 495 gram minimum.">
 <line x1="20" y1="250" x2="660" y2="250" stroke="#0f1011"/>
 <text x="69.2" y="270" font-size="13" fill="#5a5d60" text-anchor="middle">494</text>
 <text x="167.7" y="270" font-size="13" fill="#5a5d60" text-anchor="middle">498</text>

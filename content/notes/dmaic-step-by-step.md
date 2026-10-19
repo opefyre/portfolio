@@ -1,7 +1,8 @@
 ---
 title: DMAIC step by step: a Lean Six Sigma project from problem to control
 date: 2026-09-29
-summary: A practical walk through Define, Measure, Analyze, Improve and Control on one real-world style problem, with the tools for each phase, the questions to ask at every tollgate, and when DMAIC is the wrong tool.
+summary: Follow a fictional filling problem through Define, Measure, Analyze, Improve and Control. See how the same approach can investigate supply-chain errors.
+updated: 2026-10-19
 status: published
 topic: Operational excellence
 keywords: DMAIC, Lean Six Sigma, Six Sigma, define measure analyze improve control, process improvement, root cause analysis, SIPOC, measurement system analysis, control plan, operational excellence
@@ -9,15 +10,17 @@ seoTitle: DMAIC step by step: a Lean Six Sigma example
 seoDescription: Follow a Lean Six Sigma project through Define, Measure, Analyze, Improve and Control, with a worked example, phase tools and tollgate questions.
 ---
 
-Most improvement projects fail in one of two ways. Either the team jumps to a solution before understanding the problem, or it understands the problem beautifully and the gain quietly fades six months later. DMAIC is designed to stop both.
+A filling line has been set high to avoid underweight packs. It protects one requirement while giving away more product than intended. Lowering the setting without understanding the variation could create a different problem.
 
-It's the problem-solving backbone of Six Sigma, which Bill Smith introduced at Motorola in 1986. (Motorola's original version was MAIC; the Define phase came later, once companies learned how many projects failed for lack of a clear problem.) It works just as well in an office as on a production line. This note walks through all five phases on one example, with the tools that matter in each.
+**DMAIC means Define, Measure, Analyze, Improve and Control.** It structures an improvement project around a defined problem, trustworthy measurement, cause investigation, a tested change and follow-up. It is widely used in Six Sigma, which focuses on reducing defects and variation.
+
+[ASQ's DMAIC guide](https://asq.org/quality-resources/dmaic) describes that five-phase process. The fictional filling example below follows it from the requirement to the operating control plan.
 
 :::card The short version
 DMAIC is five questions, asked in order, with evidence required before moving on:
 1. **Define:** what's the problem, for whom, and what does success look like?
 2. **Measure:** how big is it really, and can we trust our data?
-3. **Analyze:** what's causing it? Proven, not assumed.
+3. **Analyze:** which explanations does the evidence support?
 4. **Improve:** what fixes the causes, and does the fix work in a pilot?
 5. **Control:** how do we make sure the gain holds after the project team leaves?
 :::
@@ -25,14 +28,14 @@ DMAIC is five questions, asked in order, with evidence required before moving on
 :::grid
 - **Define** Charter, SIPOC, voice of the customer. Output: a problem everyone agrees on.
 - **Measure** Operational definitions, measurement system check, baseline. Output: a trusted number.
-- **Analyze** Fishbone, stratification, hypothesis tests. Output: verified root causes.
-- **Improve** Solution selection, pilot, risk check. Output: a proven fix.
-- **Control** Control plan, SPC, standard work, handover. Output: a gain that lasts.
+- **Analyze** Compare possible causes with observations and tests. Output: supported explanations.
+- **Improve** Select a change, check risks and run a pilot. Output: a tested method.
+- **Control** Agree operating checks, standard work and handover. Output: owners and a response when performance changes.
 :::
 
 ## The example: giving product away
 
-A food plant fills 500 g packs of rice on a 12-head filling machine, about 2 million packs a year. The plant's rule: the average must be at least 500 g, and no pack may go below 495 g. Every gram above 500 is product given away for free. Finance suspects the giveaway is large, but nobody knows how large.
+A food plant fills 500 g packs of rice on a 12-head filling machine, about 2 million packs a year. For this fictional example, the plant requires an average of at least 500 g and rejects packs below 495 g. These are assumed internal rules, not a statement of legal packing requirements. Every gram above 500 is product given away for free. Finance suspects the giveaway is large, but nobody knows how large.
 
 ## Define: agree on the problem
 
@@ -46,19 +49,19 @@ The first deliverable is a short project charter. The hard part is the problem s
 | Team | Line lead, maintenance technician, quality analyst, a process engineer as project lead |
 | Sponsor | Plant manager |
 
-Then map the process at a high level with a **SIPOC**, so everyone sees the same boundaries:
+Map the process with a **SIPOC**: Suppliers, Inputs, Process, Outputs and Customers. It gives the team a shared view of the boundary:
 
 | Suppliers | Inputs | Process | Outputs | Customers |
 | --- | --- | --- | --- | --- |
 | Rice supplier, film supplier, maintenance | Rice, film, filler settings | Feed, weigh, fill, seal, check-weigh | Filled 500 g packs | Retailers, consumers, finance |
 
-Notice what the goal is *not*: "install a new filler". That's a solution, and it doesn't belong in Define.
+Keep equipment choices out of the problem statement until the team understands the weight variation.
 
 ## Measure: get a number you can trust
 
-**First, check the measuring device.** Before collecting a baseline, the team runs a measurement system analysis on the check-weigher: several people weigh the same packs several times. If the scale's own variation is a big share of the process variation, every conclusion after this is built on sand. A common rule of thumb from the automotive industry's MSA manual: under 10% of the variation from the measurement system is good, 10% to 30% may be acceptable, above 30% is not.
+**First, check the measurement.** Compare the check-weigher with a suitable reference and repeat measurements under representative operating conditions. If the same pack gets substantially different readings, investigate that before interpreting differences between filler heads. A [gage repeatability and reproducibility study](https://support.minitab.com/minitab/help-and-how-to/quality-and-process-improvement/measurement-system-analysis/how-to/gage-study/crossed-gage-r-r-study/interpret-the-results/key-results/) can help separate measurement variation from differences between parts; its design must fit the equipment and measurement method.
 
-**Then collect a baseline.** Five packs every hour from each shift for two weeks gives a solid picture:
+**Then collect a baseline.** For this teaching case, assume the team sampled across heads, shifts and two weeks and established the following baseline. A real sampling plan needs to represent the conditions the decision concerns:
 
 :::formula Baseline
 Mean weight = **507.4 g**, standard deviation = **3.1 g**
@@ -66,44 +69,44 @@ Giveaway = 7.4 g × 2,000,000 packs = 14.8 tonnes a year
 At €4 a kilo: **€59,200 a year**
 :::
 
-Now the project has a real number. It also has a clue: with a spread of 3.1 g, operators had nudged the target upwards to stay safely away from 495 g.
+The baseline gives the team a number to investigate. Settings records also show that operators raised the target after low-weight rejects. The team needs to understand that variation before reducing the target.
 
-## Analyze: find the causes, and prove them
+## Analyze: test the possible causes
 
-Brainstorm possible causes with a fishbone (people, methods, machines, materials, measurement, environment), then test the likely ones with data. The rule in Analyze is simple: *a cause isn't a root cause until the data says so.*
+A fishbone diagram can collect possible causes under headings such as people, methods, machines, materials, measurement and environment. Use observations and tests to check those explanations. The fictional investigation below illustrates the evidence to look for; it is not a supplied statistical dataset.
 
 | Suspected cause | How it was tested | Result |
 | --- | --- | --- |
-| Some filler heads fill differently | Weights split by head, compared with an ANOVA test | **Confirmed.** Heads 4 and 9 run lower and far more erratically |
-| Worn valve seals on those heads | Inspection, then weights before and after swapping seals on one head | **Confirmed.** Spread on that head fell by more than half |
-| Operators set a high target to compensate | Settings log compared with shift reports | **Confirmed.** Target raised twice after low-weight rejects |
-| Rice from the second supplier is denser | Weights split by supplier lot | Not confirmed. No meaningful difference |
+| Some filler heads fill differently | Compare weights by head using analysis of variance (ANOVA), with checks on its assumptions | Heads 4 and 9 have lower means and greater variation in the assumed study |
+| Worn valve seals on those heads | Inspection, then weights before and after swapping seals on one head | Variation fell by more than half in the assumed trial; check comparable runs and other changes |
+| Operators set a high target to compensate | Settings log compared with shift reports | Records show the target was raised twice after low-weight rejects |
+| Rice from the second supplier is denser | Weights split by supplier lot | The assumed sample did not establish a difference; check whether it was large enough to detect one relevant to the decision |
 
-This is the phase where DMAIC saves the most money, because it stops you from fixing things that aren't broken. The supplier theory was the most popular one in the room, and the data didn't support it.
+In this example, the evidence supports work on the filler heads and seals. It does not support changing supplier. Testing those explanations prevents the team from treating the preferred theory as a finding.
 
 ## Improve: fix the causes, then pilot
 
-The fixes follow directly from the verified causes:
+On that evidence, the team proposes these changes:
 
 - Replace the worn seals, and add seal checks to the weekly preventive maintenance.
 - Add a weight check per head at start-up, so a drifting head is caught in minutes, not days.
-- Once the spread is down, lower the target to what the new variation safely allows.
+- After checking the revised process and low-weight rejection controls, test a lower target.
 
-Pilot on one shift for a week, then roll out. After the rollout:
+Assume a bounded pilot and follow-up support the revised method across the relevant conditions. The fictional result used here is:
 
-::figure dmaic-fill | Before and after. The spread narrowed from 3.1 g to 1.2 g, so the average could come down from 507.4 g to 503.0 g while staying well clear of the 495 g minimum.
+::figure dmaic-fill | Fictional normal curves with means of 507.4 g and 503.0 g, and standard deviations of 3.1 g and 1.2 g. They illustrate reduced variation, not a guarantee that no pack falls below 495 g. Actual rejection controls still need verification.
 
-:::formula Result
+:::formula Gross material-value reduction at unchanged annual volume
 New mean = **503.0 g**, standard deviation = **1.2 g**
 Giveaway = 3.0 g × 2,000,000 = 6.0 tonnes a year
-Saving = 14.8 − 6.0 = 8.8 tonnes, **€35,200 a year**
+Gross material value = (14.8 − 6.0) × 1,000 kg × €4/kg = **€35,200 a year**
 :::
 
-The order matters. Lowering the target first, before reducing the spread, would have produced underweight packs. Variation came down first; the average followed.
+The €35,200 is a gross annual material-value estimate at unchanged volume and price. Deduct maintenance, testing and any additional rejection or rework costs before claiming a net saving. Lowering the mean while leaving the old variation unchanged would increase the risk of underweight packs; the mean and standard deviation alone cannot guarantee every pack meets the minimum.
 
 ## Control: make the gain hold
 
-This is the phase most teams skip, and the one that decides whether the project was worth doing. The deliverable is a **control plan**: what to watch, how, how often, and what to do when it drifts.
+The operating team needs a **control plan**: what to watch, how, how often, and what to do when it drifts.
 
 | What | How | How often | Limit | Reaction | Owner |
 | --- | --- | --- | --- | --- | --- |
@@ -112,7 +115,7 @@ This is the phase most teams skip, and the one that decides whether the project 
 | Valve seal condition | Visual and wear check | Weekly | Wear standard | Replace seal | Maintenance |
 | Target setting | Settings log | Every shift | 503 g, changes need approval | Reset, escalate | Shift supervisor |
 
-The control chart is the heart of it: it separates normal variation from a real change, so people react to signals and not to noise. [How to read one](/notes/control-charts-explained/) is its own note.
+A control chart helps the team distinguish ordinary variation from a signal that needs investigation. [How to read one](/notes/control-charts-explained/) is its own note.
 
 ## Tollgate questions
 
@@ -120,26 +123,36 @@ At the end of each phase, the sponsor reviews the work before the team moves on.
 
 | Phase | Ask before moving on |
 | --- | --- |
-| Define | Is the problem stated in numbers, with no solution hidden in it? Is the scope small enough to finish in 3 to 6 months? |
+| Define | Is the problem stated in numbers, with no solution hidden in it? Is the scope feasible with the agreed people and time? |
 | Measure | Did we check the measurement system? Is the baseline based on enough data, over enough time? |
-| Analyze | Is every root cause backed by data? Did we test the popular theories too? |
+| Analyze | Which explanations are supported? Were alternatives and possible confounding changes checked? |
 | Improve | Does each fix address a verified cause? Did a pilot show the result? What could go wrong? |
 | Control | Is there a control plan with owners? Is the process owner ready to take it over? |
 
+## How Six Sigma applies in a supply chain
+
+The same structure can investigate delivery defects. Suppose a fictional distributor records 30 late order lines out of 600 due lines in four weeks: 5%. A line is late against its confirmed delivery window, counted once. Start with that definition before comparing carriers or suppliers.
+
+Measure promise changes, dispatch and receipt events, product mix and the measurement's completeness. Then test explanations such as a recurring release delay or an unreliable route. A later lower rate is not proof of the cause unless the investigation and comparison support it.
+
+The [OTIF and on-time-delivery guide](/notes/otif-vs-on-time-delivery/) shows why whole orders, lines and units produce different service measures. Use the [Kaizen, Lean and Six Sigma comparison](/notes/kaizen-lean-six-sigma/) to decide how much investigation the problem needs.
+
+Six Sigma has not been replaced by one universal successor. It remains relevant where reducing defects or variation is the job. A different problem may need flow redesign, a simple correction or a new process design instead of a full DMAIC project.
+
 ## When DMAIC is the wrong tool
 
-DMAIC is thorough, which also makes it slow. Don't use it for everything:
+Match the investigation to what remains uncertain:
 
-- **The cause and fix are obvious.** Just do it, and check it worked.
-- **The problem is small and local.** A one-week kaizen event with the people who do the work is faster.
-- **The process doesn't exist yet.** Designing something new calls for DMADV (Define, Measure, Analyze, Design, Verify) instead.
+- **The cause is verified and the fix is straightforward.** Make an authorised correction and check the result.
+- **The problem is small and local.** A short trial with the people doing the work may be enough.
+- **The process does not exist yet.** Consider a design approach such as DMADV (Define, Measure, Analyze, Design, Verify) or [3P](/notes/3p-production-preparation-process/).
 - **The problem is mostly waste and flow, not variation.** Lean tools like value stream mapping may get you there sooner.
 
 ## A note on sigma levels
 
-"Six Sigma" refers to a process so consistent that it produces about 3.4 defects per million opportunities. That figure assumes the conventional 1.5 sigma shift, which allows for drift over the long term. Without the shift, six sigma would mean about 0.002 defects per million, which is why some statisticians question the convention. The table uses it, as most references do:
+"Six Sigma" refers to a process so consistent that it produces about 3.4 defects per million opportunities. That figure assumes the conventional 1.5 sigma shift, which allows for drift over the long term. For a centred normal distribution with limits six standard deviations from the mean, the two-sided tail is about 0.002 per million. Those are different assumptions. The table below uses the conventional 1.5-sigma shift:
 
-| Sigma level | Defects per million | Yield |
+| Sigma level | Defects per million opportunities | Share of opportunities without a defect |
 | --- | --- | --- |
 | 2 | 308,537 | 69.1% |
 | 3 | 66,807 | 93.3% |
@@ -147,7 +160,7 @@ DMAIC is thorough, which also makes it slow. Don't use it for everything:
 | 5 | 233 | 99.977% |
 | 6 | 3.4 | 99.99966% |
 
-Most processes never need six sigma. The point of the scale is direction: fewer defects, less variation, and the ability to prove it.
+Choose performance requirements for the product and its consequences. A sigma label does not replace the pack-weight specification or the checks needed to enforce it.
 
 :::link https://vrolen.com | Test a fix before you touch the line
 Vrolen models a production line, compares countermeasures before any change, and checks afterwards that the gain actually held.
@@ -160,6 +173,6 @@ Vrolen models a production line, compares countermeasures before any change, and
 - Barney, M. (2002). [Motorola's second generation](https://web.ist.utl.pt/ist11038/acad/gesQ/text/MotorolaSixSigma.pdf). *Six Sigma Forum Magazine*, ASQ.
 - U.S. Army (2011). [Lean Six Sigma Deployment Guidebook](https://www.cool.osd.mil/army/docs/LSS_Guidebook.pdf), version 5.0, on tollgate reviews.
 - Coşkun, A. & Ialongo, C. (2020). [Six Sigma revisited](https://pmc.ncbi.nlm.nih.gov/articles/PMC6999184/). *Biochemia Medica*, 30(1), on the 1.5 sigma shift.
-- Automotive Industry Action Group (2010). *Measurement Systems Analysis (MSA) Reference Manual*, 4th edition.
+- [Minitab: Crossed gage R&R interpretation](https://support.minitab.com/minitab/help-and-how-to/quality-and-process-improvement/measurement-system-analysis/how-to/gage-study/crossed-gage-r-r-study/interpret-the-results/key-results/), measurement variation and study interpretation.
 
-*The plant and its numbers are illustrative.*
+*The plant, observations and results are fictional. Annual material values assume 2 million packs and €4/kg throughout. The curves are normal-distribution illustrations, not observed data or a zero-defect guarantee.*

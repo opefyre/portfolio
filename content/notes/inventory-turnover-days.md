@@ -3,17 +3,18 @@ title: Inventory turnover and inventory days: what does the ratio tell you?
 date: 2026-10-14
 summary: Six inventory turns a year becomes 61 inventory days. A worked example shows how to calculate both, why sales revenue gives a different answer and when a higher ratio needs a closer look.
 seoTitle: Inventory turnover and inventory days: an example
-seoDescription: Calculate inventory turnover and days inventory outstanding using a worked example. Compare cost with revenue, average with closing stock, and service results.
+seoDescription: Calculate inventory turnover and inventory days, then compare the inventory-to-sales ratio. See how periods, valuation and service change the interpretation.
+updated: 2026-10-19
 status: published
 topic: Supply chain
-keywords: inventory turnover formula, inventory days calculation, days inventory outstanding, inventory turnover example, average inventory
+keywords: inventory turnover formula, inventory days calculation, days inventory outstanding, inventory turnover example, average inventory, inventory to sales ratio
 ---
 
 A warehouse reports six inventory turns a year. Someone converts that to 61 days and concludes that every item spends about two months on the shelf.
 
-The calculation can be right while the conclusion is wrong.
+The ratio describes the stock balance relative to annual sales activity. It does not track each item's age.
 
-**Inventory turnover compares the cost of goods sold during a period with the average inventory value held during that period. Inventory days expresses the same relationship in days.** Neither number tells you how long a particular box has been sitting there.
+**Inventory turnover compares the cost of goods sold during a period with the average inventory value held during that period.** Inventory days expresses the same relationship in days.
 
 The ratios help you judge how much stock the business carries relative to what it sells. You still need item records and service results to decide whether that stock is doing its job.
 
@@ -35,6 +36,21 @@ Inventory turnover = €1,200,000 COGS ÷ €200,000 average inventory = 6 turns
 Using sales revenue instead gives €1,800,000 ÷ €200,000 = 9. That mixes selling prices with stock valued at cost. A price increase could then make the ratio rise without another unit leaving the warehouse.
 
 Some reports deliberately use a sales-based ratio. Keep its name and basis explicit, and don't compare it directly with cost-based turnover.
+
+## Inventory-to-sales ratio vs inventory turnover
+
+An **inventory-to-sales ratio** puts stock in the numerator. One convention, used by the [US Census Bureau for retail trade](https://www.census.gov/retail/definitions.html), divides end-of-month inventory by that month's sales. Its inventory measure is valued at cost; sales are receipts, net of returns and allowances. That differs from our cost-based turnover calculation.
+
+For the same fictional distributor, assume December sales are €150,000 of the year's €1,800,000. Closing stock is still €240,000 at cost.
+
+| Measure | Calculation | Result |
+| --- | --- | --- |
+| Annual inventory turnover | €1,200,000 annual COGS ÷ €200,000 average stock | 6 turns/year |
+| December inventory-to-sales ratio | €240,000 closing stock ÷ €150,000 monthly sales | 1.6 |
+
+The 1.6 compares a month-end balance with a month's sales value. It is not the inverse of our annual turnover: the period, stock balance and sales basis all differ. Nor does it prove every item can cover 1.6 months of future demand.
+
+A good ratio depends on the business and season. Compare the same convention across comparable months, then check shortages and ageing. A price change can move a sales-based ratio even when stock quantities do not change.
 
 ## Convert turns into inventory days
 
@@ -83,10 +99,11 @@ The [stockout forecasting example](/notes/demand-forecasting-stockouts/) explain
 
 For the next inventory review, put the average balance and COGS beside the ratio. Then inspect ageing, shortages and the items responsible for the balance. Use that evidence to change a replenishment rule or clear a specific excess, and check service afterwards.
 
-Six turns tells you where the discussion starts. The item records tell you what to change.
+For example, a slow-moving spare may deserve a different stocking rule from a fast-selling product, even when they contribute to the same overall ratio.
 
 ## Sources and calculation notes
 
+- [US Census Bureau: Monthly Retail Trade definitions](https://www.census.gov/retail/definitions.html), inventory valuation, monthly sales and the inventories-to-sales convention. The euro example applies that formula; it is not Census data.
 - [OpenStax: Examine the Efficiency of Inventory Management Using Financial Ratios](https://openstax.org/books/principles-financial-accounting/pages/10-5-examine-the-efficiency-of-inventory-management-using-financial-ratios). Inventory turnover, the opening/closing average and inventory days calculated with daily COGS.
 
-All business figures and comparisons are fictional. The baseline uses an opening/closing average, a 365-day year and consistent cost valuation. The interactive alternatives use assumed average balances directly. No demand forecast, stock-age estimate, service optimum or measured cash saving is claimed.
+All business figures are fictional. Turnover uses an opening/closing average, a 365-day year and cost valuation. The inventory-to-sales example uses December closing stock at cost and December sales revenue. The interactive alternatives use assumed average balances.

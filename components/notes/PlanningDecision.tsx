@@ -20,7 +20,7 @@ export function PlanningDecision({ caption }: { caption: string }) {
   const max = Math.max(1000, ...rows.map(row => row.total));
   const bestNames = best.map(row => row.name).join(" and ");
   return <figure className="note-interactive planning-decision" aria-labelledby={`${id}-title`}>
-    <header className="planning-heading"><p className="planning-kicker">One month · one product · fictional inputs</p><h3 id={`${id}-title`}>What would you commit to?</h3><p>A change in demand can change which plan costs least.</p></header>
+    <header className="planning-heading"><p className="planning-kicker">One month | one product | fictional inputs</p><h3 id={`${id}-title`}>What would you commit to?</h3><p>A change in demand can change which plan costs least.</p></header>
     <div className="planning-controls">
       <div><label htmlFor={`${id}-demand`}>Demand scenario <output>{units(demand)} units</output></label><input id={`${id}-demand`} type="range" min="600" max="1400" step="10" value={demand} onChange={e => setDemand(Number(e.target.value))} aria-valuetext={`${units(demand)} units of demand`} /><div className="planning-scale"><span>600</span><span>1,400 units</span></div></div>
       <div><label htmlFor={`${id}-regular`}>Regular output <output>{units(regular)} units</output></label><input id={`${id}-regular`} type="range" min="400" max="1000" step="10" value={regular} onChange={e => setRegular(Number(e.target.value))} aria-valuetext={`${units(regular)} units of regular production before the deadline`} /><div className="planning-scale"><span>400</span><span>1,000 units</span></div></div>
@@ -32,7 +32,7 @@ export function PlanningDecision({ caption }: { caption: string }) {
     <div className="planning-bars" role="group" aria-label="Compare additional costs in euros">{rows.map(row => <button type="button" key={row.id} className={`planning-bar-option${row.id === focused ? " is-focused" : ""}${row.total === minimum ? " is-lowest" : ""}`} aria-pressed={row.id === focused} aria-label={`${row.name}: ${euro(row.total)}, ${row.late} late units, ${row.leftover} leftover units. Inspect cost breakdown.`} onMouseEnter={() => setFocused(row.id)} onFocus={() => setFocused(row.id)} onClick={() => setFocused(row.id)}>
       <span className="planning-bar-name">{row.name}<strong>{euro(row.total)}</strong></span>
       <span className="planning-bar-track" aria-hidden="true"><span className="planning-premium" style={{ width: `${row.premium / max * 100}%` }} /><span className="planning-late" style={{ width: `${row.lateCost / max * 100}%` }} /><span className="planning-carry" style={{ width: `${row.carryCost / max * 100}%` }} /></span>
-      <span className="planning-bar-note">{units(row.available)} available · {units(row.late)} late · {units(row.leftover)} left over</span>
+      <span className="planning-bar-note">{units(row.available)} available | {units(row.late)} late | {units(row.leftover)} left over</span>
     </button>)}</div>
     <p className="planning-axis">Additional cost (€), on a shared scale. Hover, tap or focus a plan to inspect its cost breakdown.</p>
     <div className="planning-breakdown" aria-live="polite"><span>{selected.name}</span><p>{euro(selected.premium)} commitment + {euro(selected.lateCost)} late delivery + {euro(selected.carryCost)} carrying stock = <strong>{euro(selected.total)}</strong></p></div>

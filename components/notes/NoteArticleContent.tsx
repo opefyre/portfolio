@@ -1,3 +1,4 @@
+import { PaaForecastMethods } from "./PaaForecastMethods";
 import { FinalFundamental, type FinalFundamentalName } from "./FinalFundamentals";
 import { CommitmentExample, type CommitmentExampleName } from "./CommitmentExamples";
 import { WorkingRecords, type WorkingRecordsName } from "./WorkingRecords";
@@ -111,6 +112,8 @@ export function NoteArticleContent({ html }: { html: string }) {
       parts.push(<FinalFundamental key={index} name={match[1] as FinalFundamentalName} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "planning-decision") {
       parts.push(<PlanningDecision key={index} caption={decodeCaption(match[2])} />);
+    } else if (match[1] === "paa-forecast-methods") {
+      parts.push(<PaaForecastMethods key={index} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "forecast-calculator") {
       parts.push(<ForecastCalculator key={index} caption={decodeCaption(match[2])} />);
     } else {
