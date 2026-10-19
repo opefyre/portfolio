@@ -24,6 +24,7 @@ export function SiteFooter() {
           <span>© 2026 {site.name}</span>
           <span>{site.location}</span>
           <a href="/privacy/" className="text-link">Privacy</a>
+          <a href="/terms/" className="text-link">Terms</a>
         </p>
       </div>
     </footer>
