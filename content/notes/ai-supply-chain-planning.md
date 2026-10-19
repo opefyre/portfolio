@@ -2,6 +2,7 @@
 title: AI supply chain planning: a better forecast is only the start
 date: 2026-10-07
 summary: Turn a demand forecast into a decision about stock, capacity and delivery. A worked example and interactive comparison show what AI planning needs beyond accuracy.
+updated: 2026-10-19
 status: published
 topic: Supply chain
 keywords: AI supply chain planning, AI demand forecasting, forecast consumption, demand planning, production planning, human oversight
@@ -19,7 +20,7 @@ This is where AI supply chain planning needs to prove its value: helping people 
 
 PwC's September 29 article, [From plans to decisions](https://www.pwc.com/us/en/services/consulting/supply-chain-operations/library/from-plans-to-decisions-ai-supply-chain-planning.html), argues for planning that responds to changing conditions, with clear limits on what AI can do. The direction makes sense. The practical test is what happens to one order, one capacity decision and one customer promise.
 
-Let's work through that test.
+Our manufacturer needs to cover the expected 200-unit gap without committing more than the demand justifies.
 
 ## First, count the demand once
 
@@ -87,6 +88,27 @@ The arithmetic here fits in a spreadsheet. AI can help a team notice changed dem
 
 A [research community vision statement on AI in supply chains](https://pubsonline.informs.org/doi/full/10.1287/msom.2025.1065) separates prediction from choosing actions and discusses language models as interfaces to planning tools. The assistant, forecast and capacity calculation have different jobs. Connecting them does not remove the need to check the result.
 
+## How to evaluate an AI forecasting tool
+
+There is no best forecasting product independent of the planning decision. Test a candidate at the item, location and horizon you actually use, with information that would have been available when each forecast was issued.
+
+| Check | Evidence to ask for |
+| --- | --- |
+| Decision and horizon | Forecast frequency, lead time, item/location level and the commitment it supports |
+| Data | Treatment of missing records, stockouts, returns, new items and open orders |
+| Baseline performance | Later-data comparisons with a credible simple method, including bias and uncertainty |
+| Integration | How approved forecasts reach planning and how failures or revised inputs are handled |
+| Review rights | Who can inspect, change, approve and recover a plan |
+| Operating cost | Setup, data work, support and checking, as well as the subscription |
+
+The [forecasting-method comparison](/notes/demand-forecasting-methods/) demonstrates a small later-data test. The candidate should also be checked against the delivery, stock and spending outcomes that matter here. A better score is not sufficient if the forecast cannot support a workable commitment.
+
+### How Amazon approached forecast uncertainty
+
+In [Amazon Science's August 2021 account](https://www.amazon.science/latest-news/the-history-of-amazons-forecasting-algorithm), Amazon describes moving from separate forecasting components towards a shared model across product categories. Its account also explains why a single predicted quantity is insufficient for inventory decisions and why it develops forecast distributions.
+
+This company-reported history explains why Amazon forecasts a range of possible demand rather than only one quantity. It is not a comparative benchmark for choosing a tool. For our manufacturer, the next step remains comparing that uncertainty with stock, capacity and the cost of a commitment.
+
 ## Make approval worth doing
 
 Suppose AI recommends overtime. “Approve” should mean the planner can see the 200-unit gap, the €700 commitment, the alternatives and the assumptions that made overtime look sensible.
@@ -121,9 +143,11 @@ Forecast error still matters. The [MAPE and WAPE note](/notes/forecast-accuracy-
 
 For a first AI planning pilot, choose one recurring decision and follow it through this whole process. Agree what counts as an improvement before the pilot starts. Record the assumptions, compare the alternatives, set the approval boundary and review the outcome.
 
-The useful test is simple: when the forecast changes, can the team explain what it will do differently, why, and how it will know whether that choice worked?
+At the next planning review, keep the changed forecast beside the action it prompted. After delivery, compare the recorded demand, cost and service result with that original decision.
 
 ## Sources
+
+- Amazon Science. [The history of Amazon's forecasting algorithm](https://www.amazon.science/latest-news/the-history-of-amazons-forecasting-algorithm), 9 August 2021. Company-reported development and use of forecasting systems; no independent comparative outcome is inferred.
 
 - PwC. [From plans to decisions: How AI is redefining supply chain planning](https://www.pwc.com/us/en/services/consulting/supply-chain-operations/library/from-plans-to-decisions-ai-supply-chain-planning.html), September 29, 2026. The starting point for this note.
 - Oracle. [Forecast consumption](https://docs.oracle.com/en/cloud/saas/supply-chain-and-manufacturing/25d/faupc/forecast-consumption.html). Matching orders to forecasts and consumption periods.

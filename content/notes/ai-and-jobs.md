@@ -2,6 +2,7 @@
 title: Is AI taking jobs? What the data and history show
 date: 2026-10-04
 summary: Is AI taking jobs? Explore employment data, lessons from past automation, and why faster work can mean fewer hires or a busier team.
+updated: 2026-10-19
 status: published
 topic: Digital transformation
 keywords: is AI taking jobs, AI and jobs, AI and entry-level jobs, AI adoption, automation and jobs, AI productivity
@@ -12,9 +13,9 @@ A layoff is easy to see. Fewer new hires are easier to miss.
 
 A company can keep its existing team and still offer fewer opportunities to the next person trying to join. That is one reason the question “Is AI taking jobs?” needs more than a count of layoffs.
 
-The clearest warning so far concerns younger workers and weaker hiring. AI use is spreading quickly, but the employment data cannot tell us how many jobs it caused to disappear.
+In the studies reviewed here, younger workers and weaker hiring raise particular concern. AI use is spreading quickly, but the employment data cannot tell us how many jobs it caused to disappear.
 
-I wanted to understand this by looking at earlier technologies alongside today's numbers. Did faster work eventually create more work? Who benefited, and who struggled?
+Earlier technologies offer a useful comparison: faster work could expand output while leaving particular workers with fewer opportunities. The current data need that same attention to who gains and who loses.
 
 For anyone running a team, those questions lead to a decision we can actually make: what should happen to the time AI saves?
 
@@ -101,7 +102,7 @@ New work appearing elsewhere did not make the transition easy for someone whose 
 
 That is why the history matters here. A productivity gain can benefit the business while the worker loses an opportunity. Looking only at total employment, or only at the company's output, misses part of the story.
 
-History also leaves us with a useful question for today: if work gets cheaper and faster, will there be more of it?
+How demand responds to cheaper, faster work helps explain the employment result.
 
 ## Does higher AI productivity mean fewer jobs?
 
@@ -115,8 +116,6 @@ Here is a fictional example using 15% as the starting assumption. A team needs 1
 
 At the same demand, the work needs 87.0 hours. If demand rises to 115 units, it still needs 100 hours. At 130 units, it needs 113.0 hours.
 
-**The same productivity gain produces three different outcomes.**
-
 This is the decision behind the AI jobs question inside a company. The saved time could mean fewer hires. It could also mean serving more customers, clearing overdue work or reducing overtime.
 
 The demonstration tells you the work can be faster. The workload and the company's choices determine what happens next.
@@ -124,6 +123,27 @@ The demonstration tells you the work can be faster. The workload and the company
 :::link /notes/benefits-realisation-automation/ | When does time saved become a real business benefit?
 Follow the saved hours into capacity, output and spending before calling them cash savings.
 :::
+
+## Will AI replace project managers or supply chain roles?
+
+Those titles contain several kinds of work. Drafting a status report and negotiating a resource commitment do not require the same evidence or authority.
+
+The [ILO's 2025 task-based exposure study](https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure) estimates which work could be affected. It does not predict a replacement date for each role. [O*NET's project-management](https://www.onetonline.org/link/summary/13-1082.00) and [logistician](https://www.onetonline.org/link/summary/13-1081.00) profiles also show jobs combining analysis, coordination and relationships.
+
+Here is one possible division of work to test. It keeps approval with people who have authority over the commitment.
+
+| Task | Assistance worth testing | Decision still requiring an authorised owner in this setup |
+| --- | --- | --- |
+| Project status reporting | Assemble records and draft an explanation of variance | Confirm the evidence and approve the reported commitment |
+| Project resource conflict | Compare feasible schedules | Negotiate and authorise whose work changes |
+| Supply-chain exception review | Identify changed orders and prepare alternatives | Check feasibility and agree customer or supplier commitments |
+| Supplier performance discussion | Summarise delivery records and disputed cases | Resolve the dispute and accept commercial consequences |
+
+Keep task exposure separate from actual use and observed hiring. Establishing an AI effect needs another comparison: what would hiring have looked like without AI, allowing for other changes?
+
+The [AI planning example](/notes/ai-supply-chain-planning/) follows a recommendation into an approved commitment. The [transformation strategy note](/notes/digital-transformation-that-sticks/) explains how to set the authority boundary.
+
+The studies do not provide a reliable list of jobs that will remain safe for five years. For a team review, identify the tasks changing now, the checking they need and how workload and training opportunities change with them.
 
 ## What should leaders check before cutting headcount?
 
@@ -141,7 +161,7 @@ The last question belongs in the plan. If AI takes over the tasks juniors used t
 
 AI may change a team through fewer hires long before it produces a visible round of layoffs. And faster work may increase demand for people rather than reduce it.
 
-Before celebrating the time saved, decide what it is for.
+Include that choice in the AI rollout plan, and review hiring and supervised learning opportunities alongside output and hours saved.
 
 ## Sources and calculation notes
 
@@ -151,4 +171,5 @@ The charts use data saved on 4 October 2026. Employment data run through August 
 - Stanford and ADP: [public employment data](https://digitaleconomy.stanford.edu/project/indicators/canaries-dashboard/) and [August 2026 research paper](https://digitaleconomy.stanford.edu/app/uploads/2026/08/Canaries_August2026.pdf). Our chart compares the highest and lowest exposure fifths, unlike the paper's headline grouping. The sample follows firms over time, not individual workers' careers. Education controls substantially reduce estimates in the paper; the chart's calculated ratios have no statistical uncertainty estimates.
 - [Census early-career hiring study](https://www.census.gov/library/working-papers/2026/adrm/CES-WP-26-27.html), [Danish AI-adopting firms](https://www.nationalbanken.dk/en/news-and-knowledge/publications-and-speeches/working-paper/2026/ai-adoption-and-firm-size-employment-effects-in-monthly-administrative-data) and [Danish chatbot study](https://www.andershumlum.com/s/chatbots_260313.pdf). These studies examine different people, measures and periods; several are working papers.
 - Competing explanations: [changes before ChatGPT](https://arxiv.org/abs/2601.02554), [remote work and younger workers](https://libertystreeteconomics.newyorkfed.org/2026/06/remote-work-leaves-younger-workers-sidelined/) and [Federal Reserve research on coder employment](https://www.federalreserve.gov/econres/feds/ai-and-coder-employment-compiling-the-evidence.htm).
+- Occupational evidence: [ILO task-exposure index, 2025](https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure), [O*NET project management specialists](https://www.onetonline.org/link/summary/13-1082.00) and [O*NET logisticians](https://www.onetonline.org/link/summary/13-1081.00), accessed 19 October 2026. Proposed task allocations above are author-defined examples, not employment estimates.
 - Historical sources are linked inside each case. The customer-support productivity result comes from [Generative AI at Work](https://academic.oup.com/qje/article/140/2/889/7990658), published in the *Quarterly Journal of Economics* in 2025.

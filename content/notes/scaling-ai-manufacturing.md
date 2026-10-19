@@ -4,6 +4,7 @@ date: 2026-10-14
 summary: The pilot reduced overtime at one factory. Before rolling it out, check whether the next plant has the same problem, the same data and enough savings to cover the work.
 seoTitle: Scaling AI in manufacturing: beyond the pilot
 seoDescription: Follow an AI pilot into a second factory. Compare local data, operating conditions and rollout costs before copying the first site's business case.
+updated: 2026-10-19
 status: published
 topic: Industrial AI
 keywords: scaling AI in manufacturing, manufacturing AI pilot to production, multi-site AI deployment, industrial AI ROI
@@ -21,13 +22,21 @@ That's the difficulty with scaling AI in manufacturing. A successful pilot gives
 
 Deloitte's [2026 manufacturing AI survey](https://www.deloitte.com/de/de/Industries/industrial-construction/research/ai-in-manufacturing.html), covering more than 140 manufacturing organisations, reports that 84% see measurable AI value. Around one in five use cases has scaled consistently across sites or the enterprise.
 
-These measure different things: finding value somewhere and repeating it elsewhere. An application that stays at one plant may still be worth having.
+Reported value at one site and consistent use across sites measure different things. An application that stays at one plant may still be worth having.
 
 Take the packaging application. In our fictional example, Plant A cuts annual overtime and rework spending by €60,000. Support costs €12,000 a year, and the team can trace the spending reduction to the changes it made.
 
 Plant B has shorter production runs. Its operators already catch some of the faults A needed help finding. Even with the same model, there may be less spending left to reduce.
 
 Before putting A's saving into B's proposal, find out what B currently loses and what people there could do differently.
+
+## Does 80% of AI work really fail?
+
+The often-repeated figure does not describe the same measure as the manufacturing scaling survey. [RAND's 2024 report](https://www.rand.org/pubs/research_reports/RRA2680-1.html) cites an estimate that more than 80% of AI projects fail. Its own research interviewed 65 experienced data scientists and engineers to investigate why projects struggle. Those interviews did not measure a population-wide 80% failure rate.
+
+That distinction matters for our packaging application. The application may work at Plant A yet need substantial changes at B. Each site also needs enough benefit to cover its additional setup, support and review work.
+
+Use RAND's findings to investigate issues such as problem definition, data and the fit with normal work. Do not use the quoted percentage as the probability that Plant B will fail. Its proposal needs B's evidence.
 
 ## The same stop code can mean different things
 
@@ -101,6 +110,8 @@ That is part of what I'm building [Vrolen](/work/vrolen/) around: keeping the op
 Before approving plant three, ask the team to show how B's actual result compared with its proposal. If B took twice the setup effort and delivered half the expected saving, that belongs in the next estimate, even if A remains a success.
 
 ## Sources
+
+- RAND (2024). [The Root Causes of Failure for Artificial Intelligence Projects](https://www.rand.org/pubs/research_reports/RRA2680-1.html). Interview study of 65 practitioners; the more-than-80% figure is a cited estimate, not its own measured failure rate.
 
 - Deloitte. [AI in Manufacturing 2026](https://www.deloitte.com/de/de/Industries/industrial-construction/research/ai-in-manufacturing.html). Survey of more than 140 manufacturing organisations. Reported AI value and consistent scaling are different measures.
 - NIST, 3 July 2026. [2026 Roadmap on Artificial Intelligence and Machine Learning for Smart Manufacturing](https://www.nist.gov/publications/2026-roadmap-artificial-intelligence-and-machine-learning-smart-manufacturing). Industrial data and system differences.

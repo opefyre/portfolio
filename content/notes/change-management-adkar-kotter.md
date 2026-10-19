@@ -1,25 +1,26 @@
 ---
-title: Change management for digital transformation: using ADKAR and Kotter so people actually adopt the new way
+title: Change management for digital transformation: ADKAR and Kotter
 date: 2026-09-29
-summary: Go-live is not adoption. How Kotter's eight steps and the ADKAR model work together in a transformation program, how to find each team's barrier point, which actions fix which barrier, and how to measure adoption.
+summary: Use ADKAR and Kotter to understand why people struggle with a new system, choose the right support and check whether the change works.
+updated: 2026-10-19
 status: published
 topic: Digital transformation
-keywords: change management, ADKAR, Kotter 8 steps, digital transformation, user adoption, organisational change, transformation program, change management plan, adoption metrics
+keywords: change management, ADKAR, Kotter 8 steps, digital transformation, user adoption, organisational change, transformation program, change management plan, adoption metrics, AI adoption at work
 seoTitle: ADKAR and Kotter: change management that gets used
-seoDescription: Use ADKAR and Kotter together in digital transformation. Find barriers to adoption, match actions to each barrier and measure whether people use the change.
+seoDescription: Use ADKAR and Kotter to support digital transformation. Find adoption barriers, train people on real tasks and apply the same checks to an AI rollout.
 ---
 
-The system went live on time and on budget. Three months later, half the team is still using the old spreadsheet, the other half uses the new tool in ways nobody intended, and the promised benefits are nowhere to be seen. Technically, the project succeeded. In every way that matters, it didn't.
+Imagine a purchasing system that goes live on time. Three months later, people still keep a separate spreadsheet because the new approval route cannot handle the exceptions they see every day.
 
-This is the most common way digital transformations fall short. BCG found that 70% of digital transformations fall short of their objectives, and in a McKinsey survey only 16% of respondents said their transformation had improved performance *and* sustained it. The fix isn't more communication emails. It's treating adoption as part of the work, with the same structure you'd give the technology.
+**Change management prepares and supports people to work differently.** That includes explaining the reason, involving them in the design, providing practice and resolving the conditions that pull them back to the old method.
 
-Two models do most of the heavy lifting: **Kotter's eight steps** for leading the change across an organisation, and **ADKAR** for getting each person through it.
+Kotter's eight steps help organise the wider change. ADKAR helps identify what an individual needs to use it. Together, they give the team a way to investigate the spreadsheet problem instead of treating every workaround as resistance.
 
 :::card The short version
-- **Kotter** is the leadership sequence for the whole organisation: urgency, coalition, vision, and so on.
+- **Kotter** helps leaders organise a change across teams, from explaining the need to making the new method part of normal work.
 - **ADKAR** describes what each *person* needs: Awareness, Desire, Knowledge, Ability, Reinforcement, in that order.
-- Survey each team on the five ADKAR elements. The first element that scores 3 or lower out of 5 is the **barrier point**. Fix that one before anything else.
-- Measure adoption (usage, proficiency, abandoned workarounds), not go-live.
+- Use the five ADKAR elements to find the earliest barrier, then check the reason with the people affected.
+- After launch, check correct use, remaining workarounds and the result in the process.
 :::
 
 ## Two models, two jobs
@@ -31,7 +32,7 @@ Two models do most of the heavy lifting: **Kotter's eight steps** for leading th
 | Origin | John Kotter, *Harvard Business Review*, 1995 | Jeff Hiatt, Prosci, developed in 1996 |
 | Best used for | Planning the program's change activities | Diagnosing resistance and targeting help |
 
-They're complementary. Kotter tells leadership what to do. ADKAR tells you whether it's working, team by team.
+The models ask different questions. An organisation can have a clear plan while a particular shift still lacks the support to use it.
 
 ## Kotter's eight steps, in a digital program
 
@@ -46,7 +47,7 @@ They're complementary. Kotter tells leadership what to do. ADKAR tells you wheth
 | 7. Build on the change | Use early wins to take on the harder processes | The program declares victory at go-live |
 | 8. Anchor it in the culture | New ways become the standard: in onboarding, KPIs and job descriptions | Six months on, the old way creeps back |
 
-Kotter's original argument, drawn from more than 100 companies, was that skipping steps creates only the illusion of speed. (He has since reworked the steps into eight "accelerators" that run in parallel, but the sequence is still the clearest way to plan.) In digital programs, step 5 is the one most often skipped: the tool changes, but the reports, approvals and targets around it don't.
+Kotter's original argument, drawn from more than 100 companies, was that skipping steps creates only the illusion of speed. He has since reworked the steps into eight "accelerators". For our purchasing system, step 5 deserves a close look: changing the screen will not help if an unresolved approval rule still sends people to a spreadsheet.
 
 ## ADKAR: what each person needs
 
@@ -55,52 +56,41 @@ Kotter's original argument, drawn from more than 100 companies, was that skippin
 - **Desire** to take part. *Do I want to, and what's in it for me?*
 - **Knowledge** of how to change. *Do I know what to do differently?*
 - **Ability** to do it in real work. *Can I actually do it, at full speed?*
-- **Reinforcement** to keep it going. *Is anything making me stick with it?*
+- **Reinforcement** to keep it going. *Do the support, feedback and working rules help me continue?*
 :::
 
-The order matters. Training (Knowledge) doesn't help someone who doesn't see why the change is needed (Awareness). This is why a training-only rollout so often fails: it jumps to step three.
+Someone may know which buttons to press without understanding why the process changed. Someone else may support the change but lack time to practise. Those situations need different help.
 
 ## Find the barrier point
 
-Ask each team to rate each element from 1 to 5, in a short anonymous survey or in facilitated conversations. The first element in the sequence that scores 3 or lower is the **barrier point**. Everything after it is secondary until it's fixed.
+[Prosci uses the **barrier point**](https://www.prosci.com/blog/individual-barriers-to-change-and-what-to-do-about-them) to identify the earliest ADKAR element holding a person back. In the fictional assessment below, we use scores from 1 to 5 and flag the first score of 3 or lower.
 
-::figure adkar-barriers | ADKAR scores for four teams after the rollout of a new expense and procurement system. The ringed element is each team's barrier point. The faded elements after it can't be fixed until the barrier is.
+Use a score to start a conversation. A team average can hide very different experiences, so ask about the task, shift and support behind it.
+
+::figure adkar-barriers | Fictional team scores after an expense and procurement rollout. The ring marks the first score of 3 or lower in this example. Later elements still need attention; fading them shows where the discussion starts, not that progress is impossible.
 
 Reading the chart:
 
-- **Finance** has no barrier. They asked for the change and use the system well. Keep reinforcing.
-- **Sales** is stuck at *Awareness*. Scores for later elements are low too, but more training won't help: they don't see why the change matters. Their leaders need to explain it, in their own terms.
+- **Finance** has no flagged score in this example. Check actual use and keep support available.
+- **Sales** has its first flag at *Awareness*. Discuss the reason for the change before assuming another training session will resolve it.
 - **Warehouse** understands and wants the change, but is stuck at *Knowledge*. They need hands-on training on their actual tasks.
 - **HR** knows how, but is stuck at *Ability*. They need practice time and someone on hand in the first weeks.
 
-Four teams, one rollout, three completely different fixes. A single company-wide change plan would have missed all three.
+A shared rollout plan can include these different responses. It needs enough detail to give each group the help it actually needs.
 
 ## Match the action to the barrier
 
-| Barrier | Typical symptom | What works | What doesn't |
+| Barrier | Typical symptom | Help to consider | Often insufficient alone |
 | --- | --- | --- | --- |
-| Awareness | "Why are we even doing this?" | The sponsor and direct managers explaining the reason, with numbers | A newsletter |
+| Awareness | "Why are we even doing this?" | The sponsor and direct managers explaining the reason, with numbers | A newsletter without a chance to ask questions |
 | Desire | "I get it, but not for me" | Answering "what's in it for me", involving people in the design, removing personal downsides | More facts about the business case |
 | Knowledge | "I don't know how to do my job in it" | Role-based training on real tasks, just before go-live | Generic training months early |
 | Ability | "I know how, but it's slow and I get stuck" | Practice, floor support, super-users, time to learn | Assuming training equals ability |
-| Reinforcement | Old workarounds come back | Recognition, KPIs and reports that use the new way, switching off the old one | Declaring victory at go-live |
+| Reinforcement | Old workarounds come back | Reports and support that use the accepted method; retire old routes after testing the replacement | Declaring victory at go-live |
 
-## Does it make a difference?
+## Check adoption after go-live
 
-Prosci's long-running research with more than 2,600 practitioners links the quality of change management to project results:
-
-| Change management was… | Projects that met or exceeded objectives |
-| --- | --- |
-| Excellent | 88% |
-| Good | 73% |
-| Fair | 39% |
-| Poor | 13% |
-
-The numbers are self-reported, and they come from the company that sells ADKAR, so read them as direction rather than precision. The direction is hard to argue with.
-
-## Measure adoption, not go-live
-
-Go-live is a date. Adoption is a result. Track these for at least three months after launch:
+Track whether people can complete the work correctly, as well as whether they open the tool. These fictional targets illustrate a review; set the period and thresholds for your process:
 
 | Measure | What it tells you | Example target |
 | --- | --- | --- |
@@ -110,16 +100,48 @@ Go-live is a date. Adoption is a result. Track these for at least three months a
 | Speed of adoption | How quickly each team reaches the target | No team more than 4 weeks behind |
 | Business outcome | The benefit the change was for | Cycle time, cost or error rate from the business case |
 
-Break every measure down by team. The averages will hide the one team that's struggling, and that team is usually where the barrier point is.
+Break the measures down by team and shift. Investigate errors and workarounds with the people involved before deciding that low usage is the problem.
+
+## Helping employees adopt AI at work
+
+Take a fictional purchasing team trying AI to draft supplier-status updates. The buyer still checks the order record and approves the message. The tool cannot change an order or send an email itself.
+
+That task needs more than a demonstration of a good prompt. The team must know which information it may use, how to check the result and what to do when the evidence is missing.
+
+| Part of the trial | What people practise |
+| --- | --- |
+| Permitted data | Use the approved tool and records allowed for this task; leave restricted information out |
+| Verification | Compare quantities, dates and supplier claims with the current order record |
+| Missing or conflicting evidence | Leave the claim out, flag the gap and ask the responsible buyer |
+| Approval | A named buyer reviews the draft before anything reaches the supplier |
+
+[NIST's AI RMF](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/) calls for trained people, clear oversight responsibilities and monitoring after deployment.
+
+Compare completed, correct updates and total effort with the current method, including checking and corrections. Keep unsuitable cases out of the trial. Higher usage is useful only when the work improves; expanding a tool that creates extra checking would miss the point.
+
+The [AI planning example](/notes/ai-supply-chain-planning/) follows the same distinction between preparing a recommendation and authorising a commitment.
+
+## Why the 70% and 84% failure claims need context
+
+These figures describe different sources and definitions. They cannot tell you the probability that your rollout will fail.
+
+| Source | What it reports | What the headline misses |
+| --- | --- | --- |
+| [BCG, 2020](https://www.bcg.com/publications/2020/increasing-odds-of-success-in-digital-transformation) | 70% fell short of objectives; research combined 825 executive responses with experience from 70 companies | This includes projects that created value but missed targets, not only projects with no benefit |
+| [McKinsey, 2018](https://www.mckinsey.com/capabilities/people-and-organization/our-insights/unlocking-success-in-digital-transformations) | 16% reported improved performance and capacity to sustain it; the survey had 1,793 respondents, including 1,521 with transformation experience | Another 7% reported improvement that did not last. Missing the full success definition is not the same as achieving nothing |
+
+The older [84% headline in Forbes](https://www.forbes.com/sites/brucerogers/2016/01/07/why-84-of-companies-fail-at-digital-transformation/) comes from a 2016 interview with Michael Gale. It does not provide enough study detail to establish a general failure rate. It also predates the McKinsey survey, so it cannot be explained as simply 100% minus that survey's 16%.
+
+For your own rollout, define success in the process: correct transactions, manageable effort and the outcome the change was meant to improve. The [benefits realisation note](/notes/benefits-realisation-automation/) shows how to follow that beyond launch.
 
 ## A 90-day plan for your next rollout
 
 1. **Before launch:** name the sponsor, write the one-sentence vision, run a first ADKAR survey, and plan the obstacles you'll remove (reports, approvals, incentives).
 2. **Launch:** role-based training right before go-live, super-users in every team, visible sponsor presence.
 3. **Weeks 2 to 6:** track usage weekly, run a second ADKAR survey, and act on each team's barrier point.
-4. **Weeks 6 to 12:** publish the first measured win, switch off the old way, and fold the new process into onboarding and KPIs.
+4. **Weeks 6 to 12:** review the result, retire old routes only when the replacement works, and include the accepted method in onboarding and KPIs.
 
-None of this is complicated. It's just usually left out of the plan, because it doesn't appear in the technology project's scope. Put it in.
+Give the operating owner time and resources for that follow-up. If the purchasing team still needs its spreadsheet, find the unresolved case and fix or accept it before calling the new process complete.
 
 :::link /notes/what-to-automate-first/ | Choosing what to automate
 The other half of a transformation: which processes to change first, and with what kind of automation.
@@ -130,9 +152,11 @@ The other half of a transformation: which processes to change first, and with wh
 - Kotter, J. P. (1995). [Leading change: why transformation efforts fail](https://hbr.org/1995/03/leading-change-why-transformation-efforts-fail-2). *Harvard Business Review*, March to April 1995.
 - Kotter Inc. [The 8 steps for leading change](https://www.kotterinc.com/methodology/8-steps/).
 - Hiatt, J. (2006). *ADKAR: A Model for Change in Business, Government and Our Community*. Prosci.
+- Prosci. [ADKAR barrier points](https://www.prosci.com/blog/individual-barriers-to-change-and-what-to-do-about-them), individual assessment and the first score of 3 or lower.
 - Prosci. [The Prosci ADKAR Model](https://www.prosci.com/methodology/adkar).
-- Prosci. [The correlation between change management and project success](https://www.prosci.com/blog/the-correlation-between-change-management-and-project-success).
+- NIST. [AI RMF Core](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/), Govern 2.2 and 3.2, Map 2.1 and Manage 4.1. Training, task definition, oversight and monitoring.
+- Bruce Rogers, Forbes (2016). [Why 84% Of Companies Fail At Digital Transformation](https://www.forbes.com/sites/brucerogers/2016/01/07/why-84-of-companies-fail-at-digital-transformation/), interview with Michael Gale; the article does not establish a universal failure rate.
 - Boston Consulting Group (2020). [Flipping the odds of digital transformation success](https://www.bcg.com/publications/2020/increasing-odds-of-success-in-digital-transformation).
 - McKinsey (2018). [Unlocking success in digital transformations](https://www.mckinsey.com/capabilities/people-and-organization/our-insights/unlocking-success-in-digital-transformations).
 
-*The teams and scores are illustrative.*
+The teams, scores, purchasing scenarios and adoption targets are fictional. The AI trial is proposed guidance, not an observed performance result.

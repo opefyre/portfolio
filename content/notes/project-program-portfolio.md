@@ -3,10 +3,11 @@ title: Project vs program vs portfolio: one company, three decisions
 date: 2026-10-14
 summary: A barcode rollout, a dispatch improvement program and an invoice project all need the same integration team. See what each level manages when the work won't fit.
 seoTitle: Project vs program vs portfolio: a worked example
-seoDescription: Compare project, program and portfolio management in one company. Follow a dispatch improvement program and test competing demands on shared capacity.
+seoDescription: Compare project, program and portfolio management, including PMO authority. Follow one company and test competing demands on shared capacity.
+updated: 2026-10-19
 status: published
 topic: Project management
-keywords: project vs program vs portfolio, program management example, portfolio management, project portfolio management, resource allocation
+keywords: project vs program vs portfolio, program management example, portfolio management, project portfolio management, resource allocation, PMO vs project manager
 ---
 
 The barcode rollout has an approved plan. So does the invoice automation project. Both teams have booked the same integration team for next month.
@@ -15,7 +16,7 @@ Each plan looks reasonable on its own. Put them together with production support
 
 **A project delivers a defined result. A program coordinates related work to obtain benefits that the projects cannot achieve as well separately. A portfolio brings investments and other work together so an organisation can choose priorities and commit resources.**
 
-Those differences show up in the decisions people need to make. Changing everyone's job title won't resolve the integration team's workload.
+Those differences become practical when someone must choose which work gets the integration team's time.
 
 Let's use one fictional distributor to make the distinction concrete.
 
@@ -31,7 +32,7 @@ The distributor wants fewer orders to miss their confirmed dispatch date. It nee
 
 [PMI defines a project](https://www.pmi.org/about/what-is-a-project) as temporary work creating a unique product, service or result. Its [portfolio standard, third edition](https://www.pmi.org/-/media/pmi/documents/public/pdf/certifications/standard-for-portfolio-management-third-edition.pdf), distinguishes coordinated program benefits from portfolio selection and prioritisation. A portfolio can include operations, and its components need not be directly related.
 
-The diagram below puts those responsibilities in the same view. The projects inside the dispatch program contribute to one operating outcome. Invoice automation is a separate project; daily support remains ongoing work.
+The allocation view later in this note puts those responsibilities together. The projects inside the dispatch program contribute to one operating outcome. Invoice automation is a separate project; daily support remains ongoing work.
 
 ## One barcode project can finish before the benefit arrives
 
@@ -69,6 +70,23 @@ In the phased option, the company allocates 10 days to promise rules, six to bar
 
 This option illustrates a choice, not a recommendation. Perhaps delaying invoices creates a larger cost. Perhaps a mandatory support commitment cannot wait, or phasing barcode work postpones the whole dispatch benefit. The decision needs those consequences beside the capacity numbers.
 
+## What should get the scarce days?
+
+Before choosing the phased option, compare the effect of delaying each request. Saving enough days is only part of the decision.
+
+| Work | Intended result | Evidence and consequence to bring to the decision |
+| --- | --- | --- |
+| Promise rules | Dates that reflect actual availability | Test cases and the effect of wrong promises; barcode work alone cannot fix them |
+| Barcode project | Correct dispatch verification | Remaining tests and shift readiness; phasing can postpone the combined dispatch benefit |
+| Invoice automation | Less manual invoice handling | Current effort, error cost and any binding deadline; delay keeps the existing work running |
+| Ongoing support | Existing systems continue to operate | Service commitments, incidents and required cover; removing it transfers risk to operations |
+
+If invoices face a legal deadline or support is needed for a critical incident, the available choices change. Whoever sets priorities needs those facts alongside the capacity and benefit estimates.
+
+The [80/20 idea behind Pareto analysis](/notes/pareto-analysis-example/) helps look for concentrated problems or costs. It does not say that 20% of a project's tasks produce 80% of its value, or permit mandatory work to be ignored. [ASQ's Pareto guidance](https://asq.org/quality-resources/pareto) starts with measured categories and a chosen frequency, time or cost measure.
+
+For investment alternatives with supportable cash flows, [NPV and payback](/notes/npv-vs-payback/) can add another comparison. Here, those estimates have not been supplied. A capacity fit is only one condition for approving the work.
+
 ## A resource total is the start of the schedule
 
 Even the 20-day option may be impossible on the proposed dates. The same specialist could be needed in two places on Tuesday, or a test environment might be unavailable until the final week.
@@ -78,6 +96,22 @@ The portfolio decision authorises priorities and allocations. The program and pr
 If capacity falls to 16 days, our phased option is four days over. If it rises to 24, all 28 requested days still don't fit. Moving the slider makes the shortage visible without pretending the estimates are certain.
 
 Don't fill the apparent gap by silently removing the four days of support. That is a change to an operating commitment, with someone responsible for accepting its consequences.
+
+## PMO vs project manager: who has authority?
+
+A **project management office**, or PMO, coordinates or supports project management across an organisation. The project manager runs a particular project. A PMO may provide methods and reporting, check compliance with agreed rules, or directly manage projects and their managers. Its mandate decides its authority.
+
+So a PMO is not automatically above every project manager. [PMI's discussion of PMO structures](https://www.pmi.org/learning/library/project-management-office-strategy-execution-1449) describes different degrees of control. Check the reporting line and delegated decisions rather than infer them from the title.
+
+For our fictional distributor, suppose the PMO supports reporting and checks delivery evidence. The barcode project manager reports to the operations director, who sponsors the project.
+
+| Decision in this example | Who handles it? |
+| --- | --- |
+| Coordinate the barcode work and report a slipping test | Project manager |
+| Check that the report follows the agreed method and raise missing evidence | PMO |
+| Authorise a scope change or revised funding within delegated limits | Sponsor, with the required approvals |
+
+The PMO can challenge an incomplete report here. It cannot approve extra spending simply because it collects the numbers. A different organisation could give it that authority explicitly. The [project charter](/notes/project-charter-example/) should make the project's approval limits clear.
 
 ## Bring the decision to the right level
 
@@ -91,7 +125,9 @@ For the next review, bring one view of requested work, available capacity and co
 
 ## Sources and example notes
 
+- [ASQ: Pareto charts](https://asq.org/quality-resources/pareto), measured categories rather than a guaranteed 80/20 split.
+- [PMI: The PMO](https://www.pmi.org/learning/library/project-management-office-strategy-execution-1449), a conference paper on PMO roles, structures and degrees of authority.
 - [PMI: What is a Project?](https://www.pmi.org/about/what-is-a-project), temporary work and a unique result.
 - [PMI: The Standard for Portfolio Management, third edition](https://www.pmi.org/-/media/pmi/documents/public/pdf/certifications/standard-for-portfolio-management-third-edition.pdf), 2013, printed pages 3–5 and 11. Portfolio components, coordinated benefits, strategic alignment and resource allocation. This is the cited edition, not a claim about the latest edition.
 
-The company, work packages, roles and allocation choices are fictional. Specialist-days measure effort within one four-week window, not duration, payroll savings or a complete schedule. No benefit is assumed to be achieved merely because work fits the allocation.
+The company and allocations are fictional. Specialist-days measure effort in one four-week window. A feasible daily schedule and the benefits of the work still need checking.

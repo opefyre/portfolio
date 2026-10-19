@@ -124,7 +124,7 @@ function Work() {
     <MonthControl dates={rows.map(r => r.date)} selected={selected} onChange={setSelected} label="Inspect quarter" format={quarter} />
     <Evidence source="https://fred.stlouisfed.org/series/RPSGENAIUSAGESHAREWORK">
       <p>RPS via FRED, captured 4 October 2026. Use rates count employed US adults ages 18-64. Hours use all work hours, including non-users; missing hours observations remain missing. Assisted hours use response-bracket midpoints. Saved hours are a hypothetical comparison reported by respondents.</p>
-      <p><a href="https://fred.stlouisfed.org/series/RPSGENAIUSAGESHARELWWORK">Last-week use</a> · <a href="https://fred.stlouisfed.org/series/RPSGENAIASSISTWRKHRSALL">Assisted hours</a> · <a href="https://fred.stlouisfed.org/series/RPSGENAITSALL">Saved hours</a></p>
+      <p><a href="https://fred.stlouisfed.org/series/RPSGENAIUSAGESHARELWWORK">Last-week use</a> | <a href="https://fred.stlouisfed.org/series/RPSGENAIASSISTWRKHRSALL">Assisted hours</a> | <a href="https://fred.stlouisfed.org/series/RPSGENAITSALL">Saved hours</a></p>
       <table><caption>All eight survey quarters</caption><thead><tr><th>Quarter</th><th>Work use</th><th>Last week</th><th>Assisted</th><th>Saved</th></tr></thead><tbody>{rows.map(r => <tr key={r.date}><td>{quarter(r.date)}</td><td>{r.any_work_use_pct.toFixed(1)}%</td><td>{r.weekly_work_use_pct.toFixed(1)}%</td><td>{r.hours_assisted_pct === null ? "No data" : `${r.hours_assisted_pct.toFixed(1)}%`}</td><td>{r.hours_saved_pct === null ? "No data" : `${r.hours_saved_pct.toFixed(1)}%`}</td></tr>)}</tbody></table>
     </Evidence>
   </>;
@@ -191,7 +191,7 @@ function Demand() {
   const left = 18, right = 60, x = (n: number) => left + n / 160 * (width - left - right);
   const [hover, setHover] = useState<string | null>(null);
   return <>
-    <p className="ai-scenario-label">Fictional example · starting point: 100 units in 100 hours</p>
+    <p className="ai-scenario-label">Fictional example | starting point: 100 units in 100 hours</p>
     <div className="ai-sliders"><label htmlFor={gainId}>Productivity improvement<output htmlFor={gainId}>{gain}%</output><input id={gainId} type="range" min={0} max={50} value={gain} onChange={e => setGain(Number(e.target.value))} /></label><label htmlFor={demandId}>New demand<output htmlFor={demandId}>{demand} units</output><input id={demandId} type="range" min={50} max={160} value={demand} onChange={e => setDemand(Number(e.target.value))} /></label></div>
     <div className="ai-presets" role="group" aria-label="Demand examples">{[100, 115, 130].map(n => <button type="button" key={n} aria-pressed={demand === n} onClick={() => setDemand(n)}>{n} units</button>)}<button type="button" onClick={() => { setGain(15); setDemand(100); }}>Reset</button></div>
     <div ref={ref} className="ai-plot"><svg viewBox={`0 0 ${width} 210`} role="group" aria-label={`Fictional model: ${gain}% higher productivity and demand of ${demand} units require ${required.toFixed(1)} hours, compared with 100 baseline hours.`}>
@@ -208,9 +208,9 @@ function Demand() {
 export function AiJobsChart({ name, caption }: { name: AiJobsChartName; caption: string }) {
   const content: Record<AiJobsChartName, { title: string; subtitle: string; component: ReactNode }> = {
     "ai-jobs-adoption": { title: "How quickly did use spread?", subtitle: "Share of people using it at work or home", component: <Adoption /> },
-    "ai-jobs-work": { title: "How much work does adoption reach?", subtitle: "US Real-Time Population Survey · Q3 2024 to Q2 2026", component: <Work /> },
-    "ai-jobs-employment": { title: "Follow the employment paths", subtitle: "US employment data from ADP · September 2021 to August 2026", component: <Employment /> },
-    "ai-jobs-baseline": { title: "Change the starting date", subtitle: "Ages 22-25 · most exposed jobs compared with least exposed", component: <Baseline /> },
+    "ai-jobs-work": { title: "How much work does adoption reach?", subtitle: "US Real-Time Population Survey | Q3 2024 to Q2 2026", component: <Work /> },
+    "ai-jobs-employment": { title: "Follow the employment paths", subtitle: "US employment data from ADP | September 2021 to August 2026", component: <Employment /> },
+    "ai-jobs-baseline": { title: "Change the starting date", subtitle: "Ages 22-25 | most exposed jobs compared with least exposed", component: <Baseline /> },
     "ai-jobs-history": { title: "What happened in earlier waves of automation?", subtitle: "Four cases showing what changed for workers", component: <History /> },
     "ai-jobs-demand": { title: "What happens when the work gets faster?", subtitle: "Change the assumptions and compare the required hours", component: <Demand /> },
   };

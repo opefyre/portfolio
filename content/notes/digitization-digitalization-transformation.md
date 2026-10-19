@@ -4,18 +4,21 @@ date: 2026-10-14
 summary: Scanning an invoice, automating its approval and changing how the business pays suppliers solve different problems. Follow the same invoice through all three.
 seoTitle: Digitization vs digitalization vs transformation
 seoDescription: Understand digitization, digitalization and digital transformation through one invoice example. See what changes in the file, workflow and business.
+updated: 2026-10-19
 status: published
 topic: Digital transformation
-keywords: digitization vs digitalization, digital transformation examples, digitisation meaning, digitalization example, invoice automation
+keywords: digitization vs digitalization, digital transformation examples, digitisation meaning, digitalization example, invoice automation, types of digital transformation
 ---
 
 The invoice used to arrive on paper. Now it arrives as a PDF, gets emailed to three people and waits for the same manager to approve it.
 
-Something changed. The supplier might still wait just as long to get paid.
+The file changed. The supplier might still wait just as long to get paid.
 
 **Digitization** turns information into digital form. **Digitalization** uses digital tools and data to change an activity. **Digital transformation** describes wider changes to how an organisation operates and delivers value through those technologies.
 
 Those differences help when deciding what a project should achieve. A searchable file, a quicker approval and a different way of serving suppliers need different work and different evidence.
+
+Automation means a system performs work people would otherwise do. It can support any of these changes, but it is not another name for digital transformation. Business transformation is broader: a company can change its business model or organisation without digital technology being the main driver.
 
 ## The difference, using the same invoice
 
@@ -29,7 +32,7 @@ Here are three possible changes. This is a fictional example, not a sequence eve
 | Digitalization | Route the invoice electronically, match records and show exceptions | Does it reduce handling and waiting, including awkward cases? |
 | Digital transformation | Connect purchasing, receipt confirmation, approval authority and supplier support around a shared service | Does the new way of working produce reliable payments and clear ownership? |
 
-The [OECD's definitions](https://www.oecd.org/en/publications/investment-policy-framework-for-digital-transformation_e96b36f4-en/full-report/component-3.html) distinguish converting information, changing activities with digital technology, and wider economic and societal effects. Here we're applying that distinction to one business. The labels overlap in practice; they aren't a three-level certification.
+The [OECD's definitions](https://www.oecd.org/en/publications/investment-policy-framework-for-digital-transformation_e96b36f4-en/full-report/component-3.html) distinguish converting information, changing activities with digital technology, and wider economic and societal effects. Here we're applying that distinction to one business. In practice, one project may combine all three kinds of change.
 
 ## Start with the file
 
@@ -47,7 +50,7 @@ Suppose the team adds an invoice workflow. It checks for duplicates, connects th
 
 Take two invoices from our fictional distributor. One is for €1,200 and matches the approved order and receipt. The other is for €8,200, but the invoiced quantity doesn't match what the warehouse recorded.
 
-They shouldn't receive the same treatment merely because both arrived as PDFs.
+The matching invoice can proceed under the agreed rules; someone needs to investigate the quantity mismatch.
 
 ::interactive digital-invoice-map | Fictional comparison. Both invoices are digital. Their next steps depend on matching evidence and approved authority. The €5,000 limit is an example policy, not a recommended threshold.
 
@@ -68,6 +71,12 @@ Purchasing would keep order data usable. The warehouse would confirm receipts pr
 Changing those responsibilities, controls and service expectations across teams gives us a stronger reason to call the work transformation. Installing the portal by itself wouldn't establish that the change had happened.
 
 The [RACI example](/notes/raci-matrix-guide/) helps make those responsibilities explicit. Then [change management](/notes/change-management-adkar-kotter/) addresses whether people can and do work that way. An approval route nobody uses leaves the old process running alongside the new one.
+
+## Four types of digital transformation
+
+[AWS groups digital transformation into four types](https://aws.amazon.com/what-is/digital-transformation/): business process, business model, business domain and organisation. In that classification, domain means entering a new market; business model means changing how the company creates and earns value.
+
+These are categories in one explanation, not four stages every project must complete. Our distributor mainly changes a business process and the responsibilities around it. It does not need to enter a new market to make supplier payments work better.
 
 ## Measure the result the project actually promised
 
@@ -95,6 +104,7 @@ A project can combine all three kinds of change. Describe each one clearly enoug
 
 ## Sources
 
+- AWS. [What is Digital Transformation?](https://aws.amazon.com/what-is/digital-transformation/), four-type classification.
 - OECD, 2026. [Investment Policy Framework for Digital Transformation, introduction and Box 1.1](https://www.oecd.org/en/publications/investment-policy-framework-for-digital-transformation_e96b36f4-en/full-report/component-3.html). Definitions at economy and society level; the company comparison is an applied explanation.
 
-The distributor, invoice amounts, approval limit and proposed routes are fictional. No processing-time improvement, compliance outcome or financial saving is claimed.
+The distributor, amounts and approval rules are fictional. The example compares ways of working; it does not report measured savings.
