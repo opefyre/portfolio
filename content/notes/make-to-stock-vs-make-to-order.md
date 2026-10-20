@@ -4,6 +4,7 @@ date: 2026-10-14
 summary: A customer wants 20 lights dispatched in three days. Compare finished stock, common components and production from raw material to see which promise each can support.
 seoTitle: Make-to-stock vs make-to-order: MTS, MTO and ATO
 seoDescription: Compare make-to-stock, make-to-order and assemble-to-order using one product. Explore customer waiting time, stock choices and the effect of a production queue.
+updated: 2026-10-20
 status: published
 topic: Supply chain
 keywords: make to stock vs make to order, MTS vs MTO, assemble to order example, ATO vs MTO, order decoupling point, manufacturing strategy
@@ -55,6 +56,10 @@ In the MTS case, the manufacturer chose the finished version before knowing this
 
 ATO leaves that final choice open for longer. The common housing can serve several standard versions, provided the required fittings and assembly capacity are available. It still needs a decision about how many housings and fittings to hold.
 
+This illustrates **postponement**, also called delayed differentiation: deliberately leave final assembly, packaging or another version-specific step until later, when the requirement is better known. [ASCM's dictionary](https://learn.ascm.org/sfc/servlet.shepherd/document/download/069R3000006PlDHIA0?operationContext=S1), printed page 143, defines the strategy. It does not mean delivering an accepted order late.
+
+For these lights, finish common housings in advance but select and fit the requested version after the order. The existing timeline shows that split. It works only if common stock, the right fittings and finishing capacity can meet the three-day dispatch promise. The [risk-pooling example](/notes/inventory-risk-pooling/) explains why sharing a stock form can reduce some uncertainty, without making total demand certain.
+
 MTO postpones more production until demand is confirmed. In our example it still holds raw material and purchased parts. “Made to order” does not mean “no inventory”, and it doesn't mean every order requires a new design. Engineer-to-order adds a separate design requirement.
 
 The [ABC/XYZ inventory example](/notes/abc-xyz-inventory-analysis/) helps review item value and demand patterns. Use that evidence alongside the customer's acceptable wait, the cost of holding each stock form and the chance that a version becomes obsolete. There is no universal best approach for every item in the catalogue.
@@ -79,7 +84,7 @@ Agree that dispatch promise before accepting the order. Then measure against it.
 
 ## Sources and example notes
 
-- [ASCM Supply Chain Dictionary, 18th edition](https://learn.ascm.org/sfc/servlet.shepherd/document/download/069R3000006PlDHIA0?operationContext=S1), printed pages 14 and 110. ATO, MTO and MTS definitions.
+- [ASCM Supply Chain Dictionary, 18th edition](https://learn.ascm.org/sfc/servlet.shepherd/document/download/069R3000006PlDHIA0?operationContext=S1), printed pages 14, 110 and 143. ATO, MTO, MTS and postponement definitions.
 - [Olhager and Van Donk: Managing customer order decoupling points in supply chains](https://portal.research.lu.se/en/publications/managing-customer-order-decoupling-points-in-supply-chains/), 2024. Public research abstract defining the link between a product and a specific customer order.
 - [APICS CPIM 2019 public excerpt: Master Scheduling and Sales](https://learningsystem.ascm.org/wp-content/uploads/2018/11/APICS_CPIM_2019_Excerpt.pdf), printed pages 1-207 to 1-208 and 1-211. Available stock, capacity and order promising.
 

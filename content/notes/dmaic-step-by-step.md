@@ -2,7 +2,7 @@
 title: DMAIC step by step: a Lean Six Sigma project from problem to control
 date: 2026-09-29
 summary: Follow a fictional filling problem through Define, Measure, Analyze, Improve and Control. See how the same approach can investigate supply-chain errors.
-updated: 2026-10-19
+updated: 2026-10-20
 status: published
 topic: Operational excellence
 keywords: DMAIC, Lean Six Sigma, Six Sigma, define measure analyze improve control, process improvement, root cause analysis, SIPOC, measurement system analysis, control plan, operational excellence
@@ -119,7 +119,7 @@ A control chart helps the team distinguish ordinary variation from a signal that
 
 ## Tollgate questions
 
-At the end of each phase, the sponsor reviews the work before the team moves on. These are the questions worth asking:
+For this project, the sponsor and team agree to review each phase before moving on. Their review questions are:
 
 | Phase | Ask before moving on |
 | --- | --- |
@@ -148,6 +148,19 @@ Match the investigation to what remains uncertain:
 - **The process does not exist yet.** Consider a design approach such as DMADV (Define, Measure, Analyze, Design, Verify) or [3P](/notes/3p-production-preparation-process/).
 - **The problem is mostly waste and flow, not variation.** Lean tools like value stream mapping may get you there sooner.
 
+## DMAIC vs DMADV: improving a process or designing one
+
+**DMADV means Define, Measure, Analyze, Design and Verify.** [ASQ](https://asq.org/quality-resources/dmaic) describes it for new products or services and substantial redesign. Both approaches use evidence; their later phases answer different questions.
+
+| | DMAIC | DMADV |
+| --- | --- | --- |
+| Starting point | An existing process with a performance gap | A new design or an existing design needing substantial replacement |
+| Five phases | Define, Measure, Analyze, Improve, Control | Define, Measure, Analyze, Design, Verify |
+| In this filling context | Investigate variation on the current line, test a correction and maintain it | Define requirements for a new pack format, compare design concepts, develop and verify the selected design |
+| Evidence needed | A supported cause, a tested improvement and an operating control plan | A design demonstrated to meet the agreed requirements |
+
+The current rice-filling problem has a process to investigate, so this article follows DMAIC. A new pack format the equipment cannot handle may call for design work instead. [3P](/notes/3p-production-preparation-process/) offers a related way to explore and test process concepts before committing to equipment. Choose the approach around the work required, rather than changing the acronym on the same project.
+
 ## A note on sigma levels
 
 "Six Sigma" refers to a process so consistent that it produces about 3.4 defects per million opportunities. That figure assumes the conventional 1.5 sigma shift, which allows for drift over the long term. For a centred normal distribution with limits six standard deviations from the mean, the two-sided tail is about 0.002 per million. Those are different assumptions. The table below uses the conventional 1.5-sigma shift:
@@ -162,8 +175,8 @@ Match the investigation to what remains uncertain:
 
 Choose performance requirements for the product and its consequences. A sigma label does not replace the pack-weight specification or the checks needed to enforce it.
 
-:::link https://vrolen.com | Test a fix before you touch the line
-Vrolen models a production line, compares countermeasures before any change, and checks afterwards that the gain actually held.
+:::link https://vrolen.com/blog/lean-six-sigma/ | Connect variation and flow in a manufacturing problem
+Vrolen's guide discusses the two kinds of evidence together. Keep the method tied to the cause being investigated rather than selecting a tool from its name.
 :::
 
 ## Sources
@@ -171,7 +184,6 @@ Vrolen models a production line, compares countermeasures before any change, and
 - ASQ. [DMAIC process: define, measure, analyze, improve, control](https://asq.org/quality-resources/dmaic)
 - ASQ. [What is Six Sigma?](https://asq.org/quality-resources/six-sigma)
 - Barney, M. (2002). [Motorola's second generation](https://web.ist.utl.pt/ist11038/acad/gesQ/text/MotorolaSixSigma.pdf). *Six Sigma Forum Magazine*, ASQ.
-- U.S. Army (2011). [Lean Six Sigma Deployment Guidebook](https://www.cool.osd.mil/army/docs/LSS_Guidebook.pdf), version 5.0, on tollgate reviews.
 - Coşkun, A. & Ialongo, C. (2020). [Six Sigma revisited](https://pmc.ncbi.nlm.nih.gov/articles/PMC6999184/). *Biochemia Medica*, 30(1), on the 1.5 sigma shift.
 - [Minitab: Crossed gage R&R interpretation](https://support.minitab.com/minitab/help-and-how-to/quality-and-process-improvement/measurement-system-analysis/how-to/gage-study/crossed-gage-r-r-study/interpret-the-results/key-results/), measurement variation and study interpretation.
 

@@ -4,6 +4,7 @@ date: 2026-10-20
 summary: The build is complete, but seven days of work remain in a five-day window. Report accepted outputs, current forecasts and the decision needed before the deadline slips quietly.
 seoTitle: Project status report: a short worked example
 seoDescription: See a short project status report with baseline, forecast, costs and decisions. Compare activity updates with evidence of accepted work and remaining delivery.
+updated: 2026-10-20
 status: published
 topic: Project management
 keywords: project status report example, how to write project status report, status vs progress report, project reporting
@@ -73,6 +74,23 @@ The [delayed-project example](/notes/recover-delayed-project/) examines that rec
 
 After the sponsor decides, record the decision, any authorised changes and who must act. The next report should show what changed because of it.
 
+## Decision log example: retain what the sponsor approved
+
+A **decision log records an agreed decision and the reason for it**, with enough context to follow its consequences. It differs from the issue log, which tracks the current problem and its resolution.
+
+Extend this fictional case to day 16. Suppose the sponsor has authority to approve the revised budget and date, reviews the evidence and approves the change. The status report's request now needs a durable record:
+
+| Decision D04 | Recorded outcome |
+| --- | --- |
+| Date, approver and state | Day 16; project sponsor; approved, with implementation assigned |
+| Options considered | Approve the €23,000/day-22 plan, or require another feasible option before proceeding |
+| Decision and reason | Approve the revised budget and finish. No checked alternative currently demonstrates the same accepted scope by day 20 |
+| Effect on the plan | Authorise €3,000 additional budget and a two-working-day finish change; retain the previous baseline in the change history |
+| Action and owner | Project manager updates the authorised plan and informs the test and service leads |
+| Revisit condition | Validation finds rework beyond the four-day assumption, or the remaining forecast changes materially |
+
+[Atlassian's decision-documentation example](https://www.atlassian.com/software/confluence/templates/decision/) includes the context, options, participants, status and outcome. A small entry linked to the evidence is enough here. The next status report should confirm that the plan was updated; approval and implementation are separate events.
+
 ## Status report vs progress report
 
 A progress report often emphasises what happened during a period. A status report often emphasises where the project now stands and where it is heading. Organisations use the names differently; the reports can overlap.
@@ -81,6 +99,9 @@ This project needs both views. The completed build explains recent progress. The
 
 ## Source and example notes
 
+- [Atlassian: Decision documentation](https://www.atlassian.com/software/confluence/templates/decision/). Context, options, approver, status and outcome.
 - [APM: Project management glossary](https://www.apm.org.uk/resources/glossary/), entries for project status report, status report and actual progress.
 
-The project, day numbers, costs and acceptance counts are fictional. The forecast assumes sequential remaining work and available resources. It excludes additional defect rework; no recovery option or revised commitment is approved by the example report.
+The project, day numbers, costs and acceptance counts are fictional. The forecast assumes sequential remaining work and available resources. It excludes additional defect rework; the initial report approves no recovery option or revised commitment. The later D04 extension states its separate approval assumption.
+
+Decision D04 is a separate fictional extension after the report: it assumes the sponsor has the stated authority and approves the revised baseline.

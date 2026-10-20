@@ -4,6 +4,7 @@ date: 2026-10-15
 summary: An order can arrive without being accepted. Follow the same purchase order through EDI, an API and a combined route, including the retry that must not create a second order.
 seoTitle: EDI vs API: differences and integration example
 seoDescription: Understand EDI and API integration through one purchase order. Compare the routes, business responses and duplicate-message handling that both need.
+updated: 2026-10-20
 status: published
 topic: Digital transformation
 keywords: EDI vs API, EDI explained, API integration supply chain, electronic data interchange, purchase order integration
@@ -75,6 +76,21 @@ The [master-data guide](/notes/master-data-vs-transactional-data/) follows a box
 
 For this connection, agree who owns the order record, the permitted changes, the business response time and the person who handles a rejection or missing reply. State what the buyer's screen should show while acceptance is pending.
 
+## Interoperability: transfer, meaning and usable work
+
+**Interoperability is the ability of systems to exchange information and use it appropriately together.** A successful connection handles only part of that requirement.
+
+[IBM's interoperability overview](https://www.ibm.com/think/topics/interoperability) uses four levels: foundational, structural, semantic and organisational. Other frameworks group the subject differently; there is no universal answer of exactly three levels for every field.
+
+| Level in IBM's description | Check on our purchase order |
+| --- | --- |
+| Foundational: transfer | Can the message reach the intended receiving system? |
+| Structural: format | Can that system read the agreed fields and document version? |
+| Semantic: meaning | Do both sides interpret 100 as individual brackets and Wednesday as a delivery request? |
+| Organisational: working arrangements | Who can accept Friday, who receives the exception and when must they respond? |
+
+The existing order route shows why all four matter. A valid message can still carry the wrong unit or leave a changed date without an owner. [Data governance](/notes/data-governance-explained/) helps establish who agrees those meanings and rules; the interface must then implement them.
+
 ## Test the missing reply as well as the successful order
 
 Send the 100-piece order, lose the reply, retry it and check that SO-310 still exists only once. Send an unknown item and check that it becomes a visible exception rather than a silent substitution. Return Friday instead of Wednesday and confirm that the buyer sees an unresolved delivery change.
@@ -85,6 +101,7 @@ Choose the route the partners can support, then follow an order from submission 
 
 ## Sources and example notes
 
+- [IBM: Interoperability](https://www.ibm.com/think/topics/interoperability). Four-level description used in the comparison.
 - IBM. [EDI vs API](https://www.ibm.com/think/topics/edi-vs-api). Document exchange, software interfaces and combined implementations.
 - Amazon Web Services Builders' Library. [Making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/). Request identity and repeated operations.
 

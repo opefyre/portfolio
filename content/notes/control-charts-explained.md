@@ -1,37 +1,40 @@
 ---
 title: How to read a control chart: common cause, special cause and the rules that matter
 date: 2026-09-29
-summary: A control chart tells you when a change in your numbers is real and when it's just noise. How to build an individuals chart by hand, the four Western Electric rules, which chart fits which data, and the mistakes that make charts useless.
+summary: Compare a run chart with a control chart using the same observations. Calculate provisional individuals limits, inspect signal rules and distinguish stability from meeting requirements.
+updated: 2026-10-20
 status: published
 topic: Operational excellence
-keywords: control chart, statistical process control, SPC, I-MR chart, individuals chart, Western Electric rules, common cause variation, special cause variation, Shewhart chart, control limits
+keywords: run chart vs control chart, run chart example, control chart, statistical process control, SPC, I-MR chart, individuals chart, Western Electric rules, common cause variation, special cause variation, Shewhart chart, control limits
 seoTitle: How to read a control chart: rules and example
-seoDescription: Build an individuals control chart with a worked example. Learn common and special causes, the Western Electric rules and which chart fits your data.
+seoDescription: Compare run charts and control charts, then build an individuals chart. Follow limits, signal rules, variation and the distinction from customer specifications.
 ---
 
-Every Monday, someone looks at last week's number, sees it went up, and asks what happened. Often, nothing happened. Numbers wobble. But the question sends a team off to investigate, explain and "fix" something that was never broken, and fixing a stable process often makes it worse.
+A weekly result rises, and the team is asked to explain it. The next week it falls, and someone wants to repeat whatever caused the improvement. Both changes may be ordinary variation.
 
-A control chart is the simplest defence against this. Walter Shewhart sketched the first one in a Bell Labs memo in May 1924, and a century later it's still the best tool for one question: *is this change a signal, or just noise?*
+**A control chart plots a measure over time with limits calculated from the process data.** It helps identify observations or patterns worth investigating, rather than treating every movement as a separate event. Walter Shewhart developed the approach at Bell Labs in the 1920s.
+
+Start with a consistent measure and a suitable chart. Its signals guide investigation; they do not identify the cause on their own.
 
 :::card The short version
 - Every process varies. Most of that variation is **common cause**: the normal noise of the system.
 - Occasionally something specific changes. That's **special cause** variation, and it's worth investigating.
-- A control chart draws limits from the process's own history, about three standard deviations either side of the mean. Points inside, with no odd patterns, are noise. Points outside, or unusual patterns, are signals.
-- React to signals. Leave the noise alone, and if you don't like the noise, change the system.
+- Control limits come from the process data and the selected chart model. An individuals chart commonly uses estimated three-sigma limits. A point or pattern meeting an agreed rule is a signal to investigate, not proof of a particular cause.
+- Investigate signals. If a stable process still cannot meet the requirement, improve the process rather than adjusting it after each ordinary fluctuation.
 :::
 
 ## Two kinds of variation
 
 :::grid
-- **Common cause** Built into the process: small differences in people, materials, machines and conditions. Always there. Reacting to a single data point here is tampering, and it usually adds variation.
+- **Common cause** Built into the process: small differences in people, materials, machines and conditions. Reacting to each ordinary fluctuation can add variation instead of reducing it.
 - **Special cause** Something specific and new: a broken tool, a new supplier, a system outage, a new hire on their first day. It's worth finding while the trail is fresh.
 :::
 
-W. Edwards Deming, who spread Shewhart's ideas worldwide, estimated that 94% of problems and opportunities for improvement belong to the system, and only 6% to special causes. That's why blaming the person behind a bad week rarely helps: most of the time, the system produced that week.
+Deming argued that many problems require management to change the system. His often-quoted 94% estimate came from his experience, not a measured split to apply to every dataset. A chart cannot assign responsibility from a percentage alone.
 
 ## Control limits are not targets
 
-This is the most important idea on the page. Control limits and specification limits answer completely different questions:
+Control limits and specification limits answer different questions:
 
 | | Control limits | Specification limits |
 | --- | --- | --- |
@@ -42,11 +45,28 @@ This is the most important idea on the page. Control limits and specification li
 
 A process can be perfectly in control and still produce bad output, if its normal range sits outside the specification. Then you need to change the process itself. And a process can be out of control while every output is still in spec, which is an early warning worth having.
 
+## Run chart vs control chart
+
+A **run chart shows observations in time order**, often with a median reference line. A control chart adds model-based limits and a defined set of signal rules. [ASQ's glossary](https://asq.org/quality-resources/quality-glossary) defines the time-sequence plot; its [control-chart guide](https://asq.org/quality-resources/control-chart) explains limits and investigation.
+
+| | Run chart | Control chart |
+| --- | --- | --- |
+| What is plotted? | A consistently defined measure over time | A consistently defined measure with chart-specific limits |
+| Reference | Often a median; the plain time plot below has no centre line | A centre line and calculated control limits |
+| Useful for | Seeing the sequence and examining a change | Assessing signals using the selected chart model and rules |
+| What it cannot establish | The cause of a pattern | The cause of a signal, or whether customer specifications are met |
+
+To prepare a run chart, keep the observations in their actual order, label the time and units, and plot them on a consistent scale. Record when a change was introduced. If using run-chart rules, state that rule set; do not borrow control-chart zones for a chart without those limits.
+
+The following two views use the same twenty initial observations from the worked example below. Neither gains evidence by changing the vertical scale.
+
+::figure paa3-run-control | Fictional pick durations, days 1–20, shown on the same scale. The run view plots time-ordered values; the individuals view adds mean 12.08 minutes and provisional limits 10.498 and 13.662. No separate run-chart signal rules are applied. These limits rely on the stated model and initial-data assumptions.
+
 ## Build an individuals chart by hand
 
-The individuals and moving range chart (I-MR) is the most useful chart outside a factory, because it works with one number per period: daily orders shipped, hours to close a ticket, days to pay an invoice.
+An individuals and moving range chart (I-MR) can suit a sequence of individual numerical observations. Check the measurement, sampling and dependence between observations before choosing it. Counts, proportions and grouped measurements may need other chart models.
 
-Example: a warehouse tracks the average minutes to pick an order, each day. Here are 20 days:
+For this fictional illustration, a warehouse records one order's pick duration each day under a fixed sampling rule for comparable orders. Assume these observations adequately represent one stable process for the initial calculation. Here are twenty days:
 
 | Day | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -75,11 +95,11 @@ The companion moving range chart has an upper limit of 3.267 × 0.595 = 1.94. An
 
 Now plot the next ten days against those fixed limits:
 
-::figure spc-imr | Days 1 to 20 set the limits. Day 21 lands above the upper limit: a special cause. From day 22 onwards the process settles at a new, higher level, still inside the limits. A single-point rule would miss that shift. The run rules catch it.
+::figure spc-imr | Days 1 to 20 set the limits. Day 21 lands above the upper limit: a signal to investigate. From day 22 onwards the process settles at a new, higher level, still inside the limits. A single-point rule would miss that shift. The run rules catch it.
 
 ## The rules for spotting a signal
 
-A point outside the limits is the obvious signal. But patterns inside the limits can be just as real. The classic set comes from Western Electric's 1956 quality handbook. Divide the space between the mean and each limit into three zones of one standard deviation each, and look for:
+A point outside the limits is one signal. Defined patterns inside the limits can also warrant investigation. The classic set comes from Western Electric's 1956 quality handbook. Divide the space between the mean and each limit into three zones of one standard deviation each, and look for:
 
 | Rule | Pattern | In the example |
 | --- | --- | --- |
@@ -88,9 +108,9 @@ A point outside the limits is the obvious signal. But patterns inside the limits
 | 3 | Four of five points in a row beyond 1σ, on the same side | Triggered on day 27 |
 | 4 | Eight points in a row on the same side of the mean | Triggered on day 28 |
 
-Rules 3 and 4 caught what rule 1 couldn't: from day 22, picking takes about 12.7 minutes instead of 12.1. Something changed that week. Perhaps a new layout, a new product range, or a system update. That's the conversation to have, and it's a much better one than "why was Tuesday bad?"
+Rules 3 and 4 caught what rule 1 couldn't: from day 22, picking takes about 12.7 minutes instead of 12.1. Investigate what changed: the layout, product mix, measurement method or another operating condition. The signal does not choose the explanation.
 
-Use the rules sensibly. Each extra rule catches more real shifts, but also raises false alarms. Rule 1 plus rule 4 is a good starting pair for most teams.
+Use the rules sensibly. Each extra rule catches more real shifts, but also raises false alarms. Choose and document the rule set before interpreting the result, with an understanding of its false-alarm behaviour.
 
 ## What to do when you see a signal
 
@@ -113,18 +133,18 @@ And when there's no signal? Resist the urge to explain every up and down. If the
 | Count of defects, same area of opportunity | Scratches per panel | c chart |
 | Count of defects, varying area of opportunity | Errors per 1,000 invoice lines | u chart |
 
-When in doubt, the I-MR chart is a robust default for most business data.
+Choose the chart around the data and sampling method. A numerical column alone does not establish that an I-MR model is appropriate.
 
 ## Mistakes that make control charts useless
 
 - **Drawing specification limits or targets as control limits.** Then the chart shows opinions, not the process.
 - **Recalculating the limits every period.** The limits chase the data, and shifts disappear into them.
-- **Too little data.** Shewhart's rule of thumb was at least 25 points before judging a process. Set limits from 20 to 25, and treat early limits as provisional.
+- **Too little representative history.** Treat limits estimated from this twenty-point illustration as provisional. Use enough representative data for the chart model and review signals before treating the baseline as established.
 - **Mixing different processes.** Two machines, two shifts or two product types on one chart produce strange patterns. Stratify first.
 - **Charting and not reacting.** A chart nobody acts on is decoration. Agree in advance who responds to a signal, and how.
 
 :::link /notes/did-it-hold/ | Did the improvement hold?
-A control chart is also the best way to check whether an improvement lasted. That's the subject of this note.
+Follow the changed process over time, with a measurement and chart suited to the work. The follow-up matters after the first better result.
 :::
 
 ## Sources
@@ -137,4 +157,4 @@ A control chart is also the best way to check whether an improvement lasted. Tha
 - Western Electric Company (1956). *Statistical Quality Control Handbook*.
 - Deming, W. E. (1986). *Out of the Crisis*. MIT Press. The 94% estimate, [via the W. Edwards Deming Institute](https://deming.org/quotes/i-should-estimate-that-in-my-experience-most-troubles-and-most-possibilities-for-improvement-add-up-to-the-proportions-something-like-this94-belongs-to-the-system-responsibility-of-management6-sp-3/).
 
-*The warehouse and its numbers are illustrative.*
+*The warehouse and its numbers are fictional. The initial twenty observations provide provisional limits under the stated assumptions. Signal rules prompt investigation; a chart alone does not establish a cause or prove that a process is stable.*

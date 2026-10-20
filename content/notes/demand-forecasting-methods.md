@@ -4,6 +4,7 @@ date: 2026-10-19
 summary: Compare demand forecasting methods on the same held-out data. Inspect naive, seasonal and drift forecasts, error, bias and the limits of a small example.
 seoTitle: Demand forecasting methods: a worked comparison
 seoDescription: Compare demand forecasting methods on the same held-out data. Inspect naive, seasonal and drift forecasts, error, bias and the limits of a small example.
+updated: 2026-10-20
 status: published
 topic: Supply chain
 keywords: demand forecasting methods, demand forecasting definition, forecasting models, seasonal naive, forecast validation
@@ -66,6 +67,14 @@ Seasonal naive wins this particular illustration because it follows the repeatin
 
 This small, constructed dataset favours that seasonal pattern. Before selecting a method for a real product, compare it across more forecast dates and reserve untouched data for a final check.
 
+## Demand sensing vs demand forecasting
+
+**Demand sensing uses recent signals, such as actual sales or open orders, to update the view of near-term demand.** The [APICS demand-management excerpt](https://learningsystem.ascm.org/wp-content/uploads/2019/11/APICS_CLTD_2020_Excerpt.pdf) describes comparing those signals with the forecast to identify emerging surplus or scarcity. Forecasting is the broader estimation task; sensing supplies newer information for it.
+
+In a separate fictional weekly case, a Monday baseline predicts 100 units for the following week. Recent point-of-sale data available that same Monday leads to a revised forecast of 130. Later actual demand is 120. Absolute error is 20 units for the baseline and ten for the revision.
+
+That revision is better for this one observation. It is not proof that demand sensing always wins. Compare many genuine forecast dates at the same horizon, preserve the information available at each date and check whether the fresh signal was distorted by a stockout or promotion. Do not add open orders to a forecast that already includes them.
+
 ## Uncertainty belongs in the operating decision
 
 A point forecast does not say how likely a shortage is. Our four test observations are not enough to establish a calibrated probability range for a real product.
@@ -86,7 +95,10 @@ Choose the operational decision, establish a credible simple baseline and test a
 
 ## Sources and example notes
 
+- [APICS CLTD public excerpt](https://learningsystem.ascm.org/wp-content/uploads/2019/11/APICS_CLTD_2020_Excerpt.pdf), printed page 4-40. Demand sensing from recent sales and orders.
 - Hyndman and Athanasopoulos, [Forecaster's toolbox](https://otexts.com/fpp3/toolbox.html), Forecasting: Principles and Practice, third edition, sections 5.2, 5.5, 5.8 and 5.10.
 - Armstrong, Green and Graefe, [Golden rule of forecasting](https://faculty.wharton.upenn.edu/wp-content/uploads/2016/10/Golden-Rule-of-Forcasting_Be-Conservative_2.pdf), Journal of Business Research, 2015.
 
 The product and all 12 values are fictional. All forecasts are issued after Q8 without model tuning. Drift uses the unrounded 100/7 slope. Bias is total forecast minus total actual demand, divided by total actual demand. Displayed values are rounded; no prediction intervals are estimated.
+
+The separate weekly demand-sensing case is also fictional and is not part of the quarterly chart.

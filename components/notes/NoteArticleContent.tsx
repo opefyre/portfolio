@@ -1,3 +1,4 @@
+import { PaaRoundThreeChart, type PaaRoundThreeName } from "./PaaRoundThreeCharts";
 import { PaaRoundTwoChart, type PaaRoundTwoName } from "./PaaRoundTwoCharts";
 import { PaaForecastMethods } from "./PaaForecastMethods";
 import { FinalFundamental, type FinalFundamentalName } from "./FinalFundamentals";
@@ -55,7 +56,9 @@ export function NoteArticleContent({ html }: { html: string }) {
   for (const match of html.matchAll(pattern)) {
     const index = match.index!;
     if (index > end) parts.push(<div className="note-copy" key={`copy-${end}`} dangerouslySetInnerHTML={{ __html: html.slice(end, index) }} />);
-    if (["paa2-capacity-mix", "paa2-landed-allocation"].includes(match[1])) {
+    if (["paa3-customer-cost", "paa3-throughput-mix"].includes(match[1])) {
+      parts.push(<PaaRoundThreeChart key={index} name={match[1] as PaaRoundThreeName} caption={decodeCaption(match[2])} />);
+    } else if (["paa2-capacity-mix", "paa2-landed-allocation"].includes(match[1])) {
       parts.push(<PaaRoundTwoChart key={index} name={match[1] as PaaRoundTwoName} caption={decodeCaption(match[2])} />);
     } else if (chartNames.includes(match[1] as AiJobsChartName)) {
       parts.push(<AiJobsChart key={index} name={match[1] as AiJobsChartName} caption={decodeCaption(match[2])} />);

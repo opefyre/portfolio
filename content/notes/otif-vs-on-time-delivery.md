@@ -4,6 +4,7 @@ date: 2026-10-14
 summary: Ten orders show why 80% on-time delivery can mean 60% OTIF, and how revised promise dates can improve the report while every delivery stays the same.
 seoTitle: OTIF vs on-time delivery: a worked example
 seoDescription: Calculate OTIF and on-time delivery from ten orders. Compare original and revised promises, inspect partial deliveries and see why the counting rules matter.
+updated: 2026-10-20
 status: published
 topic: Supply chain
 keywords: OTIF vs on time delivery, OTIF calculation example, on time in full formula, delivery performance, original promise date, OTIF vs fill rate
@@ -17,7 +18,7 @@ You can't tell from those two totals. You need to check the same order identitie
 
 [ASCM's dictionary](https://learn.ascm.org/sfc/servlet.shepherd/document/download/069R3000006PlDHIA0?operationContext=S1) defines the concepts. The practical rules still need agreement: which date, which receipt event, which quantity and which orders belong in the report.
 
-## Ten orders, one declared rule
+## Ten orders, one agreed rule
 
 A fictional supplier has ten customer orders due today. Each requests 100 units of the correct product. Their original receiving window is 08:00 to 13:00, and the review takes place at 17:00.
 
@@ -40,6 +41,22 @@ OTIF = 6 orders meeting both conditions ÷ 10 due orders × 100 = 60%
 :::
 
 The two short orders help the timing score. The two late orders help the quantity score. Neither group passes OTIF.
+
+## OTIF vs perfect order: add the other conditions
+
+A **perfect order** meets the agreed fulfilment requirements beyond timing and quantity, such as accuracy, condition and documentation. ASCM's dictionary includes on-time, complete, accurate and undamaged fulfilment in its definitions. Agree the conditions your own measure will use.
+
+Keep the same ten orders and original windows. In a separate extension of this fictional example, order 101 is one of the six OTIF successes, but its invoice has an incorrect reference. The goods remain correct and accepted; timing and quantity do not change. The other five OTIF successes meet every condition in our agreed perfect-order rule.
+
+| Rule against the original promises | Passing orders | Result |
+| --- | ---: | ---: |
+| On time | 8 of 10 | 80% |
+| On time and in full | 6 of 10 | 60% |
+| OTIF plus correct documentation and no other agreed failure | 5 of 10 | 50% |
+
+This paperwork extension is not included in the interactive ledger below, which continues to compare receipt times and quantities only.
+
+Count the orders meeting **all** required conditions. Multiplying separate timing, quantity and documentation percentages will not reconstruct that overlap from their totals alone. The lower perfect-order score points to a documentation problem as well as the delivery failures.
 
 ## Change the date basis, keep the deliveries
 
@@ -79,7 +96,7 @@ Suppose a separate order receives 80 units at 12:50 and its remaining 20 at 14:0
 
 Combine receipts against the same order and compare the time its full required quantity was accepted with the window. Agree how your rules treat damaged goods, substitutions, customer holds and missing receipt evidence.
 
-Also decide which orders enter the denominator. A report covering all orders due today should not silently drop an undelivered order because it has no receipt timestamp. Apply the declared rule and keep unresolved evidence visible. If no orders are eligible, the rate is not applicable, rather than 100%.
+Also decide which orders enter the denominator. A report covering all orders due today should not silently drop an undelivered order because it has no receipt timestamp. Apply the agreed rule and keep unresolved evidence visible. If no orders are eligible, the rate is not applicable, rather than 100%.
 
 ## Use the failure pattern to choose the follow-up
 
@@ -89,7 +106,7 @@ Take the order ledger into the review. Separate quantity failures from timing fa
 
 ## Sources and example notes
 
-- [ASCM Supply Chain Dictionary, 18th edition](https://learn.ascm.org/sfc/servlet.shepherd/document/download/069R3000006PlDHIA0?operationContext=S1), printed pages 126–127 and 137. On-time delivery, OTIF and quantity completeness.
+- [ASCM Supply Chain Dictionary, 18th edition](https://learn.ascm.org/sfc/servlet.shepherd/document/download/069R3000006PlDHIA0?operationContext=S1), printed pages 126–127 and 137. On-time delivery, OTIF, quantity completeness and perfect orders.
 - [Trading Partner Alliance and McKinsey: Defining on-time, in-full in the consumer sector](https://www.mckinsey.com/capabilities/operations/our-insights/defining-on-time-in-full-in-the-consumer-sector), 2019. Differences in measurement rules and a proposed case-based approach, not a universal reporting standard.
 
-All orders, quantities, times and revisions are fictional. The order-level rule, population and review cutoff are declared teaching choices. The separate split-receipt example is not included in the interactive ledger.
+All orders, quantities, times and revisions are fictional. The order-level rule, population and review cutoff are agreed teaching choices. The separate split-receipt example is not included in the interactive ledger.

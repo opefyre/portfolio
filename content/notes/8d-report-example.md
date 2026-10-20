@@ -4,6 +4,7 @@ date: 2026-10-15
 summary: A returned batch needs immediate protection and a verified permanent correction. Follow a filled-in 8D example, including the evidence needed before containment ends.
 seoTitle: 8D report example: steps and corrective action
 seoDescription: Follow an 8D report example from customer complaint to closure. Separate containment, occurrence and escape causes, corrective action and effectiveness checks.
+updated: 2026-10-20
 status: published
 topic: Operational excellence
 keywords: 8D report example, 8D problem solving, eight disciplines, containment vs corrective action, occurrence cause escape cause
@@ -47,6 +48,20 @@ The [cost-of-quality example](/notes/cost-of-quality-example/) separates inspect
 
 The 28 nonconforming plates remain visible in the record until their approved disposition is complete. Finding the cause does not turn those units into good stock.
 
+## Correction, corrective action and preventive action
+
+**Correction addresses the detected nonconformity. Corrective action addresses its cause to prevent recurrence. Preventive action addresses a potential nonconformity before it occurs.** CAPA is shorthand for corrective and preventive action; its required procedure depends on the organisation and any applicable sector rules.
+
+| Action in this plate example | What it addresses |
+| --- | --- |
+| Approved rework or other disposition of the 28 failed plates | The existing nonconforming output; sorting alone does not correct it |
+| Restore the locating condition and maintain a verified control | The confirmed cause on the affected process, to prevent recurrence |
+| Assess a similar fixture before it makes this fault and apply justified controls | A potential failure in another process, before occurrence there |
+
+The [ASQ glossary](https://asq.org/quality-resources/quality-glossary) describes preventive action in terms of preventing occurrence. The 8D response ties the detected problem to containment, causes and effectiveness checks. This comparison explains the terms; it is not a regulated CAPA procedure or a universal five-step or seven-step sequence.
+
+Use [FMEA](/notes/fmea-step-by-step/) when examining a potential failure in that similar fixture. Copying a correction without checking whether the cause exists there can add work without preventing the actual risk.
+
 ## Verify the occurrence cause and the escape cause
 
 The **occurrence cause** explains why the fault was made. The **escape cause** explains why the existing controls did not stop it reaching the customer.
@@ -87,6 +102,9 @@ For these plates, closure means the agreed evidence has been reviewed and the on
 
 ## Source and example notes
 
+- [ASQ: Quality glossary](https://asq.org/quality-resources/quality-glossary), preventive action and cause terminology.
 - [ASQ: Eight disciplines (8D)](https://asq.org/quality-resources/eight-disciplines-8d). D0 preparation, the eight disciplines, occurrence and escape causes, correction and effectiveness.
 
 All products, causes, counts, trial results and timing are fictional. The three-lot check was chosen for this example, not as a required sample size for every correction.
+
+The action comparison explains general terms and does not claim regulated CAPA compliance.
