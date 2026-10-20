@@ -4,6 +4,7 @@ date: 2026-10-15
 summary: One operator repeats a reading closely. Another gets a different result on the same part. Inspect the individual measurements before changing the production process.
 seoTitle: Gage R&R explained: measurement study example
 seoDescription: Learn Gage R&R with 27 readings. Compare repeated scatter, operator differences and bias, then plan a measurement study with clear limits.
+updated: 2026-10-20
 status: published
 topic: Operational excellence
 keywords: gage R&R explained, measurement system analysis example, repeatability vs reproducibility, gauge R&R, gage repeatability
@@ -58,6 +59,28 @@ A real bias check needs a suitable reference and its uncertainty. The assigned v
 
 [NIST's gauge-study framework](https://www.itl.nist.gov/div898/handbook/mpc/section4/mpc4.htm) treats repeatability, reproducibility, bias, resolution and stability as distinct concerns. Passing one check doesn't settle the others.
 
+## Five MSA concerns, with different checks
+
+[Minitab's measurement-system training example](https://www.minitab.com/content/dam/www/en/uploadedfiles/documents/sample-materials/FuelInjectorNozzles-EN.pdf#page=4) groups accuracy and precision into bias, linearity, stability, repeatability and reproducibility. These five concerns are useful for planning the work; they are not five numbers to average into a score.
+
+| Concern | Question to investigate | Evidence the check needs |
+| --- | --- | --- |
+| Repeatability | Does the same method repeat closely? | Repeated readings under the stated conditions |
+| Reproducibility | Do included operators or conditions give different results? | A design that compares those conditions on suitable parts |
+| Bias | How far is the average reading from a reference? | A suitable reference value and its uncertainty |
+| Linearity | Does bias change across the measurement range? | References spanning the range, not only a middle-sized part |
+| Stability | Does the measuring system change over time? | Repeated checks over the period and conditions of use |
+
+[NIST's linearity explanation](https://www.itl.nist.gov/div898/handbook/mpc/section4/mpc452.htm) makes the range question explicit. A gauge can agree with a reference near 10 mm while behaving differently near either end of its intended range.
+
+NIST also treats resolution as a measurement concern. A five-item teaching list should not hide whether the display and method can distinguish the changes that matter.
+
+### MSA vs SPC
+
+MSA examines the measurement system. **Statistical process control**, or SPC, examines process behaviour over time using methods such as control charts. An unreliable measurement can make a steady process look unstable, or hide an actual change.
+
+Use the [control-chart explanation](/notes/control-charts-explained/) after checking what the readings represent. There is no single “good MSA value”: percent study variation, percent tolerance, bias and stability describe different things and need criteria suited to the decision.
+
 ## Plan the study around the measurement decision
 
 Three convenient parts are too narrow a basis for judging a production measuring system. Choose parts that represent the variation relevant to the job and operators who represent ordinary use. Keep the characteristic, fixture, method and instrument scope clear.
@@ -86,6 +109,8 @@ For the shaft that started this example, remeasure the same identified parts und
 
 ## Sources and example notes
 
+- [Minitab: Statistical Quality Analysis](https://www.minitab.com/content/dam/www/en/uploadedfiles/documents/sample-materials/FuelInjectorNozzles-EN.pdf), measurement-system accuracy and precision concerns.
+- [NIST: Linearity of the gauge](https://www.itl.nist.gov/div898/handbook/mpc/section4/mpc452.htm), bias across the operating range.
 - [ASQ: Gage Repeatability and Reproducibility](https://asq.org/quality-resources/gage-repeatability). Definitions and crossed-study structure.
 - [NIST: Gauge R&R studies](https://www.itl.nist.gov/div898/handbook/mpc/section4/mpc4.htm) and [analysis of repeatability](https://www.itl.nist.gov/div898/handbook/mpc/section4/mpc441.htm). Separate measurement concerns and pooling within-group variances.
 - [Minitab: Crossed Gage R&R data considerations](https://support.minitab.com/en-us/minitab/help-and-how-to/quality-and-process-improvement/measurement-system-analysis/how-to/gage-study/crossed-gage-r-r-study/before-you-start/data-considerations/). Representative parts and operators, repeat measurements and randomisation.

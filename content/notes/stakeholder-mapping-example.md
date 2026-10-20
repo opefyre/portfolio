@@ -4,6 +4,7 @@ date: 2026-10-15
 summary: A warehouse rollout has a sponsor and task owners. The night shift still hasn't been involved. Build a stakeholder map that changes who helps shape the work.
 seoTitle: Stakeholder mapping: power-interest matrix example
 seoDescription: Build a stakeholder map using a warehouse rollout. Compare power and interest, include affected teams and turn their concerns into practical engagement actions.
+updated: 2026-10-20
 status: published
 topic: Project management
 keywords: stakeholder mapping example, power interest matrix, stakeholder analysis, stakeholder engagement plan
@@ -56,6 +57,24 @@ A map doesn't tell the project lead what to do on Tuesday. Each group needs a co
 
 Invite representatives who can bring the group's experience, then give others a way to raise something they missed. One supervisor attending a meeting doesn't prove every shift has been heard.
 
+## A project communication plan for the same rollout
+
+A **project communication plan** turns the stakeholder analysis into agreed information exchanges: who needs what, for which decision, when, through which channel and from whom. It also provides a way to respond.
+
+[APM's communication guidance](https://www.apm.org.uk/resources/what-is-project-management/what-is-project-communication/) connects the plan to stakeholder analysis and shared understanding. Receiving an email does not establish that someone can use the instructions.
+
+For this fictional rollout, three planned exchanges could look like this:
+
+| Audience and purpose | Information needed | When and how | Owner and response route |
+| --- | --- | --- | --- |
+| Night-shift operators: prepare for the trial | Current exception steps, known limits and how to get help | Paid shift briefing before the trial, with a live device demonstration | Shift supervisor collects questions; unresolved cases go to the trial lead before release |
+| Sponsor: decide whether release can proceed | Acceptance results, unresolved gaps and options with cost/date effects | Decision pack before the agreed release meeting | Project lead requests a decision; sponsor records it |
+| Customer service: handle held orders | Which orders are affected, current status and the next update time | Shared exception view during rollout; urgent cases use the agreed escalation route | Service lead confirms the customer message and reports missing information |
+
+The last row concerns a service that continues after the project. Agree who owns it after handover. The project lead cannot remain the permanent answer to every held order.
+
+Keep the plan short enough to use. At the trial, ask operators to demonstrate the exception route, collect what remains unclear and update the instruction. Sending another copy of the same message would not close that gap.
+
 ## Follow up when input changes the plan
 
 Suppose the night trial finds that a damaged location label cannot be replaced without daytime approval. Record the problem, assign someone to resolve it and test the agreed route. Tell the operators what changed and what remains open. Put any new agreed requirement into the [requirements traceability matrix](/notes/requirements-traceability-matrix-example/) so it reaches implementation and testing.
@@ -76,6 +95,7 @@ Schedule the exception trial during the night shift, with time to resolve the fi
 
 ## Source and example notes
 
+- [APM: Project communication](https://www.apm.org.uk/resources/what-is-project-management/what-is-project-communication/). Audience, purpose, timing, channels and shared understanding.
 - Association for Project Management. [Stakeholder engagement](https://www.apm.org.uk/resources/find-a-resource/stakeholder-engagement/). Stakeholders, power, interest, support and using different perspectives to shape delivery.
 
 The rollout, group placements, concerns and proposed actions are fictional. Check the initial placements and concerns with the people involved.

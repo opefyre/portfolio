@@ -2,10 +2,12 @@
 title: Value stream mapping example: 40 minutes of work, 10 days of waiting
 date: 2026-10-03
 summary: Follow an order from release to dispatch. Map its work, queues and instructions, then compare speeding up one task with changing the wait between tasks.
+updated: 2026-10-20
 status: published
 topic: Operational excellence
 keywords: value stream mapping example, current state value stream map, value stream mapping lead time, value stream mapping template Excel, VSM cycle time vs lead time
 seoTitle: Value stream mapping: work time vs waiting time
+seoDescription: Follow a value stream mapping example through work, queues and lead time. Compare process cycle efficiency with activity ratio before choosing an improvement.
 ---
 
 Orders take nearly two working weeks to get through the operation. The first request is for faster preparation equipment. It is the most visible place where people are busy.
@@ -63,6 +65,31 @@ Check the estimate against actual order timestamps. A growing backlog or a perio
 
 Working days also need a calendar. Ten working days are not necessarily ten calendar days. The conversion here uses 480 minutes per working day for comparison; it does not promise a dispatch date.
 
+## Process cycle efficiency: decide what counts as value-added
+
+**Process cycle efficiency**, or PCE, is commonly used for value-added time divided by total lead time. Some sources use processing time instead. State the numerator before comparing percentages.
+
+The [EPA metrics guide](https://www.epa.gov/sites/default/files/2014-04/documents/metrics_guide.pdf#page=6) separates an activity ratio, processing time divided by lead time, from a value-added percentage. The distinction matters in this order route.
+
+:::formula What the current observations establish
+Activity ratio = 40 active minutes ÷ 4,840 total working minutes × 100 = 0.83%
+PCE, using a value-added numerator = value-added minutes ÷ 4,840 × 100
+:::
+
+We know the active time. We have not yet established how much of it changes the order in a way the customer values. Approval, searching and repeated checks can take real effort without adding that value.
+
+| Part of the timeline | Time available from this example | What it establishes |
+| --- | ---: | --- |
+| Waiting | 4,800 working minutes | Time the order waits between active steps |
+| Active processing | 40 minutes | Work is being done, including any checks or rework |
+| Customer value-added work | Not yet classified | The numerator needed for our PCE definition |
+
+The PCE is therefore unresolved, not zero and not automatically 0.83%. Review the work elements before assigning it. A required check may remain necessary even when it is classified as non-value-added.
+
+::figure paa2-time-classification | Fictional route, one working-time calendar. The 40 active minutes are known; their value-added share has not been established. The activity ratio is 0.83%. The time bands are labelled and not drawn to scale.
+
+Keep total lead time beside either ratio. Removing an unnecessary processing step can lower the activity ratio while improving the process. Raising a percentage is not a reason to preserve work the order doesn't need.
+
 ## Compare the proposed changes
 
 Suppose faster equipment reduces preparation from 18 minutes to eight. Hold throughput and the queues fixed for this first sensitivity test.
@@ -102,6 +129,7 @@ The map earns its place when it changes the next question. Before ordering faste
 ## Sources
 
 - Lean Enterprise Institute. [Value stream mapping](https://www.lean.org/lexicon-terms/value-stream-mapping/). Material and information flow, current and future states, process and lead time.
+- [US EPA: Lean Government Metrics Guide](https://www.epa.gov/sites/default/files/2014-04/documents/metrics_guide.pdf), printed pages 5 and 8. Activity ratio, value-added time and the difficulty of classifying office work.
 - Little, J. D. C. (2011). [Little's Law as viewed on its 50th anniversary](https://doi.org/10.1287/opre.1110.0940). The relationship between average work, throughput and flow time.
 
 The route, queue counts, work times and proposed changes are fictional. The example assumes a stable common flow through all three stages. It illustrates which assumptions to investigate, not a demonstrated lead-time reduction.

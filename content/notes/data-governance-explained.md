@@ -4,6 +4,7 @@ date: 2026-10-15
 summary: Sales sees 70 pieces available. The warehouse says 50. The records agree; the definitions don't. Follow the decision from business ownership to a checked change.
 seoTitle: Data governance explained: roles and example
 seoDescription: Learn data governance through a disputed stock definition. Compare owners, stewards and custodians, then follow a change into reports and checks.
+updated: 2026-10-20
 status: published
 topic: Digital transformation
 keywords: data governance explained, data owner vs data steward, data governance example, data custodian, business glossary
@@ -56,6 +57,27 @@ Keep the formula with its unit, location, effective date, owner and intended use
 
 Changing the name alone won't fix an old report that still calculates 70. Find the calculations, exports and interfaces that use the old label before calling the issue resolved.
 
+## System of record vs single source of truth
+
+A **system of record** is the designated authoritative source for a particular record or field. A **single source of truth** describes the agreed view people should use. Terminology varies; here, the second term means a reconciled view with a governed definition, not necessarily one physical database.
+
+[IBM's comparison](https://www.ibm.com/think/topics/system-of-record-vs-source-of-truth) distinguishes source records from views that bring several domains together. To make that concrete, suppose our fictional warehouse assigns these source roles:
+
+| Information | Authoritative source in this example | Use in the picking view |
+| --- | --- | --- |
+| Physical quantity | Warehouse movement records | Start with 100 pieces at the selected location |
+| Quality hold | Quality-status records linked to that stock | Exclude the 20 held pieces |
+| Allocation | Order reservation records | Exclude 30 other pieces already committed |
+| Unallocated pickable stock | Governed calculation combining the records | Show 50 pieces for immediate picking |
+
+The systems need matching identities and a compatible snapshot. Yesterday's hold status joined to today's movements can still give a wrong result. Naming a source authoritative does not make every entry in it accurate.
+
+An agreed shared view is a plainer description of what “single source of truth” means here. Master data management, a data warehouse and a system of record have different roles; none is an exact substitute for that meaning.
+
+Keeping three dashboards in one database would not resolve the original disagreement about whether held stock is pickable. The owner must settle that rule, and the technical team must implement it consistently.
+
+The [data-lineage example](/notes/data-lineage-example/) follows a calculated value back through its source fields and forward to the reports that depend on it.
+
 ## Apply the agreed definition across reports
 
 The steward lists the sales dashboard, pick screen and planning export that use this field. Each team confirms whether it needs physical stock, immediate pickable stock or a dated planning position.
@@ -74,7 +96,7 @@ The [master vs transactional data note](/notes/master-data-vs-transactional-data
 
 The [data quality dimensions](/notes/data-quality-dimensions/) test whether records are complete, accurate and suitable for use. Governance decides who owns those requirements and what happens when a check fails repeatedly.
 
-A catalogue can store the definition. It can't decide whether a sales promise may include quality-held stock. That business decision still needs an accountable person and the relevant evidence.
+A [data catalog or dictionary](/notes/data-catalog-vs-data-dictionary/) can store and expose the definition. It can't decide whether a sales promise may include quality-held stock. That business decision still needs an accountable person and the relevant evidence.
 
 [Vrolen's manufacturing software guide](https://vrolen.com/blog/manufacturing-software-guide/) connects this to systems: define the authoritative source, permitted writers and consumers for each shared record. An integration can otherwise move the same ambiguous field faster without resolving it.
 
@@ -82,6 +104,7 @@ For this warehouse, start with the three screens already using “available”. 
 
 ## Sources and example notes
 
+- [IBM: System of record vs source of truth](https://www.ibm.com/think/topics/system-of-record-vs-source-of-truth). Source authority and reconciled views.
 - [IBM: What is data governance?](https://www.ibm.com/think/topics/data-governance). Policies, standards, responsibilities and data use across the lifecycle.
 - UK Government. [Data ownership model](https://www.gov.uk/government/publications/data-ownership-in-government/data-ownership-model), especially roles and responsibilities. Business accountability, operational stewardship and technical custody. The warehouse adapts those role distinctions to its own team.
 

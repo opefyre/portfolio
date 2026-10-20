@@ -4,6 +4,7 @@ date: 2026-10-14
 summary: Three stations average 60 seconds. The middle one takes 75. Compare each station with takt to see why the average can hide a capacity gap.
 seoTitle: Takt time vs cycle time: formula and example
 seoDescription: Calculate takt time and compare it with each station's cycle time. An interactive example shows why an average can hide the station limiting output.
+updated: 2026-10-20
 status: published
 topic: Operational excellence
 keywords: takt time vs cycle time, takt time formula, cycle time example, takt time calculation, line balancing, takt vs lead time
@@ -69,6 +70,24 @@ Observe B's work elements with the people doing them. Separate the equipment's a
 
 The [standard work vs SOP example](/notes/standard-work-vs-sop/) shows how timing and permitted overlap belong beside the sequence. That is the evidence needed for a proposed 60-second cycle, rather than a faster target written on the board.
 
+### What line balancing would change here
+
+**Line balancing distributes work elements between stations or operators so the process can meet the required pace.** It requires a feasible work sequence, not just equal totals. LEI's [operator balance chart](https://www.lean.org/lexicon-terms/operator-balance-chart/) stacks work elements against takt to help investigate that distribution.
+
+For a separate proposed redesign, suppose observation identifies five seconds of preparation and ten seconds of checking at B that might move to A and C. Assume these are manual elements that can move without breaking the required sequence. That assumption needs a trial.
+
+| Station | Original repeat | Proposed transfer | Proposed repeat |
+| --- | ---: | --- | ---: |
+| A | 55 s | Take 5 s of B's preparation | 60 s |
+| B | 75 s | Transfer 15 s in total | 60 s |
+| C | 50 s | Take 10 s of B's checking | 60 s |
+
+The total work remains 180 seconds per piece. We have redistributed it rather than removed it. This differs from the earlier control, which changes B alone and leaves A and C unchanged.
+
+::figure paa2-line-balance | Fictional reallocation proposal. A takes 5 seconds and C takes 10 seconds from B. Totals change from 55/75/50 to 60/60/60 seconds; total work stays at 180 seconds. Transfer feasibility and quality are unverified. All bars share a seconds-per-piece scale.
+
+Check reach, sequence, skills, equipment and inspection conditions with the team. If some of B's 75 seconds is automatic machine time, moving a manual task may not shorten its limiting repeat by the same amount. A balanced chart does not establish a safe method or lower staffing need.
+
 If a change is tested, check its effect on repeat time, good output and the surrounding stations. The [PDCA example](/notes/pdca-cycle-example/) explains how to compare a small trial with its prediction before changing the method.
 
 A real line also needs a range of observed cycles. One fast repeat doesn't show what happens across products, shifts, replenishment and normal variation. Keep losses visible instead of reducing the demand target until the result appears comfortable.
@@ -90,6 +109,7 @@ Start the next capacity review with demand for the period, planned production ti
 ## Sources
 
 - Lean Enterprise Institute. [Takt Time](https://www.lean.org/lexicon-terms/takt-time/). Available time divided by matching-period demand.
+- Lean Enterprise Institute. [Operator Balance Chart](https://www.lean.org/lexicon-terms/operator-balance-chart/). Distributing work elements relative to takt time.
 - Lean Enterprise Institute. [Cycle Time](https://www.lean.org/lexicon-terms/cycle-time/). Measured cycle definitions and the distinction from production lead time.
 
 All shift, demand and station figures are fictional. The steady-running calculation is separate from an actual shift result.
