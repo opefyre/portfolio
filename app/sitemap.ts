@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { ogImage, site, works } from "@/content/site";
+import { getNoteHero } from "@/lib/note-heroes";
 import { getNotes } from "@/lib/notes";
 
 export const dynamic = "force-static";
@@ -53,7 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   };
 
   const notePages: Entry[] = notes.map((n) => {
-    const images = noteImages(n.html);
+    const images = [...new Set([abs(getNoteHero(n.slug).src), ...noteImages(n.html)])];
     return {
       url: abs(`/notes/${n.slug}/`),
       lastModified: new Date(`${n.updated}T12:00:00Z`),

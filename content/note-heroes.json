@@ -1,0 +1,1052 @@
+{
+  "3p-production-preparation-process": {
+    "src": "/notes/3p-production-preparation-process/hero-dfe300eaed6c.webp",
+    "smallSrc": "/notes/3p-production-preparation-process/hero-small-fbc3398aad5d.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Small-scale process models before an equipment decision."
+  },
+  "5-whys-example": {
+    "src": "/notes/5-whys-example/hero-51e933675b2b.webp",
+    "smallSrc": "/notes/5-whys-example/hero-small-456ab7b6ccb6.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Following a stoppage to a testable physical cause."
+  },
+  "5s-methodology-example": {
+    "src": "/notes/5s-methodology-example/hero-e3c9a93e1155.webp",
+    "smallSrc": "/notes/5s-methodology-example/hero-small-6a9a822bf161.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A packing station organised around the work."
+  },
+  "8d-report-example": {
+    "src": "/notes/8d-report-example/hero-e808dd68236f.webp",
+    "smallSrc": "/notes/8d-report-example/hero-small-1631d5350dea.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Containing a defective batch while verifying a correction."
+  },
+  "a3-problem-solving-example": {
+    "src": "/notes/a3-problem-solving-example/hero-db439304c31a.webp",
+    "smallSrc": "/notes/a3-problem-solving-example/hero-small-bd1e69db73ce.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A problem, evidence and a tested correction considered together."
+  },
+  "abc-xyz-inventory-analysis": {
+    "src": "/notes/abc-xyz-inventory-analysis/hero-f5ea685709a1.webp",
+    "smallSrc": "/notes/abc-xyz-inventory-analysis/hero-small-6cd899304742.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Stock groups with different value and demand patterns."
+  },
+  "acceptance-sampling-explained": {
+    "src": "/notes/acceptance-sampling-explained/hero-ff3714a4811f.webp",
+    "smallSrc": "/notes/acceptance-sampling-explained/hero-small-4b5bd3c91e28.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Checking a sample from a shipment rather than every item."
+  },
+  "agile-waterfall-hybrid": {
+    "src": "/notes/agile-waterfall-hybrid/hero-5173898e53ac.webp",
+    "smallSrc": "/notes/agile-waterfall-hybrid/hero-small-0505b0a21a17.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Sequential work and iterative work joined in one project."
+  },
+  "ai-and-jobs": {
+    "src": "/notes/ai-and-jobs/hero-70932d8164e1.webp",
+    "smallSrc": "/notes/ai-and-jobs/hero-small-bb660313fd1d.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "AI assistance and a changing entry route into work."
+  },
+  "ai-supply-chain-planning": {
+    "src": "/notes/ai-supply-chain-planning/hero-d08becd32076.webp",
+    "smallSrc": "/notes/ai-supply-chain-planning/hero-small-dabeeaaf9d97.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A better plan still needs capacity and a delivery decision."
+  },
+  "ai-visual-inspection-roi": {
+    "src": "/notes/ai-visual-inspection-roi/hero-7ec0f9ac0cda.webp",
+    "smallSrc": "/notes/ai-visual-inspection-roi/hero-small-37ef07b09f87.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "An inspection camera, rejected parts and accepted output."
+  },
+  "application-rationalization-example": {
+    "src": "/notes/application-rationalization-example/hero-5d06016b4ca2.webp",
+    "smallSrc": "/notes/application-rationalization-example/hero-small-da2f90e3f358.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Retiring software only after its work and records have a destination."
+  },
+  "atp-vs-ctp": {
+    "src": "/notes/atp-vs-ctp/hero-909278771a34.webp",
+    "smallSrc": "/notes/atp-vs-ctp/hero-small-58c2bd2b81ba.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Ready stock and the capacity needed to make another order."
+  },
+  "batch-vs-stream-processing": {
+    "src": "/notes/batch-vs-stream-processing/hero-dc15f3e26e01.webp",
+    "smallSrc": "/notes/batch-vs-stream-processing/hero-small-0c36eb7bd592.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Processing a collected batch or handling records as they arrive."
+  },
+  "benefits-realisation-automation": {
+    "src": "/notes/benefits-realisation-automation/hero-8107a99378b4.webp",
+    "smallSrc": "/notes/benefits-realisation-automation/hero-small-d2248e7b2167.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Released work time and spending measured separately."
+  },
+  "build-vs-buy-software": {
+    "src": "/notes/build-vs-buy-software/hero-4b865ae4afe5.webp",
+    "smallSrc": "/notes/build-vs-buy-software/hero-small-0495fa0fd511.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Building or buying the system and keeping it running."
+  },
+  "bullwhip-effect-explained": {
+    "src": "/notes/bullwhip-effect-explained/hero-cde8323d6471.webp",
+    "smallSrc": "/notes/bullwhip-effect-explained/hero-small-974b8998c338.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A small demand change amplified through the supply chain."
+  },
+  "business-capability-mapping-example": {
+    "src": "/notes/business-capability-mapping-example/hero-22e9b496e6c1.webp",
+    "smallSrc": "/notes/business-capability-mapping-example/hero-small-09911f4a034f.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Business abilities mapped separately from the systems that support them."
+  },
+  "business-continuity-vs-disaster-recovery": {
+    "src": "/notes/business-continuity-vs-disaster-recovery/hero-d95d0c3acb45.webp",
+    "smallSrc": "/notes/business-continuity-vs-disaster-recovery/hero-small-07c90c84b2ae.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Keeping work going and restoring reconciled service."
+  },
+  "business-process-management-example": {
+    "src": "/notes/business-process-management-example/hero-34eaad7395bb.webp",
+    "smallSrc": "/notes/business-process-management-example/hero-small-28d1f5688db3.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Following the complete process across team handovers."
+  },
+  "busy-machines-slower-orders": {
+    "src": "/notes/busy-machines-slower-orders/hero-48b0c08626be.webp",
+    "smallSrc": "/notes/busy-machines-slower-orders/hero-small-2e69179ac8a7.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "High utilisation, growing work in progress and customer waiting."
+  },
+  "can-ai-take-over": {
+    "src": "/notes/can-ai-take-over/hero-22dc16872105.webp",
+    "smallSrc": "/notes/can-ai-take-over/hero-small-68e6be725ec6.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "AI capability, delegated authority and a usable human override."
+  },
+  "cash-conversion-cycle-example": {
+    "src": "/notes/cash-conversion-cycle-example/hero-9b2dbc2f4c82.webp",
+    "smallSrc": "/notes/cash-conversion-cycle-example/hero-small-b0d668e1de4d.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Cash tied up between paying for stock and being paid by a customer."
+  },
+  "change-data-capture-explained": {
+    "src": "/notes/change-data-capture-explained/hero-6e4b4a85d66a.webp",
+    "smallSrc": "/notes/change-data-capture-explained/hero-small-7aaee677ee45.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Keeping inserts, updates and deletions consistent between copies."
+  },
+  "change-management-adkar-kotter": {
+    "src": "/notes/change-management-adkar-kotter/hero-3617b3f08fbb.webp",
+    "smallSrc": "/notes/change-management-adkar-kotter/hero-small-9c358e1ae07f.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Practice, support and the ability to use a changed process."
+  },
+  "continuous-improvement-explained": {
+    "src": "/notes/continuous-improvement-explained/hero-3738babbc654.webp",
+    "smallSrc": "/notes/continuous-improvement-explained/hero-small-35a72eca5c8f.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Checking the work after an improvement has been made."
+  },
+  "continuous-vs-periodic-inventory-review": {
+    "src": "/notes/continuous-vs-periodic-inventory-review/hero-ba228bb19cfb.webp",
+    "smallSrc": "/notes/continuous-vs-periodic-inventory-review/hero-small-9d1cc9d9f44d.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Replenishing after continuous monitoring or a scheduled review."
+  },
+  "control-charts-explained": {
+    "src": "/notes/control-charts-explained/hero-30bc982b0f9f.webp",
+    "smallSrc": "/notes/control-charts-explained/hero-small-24ae8f4843a8.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A process signal that prompts investigation."
+  },
+  "cost-of-quality-example": {
+    "src": "/notes/cost-of-quality-example/hero-5f9b46650148.webp",
+    "smallSrc": "/notes/cost-of-quality-example/hero-small-0347e9a56e30.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Prevention, inspection, internal failure and customer failure."
+  },
+  "cost-to-serve-example": {
+    "src": "/notes/cost-to-serve-example/hero-ba4a56a34af3.webp",
+    "smallSrc": "/notes/cost-to-serve-example/hero-small-1bb9668b0533.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "The same sales volume can require different service work."
+  },
+  "critical-chain-vs-critical-path": {
+    "src": "/notes/critical-chain-vs-critical-path/hero-174a170d8ac0.webp",
+    "smallSrc": "/notes/critical-chain-vs-critical-path/hero-small-2987e622fb5f.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A shared resource changes the feasible project sequence."
+  },
+  "critical-path-method-worked-example": {
+    "src": "/notes/critical-path-method-worked-example/hero-d7422c61dd37.webp",
+    "smallSrc": "/notes/critical-path-method-worked-example/hero-small-04f19255afe0.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "The longest dependent route through the same project."
+  },
+  "cross-docking-explained": {
+    "src": "/notes/cross-docking-explained/hero-e0b9d7af346b.webp",
+    "smallSrc": "/notes/cross-docking-explained/hero-small-5e8e0bdc116f.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Sorting inbound goods directly into outbound deliveries."
+  },
+  "ctq-tree-example": {
+    "src": "/notes/ctq-tree-example/hero-716ddb165609.webp",
+    "smallSrc": "/notes/ctq-tree-example/hero-small-0571c7abd8a9.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Turning a customer need into things that can be checked."
+  },
+  "cycle-counting-inventory-accuracy": {
+    "src": "/notes/cycle-counting-inventory-accuracy/hero-b2dbe0d6f40c.webp",
+    "smallSrc": "/notes/cycle-counting-inventory-accuracy/hero-small-340755940f12.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A correct total can hide incorrect bin records."
+  },
+  "cycle-service-level-vs-fill-rate": {
+    "src": "/notes/cycle-service-level-vs-fill-rate/hero-2e9ece917cd0.webp",
+    "smallSrc": "/notes/cycle-service-level-vs-fill-rate/hero-small-2052a628b6a6.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Counting shortage cycles separately from units supplied."
+  },
+  "data-catalog-vs-data-dictionary": {
+    "src": "/notes/data-catalog-vs-data-dictionary/hero-220894163079.webp",
+    "smallSrc": "/notes/data-catalog-vs-data-dictionary/hero-small-35cf2f618b44.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Finding a dataset and understanding its fields are different tasks."
+  },
+  "data-governance-explained": {
+    "src": "/notes/data-governance-explained/hero-ffd907b7c6b2.webp",
+    "smallSrc": "/notes/data-governance-explained/hero-small-da433dd1d12c.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Ownership and rules behind a usable stock record."
+  },
+  "data-lineage-example": {
+    "src": "/notes/data-lineage-example/hero-15cc76ffb230.webp",
+    "smallSrc": "/notes/data-lineage-example/hero-small-22fac7c1ca1e.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Tracing a reported number back through its sources and transformations."
+  },
+  "data-migration-vs-integration": {
+    "src": "/notes/data-migration-vs-integration/hero-589a5f8cafda.webp",
+    "smallSrc": "/notes/data-migration-vs-integration/hero-small-e01f04f05fea.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Moving records once and connecting live systems continuously."
+  },
+  "data-quality-dimensions": {
+    "src": "/notes/data-quality-dimensions/hero-db89712c76c5.webp",
+    "smallSrc": "/notes/data-quality-dimensions/hero-small-324e5bae9277.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Checking whether inventory records match the work they describe."
+  },
+  "demand-forecasting-methods": {
+    "src": "/notes/demand-forecasting-methods/hero-ea7047b52963.webp",
+    "smallSrc": "/notes/demand-forecasting-methods/hero-small-4028aa491c82.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Comparing forecasts against demand they have not already seen."
+  },
+  "demand-forecasting-stockouts": {
+    "src": "/notes/demand-forecasting-stockouts/hero-2cf679555d11.webp",
+    "smallSrc": "/notes/demand-forecasting-stockouts/hero-small-32ad52a82181.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Sales stop when stock is absent, while demand can continue."
+  },
+  "demand-patterns-trend-seasonality": {
+    "src": "/notes/demand-patterns-trend-seasonality/hero-bf84f7f749a1.webp",
+    "smallSrc": "/notes/demand-patterns-trend-seasonality/hero-small-913f1c244869.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A repeating seasonal pattern and a changing demand level."
+  },
+  "design-of-experiments-example": {
+    "src": "/notes/design-of-experiments-example/hero-7048ac56972b.webp",
+    "smallSrc": "/notes/design-of-experiments-example/hero-small-f8c04398afb2.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Testing combinations of two settings in a controlled experiment."
+  },
+  "did-it-hold": {
+    "src": "/notes/did-it-hold/hero-7dc6a9b73f5e.webp",
+    "smallSrc": "/notes/did-it-hold/hero-small-4b86897a748e.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Verifying that an improvement still holds after the initial result."
+  },
+  "digital-maturity-assessment": {
+    "src": "/notes/digital-maturity-assessment/hero-b62a630658dd.webp",
+    "smallSrc": "/notes/digital-maturity-assessment/hero-small-0a649c996c0e.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A maturity score checked against working evidence."
+  },
+  "digital-transformation-lead-responsibilities": {
+    "src": "/notes/digital-transformation-lead-responsibilities/hero-2d8ad82edcc8.webp",
+    "smallSrc": "/notes/digital-transformation-lead-responsibilities/hero-small-c16c48f03bd1.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Connecting operational work, technology delivery and measured results."
+  },
+  "digital-transformation-that-sticks": {
+    "src": "/notes/digital-transformation-that-sticks/hero-812a4c5f1783.webp",
+    "smallSrc": "/notes/digital-transformation-that-sticks/hero-small-e4351dab60cb.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A digital change built around the operating work."
+  },
+  "digital-twin-vs-simulation": {
+    "src": "/notes/digital-twin-vs-simulation/hero-08891abeba6a.webp",
+    "smallSrc": "/notes/digital-twin-vs-simulation/hero-small-3952ce62accc.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A connected model and an offline simulation of the same line."
+  },
+  "digitization-digitalization-transformation": {
+    "src": "/notes/digitization-digitalization-transformation/hero-1cab9f659ad3.webp",
+    "smallSrc": "/notes/digitization-digitalization-transformation/hero-small-679fbd3ecc36.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Converting a record, changing a workflow and redesigning the operating system."
+  },
+  "distribution-requirements-planning-example": {
+    "src": "/notes/distribution-requirements-planning-example/hero-9a12639a5a93.webp",
+    "smallSrc": "/notes/distribution-requirements-planning-example/hero-small-84f67d5f83f2.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Replenishing a distribution network at the right time."
+  },
+  "dmaic-step-by-step": {
+    "src": "/notes/dmaic-step-by-step/hero-c5d483ed617e.webp",
+    "smallSrc": "/notes/dmaic-step-by-step/hero-small-d79a15b8fd19.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Following a filling problem from measurement to control."
+  },
+  "earned-value-management-explained": {
+    "src": "/notes/earned-value-management-explained/hero-cccdd0d970dc.webp",
+    "smallSrc": "/notes/earned-value-management-explained/hero-small-d65ab4ec77e6.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Accepted work, planned work and actual spending considered together."
+  },
+  "economic-order-quantity-eoq": {
+    "src": "/notes/economic-order-quantity-eoq/hero-cdb13e381291.webp",
+    "smallSrc": "/notes/economic-order-quantity-eoq/hero-small-0643c9837a1e.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Trading order effort against inventory held."
+  },
+  "edi-vs-api": {
+    "src": "/notes/edi-vs-api/hero-0dcbf3e278f1.webp",
+    "smallSrc": "/notes/edi-vs-api/hero-small-06710ed23205.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Two exchange methods still need the same business acceptance."
+  },
+  "eight-wastes-lean": {
+    "src": "/notes/eight-wastes-lean/hero-2e9ec5ba73d3.webp",
+    "smallSrc": "/notes/eight-wastes-lean/hero-small-56acfd086dfe.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Losses around the work needed to fulfil one order."
+  },
+  "erp-mes-scada": {
+    "src": "/notes/erp-mes-scada/hero-57a9ded0612a.webp",
+    "smallSrc": "/notes/erp-mes-scada/hero-small-1c47d5b0b0b1.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Planning, executing and sensing the same production order."
+  },
+  "etl-vs-elt": {
+    "src": "/notes/etl-vs-elt/hero-454e66b69088.webp",
+    "smallSrc": "/notes/etl-vs-elt/hero-small-86320e5ee36a.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Transforming records before or after loading them."
+  },
+  "event-driven-architecture-example": {
+    "src": "/notes/event-driven-architecture-example/hero-1b8de4b17145.webp",
+    "smallSrc": "/notes/event-driven-architecture-example/hero-small-35ec112b535d.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "One event can reach independent consumers at different times."
+  },
+  "factory-floor-software": {
+    "src": "/notes/factory-floor-software/hero-25d66caf7d4a.webp",
+    "smallSrc": "/notes/factory-floor-software/hero-small-1508725ce66e.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Factory habits applied to building software."
+  },
+  "fast-tracking-vs-crashing": {
+    "src": "/notes/fast-tracking-vs-crashing/hero-1bdb081d9926.webp",
+    "smallSrc": "/notes/fast-tracking-vs-crashing/hero-small-d2eb3c2b9758.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Overlapping tasks or adding resources changes different risks."
+  },
+  "fifo-vs-fefo": {
+    "src": "/notes/fifo-vs-fefo/hero-7d4850253c44.webp",
+    "smallSrc": "/notes/fifo-vs-fefo/hero-small-14d6d723aa39.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Arrival order and expiry order can point to different stock."
+  },
+  "first-pass-yield-vs-final-yield": {
+    "src": "/notes/first-pass-yield-vs-final-yield/hero-32eeb48baedb.webp",
+    "smallSrc": "/notes/first-pass-yield-vs-final-yield/hero-small-528886abcff0.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Final accepted output can include work that failed first time."
+  },
+  "fmea-step-by-step": {
+    "src": "/notes/fmea-step-by-step/hero-3803193018e5.webp",
+    "smallSrc": "/notes/fmea-step-by-step/hero-small-e3d719d0b1c3.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Identifying a failure mode and changing the design before it happens."
+  },
+  "forecast-accuracy-mape-wape": {
+    "src": "/notes/forecast-accuracy-mape-wape/hero-6fad972794b3.webp",
+    "smallSrc": "/notes/forecast-accuracy-mape-wape/hero-small-4e77f201bb09.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Different forecast-error measures weight the same observations differently."
+  },
+  "forecast-accuracy-zero-demand": {
+    "src": "/notes/forecast-accuracy-zero-demand/hero-f8ded930f1e6.webp",
+    "smallSrc": "/notes/forecast-accuracy-zero-demand/hero-small-60ef3448eb39.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Percentage forecast error needs care when actual demand is zero."
+  },
+  "forecast-bias-calculation": {
+    "src": "/notes/forecast-bias-calculation/hero-03bda317bc5a.webp",
+    "smallSrc": "/notes/forecast-bias-calculation/hero-small-34a7954dbc9e.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Opposite errors can cancel in bias while absolute error remains."
+  },
+  "gage-rr-explained": {
+    "src": "/notes/gage-rr-explained/hero-da93d90c1ef7.webp",
+    "smallSrc": "/notes/gage-rr-explained/hero-small-40e86cf54440.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Separating repeated measurement variation from operator-to-operator variation."
+  },
+  "gemba-walk-example": {
+    "src": "/notes/gemba-walk-example/hero-dba6d989f7a4.webp",
+    "smallSrc": "/notes/gemba-walk-example/hero-small-e57068337ada.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Going to the work before choosing an explanation."
+  },
+  "heijunka-production-leveling": {
+    "src": "/notes/heijunka-production-leveling/hero-61055d6c5f7f.webp",
+    "smallSrc": "/notes/heijunka-production-leveling/hero-small-23a04854cf69.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Levelling the sequence while retaining the same product mix."
+  },
+  "hoshin-kanri-vs-okrs": {
+    "src": "/notes/hoshin-kanri-vs-okrs/hero-0231a5e6b3dd.webp",
+    "smallSrc": "/notes/hoshin-kanri-vs-okrs/hero-small-dc493f4dd957.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Connecting strategy, team choices and evidence of progress."
+  },
+  "humanoid-robots-manufacturing-roi": {
+    "src": "/notes/humanoid-robots-manufacturing-roi/hero-483709db0fd3.webp",
+    "smallSrc": "/notes/humanoid-robots-manufacturing-roi/hero-small-aa25eb466a23.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A robot deployment still needs a useful task, charging and support."
+  },
+  "improve-inventory-management": {
+    "src": "/notes/improve-inventory-management/hero-70d61a89b79d.webp",
+    "smallSrc": "/notes/improve-inventory-management/hero-small-5dc8c45bd324.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Finding the shortage mechanism before adding more stock."
+  },
+  "inventory-position-vs-on-hand": {
+    "src": "/notes/inventory-position-vs-on-hand/hero-262da95b7bbf.webp",
+    "smallSrc": "/notes/inventory-position-vs-on-hand/hero-small-2439ef8b2a6f.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "On-hand stock, incoming supply and committed demand."
+  },
+  "inventory-risk-pooling": {
+    "src": "/notes/inventory-risk-pooling/hero-cb8599b898a8.webp",
+    "smallSrc": "/notes/inventory-risk-pooling/hero-small-75fed3b68f1e.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Sharing stock across demand streams changes the required buffer."
+  },
+  "inventory-shrinkage-example": {
+    "src": "/notes/inventory-shrinkage-example/hero-7cf584136639.webp",
+    "smallSrc": "/notes/inventory-shrinkage-example/hero-small-3575328d923b.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Reconciling a record error before investigating genuine missing stock."
+  },
+  "inventory-turnover-days": {
+    "src": "/notes/inventory-turnover-days/hero-f77803c9c1bf.webp",
+    "smallSrc": "/notes/inventory-turnover-days/hero-small-9db621bfaf8f.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Stock movement and how long inventory remains held."
+  },
+  "it-vs-ot-explained": {
+    "src": "/notes/it-vs-ot-explained/hero-362b893a5348.webp",
+    "smallSrc": "/notes/it-vs-ot-explained/hero-small-fc3f2386f5a4.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Business systems and physical equipment have different operating constraints."
+  },
+  "jidoka-andon-explained": {
+    "src": "/notes/jidoka-andon-explained/hero-273ea493ef68.webp",
+    "smallSrc": "/notes/jidoka-andon-explained/hero-small-cfd055b7339c.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Detecting the problem, signalling it and stopping further defects."
+  },
+  "kaizen-lean-six-sigma": {
+    "src": "/notes/kaizen-lean-six-sigma/hero-f54c11145e6a.webp",
+    "smallSrc": "/notes/kaizen-lean-six-sigma/hero-small-9569c847d575.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Choosing improvement methods to fit the problem."
+  },
+  "kanban-pull-system": {
+    "src": "/notes/kanban-pull-system/hero-5f90b7196b52.webp",
+    "smallSrc": "/notes/kanban-pull-system/hero-small-834d4c54c5b5.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "An empty bin sends the signal to replace what was used."
+  },
+  "kraljic-matrix-example": {
+    "src": "/notes/kraljic-matrix-example/hero-4e8dfde26546.webp",
+    "smallSrc": "/notes/kraljic-matrix-example/hero-small-59ef364a3d86.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Different purchasing items need different supply strategies."
+  },
+  "layered-process-audit-example": {
+    "src": "/notes/layered-process-audit-example/hero-f31fa0be97df.webp",
+    "smallSrc": "/notes/layered-process-audit-example/hero-small-399fd7ed9dde.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Different review levels checking the same operating control."
+  },
+  "leading-vs-lagging-indicators": {
+    "src": "/notes/leading-vs-lagging-indicators/hero-76eb7eed4cf3.webp",
+    "smallSrc": "/notes/leading-vs-lagging-indicators/hero-small-beab357e8d17.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A warning visible before the final service result."
+  },
+  "lessons-learned-example": {
+    "src": "/notes/lessons-learned-example/hero-706df826c3f6.webp",
+    "smallSrc": "/notes/lessons-learned-example/hero-small-2213b7f4e8e7.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A lesson changes the next project rather than remaining in a report."
+  },
+  "make-to-stock-vs-make-to-order": {
+    "src": "/notes/make-to-stock-vs-make-to-order/hero-a564b52ab406.webp",
+    "smallSrc": "/notes/make-to-stock-vs-make-to-order/hero-small-0476a9cea6d2.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Different amounts of work happen before the customer order."
+  },
+  "master-data-vs-transactional-data": {
+    "src": "/notes/master-data-vs-transactional-data/hero-2026e49ab0d4.webp",
+    "smallSrc": "/notes/master-data-vs-transactional-data/hero-small-b55ed484d4e7.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Stable item definitions support changing business transactions."
+  },
+  "material-requirements-planning-example": {
+    "src": "/notes/material-requirements-planning-example/hero-3ce10a296fb8.webp",
+    "smallSrc": "/notes/material-requirements-planning-example/hero-small-ac85c379ba46.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Turning product requirements and existing stock into timed component orders."
+  },
+  "mtbf-vs-mttr": {
+    "src": "/notes/mtbf-vs-mttr/hero-2c0a59af20bb.webp",
+    "smallSrc": "/notes/mtbf-vs-mttr/hero-small-0c8d6a772299.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Time between failures and time to repair a failure."
+  },
+  "npv-vs-payback": {
+    "src": "/notes/npv-vs-payback/hero-ff74fc185307.webp",
+    "smallSrc": "/notes/npv-vs-payback/hero-small-8281b63d0450.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Early repayment and total discounted value can favour different projects."
+  },
+  "obsolete-inventory-explained": {
+    "src": "/notes/obsolete-inventory-explained/hero-84fca357f311.webp",
+    "smallSrc": "/notes/obsolete-inventory-explained/hero-small-f01798dc3e64.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Stock can remain physically present after its useful demand is gone."
+  },
+  "otif-vs-on-time-delivery": {
+    "src": "/notes/otif-vs-on-time-delivery/hero-8404a51c0d68.webp",
+    "smallSrc": "/notes/otif-vs-on-time-delivery/hero-small-26e17885783a.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Arriving on time does not mean arriving in full."
+  },
+  "pareto-analysis-example": {
+    "src": "/notes/pareto-analysis-example/hero-dcd71af75a48.webp",
+    "smallSrc": "/notes/pareto-analysis-example/hero-small-7ef91ed05c18.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "The largest count is not necessarily the largest delay or cost."
+  },
+  "pdca-cycle-example": {
+    "src": "/notes/pdca-cycle-example/hero-e80574e08009.webp",
+    "smallSrc": "/notes/pdca-cycle-example/hero-small-7c7a741f7ee8.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Testing and checking a change before spreading it."
+  },
+  "planning-time-fence-explained": {
+    "src": "/notes/planning-time-fence-explained/hero-f4964e833db3.webp",
+    "smallSrc": "/notes/planning-time-fence-explained/hero-small-c0196a39275d.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Near-term commitments and later planning changes need different treatment."
+  },
+  "poka-yoke-mistake-proofing": {
+    "src": "/notes/poka-yoke-mistake-proofing/hero-d991e8ee6f61.webp",
+    "smallSrc": "/notes/poka-yoke-mistake-proofing/hero-small-396089822e77.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Preventing a wrong assembly at the point of use."
+  },
+  "process-capability-cp-cpk": {
+    "src": "/notes/process-capability-cp-cpk/hero-7701845c516b.webp",
+    "smallSrc": "/notes/process-capability-cp-cpk/hero-small-526d9a781361.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Process spread and centring relative to the requirement."
+  },
+  "process-mining-vs-process-mapping": {
+    "src": "/notes/process-mining-vs-process-mapping/hero-3687048d615a.webp",
+    "smallSrc": "/notes/process-mining-vs-process-mapping/hero-small-8b1856741f58.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Actual records reveal work missing from the intended process map."
+  },
+  "project-assumptions-vs-constraints": {
+    "src": "/notes/project-assumptions-vs-constraints/hero-0cb4d3829d02.webp",
+    "smallSrc": "/notes/project-assumptions-vs-constraints/hero-small-576612248c6c.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Assumed conditions differ from fixed planning limits."
+  },
+  "project-business-case-example": {
+    "src": "/notes/project-business-case-example/hero-7b937215a463.webp",
+    "smallSrc": "/notes/project-business-case-example/hero-small-422a3e188961.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Comparing a proposed investment with the actual alternative."
+  },
+  "project-charter-example": {
+    "src": "/notes/project-charter-example/hero-23d94327c77a.webp",
+    "smallSrc": "/notes/project-charter-example/hero-small-ec62222cbf44.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Agreeing the purpose, boundary and authority to start a project."
+  },
+  "project-dependency-types": {
+    "src": "/notes/project-dependency-types/hero-14ce88e448f8.webp",
+    "smallSrc": "/notes/project-dependency-types/hero-small-568fc4bebefe.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Task relationships connect starts and finishes, not just bars on a plan."
+  },
+  "project-estimation-techniques": {
+    "src": "/notes/project-estimation-techniques/hero-d2a827a72c49.webp",
+    "smallSrc": "/notes/project-estimation-techniques/hero-small-77241e989994.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Using prior work, a unit model or a detailed build-up to estimate cost."
+  },
+  "project-governance-example": {
+    "src": "/notes/project-governance-example/hero-796883568243.webp",
+    "smallSrc": "/notes/project-governance-example/hero-small-00a6d63c4a66.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Decision authority and delivery responsibility are different."
+  },
+  "project-handover-checklist": {
+    "src": "/notes/project-handover-checklist/hero-2ae4a47ac5d6.webp",
+    "smallSrc": "/notes/project-handover-checklist/hero-small-6ae0ac9db38b.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Preparing operations to own and support the delivered system."
+  },
+  "project-management-explained": {
+    "src": "/notes/project-management-explained/hero-cfda4f6365e8.webp",
+    "smallSrc": "/notes/project-management-explained/hero-small-47c5b8d5c48f.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Managing an idea through to accepted operational work."
+  },
+  "project-program-portfolio": {
+    "src": "/notes/project-program-portfolio/hero-21d40aebcac7.webp",
+    "smallSrc": "/notes/project-program-portfolio/hero-small-6f0412442c70.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Projects, programs and portfolios manage different connected decisions."
+  },
+  "project-quality-management-example": {
+    "src": "/notes/project-quality-management-example/hero-2e181745bc78.webp",
+    "smallSrc": "/notes/project-quality-management-example/hero-small-0ba5211d679b.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Quality is about accepted output against the agreed requirement."
+  },
+  "project-risk-register": {
+    "src": "/notes/project-risk-register/hero-9dcca7b6301d.webp",
+    "smallSrc": "/notes/project-risk-register/hero-small-18de9dae2d84.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A risk record should support a response and reserve decision."
+  },
+  "project-risk-vs-issue": {
+    "src": "/notes/project-risk-vs-issue/hero-e65142c5f681.webp",
+    "smallSrc": "/notes/project-risk-vs-issue/hero-small-1961301feae2.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A possible event becoming a present issue."
+  },
+  "project-status-report-example": {
+    "src": "/notes/project-status-report-example/hero-36ae190bab6f.webp",
+    "smallSrc": "/notes/project-status-report-example/hero-small-3c7d95df89fc.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Reporting the remaining work and the decision needed."
+  },
+  "raci-matrix-guide": {
+    "src": "/notes/raci-matrix-guide/hero-c1f4c79d6df9.webp",
+    "smallSrc": "/notes/raci-matrix-guide/hero-small-887c99a0bebc.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Clear responsibility and one accountable decision owner."
+  },
+  "recover-delayed-project": {
+    "src": "/notes/recover-delayed-project/hero-825138212e7e.webp",
+    "smallSrc": "/notes/recover-delayed-project/hero-small-4913a3cedcc0.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Recovering the plan without erasing the original commitment."
+  },
+  "requirements-traceability-matrix-example": {
+    "src": "/notes/requirements-traceability-matrix-example/hero-a7cd8a7b3df6.webp",
+    "smallSrc": "/notes/requirements-traceability-matrix-example/hero-small-e91c908e8b78.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Tracing requirements through implementation, testing and acceptance."
+  },
+  "resource-leveling-vs-smoothing": {
+    "src": "/notes/resource-leveling-vs-smoothing/hero-e8b947341e5c.webp",
+    "smallSrc": "/notes/resource-leveling-vs-smoothing/hero-small-f6195327b042.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Fitting work to a shared resource rather than merely moving bars."
+  },
+  "reverse-logistics-example": {
+    "src": "/notes/reverse-logistics-example/hero-1247d421a5e3.webp",
+    "smallSrc": "/notes/reverse-logistics-example/hero-small-31b4e18e0e9e.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Returning a product and issuing credit are connected but separate decisions."
+  },
+  "role-based-access-control-explained": {
+    "src": "/notes/role-based-access-control-explained/hero-170aa67f7d79.webp",
+    "smallSrc": "/notes/role-based-access-control-explained/hero-small-36cdf3599ae5.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Giving a role the permissions its work actually needs."
+  },
+  "rolling-wave-planning-example": {
+    "src": "/notes/rolling-wave-planning-example/hero-c8a737e9a3a5.webp",
+    "smallSrc": "/notes/rolling-wave-planning-example/hero-small-7b7853de5406.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Adding detail as the next part of the project becomes better understood."
+  },
+  "root-cause-analysis-explained": {
+    "src": "/notes/root-cause-analysis-explained/hero-b43ec106eb4c.webp",
+    "smallSrc": "/notes/root-cause-analysis-explained/hero-small-5384092b951e.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Following evidence beyond the first explanation."
+  },
+  "rough-cut-capacity-planning": {
+    "src": "/notes/rough-cut-capacity-planning/hero-db3df7189f16.webp",
+    "smallSrc": "/notes/rough-cut-capacity-planning/hero-small-6fc563025af3.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Checking whether an aggregate plan fits a critical resource."
+  },
+  "saas-paas-iaas-explained": {
+    "src": "/notes/saas-paas-iaas-explained/hero-cacdeb2fd7b2.webp",
+    "smallSrc": "/notes/saas-paas-iaas-explained/hero-small-d1c5675afc2b.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Different cloud models leave different operating responsibilities."
+  },
+  "safety-stock-reorder-point": {
+    "src": "/notes/safety-stock-reorder-point/hero-7aa87c3d35e5.webp",
+    "smallSrc": "/notes/safety-stock-reorder-point/hero-small-9ee7ec531775.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Ordering in time while retaining a buffer against uncertainty."
+  },
+  "sales-operations-planning-explained": {
+    "src": "/notes/sales-operations-planning-explained/hero-56de4a61c946.webp",
+    "smallSrc": "/notes/sales-operations-planning-explained/hero-small-17e4587158e8.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Reconciling demand, capacity and customer commitments."
+  },
+  "same-oee-opposite-fixes": {
+    "src": "/notes/same-oee-opposite-fixes/hero-f3bf7b955bed.webp",
+    "smallSrc": "/notes/same-oee-opposite-fixes/hero-small-5fab616f9f35.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "The same headline equipment score can hide different losses."
+  },
+  "scaling-ai-manufacturing": {
+    "src": "/notes/scaling-ai-manufacturing/hero-8cd9933fc168.webp",
+    "smallSrc": "/notes/scaling-ai-manufacturing/hero-small-17c3dde146af.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A working pilot does not settle the next plant's conditions."
+  },
+  "scope-creep-change-control": {
+    "src": "/notes/scope-creep-change-control/hero-96f212b531d1.webp",
+    "smallSrc": "/notes/scope-creep-change-control/hero-small-b03d032844d0.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "An extra deliverable still needs time, capacity and a decision."
+  },
+  "scrum-explained": {
+    "src": "/notes/scrum-explained/hero-96ce1b9e0aa3.webp",
+    "smallSrc": "/notes/scrum-explained/hero-small-62ddf46691af.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A sprint needs a usable increment, not just finished tickets."
+  },
+  "sipoc-diagram-example": {
+    "src": "/notes/sipoc-diagram-example/hero-9ad55703a964.webp",
+    "smallSrc": "/notes/sipoc-diagram-example/hero-small-4c78d985edab.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Defining the process boundary through its inputs, output and customer."
+  },
+  "sit-vs-uat": {
+    "src": "/notes/sit-vs-uat/hero-5690bae13d82.webp",
+    "smallSrc": "/notes/sit-vs-uat/hero-small-62781ee4955a.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A working interface does not prove the business can use the result."
+  },
+  "smed-changeover-smaller-batches": {
+    "src": "/notes/smed-changeover-smaller-batches/hero-242bc55721c0.webp",
+    "smallSrc": "/notes/smed-changeover-smaller-batches/hero-small-37086867fe2d.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Moving preparation out of the stoppage can enable smaller batches."
+  },
+  "spaghetti-diagram-example": {
+    "src": "/notes/spaghetti-diagram-example/hero-65ca7ec562aa.webp",
+    "smallSrc": "/notes/spaghetti-diagram-example/hero-small-eceab7641505.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Measuring the actual walking route before changing the layout."
+  },
+  "stage-gate-review-example": {
+    "src": "/notes/stage-gate-review-example/hero-7c96d7ad2572.webp",
+    "smallSrc": "/notes/stage-gate-review-example/hero-small-478c90746647.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Completing the pilot and authorising rollout are different decisions."
+  },
+  "stakeholder-mapping-example": {
+    "src": "/notes/stakeholder-mapping-example/hero-aaed3edd739c.webp",
+    "smallSrc": "/notes/stakeholder-mapping-example/hero-small-3a5b1b1ca8b1.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Involving the people whose power or operating knowledge affects the change."
+  },
+  "standard-work-vs-sop": {
+    "src": "/notes/standard-work-vs-sop/hero-5de984c283b9.webp",
+    "smallSrc": "/notes/standard-work-vs-sop/hero-small-2fbdb3dd5859.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Instructions plus an agreed sequence, timing and work in progress."
+  },
+  "supplier-development-example": {
+    "src": "/notes/supplier-development-example/hero-87b8dc8d9ad3.webp",
+    "smallSrc": "/notes/supplier-development-example/hero-small-82b93ec1de05.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Improving the buyer and supplier work behind a delivery result."
+  },
+  "supplier-scorecard-example": {
+    "src": "/notes/supplier-scorecard-example/hero-ed9f31745757.webp",
+    "smallSrc": "/notes/supplier-scorecard-example/hero-small-631c69cc396a.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A good combined score can still fail a required quality condition."
+  },
+  "supply-chain-management-explained": {
+    "src": "/notes/supply-chain-management-explained/hero-a14418dc603b.webp",
+    "smallSrc": "/notes/supply-chain-management-explained/hero-small-ccfc72763af3.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Following one order across the full supply chain."
+  },
+  "supply-chain-risk-management": {
+    "src": "/notes/supply-chain-risk-management/hero-cc574a719ff9.webp",
+    "smallSrc": "/notes/supply-chain-risk-management/hero-small-dcc76996c6c8.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Checking what the backup route still depends on."
+  },
+  "takt-time-vs-cycle-time": {
+    "src": "/notes/takt-time-vs-cycle-time/hero-c7ae2e4dee33.webp",
+    "smallSrc": "/notes/takt-time-vs-cycle-time/hero-small-32c7de30ec5b.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Comparing each station with demand instead of hiding behind an average."
+  },
+  "technical-debt-explained": {
+    "src": "/notes/technical-debt-explained/hero-4adc425fef76.webp",
+    "smallSrc": "/notes/technical-debt-explained/hero-small-1632b5fd8bbd.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A quick duplication can make later changes harder."
+  },
+  "throughput-accounting-example": {
+    "src": "/notes/throughput-accounting-example/hero-6bf77357e6c4.webp",
+    "smallSrc": "/notes/throughput-accounting-example/hero-small-9a5920c214dd.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Comparing the return on the constrained production resource."
+  },
+  "total-landed-cost-example": {
+    "src": "/notes/total-landed-cost-example/hero-be45072402ad.webp",
+    "smallSrc": "/notes/total-landed-cost-example/hero-small-576c5400d696.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A shared shipment bill still needs a clear allocation basis."
+  },
+  "total-productive-maintenance-explained": {
+    "src": "/notes/total-productive-maintenance-explained/hero-f174d3f8c7c5.webp",
+    "smallSrc": "/notes/total-productive-maintenance-explained/hero-small-f98f1bafd3e3.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Shared work to prevent a recurring equipment loss."
+  },
+  "value-stream-mapping-example": {
+    "src": "/notes/value-stream-mapping-example/hero-7901fa72e94a.webp",
+    "smallSrc": "/notes/value-stream-mapping-example/hero-small-5af82b12229c.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "The waiting between tasks can dominate the lead time."
+  },
+  "vmi-vs-consignment": {
+    "src": "/notes/vmi-vs-consignment/hero-d2e43f422321.webp",
+    "smallSrc": "/notes/vmi-vs-consignment/hero-small-e3e14721bead.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Managing replenishment and owning the stock are separate arrangements."
+  },
+  "what-to-automate-first": {
+    "src": "/notes/what-to-automate-first/hero-b52eb6f75633.webp",
+    "smallSrc": "/notes/what-to-automate-first/hero-small-d536c79807ed.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Choosing the process and method before automating it."
+  },
+  "when-procurement-savings-increase-total-cost": {
+    "src": "/notes/when-procurement-savings-increase-total-cost/hero-4e6c3e0255a1.webp",
+    "smallSrc": "/notes/when-procurement-savings-increase-total-cost/hero-small-1176d64a7552.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Express freight can outweigh the purchase-price saving."
+  },
+  "why-projects-fail": {
+    "src": "/notes/why-projects-fail/hero-53fd3e723601.webp",
+    "smallSrc": "/notes/why-projects-fail/hero-small-d2e9a00ab8b1.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A reassuring status report can hide missing delivery conditions."
+  },
+  "work-breakdown-structure-example": {
+    "src": "/notes/work-breakdown-structure-example/hero-caeb12a65486.webp",
+    "smallSrc": "/notes/work-breakdown-structure-example/hero-small-f417489f3d47.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Breaking the project into deliverables before scheduling tasks."
+  }
+}
