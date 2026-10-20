@@ -11,7 +11,8 @@
     "verify:headers": "./verify-hosting-headers.sh",
     "verify:seo": "node scripts/check-seo.mjs",
     "postinstall": "node scripts/patch-fiber-timer.mjs",
-    "predev": "node scripts/prepare-note-figures.mjs"
+    "predev": "node scripts/prepare-note-figures.mjs",
+    "verify:heroes": "node scripts/check-note-heroes.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.8.0",

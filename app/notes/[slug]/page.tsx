@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { NoteHero } from "@/components/notes/NoteHero";
+import { getNoteHero } from "@/lib/note-heroes";
 import { NoteArticleContent } from "@/components/notes/NoteArticleContent";
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/site/SiteFooter";
@@ -6,8 +8,8 @@ import { TLink } from "@/components/shell/transitions";
 import { LensAnchor } from "@/components/lens/LensAnchor";
 import { GLImage } from "@/components/media/GLImage";
 import { SocialLinks } from "@/components/site/SocialLinks";
-import { author, ogImage, site } from "@/content/site";
-import { formatDate, getNote, getNotes } from "@/lib/notes";
+import { author, site } from "@/content/site";
+import { getNote, getNotes } from "@/lib/notes";
 
 export const dynamicParams = false;
 
@@ -46,6 +48,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   const n = getNote(slug);
   if (!n) return {};
+  const hero = getNoteHero(slug);
   return {
     title: n.seoTitle,
     description: n.seoDescription,
@@ -62,9 +65,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       section: n.topic || undefined,
       tags: n.keywords,
       url: `/notes/${slug}/`,
-      images: [ogImage],
+      images: [{ url: hero.src, width: hero.width, height: hero.height, alt: hero.alt }],
     },
-    twitter: { card: "summary_large_image", title: n.seoTitle, description: n.seoDescription, images: [ogImage] },
+    twitter: { card: "summary_large_image", title: n.seoTitle, description: n.seoDescription, images: [{ url: hero.src, alt: hero.alt }] },
   };
 }
 
@@ -76,6 +79,7 @@ export default async function NotePage({ params }: Params) {
   const n = notes[i];
   const next = notes[(i + 1) % notes.length];
   const cta = vrolenCtas[n.slug];
+  const hero = getNoteHero(n.slug);
 
   const url = `${site.url}/notes/${n.slug}/`;
   const personId = `${site.url}/#person`;
@@ -97,7 +101,7 @@ export default async function NotePage({ params }: Params) {
         wordCount: n.words,
         timeRequired: `PT${n.readingMinutes}M`,
         isAccessibleForFree: true,
-        image: `${site.url}${ogImage.url}`,
+        image: `${site.url}${hero.src}`,
         author: { "@id": personId },
         publisher: { "@id": personId },
         isPartOf: { "@type": "Blog", "@id": `${site.url}/notes/#blog`, name: "Notes by Abolfazl Shirkavand", url: `${site.url}/notes/` },
@@ -129,57 +133,33 @@ export default async function NotePage({ params }: Params) {
   return (
     <>
       <div className="paper" data-nav-tone="light">
-        <article className="note frame">
-          <header className="note-head">
-            <TLink href="/notes/" className="text-link note-back">
-              <span aria-hidden="true">←</span> Notes
-            </TLink>
-            <h1 className="note-title">{n.title}</h1>
-            <p className="note-dek">{n.summary}</p>
-            <div className="note-byline">
-              <TLink href="/about/" className="note-author" rel="author">
-                <img src={author.avatar} alt="" width={48} height={48} className="note-avatar" loading="eager" fetchPriority="low" decoding="async" />
-                <span className="note-author-text">
-                  <span className="note-author-name">{site.name}</span>
-                  <span className="note-author-role">{author.line}</span>
-                </span>
-              </TLink>
-              <p className="note-meta">
-                {n.topic && <span className="note-meta-topic">{n.topic}</span>}
-                <time dateTime={n.date}>{formatDate(n.date)}</time>
-                {n.updated !== n.date && (
-                  <span>
-                    Updated <time dateTime={n.updated}>{formatDate(n.updated)}</time>
-                  </span>
-                )}
-                <span>{n.readingMinutes} min read</span>
-              </p>
-            </div>
-          </header>
-
-          <div className="note-layout">
-            {n.toc.length > 0 && (
-              <nav className="note-toc" aria-label="Contents">
-                <p className="note-toc-title">Contents</p>
-                <ol>
-                  {n.toc.map((t) => (
-                    <li key={t.id}>
-                      <a href={`#${t.id}`}>{t.text}</a>
-                    </li>
-                  ))}
-                </ol>
-              </nav>
-            )}
-
-            <div className="note-body">
-              <NoteArticleContent html={n.html} />
-
-              {next && next.slug !== n.slug && (
-                <TLink href={`/notes/${next.slug}/`} className="note-next">
-                  <span className="note-next-label">Next</span>
-                  <span className="note-next-title">{next.title}</span>
-                </TLink>
+        <article className="note note--with-hero">
+          <NoteHero note={n} image={hero} />
+          <div className="note-article-frame frame">
+            <div className="note-layout">
+              {n.toc.length > 0 && (
+                <nav className="note-toc" aria-label="Contents">
+                  <p className="note-toc-title">Contents</p>
+                  <ol>
+                    {n.toc.map((t) => (
+                      <li key={t.id}>
+                        <a href={`#${t.id}`}>{t.text}</a>
+                      </li>
+                    ))}
+                  </ol>
+                </nav>
               )}
+
+              <div className="note-body">
+                <NoteArticleContent html={n.html} />
+
+                {next && next.slug !== n.slug && (
+                  <TLink href={`/notes/${next.slug}/`} className="note-next">
+                    <span className="note-next-label">Next</span>
+                    <span className="note-next-title">{next.title}</span>
+                  </TLink>
+                )}
+              </div>
             </div>
           </div>
         </article>
