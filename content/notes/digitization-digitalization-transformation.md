@@ -4,7 +4,7 @@ date: 2026-10-14
 summary: Scanning an invoice, automating its approval and changing how the business pays suppliers solve different problems. Follow the same invoice through all three.
 seoTitle: Digitization vs digitalization vs transformation
 seoDescription: Understand digitization, digitalization and digital transformation through one invoice example. See what changes in the file, workflow and business.
-updated: 2026-10-19
+updated: 2026-10-20
 status: published
 topic: Digital transformation
 keywords: digitization vs digitalization, digital transformation examples, digitisation meaning, digitalization example, invoice automation, types of digital transformation
@@ -36,13 +36,30 @@ The [OECD's definitions](https://www.oecd.org/en/publications/investment-policy-
 
 ## Start with the file
 
-Scanning makes the invoice available without passing paper around. Optical character recognition, usually called OCR, can also extract fields such as supplier, invoice number, amount and due date.
+Scanning makes the invoice available without passing paper around. **Optical character recognition**, or OCR, turns text in an image into machine-readable text. A document-processing system can then use it to extract fields such as supplier, invoice number, amount and due date.
 
 An image of a number and a correctly captured number are different things. If OCR reads €8,200 as €820, the file is digital and the payable amount is wrong. Someone needs a way to check uncertain fields against the original.
 
 Good digitization can be the whole project. Replacing a vulnerable paper archive with searchable records may solve a worthwhile problem. It doesn't need a larger name to justify the work.
 
 For the supplier waiting for payment, though, the unchanged approval queue is still there. That takes us from the file to the process.
+
+## OCR vs intelligent document processing
+
+OCR does the text-recognition job. **Intelligent document processing**, or IDP, combines capabilities such as recognising document types, extracting fields and preparing structured output for the next process. OCR can be one part of that arrangement.
+
+[AWS explains OCR](https://aws.amazon.com/what-is/ocr/) as converting image text into machine-readable text. [IBM's IDP explanation](https://www.ibm.com/think/topics/intelligent-document-processing) separates document classification, data extraction and output. Product boundaries differ, so inspect what a proposed system actually does.
+
+| Job | In the same invoice example |
+| --- | --- |
+| Recognise text | Read the printed characters “€8,200” |
+| Classify and extract | Identify an invoice and associate €8,200 with the amount-due field |
+| Validate | Compare quantities, currency and supplier identity with the relevant records |
+| Route the result | Send a discrepancy to someone who can resolve it |
+
+Calling the system intelligent does not make the extracted amount correct. Its confidence score is not automatically a measured error rate, and it does not grant payment authority. Check uncertain fields against the original and test the complete route, including exceptions.
+
+OCR has not become irrelevant because a wider document workflow exists. It may still provide the text that workflow needs. Equally, a born-digital invoice may already contain usable text and need no image recognition at all.
 
 ## Change how the work moves
 
@@ -104,6 +121,8 @@ A project can combine all three kinds of change. Describe each one clearly enoug
 
 ## Sources
 
+- [AWS: What is OCR?](https://aws.amazon.com/what-is/ocr/), text recognition.
+- [IBM: Intelligent document processing](https://www.ibm.com/think/topics/intelligent-document-processing), classification, extraction and output.
 - AWS. [What is Digital Transformation?](https://aws.amazon.com/what-is/digital-transformation/), four-type classification.
 - OECD, 2026. [Investment Policy Framework for Digital Transformation, introduction and Box 1.1](https://www.oecd.org/en/publications/investment-policy-framework-for-digital-transformation_e96b36f4-en/full-report/component-3.html). Definitions at economy and society level; the company comparison is an applied explanation.
 

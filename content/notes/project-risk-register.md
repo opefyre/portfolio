@@ -1,142 +1,114 @@
 ---
-title: A project risk register that drives decisions: probability, impact and expected monetary value
+title: Project risk register: probability, impact and reserve decisions
 date: 2026-09-29
-summary: How to write risks people can act on, score them on a probability and impact matrix, turn them into expected monetary value, size a contingency reserve, choose responses (including for opportunities), and use EMV to decide whether a mitigation is worth paying for.
+updated: 2026-10-20
+summary: A risk register should help someone make a decision. Follow an ERP example through expected costs, response choices and the difference between two project reserves.
 status: published
 topic: Project management
-keywords: risk register, project risk management, probability impact matrix, expected monetary value, EMV, contingency reserve, risk response strategies, risk assessment, decision tree, PMP
+keywords: project risk register, expected monetary value, EMV, contingency reserve vs management reserve, probability impact matrix
 seoTitle: Project risk register: probability, impact and EMV
-seoDescription: Build a project risk register with probability, impact and expected monetary value. Use worked examples to compare responses and plan contingency.
+seoDescription: Build a project risk register, calculate expected monetary value and distinguish contingency from management reserve. A worked example explains the limits.
 ---
 
-Most risk registers are written once, at kickoff, and then left to age. They list vague worries ("resources", "scope creep", "vendor issues"), each tagged red, amber or green, and nobody makes a decision because of them.
+“Data migration” appears in the risk register. It is marked red. The next meeting brings the same entry, with no decision about the data.
 
-A useful risk register does three jobs. It says clearly what could happen. It puts a size on it, ideally in money and days. And it forces a decision: do something, or consciously accept it. This note builds one for a real-world style project, and shows how a little arithmetic turns it into budget and design decisions.
+A **project risk register records uncertain events, their possible effects, the people responsible and the response.** It should make the next action clearer. A colour alone won't do that.
 
-:::card The short version
-- Write each risk as **cause → event → effect**, so it's specific enough to act on.
-- Score **probability** and **impact** on defined scales, and plot them on a matrix to see what matters.
-- Multiply probability by impact in money to get **expected monetary value (EMV)**. Add them up to size a contingency reserve.
-- Choose a response for every risk: **avoid, transfer, mitigate or accept**. Opportunities get their own: **exploit, share, enhance or accept**.
-- Use EMV to decide whether a mitigation is worth its cost.
+Let's follow a fictional ERP replacement. The base cost estimate is €2.4 million over ten months, before risk reserves. The team needs to decide which risks to reduce and what funding to set aside for those that remain.
+
+## Write a risk someone can investigate
+
+Describe the cause, the uncertain event and its effect on the project.
+
+“Because customer records contain unchecked duplicates, migration errors may be found during acceptance testing, delaying go-live and adding up to €120,000 of rework.”
+
+That gives the team something to examine before testing. It also distinguishes the risk from an [issue that has already happened](/notes/project-risk-vs-issue/). Confirmed duplicates are a current issue; the later migration failure is still uncertain.
+
+## Risk register example: keep the financial basis consistent
+
+Here are the assumed exposures before additional responses. Each impact is an extra project cash cost if that event occurs. The amounts exclude costs already in the base estimate.
+
+| ID | Uncertain event and effect | Probability | Extra cash cost if it happens | EMV |
+| --- | --- | ---: | ---: | ---: |
+| R1 | Migration errors require late rework | 40% | €120,000 | €48,000 |
+| R2 | Departure of the integration engineer requires replacement support | 20% | €80,000 | €16,000 |
+| R3 | Licence prices rise at the project's planned renewal | 35% | €30,000 | €10,500 |
+| R4 | Slow adoption requires extended external support for parallel operation | 30% | €150,000 | €45,000 |
+| R5 | Security findings require additional implementation work | 25% | €40,000 | €10,000 |
+| O1 | Reusable test scripts reduce an external testing bill | 60% | −€25,000 | −€15,000 |
+
+All probabilities and impacts are fictional. Benefits arriving late would be a different financial effect from an extra support invoice. Keep that distinction when building a real register.
+
+## Use probability and impact to organise the review
+
+A probability-impact matrix can bring important risks into view, provided its scales are defined. It does not calculate their expected cost or establish the right response.
+
+For example, R1 has a larger expected cash exposure than R3. Its timing may also threaten acceptance. Both facts matter when deciding where to spend the team's attention.
+
+[Cox's research on risk matrices](https://doi.org/10.1111/j.1539-6924.2008.01030.x) explains how coarse categories can mis-rank risks. Keep the underlying estimates and consequences beside the colour.
+
+## Calculate expected monetary value
+
+**Expected monetary value**, or EMV, is probability multiplied by financial impact. Use a positive sign for extra cost and a negative sign for an uncertain cost reduction in this example.
+
+:::formula Expected exposure before additional responses
+R1: 0.40 × €120,000 = €48,000
+Threats R1 to R5: €129,500
+Opportunity O1: 0.60 × −€25,000 = −€15,000
+Net expected exposure: €129,500 − €15,000 = €114,500
 :::
 
-## Write risks you can act on
+The total is an average under our assumptions. It is not the amount the project will necessarily spend. For R1 alone, the simplified outcome is either no extra cost or €120,000. Neither outcome is €48,000.
 
-"Data migration" is a topic, not a risk. A good risk statement names a cause, an uncertain event and an effect on the project's objectives:
+The expected values of distinct cost effects can be added even when the events are related. That does not make their relationship irrelevant: a shared cause can make several large costs arrive together. It changes the range of possible totals and the funding needed to cover them.
 
-:::formula Risk statement
-Because **[cause]**, **[uncertain event]** may happen, which would lead to **[effect on objectives]**.
-:::
+Check for overlapping impacts before adding anything. If two risks include the same rework invoice, remove the duplication. Don't reduce the funding available for a threat simply because an unrelated saving might occur.
 
-For example: *Because the legacy customer data has never been cleaned, migration errors may be found late in testing, which would delay go-live by up to six weeks and cost about €120,000.*
+## Contingency reserve vs management reserve
 
-That sentence tells you what to watch (the data quality), when it would bite (testing), and what's at stake. It also tells you what a response could target: the cause.
+Under the budget convention described in [PMI's reserve paper](https://www.pmi.org/learning/library/model-risk-contingency-reserve-9310), contingency sits within the cost baseline, while management reserve sits outside it and within the overall project budget.
 
-## The example project
-
-A mid-sized company is replacing its ERP system. Budget €2.4 million, go-live in 10 months. The team's risk register, after a workshop:
-
-| ID | Risk | Probability | Impact | EMV |
-| --- | --- | --- | --- | --- |
-| R1 | Uncleaned legacy data causes migration errors late in testing, delaying go-live | 40% | €120,000 | €48,000 |
-| R2 | The key integration engineer leaves mid-project, slowing interfaces | 20% | €80,000 | €16,000 |
-| R3 | The vendor raises licence prices at renewal | 35% | €30,000 | €10,500 |
-| R4 | Users keep old spreadsheets, so benefits arrive months late | 30% | €150,000 | €45,000 |
-| R5 | The security review finds gaps that need rework | 25% | €40,000 | €10,000 |
-| O1 | Existing test scripts can be reused, saving effort | 60% | −€25,000 | −€15,000 |
-| | **Total expected value** | | | **€114,500** |
-
-O1 is an opportunity: an uncertain event that would *help*. It belongs in the same register, with a negative value.
-
-## Probability and impact, on defined scales
-
-"High" means different things to different people, so define the scales before anyone scores:
-
-| Level | Probability | Impact (cost) |
+| Reserve | What it is for in that convention | How to control it |
 | --- | --- | --- |
-| Very low | 10% or less | Under €10,000 |
-| Low | 11% to 25% | €10,000 to €49,999 |
-| Medium | 26% to 39% | €50,000 to €99,999 |
-| High | 40% to 69% | €100,000 to €149,999 |
-| Very high | 70% or more | €150,000 or more |
+| Contingency reserve | Identified uncertainty and the agreed response to it | Record the exposure, trigger, allocation and authority to use it |
+| Management reserve | Unforeseen work within the project's scope | Keep the management approval and any transfer into the baseline visible |
 
-Most projects also score impact on schedule, quality or reputation, and take the worst of them. Then plot every risk on the matrix:
+The organisation sets the actual approval rules. A reserve does not authorise extra scope or waive purchasing controls. The [project charter](/notes/project-charter-example/) should make the manager's authority clear.
 
-::figure risk-heatmap | The register on a probability and impact matrix. R1 (data migration) and R4 (low adoption) sit in the red zone and need a response now. O1 is an opportunity worth chasing.
+For a budget illustration, suppose management approves €180,000 of contingency and €100,000 of management reserve. These are assumed allocations to explain the structure, not calculated recommendations.
 
-The matrix is good for one thing: making the few big risks visible at a glance, so the steering committee spends its time on R1 and R4, not on R5.
+::figure paa2-reserve-bridge | Fictional funding illustration, not a reserve-sizing result. €2.4 million base cost plus €180,000 contingency gives a €2.58 million cost baseline. A separate €100,000 management reserve brings the total budget to €2.68 million.
 
-Don't ask more of it than that. Tony Cox showed that typical risk matrices can rank risks wrongly, sometimes putting a smaller risk above a bigger one, and in some cases do worse than random. Use the matrix to spot what needs attention, and numbers to decide.
+How much contingency is enough? Our €114,500 net expectation cannot answer that on its own. A reserve of €48,000 for R1 alone would be insufficient whenever its €120,000 event occurs. Under this two-outcome assumption, it covers the outcome only in the 60% of cases where the event does not happen.
 
-## Expected monetary value
+To discuss a funding confidence level, model the remaining cost ranges and relevant relationships, then examine the distribution of total cost. [GAO's cost-estimating guidance](https://www.gao.gov/products/gao-20-195g) describes risk and uncertainty analysis for that purpose. Better arithmetic cannot repair unsupported probabilities.
 
-The matrix ranks risks. EMV sizes them:
+## Compare a response with the exposure left behind
 
-:::formula Expected monetary value
-EMV = probability × impact
-R1: 40% × €120,000 = **€48,000**
-Register total: 48,000 + 16,000 + 10,500 + 45,000 + 10,000 − 15,000 = **€114,500**
+The team proposes a migration rehearsal costing €25,000. Assume, for this example, that credible evidence supports reducing R1's probability from 40% to 10%, with its €120,000 impact unchanged.
+
+:::formula Rehearsal comparison
+Without rehearsal: 0.40 × €120,000 = €48,000 expected cost
+With rehearsal: €25,000 + 0.10 × €120,000 = €37,000 expected cost
+Difference: €11,000 lower expected cost with the rehearsal
 :::
 
-EMV isn't what any single risk will cost. R1 will cost either nothing or €120,000, never €48,000. But across a portfolio of risks, the sum of EMVs is a reasonable estimate of what the known risks will cost on average. That makes it a defensible starting point for a **contingency reserve**: here, about €115,000, or 4.8% of the budget.
+The rehearsal is cheaper on expectation under those assumptions. The project still needs the €25,000 for certain and still faces a possible €120,000 event. Update the base plan for the funded rehearsal and assess the residual risk. Don't keep charging the original 40% exposure as though nothing changed.
 
-For a big project, go one step further. Model the uncertain costs and durations as ranges and run a Monte Carlo simulation. It gives you a probability curve instead of a single number: "we have a 70% chance of finishing under €2.55 million". The U.S. Government Accountability Office's schedule guide describes Monte Carlo simulation as an accepted way to size schedule reserves on large programs.
+Other responses might remove risky scope, move a contractual obligation or accept the exposure with a stated trigger. A contract can move some financial consequences while leaving the operating disruption with the project. Check what the response actually changes.
 
-## Choosing responses
+## Give the register a reason to change
 
-Every risk needs an owner and a response. There are four standard responses for threats, and four mirror images for opportunities:
+Name an owner, the evidence to watch and the decision date for each important entry. For R1, the owner could report duplicate rates, rehearsal results and unresolved mapping defects before the acceptance window.
 
-| Threats | What it means | Example |
-| --- | --- | --- |
-| Avoid | Change the plan so the risk can't happen | Don't migrate 10 years of closed orders at all; archive them |
-| Transfer | Shift the impact to someone else, usually at a price | A fixed-price clause for the integration work |
-| Mitigate | Reduce probability or impact | A full migration rehearsal two months before go-live |
-| Accept | Consciously do nothing, and keep a reserve | Accept R3's licence risk; it's in the contingency |
+After the rehearsal, revise the estimate using what was learned. Completion of the activity is not proof that the probability fell to 10%.
 
-| Opportunities | What it means | Example |
-| --- | --- | --- |
-| Exploit | Make sure it happens | Assign a tester to adapt the old scripts in week one |
-| Share | Partner with someone better placed to capture it | Share the saving with the vendor if they supply scripts |
-| Enhance | Raise its probability or size | Reuse scripts for regression testing after go-live too |
-| Accept | Take it if it comes | Don't plan for it; enjoy it if it happens |
+Review reserve use with Finance and the sponsor. Close exposures that have passed, investigate new ones and record any approved release or transfer of funding. The register should explain what changed in the plan since the last review.
 
-Accepting is a legitimate choice. What's not legitimate is accepting by accident, because nobody decided.
+## Sources and calculation notes
 
-## Is the mitigation worth it?
+- [PMI: A model to develop and use risk contingency reserve](https://www.pmi.org/learning/library/model-risk-contingency-reserve-9310), Narendra Shrivastava, 2014 conference paper. Reserve distinctions and limits of an EMV-based model.
+- [GAO: Cost Estimating and Assessment Guide](https://www.gao.gov/products/gao-20-195g), 2020, risk and uncertainty analysis.
+- [Cox: What's wrong with risk matrices?](https://doi.org/10.1111/j.1539-6924.2008.01030.x), 2008. Limits of categorical risk ranking.
 
-Here's where EMV earns its place. The team proposes a full data migration rehearsal for R1. It costs €25,000 and, based on similar projects, would cut the probability of late migration errors from 40% to 10%.
-
-:::formula Compare the two options
-Without the rehearsal: expected cost = 40% × €120,000 = **€48,000**
-With the rehearsal: €25,000 + 10% × €120,000 = **€37,000**
-Expected saving from rehearsing = **€11,000**
-:::
-
-The rehearsal costs money for certain, yet it's the cheaper option on average, and it also narrows the range of outcomes, which matters to a sponsor who can't absorb a six-week slip. The same logic works in reverse: some mitigations cost more than the risk they address, and accepting is the better decision.
-
-## Keep it alive
-
-A risk register is only as good as its last review:
-
-1. **Review the top risks at every steering meeting**, not the whole list. Five minutes, with owners reporting.
-2. **Update probability and impact as you learn.** After the migration rehearsal, R1's probability genuinely drops. Show it.
-3. **Close risks that have passed**, and release their share of the contingency.
-4. **Add new risks as they appear**, especially after every surprise. A surprise means a risk nobody wrote down.
-5. **Track the triggers.** For R1, the trigger is "more than 2% of test records fail validation". Agree in advance what happens when it fires.
-
-Risk management isn't pessimism. It's the part of planning that deals honestly with what you don't know yet.
-
-:::link /notes/fmea-step-by-step/ | The same idea for processes: FMEA
-Failure mode and effects analysis applies this thinking to how a process could fail, before it does.
-:::
-
-## Sources
-
-- U.S. Government Accountability Office (2015). [Schedule Assessment Guide](https://www.gao.gov/products/gao-16-89g) (GAO-16-89G), best practice 8: schedule risk analysis.
-- NASA (2024). [Risk Management Handbook, version 2.0](https://ntrs.nasa.gov/citations/20240014019).
-- Goodman, R. (2005). [The ascent of risk](https://www.pmi.org/learning/library/ascent-risk-pmbok-guide-7618). PMI Global Congress. On response strategies for threats and opportunities.
-- Gump, A. (2001). [Using decision models in the real world](https://www.pmi.org/learning/library/expected-monetary-value-choices-risk-impact-3490). *PM Network*. On expected monetary value and decision trees.
-- Cox, L. A. (2008). [What's wrong with risk matrices?](https://doi.org/10.1111/j.1539-6924.2008.01030.x) *Risk Analysis*, 28(2).
-
-*The project and its figures are illustrative.*
+The project, estimates, events, reserve allocations and proposed probability reduction are fictional. The budget bridge explains a stated convention. No cost distribution or funding confidence level has been estimated for this project.

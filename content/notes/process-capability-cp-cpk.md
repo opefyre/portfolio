@@ -1,144 +1,114 @@
 ---
-title: Process capability explained: Cp, Cpk, Pp and Ppk with one worked example
+title: Process capability: Cp, Cpk, Pp and Ppk with a worked example
 date: 2026-09-29
-summary: What Cp and Cpk actually measure, how to calculate them by hand, why a process can have a good Cp and a poor Cpk, how Ppk differs, what the common targets mean in defects per million, and the checks to do before trusting any capability number.
+updated: 2026-10-20
+summary: A shaft process has Cp of 1.39 and Cpk of 1.06. Follow the calculation, check what the difference means and see why a target alone cannot approve a process.
 status: published
 topic: Operational excellence
-keywords: process capability, Cpk, Cp, Ppk, Pp, Cpk formula, capability index, six sigma, statistical process control, specification limits, ppm defects
+keywords: process capability, Cp Cpk formula, Cpk vs Ppk, Pp Ppk, Cpk 1.33 meaning, process capability example
 seoTitle: Process capability: Cp, Cpk, Pp and Ppk explained
-seoDescription: Calculate Cp, Cpk, Pp and Ppk with a worked example. Learn what process capability measures and what to check before trusting the result.
+seoDescription: Calculate Cp, Cpk, Pp and Ppk with a shaft example. Understand sigma distance, normal-model defect estimates and the limits of common capability targets.
 ---
 
-"All the parts are in spec" sounds like good news. But it doesn't tell you whether they'll stay in spec next week, or how close to the edge they already are. Process capability answers that. It compares how much your process varies with how much the customer allows, and turns it into one number that suppliers, customers and auditors all understand.
+The sampled shafts all passed inspection. The production team still wants to know how close the process runs to the diameter limit, and whether today's result represents normal operation.
 
-This note calculates capability by hand on one example, so the formulas stop being a black box in your statistics software.
+**Process capability compares a process's variation and location with its specification limits.** Cp compares the widths. Cpk also considers where the mean sits. Pp and Ppk make corresponding comparisons using overall rather than within-subgroup variation.
 
-:::card The short version
-- **Cp** compares the width of the specification with the width of the process (six standard deviations). It ignores where the process is centred.
-- **Cpk** does the same, but only on the side nearest to a limit. It penalises a process that's off-centre.
-- **Pp and Ppk** use the overall, long-term variation instead of the short-term variation. A big gap between Cpk and Ppk means the process drifts.
-- 1.33 is the most common minimum target. Below 1.0, you're making defects.
-- Capability only means something if the process is stable. Check the control chart first.
+These are estimates from data, not guarantees about the next part. The example below shows what to calculate and what needs checking before acting on the result.
+
+## Cp and Cpk: use the same specification and variation estimate
+
+Our fictional machine turns shafts to **25.00 ± 0.05 mm**. The lower specification limit, LSL, is 24.95 mm. The upper limit, USL, is 25.05 mm.
+
+Assume a representative study with 25 subgroups of five measurements, a stable control chart and an approximately normal distribution. The estimated mean is 25.012 mm and the within-subgroup standard deviation is 0.012 mm.
+
+:::formula Cp compares the widths
+Cp = (USL − LSL) ÷ (6 × within-subgroup standard deviation)
+Cp = 0.10 ÷ (6 × 0.012) = 1.39
 :::
 
-## Two voices
+A Cp of 1.39 means the specification width is about 1.39 times the estimated six-standard-deviation spread. It does not tell us whether that spread is centred between the limits. A Cp of 1.33 would mean a width ratio of 1.33, with the same limitation.
 
-Capability puts two things side by side. The **voice of the customer** is the specification: the lower and upper limits (LSL and USL) a part or service must meet. The **voice of the process** is its natural spread, usually taken as six standard deviations (±3σ), which covers about 99.73% of output from a stable, normally distributed process.
+Cpk uses the nearer specification limit.
 
-If the process spread fits comfortably inside the specification, the process is capable. If it's wider, or pushed against one side, it will produce defects no matter how carefully people work.
-
-## The example
-
-A machine turns shafts with a specified diameter of **25.00 ± 0.05 mm**. So LSL = 24.95 and USL = 25.05. From a stable control chart with 25 subgroups:
-
-| Input | Value |
-| --- | --- |
-| Process mean (x̄) | 25.012 mm |
-| Within-subgroup standard deviation (σ) | 0.012 mm |
-| Specification width (USL − LSL) | 0.10 mm |
-
-The standard deviation here is the *within-subgroup* estimate, taken from the control chart (for example, R̄ ÷ d₂). That detail matters later.
-
-## Cp: could the process fit?
-
-:::formula Cp
-Cp = (USL − LSL) ÷ 6σ = 0.10 ÷ (6 × 0.012) = 0.10 ÷ 0.072 = **1.39**
+:::formula Cpk includes the process location
+Upper side = (25.05 − 25.012) ÷ (3 × 0.012) = 1.06
+Lower side = (25.012 − 24.95) ÷ (3 × 0.012) = 1.72
+Cpk = the smaller result = 1.06
 :::
 
-The specification is 1.39 times as wide as the process spread. If the process sat exactly in the middle, it would fit with room to spare.
+The mean is closer to the upper limit. That explains why Cpk is below Cp in this example. The [NIST capability reference](https://www.itl.nist.gov/div898/handbook/pmc/section1/pmc16.htm) sets out these definitions and the assumptions behind their interpretation.
 
-## Cpk: does it fit where it is?
+## The same spread can produce different results
 
-Cpk measures the distance from the mean to the *nearest* limit, in units of 3σ.
+Holding the assumed variation fixed, centring the process at 25.000 mm makes both sides equal and lifts Cpk to 1.39.
 
-:::formula Cpk
-Upper side: (USL − x̄) ÷ 3σ = (25.05 − 25.012) ÷ 0.036 = 1.06
-Lower side: (x̄ − LSL) ÷ 3σ = (25.012 − 24.95) ÷ 0.036 = 1.72
-Cpk = the smaller of the two = **1.06**
+::figure cpk-centering | Fictional normal-model comparison using unrounded inputs. At mean 25.012 mm and standard deviation 0.012 mm, about 771 parts per million lie outside the limits, almost all above the upper limit. At mean 25.000 mm, the two-tail total is about 31 per million. These are model estimates, not counted defects.
+
+An adjustment would need engineering approval and verification. The chart does not establish that centring is safe, inexpensive or sufficient for the actual process.
+
+When Cp is adequate but Cpk misses the agreed requirement, investigate location as well as measurement. When the estimated spread is too wide, centring alone cannot reduce it. A high Cpk still needs a stable, representative process and an acceptable measuring system.
+
+## What does Cpk 1.33 mean in sigma and defects?
+
+With these definitions, **3 × Cpk is the estimated distance from the mean to the nearer specification limit, in units of the same standard deviation**. At Cpk 1.33, that distance is 3.99 standard deviations.
+
+No automatic 1.5-sigma shift is part of this calculation. If a report uses a shifted “sigma level”, it is using another convention and should say so.
+
+Under a normal model, these nearest-limit distances imply the following one-tail estimates:
+
+| Cpk | Distance to nearer limit | Estimated ppm beyond that limit |
+| --- | ---: | ---: |
+| 0.67 | 2.01 standard deviations | About 22,216 |
+| 1.00 | 3.00 | About 1,350 |
+| 1.33 | 3.99 | About 33 |
+| 1.67 | 5.01 | About 0.27 |
+| 2.00 | 6.00 | About 0.001 |
+
+For two-sided specifications, add the other tail. If the process is centred, both tails are equal: Cpk 1.33 gives about 66 ppm in total under that model. If it is off-centre, Cpk alone does not identify the farther tail.
+
+A result below 1.0 indicates the nearer limit is less than three estimated standard deviations from the mean. It does not prove defects occurred in a finite sample. Nor does a high index establish a low defect rate when the assumed distribution is wrong.
+
+## Cpk vs Ppk: change the variation estimate, not the specification
+
+Cp and Cpk use an estimate of variation within rational subgroups. Pp and Ppk use overall variation across the included observations. [Minitab's explanation](https://blog.minitab.com/en/blog/marilyn-wheatleys-blog/how-cpk-and-ppk-are-calculated2c-part-2) distinguishes these two views.
+
+Suppose the overall standard deviation of our 125 measurements is 0.015 mm, with the same mean and limits.
+
+:::formula Overall performance indices
+Pp = 0.10 ÷ (6 × 0.015) = 1.11
+Ppk = min(0.038, 0.062) ÷ (3 × 0.015) = 0.84
 :::
 
-The process has the potential of 1.39 but delivers 1.06, because it runs 0.012 mm high. All the risk is on the upper side.
+Ppk 0.84 is lower than Cpk 1.06 because the estimated overall variation is larger. The difference may reflect shifts between subgroups, the grouping method or other features of the study. Plot the data over time before calling it drift.
 
-::figure cpk-centering | Same spread, two positions. Off-centre, the tail crosses the upper limit and about 770 parts per million are out of spec. Centred on target, the same process produces about 31 per million.
+“Overall” does not automatically mean long term. A short study can miss tool wear, material changes or later shifts even when every reading enters the overall calculation. A Ppk of 1.33 is a nearer-limit distance of 3.99 overall standard deviations; it is not a promise of long-term performance.
 
-## What the numbers mean in defects
+## One-sided specifications need one tail
 
-Assuming a normal distribution, each Cpk value corresponds to an expected defect rate:
+A separate fictional service requires invoice processing within five days. Assume stable, approximately normal processing times with mean 3.1 days and standard deviation 0.6 days.
 
-| Cpk | Out of spec beyond the nearer limit |
-| --- | --- |
-| 0.67 | about 22,000 ppm (2.2%) |
-| 1.00 | about 1,350 ppm |
-| 1.33 | about 32 ppm |
-| 1.67 | about 0.3 ppm |
-| 2.00 | about 0.001 ppm |
-
-In the example, the off-centre process produces about 770 ppm above the upper limit. Centring it at 25.000 brings both sides to 1.39 and the total down to about 31 ppm, a 25-fold improvement from an adjustment, not a new machine.
-
-## Cp and Cpk together tell you what to do
-
-:::grid
-- **Cp high, Cpk high** Capable and centred. Monitor it and move on.
-- **Cp high, Cpk low** Capable but off-centre. Adjust the setting. Usually quick and cheap.
-- **Cp low, Cpk low** Too much variation. Find and reduce the sources of variation: a project, not an adjustment.
-- **Cpk higher than Cp** Impossible. Check the calculation.
+:::formula Upper-only capability
+Cpu = (5 − 3.1) ÷ (3 × 0.6) = 1.06
+Distance to deadline = (5 − 3.1) ÷ 0.6 = 3.17 standard deviations
 :::
 
-In the example, the first fix is to centre the process. Going further means reducing variation: bringing σ down from 0.012 to 0.009 mm would lift both indices to 1.85.
+Using the unrounded distance, the model estimates about 771 late invoices per million, or roughly one in 1,300. That prediction depends on the distribution; service-time data often need a different model. Actual deadline performance should also be counted directly.
 
-## Cpk versus Ppk
+## Is 1.33 or 1.67 good enough?
 
-Cp and Cpk use the short-term, within-subgroup standard deviation. They describe what the process can do when nothing shifts. Pp and Ppk use the overall standard deviation of all the data, including shifts between subgroups, shifts between shifts, material lots and so on.
+The answer comes from the customer requirement, the characteristic and the evidence behind the study. Neither number is a universal approval rule.
 
-Suppose the overall standard deviation of all 125 measurements is 0.015 mm:
+For a specific example, Ford's [June 2026 PPAP requirements](https://www.iatfglobaloversight.org/wp/wp-content/uploads/2026/06/Ford-Specifics-for-PPAP_June-2026-SCCAF-_-Final.pdf#page=17) specify Ppk greater than 1.67 in Note 6 of the initial/final capability procedure for programs using SCCAF. That requirement belongs to its customer-specific context and conditions.
 
-:::formula Ppk
-Ppk = (USL − x̄) ÷ 3σ<sub>overall</sub> = 0.038 ÷ 0.045 = **0.84**
-:::
+Before accepting any capability number, check the [control chart](/notes/control-charts-explained/), the [measurement study](/notes/gage-rr-explained/), the distribution and the period and conditions represented. NIST also discusses uncertainty in estimated indices. A small dataset can produce a precise-looking number with substantial uncertainty.
 
-A Cpk of 1.06 and a Ppk of 0.84 tell a story: within a subgroup the process is decent, but something moves it around between subgroups. A setting that drifts, a tool that wears, differences between operators. That's often the most valuable finding of a capability study, because it points to a specific cause worth hunting.
+For our shaft process, the next step is to verify the location difference and the measurement, then test an authorised setting change. Recalculate with data that represents the changed process. Keep the underlying measurements with the index so another reviewer can follow the result.
 
-## One-sided specifications
+## Sources and calculation notes
 
-Many real specifications only have one limit. A pack must weigh *at least* 495 g. An invoice must be processed *within* 5 days. Then only one side of the formula applies.
+- [NIST: What is process capability?](https://www.itl.nist.gov/div898/handbook/pmc/section1/pmc16.htm), index definitions, distribution assumptions and estimation uncertainty.
+- [Minitab: How Cpk and Ppk are calculated, part 2](https://blog.minitab.com/en/blog/marilyn-wheatleys-blog/how-cpk-and-ppk-are-calculated2c-part-2), within and overall variation.
+- [Ford: Customer-specific PPAP requirements](https://www.iatfglobaloversight.org/wp/wp-content/uploads/2026/06/Ford-Specifics-for-PPAP_June-2026-SCCAF-_-Final.pdf), effective 15 June 2026, process-capability procedure and acceptance criteria.
 
-For invoices processed in an average of 3.1 days with a standard deviation of 0.6 days:
-
-:::formula One-sided capability
-Cpu = (USL − x̄) ÷ 3σ = (5 − 3.1) ÷ 1.8 = **1.06**
-:::
-
-About 1 invoice in 1,300 will take longer than 5 days. Capability works just as well for service processes, as long as the data behave.
-
-## Before you trust a capability number
-
-A capability index is easy to calculate and easy to get wrong. Check four things first:
-
-1. **Is the process stable?** Plot a control chart. If it shows special causes, the process has no single capability to measure. Fix the instability first. (See [how to read a control chart](/notes/control-charts-explained/).)
-2. **Is the measurement system good enough?** If the gauge's own variation is a large share of the tolerance, the capability number describes the gauge as much as the process.
-3. **Is the data roughly normal?** Skewed data, like cycle times or flatness, can make the defect estimate wildly wrong. Use a transformation or a non-normal capability method.
-4. **Is there enough data?** Around 100 measurements, for example 25 subgroups of 4 or 5, is a common minimum. Capability from 30 parts is a rough guess with wide error bars.
-
-## Common targets
-
-| Minimum | Where you see it |
-| --- | --- |
-| 1.00 | The bare minimum: the process just fits, with no margin |
-| 1.33 | The most common general requirement for an ongoing process |
-| 1.67 | New processes and critical characteristics. Automotive customers typically want a Ppk of 1.67 or more in the initial study before production approval (PPAP) |
-| 2.00 | Six Sigma level: ±6σ fits inside the specification |
-
-Treat targets as a conversation with the customer, not a law of nature. A cosmetic dimension doesn't need the same capability as a brake component.
-
-:::link /notes/dmaic-step-by-step/ | When the answer is "reduce variation"
-A low Cp calls for a structured project. DMAIC is the standard way to run one.
-:::
-
-## Sources
-
-- NIST/SEMATECH. [What is process capability?](https://www.itl.nist.gov/div898/handbook/pmc/section1/pmc16.htm) *e-Handbook of Statistical Methods*.
-- Steiner, S. H., Abraham, B. & MacKay, R. J. [Understanding process capability indices](https://sas.uwaterloo.ca/~shsteine/papers/cap.pdf). University of Waterloo, Institute for Improvement in Quality and Productivity. On Cpk versus Ppk and the AIAG requirements.
-- Ford Motor Company (2024). [Ford specifics for PPAP](https://www.iatfglobaloversight.org/wp/wp-content/uploads/2024/10/Ford_Specifics_for_PPAP.pdf). On the Ppk ≥ 1.67 requirement.
-- AIAG. [Statistical Process Control (SPC) reference manual](https://www.aiag.org/training-and-resources/manuals/details/SPC-3).
-
-*The machine, the invoice process and their numbers are illustrative.*
+All process values are fictional. Indices use unrounded inputs. Ppm values are normal-model probabilities multiplied by one million; they are not observed reject counts. The shaft figure compares total two-sided probabilities, while the interpretation table shows the nearer tail only.
