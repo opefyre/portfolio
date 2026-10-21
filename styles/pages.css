@@ -481,7 +481,7 @@
   color: var(--color-ink);
 }
 
-/* Contents: only on notes with four or more sections. Above the text on
+/* Contents: notes with two or more sections. Above the text on
    narrow screens, a sticky sidebar on wide ones. */
 .note-toc {
   margin: 0 0 clamp(36px, 6vh, 52px);

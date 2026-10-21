@@ -18,7 +18,6 @@
 .note-hero-name{display:block;font:500 17px/1.3 var(--font-display);color:#24282b}
 .note-hero-role{display:block;font-size:12px;line-height:1.4;margin-top:3px;color:#555a5c;max-width:38ch}
 .note-hero-dates{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:16px;font-size:13px;line-height:1.5;color:#555a5c}
-.note-hero-caption{position:absolute;bottom:16px;right:var(--gutter);font-size:11px;color:#555a5c}
 @media(min-width:1800px){.note-hero-copy{margin-left:max(var(--gutter),calc((100vw - 1600px)/2))}}
 @media(min-width:761px) and (max-width:1100px){.note-hero-copy{width:42%}.note-hero-title{font-size:48px}.note-hero--long .note-hero-title{font-size:44px}.note-hero--very-long .note-hero-title{font-size:41px}.note-hero-summary{font-size:18px}}
 @media(max-width:760px){
@@ -34,7 +33,6 @@
  .note-hero-role{font-size:12px}
  .note-hero-dates{font-size:12px;gap:6px 16px;margin-top:14px}
  .note-hero-art>img{width:170%;right:0;bottom:28px;mask-image:linear-gradient(to bottom,transparent 0%,#000 15%)}
- .note-hero-caption{font-size:10px;bottom:12px;right:var(--gutter)}
  .note-article-frame.frame{padding-top:38px}
 }
 @media(prefers-reduced-motion:reduce){.note-hero{scroll-behavior:auto}}

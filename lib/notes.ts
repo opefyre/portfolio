@@ -32,7 +32,7 @@ import { inlineNoteFigure } from "./note-figure";
  *   :::grid                              a Markdown list shown as a grid of small cards
  *   :::link <href> | <label>             a card that is one big link (tools, Vrolen, contact)
  *
- * Every h2 gets an id, and notes with four or more get a contents list.
+ * Every h2 gets an id, and notes with two or more sections get a contents list.
  */
 export type Note = {
   slug: string;
@@ -130,6 +130,7 @@ function parse(file: string): Note {
       return `<h2 id="${id}">${inner}</h2>`;
     },
   );
+  const contents = toc.filter(t => t.id !== "sources");
   return {
     slug: file.replace(/\.md$/, ""),
     title: meta.title ?? file,
@@ -144,7 +145,7 @@ function parse(file: string): Note {
     words,
     keywords: (meta.keywords ?? "").split(",").map((k) => k.trim()).filter(Boolean),
     topic: meta.topic ?? "",
-    toc: toc.length >= 4 ? toc.filter((t) => t.id !== "sources") : [],
+    toc: contents.length >= 2 ? contents : [],
   };
 }
 

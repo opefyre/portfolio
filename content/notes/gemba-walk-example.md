@@ -17,7 +17,7 @@ Before changing it, follow the order from release to the dock. The delay may sit
 
 The [Lean Enterprise Institute's definition](https://www.lean.org/lexicon-terms/gemba/) puts observation before action and suggests following a product family or customer-facing process across functions.
 
-::image /notes/gemba-walk-example/warehouse-observation.webp | A paper-model warehouse connects storage, a packing bench with waiting cartons and an outbound dock. | Generated conceptual warehouse scene. Follow the route from storage through packing to dispatch; W-218's timings are shown separately below.
+::image /notes/gemba-walk-example/warehouse-observation.webp | A paper-model warehouse connects storage, a packing bench with waiting cartons and an outbound dock. | Follow the route from storage through packing to dispatch; W-218's timings are shown separately below.
 
 ## How to prepare a gemba walk
 
