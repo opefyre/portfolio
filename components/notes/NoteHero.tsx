@@ -24,6 +24,5 @@ export function NoteHero({note, image}: {note: Note; image: NoteHeroImage}) {
         <p className="note-hero-dates"><time dateTime={note.date}>{formatDate(note.date)}</time>{note.updated!==note.date && <span>Updated <time dateTime={note.updated}>{formatDate(note.updated)}</time></span>}<span>{note.readingMinutes} min read</span></p>
       </div>
     </div>
-    <p className="note-hero-caption">Conceptual clay illustration</p>
   </header>;
 }

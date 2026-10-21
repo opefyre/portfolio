@@ -17,7 +17,7 @@ Feed that file into the next forecast without checking availability, and 60 can 
 
 Demand forecasting during stockouts starts with this distinction: sales record what customers bought. They can only tell you what customers wanted while the product was available to buy.
 
-::image /notes/demand-forecasting-stockouts/stockout-editorial.webp | A paper shelf with one carton, empty spaces and a short receipt | AI-generated editorial illustration. Sales receipts record purchases; they cannot count customers who found no stock.
+::image /notes/demand-forecasting-stockouts/stockout-editorial.webp | A paper shelf with one carton, empty spaces and a short receipt | Sales receipts record purchases; they cannot count customers who found no stock.
 
 ## How a lower forecast gets the better score
 

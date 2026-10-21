@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { fragment, vertex } from "./notes-field-shader";
 import "./NotesField.css";
 
@@ -10,7 +10,7 @@ function subscribeMotion(change: () => void) {
   return ()=>mq.removeEventListener("change",change);
 }
 
-export function NotesField() {
+export function NotesField({children,browse=false}:{children?:ReactNode;browse?:boolean}) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const state = useRef({ paused: false, wake: () => {} });
   const [paused, setPaused] = useState(false);
@@ -63,9 +63,9 @@ export function NotesField() {
     document.addEventListener("visibilitychange",onVisibility);motion.addEventListener("change",wake);el.addEventListener("webglcontextlost",onLost);resize();
     return ()=>{disposed=true;cancelAnimationFrame(frame);controls.wake=()=>{};resizeObserver.disconnect();intersection.disconnect();document.removeEventListener("visibilitychange",onVisibility);motion.removeEventListener("change",wake);el.removeEventListener("webglcontextlost",onLost);parent.removeEventListener("pointermove",onMove);parent.removeEventListener("pointerleave",onLeave);gl.deleteBuffer(buffer);gl.deleteProgram(program);gl.deleteShader(vs);gl.deleteShader(fs);};
   },[]);
-  return <section className="notes-field" aria-labelledby="notes-title" data-nav-tone="dark">
+  return <section className={`notes-field${browse?" notes-field--browse":""}`} aria-labelledby="notes-title" data-nav-tone="dark">
     <canvas ref={canvas} className="notes-field-canvas" aria-hidden="true"/>
-    <div className="notes-field-content"><p className="notes-field-kicker">Operations and transformation</p><h1 id="notes-title">Notes<span aria-hidden="true">.</span></h1><p className="notes-field-intro">Practical guides to supply chains, continuous improvement and projects. Worked examples, numbers and sources.</p><a className="notes-field-read" href="#latest">Read the notes <span aria-hidden="true">↘</span></a></div>
+    <div className="notes-field-content"><p className="notes-field-kicker">Operations and transformation</p><h1 id="notes-title">Notes<span aria-hidden="true">.</span></h1><p className="notes-field-intro">Practical guides to supply chains, continuous improvement and projects. Worked examples, numbers and sources.</p>{children??<a className="notes-field-read" href="#latest">Read the notes <span aria-hidden="true">↘</span></a>}</div>
     <div className="notes-field-footer"><p>By Abolfazl Shirkavand</p><div className="notes-field-tools"><button type="button" className="notes-field-pause" aria-pressed={paused||reduced} disabled={reduced} aria-label={reduced?"Motion off, reduced motion preference":paused?"Play hero animation":"Pause hero animation"} onClick={()=>setPaused(p=>!p)}><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">{paused||reduced?<path d="M3 1.5 10 6 3 10.5Z" fill="currentColor"/>:<path d="M3 2v8M9 2v8" stroke="currentColor" strokeWidth="1.5"/>}</svg><span>{reduced?"Motion off":paused?"Play":"Pause"}</span></button></div></div>
   </section>;
 }
