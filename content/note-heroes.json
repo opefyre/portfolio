@@ -1048,5 +1048,110 @@
     "width": 1600,
     "height": 900,
     "alt": "Breaking the project into deliverables before scheduling tasks."
+  },
+  "strategic-sourcing-supplier-selection": {
+    "src": "/notes/strategic-sourcing-supplier-selection/hero-5942b2c1798f.webp",
+    "smallSrc": "/notes/strategic-sourcing-supplier-selection/hero-small-211c8c1e7860.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Supplier samples compared before an award."
+  },
+  "warehouse-slotting-example": {
+    "src": "/notes/warehouse-slotting-example/hero-90caba6101bb.webp",
+    "smallSrc": "/notes/warehouse-slotting-example/hero-small-96f0ddd36665.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Pick locations and reserve stock in a miniature warehouse."
+  },
+  "transport-mode-selection": {
+    "src": "/notes/transport-mode-selection/hero-d5c6acff6c29.webp",
+    "smallSrc": "/notes/transport-mode-selection/hero-small-9dae506de5f5.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Different transport choices for the same shipment."
+  },
+  "supply-chain-network-design": {
+    "src": "/notes/supply-chain-network-design/hero-6be3d2b83da1.webp",
+    "smallSrc": "/notes/supply-chain-network-design/hero-small-9281abeb186e.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "One central warehouse compared with a regional network."
+  },
+  "lean-daily-management": {
+    "src": "/notes/lean-daily-management/hero-b8bba84149e7.webp",
+    "smallSrc": "/notes/lean-daily-management/hero-small-ae36b0fb4655.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A performance board connected to follow-up work."
+  },
+  "fishbone-diagram-example": {
+    "src": "/notes/fishbone-diagram-example/hero-db0e1eedda62.webp",
+    "smallSrc": "/notes/fishbone-diagram-example/hero-small-0f22021cbf04.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Possible causes investigated around an imperfect package seal."
+  },
+  "theory-of-constraints-example": {
+    "src": "/notes/theory-of-constraints-example/hero-99d6c3394abb.webp",
+    "smallSrc": "/notes/theory-of-constraints-example/hero-small-bb41f922354e.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A queue before the limiting step of a production line."
+  },
+  "confidence-interval-example": {
+    "src": "/notes/confidence-interval-example/hero-1159329dde5b.webp",
+    "smallSrc": "/notes/confidence-interval-example/hero-small-8c425a532acb.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Individual observations beside a range around an estimated mean."
+  },
+  "requirements-gathering-example": {
+    "src": "/notes/requirements-gathering-example/hero-6cf20695fc22.webp",
+    "smallSrc": "/notes/requirements-gathering-example/hero-small-8e16bb3fd663.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A vague request developed into requirements that can be checked."
+  },
+  "project-contract-types": {
+    "src": "/notes/project-contract-types/hero-daf81af40aa0.webp",
+    "smallSrc": "/notes/project-contract-types/hero-small-9d9797835621.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Three ways to price the same project assignment."
+  },
+  "schedule-risk-analysis-example": {
+    "src": "/notes/schedule-risk-analysis-example/hero-1ffdb044d284.webp",
+    "smallSrc": "/notes/schedule-risk-analysis-example/hero-small-dd33b1036e43.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Two uncertain project paths meeting at a completion milestone."
+  },
+  "target-operating-model-example": {
+    "src": "/notes/target-operating-model-example/hero-a9e8973e276c.webp",
+    "smallSrc": "/notes/target-operating-model-example/hero-small-1b5cdbf350af.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Two sites agreeing shared rules and local decisions."
+  },
+  "erp-big-bang-vs-phased-rollout": {
+    "src": "/notes/erp-big-bang-vs-phased-rollout/hero-1cd5b48ac862.webp",
+    "smallSrc": "/notes/erp-big-bang-vs-phased-rollout/hero-small-69dd7dae7d4b.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Two sites switching systems together or in separate stages."
+  },
+  "erp-vs-wms-vs-tms": {
+    "src": "/notes/erp-vs-wms-vs-tms/hero-8649b417a71f.webp",
+    "smallSrc": "/notes/erp-vs-wms-vs-tms/hero-small-386edf8cbbea.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "An order passing through business, warehouse and transport systems."
+  },
+  "new-product-introduction-process": {
+    "src": "/notes/new-product-introduction-process/hero-e6cd9e20e216.webp",
+    "smallSrc": "/notes/new-product-introduction-process/hero-small-3d9901d6afac.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Materials, packaging and production trials supporting a product launch."
   }
 }
