@@ -4,7 +4,7 @@
 .note-hero{position:relative;isolation:isolate;overflow:hidden;background:#eeebe4;width:100%;min-height:clamp(740px,92svh,980px)}
 .note-hero-art{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
 .note-hero-art>img{position:absolute;right:0;bottom:0;width:88%;max-width:none;height:auto;mask-image:linear-gradient(90deg,transparent 0%,#000 18%),linear-gradient(to bottom,transparent 0%,#000 18%);mask-composite:intersect;}
-.note-hero-copy{position:relative;width:42%;max-width:680px;margin-left:var(--gutter);padding-top:clamp(140px,17vh,190px);padding-bottom:82px}
+.note-hero-copy{position:relative;width:42%;max-width:680px;margin-left:var(--gutter);padding-top:calc(var(--nav-h) + 42px);padding-bottom:82px}
 .note-hero-back{display:inline-flex;gap:8px;font-size:14px;line-height:1.4;color:#555a5c;margin-bottom:38px}
 .note-hero-back:hover{text-decoration:underline;text-underline-offset:4px}
 .note-hero-topic{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#555a5c;margin-bottom:18px}
@@ -20,10 +20,10 @@
 .note-hero-dates{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:16px;font-size:13px;line-height:1.5;color:#555a5c}
 .note-hero-caption{position:absolute;bottom:16px;right:var(--gutter);font-size:11px;color:#555a5c}
 @media(min-width:1800px){.note-hero-copy{margin-left:max(var(--gutter),calc((100vw - 1600px)/2))}}
-@media(min-width:761px) and (max-width:1100px){.note-hero-copy{width:42%;padding-top:140px}.note-hero-title{font-size:48px}.note-hero--long .note-hero-title{font-size:44px}.note-hero--very-long .note-hero-title{font-size:41px}.note-hero-summary{font-size:18px}}
+@media(min-width:761px) and (max-width:1100px){.note-hero-copy{width:42%}.note-hero-title{font-size:48px}.note-hero--long .note-hero-title{font-size:44px}.note-hero--very-long .note-hero-title{font-size:41px}.note-hero-summary{font-size:18px}}
 @media(max-width:760px){
  .note-hero{min-height:0}
- .note-hero-copy{width:auto;max-width:620px;margin-inline:var(--gutter);padding-top:122px;padding-bottom:clamp(310px,100vw,730px)}
+ .note-hero-copy{width:auto;max-width:620px;margin-inline:var(--gutter);padding-bottom:clamp(310px,100vw,730px)}
  .note-hero-back{margin-bottom:25px;font-size:13px}
  .note-hero-topic{font-size:11px;margin-bottom:16px}
  .note-hero-title{font-size:clamp(37px,9.7vw,52px);line-height:1.03;letter-spacing:-.04em}
