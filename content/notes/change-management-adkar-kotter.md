@@ -2,7 +2,7 @@
 title: Change management for digital transformation: ADKAR and Kotter
 date: 2026-09-29
 summary: Use ADKAR and Kotter to understand why people struggle with a new system, choose the right support and check whether the change works.
-updated: 2026-10-19
+updated: 2026-10-23
 status: published
 topic: Digital transformation
 keywords: change management, ADKAR, Kotter 8 steps, digital transformation, user adoption, organisational change, transformation program, change management plan, adoption metrics, AI adoption at work
@@ -157,6 +157,6 @@ The other half of a transformation: which processes to change first, and with wh
 - NIST. [AI RMF Core](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/), Govern 2.2 and 3.2, Map 2.1 and Manage 4.1. Training, task definition, oversight and monitoring.
 - Bruce Rogers, Forbes (2016). [Why 84% Of Companies Fail At Digital Transformation](https://www.forbes.com/sites/brucerogers/2016/01/07/why-84-of-companies-fail-at-digital-transformation/), interview with Michael Gale; the article does not establish a universal failure rate.
 - Boston Consulting Group (2020). [Flipping the odds of digital transformation success](https://www.bcg.com/publications/2020/increasing-odds-of-success-in-digital-transformation).
-- McKinsey (2018). [Unlocking success in digital transformations](https://www.mckinsey.com/capabilities/people-and-organization/our-insights/unlocking-success-in-digital-transformations).
+- McKinsey (2018). [McKinsey's survey of digital transformation practices](https://www.mckinsey.com/capabilities/people-and-organization/our-insights/unlocking-success-in-digital-transformations).
 
 The teams, scores, purchasing scenarios and adoption targets are fictional. The AI trial is proposed guidance, not an observed performance result.

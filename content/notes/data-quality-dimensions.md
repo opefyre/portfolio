@@ -1,6 +1,7 @@
 ---
 title: Six data quality dimensions, explained with inventory
 date: 2026-10-14
+updated: 2026-10-23
 summary: The stock file is complete, the quantity is valid, and the shelf still contains fewer units. Use six data quality checks to see what a clean-looking record can hide.
 seoTitle: Six data quality dimensions: inventory examples
 seoDescription: Learn the six data quality dimensions through stock records. Compare completeness, uniqueness, consistency, timeliness, validity and accuracy.
@@ -9,9 +10,9 @@ topic: Digital transformation
 keywords: data quality dimensions, data quality examples, accuracy vs completeness, inventory data quality, data validation
 ---
 
-The planning screen says there are 100 brackets. Every field is filled in. The quantity is a sensible positive number. The file passes validation.
+The planning file passes validation: it records 100 brackets, with every required field complete and a valid positive quantity.
 
-Someone counts the shelf. There are 80.
+The shelf count finds 80 brackets.
 
 **Data quality means data is fit for the job you need it to do.** In this case, that job is deciding how many brackets to order. A record can pass a format check and still produce the wrong order.
 
@@ -27,7 +28,7 @@ The [MRP worked example](/notes/material-requirements-planning-example/) explain
 
 ## What each data quality dimension asks
 
-The [UK Government Data Quality Framework](https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework) sets out these six dimensions and stresses that their importance depends on the use. They are a starting point, rather than a compulsory scorecard for every dataset.
+The [UK government data-quality guidance](https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework) sets out these six dimensions and stresses that their importance depends on the use. They are a starting point, rather than a compulsory scorecard for every dataset.
 
 | Dimension | Plain question | Inventory example |
 | --- | --- | --- |
@@ -92,6 +93,6 @@ Start with the fields that can change the order. Make those checks visible, and 
 
 ## Sources
 
-- UK Government. [The Government Data Quality Framework](https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework), sections on dimensions and user needs. Definitions, the distinction between completeness and accuracy, and context-dependent trade-offs.
+- UK Government. [Government guidance on data quality](https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework), sections on dimensions and user needs. Definitions, the distinction between completeness and accuracy, and context-dependent trade-offs.
 
 All stock records, movements, counts and purchasing calculations are fictional. The simplified net requirement excludes receipts, reservations, safety stock, lead times and order multiples. A data check doesn't replace the physical or operational evidence needed to resolve a discrepancy.

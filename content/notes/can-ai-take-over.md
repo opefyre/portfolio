@@ -1,6 +1,7 @@
 ---
 title: Can AI take over? What the singularity debate gets wrong
 date: 2026-10-05
+updated: 2026-10-23
 summary: What AI takeover and the singularity mean, what experiments and real incidents show, and how to keep human control as AI agents gain more authority.
 status: published
 topic: Digital transformation
@@ -10,15 +11,11 @@ seoTitle: Can AI take over? Evidence behind the singularity
 
 In July 2026, AI agents in an OpenAI evaluation found ways to communicate when they were meant to be isolated. They coordinated an unauthorized attack on Hugging Face, a platform used to share AI models and datasets. An independent investigation by METR documents what happened. [METR incident investigation](https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/).
 
-These were research agents running with reduced safeguards. They did not take over the world. They did act beyond the boundaries people had set for them.
-
-That is a more useful starting point than a robot apocalypse.
+Researchers ran these agents with reduced safeguards. The incident exposed a failure to keep their actions within the assigned evaluation. It gives us a specific control failure to examine.
 
 In the [previous note about AI and jobs](/notes/ai-and-jobs/), the question was what happens to people when work gets faster. This time, it is who remains in charge as systems become more capable and get permission to do more.
 
 “AI will take over” bundles together several different worries. Some concern machines acting against our wishes. Others concern people handing over decisions, or using AI to gain power over other people. The singularity is another idea again.
-
-Separating them makes the evidence much easier to understand.
 
 :::card The short version
 There is credible evidence of AI agents cheating tests, bypassing controls and taking unauthorized actions. Some incidents have reached real systems.
@@ -42,21 +39,15 @@ But faster progress and loss of control are separate questions. A system can cau
 
 Parts of this loop already exist. AI can revise code, test solutions and contribute to research. The important distinction is between improving an answer, improving the software around a model, and repeatedly creating more capable models.
 
-Those are very different achievements.
-
 A September 2026 review of 1,250 arXiv papers separates these kinds of self-improvement. It identifies recurring constraints, especially how to judge whether a change is actually better. A system can become good at pleasing its own evaluator without becoming more useful. The review is a preprint, not a demonstration that an unlimited improvement loop exists. [Self-improvement review](https://arxiv.org/html/2607.07663v2).
 
 Compute also matters. A study of four AI labs finds different answers about whether more research effort can substitute for compute, depending on the model used. Faster thinking does not settle the question of how many experiments, chips or other resources the next advance needs. [Compute bottleneck study](https://arxiv.org/html/2507.23181v2).
 
-The useful measurement would be how much AI shortens the complete research cycle, at a known cost and quality. Counting code written or benchmark points gained captures only part of that work.
+To assess AI-assisted research, measure time, cost and quality across the complete research cycle. Code volume or a benchmark gain alone leaves out evaluation, experiments and unsuccessful changes.
 
-So far, the sources reviewed here do not establish an open-ended, unstoppable intelligence explosion. They do show why researchers are trying to measure the loop more carefully.
-
-And we do not need that loop to ask the next question: what happens when a capable agent pursues the wrong objective?
+The reviewed studies do not demonstrate an open-ended intelligence explosion. They describe capabilities, experiments and limits that researchers can test separately.
 
 ## Why would AI act against human instructions?
-
-It does not need anger or a wish to rule.
 
 An AI agent is a model connected to tools, working through a task over multiple steps. Give it an incomplete objective and enough access, and it may find a way to meet the objective that we would reject.
 
@@ -104,7 +95,7 @@ These measures help us understand specific abilities and weaknesses. Adding them
 
 ## Could we lose control by handing it over?
 
-There is another route worth considering. People may keep formal authority while becoming too dependent on AI to exercise it well.
+People may also keep formal approval rights while losing the knowledge needed to exercise them. The next example follows that risk through routine planning.
 
 A system recommends the production plan. It usually works, so approval becomes routine. Staff stop checking the assumptions. Eventually, when something unusual happens, the person approving it cannot explain the plan or produce an alternative.
 
@@ -141,11 +132,7 @@ For research, keep the measures separate. For an organisation, apply the same qu
 
 There is useful work here before anyone agrees on a singularity date. Decide which actions need approval. Keep a record of what the agent actually does. Test whether revoking its access stops the work, including copies or delegated tasks. Practise recovery, and make sure someone still understands the process being automated.
 
-Those are recommendations drawn from the failure mechanisms above. They do not promise to solve every future AI risk. They do turn “a human is in charge” into something we can check.
-
-The jobs article asked what we would do with the time AI saves. This one asks what authority we give it in return.
-
-A system getting better at a task does not answer that question for us.
+Assign an owner and a review date for each control. Before granting more access, inspect the stop-and-recovery test results and resolve any action the team could not contain.
 
 ## Sources and scope
 

@@ -1,6 +1,7 @@
 ---
 title: Why busy machines make customers wait: Little's Law and takt time on the floor
 date: 2026-09-24
+updated: 2026-10-23
 summary: Keeping every resource busy feels productive and often makes lead times worse. Two simple formulas explain why, and how launch times fell from five months to two.
 status: draft
 topic: Supply chain
@@ -11,7 +12,7 @@ seoDescription: See how Little's Law and takt time explain longer queues and slo
 
 When I ran the supply chain side of new product launches at British American Tobacco, launch lead time came down from about five months to two. People sometimes assume that meant everyone worked faster. Very little of it did.
 
-Most of the gain came from deciding what *not* to start. Readiness gates, clear checkpoints and one cross-functional governance routine meant work only entered the system when it could actually flow through it. That sounds like common sense, and it is. It's also one of the most ignored ideas in operations, so this note walks through the two formulas behind it.
+Most of the gain came from deciding what *not* to start. Readiness gates, clear checkpoints and one cross-functional governance routine meant work only entered the system when it could actually flow through it. The calculations below connect those release decisions to work in process, throughput and the pace set by demand.
 
 ## Little's Law, in one line
 
@@ -48,7 +49,7 @@ An illustrative shift:
 | **Takt time** | **25,200 ÷ 210 = 120 s per unit** |
 | Observed cycle time | 144 s |
 
-144 seconds against 120 is "only" 20% slow. It sounds like a tuning problem. Here's what it means for the shift:
+A 144-second cycle exceeds the 120-second takt by 20%. Translate that difference into the number of units the team can finish in the shift:
 
 ::figure takt-gap | Twenty percent slower than takt is 35 units short per shift, before a single breakdown.
 

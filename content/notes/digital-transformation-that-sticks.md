@@ -2,7 +2,7 @@
 title: Digital transformation strategy: start with the work
 date: 2026-09-26
 summary: Lessons from 50+ automation projects: choose the operating problem, plan the change and decide which actions AI may take.
-updated: 2026-10-19
+updated: 2026-10-23
 status: published
 topic: Digital transformation
 keywords: digital transformation, process automation, AI in operations, agentic AI, change management, program management, operational excellence
@@ -55,9 +55,9 @@ Agree the outcome and review method before choosing a tool. The process owner ne
 
 ### Where the 4Ds and pillar lists fit
 
-[McKinsey's 2017 4D approach](https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/from-disrupted-to-disruptor-reinventing-your-business-by-transforming-the-core) is **Discover, Design, Deliver and De-risk**: choose the ambition, design the change, organise delivery and reduce exposure through the way it is sequenced. It is one named framework for organising the work.
+[McKinsey's 2017 4D approach](https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/from-disrupted-to-disruptor-reinventing-your-business-by-transforming-the-core) is **Discover, Design, Deliver and De-risk**: choose the ambition, design the change, organise delivery and reduce exposure through the way it is sequenced. It offers one way to organise those decisions.
 
-Five- or seven-pillar lists depend on the author. For example, [McKinsey's 2018 survey](https://www.mckinsey.com/capabilities/people-and-organization/our-insights/unlocking-success-in-digital-transformations) groups its success practices into leadership, capability building, empowering workers, upgrading tools and communication. Those five categories are not five delivery stages. A roadmap needs actual work and decisions under whichever labels you choose.
+Five- or seven-pillar lists depend on the author. For example, [McKinsey's 2018 survey](https://www.mckinsey.com/capabilities/people-and-organization/our-insights/unlocking-success-in-digital-transformations) groups its success practices into leadership, capability building, involving staff in new ways of working, upgrading tools and communication. Those five categories are not five delivery stages. A roadmap needs actual work and decisions under whichever labels you choose.
 
 The five-step sequence above is one possible roadmap for a process change. A company-wide change may need several overlapping projects and reviews, rather than five stages completed once.
 
@@ -73,7 +73,7 @@ Disconnected systems and slow handoffs still give businesses a reason to change.
 
 An AI assistant adds another decision to the strategy: which actions can it take, and which still need approval?
 
-[NIST's AI Risk Management Framework](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/) calls for defined human oversight, trained people and monitoring after deployment. The ladder below is my way of making that discussion concrete in operations; it is not a NIST maturity model.
+[NIST's AI risk-management guidance](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/) calls for defined human oversight, trained people and monitoring after deployment. The ladder below is my way of making that discussion concrete in operations; it is not a NIST maturity model.
 
 ## A simple autonomy ladder
 
@@ -112,8 +112,8 @@ My note on [what to automate first](/notes/what-to-automate-first/) helps choose
 
 ## Sources
 
-- McKinsey, 2017. [From disrupted to disruptor: Reinventing your business by transforming the core](https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/from-disrupted-to-disruptor-reinventing-your-business-by-transforming-the-core), the named 4D approach.
-- McKinsey, 2018. [Unlocking success in digital transformations](https://www.mckinsey.com/capabilities/people-and-organization/our-insights/unlocking-success-in-digital-transformations), five categories of practices reported in its survey, not a universal lifecycle.
+- McKinsey, 2017. [McKinsey on the 4D approach](https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/from-disrupted-to-disruptor-reinventing-your-business-by-transforming-the-core), the named 4D approach.
+- McKinsey, 2018. [McKinsey's survey of digital transformation practices](https://www.mckinsey.com/capabilities/people-and-organization/our-insights/unlocking-success-in-digital-transformations), five categories of practices reported in its survey, not a universal lifecycle.
 - NIST. [AI RMF Core](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/), human oversight, training and monitoring.
 
 The Snoonu figures are from my own work. The planning sequence is proposed guidance; the autonomy ladder is an author-defined decision aid.

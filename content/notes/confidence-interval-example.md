@@ -1,6 +1,7 @@
 ---
 title: Confidence intervals explained: a process-time example
 date: 2026-10-21
+updated: 2026-10-23
 summary: Ten jobs average ten minutes. That does not make ten the process's known average. Calculate a confidence interval and see what another sample can change.
 seoTitle: Confidence intervals: a worked process-time example
 seoDescription: Calculate a 95% confidence interval for a process mean using ten job times. Explore sample size and distinguish uncertainty from process variation.
@@ -38,7 +39,7 @@ The standard deviation describes variation between these job times. The standard
 
 ::interactive gap-confidence | Fictional job times. Choose a nested sample of 5, 10 or 20 separate teaching observations to inspect the raw values and a two-sided 95% t interval. Values are fixed, not live measurements. A larger sample can change both the mean and the estimated spread.
 
-The control shows the data, not just a shrinking bar. That matters because collecting more jobs can move the estimate as well as narrow its interval.
+Change the sample size to see how the additional job times move the estimated mean and its interval.
 
 ## What does 95% confidence actually mean?
 

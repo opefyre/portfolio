@@ -1,6 +1,7 @@
 ---
 title: Same OEE, opposite fixes: turning the percentage back into minutes
 date: 2026-09-28
+updated: 2026-10-23
 summary: Two machines can report the same OEE and need completely different work. Here's how I turn the score back into minutes a team can act on.
 status: draft
 topic: Operational excellence
@@ -8,9 +9,9 @@ keywords: OEE, overall equipment effectiveness, operational excellence, continuo
 seoTitle: Same OEE, opposite fixes: turn scores into minutes
 ---
 
-I've spent a good part of my career staring at OEE. On the Unilever lines I worked on, it moved from roughly 60% to roughly 75%, and I'm proud of that. But if I'm honest, the percentage never told us what to do on Monday morning. The minutes did.
+On the Unilever lines I worked on, OEE moved from roughly 60% to roughly 75%. To choose the next improvement, we had to trace the lost minutes behind the percentage.
 
-This note is about that translation: from one tidy number back to the lost time underneath it, and from there to the right improvement project.
+The shift example below shows how the same OEE can hide different losses and lead to different work.
 
 ## A quick refresher on OEE
 
@@ -23,7 +24,7 @@ Overall equipment effectiveness multiplies three factors ([Vorne](https://www.oe
 | Quality | Were the parts right first time? | Good count ÷ total count |
 | **OEE** | **How much of the planned time made good parts at full speed?** | **Availability × Performance × Quality** |
 
-It's a brilliant compression. The problem is exactly that: it compresses.
+To choose an action, separate the three factors and inspect the losses behind each one.
 
 ## One shift, worked through
 
@@ -37,7 +38,7 @@ Here's an illustrative packaging shift, the same example we use in the free [OEE
 | Units produced | 720 |
 | Good units, first pass | 690 |
 
-That gives 86.7% availability, 92.3% performance and 95.8% quality, so **76.7% OEE**. Sounds precise. Now put it back into time:
+That gives 86.7% availability, 92.3% performance and 95.8% quality, so **76.7% OEE**. Convert that result back into the planned minutes:
 
 ::figure oee-minutes | Where the shift went. The score is 76.7%; the minutes tell you what kind of problem you have.
 
@@ -45,14 +46,12 @@ Sixty minutes of stops, thirty minutes of slow running and small stops, fifteen 
 
 ## Same score, different problem
 
-It gets more interesting when you compare machines. Two lines, both at 75.2%:
+Compare two illustrative lines with the same 75.2% OEE:
 
 | Machine | Availability | Performance | Quality | OEE |
 | --- | --- | --- | --- | --- |
 | A | 80% | 95% | 99% | 75.2% |
 | B | 95% | 80% | 99% | 75.2% |
-
-Identical scores. Opposite stories.
 
 - **Machine A** spends too much planned time stopped. The work is on breakdowns, changeovers and waiting for material.
 - **Machine B** runs almost all shift but loses rate: slow cycles, microstops, starving or blocking from its neighbours, maybe a cycle time nobody has validated in years.
@@ -70,7 +69,7 @@ At Unilever the work that moved OEE was mostly unglamorous, and it lined up with
 | Quality | In-process checks, first-pass yield work | Defects caught on the line, not at the end of it |
 | Visibility | A downtime and loss dashboard | 60% less time spent preparing production reports |
 
-None of that was one big project. It was ten-plus smaller ones, each aimed at a specific loss, inside a World Class Manufacturing program. The dashboard mattered more than it sounds, because it gave every shift the same picture of where the minutes went.
+We tackled those losses through ten-plus smaller projects within the World Class Manufacturing program. The dashboard gave each shift the same breakdown of lost time.
 
 ## Four questions before you pick the next project
 
@@ -79,7 +78,7 @@ Even the biggest loss isn't automatically the best thing to fix. Before committi
 1. **Which factor actually moved?** Availability, performance or quality.
 2. **Which events created the loss?** Not the category, the actual stops, jams and rejects.
 3. **Is this machine the constraint right now?** Recovering minutes on a machine that isn't holding the line back mostly makes a bigger queue.
-4. **Would removing the loss improve good output, lead time or delivery?** If not, it can wait.
+4. **Which result would the change improve?** Check good output, lead time and delivery, alongside any safety or quality requirement that needs attention.
 
 That third question is where OEE and flow meet, and it's the subject of my note on [why busy machines make customers wait](/notes/busy-machines-slower-orders/).
 
@@ -89,7 +88,7 @@ This is the logic I'm building into [Vrolen](https://vrolen.com) ([more about it
 
 ::image /work/vrolen/what-if.webp | Vrolen's guided what-if comparing cautious, balanced and ambitious options | Testing a countermeasure in Vrolen before touching the line. Cautious, balanced and ambitious options, side by side.
 
-The tool is the easy part, though. The habit that matters is asking "which minutes?" every time someone quotes a percentage. If you want to try the translation on your own line, the free [OEE calculator](https://vrolen.com/tools/oee-calculator/) shows the minutes behind each factor.
+For the next shift review, take the stop records, speed losses and reject quantities behind the score. Use the free [OEE calculator](https://vrolen.com/tools/oee-calculator/) to check the minutes, then investigate the loss at the current constraint.
 
 ## Sources
 

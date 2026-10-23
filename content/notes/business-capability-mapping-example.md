@@ -1,6 +1,7 @@
 ---
 title: Business capability mapping: meaning and a practical example
 date: 2026-10-20
+updated: 2026-10-23
 summary: Three teams have order dashboards. None can reliably promise a delivery date. Map what the business needs to do before choosing which system to improve.
 seoTitle: Business capability mapping: meaning and example
 seoDescription: Build a business capability map for customer orders. Separate capabilities from processes, departments and apps, then use evidence to choose an investment.
@@ -63,7 +64,7 @@ A [digital maturity assessment](/notes/digital-maturity-assessment/) can examine
 
 Agree names that people recognise, a level of detail suitable for the decision and an owner for maintaining the relationships. “Order promising” is more durable than naming the current spreadsheet as a capability.
 
-Start with the customer service that needs attention. Map its required abilities, connect the people, processes and applications, then inspect the evidence for the proposed investment. Expand the map when another decision needs it, rather than building hundreds of boxes before using the first few.
+Start with order promising: map who checks supply, who confirms the date and which records they use. Use that evidence to assess the proposed screen, then extend the map when another service needs a decision.
 
 ## Source and example notes
 

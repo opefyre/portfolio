@@ -1,6 +1,7 @@
 ---
 title: What to automate first: a scoring model for processes, and when to use RPA, workflows or AI agents
 date: 2026-09-29
+updated: 2026-10-23
 summary: A practical way to choose which processes to automate, score them, pick the right kind of automation (API, workflow, RPA, document AI or an AI agent) and build a business case with a payback period.
 status: published
 topic: Digital transformation
@@ -9,9 +10,9 @@ seoTitle: What to automate first: a process scoring model
 seoDescription: Score processes before automating them. Compare APIs, workflows, RPA and AI agents, then build a business case with a worked payback example.
 ---
 
-Most automation programs don't fail because the technology doesn't work. They fail at the start, by automating the wrong things: a process nobody understood, one that changes every quarter, or one that only takes a few hours a month. Then the bots break, the savings never show up, and the next budget request is harder.
+A supplier-invoice process handles 3,000 cases a month at six minutes each. That makes 300 hours of work worth examining. Before choosing a tool, the team needs to know how many cases follow clear rules, what happens to exceptions and which hours a change could release.
 
-Now that AI agents can take actions on their own, the choice is wider and the stakes are higher. This note is a simple, repeatable way to choose what to automate, and what to automate it *with*.
+Compare the work first, then choose among an integration, workflow, software robot, document AI or an agent. Keep the permissions and support required by each option in the decision.
 
 :::card The short version
 1. **List candidates with numbers:** volume, minutes per case, exceptions, systems touched.
@@ -23,7 +24,7 @@ Now that AI agents can take actions on their own, the choice is wider and the st
 
 ## Step 1: list the candidates, with numbers
 
-Ask each department for the processes that are repetitive, rule-based and time-consuming. Then put numbers on them. A rough estimate is fine. No estimate is not.
+Ask each department to identify repetitive work and estimate its volume, time per case and exceptions. Label estimates so the team knows what needs measuring before approval.
 
 | Process | Cases a month | Minutes each | Hours a month |
 | --- | --- | --- | --- |
@@ -35,11 +36,11 @@ Ask each department for the processes that are repetitive, rule-based and time-c
 | Sales quotes | 220 | 15 | 55 |
 | Travel bookings | 400 | 6 | 40 |
 
-If you have event logs from your ERP or ticketing system, **process mining** can do much of this for you. It rebuilds the real process from timestamps: every path a case took, how long each step waited, and how often cases loop back. It's the fastest way to learn that the "standard" process covers only half the cases.
+If your ERP or ticketing system has suitable event logs, use [process mining](/notes/process-mining-vs-process-mapping/) to inspect recorded paths, elapsed times and repeated steps. Check the case IDs and event coverage before treating those records as the whole process.
 
 ## Step 2: score automation fit
 
-Hours tell you the value. They don't tell you whether a process *can* be automated well. For that, score each candidate from 1 to 5 on five criteria:
+Recorded hours show how much work the process consumes. To assess automation fit, score each candidate from 1 to 5 against the same five criteria. Check the evidence behind each score before using the ranking.
 
 | Criterion | Weight | Scores 5 when… | Scores 1 when… |
 | --- | --- | --- | --- |
@@ -66,14 +67,14 @@ Each quadrant has a different next step:
 
 :::grid
 - **Automate first** High value, high fit. Supplier invoices and customer refunds. Start here, and use the early wins to fund the rest.
-- **Fix the process, then automate** High value, low fit. Month-end close and contract review. Standardise, simplify and remove steps first. Automating a messy process just makes the mess faster.
+- **Fix the process, then automate** High value, low fit. For month-end close and contract review, resolve unclear rules and recurring exceptions before selecting automation.
 - **Quick wins, if cheap** Low value, high fit. Onboarding and travel. Worth doing with off-the-shelf tools, not with a custom build.
 - **Leave for now** Low value, low fit. Sales quotes. Revisit next year.
 :::
 
 ## Step 4: pick the right kind of automation
 
-"Automation" covers very different tools. They sit on a scale from fully predictable to adaptive, and the rule of thumb is simple: **use the most predictable tool that can do the job.** Predictable tools are cheaper to run, easier to test and easier to trust.
+Choose a tool whose behaviour the team can test and support for this task. An integration can move agreed fields; a workflow can route known approval rules. An agent needs additional checks when it chooses steps or uses tools. Compare actual costs and controls before selecting it.
 
 | Tool | Best for | Weak at | Example |
 | --- | --- | --- | --- |
@@ -87,7 +88,7 @@ Real processes usually combine them. For supplier invoices: document AI reads th
 
 ## Step 5: build the business case
 
-Here's a simple version for supplier invoices.
+For supplier invoices, compare the current work with the expected exception workload:
 
 :::formula Hours
 Today: 3,000 invoices × 6 min = **300 hours a month**
@@ -95,7 +96,9 @@ After: 80% flow straight through. 600 exceptions × 4 min = **40 hours a month**
 Released: **260 hours a month**
 :::
 
-:::formula Money
+The money calculation below values released capacity at €35 an hour. Treat its payback as conditional: the released hours must produce that much avoided spending or another demonstrated financial benefit. If payroll and other costs stay unchanged, report the time as capacity released.
+
+:::formula Conditional financial case
 Benefit: 260 h × €35 per hour (fully loaded) = €9,100 a month, **€109,200 a year**
 Costs: €45,000 to build, €1,500 a month to run (€18,000 a year)
 Payback: 45,000 ÷ (9,100 − 1,500) ≈ **6 months**
@@ -105,7 +108,7 @@ First-year net benefit: 109,200 − 18,000 − 45,000 = **€46,200**
 Two things make a business case honest:
 
 - **Count released hours, not saved minutes.** Saving 12 minutes a day for 20 people doesn't free a person. The savings only become real when capacity is redeployed, hiring is avoided, or overtime disappears. Say which one, and who owns it.
-- **Count the benefits beyond hours.** For invoices: early-payment discounts that were being missed, fewer duplicate payments, faster month-end close. These are often bigger than the labour saving.
+- **Check benefits beyond hours.** For invoices, inspect missed early-payment discounts, duplicate payments and month-end delays. Include only benefits the team can evidence, without counting the same saving twice.
 
 This matters more than it sounds. In Deloitte's intelligent automation survey, more than half of organisations hadn't even calculated what their automation saved, and average payback for pilots had stretched from 16 to 22 months.
 
@@ -115,7 +118,7 @@ AI agents can plan, use tools and take actions, which makes them powerful for wo
 
 Before giving an agent a process, decide how much it's allowed to do on its own:
 
-- **Read:** it gathers and summarises information. Low risk, useful right away.
+- **Read:** it gathers and summarises permitted information. Confirm which records it may access.
 - **Recommend:** it proposes an action; a person decides.
 - **Orchestrate:** it runs approved workflows and hands exceptions to people.
 - **Act:** it executes within explicit limits, with every action logged and reversible.
@@ -125,10 +128,10 @@ Move a process up a level only when mistakes would be small, reversible and noti
 ## Five mistakes to avoid
 
 1. **Automating a broken process.** If the process has five approval loops nobody needs, remove them first. McKinsey's 2026 State of AI survey found that nearly three quarters of the companies getting the most from AI had fundamentally redesigned their workflows, against a quarter of the rest.
-2. **Ignoring the exceptions.** The 20% of cases that don't fit often take 80% of the effort. Design their path on day one.
+2. **Ignoring the exceptions.** Measure the handling effort for the cases that need people, and include their route in the design.
 3. **No process owner.** Every automation needs a business owner who notices when it drifts, not just an IT ticket queue.
-4. **Building on screens when an API exists.** RPA on a system with a perfectly good API is fragile and expensive.
-5. **Measuring go-live instead of results.** Track the hours, errors and cycle time a quarter later. That's the real result.
+4. **Using screens without checking the API.** Compare the supported API with screen automation, including access, missing functions and maintenance after an interface changes.
+5. **Closing the review at go-live.** Check hours, errors and cycle time a quarter later. Confirm with Finance which released hours changed spending.
 
 :::link /notes/change-management-adkar-kotter/ | Next: getting people to adopt it
 Automation changes how people work. Here's how to make sure they actually switch to the new way.

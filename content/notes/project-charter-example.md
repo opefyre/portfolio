@@ -1,6 +1,7 @@
 ---
 title: Project charter example: agree what you're authorised to do
 date: 2026-10-14
+updated: 2026-10-23
 summary: Everyone agrees that orders need to ship faster. The project still needs a boundary, a sponsor and permission to use resources. Here's what a short charter can settle.
 seoTitle: Project charter example: charter vs project plan
 seoDescription: See a short project charter for a warehouse pilot. Compare it with a business case and project plan, and inspect what the project manager can approve.
@@ -95,7 +96,7 @@ Suppose the investigation finds that the dispatch problem comes from promises ma
 
 Bring that finding to the sponsor. Explain the new boundary, resource needs and effect on the objective before committing the team to wider work. Update the approval and the plan together if the assignment changes.
 
-A short charter earns its place when people can use it in that conversation. It should let the manager explain what can proceed today, what needs another decision and who will make it.
+Before committing to the wider work, use the charter to confirm what the manager may approve and which decision belongs with the sponsor. Record any revised authority with the approved scope.
 
 ## Sources and example notes
 

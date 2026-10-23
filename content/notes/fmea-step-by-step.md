@@ -1,6 +1,7 @@
 ---
 title: FMEA step by step: find what could go wrong before it does
 date: 2026-09-29
+updated: 2026-10-23
 summary: A practical guide to process FMEA: the seven steps, how to rate severity, occurrence and detection, why ranking by RPN can hide your worst risk, how action priority fixes it, and a worked example on an order fulfilment process.
 status: published
 topic: Operational excellence
@@ -9,9 +10,9 @@ seoTitle: FMEA step by step: ratings and a worked example
 seoDescription: Build a process FMEA with a worked example. Rate severity, occurrence and detection, compare RPN with action priority, and choose what to fix first.
 ---
 
-Most problem-solving starts after something has gone wrong. Failure mode and effects analysis (FMEA) starts before. It began as a US military procedure in 1949, helped NASA through the Apollo program in the 1960s, and has been standard in the automotive industry for decades. It asks a team to walk through a process step by step and imagine, systematically, every way each step could fail, what that failure would cause, and how likely you'd be to catch it.
+**Teams use failure mode and effects analysis (FMEA) to examine how a process could fail, what the effects would be and which controls address the causes or detect the failures.** They record that reasoning before choosing actions and revise it as they learn about the process.
 
-Done well, it's one of the highest-return hours a team can spend. Done badly, it's a spreadsheet nobody reads. The difference is mostly in how you prioritise, and that's where the most common method, the risk priority number, quietly lets people down.
+The food-distribution example below shows why the team must examine severity alongside any total score. Its highest-severity failure has the lowest risk priority number (RPN).
 
 :::card The short version
 1. List the process steps.
@@ -23,7 +24,7 @@ Done well, it's one of the highest-return hours a team can spend. Done badly, it
 
 ## The vocabulary, once
 
-People mix these up constantly, so it's worth being precise:
+Use separate fields for the failure, its effect, its cause and the current control:
 
 :::grid
 - **Failure mode** How the step fails. "Wrong item picked."
@@ -48,11 +49,11 @@ The 2019 AIAG and VDA handbook, now the reference for automotive and widely used
 | 6. Optimisation | Decide actions, owners and dates; re-rate after they're done |
 | 7. Results documentation | Record and communicate what was found and changed |
 
-The first three steps look like admin. They're where most of the value comes from, because a clear map of the process is what lets a team see failure modes nobody had written down.
+Agree the scope and intended functions before rating failures. Otherwise, the team may assign scores to different understandings of what the process must do.
 
 ## The example: order fulfilment at a food distributor
 
-A distributor picks, labels, packs and ships mixed food orders to shops. Some products contain allergens. The team runs a process FMEA and, among many lines, records these:
+In this fictional example, a distributor picks, labels, packs and ships mixed food orders to shops. Some products contain allergens. The team records these lines in its process FMEA:
 
 | Step | Failure mode | Effect | S | Cause | O | Current control | D | RPN |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -74,18 +75,18 @@ Every organisation tunes its own scales, but they should describe observable thi
 | 2 to 3 | Minor annoyance | Rare, with good prevention | Caught by an automatic check |
 | 1 | No noticeable effect | Practically impossible | Failure is prevented or always caught |
 
-Rate severity for the effect, occurrence for the cause, and detection for the best current control. Rate as a team, and move on when you're within a point: the discussion is worth more than the decimals.
+Use the applicable rating tables and record the evidence supporting each score. Rate severity for the effect, occurrence for the cause, and detection for the relevant current control. Resolve a disagreement if it could change the action priority.
 
 ## The trap: ranking by RPN
 
 The traditional way to prioritise is the risk priority number: RPN = S × O × D. Sort by RPN, work from the top. In the example, that puts the allergen line **last**.
 
-::figure fmea-rpn | Ranked by RPN, the only failure that could hurt someone comes bottom, with 40, below a late dispatch. Multiplying three ordinal scores hides the one that matters most.
+::figure fmea-rpn | The allergen failure has the highest assigned severity, 10, but the lowest RPN, 40. Review that severity directly before using the score to choose actions.
 
 This isn't a quirk of the example. RPN has well-known flaws:
 
 - **It treats the three factors as equal.** A severity of 10 counts no more than an occurrence of 10. But a rare catastrophe and a frequent nuisance are not the same risk.
-- **The scores are rankings, not measurements.** A detection of 6 isn't "twice as bad" as a 3. Multiplying them produces a number with no real meaning.
+- **The scores are rankings, not measurements.** A detection of 6 isn't "twice as bad" as a 3. Their product does not measure the probability or cost of the effect.
 - **Very different risks get the same RPN.** 10 × 2 × 2 and 2 × 5 × 4 both give 40.
 - **It invites gaming.** Teams learn that lowering any factor lowers the RPN, and choose the easiest one, often detection.
 
@@ -93,37 +94,35 @@ Reliability researchers have pointed this out for over twenty years. One well-ci
 
 ## Action priority: severity first
 
-The AIAG and VDA handbook replaced RPN with **action priority (AP)**: a lookup table that sorts every combination of S, O and D into high, medium or low priority. The logic behind it is what matters:
+The AIAG and VDA handbook uses **action priority (AP)** tables to assign high, medium or low priority to combinations of severity, occurrence and detection. Use the applicable table and its action requirements. A general instruction to put severity first cannot replace that lookup.
 
-1. **Severity comes first.** A high-severity effect is high priority unless you can show that occurrence is genuinely very low *and* detection is very reliable.
-2. **Occurrence comes second.** Preventing the cause beats catching the failure.
-3. **Detection comes last.** An inspection is the weakest control, because it relies on catching problems rather than stopping them.
+For each high-severity effect, review the evidence behind prevention and detection. A low occurrence or detection score needs support from the actual controls and operating conditions.
 
-In the example, the team asked the question action priority forces: is the allergen line's low occurrence and detection actually proven? It wasn't. The scan at packing only works if every carton is scanned, and night shift sometimes skipped it under pressure. With one failure able to harm a consumer, the team made it the first action, followed by the wrong pick and the damaged shipments. A severity of 9 or 10 should always get a deliberate decision, never a quiet place at the bottom of a sorted list.
+The fictional team checks the allergen line's low occurrence and detection ratings. The scan works only if every carton passes through it, and the night shift sometimes skips it under pressure. The team therefore reviews those scores and prioritises the allergen control, followed by wrong picks and transit damage. Record the safety decision and its evidence separately from the RPN ranking.
 
 ## Optimisation: the actions
 
 Good actions follow the same order as the logic: remove the cause, then prevent it, then detect it.
 
-| Failure mode | Action | Owner and date | New S / O / D |
+| Failure mode | Action | Owner and date | Proposed S / O / D, subject to verification |
 | --- | --- | --- | --- |
 | Allergen product in the wrong carton | Store allergen products in a separate zone; the scanner blocks packing if an allergen item goes into a non-allergen order | Warehouse manager, end of Q1 | 10 / 1 / 1 |
 | Wrong item picked | Scan-to-pick on every line; separate look-alike items | Operations lead, end of Q2 | 5 / 3 / 2 |
 | Damaged in transit | Palletising standard with a photo check; stretch-wrap settings fixed | Shipping supervisor, next month | 6 / 2 / 4 |
 
-Notice that severity rarely changes. It's a property of the effect. What you can change is how often the cause happens and how early it's caught. The best actions are mistake-proofing (*poka-yoke*): designs that make the error impossible, like the scanner that won't let an allergen item into the wrong carton.
+For the same effect, retain its severity while checking whether the action changes occurrence or detection. Test the scanner's block with a wrong item, a missed scan and the recovery procedure before accepting the proposed ratings.
 
 ## Mistakes that turn FMEA into paperwork
 
 1. **Doing it alone.** One engineer filling in a template misses most of the failure modes. The people who do the work know where it breaks.
 2. **Doing it once.** An FMEA should change whenever the process does, and whenever a failure happens that it didn't predict.
-3. **Arguing about scores.** Agree within a point and move on. The ranking matters, not the precision.
+3. **Scores without evidence.** Use the agreed scales and investigate differences that could change the required action.
 4. **Actions without owners and dates.** "Improve training" isn't an action. "New pick-path training for night shift, owned by Ana, by 15 March" is.
-5. **Stopping at detection.** Adding an inspection feels like progress, but prevention is almost always cheaper over the life of the process.
+5. **Stopping at detection.** Check whether the team can prevent the cause. Compare the control's coverage, operating burden and response to a failure before selecting it.
 
 ## Where FMEA fits
 
-FMEA is a forward-looking tool. It pairs naturally with the backward-looking ones: when something does fail, a root cause analysis should feed back into the FMEA, and the control plan from a [DMAIC project](/notes/dmaic-step-by-step/) should cover its highest risks. Used together, they turn "that should never have happened" into "we'd already planned for that".
+After a failure, update the FMEA with the cause evidence and any control that failed to work as expected. Carry accepted changes into the control plan from the [DMAIC project](/notes/dmaic-step-by-step/), with an owner and a check that the control still works in use.
 
 :::link /notes/project-risk-register/ | The same thinking, for projects
 Projects have failure modes too. Here's how to build a risk register that actually drives decisions.

@@ -1,6 +1,7 @@
 ---
 title: Data lineage explained: trace a number to its source
 date: 2026-10-20
+updated: 2026-10-23
 summary: A report says 50 pieces are available. Trace the source fields, calculation version and downstream uses so the team can explain the number and check what a change affects.
 seoTitle: Data lineage explained with a stock-data example
 seoDescription: Trace a stock figure through source fields, transformation rules and reports. A data-lineage example shows how to investigate errors and assess a rule change.
@@ -78,7 +79,7 @@ A small maintained diagram and a field table can be enough for a bounded example
 
 A runtime log answers when a job ran and what it did. Lineage describes the derivation and dependencies; a particular record or event log can add evidence of what happened in one run. Keep both when the decision requires them.
 
-For this stock field, the team should be able to reproduce 50 from the identified snapshot and rule, explain the earlier 70 and name the reports to check before the next rule change. That is more useful than an unexplained assurance that every dashboard uses the same data platform.
+Before changing this stock rule, reproduce 50 from the recorded snapshot, explain the earlier 70 and list the affected reports. Give each report owner the revised rule and the checks needed before release.
 
 ## Source and example notes
 

@@ -1,6 +1,7 @@
 ---
 title: 5 Whys example: finding a cause you can test
 date: 2026-10-03
+updated: 2026-10-23
 summary: The team finishes its 5 Whys, retrains the operators, and the failure returns. A manufacturing example of checking the evidence, choosing a corrective action and testing whether it worked. Includes an Excel worksheet.
 status: published
 topic: Operational excellence
@@ -9,13 +10,13 @@ seoTitle: 5 Whys example: finding a cause you can test
 seoDescription: A manufacturing 5 Whys example: check evidence, test the cause and choose a corrective action that works. Includes an editable Excel worksheet.
 ---
 
-A packaging line keeps stopping at the infeed. The team completes a 5 Whys sheet, arrives at "the operator didn't set it correctly", and arranges retraining. Everyone signs the action off.
+A packaging line keeps stopping at the infeed. The team completes a 5 Whys sheet, concludes that "the operator didn't set it correctly" and signs off retraining as the fix.
 
 The stops return on the next shift.
 
 The sheet was complete. The explanation was still untested. A sequence of plausible answers can look convincing even when nobody has checked the links between them.
 
-This note works through a fictional investigation. The point is to make the cause specific enough to test, so the action follows from evidence rather than from whoever speaks first in the meeting.
+In this fictional investigation, the team checks each proposed cause against the line records before choosing a fix.
 
 ## Start with the failure you can describe
 
@@ -111,13 +112,13 @@ The method helps here because the failure is specific and the team can observe t
 
 When causes branch, conditions interact or the consequences require a more formal investigation, add the methods and expertise the problem needs. A cause-and-effect diagram can organise candidate explanations. A controlled test can distinguish them. Completing five boxes does neither by itself.
 
-The useful habit is to keep three things separate: what the team observed, what it thinks caused the event, and what test could change its mind. Do that before asking for an action owner.
+Before assigning the action, record what the team observed, which cause it suspects and how it will test that explanation.
 
 :::link /notes/did-it-hold/ | Check the result after the change
 Once a countermeasure is in place, review whether the improvement holds under normal operating conditions.
 :::
 
-The next time a 5 Whys ends with "retrain the operator", ask what was observed and how the action would prevent the failure. Training may be exactly what is needed. It should earn its place in the explanation.
+If the proposed action is "retrain the operator", check whether the team found a knowledge or skill gap and how it will verify the training in use.
 
 ## Sources
 

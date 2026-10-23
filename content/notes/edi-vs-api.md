@@ -4,7 +4,7 @@ date: 2026-10-15
 summary: An order can arrive without being accepted. Follow the same purchase order through EDI, an API and a combined route, including the retry that must not create a second order.
 seoTitle: EDI vs API: differences and integration example
 seoDescription: Understand EDI and API integration through one purchase order. Compare the routes, business responses and duplicate-message handling that both need.
-updated: 2026-10-20
+updated: 2026-10-23
 status: published
 topic: Digital transformation
 keywords: EDI vs API, EDI explained, API integration supply chain, electronic data interchange, purchase order integration
@@ -80,7 +80,7 @@ For this connection, agree who owns the order record, the permitted changes, the
 
 **Interoperability is the ability of systems to exchange information and use it appropriately together.** A successful connection handles only part of that requirement.
 
-[IBM's interoperability overview](https://www.ibm.com/think/topics/interoperability) uses four levels: foundational, structural, semantic and organisational. Other frameworks group the subject differently; there is no universal answer of exactly three levels for every field.
+[IBM's interoperability overview](https://www.ibm.com/think/topics/interoperability) uses four levels: foundational, structural, semantic and organisational. Other authors group these levels differently. Check which distinctions the team needs for the systems being connected.
 
 | Level in IBM's description | Check on our purchase order |
 | --- | --- |

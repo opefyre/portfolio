@@ -1,6 +1,7 @@
 ---
 title: Cost of quality: what belongs in the calculation?
 date: 2026-10-14
+updated: 2026-10-23
 summary: Inspection costs €200. Rework and customer failures cost another €1,500. Follow one monthly ledger to calculate cost of quality and test a prevention proposal.
 seoTitle: Cost of quality: formula and worked example
 seoDescription: Understand the four cost of quality categories, calculate COQ and COPQ, and test how much failure cost a prevention proposal must remove to break even.
@@ -15,7 +16,7 @@ Look only at the inspection budget and most of the cost stays out of view.
 
 **Cost of quality (COQ) groups the resources used to prevent problems, check conformance and deal with failures.** It includes four categories: prevention, appraisal, internal failure and external failure. [ASQ's explanation](https://asq.org/quality-resources/cost-of-quality) uses this structure to make the wider cost visible.
 
-The point is to understand where the effort goes and which problem deserves attention. Cutting one budget line doesn't establish that the company spends less overall.
+Use the combined ledger to choose which recurring failure to investigate. Check the total again after the change; a lower inspection bill may come with more rework or returns.
 
 ## The four cost of quality categories
 
@@ -89,7 +90,7 @@ A separate process example shows how to test one change, compare the result with
 
 Labour needs particular care in the result. Removing four hours of rework may free four hours for useful work. It doesn't reduce payroll by four hours if staffing and paid time stay the same. The [benefits realisation note](/notes/benefits-realisation-automation/) explains how to distinguish released capacity from money actually saved.
 
-Start with a ledger small enough to reconcile with the people doing the work and the people holding the costs. It is more useful to understand one recurring loss properly than to present a large total nobody can trace.
+For the next review, reconcile one recurring loss with Production, Logistics and Finance. Keep the inspection, rework and return costs together so the team can check whether its proposed change reduces the total.
 
 ## Source
 

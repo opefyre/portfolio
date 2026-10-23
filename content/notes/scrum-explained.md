@@ -1,6 +1,7 @@
 ---
 title: Scrum explained: roles, events and a usable sprint example
 date: 2026-10-15
+updated: 2026-10-23
 summary: A team finishes its tickets, but the warehouse still cannot use the feature. Follow one sprint from a clear goal to a working change people can inspect.
 seoTitle: Scrum explained: roles, events and sprint example
 seoDescription: Understand Scrum through a warehouse software feature. Connect the team, sprint events, backlogs and Definition of Done to a usable product increment.
@@ -9,13 +10,13 @@ topic: Project management
 keywords: Scrum explained, Scrum roles events artifacts, sprint example, sprint review vs retrospective, Definition of Done
 ---
 
-**Scrum is a framework for developing products through short cycles of usable work, feedback and adjustment.** A cycle is a Sprint, lasting a month or less. The team works towards a goal and produces a usable addition to the product, called an Increment.
+**Teams use Scrum to develop products through short cycles of usable work, feedback and adjustment.** A cycle is a Sprint, lasting a month or less. The team works towards a goal and produces a usable addition to the product, called an Increment.
 
 Imagine a warehouse team asking for a stock-hold feature. Quality staff need to block suspect stock, and pickers need to see that it cannot be dispatched.
 
 The developers finish a screen labelled “Hold stock”. Their tickets are closed. But a picker can still scan the held stock onto an order. The screen works; the intended outcome doesn't.
 
-The [2020 Scrum Guide](https://scrumguides.org/scrum-guide.html), written by its creators, is the source for the framework terms below.
+The [2020 Scrum Guide](https://scrumguides.org/scrum-guide.html), written by its creators, defines the roles, events and terms used below.
 
 ## Start with the product goal and the sprint goal
 
@@ -29,7 +30,7 @@ Scrum is one way to work within an agile approach. The [agile, waterfall and hyb
 
 ## Scrum roles: who is accountable for what?
 
-| Accountability | Framework purpose | In this fictional team |
+| Accountability | Role in Scrum | In this fictional team |
 | --- | --- | --- |
 | Product Owner | Maximise product value and order the Product Backlog | Decides which warehouse need deserves attention first |
 | Developers | Create a usable Increment and adapt their plan | Build and test the hold workflow together |

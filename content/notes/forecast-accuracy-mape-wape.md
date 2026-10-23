@@ -1,7 +1,7 @@
 ---
 title: Forecast accuracy: MAPE vs WAPE, with a worked example
 date: 2026-10-03
-updated: 2026-10-12
+updated: 2026-10-23
 summary: MAPE and WAPE can pick different winners from the same forecasts. Compare their formulas, try the calculator and see what each score hides.
 status: published
 topic: Supply chain
@@ -10,9 +10,7 @@ seoTitle: Forecast accuracy: MAPE vs WAPE worked example
 seoDescription: Compare MAPE and WAPE with a worked example and interactive calculator. Change demand and forecasts to see how volume, zero demand and bias affect the scores.
 ---
 
-The planning team brings two forecasts to the review. Forecast A has the lower average percentage error. Forecast B misses far fewer units. Both teams have a number that says their forecast is better.
-
-Which one should purchasing use?
+The planning team brings two forecasts to the review. Forecast A has the lower average percentage error. Forecast B misses far fewer units. Before purchasing chooses a forecast, the team needs to agree whether the decision depends on relative error, units missed or the cost of the resulting shortage.
 
 The difference is simple: **MAPE averages each observation's percentage error. WAPE adds the absolute errors and divides by total actual demand.** A small product can dominate MAPE; a large product has more influence on WAPE. Neither tells you how costly a miss will be.
 
@@ -110,7 +108,7 @@ Prefer Excel? Use the original worked example and blank input sheet, with MAPE, 
 
 A better forecast may change the inventory you need. It does not justify cutting every buffer by the same percentage. Check lead-time variability and the service requirement in the [safety stock and reorder point example](/notes/safety-stock-reorder-point/).
 
-When someone says the forecast improved, ask where, at which horizon and according to which measure. Then look at the products the average made hard to see.
+At the next review, name the product group, forecast date, horizon and measure. Inspect the largest unit misses as well as the average before changing the orders.
 
 ## Sources
 

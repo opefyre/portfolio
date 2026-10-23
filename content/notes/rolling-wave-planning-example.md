@@ -1,6 +1,7 @@
 ---
 title: Rolling-wave planning: an example as the detail changes
 date: 2026-10-20
+updated: 2026-10-23
 summary: The first site has a detailed plan. Later sites still have planning packages. Follow a trial finding into the next wave without hiding scope, dependencies or a changed forecast.
 seoTitle: Rolling-wave planning: meaning and example
 seoDescription: Learn rolling-wave planning through a three-site rollout. Compare it with progressive elaboration and see how more detail can expose a later finish.
@@ -71,7 +72,7 @@ For this rollout, the team should bring the revised day-32 finish to the sponsor
 
 The next approval may retain the scope and accept the forecast, change the delivery approach or stop for more evidence. Record the decision and update the relevant plan.
 
-S3 will need the same treatment before its work begins. Rolling-wave planning continues to earn its place only if each refinement arrives early enough to change what the team does.
+Set a review date for S3 before its work begins, allowing time to resolve the requirements, people and support still covered by the planning package.
 
 ## Sources and example notes
 

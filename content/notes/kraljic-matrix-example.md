@@ -1,6 +1,7 @@
 ---
 title: Kraljic matrix explained: four quadrants and purchasing examples
 date: 2026-10-15
+updated: 2026-10-23
 summary: The biggest purchase deserves attention. So does the inexpensive control module that can stop a line. Use supply risk and profit impact to choose how to buy.
 seoTitle: Kraljic matrix: 4 quadrants and purchasing examples
 seoDescription: Learn the four Kraljic matrix quadrants with purchasing examples. Compare profit impact and supply risk, then test a change in qualified suppliers.
@@ -34,7 +35,7 @@ Keep the evidence for each axis separate. “We spend a lot” says little about
 | Category label | Profit impact | Supply risk | Initial purchasing focus |
 | --- | --- | --- | --- |
 | “Non-critical items” or routine purchases | Lower | Lower | Simplify routine ordering |
-| “Leverage items” | Higher | Lower | Compare qualified offers on the complete requirement |
+| High-impact, lower-risk items | Higher | Lower | Compare qualified offers on the complete requirement |
 | “Bottleneck items” | Lower | Higher | Secure continuity and check the fallback |
 | “Strategic items” | Higher | Higher | Plan capacity, alternatives and the supplier relationship carefully |
 

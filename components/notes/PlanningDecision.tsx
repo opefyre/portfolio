@@ -34,7 +34,7 @@ export function PlanningDecision({ caption }: { caption: string }) {
       <span className="planning-bar-track" aria-hidden="true"><span className="planning-premium" style={{ width: `${row.premium / max * 100}%` }} /><span className="planning-late" style={{ width: `${row.lateCost / max * 100}%` }} /><span className="planning-carry" style={{ width: `${row.carryCost / max * 100}%` }} /></span>
       <span className="planning-bar-note">{units(row.available)} available | {units(row.late)} late | {units(row.leftover)} left over</span>
     </button>)}</div>
-    <p className="planning-axis">Additional cost (€), on a shared scale. Hover, tap or focus a plan to inspect its cost breakdown.</p>
+    <p className="planning-axis">Additional cost (€), on a shared scale. Hover over, select or focus a plan to inspect its cost breakdown.</p>
     <div className="planning-breakdown" aria-live="polite"><span>{selected.name}</span><p>{euro(selected.premium)} commitment + {euro(selected.lateCost)} late delivery + {euro(selected.carryCost)} carrying stock = <strong>{euro(selected.total)}</strong></p></div>
     <details className="planning-methods"><summary>Assumptions, calculations and all values</summary>
       <p>All quantities refer to one product and one delivery month. The 600 confirmed orders in the story sit inside forecast demand; they are not added again. Demand cannot fall below those orders in this control. Regular output is the quantity available before the deadline, not a long-run capacity rating.</p>

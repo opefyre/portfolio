@@ -1,6 +1,7 @@
 ---
 title: AI visual inspection ROI: a worked business case
 date: 2026-10-03
+updated: 2026-10-23
 summary: A pilot reports 98% accuracy. Translate that into missed defects, false alarms and annual cost, then calculate the payback against today's inspection process. Includes an Excel model.
 status: published
 topic: Industrial AI
@@ -125,7 +126,7 @@ Assign someone to the costs as well as the detection results. Quality can verify
 Editable pilot counts, an annual comparison with the current process, and sensitivity tables for false positives and defect prevalence. The fictional inputs are clearly labelled.
 :::
 
-An investment may be worthwhile with a modest accuracy figure, and disappointing with an impressive one. The useful question is whether the defects prevented are worth more than the work and costs added, while meeting the required quality standard.
+Before approving the investment, compare the cost of defects prevented with the inspection, review and support costs added. Quality must also confirm that the proposed setup meets the required standard.
 
 :::link /notes/what-to-automate-first/ | Choose the process before buying the technology
 Use the automation scoring model to compare candidates before building a detailed case for one inspection point.

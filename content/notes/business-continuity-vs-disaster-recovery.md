@@ -1,6 +1,7 @@
 ---
 title: Business continuity vs disaster recovery: a warehouse example
 date: 2026-10-20
+updated: 2026-10-23
 summary: The stock system returns, but dispatch records still need reconciliation. Follow the outage, fallback work and recovery before calling the operation back to normal.
 seoTitle: Business continuity vs disaster recovery: example
 seoDescription: Compare business continuity and disaster recovery through a warehouse outage. Define RTO and RPO, follow fallback work and check records before normal service.
@@ -65,7 +66,7 @@ For this warehouse, a short plan needs the following. They are a useful grouping
 
 For equipment-connected systems, the [IT vs OT comparison](/notes/it-vs-ot-explained/) explains why recovery must include the physical operating state. An application restart alone may not authorise a machine restart.
 
-Exercise the whole route. Try accessing the fallback records, recovering the service and reconciling what happened in between. Time the result and retain unresolved exceptions. The return to normal work should be a checked decision, rather than an announcement that the server is running again.
+Rehearse access to the fallback records, service recovery and reconciliation of shipments made during the outage. Time the exercise and record unresolved exceptions. Dispatch should resume the normal route only after the responsible team confirms it can use the reconciled records.
 
 ## Source and example notes
 

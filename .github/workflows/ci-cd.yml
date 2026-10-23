@@ -65,6 +65,9 @@ jobs:
       - name: Verify search metadata
         run: npm run verify:seo
 
+      - name: Verify note vocabulary and punctuation
+        run: npm run verify:voice
+
       - name: Verify article hero images
         run: npm run verify:heroes
 

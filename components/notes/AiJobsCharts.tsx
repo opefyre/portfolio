@@ -96,7 +96,7 @@ function Adoption() {
     <label className="ai-checkbox"><input type="checkbox" checked={internet} onChange={e => setInternet(e.target.checked)} /> Include internet observations</label>
     <Legend lines={[{ label: "PC", color: INK }, { label: "GenAI", color: RUST }, ...(internet ? [{ label: "Internet, ages 18-64", color: GREY, open: true }, { label: "Internet, all ages", color: GREY }] : [])]} />
     <Plot label="Historical overall adoption survey points by years since the chosen mass-market anchor" points={rows.map(r => ({ x: r.years, y: r.value, label: `${r.technology}, ${r.surveyYear}`, color: colors[r.technology], open: r.technology === "Internet (CPS)", detail: `${r.population}. Use at work or home.${r.technology === "GenAI" ? " Revised from 39.4% after a question-order experiment; roughly 21 months after launch." : " Observed source point; no interpolation."}` }))} xDomain={[0, 14]} yDomain={[0, 85]} xTicks={[0, 2, 4, 6, 8, 10, 12, 14].map(value => ({ value, label: String(value) }))} yTicks={[0, 20, 40, 60, 80]} yLabel="Overall use (%)" xLabel="Years since source anchor" />
-    <p className="ai-hint">Hover, tap or focus a point for its year and population.</p>
+    <p className="ai-hint">Hover over, select or focus a point for its year and population.</p>
     {internet && <p className="ai-caution">The all-age internet series has a different denominator. It is context, not a matched comparison.</p>}
     <Evidence source="https://www.stlouisfed.org/on-the-economy/2025/nov/state-generative-ai-adoption-2025">
       <p>Anchors: IBM PC in 1981, commercial internet in 1995, ChatGPT in 2022. Historical observations come from the September 2024 Fed workbook. AI&rsquo;s August 2024 overall-use estimate uses the November 2025 revision. No intermediate survey values are invented.</p>
@@ -168,7 +168,7 @@ function Baseline() {
       {data.baseline.map((r, i) => <g key={r.date} tabIndex={0} role="button" aria-label={`${month(r.date)} baseline: ${pct(r.value)} through August 2026`} className="ai-mark" onFocus={() => setSelected(i)} onPointerEnter={() => setSelected(i)} onClick={() => setSelected(i)} onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSelected(i); } }}><text x={0} y={38 + i * 41} className="ai-tick">{month(r.date)}</text><circle cx={x(r.value)} cy={34 + i * 41} r={18} fill="transparent" /><circle cx={x(r.value)} cy={34 + i * 41} r={selected === i ? 6 : 4.5} fill={selected === i ? RUST : GREY} /></g>)}
     </svg></div>
     <div className="ai-readout" aria-live="polite"><span>{month(data.baseline[selected].date)} to Aug 2026</span><strong>{pct(data.baseline[selected].value)}<small>Relative employment change</small></strong></div>
-    <p className="ai-hint">Hover, tap or focus a point to inspect its comparison period.</p>
+    <p className="ai-hint">Hover over, select or focus a point to inspect its comparison period.</p>
     <Evidence source={sourceCanaries}><p>For each baseline b, relative change = 100 × (Q5 in August 2026 ÷ Q5 at b) ÷ (Q1 in August 2026 ÷ Q1 at b) − 100. Every row measures a different period. These are not statistical confidence bounds.</p><table><caption>All five baseline calculations</caption><thead><tr><th>Baseline</th><th>Relative change to Aug 2026</th></tr></thead><tbody>{data.baseline.map(r => <tr key={r.date}><td>{month(r.date)}</td><td>{pct(r.value)}</td></tr>)}</tbody></table></Evidence>
   </>;
 }

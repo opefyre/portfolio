@@ -1,6 +1,7 @@
 ---
 title: MRP explained: what to order and when
 date: 2026-10-14
+updated: 2026-10-23
 summary: Fifty stands need 100 brackets, but you shouldn't order all 100. Work through the bill of materials, usable stock, incoming deliveries and the dates that decide the shortage.
 seoTitle: MRP explained: what to order and when
 seoDescription: Learn material requirements planning with a worked example. Calculate component needs, net off usable stock and receipts, then work back to order dates.
@@ -15,7 +16,7 @@ There are already 20 usable brackets in the warehouse and another 30 due before 
 
 **Material requirements planning**, or MRP, works through those quantities and dates. It starts from what you plan to make, calculates the components required, allows for usable supply, and proposes when to order or make the missing material.
 
-It can also recommend moving existing orders. The point is to connect the finished-product plan with component availability, rather than let each order follow the gross requirement alone.
+It can also recommend moving existing orders. The planner checks those proposals against usable stock, incoming supply and the component dates in the finished-product plan.
 
 ## Start with what one finished product contains
 

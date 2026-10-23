@@ -2,7 +2,7 @@
 title: AI supply chain planning: a better forecast is only the start
 date: 2026-10-07
 summary: Turn a demand forecast into a decision about stock, capacity and delivery. A worked example and interactive comparison show what AI planning needs beyond accuracy.
-updated: 2026-10-19
+updated: 2026-10-23
 status: published
 topic: Supply chain
 keywords: AI supply chain planning, AI demand forecasting, forecast consumption, demand planning, production planning, human oversight
@@ -16,7 +16,7 @@ Someone has to decide what to do about the gap.
 
 A better forecast helps. It still doesn't tell you whether to book overtime, buy from another supplier or accept some late deliveries. That depends on the costs, the constraints and what you have promised customers.
 
-This is where AI supply chain planning needs to prove its value: helping people choose a workable response, then checking whether it worked.
+To assess the AI planning tool, follow the response the team chooses and the delivery result that follows.
 
 PwC's September 29 article, [From plans to decisions](https://www.pwc.com/us/en/services/consulting/supply-chain-operations/library/from-plans-to-decisions-ai-supply-chain-planning.html), argues for planning that responds to changing conditions, with clear limits on what AI can do. The direction makes sense. The practical test is what happens to one order, one capacity decision and one customer promise.
 
@@ -149,7 +149,7 @@ At the next planning review, keep the changed forecast beside the action it prom
 
 - Amazon Science. [The history of Amazon's forecasting algorithm](https://www.amazon.science/latest-news/the-history-of-amazons-forecasting-algorithm), 9 August 2021. Company-reported development and use of forecasting systems; no independent comparative outcome is inferred.
 
-- PwC. [From plans to decisions: How AI is redefining supply chain planning](https://www.pwc.com/us/en/services/consulting/supply-chain-operations/library/from-plans-to-decisions-ai-supply-chain-planning.html), September 29, 2026. The starting point for this note.
+- PwC. [PwC on AI supply chain planning](https://www.pwc.com/us/en/services/consulting/supply-chain-operations/library/from-plans-to-decisions-ai-supply-chain-planning.html), September 29, 2026. The starting point for this note.
 - Oracle. [Forecast consumption](https://docs.oracle.com/en/cloud/saas/supply-chain-and-manufacturing/25d/faupc/forecast-consumption.html). Matching orders to forecasts and consumption periods.
 - Hyndman, R. J. and Athanasopoulos, G. [Distributional forecasts and prediction intervals](https://otexts.com/fpp3/prediction-intervals.html). Forecasting: Principles and Practice, third edition.
 - PwC. [2026 Digital Trends in Operations Survey](https://www.pwc.com/us/en/services/consulting/supply-chain-operations/library/digital-trends-operations-survey.html), April 23, 2026. Online survey conducted in January and February 2026; the data-quality figure describes respondents' reported experience.
