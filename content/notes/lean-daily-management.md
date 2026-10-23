@@ -1,6 +1,7 @@
 ---
 title: Lean daily management: a board, a response and a follow-up
 date: 2026-10-21
+updated: 2026-10-23
 summary: A red number has been on the board for three mornings. Follow one material shortage through a short review, an escalation and the check that closes the action.
 seoTitle: Lean daily management: a practical board example
 seoDescription: See a lean daily management board in use. Follow a missed production target through an immediate fix, assigned actions and the next-day check.
@@ -68,7 +69,7 @@ Once a change is accepted, update the [standard work](/notes/standard-work-vs-so
 
 ## Keep the routine useful to the people doing the work
 
-Leader standard work can specify the manager's own checks: review open escalations, visit the affected work and return with the promised decision. It should make support dependable, rather than create another inspection of whether the board looks tidy.
+Put the manager's checks in leader standard work: review open escalations, visit the affected work and return with the promised decision. Check at the next review whether that decision reached the people waiting for it.
 
 :::link https://www.youtube.com/watch?v=p5687M5EoGM | Watch Vrolen's PDCA process example
 The video follows a separate improvement example from a proposed change to a result check. Use that loop when a recurring board problem needs a trial rather than another temporary fix.

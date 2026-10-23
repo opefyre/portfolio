@@ -1,6 +1,7 @@
 ---
 title: The bullwhip effect: why orders swing more than sales
 date: 2026-10-14
+updated: 2026-10-23
 summary: Customers buy about 100 units a week. The manufacturer sees orders of 400, then nothing. Follow the order batches to see how the same demand becomes a very different signal.
 seoTitle: Bullwhip effect: a worked supply chain example
 seoDescription: Understand the bullwhip effect with an interactive example. See how order batching changes the demand signal, why it happens and what to investigate.
@@ -92,7 +93,7 @@ Keep the observation window long enough to include full order cycles. Check fulf
 
 For a related flow check, Vrolen's [Little's Law guide](https://vrolen.com/blog/littles-law-wip-lead-time/) explains how average inventory, throughput and lead time fit together, and why changing one doesn't guarantee the others stay fixed.
 
-Before calling a supplier's demand unpredictable, put its orders beside the purchases those orders ultimately serve. Some of the apparent volatility may come from decisions the businesses can change.
+Compare the supplier's orders with the customer purchases behind them. Check whether batching or order timing explains the extra swings before changing the forecast.
 
 ## Sources
 

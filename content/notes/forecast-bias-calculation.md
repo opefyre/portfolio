@@ -1,6 +1,7 @@
 ---
 title: Forecast bias calculation: why zero bias can hide a bad forecast
 date: 2026-10-12
+updated: 2026-10-23
 summary: A forecast can get the total right and miss every week. Calculate signed bias, compare it with WAPE and see what a balanced result hides from a planning team.
 seoTitle: Forecast bias calculation: what zero bias hides
 seoDescription: Calculate forecast bias with a four-week example. See why zero bias can hide errors, how sign conventions differ and what to check before adjusting demand.
@@ -78,7 +79,7 @@ If purchasing orders eight weeks ahead, evaluate that version of the forecast. A
 
 A persistent directional error may affect the stock you need, but the remedy depends on its cause and the cost of being wrong. Check lead-time variation and service targets before changing buffers. The [safety stock example](/notes/safety-stock-reorder-point/) takes that next step; the [AI planning note](/notes/ai-supply-chain-planning/) shows why a forecast still needs a decision about capacity and cost.
 
-Zero bias is useful information. It becomes misleading when the review stops there.
+Keep the signed errors and absolute errors for each week beside the monthly bias. In this example, that check exposes A's alternating misses before the team accepts the zero as evidence of a good forecast.
 
 ## Sources
 

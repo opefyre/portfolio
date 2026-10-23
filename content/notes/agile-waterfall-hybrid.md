@@ -1,6 +1,7 @@
 ---
 title: Agile vs waterfall vs hybrid: differences and a project example
 date: 2026-10-15
+updated: 2026-10-23
 summary: A reporting screen needs user feedback. A warehouse installation needs an approved outage. One project can need different ways to plan those two kinds of work.
 seoTitle: Agile vs waterfall vs hybrid: key differences
 seoDescription: Compare agile, waterfall and hybrid through a warehouse project. See where feedback changes the work and where dependencies and release approvals still matter.
@@ -28,7 +29,7 @@ The screen can evolve through feedback while the installation needs a firm plan.
 
 Agile doesn't mean no plan, documentation or approval. A linear plan can also include prototypes and early reviews. The distinction is how feedback affects the next delivery commitment, rather than whether the team ever talks to a user.
 
-The [Agile Manifesto's principles](https://agilemanifesto.org/principles.html) emphasise frequent working software, collaboration, adapting to requirements and improving how the team works. A fortnightly status meeting alone doesn't provide that feedback loop. Scrum is one framework for organising agile work, not another word for all of agile.
+The [Agile Manifesto's principles](https://agilemanifesto.org/principles.html) emphasise frequent working software, collaboration, adapting to requirements and improving how the team works. A fortnightly status meeting alone doesn't provide that feedback loop. Teams can use Scrum to organise agile work. Other agile approaches use different roles and routines.
 
 ## Project example: software feedback and site installation
 

@@ -1,6 +1,7 @@
 ---
 title: Trend vs seasonality: demand patterns explained with examples
 date: 2026-10-15
+updated: 2026-10-23
 summary: A busy August can look like growth. Separate the underlying movement, the repeating pattern and the unusual month before changing the forecast.
 seoTitle: Trend vs seasonality: demand forecasting examples
 seoDescription: Learn how trend, seasonality and noise differ in demand forecasting. Explore a worked chart and see why a busy month can mislead your next plan.
@@ -80,7 +81,7 @@ For the fictional August, the next step is to check the unusual order and plan f
 
 Then test forecasting approaches on periods they have not already seen. Include the lead time and time interval you actually plan against. The [MAPE and WAPE guide](/notes/forecast-accuracy-mape-wape/) explains how to compare forecast errors; the [bias example](/notes/forecast-bias-calculation/) checks whether misses repeatedly go in one direction.
 
-A lower error score helps choose between forecasts. Reading the history first helps you understand what those forecasts need to handle, and what changed when they miss.
+For the next forecast review, retain the calendar events, availability changes and original forecast dates beside the errors. Check whether the model missed a recurring pattern or faced conditions that had changed.
 
 ## Sources and example notes
 

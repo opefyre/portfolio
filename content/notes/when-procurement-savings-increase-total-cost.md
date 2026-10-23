@@ -1,6 +1,7 @@
 ---
 title: When procurement savings increase total cost: a worked example and supplier comparison sheet
 date: 2026-10-03
+updated: 2026-10-23
 summary: A cheaper part saves €200. One late delivery adds €350 in freight. How to compare suppliers, separate a bad outcome from a bad decision, and measure savings across the company.
 status: published
 topic: Supply chain
@@ -17,7 +18,7 @@ Both reports can be correct. Together, they describe a company spending €150 m
 
 ::figure procurement-cost-story | Fictional scenario. €200 saved minus €350 extra freight means €150 more spent. The problem is how the saving is measured, not the competence of the buyer.
 
-The buyer may have done exactly what the target rewarded. That's what makes this worth looking at. If success ends at the purchase order, the costs that follow can disappear from the decision that created them.
+The buyer may have done exactly what the target rewarded. A purchase-price target can credit the €200 while leaving logistics to explain the later freight cost.
 
 :::card The short version
 - Compare suppliers on the cost of meeting the same requirement, including delivery and quality.
@@ -67,7 +68,7 @@ Suppose the same factory buys 12 identical orders a year. A costs €5 a part, B
 
 With these assumptions, B can still be the better choice despite occasional express freight. At seven shipments, the price advantage is gone. If A also needs express freight, compare the difference between the two suppliers, rather than charging every exception to B alone.
 
-That is the useful question before signing: **how much additional cost can this price saving absorb, and what evidence says we will stay below it?**
+Before signing, calculate the extra cost that would erase the price saving. Check delivery records and the proposed supply arrangement against that threshold.
 
 ## Put the missing costs beside the quote
 

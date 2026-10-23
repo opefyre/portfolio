@@ -1,6 +1,7 @@
 ---
 title: Leading vs lagging indicators: a warning you can still act on
 date: 2026-10-14
+updated: 2026-10-23
 summary: Last week's dispatch score tells you what happened. Monday's readiness check can help with Friday's orders. Ten orders show why you need both, and why an early signal isn't a prediction.
 seoTitle: Leading vs lagging indicators: practical examples
 seoDescription: Compare leading and lagging indicators through ten orders. See how an early readiness check supports action, why warnings can be wrong and how to pair measures.
@@ -84,7 +85,7 @@ This separate order example compares takt time, cycle time and lead time. It hel
 
 For a broader explanation of flow and pull, [Vrolen's Lean manufacturing guide](https://vrolen.com/blog/lean-manufacturing/) connects these checks to the work moving through the process. Adding another score doesn't remove a queue.
 
-Try one pair of measures for the next dispatch cycle: readiness at an agreed point and actual dispatch against the original promise. Put the flagged order IDs, follow-up owner and next review time beside them. The Monday measure earns its place when the team can use it while something can still change.
+For the next dispatch cycle, pair Monday's readiness check with dispatch against the original promise. Record the flagged order IDs, follow-up owners and review times, then check whether those actions reached the orders before their deadlines.
 
 ## Sources and example notes
 

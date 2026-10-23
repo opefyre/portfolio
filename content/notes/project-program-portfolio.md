@@ -4,7 +4,7 @@ date: 2026-10-14
 summary: A barcode rollout, a dispatch improvement program and an invoice project all need the same integration team. See what each level manages when the work won't fit.
 seoTitle: Project vs program vs portfolio: a worked example
 seoDescription: Compare project, program and portfolio management, including PMO authority. Follow one company and test competing demands on shared capacity.
-updated: 2026-10-19
+updated: 2026-10-23
 status: published
 topic: Project management
 keywords: project vs program vs portfolio, program management example, portfolio management, project portfolio management, resource allocation, PMO vs project manager
@@ -41,8 +41,6 @@ For the barcode project, the agreed result includes tested scans, correct order 
 The project manager needs to manage scope, cost, dependencies and acceptance. If someone asks for an extra dashboard, the [scope change example](/notes/scope-creep-change-control/) shows why that request needs an explicit decision.
 
 But working barcodes can't fix a promise date set before stock will be available. They may prevent a wrong dispatch without reducing lateness. Closing the barcode project doesn't establish that the business has achieved the wider benefit.
-
-That is where the program's coordination matters.
 
 ## A program connects delivery to the shared outcome
 

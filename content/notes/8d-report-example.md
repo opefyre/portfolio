@@ -4,7 +4,7 @@ date: 2026-10-15
 summary: A returned batch needs immediate protection and a verified permanent correction. Follow a filled-in 8D example, including the evidence needed before containment ends.
 seoTitle: 8D report example: steps and corrective action
 seoDescription: Follow an 8D report example from customer complaint to closure. Separate containment, occurrence and escape causes, corrective action and effectiveness checks.
-updated: 2026-10-20
+updated: 2026-10-23
 status: published
 topic: Operational excellence
 keywords: 8D report example, 8D problem solving, eight disciplines, containment vs corrective action, occurrence cause escape cause
@@ -98,7 +98,7 @@ D7 also asks whether the same cause can exist elsewhere. A review of similar fix
 
 If the team needs a short account of the wider problem and reasoning, the [A3 example](/notes/a3-problem-solving-example/) offers that format. The 8D record here keeps the complaint, containment and correction evidence connected.
 
-For these plates, closure means the agreed evidence has been reviewed and the ongoing controls have owners. The aim is to make the next recurrence less likely and visible if it happens, rather than make the complaint disappear from the list.
+Close this report after the team reviews the agreed evidence and the operating owners accept the ongoing checks. Keep the recurrence check due after closure in their action records.
 
 ## Source and example notes
 

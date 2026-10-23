@@ -1,6 +1,7 @@
 ---
 title: Three factory habits I use in software
 date: 2026-09-14
+updated: 2026-10-23
 summary: Standard work, inspection at the station, and readiness before launch.
 status: draft
 topic: Digital transformation
@@ -14,7 +15,7 @@ I spent my first years on production lines, World Class Manufacturing at Unileve
 
 On a line, standard work is the best-known way to do a job, written down so it can be improved. Without it there's nothing to improve against, and every shift runs its own experiment.
 
-Software has the same thing under other names: conventions, templates, a shared definition of done. You can only improve a process you can see.
+In software, shared conventions, templates and a definition of done give the team a reference for checking a change.
 
 ## 2. Catch defects at the station
 
@@ -24,10 +25,10 @@ In software that means tests, reviews and checks as close to the change as possi
 
 ## 3. Readiness before launch
 
-At BAT, launch time came down from about five months to two through better planning: a readiness framework with clear checkpoints, clear owners and a governance routine across sourcing, planning, manufacturing and quality. Problems showed up while there was still time to fix them.
+At BAT, launch time came down from about five months to two through better planning: readiness checks, named owners and regular decisions across sourcing, planning, manufacturing and quality. Problems showed up while there was still time to fix them.
 
-Software launches fail the same way. Rarely from lack of effort, usually because nobody could see the gap in time.
+Before a software launch, I use the same readiness checks to expose missing work while the team can still respond.
 
 ## One difference
 
-Code is cheaper to change than a production line, so it's tempting to skip all of this. Cheap to change doesn't mean cheap to get wrong.
+Before releasing a software change, check the affected workflow, its tests and the people responsible for support. Resolve any missing prerequisite before committing the release date.

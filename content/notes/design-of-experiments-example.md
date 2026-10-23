@@ -1,6 +1,7 @@
 ---
 title: Design of experiments: a factorial example with two settings
 date: 2026-10-15
+updated: 2026-10-23
 summary: A higher temperature improves one seal and weakens another. A small factorial experiment shows why changing one setting at a time can miss the relationship.
 seoTitle: Design of experiments: a worked factorial example
 seoDescription: Learn DOE through a two-factor sealing example. Compare all four settings, inspect repeated readings and see what an interaction changes in the decision.
@@ -72,7 +73,7 @@ The [PDCA note](/notes/pdca-cycle-example/) explains how a trial feeds the next 
 A video explanation of the wider improvement loop, using a different worked example. Use it to connect the experiment with the next operating decision.
 :::
 
-Write the experiment around the decision you need to make: which factors, which settings, which response and which uncertainty would change the choice. That is more useful than collecting a few favourable readings after the setting has already been chosen.
+Before the next trial, agree the factors, settings and response, plus the result that would change the proposed setting. Retain every planned run, including results that disagree with the preferred choice.
 
 ## Sources and example notes
 

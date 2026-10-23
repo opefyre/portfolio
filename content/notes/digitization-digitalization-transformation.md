@@ -4,7 +4,7 @@ date: 2026-10-14
 summary: Scanning an invoice, automating its approval and changing how the business pays suppliers solve different problems. Follow the same invoice through all three.
 seoTitle: Digitization vs digitalization vs transformation
 seoDescription: Understand digitization, digitalization and digital transformation through one invoice example. See what changes in the file, workflow and business.
-updated: 2026-10-20
+updated: 2026-10-23
 status: published
 topic: Digital transformation
 keywords: digitization vs digitalization, digital transformation examples, digitisation meaning, digitalization example, invoice automation, types of digital transformation
@@ -124,6 +124,6 @@ A project can combine all three kinds of change. Describe each one clearly enoug
 - [AWS: What is OCR?](https://aws.amazon.com/what-is/ocr/), text recognition.
 - [IBM: Intelligent document processing](https://www.ibm.com/think/topics/intelligent-document-processing), classification, extraction and output.
 - AWS. [What is Digital Transformation?](https://aws.amazon.com/what-is/digital-transformation/), four-type classification.
-- OECD, 2026. [Investment Policy Framework for Digital Transformation, introduction and Box 1.1](https://www.oecd.org/en/publications/investment-policy-framework-for-digital-transformation_e96b36f4-en/full-report/component-3.html). Definitions at economy and society level; the company comparison is an applied explanation.
+- OECD, 2026. [OECD guidance on investment and digital transformation, introduction and Box 1.1](https://www.oecd.org/en/publications/investment-policy-framework-for-digital-transformation_e96b36f4-en/full-report/component-3.html). Definitions at economy and society level; the company comparison is an applied explanation.
 
 The distributor, amounts and approval rules are fictional. The example compares ways of working; it does not report measured savings.

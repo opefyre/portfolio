@@ -1,6 +1,7 @@
 ---
 title: Project business case: a worked example and structure
 date: 2026-10-20
+updated: 2026-10-23
 summary: A customer portal promises fewer enquiries. A cheaper change might solve enough of the problem. Compare the options, cash, capacity and evidence before choosing a project.
 seoTitle: Project business case: structure and worked example
 seoDescription: Write a project business case using an order-status example. Compare options, costs, benefits and risks, then record the decision and who owns the result.
@@ -85,7 +86,7 @@ For this example, the sponsor could choose a bounded shared-record trial before 
 
 Record the reason, permitted spend, evidence needed and next decision date. Revisit the case if the trial finds that the record cannot be kept current or the assumed charge reduction is unavailable.
 
-A business case earns its place when it can change the proposed project. Here, the team may still build a portal later. First it has a cheaper option to test and a clear cash assumption to verify.
+Test the cheaper option first and confirm whether the provider will reduce its charge. Keep the portal proposal available for review if the trial leaves enquiries unresolved.
 
 ## Sources and calculation notes
 

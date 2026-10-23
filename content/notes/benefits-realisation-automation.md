@@ -1,6 +1,7 @@
 ---
 title: Benefits realisation: did the automation actually save money?
 date: 2026-10-03
+updated: 2026-10-23
 summary: The automation is live and processing time is down. Adjust for volume, separate released capacity from cash, and check the promised benefit against evidence. Includes an Excel review sheet.
 status: published
 topic: Digital transformation
@@ -11,7 +12,7 @@ seoDescription: Check whether automation delivered its promised savings. Separat
 
 The automation is live. Operations says processing time has halved. The project report calls that a saving, and Finance asks which expense fell.
 
-Nobody has to be wrong for this conversation to happen. The system can work, the process can get faster, and the financial claim can still need correcting.
+Operations may have released time for other work while Finance still pays the same salaries. The benefits report needs to show which result the project achieved.
 
 Benefits realisation is the work of checking the promised result after the change enters normal use. Start with the original promise, then follow it into operating evidence and the accounts.
 
@@ -21,7 +22,7 @@ A launch date tells you when a system became available. It does not establish th
 
 For each benefit, keep a short record of the starting position, target, measurement period, evidence and person responsible for delivering it. Preserve the dated original target when the forecast changes. Otherwise, a review can become a comparison against whatever now looks achievable.
 
-[Australia's Digital Transformation Agency](https://architecture.digital.gov.au/design/benefits-management-guides-and-tools) provides benefits guidance and templates. The [UK Government Efficiency Framework](https://www.gov.uk/government/publications/the-government-efficiency-framework/the-government-efficiency-framework--2) distinguishes cash reductions from improvements that increase output without reducing spending. These are public-sector references; the measurement distinction is also useful in a private business.
+[Australia's Digital Transformation Agency](https://architecture.digital.gov.au/design/benefits-management-guides-and-tools) provides benefits guidance and templates. The [UK government guidance on measuring efficiency](https://www.gov.uk/government/publications/the-government-efficiency-framework/the-government-efficiency-framework--2) distinguishes cash reductions from improvements that increase output without reducing spending. These are public-sector references; the measurement distinction is also useful in a private business.
 
 Our fictional case is an invoice process. Its original promise was to halve handling time and remove €900 a month of overtime, while maintaining the agreed accuracy and turnaround. The system costs €700 a month to run and €12,000 to introduce.
 
@@ -119,7 +120,7 @@ The next benefits report should make the result easy to check. State what improv
 
 ## Sources
 
-- HM Treasury and Government Finance Function. [The Government Efficiency Framework](https://www.gov.uk/government/publications/the-government-efficiency-framework/the-government-efficiency-framework--2). Baselines, cash and non-cash benefits, costs and double counting.
+- HM Treasury and Government Finance Function. [Government guidance on measuring efficiency](https://www.gov.uk/government/publications/the-government-efficiency-framework/the-government-efficiency-framework--2). Baselines, cash and non-cash benefits, costs and double counting.
 - Australian Government Digital Transformation Agency. [Benefits management guides and tools](https://architecture.digital.gov.au/design/benefits-management-guides-and-tools). Guidance and benefit planning templates.
 
 The invoice volumes, handling times, costs, original promise and review outcomes are fictional. The counterfactual assumes comparable case mix and no other changes. A calculated difference is not independent proof that automation caused it.

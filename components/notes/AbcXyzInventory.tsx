@@ -56,7 +56,7 @@ function Matrix({ caption }: { caption: string }) {
         {months.map((value,i)=><button type="button" key={i} className="abc-month" aria-label={`${MONTHS[i]}: ${quantity(value, item.unit)}`} aria-pressed={month===i} onMouseEnter={()=>setMonth(i)} onFocus={()=>setMonth(i)} onClick={()=>setMonth(i)}><span className="abc-month-track" aria-hidden="true"><span style={{height:`${value/max*100}%`}}/>{value===0?<i/>:null}</span><span aria-hidden="true">{MONTHS[i].slice(0,1)}</span></button>)}
       </div>
       <div className="abc-month-inspect"><label htmlFor={`${id}-month`}>Month<select id={`${id}-month`} value={month} onChange={e=>setMonth(Number(e.target.value))}>{MONTHS.map((name,i)=><option key={name} value={i}>{name}</option>)}</select></label><p aria-live="polite"><strong>{quantity(selectedUnits, item.unit)}</strong><span>{MONTHS[month]} use</span></p></div>
-      <p className="abc-small">Hover, tap or focus a bar, or use the month selector. Zero months stay in the calculation.</p>
+      <p className="abc-small">Hover over, select or focus a bar, or use the month selector. Zero months stay in the calculation.</p>
       {item.critical?<p className="abc-critical">Critical-spare assumption: a missing drive fuse stops the machine. Replenishment takes six weeks, with no approved substitute. The CZ label does not capture that consequence.</p>:null}
     </div>
     <details><summary>All monthly data and calculation rules</summary>

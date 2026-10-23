@@ -1,6 +1,7 @@
 ---
 title: First-pass yield vs final yield: the work behind 100% accepted
 date: 2026-10-14
+updated: 2026-10-23
 summary: All 100 units pass eventually. Some need repeated correction. Follow their first attempts to see what first-pass yield measures and why station averages miss the story.
 seoTitle: First-pass yield vs final yield: a worked example
 seoDescription: Calculate first-pass and final yield from the same units. Explore repeated rework, station yields and why multiplying rates may not match the unit history.
@@ -88,7 +89,7 @@ Keep final yield alongside FPY so successfully recovered output remains visible.
 
 For a single-stage example with repair and scrap, see [Vrolen's first-pass yield guide](https://vrolen.com/blog/first-pass-yield-rework/). Its 1,000-unit ledger is separate from the three-station histories here.
 
-At the next quality review, trace a completed group from first entry to final disposition. Report how many passed untouched and how many were recovered. Then use the repeated events to decide where the team needs evidence next.
+At the next quality review, trace a completed group from first entry through acceptance, repair or scrap. Report how many passed first time and how many needed recovery. Investigate the repeated failures using those unit histories.
 
 ## Sources and example notes
 

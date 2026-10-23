@@ -1,6 +1,7 @@
 ---
-title: The critical path method, step by step: a worked example you can copy
+title: Critical path method: a 39-day project, step by step
 date: 2026-09-29
+updated: 2026-10-23
 summary: How to find the critical path by hand: build the network, run the forward and backward pass, calculate float, and use the result to decide where extra effort actually shortens a project.
 status: published
 topic: Project management
@@ -9,9 +10,9 @@ seoTitle: Critical path method: a step-by-step worked example
 seoDescription: Find the critical path with a worked example. Build a network, calculate early and late dates and float, then see which tasks shorten the project.
 ---
 
-Every project plan answers one question sooner or later: *what is the earliest we can finish, and what exactly decides that date?* The critical path method (CPM) answers it with simple arithmetic. It came out of a joint project between DuPont and Remington Rand in the late 1950s, led by Morgan Walker and James Kelley. Its first real test was maintenance shutdowns at a DuPont plant, where it cut downtime by about a quarter. It's still the backbone of every scheduling tool you've used.
+**Project planners use the critical path method (CPM) to calculate the earliest finish supported by a set of activity durations and dependencies.** The critical path is the longest duration path through that network. A delay on it moves the finish unless the team changes the plan.
 
-You don't need software to understand it. This note works through one small project by hand, so you can copy the method onto your own.
+The worked example follows eight activities in an expense-system rollout. Calculate the dates by hand, then use the results to compare delays and shorter activity durations.
 
 :::card The short version
 1. List the activities, their durations and what each one depends on.
@@ -35,7 +36,7 @@ Say you're rolling out a new expense management tool across a company. Eight act
 | G | Train everyone | 4 | E, F |
 | H | Go live and support | 3 | G |
 
-Add up the durations and you get 53 days. But several activities can run in parallel, so the project will be shorter than that. The question is by how much, and which activities set the pace.
+The activities total 53 days. Because the team can do some work in parallel, we need the dependencies to calculate the earliest finish.
 
 ## Step 1: draw the network
 
@@ -43,7 +44,7 @@ Each activity becomes a box, and each dependency an arrow. This is the "activity
 
 ::figure cpm-network | The network for the example. In each box, the top corners show the earliest start and finish, and the bottom corners the latest start and finish. Dark boxes have zero float: that's the critical path.
 
-Drawing it is worth the ten minutes, even if a tool will do it for you later. It's where missing dependencies show up. ("Wait, can we really pilot before the policy is written?")
+Review the network with the people doing the work. In this example, the pilot depends on configuration and integration. If the real pilot also needs the policy, add that link before calculating its dates.
 
 ## Step 2: the forward pass
 
@@ -61,7 +62,7 @@ Start at the beginning and move right, calculating the earliest each activity ca
 - G needs E (day 11) and F (day 32), so it starts at 32 and finishes at 36.
 - H runs from 36 to 39.
 
-The project's earliest finish is **day 39**. The merge points (F and G) are where the forward pass does its real work: the later predecessor always wins.
+The earliest finish under these assumptions is **day 39**. At F and G, use the later predecessor finish because both required activities must be complete.
 
 ## Step 3: the backward pass
 
@@ -76,7 +77,7 @@ Now start at the end and move left, calculating the latest each activity can sta
 - C and D both feed F, which starts at 27. So D must start by 15, and C by **19**.
 - E feeds G, which starts at 32, so E can start as late as **26**.
 - B feeds both C (latest start 19) and D (latest start 15). The smaller wins: B must finish by **15**.
-- A feeds B (15) and E (26), so A must finish by 5.
+- A feeds B (latest start 5) and E (latest start 26), so A must finish by 5.
 
 At split points (B, and A), the backward pass takes the *earlier* successor. It's the mirror image of the forward pass.
 
@@ -106,7 +107,7 @@ The critical path is **A → B → D → F → G → H**: 5 + 10 + 12 + 5 + 4 + 
 
 ## What the numbers let you do
 
-This is where CPM earns its keep. A few questions every project manager gets asked:
+Recalculate the same network after each proposed change:
 
 | What happens | Effect on the finish | Why |
 | --- | --- | --- |
@@ -116,14 +117,14 @@ This is where CPM earns its keep. A few questions every project manager gets ask
 | Add a second integrator, cutting D from 12 to 9 days | Day 36 | D was critical, so the saving counts |
 | Cut D to 7 days | Day 35, not 34 | The path through C (35 days) is now the critical one |
 
-That last row is the one people miss. When you shorten the critical path (called *crashing*), another path can catch up. After cutting D to 9 days, C has only 1 day of float left. Past 8 days, you're paying for days that no longer shorten the project. Always re-run the passes after a change.
+After cutting D to 9 days, C has only 1 day of float left. Reducing D below 8 days leaves the path through C controlling the finish. Recalculate both passes before paying for a further reduction in D.
 
-The other lesson is where *not* to spend. Adding people to write the training material (E) would cost money and change nothing, because E wasn't holding the project back.
+The other lesson is where *not* to spend. Adding people to write the training material (E) would cost money and change nothing, because E wasn't holding the project back.<span id="five-mistakes-i-see-most-often"></span>
 
-## Five mistakes I see most often
+## Five planning mistakes to check
 
 1. **Treating float as the activity's spare time.** Float belongs to the project, not the task. If C's team uses its 4 days early, nothing is left for surprises later on that path.
-2. **Ignoring near-critical paths.** An activity with 1 or 2 days of float is critical in all but name. Watch anything with float under about 10% of the project length.
+2. **Ignoring near-critical paths.** An activity with 1 or 2 days of float can become critical after a small delay. Compare its float with the uncertainty in its remaining work.
 3. **Assuming unlimited people.** Classic CPM assumes every activity can start the moment its predecessors finish. If the same two engineers are needed for C and D, they can't happen in parallel, and your real critical path is longer. That's what resource levelling (and methods like critical chain) deal with.
 4. **Missing dependencies.** A forgotten link, like "the pilot needs the policy", quietly makes the plan look shorter than it is.
 5. **Calculating it once.** The critical path moves as work finishes early or late. Recalculate at every status update, not just at kickoff.
@@ -136,7 +137,7 @@ CPM uses one duration per activity. When you genuinely don't know, a common appr
 Expected duration = (Optimistic + 4 × Most likely + Pessimistic) ÷ 6
 :::
 
-For the integration, an optimistic 9 days, a likely 12 and a pessimistic 21 gives (9 + 48 + 21) ÷ 6 = **13 days**. That's a day more than the "likely" guess, because bad surprises tend to be bigger than good ones. Use the blended number in your forward and backward pass, and you get a plan that's honest about its risk.
+For integration, optimistic 9 days, most likely 12 and pessimistic 21 gives (9 + 48 + 21) ÷ 6 = **13 days**. The higher pessimistic input pulls this blend above 12. Using 13 in CPM still gives one finish date; it does not calculate a probability of meeting that date. The [schedule-risk example](/notes/schedule-risk-analysis-example/) shows how to explore duration uncertainty across this same network.
 
 :::link /notes/earned-value-management-explained/ | Next: tracking the plan with earned value
 Once the schedule exists, earned value tells you whether the project is ahead or behind on cost and time, with three numbers.

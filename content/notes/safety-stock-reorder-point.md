@@ -1,8 +1,8 @@
 ---
-title: Safety stock and reorder point: the formulas, a worked example, and what service level really costs
+title: Safety stock and reorder point: formulas and example
 date: 2026-09-29
-updated: 2026-10-12
-summary: How to calculate safety stock and the reorder point step by step, why lead-time variability usually matters more than demand, how cycle service level differs from fill rate, and what each extra point of service costs in inventory.
+updated: 2026-10-23
+summary: Calculate safety stock and the reorder point for one spare part. Compare demand and supplier delays, distinguish cycle service from fill rate, and price a higher service target.
 status: published
 topic: Supply chain
 keywords: safety stock formula, reorder point, safety stock calculation, service level, fill rate, lead time variability, inventory management, supply chain planning, z-score
@@ -10,14 +10,14 @@ seoTitle: Safety stock and reorder point: formulas and example
 seoDescription: Calculate safety stock and reorder point with a worked example. Compare demand and lead-time variability, service level and the cost of inventory.
 ---
 
-Every planner has been in this meeting. Stock ran out, a customer was let down, and someone says "we need more safety stock". Six months later, the warehouse is full, cash is tied up, and someone else says "we need less". Both are guessing.
+A distributor needs enough spare parts to cover the wait for replenishment. Its buyer has to allow for two uncertainties: how much customers will need and when the supplier's delivery will become usable.
 
-Safety stock doesn't have to be a guess. It's a buffer against uncertainty, and uncertainty can be measured. This note walks through the standard formulas on one product, shows which input usually matters most, and puts a price on the service level you choose.
+**Safety stock is extra inventory held to cover uncertainty in demand and replenishment.** The reorder point combines expected demand during lead time with that buffer. The calculation below uses one spare part to compare demand variation, delivery variation and the cost of a chosen service target.
 
 :::card The short version
 - **Reorder point** = expected demand during the lead time + safety stock.
 - **Safety stock** = z × the standard deviation of demand over the lead time. The z comes from the service level you want: 1.645 for 95%.
-- If lead times vary, include that variation. It's often bigger than the demand variation.
+- If lead times vary, include that variation. It drives most of the buffer in this example.
 - Service level has a steep cost curve. Going from 95% to 99% can need 40% more safety stock.
 - "95% service level" usually means 95% of replenishment cycles without a stock-out. That's not the same as filling 95% of demand.
 :::
@@ -43,7 +43,7 @@ The reorder point exists to cover the wait between placing an order and receivin
 d × L = 120 × 9 = **1,080 units**
 :::
 
-If demand and lead time never varied, you'd reorder at 1,080 and the delivery would arrive exactly as the shelf emptied. They do vary. That's what safety stock is for.
+With constant demand and lead time under this model, the buyer would reorder at 1,080 and receive the delivery as stock ran out. The buffer covers departures from that expected path.
 
 ## Step 2: safety stock when only demand varies
 
@@ -56,7 +56,7 @@ Safety stock = z × 90 = 1.645 × 90 = **148 units**
 
 ## Step 3: add lead-time variability
 
-Now the realistic part. The supplier doesn't always take 9 days. Sometimes it's 7, sometimes 12. When the lead time runs long, you're selling 120 units a day for days you didn't plan for. The combined formula accounts for both sources of uncertainty:
+The supplier's lead time also varies: sometimes 7 days, sometimes 12, around the 9-day average. A delayed receipt leaves the distributor serving demand for longer. The next calculation includes both, assuming demand and lead-time variation are independent and the normal approximation is suitable.
 
 :::formula Demand and lead-time variability
 σ = √( L × σ<sub>d</sub>² + d² × σ<sub>L</sub>² )
@@ -66,7 +66,7 @@ Safety stock = 1.645 × 256 = **422 units**
 
 Look at the two terms under the square root. Demand variation contributes 8,100. Lead-time variation contributes 57,600, seven times more. The safety stock nearly triples, from 148 to 422 units, and almost all of the increase comes from the supplier, not the customer.
 
-This is the most useful insight in the whole calculation. Before arguing about forecast accuracy, look at your suppliers' delivery reliability. Cutting σ<sub>L</sub> from 2 days to 1 would bring the safety stock down to about 247 units, a 41% reduction, without touching demand.
+In this example, improving supplier delivery reliability has the larger effect. Cutting σ<sub>L</sub> from 2 days to 1 would bring the safety stock down to about 247 units, a 41% reduction, with the same demand inputs.
 
 ## Step 4: the reorder point
 
@@ -74,7 +74,7 @@ This is the most useful insight in the whole calculation. Before arguing about f
 ROP = demand during the lead time + safety stock = 1,080 + 422 = **1,502 units**
 :::
 
-When stock on hand plus stock on order falls to 1,502, place the next order.
+Place the next order when inventory position reaches 1,502. Calculate that position from on-hand stock plus outstanding replenishment, less backorders; confirm the existing receipts before creating another order.
 
 ::figure ss-sawtooth | The classic sawtooth. Stock falls by about 120 units a day. The order goes out at 1,502 and arrives nine days later, on an average cycle just as stock reaches the safety stock. On a bad cycle, the buffer absorbs the difference.
 
@@ -92,13 +92,13 @@ The service level decides z, and z doesn't grow in a straight line. The higher y
 
 ::figure ss-curve | Safety stock against service level for the example. The curve is gentle up to about 95%, then climbs steeply.
 
-Put a price on it. If the part costs €20 and holding inventory costs 25% of its value a year, each unit of safety stock costs €5 a year. Moving from 95% to 99% adds 174 units, or **€870 a year for this one part**. Across 2,000 parts, the same decision is worth well over a million euros a year. That's why service targets should be set by product segment, not as one number for the whole catalogue.
+Put a price on it. If the part costs €20 and holding inventory costs 25% of its value a year, each unit of safety stock costs €5 a year. Moving from 95% to 99% adds 174 units, or **€870 a year for this one part**. For 2,000 parts with those same costs and uncertainties, the increase would exceed a million euros a year. Real items differ, so assess the service requirement and cost for each group.
 
 A common approach is to set targets by ABC class (high-value or high-margin items first), and adjust for how critical the item is to the customer. Spare parts that stop a production line may justify 99%. Slow-moving accessories may be fine at 90%.
 
 ## Cycle service level is not fill rate
 
-This trips up a lot of teams. There are two common definitions of "service level":
+Agree which service measure the team is targeting:
 
 :::grid
 - **Cycle service level** The share of replenishment cycles that end without a stock-out. That's what the z in the formula targets.
@@ -125,21 +125,21 @@ The formula is only as good as what you feed it:
 - **Be careful at low service levels.** Research by Chopra, Reinhardt and Dada found that below roughly 50% to 70% cycle service level, the normal approximation can give the wrong advice, even suggesting that more reliable suppliers need a *higher* reorder point. The formulas here are for the 90% to 99% range most planners work in.
 - **Recalculate regularly.** Monthly or quarterly, and after any big change in supplier or demand pattern.
 
-Before claiming the forecast improved, check what its score measures. The [MAPE/WAPE comparison and calculator](/notes/forecast-accuracy-mape-wape/) shows why two metrics can choose different winners. For slow movers with quiet weeks, see [forecast accuracy with zero demand](/notes/forecast-accuracy-zero-demand/).
+Before claiming the forecast improved, check what its score measures. The [MAPE/WAPE comparison and calculator](/notes/forecast-accuracy-mape-wape/) shows why two metrics can choose different winners. For slow movers with quiet weeks, see [forecast accuracy with zero demand](/notes/forecast-accuracy-zero-demand/).<span id="where-the-real-savings-are"></span>
 
-## Where the real savings are
+## Compare changes to the buffer inputs
 
-Once the formula is in place, the levers become obvious:
+Use the model to compare the changes the team can actually make:
 
 | Lever | What it changes | Effect |
 | --- | --- | --- |
-| More reliable supplier deliveries | σ<sub>L</sub> | Usually the biggest reduction |
+| More reliable supplier deliveries | σ<sub>L</sub> | Biggest reduction in this example |
 | Shorter lead time | L | Less demand exposure while waiting |
 | Better forecasts | σ<sub>d</sub> (forecast error) | Smaller buffer for the same service |
 | Differentiated service targets | z | Stock where it earns its keep |
 | Reviewing more often | The period of uncertainty | Smaller buffer in periodic-review systems |
 
-Safety stock is the price of uncertainty. The formula tells you what that price is. The work is in reducing the uncertainty itself.
+For this part, check the supplier's actual delivery spread before changing the buffer. Recalculate after any agreed delivery improvement, and track shortages alongside the stock reduction.
 
 :::link /notes/busy-machines-slower-orders/ | Why busy machines make customers wait
 Inventory and lead time are two sides of the same flow problem. Little's Law explains the other side.

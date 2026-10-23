@@ -1,6 +1,7 @@
 ---
 title: Why projects fail: the warning signs a status report can hide
 date: 2026-10-19
+updated: 2026-10-23
 summary: Learn how weak scope, untested assumptions and missing dependencies undermine projects. Compare practical checks with two National Audit Office case studies.
 seoTitle: Why projects fail: warning signs and real cases
 seoDescription: Learn how weak scope, untested assumptions and missing dependencies undermine projects. Compare practical checks with two National Audit Office case studies.
@@ -66,7 +67,7 @@ Those actions follow from the gaps found. Adding a generic “risk of delay” l
 
 [Scope change control](/notes/scope-creep-change-control/) records what a new request changes. If the project is already late, the [recovery example](/notes/recover-delayed-project/) rebuilds the remaining plan and compares the choices.
 
-At the next status meeting, choose one claimed deliverable and ask to see its acceptance evidence. Then follow any missing dependency to a named owner and decision. A report becomes useful when it helps the team act before its remaining options disappear.
+At the next status meeting, choose one claimed deliverable and inspect its acceptance evidence. Assign any missing dependency to an owner, with a decision date that leaves time to complete the affected work.
 
 ## Sources and example notes
 

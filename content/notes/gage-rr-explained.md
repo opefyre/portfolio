@@ -4,7 +4,7 @@ date: 2026-10-15
 summary: One operator repeats a reading closely. Another gets a different result on the same part. Inspect the individual measurements before changing the production process.
 seoTitle: Gage R&R explained: measurement study example
 seoDescription: Learn Gage R&R with 27 readings. Compare repeated scatter, operator differences and bias, then plan a measurement study with clear limits.
-updated: 2026-10-20
+updated: 2026-10-23
 status: published
 topic: Operational excellence
 keywords: gage R&R explained, measurement system analysis example, repeatability vs reproducibility, gauge R&R, gage repeatability
@@ -57,7 +57,7 @@ Choose “Common shift”. The operators now agree closely with one another, yet
 
 A real bias check needs a suitable reference and its uncertainty. The assigned values here are fictional teaching references. Tight clusters alone cannot show whether a real measurement is close to the value it should represent.
 
-[NIST's gauge-study framework](https://www.itl.nist.gov/div898/handbook/mpc/section4/mpc4.htm) treats repeatability, reproducibility, bias, resolution and stability as distinct concerns. Passing one check doesn't settle the others.
+[NIST's gauge-study guidance](https://www.itl.nist.gov/div898/handbook/mpc/section4/mpc4.htm) treats repeatability, reproducibility, bias, resolution and stability as distinct concerns. Passing one check doesn't settle the others.
 
 ## Five MSA concerns, with different checks
 

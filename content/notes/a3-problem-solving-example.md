@@ -1,6 +1,7 @@
 ---
 title: A3 problem solving example: follow the evidence across the page
 date: 2026-10-14
+updated: 2026-10-23
 summary: A quoting team reduces late replies from ten to four, but misses its target. A completed A3 shows the problem, the reasoning, the trial and what still needs work.
 seoTitle: A3 problem solving: a completed worked example
 seoDescription: See an A3 problem-solving example for late customer quotes. Connect the baseline, suspected cause, trial and result, including a target that was missed.
@@ -9,7 +10,7 @@ topic: Continuous improvement
 keywords: A3 problem solving example, A3 report, A3 thinking, A3 vs PDCA, completed A3 example, continuous improvement
 ---
 
-The improvement report says the new quotation checklist is live. Everyone has been trained. The action list is complete.
+The improvement team has introduced the quotation checklist, trained staff and closed the action list.
 
 Customers are still waiting for quotes. To judge the change, the team needs to see what happened to those requests after the checklist went into use.
 

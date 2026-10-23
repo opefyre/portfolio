@@ -1,6 +1,7 @@
 ---
 title: What does a digital transformation lead actually do?
 date: 2026-10-19
+updated: 2026-10-23
 summary: Follow a supplier-service change to see what a digital transformation lead does, which decisions belong elsewhere and how the role supports adoption and benefits.
 seoTitle: Digital transformation lead: responsibilities
 seoDescription: Follow a supplier-service change to see what a digital transformation lead does, where authority sits and how the role supports adoption and benefits.
@@ -72,7 +73,7 @@ At handover, Finance accepts the service measure, IT accepts support and the man
 
 If fewer calls simply mean suppliers cannot find the contact route, the headline has improved while the service has worsened. The lead needs evidence of the intended result, with the process owner responsible for sustaining it.
 
-Before the project team leaves, the lead checks that Finance and IT have accepted their parts of the service, including the unresolved cases. That is how coordination carries through into an operation people can maintain.
+Before the project team leaves, the lead checks that Finance and IT have accepted their support responsibilities, including the unresolved cases and their next review dates.
 
 ## Sources and example notes
 

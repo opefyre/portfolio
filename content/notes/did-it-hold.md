@@ -1,7 +1,8 @@
 ---
 title: Did the improvement hold?
 date: 2026-09-21
-summary: Most improvement work stops when the fix is agreed. The useful question comes weeks later.
+updated: 2026-10-23
+summary: Keep the evidence and expected result with the improvement decision. Check the outcome after the change and record what the team will do next.
 status: draft
 topic: Operational excellence
 seoTitle: Did the improvement hold?
@@ -10,7 +11,7 @@ seoDescription: Check whether an operational improvement lasted. Connect observa
 
 Most improvement work I've seen, on production lines at Unilever, in launches at BAT and in operations teams since, is organised around the fix. Someone maps the process, someone finds the loss, a countermeasure is agreed, a task is closed. The dashboard turns green for a week.
 
-The question that rarely gets the same attention comes later: did it hold?
+The team also needs a follow-up date and a way to check whether the improvement lasted.
 
 ## Five tools, no thread
 
@@ -20,10 +21,10 @@ Each tool is fine on its own. The trouble is the gaps between them. The evidence
 
 ## Write down what you expect
 
-A KPI tells you that a number moved. It can't tell you why, or whether your change is what moved it. A finding can: this station, this loss, this evidence, this cause. If you also write down what you expect the fix to do, you can check it later.
+When a KPI moves, record the affected station, loss and supporting observations. Test the proposed cause and write down the result you expect from the fix. At follow-up, compare that prediction with what happened and check other changes that could explain the result.
 
 ## Checking is the work
 
 That's what I'm building [Vrolen](/work/vrolen/) around. It keeps the whole cycle in one place, from observation and evidence to the decision and the fix, and then checks whether the fix produced the expected result. If it did, the fix becomes the new standard. If it didn't, you find out while it's still cheap to change course.
 
-Simulation helps in one narrow case: when a proposed change is worth testing on a model before anyone touches the real line.
+If a proposed change needs testing on a model first, use simulation with recorded assumptions. Set a separate follow-up for the change in use; the model result cannot replace it.

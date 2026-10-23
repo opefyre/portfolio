@@ -169,14 +169,13 @@ export default async function NotePage({ params }: Params) {
         <div className="frame note-cta-inner">
           <div className="note-cta-copy">
             <h2 id="note-cta-title" className="note-cta-title">
-              {cta?.title ?? "Working on something like this?"}
+              {cta?.title ?? "Discuss an operations problem"}
             </h2>
             <p className="note-cta-text">
               {cta ? cta.text : (
                 <>
                   I work with operations and transformation teams on operational excellence, digital transformation programs,
-                  supply chains and industrial AI. If this sounds like your line, your program or your problem, I&rsquo;d be
-                  glad to compare notes.
+                  supply chains and industrial AI. Send me the problem you&rsquo;re working on and the result you need.
                 </>
               )}
             </p>

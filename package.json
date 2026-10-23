@@ -12,7 +12,8 @@
     "verify:seo": "node scripts/check-seo.mjs",
     "postinstall": "node scripts/patch-fiber-timer.mjs",
     "predev": "node scripts/prepare-note-figures.mjs",
-    "verify:heroes": "node scripts/check-note-heroes.mjs"
+    "verify:heroes": "node scripts/check-note-heroes.mjs",
+    "verify:voice": "node scripts/check-note-voice.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.8.0",

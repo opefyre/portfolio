@@ -2,7 +2,7 @@
 title: Value stream mapping example: 40 minutes of work, 10 days of waiting
 date: 2026-10-03
 summary: Follow an order from release to dispatch. Map its work, queues and instructions, then compare speeding up one task with changing the wait between tasks.
-updated: 2026-10-20
+updated: 2026-10-23
 status: published
 topic: Operational excellence
 keywords: value stream mapping example, current state value stream map, value stream mapping lead time, value stream mapping template Excel, VSM cycle time vs lead time
@@ -124,7 +124,7 @@ Keep necessary checks. Ten minutes spent confirming the order is correct may pro
 Use evidence to test the cause before choosing an action. The largest queue points to a question, not a completed diagnosis.
 :::
 
-The map earns its place when it changes the next question. Before ordering faster equipment, find out whether the order is waiting for a machine, a decision or permission to move.
+Before ordering faster equipment, trace the queue at its planned location. Confirm whether orders are waiting for that machine, an approval or permission to move, then trial a change at the source of the delay.
 
 ## Sources
 

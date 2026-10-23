@@ -1,6 +1,7 @@
 ---
 title: Target operating model: a practical two-site example
 date: 2026-10-21
+updated: 2026-10-23
 summary: Two sites use the same software and still promise delivery differently. Define the shared checks, local decisions and ownership before designing another screen.
 seoTitle: Target operating model: a practical example
 seoDescription: Build a target operating model around one delivery promise. Connect process, decision rights, people, data, technology and measures across two sites.
@@ -71,4 +72,4 @@ For the two sites, a useful outcome is a promise made from the same evidence, wi
 
 - [MIT CISR: Defining digital operating models](https://cisr.mit.edu/content/defining-digital-operating-models). Public introduction on standardisation and integration.
 
-All site practices, quantities and target decisions are fictional. The table illustrates one service design rather than a complete organisation-wide operating model or a universal framework.
+All site practices, quantities and target decisions are fictional. The table covers this one service. An organisation-wide operating model would need to cover its other services and responsibilities too.
