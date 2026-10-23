@@ -10,8 +10,8 @@ const decode = text => text
   .replace(/&#([0-9]+);/g, (_, n) => String.fromCodePoint(Number(n)))
   .replace(/&(amp|quot|apos|lt|gt|nbsp|mdash|middot);/g, (_, name) => ({amp:'&',quot:'"',apos:"'",lt:'<',gt:'>',nbsp:' ',mdash:'\u2014',middot:'\u00b7'})[name]);
 const visible = html => decode(html
-  .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '')
-  .replace(/<!--[^]*?-->/g, '')
+  .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, ' ')
+  .replace(/<!--[^]*?-->/g, ' ')
   .replace(/<[^>]+>/g, ' '));
 const sitemap = readFileSync(path.join(out, 'sitemap.xml'), 'utf8');
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]).filter(url => /^\/notes\/[a-z0-9-]+\/$/.test(new URL(url).pathname));
