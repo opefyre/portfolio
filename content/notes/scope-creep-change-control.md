@@ -4,6 +4,7 @@ date: 2026-10-14
 summary: The dashboard is a good idea. It still needs time, testing and someone to build it. Compare adding it, replacing another deliverable and saving it for the next release.
 seoTitle: Scope creep and change control: a worked example
 seoDescription: Learn what scope creep means through a barcode pilot. Compare adding, swapping or deferring a dashboard, with an interactive schedule and cost example.
+updated: 2026-10-24
 status: published
 topic: Project management
 keywords: scope creep example, project change control, scope change request, scope management, change impact assessment
@@ -88,6 +89,14 @@ The request is a proposal, not an approval. Keep the estimate, assumptions and d
 ## Update the work people actually use
 
 If the sponsor approves the substitution, remove the daily report from the current scope and add the dashboard's definition and acceptance conditions. Update the schedule, remaining cost forecast and responsibilities together.
+
+### Configuration management: identify the version released
+
+Change control records whether the dashboard substitution may proceed. Configuration management keeps the agreed items and revisions identifiable, then checks that the released version contains the approved change. [NASA's systems-engineering guidance](https://www.nasa.gov/reference/6-5-configuration-management/) separates identification, controlled changes and verification of incorporation.
+
+For this pilot, connect the approved request to the dashboard version, interface version, acceptance evidence and release record. Approval alone does not show which version the warehouse received. The [traceability record](/notes/requirements-traceability-matrix-example/) should point to the version tested.
+
+Keep the [approved project baseline](/notes/project-baseline-explained/) and the current release record connected. One records the authorised delivery commitment; the other identifies what was actually released.
 
 Tell the users what has changed. Otherwise one team can expect both outputs while another works to the substituted plan. The [RACI guide](/notes/raci-matrix-guide/) helps separate who prepares the change, who approves it and who needs to know.
 

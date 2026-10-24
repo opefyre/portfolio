@@ -1,0 +1,22 @@
+.prose .r4-chart{margin:2.2em 0;padding:26px 0;border-block:1px solid var(--rule-strong);font-size:16px;line-height:1.6}
+.r4-chart .r4-kicker{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#63676a;margin:0 0 12px}
+.r4-chart h3{font:500 clamp(24px,3vw,32px)/1.15 var(--font-display);letter-spacing:-.025em;margin:0 0 20px}
+.r4-chart .r4-help{font-size:14px;color:#555c5e;margin-bottom:24px}
+.r4-fields{display:grid;grid-template-columns:1fr 1fr;gap:18px 24px;margin:24px 0}
+.r4-fields label{font-size:14px;display:grid;gap:8px;color:#42494b}
+.r4-fields input{min-width:0;width:100%;min-height:46px;padding:10px 12px;font:inherit;border:1px solid #9a9d96;background:#f8f6f0;color:#24282b;border-radius:4px}
+.r4-chart button{min-height:44px;padding:10px 15px;border:1px solid var(--rule-strong);border-radius:5px;font:inherit;font-size:14px;cursor:pointer}
+.r4-result{display:grid;gap:10px;padding:20px;background:#24282b08;margin:24px 0}
+.r4-result strong{font:500 25px/1.25 var(--font-display)}
+.r4-result span{font-size:14px;color:#555c5e}
+.r4-chart svg{display:block;width:100%;height:auto;font:17px var(--font-display);fill:#24282b}
+.r4-chart svg text{font-variant-numeric:tabular-nums}
+.r4-chart :is(input,button,summary,[tabindex]):focus-visible{outline:2px solid #a94f35;outline-offset:4px}
+.r4-chart summary{cursor:pointer;min-height:44px;padding:8px 0;text-decoration:underline;text-underline-offset:4px}
+.r4-chart details p,.r4-chart figcaption{font-size:14px;line-height:1.6;margin:18px 0;color:#555c5e}
+.r4-chart table{margin:18px 0;font-size:14px;min-width:0}
+.r4-chart table caption{text-align:left;font-weight:500;margin-bottom:12px}
+.r4-chart .r4-table-wrap{overflow-x:auto}
+.prose .note-figure[class*="note-figure--r4-"]{overflow-x:auto}
+.prose .note-figure[class*="note-figure--r4-"] svg{min-width:600px}
+@media(max-width:540px){.r4-fields{gap:16px 12px}.r4-chart svg{font-size:26px}.r4-result{padding:16px}.r4-chart .r4-kicker{text-transform:none;letter-spacing:0}}

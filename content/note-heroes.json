@@ -1153,5 +1153,89 @@
     "width": 1600,
     "height": 900,
     "alt": "Materials, packaging and production trials supporting a product launch."
+  },
+  "incoterms-explained": {
+    "src": "/notes/incoterms-explained/hero-f0550bae317c.webp",
+    "smallSrc": "/notes/incoterms-explained/hero-small-ba9a188649ea.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A clay cargo ship, dock and crate at a delivery handoff."
+  },
+  "3pl-vs-4pl": {
+    "src": "/notes/3pl-vs-4pl/hero-13cb4b6bf3e6.webp",
+    "smallSrc": "/notes/3pl-vs-4pl/hero-small-e643e24b1268.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A clay warehouse and delivery trucks connected through a coordinating hub."
+  },
+  "procure-to-pay-process": {
+    "src": "/notes/procure-to-pay-process/hero-dd537e937c46.webp",
+    "smallSrc": "/notes/procure-to-pay-process/hero-small-99cedebc82e9.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Clay purchase records, a received crate and payment tokens arranged in sequence."
+  },
+  "milk-run-logistics": {
+    "src": "/notes/milk-run-logistics/hero-f93ae1b6164e.webp",
+    "smallSrc": "/notes/milk-run-logistics/hero-small-fe264bc372dd.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "One clay delivery truck on a loop connecting three replenishment stops."
+  },
+  "sku-rationalization-example": {
+    "src": "/notes/sku-rationalization-example/hero-f56ba46bffaf.webp",
+    "smallSrc": "/notes/sku-rationalization-example/hero-small-8d0204211ed1.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Clay product variants on shelves, with a small spare part kept in its own cubby."
+  },
+  "project-kickoff-meeting": {
+    "src": "/notes/project-kickoff-meeting/hero-43196927f3c1.webp",
+    "smallSrc": "/notes/project-kickoff-meeting/hero-small-9b4db326a506.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A clay warehouse pilot model beside blank planning cards and a scanner."
+  },
+  "hypothesis-testing-process-improvement": {
+    "src": "/notes/hypothesis-testing-process-improvement/hero-e812ee088e64.webp",
+    "smallSrc": "/notes/hypothesis-testing-process-improvement/hero-small-fcece68ff941.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Two clay trays of quote records with different groups of late records set aside."
+  },
+  "work-sampling-vs-time-study": {
+    "src": "/notes/work-sampling-vs-time-study/hero-cdcadb690be6.webp",
+    "smallSrc": "/notes/work-sampling-vs-time-study/hero-small-330b7e5397d1.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A clay stopwatch beside spaced observation markers and a dispatch box."
+  },
+  "data-lake-vs-data-warehouse": {
+    "src": "/notes/data-lake-vs-data-warehouse/hero-67a4f5515b11.webp",
+    "smallSrc": "/notes/data-lake-vs-data-warehouse/hero-small-0716a2b3464c.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Mixed clay record tiles beside prepared rows on a small storage structure."
+  },
+  "poc-prototype-mvp-pilot": {
+    "src": "/notes/poc-prototype-mvp-pilot/hero-79f39634246e.webp",
+    "smallSrc": "/notes/poc-prototype-mvp-pilot/hero-small-82d7d167c3e6.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Four clay test setups showing a connection, scanner design, usable product and bounded warehouse operation."
+  },
+  "sla-vs-slo-vs-sli": {
+    "src": "/notes/sla-vs-slo-vs-sli/hero-b6a62adb46f6.webp",
+    "smallSrc": "/notes/sla-vs-slo-vs-sli/hero-small-e5c41810140d.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A clay service measure, target marker and agreement record beside a warehouse terminal."
+  },
+  "project-baseline-explained": {
+    "src": "/notes/project-baseline-explained/hero-382bc2f0ee12.webp",
+    "smallSrc": "/notes/project-baseline-explained/hero-small-48aba642951c.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A clay planning board with a fixed reference and a longer forecast path."
   }
 }
