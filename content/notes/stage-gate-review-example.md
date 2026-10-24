@@ -4,6 +4,7 @@ date: 2026-10-15
 summary: The pilot finished and met its targets. Overnight support is still missing. Follow a stage gate review that separates completed work from permission to roll out.
 seoTitle: Stage gate review: process and project example
 seoDescription: Learn stage gate reviews through a warehouse pilot. Compare milestones, evidence and decision authority, including go, hold, rework and stop options.
+updated: 2026-10-24
 status: published
 topic: Project management
 keywords: stage gate review example, project phase gate, stage gate vs milestone, go no go criteria, project gate decisions
@@ -19,15 +20,20 @@ The pilot is finished, but rollout would extend it to a shift the team has not t
 
 [APM's stage-gate guidance](https://www.apm.org.uk/blog/top-tips-for-successful-stage-gate-reviews/) stresses decision authority, operational involvement and a genuine possibility of saying no. A review that can only approve the next phase cannot properly assess whether it is ready.
 
-## Stage gate vs milestone: completion and permission
+## Milestone vs deliverable vs gate
 
-A milestone marks an event or result in the plan. A gate decides what the organisation will authorise next. They can occur together without meaning the same thing.
+A **deliverable** is an output someone can inspect and accept. A **milestone** marks an important event or result in the project schedule, such as acceptance of that output. A gate decides what the organisation will authorise next. [APM's glossary](https://www.apm.org.uk/resources/glossary/) distinguishes the output from the event.
+
+The timeline is the view that places these events and activities in sequence. It can contain several milestones; it is not another name for one.
 
 | Item | Question it answers | Warehouse example |
 | --- | --- | --- |
+| Deliverable | What output can we inspect and accept? | The day-shift pilot evidence and tested support instructions |
 | Milestone | Has a defined event or result been reached? | The day-shift pilot review is complete |
 | Gate evidence | What supports the next decision, and what is missing? | Pilot outcomes, costs, support tests and rollout risks |
 | Gate decision | What may proceed, within which limits? | Hold rollout until overnight support has been tested |
+
+The [work breakdown structure example](/notes/work-breakdown-structure-example/) shows deliverables at several levels. Use milestones to mark the agreed events in their delivery, without replacing the output or its acceptance conditions with a date.
 
 An approved [project charter](/notes/project-charter-example/) establishes the initial authority and boundary. A later gate can authorise a further stage, reject it or ask for a revised proposal. The people making that decision need the appropriate delegated authority.
 

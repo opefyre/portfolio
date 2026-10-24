@@ -4,7 +4,7 @@ date: 2026-10-14
 summary: Three stations average 60 seconds. The middle one takes 75. Compare each station with takt to see why the average can hide a capacity gap.
 seoTitle: Takt time vs cycle time: formula and example
 seoDescription: Calculate takt time and compare it with each station's cycle time. An interactive example shows why an average can hide the station limiting output.
-updated: 2026-10-20
+updated: 2026-10-24
 status: published
 topic: Operational excellence
 keywords: takt time vs cycle time, takt time formula, cycle time example, takt time calculation, line balancing, takt vs lead time
@@ -85,6 +85,19 @@ For a separate proposed redesign, suppose observation identifies five seconds of
 The total work remains 180 seconds per piece. We have redistributed it rather than removed it. This differs from the earlier control, which changes B alone and leaves A and C unchanged.
 
 ::figure paa2-line-balance | Fictional reallocation proposal. A takes 5 seconds and C takes 10 seconds from B. Totals change from 55/75/50 to 60/60/60 seconds; total work stays at 180 seconds. Transfer feasibility and quality are unverified. All bars share a seconds-per-piece scale.
+
+### Calculate the line-balance ratio
+
+For this simplified line, calculate the balance ratio as total work per piece divided by the time available across all stations at the governing line cycle.
+
+:::formula Same work, different distribution
+Original ratio = 180 ÷ (3 × 75) = 80%
+Proposed ratio = 180 ÷ (3 × 60) = 100%
+:::
+
+The original 225 station-seconds contain 180 seconds of work and 45 seconds of unfilled time per repeating line cycle. The proposed distribution removes that gap in the model while retaining all 180 seconds of work.
+
+This ratio describes the assumed balance. It excludes downtime, rejects, startup and variation, so it is not [OEE](/notes/same-oee-opposite-fixes/) or a measured good-output result. The proposed 100% also leaves no spare time at a 60-second takt.
 
 Check reach, sequence, skills, equipment and inspection conditions with the team. If some of B's 75 seconds is automatic machine time, moving a manual task may not shorten its limiting repeat by the same amount. A balanced chart does not establish a safe method or lower staffing need.
 

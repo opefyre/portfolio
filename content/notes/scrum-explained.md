@@ -1,7 +1,7 @@
 ---
 title: Scrum explained: roles, events and a usable sprint example
 date: 2026-10-15
-updated: 2026-10-23
+updated: 2026-10-24
 summary: A team finishes its tickets, but the warehouse still cannot use the feature. Follow one sprint from a clear goal to a working change people can inspect.
 seoTitle: Scrum explained: roles, events and sprint example
 seoDescription: Understand Scrum through a warehouse software feature. Connect the team, sprint events, backlogs and Definition of Done to a usable product increment.
@@ -61,6 +61,14 @@ Scrum's three artifacts each have a commitment: Product Backlog with Product Goa
 The [Definition of Done](https://www.scrum.org/node/69427) sets the quality standard for the Increment. For our example, assume it includes integrated tests, permission checks, relevant user instructions and a working picking path. A hold screen alone would not meet it.
 
 A particular item's acceptance criteria might say that stock on hold cannot be added to a dispatch. Those criteria describe the expected behaviour of that item. They do not replace the product's wider quality standard. Scrum.org [distinguishes that item-level practice from Done](https://www.scrum.org/resources/blog/what-difference-between-definition-done-and-acceptance-criteria).
+
+### Who defines Done, and where Ready fits
+
+[Scrum.org explains](https://www.scrum.org/resources/what-definition-done) that organisational quality standards form the minimum Definition of Done. When those standards do not exist, the Scrum Team creates a suitable definition. Developers commit to meeting it.
+
+Some teams also agree a **Definition of Ready**, meaning conditions that help them discuss whether an item is understood well enough to work on. [Scrum does not require it](https://www.scrum.org/resources/blog/what-difference-between-definition-done-dod-and-definition-ready-dor).
+
+For this team, checking access to a test scanner could help before selecting the stock-hold item. That preparation does not replace the integrated picking checks needed for Done, and it should not become a compulsory handoff that blocks useful discussion.
 
 The [requirements traceability example](/notes/requirements-traceability-matrix-example/) shows how to retain the link from a requirement to its test evidence.
 

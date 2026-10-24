@@ -4,6 +4,7 @@ date: 2026-10-19
 summary: Compare Kaizen, Lean and Six Sigma through one order-packing problem. Understand their aims, where 5S fits and why the method should follow the evidence.
 seoTitle: Kaizen vs Lean vs Six Sigma: a practical comparison
 seoDescription: Compare Kaizen, Lean and Six Sigma through one order-packing problem. Understand their aims, where 5S fits and why the method should follow the evidence.
+updated: 2026-10-24
 status: published
 topic: Operational excellence
 keywords: Kaizen vs Lean vs Six Sigma, Lean principles, Kaizen principles, 5S, continuous improvement
@@ -50,6 +51,16 @@ Seven wastes are a different list: categories used to notice waste, not seven re
 [5S](/notes/5s-methodology-example/) helps organise and maintain the workplace so needed items and abnormal conditions are easier to identify. It supports Lean work, but a tidy packing bench alone will not remove a queue created by the transfer rule.
 
 A Kaizen event gives a team concentrated time to investigate and test a change. Daily follow-up still matters. Someone has to maintain labels, train new people and check whether the change works during the busy shift.
+
+For this packing problem, a short event needs preparation and a way to continue the checks afterwards.
+
+| When | Work for this packing area |
+| --- | --- |
+| Before | Agree the order family, record the wait and quantity errors, arrange access to the shifts and identify who can approve a trial |
+| During | Observe the handoff and counting method with packers, test a bounded change and inspect delay and errors together |
+| After | Name the process owner, update the working method if supported and review the busy shift before closing the action |
+
+Choose the duration from the investigation and access needed. A five-day event is one possible arrangement, not a condition that makes work Kaizen. The [PDCA example](/notes/pdca-cycle-example/) shows the result check; [daily management](/notes/lean-daily-management/) keeps later problems visible.
 
 Kaizen Institute publishes its own five-principle formulation around the customer, flow, direct observation, participation and transparency. [Its explanation](https://kaizen.com/what-is-kaizen/) is a named approach, not a universal five-step project sequence.
 

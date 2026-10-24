@@ -4,6 +4,7 @@ date: 2026-10-15
 summary: Ten boxes arrived with 12 units each. After the product's pack size changes to 24, a report doubles the old receipt. Follow the records to see how that happens.
 seoTitle: Master data vs transactional data: ERP examples
 seoDescription: Understand master, transactional and reference data through one stock receipt. See why changing a product record should not rewrite an earlier movement.
+updated: 2026-10-24
 status: published
 topic: Digital transformation
 keywords: master data vs transactional data, master data examples, reference data examples, ERP master data, unit of measure conversion
@@ -32,6 +33,14 @@ The unit code BOX doesn't tell us how many cartridges it contains. That relation
 [Microsoft's units-of-measure documentation](https://learn.microsoft.com/en-us/dynamics365/business-central/inventory-how-setup-units-of-measure) explains the relationship between an item's base inventory unit and alternate purchase or sales units. One product's box can contain a different quantity from another's.
 
 Master data isn't necessarily permanent, and transactional data isn't only financial. A supplier address can change; a warehouse movement is still a transaction even before an invoice exists.
+
+## What master data management does
+
+Master data management, or MDM, is the work of keeping shared entity records usable across the systems and teams that depend on them. [IBM's MDM explanation](https://www.ibm.com/think/topics/master-data-management) covers the processes, ownership and technology involved.
+
+For P-204, the responsible owner needs to approve the new pack definition, record when it applies and share it with purchasing, receiving and reporting. The team then checks an old receipt and a new order to confirm that each uses the intended definition.
+
+That work continues whenever the product changes. An MDM tool can distribute a record; the business still has to agree its meaning and protect its history.
 
 ## ERP example: preserve the original transaction
 

@@ -1,9 +1,10 @@
 ---
-title: EOQ explained: how much should you order?
+title: Economic order quantity (EOQ) vs MOQ: a worked example
 date: 2026-10-14
 summary: Bigger orders mean fewer purchase orders and more stock. Calculate economic order quantity, compare practical batch sizes and see what changes when ordering gets cheaper.
-seoTitle: EOQ formula and example: how much to order
-seoDescription: Calculate economic order quantity with a worked example and interactive cost chart. Compare case packs, minimum orders and EOQ versus reorder point.
+seoTitle: EOQ vs MOQ: formula and order quantity example
+seoDescription: Calculate EOQ, then compare it with a supplier minimum order quantity. Follow the cost curve, case packs and an Excel formula using the same worked example.
+updated: 2026-10-24
 status: published
 topic: Supply chain
 keywords: EOQ formula, economic order quantity example, EOQ calculator, EOQ vs reorder point, ordering cost holding cost
@@ -74,6 +75,16 @@ An order of 700 costs only about €0.11 more per year in this model. The curve 
 If the supplier requires at least 800 units in cases of 100, 800 is the lowest-cost feasible quantity on the original inputs. Its combined annual cost is €2,100, about €21.54 above the unconstrained minimum.
 
 The calculator checks the feasible pack sizes around the minimum, subject to the minimum order. It doesn't simply round every mathematical answer upward and assume that is cheapest.
+
+### MOQ vs EOQ: the supplier's minimum and your cost model
+
+**Minimum order quantity, or MOQ, is the smallest order the supplier agrees to accept under the quoted conditions.** Here the MOQ is 800 units. EOQ is about 693 units, so the supplier's minimum rules out the mathematical optimum.
+
+A quote saying “200 MOQ” or “500 MOQ” still needs a unit: pieces, cases or another stated quantity. Check whether the minimum applies to each [SKU, meaning a separately identified stock item](/notes/sku-rationalization-example/), or to the combined order. There is no generally good MOQ; compare it with demand, space, expiry and feasible alternatives.
+
+MOQ and FOB describe different conditions. MOQ concerns order size; [FOB is an Incoterms delivery rule](/notes/incoterms-explained/). A quote can contain both.
+
+For the existing EOQ inputs, Excel's `=SQRT(2*12000*60/3)` returns 692.82. Keep the annual units consistent. That formula estimates EOQ; it does not calculate the supplier's minimum.
 
 ## Change the ordering cost before accepting a large batch
 

@@ -1,7 +1,7 @@
 ---
 title: Six data quality dimensions, explained with inventory
 date: 2026-10-14
-updated: 2026-10-23
+updated: 2026-10-24
 summary: The stock file is complete, the quantity is valid, and the shelf still contains fewer units. Use six data quality checks to see what a clean-looking record can hide.
 seoTitle: Six data quality dimensions: inventory examples
 seoDescription: Learn the six data quality dimensions through stock records. Compare completeness, uniqueness, consistency, timeliness, validity and accuracy.
@@ -78,6 +78,14 @@ For this case, keep the source, item and location, unit, effective time, import 
 Choose limits around the decision. A daily balance might serve a weekly planning review. A stock promise made while goods are being picked may need more recent movements. There is no universal refresh interval that makes both safe to use.
 
 The [stockout forecasting example](/notes/demand-forecasting-stockouts/) shows another limit: perfectly recorded sales can still be the wrong input for unconstrained demand. Data can be accurate for what it records and unsuitable for what you ask it to represent.
+
+## Data integrity vs data quality: check the intended meaning
+
+Data integrity has several uses. In security, [NIST's definitions](https://csrc.nist.gov/glossary/term/data_integrity) include protecting data from unauthorised alteration. Database teams also use referential integrity for keeping relationships valid, such as requiring a referenced product record to exist; [PostgreSQL illustrates that check with foreign keys](https://www.postgresql.org/docs/current/tutorial-fk.html).
+
+Those controls help preserve the record. They do not establish that the shelf contains 100 brackets. An authorised person can enter an incorrect quantity, and a valid product reference can point to a stock record that needs a physical check.
+
+Ask which integrity condition the team means, then keep the relevant quality tests. Accuracy can form part of an integrity requirement too; the terms do not divide neatly into separate boxes.
 
 ## Repair the source of the recurring error
 

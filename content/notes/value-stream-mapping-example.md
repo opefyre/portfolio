@@ -2,7 +2,7 @@
 title: Value stream mapping example: 40 minutes of work, 10 days of waiting
 date: 2026-10-03
 summary: Follow an order from release to dispatch. Map its work, queues and instructions, then compare speeding up one task with changing the wait between tasks.
-updated: 2026-10-23
+updated: 2026-10-24
 status: published
 topic: Operational excellence
 keywords: value stream mapping example, current state value stream map, value stream mapping lead time, value stream mapping template Excel, VSM cycle time vs lead time
@@ -25,6 +25,20 @@ For this fictional example, choose one family of repeat orders with the same rou
 The operation completes 50 orders per working day. A working day contains 480 minutes. Several people or benches can handle different orders at once, so an 18-minute processing step does not imply that one person completes all 50 orders.
 
 Before drawing, agree what an order is. Mixing individual items, pallets and customer orders in one calculation makes the result meaningless, even if every number came from a real system.
+
+## Order cycle time and lead time: name the boundary
+
+**Order cycle time measures elapsed time between the stated start and finish of an order.** To measure customer order-to-delivery time, start at order receipt and finish at delivery. An internal process can use a narrower boundary, which needs its own label. Write those events beside the number so the reader can reproduce it.
+
+This map starts at release and ends at dispatch. It does not include the time before release or transport to the customer. We do not have those timestamps, so we cannot calculate the full customer order-to-delivery time from this example.
+
+| Time boundary | What this example provides |
+| --- | --- |
+| Customer order received to release | Not measured |
+| Release to dispatch | The work and waiting mapped below |
+| Dispatch to customer delivery | Not measured |
+
+For a completed order, subtract the agreed starting timestamp from the finishing timestamp, using the stated calendar. A quoted 30-day lead time also needs those boundaries and a working-day or calendar-day basis. The [takt, cycle and lead-time comparison](/notes/takt-time-vs-cycle-time/) explains the production clocks; the same word can describe a different span here.
 
 ## Collect the waiting as carefully as the work
 

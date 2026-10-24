@@ -4,6 +4,7 @@ date: 2026-10-15
 summary: A warehouse needs an approval workflow. Before choosing a new app or a custom build, compare what each route solves and what the team will have to maintain.
 seoTitle: Build vs buy software: cost and configuration
 seoDescription: Compare building, buying and configuring software through one warehouse workflow. Check requirements, support, integrations and costs over three to eight years.
+updated: 2026-10-24
 status: published
 topic: Digital transformation
 keywords: build vs buy software, configure vs customize, software build buy decision, software total cost of ownership
@@ -41,6 +42,14 @@ Ask the supplier to demonstrate an awkward case: an approver rejects a request, 
 The [SIT and UAT note](/notes/sit-vs-uat/) separates checking the connection from checking the business outcome. Both belong in the comparison. A demonstration where nothing fails would miss the retry and rejection cases.
 
 Vrolen's [manufacturing software guide](https://vrolen.com/blog/manufacturing-software-guide/) is useful when this decision spans several factory applications and their operating responsibilities.
+
+## Where low-code and no-code fit
+
+Low-code tools let people assemble an application visually and add code where the platform supports it. No-code tools aim to cover their supported work without the user writing code. [Microsoft describes the two approaches](https://www.microsoft.com/en-us/power-platform/products/power-apps/topics/low-code-no-code/low-code-no-code-development-platforms) this way. Python is a programming language, rather than a low-code platform by itself.
+
+For the warehouse, a visual tool might provide the request form and approval route. The team still needs to demonstrate correct stock posting after a timeout or retry. If that requires a custom interface, include its testing and upkeep even when nobody writes code for the form.
+
+A low-code product can sit in either the bought-app or custom-workflow route. Record its licences, connectors, permissions, support owner and exit method. The label does not settle the five-year cost or remove the work of operating it.
 
 ## Worked cost comparison: what changes over time?
 
