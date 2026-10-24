@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useLayoutEffect, type ComponentProps, type MouseEvent } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { glNav } from "@/components/lens/glImages";
 import { scrollStore, scrollToTarget } from "./SmoothScroll";
+import { DOCUMENT_NAVIGATION_QUERY, shouldTransitionLink } from "./link-navigation";
 
 /**
  * Page transitions.
@@ -73,19 +73,20 @@ export function useTransitionNavigate() {
   );
 }
 
-/** next/link with a page transition. `keep` names the WebGL image that should fly to the next page. */
-export function TLink({ href, onClick, keep, ...props }: ComponentProps<typeof Link> & { href: string; keep?: string }) {
+/** Native links on phones; desktop links keep the optional WebGL transition. */
+export function TLink({ href, onClick, keep, ...props }: ComponentProps<"a"> & { href: string; keep?: string }) {
   const navigate = useTransitionNavigate();
   return (
-    <Link
+    <a
       href={href}
-      scroll={false}
-      prefetch={false}
       {...props}
       onClick={(e: MouseEvent<HTMLAnchorElement>) => {
         onClick?.(e);
-        if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-        if (href.startsWith("http") || href.startsWith("mailto:")) return;
+        if (!shouldTransitionLink(e, {
+          href,
+          target: e.currentTarget.target,
+          download: e.currentTarget.hasAttribute("download"),
+        }, window.location.href, window.matchMedia(DOCUMENT_NAVIGATION_QUERY).matches)) return;
         e.preventDefault();
         navigate(href, keep);
       }}
