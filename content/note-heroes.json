@@ -1237,5 +1237,278 @@
     "width": 1600,
     "height": 900,
     "alt": "A clay planning board with a fixed reference and a longer forecast path."
+  },
+  "industrial-ai-explained": {
+    "src": "/notes/industrial-ai-explained/hero-09a3af7282b6.webp",
+    "smallSrc": "/notes/industrial-ai-explained/hero-small-3c1438c0fa35.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A conveyor, inspection camera, equipment sensor and document records."
+  },
+  "predictive-vs-preventive-maintenance": {
+    "src": "/notes/predictive-vs-preventive-maintenance/hero-6899e1de885c.webp",
+    "smallSrc": "/notes/predictive-vs-preventive-maintenance/hero-small-71a6528b8c82.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A motor-mounted sensor beside a maintenance tool and schedule."
+  },
+  "anomaly-detection-manufacturing": {
+    "src": "/notes/anomaly-detection-manufacturing/hero-ddaa2c98bd51.webp",
+    "smallSrc": "/notes/anomaly-detection-manufacturing/hero-small-3ed77c4df053.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "An inspection probe above a row containing a differently positioned component."
+  },
+  "remaining-useful-life-prediction": {
+    "src": "/notes/remaining-useful-life-prediction/hero-c6a23b37d523.webp",
+    "smallSrc": "/notes/remaining-useful-life-prediction/hero-small-5457622391bd.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A bearing assembly beside a pointer suggesting a remaining-life estimate."
+  },
+  "soft-sensors-manufacturing": {
+    "src": "/notes/soft-sensors-manufacturing/hero-faa43d24ca85.webp",
+    "smallSrc": "/notes/soft-sensors-manufacturing/hero-small-b4de81d9edd5.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Physical measurements connected to an estimated process value."
+  },
+  "machine-vision-vs-computer-vision": {
+    "src": "/notes/machine-vision-vs-computer-vision/hero-a73e9e763bd4.webp",
+    "smallSrc": "/notes/machine-vision-vs-computer-vision/hero-small-40c669711c01.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A camera, lighting, conveyor and diverter in one inspection station."
+  },
+  "supervised-vs-unsupervised-learning-manufacturing": {
+    "src": "/notes/supervised-vs-unsupervised-learning-manufacturing/hero-bbd3a9e98288.webp",
+    "smallSrc": "/notes/supervised-vs-unsupervised-learning-manufacturing/hero-small-bf25604e78bc.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Grouped components beside separate reference shapes."
+  },
+  "data-leakage-machine-learning": {
+    "src": "/notes/data-leakage-machine-learning/hero-d53fe20f1ac2.webp",
+    "smallSrc": "/notes/data-leakage-machine-learning/hero-small-244f0640bbc7.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A component crossing between two separated information paths."
+  },
+  "data-drift-vs-concept-drift": {
+    "src": "/notes/data-drift-vs-concept-drift/hero-e4cb8c8626ef.webp",
+    "smallSrc": "/notes/data-drift-vs-concept-drift/hero-small-f2ec18ee18c8.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "An inspection setup with changed parts and surface samples."
+  },
+  "mlops-manufacturing": {
+    "src": "/notes/mlops-manufacturing/hero-074dd620778a.webp",
+    "smallSrc": "/notes/mlops-manufacturing/hero-small-47b577672e7c.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Replaceable model cartridges beside an equipment service record."
+  },
+  "edge-ai-vs-cloud-ai-manufacturing": {
+    "src": "/notes/edge-ai-vs-cloud-ai-manufacturing/hero-88cbf7aa0e50.webp",
+    "smallSrc": "/notes/edge-ai-vs-cloud-ai-manufacturing/hero-small-66217dd6a83c.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A local computing device and a remote server connected to equipment."
+  },
+  "rag-manufacturing-maintenance": {
+    "src": "/notes/rag-manufacturing-maintenance/hero-a784ad03dbbf.webp",
+    "smallSrc": "/notes/rag-manufacturing-maintenance/hero-small-c83bb99efc69.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Maintenance manuals and a tool selecting a source passage."
+  },
+  "synthetic-data-visual-inspection": {
+    "src": "/notes/synthetic-data-visual-inspection/hero-76ff60a55da4.webp",
+    "smallSrc": "/notes/synthetic-data-visual-inspection/hero-small-98a58b4d2905.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A camera beside original and varied component samples."
+  },
+  "ai-production-scheduling": {
+    "src": "/notes/ai-production-scheduling/hero-5b18feaa6dda.webp",
+    "smallSrc": "/notes/ai-production-scheduling/hero-small-8431b74e20c6.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Workpieces moving between several shared machine stations."
+  },
+  "reinforcement-learning-manufacturing": {
+    "src": "/notes/reinforcement-learning-manufacturing/hero-7ab547c42e9c.webp",
+    "smallSrc": "/notes/reinforcement-learning-manufacturing/hero-small-f202baacc226.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A process vessel, valve and connected control loop."
+  },
+  "ai-energy-optimisation-manufacturing": {
+    "src": "/notes/ai-energy-optimisation-manufacturing/hero-4d5da3690d33.webp",
+    "smallSrc": "/notes/ai-energy-optimisation-manufacturing/hero-small-1aeea081f72d.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "An energy meter beside a motor and finished components."
+  },
+  "ai-root-cause-analysis-manufacturing": {
+    "src": "/notes/ai-root-cause-analysis-manufacturing/hero-48de51d47fa1.webp",
+    "smallSrc": "/notes/ai-root-cause-analysis-manufacturing/hero-small-64e4f55d6b30.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Disassembled equipment parts arranged for a cause investigation."
+  },
+  "explainable-ai-manufacturing": {
+    "src": "/notes/explainable-ai-manufacturing/hero-14228455c3d3.webp",
+    "smallSrc": "/notes/explainable-ai-manufacturing/hero-small-84f9f62384e3.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "An open inspection machine showing its internal arrangement."
+  },
+  "data-labelling-manufacturing": {
+    "src": "/notes/data-labelling-manufacturing/hero-8de379899732.webp",
+    "smallSrc": "/notes/data-labelling-manufacturing/hero-small-8714e8a388c8.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Inspection samples with clear and ambiguous surface marks."
+  },
+  "federated-learning-manufacturing": {
+    "src": "/notes/federated-learning-manufacturing/hero-fde81ebe8abb.webp",
+    "smallSrc": "/notes/federated-learning-manufacturing/hero-small-06328f4f0df9.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Separated factory modules connected through a shared training hub."
+  },
+  "check-sheet-vs-checklist": {
+    "src": "/notes/check-sheet-vs-checklist/hero-fa0a781b4ce9.webp",
+    "smallSrc": "/notes/check-sheet-vs-checklist/hero-small-476630c65033.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A tally sheet beside a task completion sheet."
+  },
+  "attribute-agreement-analysis": {
+    "src": "/notes/attribute-agreement-analysis/hero-b1fd3769b539.webp",
+    "smallSrc": "/notes/attribute-agreement-analysis/hero-small-b7ef15e88e2c.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A fabric sample and reference examined through inspection frames."
+  },
+  "which-control-chart-to-use": {
+    "src": "/notes/which-control-chart-to-use/hero-900d9d8b9b06.webp",
+    "smallSrc": "/notes/which-control-chart-to-use/hero-small-1b6c3794c69d.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Different process chart shapes beside measuring and counting tools."
+  },
+  "rational-subgrouping-spc": {
+    "src": "/notes/rational-subgrouping-spc/hero-627c07a486bf.webp",
+    "smallSrc": "/notes/rational-subgrouping-spc/hero-small-fdf147545e32.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Separate trays retaining groups of measured components."
+  },
+  "dpmo-vs-dpu-vs-ppm": {
+    "src": "/notes/dpmo-vs-dpu-vs-ppm/hero-b925f1516573.webp",
+    "smallSrc": "/notes/dpmo-vs-dpu-vs-ppm/hero-small-7d29fc353c94.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Order records with individual defect marks."
+  },
+  "seven-basic-quality-tools": {
+    "src": "/notes/seven-basic-quality-tools/hero-cf09871dc633.webp",
+    "smallSrc": "/notes/seven-basic-quality-tools/hero-small-d1038e457d5d.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A small collection of recording, examining and measuring tools."
+  },
+  "histogram-vs-control-chart": {
+    "src": "/notes/histogram-vs-control-chart/hero-00bb877c3de9.webp",
+    "smallSrc": "/notes/histogram-vs-control-chart/hero-small-7e1e80dc61c7.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A distribution of columns beside an ordered set of values."
+  },
+  "scatter-diagram-quality-control": {
+    "src": "/notes/scatter-diagram-quality-control/hero-863de8e695ea.webp",
+    "smallSrc": "/notes/scatter-diagram-quality-control/hero-small-e73519a2ecfb.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Paired measurement pegs forming a scattered relationship."
+  },
+  "regression-analysis-process-improvement": {
+    "src": "/notes/regression-analysis-process-improvement/hero-958e982860fb.webp",
+    "smallSrc": "/notes/regression-analysis-process-improvement/hero-small-16164eb59d1a.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A calibration stand with a straight reference and differing measurements."
+  },
+  "random-vs-stratified-sampling": {
+    "src": "/notes/random-vs-stratified-sampling/hero-84806548803d.webp",
+    "smallSrc": "/notes/random-vs-stratified-sampling/hero-small-45fad55a2d5a.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Samples selected from separate groups of components."
+  },
+  "improvement-kata-vs-coaching-kata": {
+    "src": "/notes/improvement-kata-vs-coaching-kata/hero-267aae15f82f.webp",
+    "smallSrc": "/notes/improvement-kata-vs-coaching-kata/hero-small-974e18650917.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Two seats beside a shared board and an improvement path."
+  },
+  "ecrs-process-improvement": {
+    "src": "/notes/ecrs-process-improvement/hero-718f9f9d789d.webp",
+    "smallSrc": "/notes/ecrs-process-improvement/hero-small-e1926c56637b.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A work sequence with a redundant operation set aside."
+  },
+  "5w2h-action-plan": {
+    "src": "/notes/5w2h-action-plan/hero-946aabbba41b.webp",
+    "smallSrc": "/notes/5w2h-action-plan/hero-small-62878a7c0dd8.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "An action planning sheet with fields and a recorded task."
+  },
+  "twi-job-instruction": {
+    "src": "/notes/twi-job-instruction/hero-05bc8f5ee71e.webp",
+    "smallSrc": "/notes/twi-job-instruction/hero-small-725fdeba66d3.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A packing station and a task instruction stand."
+  },
+  "yokoten-explained": {
+    "src": "/notes/yokoten-explained/hero-fb730fc21cbd.webp",
+    "smallSrc": "/notes/yokoten-explained/hero-small-c5040dc71e80.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Two similar workstations with a local fixture difference."
+  },
+  "muda-mura-muri-examples": {
+    "src": "/notes/muda-mura-muri-examples/hero-f11ee55e7589.webp",
+    "smallSrc": "/notes/muda-mura-muri-examples/hero-small-30ea4593f750.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Cargo distributed across two small trucks."
+  },
+  "impact-effort-matrix": {
+    "src": "/notes/impact-effort-matrix/hero-9d3550c2c526.webp",
+    "smallSrc": "/notes/impact-effort-matrix/hero-small-53eb9c69f77f.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "An effort and effect comparison board with candidate work tokens."
+  },
+  "employee-suggestion-system": {
+    "src": "/notes/employee-suggestion-system/hero-8b37a647076b.webp",
+    "smallSrc": "/notes/employee-suggestion-system/hero-small-0531d171e6cb.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "An idea entering review and returning as a recorded response."
+  },
+  "benchmarking-continuous-improvement": {
+    "src": "/notes/benchmarking-continuous-improvement/hero-38a1b39fd62b.webp",
+    "smallSrc": "/notes/benchmarking-continuous-improvement/hero-small-f60a253d2806.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Two production methods compared with the same measuring tool."
   }
 }
