@@ -2,7 +2,7 @@
 title: DMAIC step by step: a Lean Six Sigma project from problem to control
 date: 2026-09-29
 summary: Follow a fictional filling problem through Define, Measure, Analyze, Improve and Control. See how the same approach can investigate supply-chain errors.
-updated: 2026-10-20
+updated: 2026-10-25
 status: published
 topic: Operational excellence
 keywords: DMAIC, Lean Six Sigma, Six Sigma, define measure analyze improve control, process improvement, root cause analysis, SIPOC, measurement system analysis, control plan, operational excellence
@@ -106,7 +106,11 @@ The €35,200 is a gross annual material-value estimate at unchanged volume and 
 
 ## Control: make the gain hold
 
-The operating team needs a **control plan**: what to watch, how, how often, and what to do when it drifts.
+A **manufacturing control plan** records the characteristic to monitor, the checking method and frequency, the limit, the response and the owner. It gives the operating team a specific check and action after the improvement project.
+
+<h3 id="control-plan-example">Control plan example: checks, limits and owners</h3>
+
+The limits and responses below belong to this fictional filling process. Use the approved requirements for the line you are working on.
 
 | What | How | How often | Limit | Reaction | Owner |
 | --- | --- | --- | --- | --- | --- |
