@@ -41,7 +41,7 @@ export const publications: Publication[] = [
     title: "The effects of shading on thermal performance of DSF in the hot-arid climate of Iran",
     authors: ["Sepideh Bazari", "Abolfazl Shirkavand"],
     date: "2019-03",
-    href: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=qI-slo4AAAAJ&citation_for_view=qI-slo4AAAAJ:d1gkVwhDpl0C",
+    href: "https://en.civilica.com/doc/878290/",
     summary: "A simulation study of shading blinds in a double-skin facade, examining inner-skin temperatures during hot-weather conditions in Iran.",
   },
 ];
