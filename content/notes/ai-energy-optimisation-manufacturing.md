@@ -1,6 +1,7 @@
 ---
 title: AI energy optimisation: measure the result
 date: 2026-10-25
+updated: 2026-10-27
 summary: Evaluate AI energy optimisation with clear measurement boundaries. Separate consumption, output, normalised performance and future saving scenarios.
 seoTitle: AI energy optimisation: measure the result
 seoDescription: Evaluate AI energy optimisation with clear measurement boundaries. Separate consumption, output, normalised performance and future saving scenarios.
@@ -37,7 +38,7 @@ If you choose good units as the output, state the acceptance definition and keep
 | Energy cost | Expenditure at the applicable tariffs | Price changes, demand charges and consumption |
 | Normalised performance | A comparison accounting for included relevant variables | Model validity, baseline choice and unexplained changes |
 
-[DOE's explanation of normalisation](https://www.energy.gov/eere/amo/articles/superior-energy-performance-faqs) distinguishes simple intensity from measures that account for other relevant factors, including weather and fixed facility consumption. Dividing by output does not automatically control for all of them.
+[DOE's energy baselining guide](https://www.energy.gov/sites/default/files/2016/02/f29/Energy%20Intensity%20Baselining%20and%20Tracking%20Guidance.pdf#page=21) explains how regression can account for relevant variables such as production and weather when comparing periods. Dividing by output alone does not automatically account for those other influences.
 
 ## Identify what the AI actually changes
 
@@ -55,4 +56,4 @@ At the review, show consumption, the declared output, operating conditions and e
 
 - [IEA AI use in energy and industry](https://www.iea.org/reports/energy-and-ai/ai-for-energy-optimisation-and-innovation).
 - [DOE energy performance indicators](https://www1.eere.energy.gov/manufacturing/eguide/iso_step_2_7.html).
-- [DOE energy intensity and normalisation](https://www.energy.gov/eere/amo/articles/superior-energy-performance-faqs).
+- [DOE: Energy Intensity Baselining and Tracking Guidance](https://www.energy.gov/sites/default/files/2016/02/f29/Energy%20Intensity%20Baselining%20and%20Tracking%20Guidance.pdf), printed pages 7 and 13, selecting relevant variables and normalising consumption with regression.

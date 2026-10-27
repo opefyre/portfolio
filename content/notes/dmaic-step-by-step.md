@@ -2,7 +2,7 @@
 title: DMAIC step by step: a Lean Six Sigma project from problem to control
 date: 2026-09-29
 summary: Follow a fictional filling problem through Define, Measure, Analyze, Improve and Control. See how the same approach can investigate supply-chain errors.
-updated: 2026-10-25
+updated: 2026-10-27
 status: published
 topic: Operational excellence
 keywords: DMAIC, Lean Six Sigma, Six Sigma, define measure analyze improve control, process improvement, root cause analysis, SIPOC, measurement system analysis, control plan, operational excellence
@@ -115,9 +115,11 @@ The limits and responses below belong to this fictional filling process. Use the
 | What | How | How often | Limit | Reaction | Owner |
 | --- | --- | --- | --- | --- | --- |
 | Average pack weight | Check-weigher, control chart | Every hour | Control limits from the new baseline | Stop, check heads, log cause | Line lead |
-| Weight per head | Start-up check, 5 packs per head | Every start-up | Any head more than 2 g from target | Adjust or isolate the head | Operator |
+| Mean by filler head | Mean of 5 consecutive packs per head | Every start-up | Mean below 501 g or above 505 g | Hold that head; investigate, correct and recheck | Operator |
 | Valve seal condition | Visual and wear check | Weekly | Wear standard | Replace seal | Maintenance |
 | Target setting | Settings log | Every shift | 503 g, changes need approval | Reset, escalate | Shift supervisor |
+
+The start-up trigger applies when a head's five-pack mean is more than 2 g from the 503 g target. This action limit is separate from the hourly chart's control limits. Reject and investigate any individual pack below 495 g, even if its group's mean passes.
 
 A control chart helps the team distinguish ordinary variation from a signal that needs investigation. [How to read one](/notes/control-charts-explained/) is its own note.
 

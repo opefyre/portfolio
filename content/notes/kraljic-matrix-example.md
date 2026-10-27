@@ -1,7 +1,7 @@
 ---
 title: Kraljic matrix explained: four quadrants and purchasing examples
 date: 2026-10-15
-updated: 2026-10-23
+updated: 2026-10-27
 summary: The biggest purchase deserves attention. So does the inexpensive control module that can stop a line. Use supply risk and profit impact to choose how to buy.
 seoTitle: Kraljic matrix: 4 quadrants and purchasing examples
 seoDescription: Learn the four Kraljic matrix quadrants with purchasing examples. Compare profit impact and supply risk, then test a change in qualified suppliers.
@@ -30,7 +30,7 @@ Keep the evidence for each axis separate. “We spend a lot” says little about
 
 ## The four Kraljic matrix quadrants
 
-[CIPS uses the conventional category names below](https://www.cips.org/intelligence-hub/supplier-relationship-management/kraljic-matrix). Use the labels to read the two axes together.
+The table summarises [CIPS's four purchasing categories](https://www.cips.org/intelligence-hub/supplier-relationship-management/kraljic-matrix), using a plain description for high-impact, lower-risk items. Read each category against both axes.
 
 | Category label | Profit impact | Supply risk | Initial purchasing focus |
 | --- | --- | --- | --- |
@@ -88,4 +88,4 @@ Start with a manageable group of purchases. Have purchasing, operations and the 
 - Nevi. [Inkoopportfolio](https://nevi.nl/inkoop/inkoopkennis/inkoopportfolio-inkopers). Professional-body overview of purchasing-portfolio analysis.
 - Peter Kraljic. [Purchasing Must Become Supply Management](https://hbr.org/1983/09/purchasing-must-become-supply-management), Harvard Business Review, September 1983. Original publication; full text requires access.
 
-The factory, amounts, alternatives and supplier-exit scenario are fictional. Lower and higher are relative judgements for this factory, not universal spend bands. The table gives the conventional names; the chart describes the purchasing work they suggest.
+The factory, amounts, alternatives and supplier-exit scenario are fictional. Lower and higher are relative judgements for this factory, not universal spend bands. The table combines category names with a plain description; the chart describes the purchasing work they suggest.

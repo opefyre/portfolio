@@ -1,6 +1,7 @@
 ---
 title: Predictive vs preventive maintenance explained
 date: 2026-10-25
+updated: 2026-10-27
 summary: Compare predictive, preventive and condition-based maintenance. See what a prediction needs before it can support a maintenance decision.
 seoTitle: Predictive vs preventive maintenance explained
 seoDescription: Compare predictive, preventive and condition-based maintenance. See what a prediction needs before it can support a maintenance decision.
@@ -9,7 +10,9 @@ topic: Industrial AI
 keywords: predictive maintenance machine learning, predictive vs preventive maintenance, condition based vs predictive maintenance, AI predictive maintenance
 ---
 
-Preventive maintenance schedules work by time, usage or another planned interval. Condition-based maintenance responds to evidence about equipment condition. Predictive maintenance uses data and a model to anticipate a future condition or maintenance need.
+Preventive maintenance aims to reduce the chance of failure. It includes scheduled work and work based on equipment condition. [IEC's maintenance terminology](https://standards.iteh.ai/catalog/standards/iec/7a3811a1-2da2-4f5f-8feb-d1f1794ca94c/iec-ts-63060-2019) uses that broader meaning.
+
+For the comparison below, **scheduled preventive maintenance** means work triggered by a date or usage interval. Condition-based maintenance responds to evidence about equipment condition. Predictive maintenance uses data and a model to anticipate a future condition or maintenance need.
 
 The approaches can coexist on the same machine. A team can inspect a seal weekly, respond to a measured condition and use a model to estimate when another component may need attention.
 
@@ -19,7 +22,7 @@ The approaches can coexist on the same machine. A team can inspect a seal weekly
 
 | Approach | Trigger | Evidence the team needs |
 | --- | --- | --- |
-| Preventive | A planned date or usage interval | Maintenance requirements, operating history and the consequences of the interval |
+| Scheduled preventive | A planned date or usage interval | Maintenance requirements, operating history and the consequences of the interval |
 | Condition-based | An observed condition reaches a defined criterion | A credible measurement, operating context and an agreed response |
 | Predictive | A model anticipates a condition or maintenance need | Suitable historical evidence, validation and enough warning to act |
 
@@ -53,5 +56,6 @@ Keep scheduled tasks where the maintenance requirement calls for them. Before ad
 
 ## Sources
 
+- [IEC TS 63060:2019, public preview](https://standards.iteh.ai/catalog/standards/iec/7a3811a1-2da2-4f5f-8feb-d1f1794ca94c/iec-ts-63060-2019), clauses 3.4 to 3.4.2. This electrical-network document uses IEC 60050-192 terms to distinguish preventive, condition-based and periodic maintenance.
 - [MathWorks predictive maintenance overview](https://www.mathworks.com/help/predmaint/gs/what-is-predictive-maintenance.html).
 - [MathWorks remaining useful life methods](https://www.mathworks.com/company/technical-articles/three-ways-to-estimate-remaining-useful-life-for-predictive-maintenance.html).

@@ -1,7 +1,7 @@
 ---
 title: FMEA step by step: find what could go wrong before it does
 date: 2026-09-29
-updated: 2026-10-23
+updated: 2026-10-27
 summary: A practical guide to process FMEA: the seven steps, how to rate severity, occurrence and detection, why ranking by RPN can hide your worst risk, how action priority fixes it, and a worked example on an order fulfilment process.
 status: published
 topic: Operational excellence
@@ -58,9 +58,9 @@ In this fictional example, a distributor picks, labels, packs and ships mixed fo
 | Step | Failure mode | Effect | S | Cause | O | Current control | D | RPN |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Pick | Wrong item picked | Shop receives the wrong product | 5 | Similar items stored side by side | 6 | Visual check at packing | 5 | 150 |
-| Pack | Damaged in transit | Refund and re-shipment | 6 | Poor palletising | 4 | Customer complaint | 6 | 144 |
+| Pack | Damaged in transit | Refund and re-shipment | 6 | Poor palletising | 4 | Customer complaint | 8 | 192 |
 | Dispatch | Late dispatch | Missed delivery slot | 4 | Wave planning overload | 6 | End-of-day report | 4 | 96 |
-| Label | Batch code missing | Traceability lost in a recall | 8 | Printer ribbon runs out | 2 | Operator glance | 3 | 48 |
+| Label | Batch code missing | Traceability lost in a recall | 8 | Printer ribbon runs out | 2 | Operator glance | 5 | 80 |
 | Pack | Allergen product in the wrong carton | Allergic reaction for a consumer | 10 | Similar outer packaging | 2 | Scan at packing | 2 | 40 |
 
 ## Rating: keep the scales concrete
@@ -76,6 +76,8 @@ Every organisation tunes its own scales, but they should describe observable thi
 | 1 | No noticeable effect | Practically impossible | Failure is prevented or always caught |
 
 Use the applicable rating tables and record the evidence supporting each score. Rate severity for the effect, occurrence for the cause, and detection for the relevant current control. Resolve a disagreement if it could change the action priority.
+
+Under this teaching scale, the customer complaint receives a detection score of 8 because the failure has already reached the customer. The operator's glance receives 5 as a manual check. These are illustrative choices within the stated bands, not official AIAG and VDA ratings.
 
 ## The trap: ranking by RPN
 
@@ -98,7 +100,7 @@ The AIAG and VDA handbook uses **action priority (AP)** tables to assign high, m
 
 For each high-severity effect, review the evidence behind prevention and detection. A low occurrence or detection score needs support from the actual controls and operating conditions.
 
-The fictional team checks the allergen line's low occurrence and detection ratings. The scan works only if every carton passes through it, and the night shift sometimes skips it under pressure. The team therefore reviews those scores and prioritises the allergen control, followed by wrong picks and transit damage. Record the safety decision and its evidence separately from the RPN ranking.
+The fictional team checks the allergen line's low occurrence and detection ratings. The scan works only if every carton passes through it, and the night shift sometimes skips it under pressure. The team therefore reviews those scores and prioritises the allergen control. It also reviews wrong picks and transit damage against their effects and current controls. Record the safety decision and its evidence separately from the RPN ranking.
 
 ## Optimisation: the actions
 

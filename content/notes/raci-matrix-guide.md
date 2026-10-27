@@ -1,7 +1,7 @@
 ---
 title: RACI matrix: assign roles for a product launch
 date: 2026-09-29
-updated: 2026-10-23
+updated: 2026-10-27
 summary: How to build a RACI matrix that settles who does what, the rule of one accountable person per task, how to scan rows and columns for bottlenecks and gaps, when to use RASCI, DACI or RAPID instead, and how to run the workshop.
 status: published
 topic: Project management
@@ -15,8 +15,8 @@ A new-product launch needs supplier approval, artwork and a release decision. Be
 **A RACI matrix assigns responsibility for tasks or decisions.** It records who does the work, who owns the outcome, whose input is needed and who must be told. Building it requires those people to agree the assignments.
 
 :::card The short version
-- **R, Responsible:** does the work. At least one per task.
-- **A, Accountable:** owns the outcome and signs it off. **Exactly one per task.**
+- **R, Responsible:** does the work. Each task needs at least one R or A/R assignment.
+- **A, Accountable:** owns the outcome and signs it off. **Exactly one accountable owner per task**, marked A or A/R.
 - **C, Consulted:** gives input before the work is done. Two-way.
 - **I, Informed:** is told after. One-way.
 - Read the matrix by row (is every task covered?) and by column (is any role overloaded?).
@@ -24,7 +24,7 @@ A new-product launch needs supplier approval, artwork and a release decision. Be
 
 ## The four letters
 
-The letters are simple. The discipline is in the difference between R and A. The responsible person does the work; the accountable person answers for it. They can be the same person on small tasks, but then write "A", because accountability includes responsibility.
+The responsible person does the work; the accountable person answers for it. When the same person does both, write **A/R**. Count that assignment as both responsible and accountable when checking the row. An A on its own does not say who performs the work.
 
 The rule that makes RACI work, and the one the PMBOK Guide stresses: **one A per task**. If two managers both expect to approve the same task, agree the final decision owner and any required consultation before recording the assignment.
 
@@ -32,7 +32,7 @@ The rule that makes RACI work, and the one the PMBOK Guide stresses: **one A per
 
 A consumer goods company is launching a new product variant. The project lead maps the main tasks against six roles:
 
-::figure raci-grid | A RACI matrix for the launch. Each row has exactly one A and at least one R. The project lead is accountable for most of the delivery; the sponsor for the two big go or no-go decisions.
+::figure raci-grid | A RACI matrix for the launch, with separate A and R assignments in every row. A combined A/R assignment would count towards both checks. The project lead is accountable for most of the delivery; the sponsor for the two big go or no-go decisions.
 
 ## Read it by row
 
@@ -40,9 +40,9 @@ Each row is a task. Scan them for these patterns:
 
 | Pattern | What it means | What to do |
 | --- | --- | --- |
-| No A | Nobody owns the outcome | Assign one, today |
-| More than one A | Unclear decision rights | Pick one; make the other C |
-| No R | Everyone assumes someone else is doing it | Assign the work |
+| No A or A/R | Nobody owns the outcome | Assign one accountable owner |
+| More than one A or A/R | Unclear decision rights | Agree one accountable owner; review the other person's role |
+| No R or A/R | Nobody is assigned to do the work | Assign the work |
 | Lots of Cs | Slow decisions, too many voices | Keep C for people whose input changes the result; move the rest to I |
 | Only I's apart from A and R | Possibly fine, or a stakeholder is missing | Check who'd be upset to be left out |
 
@@ -54,7 +54,7 @@ Read each role's column to check the number and type of assignments:
 | --- | --- | --- |
 | Many A's in one column | A bottleneck; every decision waits for one person | Delegate accountability for smaller tasks |
 | Many R's in one column | Overload; check capacity against the plan | Rebalance, or accept the risk explicitly |
-| No R or A at all | The role may not need to be on the project | Keep them informed, or take them off the core team |
+| No R, A or A/R at all | The role may not need to be on the project | Keep them informed, or take them off the core team |
 | Only C's | Useful expertise, or an unnecessary approval step | Check that every C really changes decisions |
 
 In the example, the project lead has four A's. For a launch that size, that's reasonable. Across a portfolio of twelve launches, the same column would signal a bottleneck, and the fix would be to make functional leads accountable for their own deliverables.
