@@ -1,7 +1,7 @@
 ---
 title: Three factory habits I use in software
 date: 2026-09-14
-updated: 2026-10-23
+updated: 2026-10-27
 summary: Standard work, inspection at the station, and readiness before launch.
 status: draft
 topic: Digital transformation
@@ -26,9 +26,5 @@ In software that means tests, reviews and checks as close to the change as possi
 ## 3. Readiness before launch
 
 At BAT, launch time came down from about five months to two through better planning: readiness checks, named owners and regular decisions across sourcing, planning, manufacturing and quality. Problems showed up while there was still time to fix them.
-
-Before a software launch, I use the same readiness checks to expose missing work while the team can still respond.
-
-## One difference
 
 Before releasing a software change, check the affected workflow, its tests and the people responsible for support. Resolve any missing prerequisite before committing the release date.

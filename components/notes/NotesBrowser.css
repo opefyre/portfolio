@@ -64,3 +64,6 @@
 }
 @media(prefers-reduced-motion:reduce){.notes-browser-row *{transition:none}}
 @media(max-width:360px){.notes-browser-row{grid-template-columns:minmax(0,1fr) 85px;gap:14px}}
+.notes-topic-intro{max-width:76ch;margin:0 0 24px;padding:0 0 20px;border-bottom:1px solid var(--rule);font-size:15px;line-height:1.6}
+.notes-topic-intro p{margin:0}
+.notes-topic-intro a{text-decoration:underline;text-underline-offset:3px}

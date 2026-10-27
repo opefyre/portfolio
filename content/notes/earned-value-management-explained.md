@@ -1,7 +1,7 @@
 ---
 title: Earned value management: follow a €200k project
 date: 2026-09-29
-updated: 2026-10-23
+updated: 2026-10-27
 summary: Follow a €200k warehouse-system project through planned value, earned value and actual cost. Calculate CPI, SPI, EAC and TCPI, then check the assumptions behind the forecasts.
 status: published
 topic: Project management
@@ -17,7 +17,7 @@ seoDescription: Calculate CPI, SPI and EAC with a €200k project example. Learn
 :::card The short version
 - **PV** (planned value): what the plan said should be done by now, in budget terms.
 - **EV** (earned value): what is actually done, valued at its budget.
-- **AC** (actual cost): what the done work actually cost.
+- **AC** (actual cost): cost incurred for work performed, including work still in progress.
 - **CPI = EV ÷ AC** tells you cost efficiency. **SPI = EV ÷ PV** tells you schedule efficiency. Below 1.0 calls for investigation.
 - The most common forecast is **EAC = BAC ÷ CPI**: the final cost if the current efficiency continues.
 :::
@@ -27,8 +27,10 @@ seoDescription: Calculate CPI, SPI and EAC with a €200k project example. Learn
 :::grid
 - **Planned value (PV)** The budgeted cost of the work scheduled up to today. It comes straight from your baseline plan.
 - **Earned value (EV)** The budgeted cost of the work actually completed up to today. The key idea: you earn the *budget* of a task by finishing it, whatever it really cost.
-- **Actual cost (AC)** What you actually spent on the work completed up to today, from timesheets and invoices.
+- **Actual cost (AC)** Cost incurred for work performed up to today, including unfinished work. Use cost records for the same work and period as EV.
 :::
+
+Cost can be incurred before the work earns value or its invoice is paid. Under a 0/100 progress rule, an unfinished task earns no EV yet, but its incurred cost still belongs in AC. [GAO defines actual cost](https://www.gao.gov/assets/gao-20-195g.pdf#page=258) on that incurred-cost basis.
 
 One more you'll need: **BAC**, the budget at completion, which is simply the total budget.
 

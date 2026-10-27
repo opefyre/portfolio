@@ -34,6 +34,9 @@ export function NotesBrowser({notes}:{notes:NotesIndexItem[]}) {
     </NotesField>
     <section className="notes-index-list frame" id="latest" aria-labelledby="latest-title">
       <header className="notes-index-head notes-browser-head"><div><h2 id="latest-title">{filtered?'Search results':'Latest writing'}</h2><p>{visible.length} {visible.length===1?'note':'notes'}{topic?` in ${topic}`:''}</p></div><div className="notes-list-actions">{filtered&&<button type="button" onClick={clear}>Clear filters</button>}<button type="button" onClick={changeSearch}>Search & filters <span aria-hidden="true">↑</span></button></div></header>
+      {topic==='Continuous improvement'&&<aside className="notes-topic-intro" aria-label="Continuous improvement foundations">
+        <p>Start with the <TLink href="/notes/continuous-improvement-explained/">continuous improvement overview</TLink>. Foundational guides also sit under Operational excellence: <TLink href="/notes/5-whys-example/">5 Whys</TLink>, <TLink href="/notes/5s-methodology-example/">5S</TLink>, <TLink href="/notes/pdca-cycle-example/">PDCA</TLink>, <TLink href="/notes/control-charts-explained/">control charts</TLink> and <TLink href="/notes/lean-daily-management/">daily management</TLink>.</p>
+      </aside>}
       <ol id="notes-results" className="notes-browser-rows">
         {visible.map(n=><li key={n.slug}>
           <TLink href={`/notes/${n.slug}/`} className="notes-browser-row">
