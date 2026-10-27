@@ -240,6 +240,80 @@
   white-space: nowrap;
 }
 
+/* ---------- Publications ------------------------------------------------- */
+
+.publications {
+  padding-top: clamp(80px, 12vh, 144px);
+}
+.publications-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.publications-intro {
+  max-width: 52ch;
+  margin-top: 24px;
+  color: var(--fg-2);
+  font-size: clamp(18px, 1.5vw, 21px);
+  line-height: 1.5;
+}
+.publication-list {
+  list-style: none;
+  padding: 0;
+  margin: 40px 0 0;
+  border-top: 1px solid var(--rule-strong);
+}
+.publication-row {
+  display: grid;
+  grid-template-columns: minmax(60px, 0.2fr) minmax(0, 1fr);
+  gap: 16px 32px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.publication-year, .publication-venue, .publication-authors, .publication-doi {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--fg-3);
+}
+.publication-title {
+  max-width: 47ch;
+  margin: 10px 0 16px;
+  font-family: var(--font-display);
+  font-size: clamp(23px, 2.2vw, 34px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+.publication-title a {
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  transition: text-decoration-color 180ms ease;
+}
+.publication-title a:hover, .publication-title a:focus-visible {
+  text-decoration-color: currentColor;
+}
+.publication-summary {
+  max-width: 66ch;
+  margin-bottom: 18px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--fg-2);
+}
+.publication-doi {
+  display: inline-block;
+  margin-top: 8px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 600px) {
+  .publication-row { grid-template-columns: 1fr; gap: 8px; }
+}
+
 /* ---------- Notes -------------------------------------------------------- */
 
 .notes-page {

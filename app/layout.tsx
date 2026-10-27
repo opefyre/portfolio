@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { SiteShell } from "@/components/shell/SiteShell";
 import { site } from "@/content/site";
+import { scholarProfile } from "@/content/publications";
 import { getCertifications } from "@/lib/data";
 import "./globals.css";
 import "@/styles/home.css";
@@ -59,7 +60,7 @@ async function personJsonLd() {
     worksFor: { "@type": "Organization", name: "Vrolen", url: "https://vrolen.com" },
     hasCredential: certifications.map((c) => ({ "@type": "EducationalOccupationalCredential", name: c.name })),
     address: { "@type": "PostalAddress", addressLocality: "Lisbon", addressCountry: "PT" },
-    sameAs: [site.linkedin, site.instagram, site.github],
+    sameAs: [site.linkedin, site.instagram, site.github, scholarProfile],
   };
 }
 
