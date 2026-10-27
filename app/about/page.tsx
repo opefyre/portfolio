@@ -4,9 +4,10 @@ import { GLImage } from "@/components/media/GLImage";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SocialLinks } from "@/components/site/SocialLinks";
 import { about, ogImage, site } from "@/content/site";
+import { publications, scholarProfile } from "@/content/publications";
 import { getCertifications, getExperiences } from "@/lib/data";
 
-const description = "Operational excellence, digital transformation and supply chain programs at Unilever, British American Tobacco and Snoonu. Founder of Vrolen, based in Lisbon.";
+const description = "Operational excellence, digital transformation and engineering research. Career at Unilever, British American Tobacco and Snoonu. Founder of Vrolen.";
 
 export const metadata: Metadata = {
   title: "About Abolfazl Shirkavand",
@@ -84,6 +85,45 @@ export default async function AboutPage() {
           </ol>
         </div>
       </section>
+      <section className="publications" data-nav-tone="dark" aria-labelledby="publications-title" id="publications">
+        <div className="frame">
+          <div className="publications-heading">
+            <h2 id="publications-title" className="h-section">Publications</h2>
+            <a href={scholarProfile} className="text-link" target="_blank" rel="noopener noreferrer">
+              Google Scholar<span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          </div>
+          <p className="publications-intro">My engineering research covers composite structures, heat transfer and building performance.</p>
+          <ol className="publication-list">
+            {publications.map((p) => (
+              <li key={p.id} className="publication-row">
+                <time dateTime={p.date} className="publication-year">{p.date.slice(0, 4)}</time>
+                <div className="publication-copy">
+                  <p className="publication-venue">{p.journal ?? "Research study"}{p.volume ? ` / Volume ${p.volume}` : ""}</p>
+                  <h3 className="publication-title"><a href={p.href} target="_blank" rel="noopener noreferrer">{p.title}<span className="sr-only"> (opens in a new tab)</span></a></h3>
+                  <p className="publication-summary">{p.summary}</p>
+                  <p className="publication-authors">{p.authors.join(", ")}</p>
+                  {p.doi && <a className="publication-doi" href={`https://doi.org/${p.doi}`} target="_blank" rel="noopener noreferrer">DOI: {p.doi}<span className="sr-only"> (opens in a new tab)</span></a>}
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": publications.map((p) => ({
+          "@type": p.journal ? "ScholarlyArticle" : "CreativeWork",
+          "@id": p.doi ? `https://doi.org/${p.doi}` : p.href,
+          name: p.title,
+          url: p.href,
+          datePublished: p.date,
+          description: p.summary,
+          author: p.authors.map((name) => ({ "@type": "Person", name, ...(name === site.name ? { "@id": `${site.url}/#person` } : {}) })),
+          ...(p.journal ? { isPartOf: { "@type": "Periodical", name: p.journal } } : {}),
+          ...(p.doi ? { identifier: { "@type": "PropertyValue", propertyID: "DOI", value: p.doi } } : {}),
+        })),
+      }).replace(/</g, "\\u003c") }} />
       <SiteFooter />
     </>
   );
