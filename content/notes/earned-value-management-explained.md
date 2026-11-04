@@ -1,7 +1,7 @@
 ---
 title: Earned value management: follow a €200k project
 date: 2026-09-29
-updated: 2026-10-27
+updated: 2026-11-04
 summary: Follow a €200k warehouse-system project through planned value, earned value and actual cost. Calculate CPI, SPI, EAC and TCPI, then check the assumptions behind the forecasts.
 status: published
 topic: Project management
@@ -26,7 +26,7 @@ seoDescription: Calculate CPI, SPI and EAC with a €200k project example. Learn
 
 :::grid
 - **Planned value (PV)** The budgeted cost of the work scheduled up to today. It comes straight from your baseline plan.
-- **Earned value (EV)** The budgeted cost of the work actually completed up to today. The key idea: you earn the *budget* of a task by finishing it, whatever it really cost.
+- **Earned value (EV)** The budgeted value of the work the team has completed, measured using the progress rule agreed for each package. A package can earn partial credit when that rule allows it.
 - **Actual cost (AC)** Cost incurred for work performed up to today, including unfinished work. Use cost records for the same work and period as EV.
 :::
 
@@ -40,7 +40,7 @@ A company is replacing its warehouse management system. The budget (BAC) is **�
 
 The plan calls for 40% of the budgeted work by now, so **PV = €80,000**. Finance records **AC = €75,000** spent. To judge that spending, the manager also needs the value of work actually completed.
 
-Now the earned value. It's calculated per work package, from the budget and how much is really finished:
+The manager calculates earned value for each package. In this example, the team has accepted the first integration milestone, which the plan assigns 20% of the package budget.
 
 | Work package | Budget | Complete | Earned |
 | --- | --- | --- | --- |
@@ -49,7 +49,7 @@ Now the earned value. It's calculated per work package, from the budget and how 
 | Build integrations | €50,000 | 20% | €10,000 |
 | Testing | €40,000 | 0% | €0 |
 | Training | €30,000 | 0% | €0 |
-| Go-live and hypercare | €30,000 | 0% | €0 |
+| Launch and early support | €30,000 | 0% | €0 |
 | **Total** | **€200,000** | | **EV = €60,000** |
 
 The team has earned €60,000 against planned value of €80,000, at an actual cost of €75,000.
@@ -83,7 +83,7 @@ Choose an estimate-at-completion (EAC) formula that matches the evidence about t
 
 From the EAC you get two more useful numbers: the **estimate to complete** (ETC = EAC − AC = €175,000 still to spend, in the first case) and the **variance at completion** (VAC = BAC − EAC = −€50,000).
 
-Which formula should you use? Be careful with the optimistic one. A study of 155 US defence contracts found that by the time they were 20% complete, the cumulative CPI had already stabilised on 134 of them, and earlier research found it rarely moved by more than 10% after that point. Small commercial projects are less rigid than defence programs, but the lesson holds: cost problems tend to persist. "The rest will go to plan" is a claim that needs evidence, such as a clearly one-off cause that has been fixed.
+A study of 155 US defence contracts found that cumulative CPI had stabilised by 20% completion on 134 of them. For your own forecast, ask what would change the cost of the remaining work. If the overrun came from a one-off problem the team has already fixed, show the evidence before assuming the remaining work will come in on budget.
 
 ## Is the budget still reachable?
 
@@ -113,7 +113,7 @@ On this planned-value curve, earned progress sits about 0.6 months behind the st
 You don't need a defence contract to use it. A lightweight version needs five things:
 
 1. **A work breakdown with budgets.** Every work package has an owner and a budget, and together they add up to the BAC.
-2. **A time-phased baseline.** When each package is planned to be done. This gives you PV, month by month.
+2. **A [time-phased baseline](/notes/project-baseline-explained/).** When each package is planned to be done. This gives you PV, month by month.
 3. **Objective progress rules.** Agreed up front, like the 0/100 and 50/50 rules above.
 4. **Actual costs by work package.** Timesheet codes that match the breakdown, so AC lines up with EV.
 5. **A monthly rhythm with thresholds.** For example, any CPI or SPI below 0.9 triggers a short review of cause and recovery options.

@@ -1,13 +1,13 @@
 ---
 title: DMAIC step by step: a Lean Six Sigma project from problem to control
 date: 2026-09-29
+updated: 2026-11-04
 summary: Follow a fictional filling problem through Define, Measure, Analyze, Improve and Control. See how the same approach can investigate supply-chain errors.
-updated: 2026-10-27
 status: published
 topic: Operational excellence
 keywords: DMAIC, Lean Six Sigma, Six Sigma, define measure analyze improve control, process improvement, root cause analysis, SIPOC, measurement system analysis, control plan, operational excellence
 seoTitle: DMAIC step by step: a Lean Six Sigma example
-seoDescription: Follow a Lean Six Sigma project through Define, Measure, Analyze, Improve and Control, with a worked example, phase tools and tollgate questions.
+seoDescription: Follow a Lean Six Sigma project through Define, Measure, Analyze, Improve and Control, with a worked example, phase tools and phase review questions.
 ---
 
 A filling line has been set high to avoid underweight packs. It protects one requirement while giving away more product than intended. Lowering the setting without understanding the variation could create a different problem.
@@ -16,22 +16,13 @@ A filling line has been set high to avoid underweight packs. It protects one req
 
 [ASQ's DMAIC guide](https://asq.org/quality-resources/dmaic) describes that five-phase process. The fictional filling example below follows it from the requirement to the operating control plan.
 
-:::card The short version
-DMAIC is five questions, asked in order, with evidence required before moving on:
-1. **Define:** what's the problem, for whom, and what does success look like?
-2. **Measure:** how big is it really, and can we trust our data?
-3. **Analyze:** which explanations does the evidence support?
-4. **Improve:** what fixes the causes, and does the fix work in a pilot?
-5. **Control:** how do we make sure the gain holds after the project team leaves?
-:::
-
-:::grid
-- **Define** Charter, SIPOC, voice of the customer. Output: a problem everyone agrees on.
-- **Measure** Operational definitions, measurement system check, baseline. Output: a trusted number.
-- **Analyze** Compare possible causes with observations and tests. Output: supported explanations.
-- **Improve** Select a change, check risks and run a pilot. Output: a tested method.
-- **Control** Agree operating checks, standard work and handover. Output: owners and a response when performance changes.
-:::
+| Phase | Question | What the team takes forward |
+| --- | --- | --- |
+| Define | What is going wrong, and what would count as success? | An agreed problem, scope and target |
+| Measure | How big is the gap, and can we trust the readings? | A baseline the team can use |
+| Analyze | Which causes does the evidence support? | Explanations the team has checked |
+| Improve | Does the proposed change work in a pilot? | A tested change |
+| Control | Who checks performance, and what do they do if it slips? | A control plan with owners and responses |
 
 ## The example: giving product away
 
@@ -123,7 +114,7 @@ The start-up trigger applies when a head's five-pack mean is more than 2 g from 
 
 A control chart helps the team distinguish ordinary variation from a signal that needs investigation. [How to read one](/notes/control-charts-explained/) is its own note.
 
-## Tollgate questions
+## What to check before moving on
 
 For this project, the sponsor and team agree to review each phase before moving on. Their review questions are:
 

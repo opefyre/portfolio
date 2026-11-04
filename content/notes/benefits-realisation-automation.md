@@ -1,7 +1,7 @@
 ---
 title: Benefits realisation: did the automation actually save money?
 date: 2026-10-03
-updated: 2026-10-23
+updated: 2026-11-04
 summary: The automation is live and processing time is down. Adjust for volume, separate released capacity from cash, and check the promised benefit against evidence. Includes an Excel review sheet.
 status: published
 topic: Digital transformation
@@ -52,7 +52,7 @@ The 360 hours are a counterfactual: an estimate of what the review workload woul
 
 This example assumes a comparable invoice mix and no other process changes. In practice, simpler invoices, better source data or different staffing could explain some of the difference. Include exception handling, rework and support effort inside the measurement boundary rather than timing only the successful automated path.
 
-A useful review asks whether the improvement remains when those conditions are accounted for. The spreadsheet can calculate a volume adjustment. It cannot establish attribution for you.
+Adjust overtime spending for the change in volume, then check what else changed that month. A new shift pattern or a different order mix could account for some of the drop.
 
 ## Separate capacity from expenditure
 
@@ -77,7 +77,7 @@ Redeployed capacity can matter even when spending does not fall. Record what the
 
 The €900 expense reduction is gross. The new system costs €700 a month, so recurring net cash benefit is €200 a month.
 
-::figure benefits-cash-bridge | Fictional monthly comparison. €900 of evidenced gross cash benefit minus €700 of recurring system cost leaves €200. The separate €6,300 capacity valuation is outside this sum.
+::figure benefits-cash-bridge | Fictional monthly comparison. Overtime spending fell by €900. After €700 in recurring system costs, €200 remains. It excludes the €6,300 estimate for freed staff time.
 
 Suppose the first three post-launch months all show the same volume, handling time, overtime reduction and operating cost. Keep this simplifying assumption visible; an actual rollout usually needs monthly observations.
 

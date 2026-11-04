@@ -1,6 +1,7 @@
 ---
 title: Project cost estimation: analogous, parametric and bottom-up
 date: 2026-10-15
+updated: 2026-11-04
 summary: Eight scanning stations need a budget. Compare a previous rollout, a cost model and a detailed build-up, then see what changes when the scope grows.
 seoTitle: Project cost estimation: 3 methods compared
 seoDescription: Compare three project cost estimation techniques: analogous, parametric and bottom-up. Work through one rollout and see how scope changes each estimate.
@@ -80,4 +81,4 @@ The sponsor can then see what the budget includes and which unresolved items cou
 - UK Infrastructure and Projects Authority. [Cost Estimating Guidance](https://www.gov.uk/government/publications/cost-estimating-guidance/cost-estimating-guidance). Method selection, evidence, assumptions and uncertainty.
 - Association for Project Management. [Three ways to approach cost estimation](https://www.apm.org.uk/blog/three-ways-to-approach-cost-estimation/). Top-down and bottom-up approaches. Its three approaches are not the same three-way classification used here.
 
-All costs, reference projects and rates are fictional. The cost-model records are 4 stations at €12,700, 8 at €18,900 and 12 at €25,100, all with the same scope boundary. They were invented to illustrate the relationship, not fitted from actual projects. Station changes assume no extra shared work within this range. The additional testing scenario is separate from the base costs.
+All costs, reference projects and rates are fictional. The cost-model records are 4 stations at €12,700, 8 at €18,900 and 12 at €25,100, all with the same scope boundary. Station changes assume no extra shared work within this range. The additional testing scenario is separate from the base costs.

@@ -1,6 +1,7 @@
 ---
 title: Project baseline: scope, schedule and cost
 date: 2026-10-24
+updated: 2026-11-04
 summary: The approved finish is day 20. The forecast says day 22. Keep both visible so the sponsor can decide what to change and the team can explain what happened.
 seoTitle: Project baseline: scope, schedule and cost
 seoDescription: Understand project baselines for scope, schedule and cost. Compare the approved plan, actuals and forecast, then follow an authorised baseline change.
@@ -14,6 +15,8 @@ A project baseline is the approved reference the team uses to compare delivery w
 The project manager can update a forecast as new information arrives. Changing the approved commitment needs the agreed authority and change record.
 
 Our [project status report](/notes/project-status-report-example/) contains exactly that situation: an approved day-20 finish and a current day-22 forecast. Keeping those figures apart gives the sponsor a decision to make.
+
+A time-phased cost baseline also gives you the planned value used in [earned value management](/notes/earned-value-management-explained/).
 
 ## Start with what the team agreed to deliver
 

@@ -1,7 +1,7 @@
 ---
 title: AI visual inspection ROI: a worked business case
 date: 2026-10-03
-updated: 2026-10-23
+updated: 2026-11-04
 summary: A pilot reports 98% accuracy. Translate that into missed defects, false alarms and annual cost, then calculate the payback against today's inspection process. Includes an Excel model.
 status: published
 topic: Industrial AI
@@ -38,6 +38,8 @@ Precision: 95 ÷ (95 + 198) = **32.42%**
 :::
 
 Detection rate, also called recall, tells us what share of defects the system catches. False positive rate divides false alarms by good parts. Precision tells us what share of the flagged parts actually have a defect. [Google's classification guide](https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall) explains these definitions.
+
+Passing every part would score **99% accuracy** in this sample because 9,900 of the 10,000 parts are good. It would catch none of the 100 defects, giving it **0% recall**.
 
 About two-thirds of this pilot's flags are false alarms. That does not establish that the system is a poor investment. It establishes work that the business case has to include.
 

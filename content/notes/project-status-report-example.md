@@ -1,10 +1,10 @@
 ---
 title: Project status report: a short example that supports decisions
 date: 2026-10-20
+updated: 2026-11-04
 summary: The build is complete, but seven days of work remain in a five-day window. Report accepted outputs, current forecasts and the decision needed before the deadline slips quietly.
 seoTitle: Project status report: a short worked example
 seoDescription: See a short project status report with baseline, forecast, costs and decisions. Compare activity updates with evidence of accepted work and remaining delivery.
-updated: 2026-10-20
 status: published
 topic: Project management
 keywords: project status report example, how to write project status report, status vs progress report, project reporting
@@ -102,6 +102,4 @@ This project needs both views. The completed build explains recent progress. The
 - [Atlassian: Decision documentation](https://www.atlassian.com/software/confluence/templates/decision/). Context, options, approver, status and outcome.
 - [APM: Project management glossary](https://www.apm.org.uk/resources/glossary/), entries for project status report, status report and actual progress.
 
-The project, day numbers, costs and acceptance counts are fictional. The forecast assumes sequential remaining work and available resources. It excludes additional defect rework; the initial report approves no recovery option or revised commitment. The later D04 extension states its separate approval assumption.
-
-Decision D04 is a separate fictional extension after the report: it assumes the sponsor has the stated authority and approves the revised baseline.
+The project, day numbers, costs and acceptance counts are fictional. The forecast assumes sequential remaining work and available resources. It excludes additional defect rework; the initial report approves no recovery option or revised commitment.

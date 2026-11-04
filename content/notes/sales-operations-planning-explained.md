@@ -1,6 +1,7 @@
 ---
 title: S&OP explained: a demand plan meets a capacity limit
 date: 2026-10-14
+updated: 2026-11-04
 summary: Sales plans 12,000 units. Operations can make 10,000. Compare overtime, an earlier stock build and changed commitments, then record the decision S&OP needs to produce.
 seoTitle: S&OP explained: a worked planning example
 seoDescription: Learn sales and operations planning through a 12,000-unit demand plan and a capacity gap. Compare options, costs and the difference between S&OP and S&OE.
@@ -36,10 +37,6 @@ Use expected good output for the planned product mix and period. A machine's des
 For this example, assume the team has checked materials, staffing, planned stops, product mix and quality losses. Normal-time output in the peak month is 10,000 acceptable units.
 
 There is also enough genuinely spare capacity in the preceding month to make up to 1,500 units early. Overtime in the peak month can add up to 2,000 units. Those are fictional, checked limits for our comparison, not general capacity rules.
-
-:::link https://www.youtube.com/watch?v=34Z2IQJOeDU | Watch Vrolen's cycle time and lead time example
-The video follows a different example to separate work time from total elapsed time. Keep that distinction when checking whether a capacity figure can support the promised delivery date.
-:::
 
 For the detailed production choices behind a monthly capacity figure, see Vrolen's [production scheduling guide](https://vrolen.com/blog/production-scheduling-optimization/). Product routes, materials and changeovers still need checking after an aggregate plan balances.
 

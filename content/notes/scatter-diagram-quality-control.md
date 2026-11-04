@@ -1,6 +1,7 @@
 ---
 title: Scatter diagram: read a process relationship
 date: 2026-10-25
+updated: 2026-11-04
 summary: Read a scatter diagram using 36 published NIST calibration pairs. Inspect individual observations, the relationship and limits of the conclusion.
 seoTitle: Scatter diagram: read a process relationship
 seoDescription: Read a scatter diagram using 36 published NIST calibration pairs. Inspect individual observations, the relationship and limits of the conclusion.
@@ -17,7 +18,7 @@ The plot can reveal shape, spread and unusual pairs. It cannot establish the eff
 
 ## Inspect published calibration observations
 
-[NIST's Norris dataset](https://www.itl.nist.gov/div898/strd/lls/data/LINKS/DATA/Norris.dat) contains 36 observed pairs from ozone-monitor calibration. It names the variables x and y but does not state physical units in the data file. The figure keeps x and y as supplied.
+[NIST's Norris dataset](https://www.itl.nist.gov/div898/strd/lls/data/LINKS/v-Norris.shtml) contains 36 observed pairs from ozone-monitor calibration. It names the variables x and y but does not state physical units in the data file. The figure keeps x and y as supplied.
 
 The records range from x = 0.2 to x = 999.0. Readings near the high end can dominate the visual scale, so the figure also lets you inspect y − x.
 
@@ -54,5 +55,5 @@ Keep the point identities with the chart. They let someone return to the origina
 ## Sources
 
 - [NIST scatter plot guidance](https://www.itl.nist.gov/div898/handbook/eda/section3/scatterp.htm).
-- [NIST Norris calibration data](https://www.itl.nist.gov/div898/strd/lls/data/LINKS/DATA/Norris.dat).
+- [NIST Norris calibration data](https://www.itl.nist.gov/div898/strd/lls/data/LINKS/v-Norris.shtml).
 - [ASQ scatter diagram](https://asq.org/quality-resources/scatter-diagram).

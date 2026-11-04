@@ -1,7 +1,7 @@
 ---
 title: RACI matrix: assign roles for a product launch
 date: 2026-09-29
-updated: 2026-10-27
+updated: 2026-11-04
 summary: How to build a RACI matrix that settles who does what, the rule of one accountable person per task, how to scan rows and columns for bottlenecks and gaps, when to use RASCI, DACI or RAPID instead, and how to run the workshop.
 status: published
 topic: Project management
@@ -32,7 +32,14 @@ The rule that makes RACI work, and the one the PMBOK Guide stresses: **one A per
 
 A consumer goods company is launching a new product variant. The project lead maps the main tasks against six roles:
 
-::figure raci-grid | A RACI matrix for the launch, with separate A and R assignments in every row. A combined A/R assignment would count towards both checks. The project lead is accountable for most of the delivery; the sponsor for the two big go or no-go decisions.
+| Task | Sponsor | Project lead | Marketing | Supply chain | Quality | Finance |
+| --- | --- | --- | --- | --- | --- | --- |
+| Approve the business case | A | C | C | C |  | R |
+| Define the product spec | I | A | R | C | C |  |
+| Plan materials and capacity |  | A | I | R | C | C |
+| Approve packaging artwork |  | A | R | C | R |  |
+| Run the production trial |  | A | I | R | R |  |
+| Release for sale | A | R | I | C | C | I |
 
 ## Read it by row
 
@@ -52,12 +59,12 @@ Read each role's column to check the number and type of assignments:
 
 | Pattern | What it means | What to do |
 | --- | --- | --- |
-| Many A's in one column | A bottleneck; every decision waits for one person | Delegate accountability for smaller tasks |
+| Many A's in one column | Several decisions depend on one person | Check approval deadlines and actual turnaround before reassigning work |
 | Many R's in one column | Overload; check capacity against the plan | Rebalance, or accept the risk explicitly |
 | No R, A or A/R at all | The role may not need to be on the project | Keep them informed, or take them off the core team |
 | Only C's | Useful expertise, or an unnecessary approval step | Check that every C really changes decisions |
 
-In the example, the project lead has four A's. For a launch that size, that's reasonable. Across a portfolio of twelve launches, the same column would signal a bottleneck, and the fix would be to make functional leads accountable for their own deliverables.
+The project lead has four A assignments. Check whether those approvals fall at the same time, whether decisions are waiting, and who else has the authority to approve them. Keep the assignments if the lead can meet the deadlines.
 
 ## Variants, and when to use them
 

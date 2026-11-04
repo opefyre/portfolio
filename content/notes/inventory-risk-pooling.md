@@ -1,6 +1,7 @@
 ---
 title: Inventory risk pooling: formula, example and demand correlation
 date: 2026-10-15
+updated: 2026-11-04
 summary: Sharing stock can reduce the buffer when demand peaks do not arrive together. Change the correlation between two regions and see when that benefit disappears.
 seoTitle: Inventory risk pooling: formula and example
 seoDescription: Explore inventory risk pooling with two regions. See how demand correlation changes a shared buffer, and what the calculation leaves out of delivery.
@@ -86,4 +87,4 @@ Use the buffer calculation to test the opportunity. Then price the service, tran
 - MIT OpenCourseWare, David Simchi-Levi. [Stochastic inventory models and supply contracts](https://ocw.mit.edu/courses/esd-273j-logistics-and-supply-chain-management-fall-2009/34e5cfa83eac1bf9711374828c260a22_MITESD_273JF09_lec05.pdf#page=78), pooling and centralisation trade-offs.
 - MIT OpenCourseWare. [18.05 probability notes](https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/mit18_05_s22_probability.pdf#page=111), covariance and variance of a sum.
 
-All demand and model inputs are fictional. The calculator compares normal-model buffers at a fixed one-day protection period. It does not model order quantities, transport, allocation rules, variable lead times or costs. Rounding is upward per stock pool; percentage reductions use unrounded quantities. The plotted days are constructed examples, not observed demand or random samples.
+The calculator uses a one-day protection period. It rounds each stock pool up to a whole piece and calculates percentage reductions before rounding.

@@ -1,10 +1,10 @@
 ---
 title: Demand forecasting methods: test them on demand they have not seen
 date: 2026-10-19
+updated: 2026-11-04
 summary: Compare demand forecasting methods on the same held-out data. Inspect naive, seasonal and drift forecasts, error, bias and the limits of a small example.
 seoTitle: Demand forecasting methods: a worked comparison
 seoDescription: Compare demand forecasting methods on the same held-out data. Inspect naive, seasonal and drift forecasts, error, bias and the limits of a small example.
-updated: 2026-10-20
 status: published
 topic: Supply chain
 keywords: demand forecasting methods, demand forecasting definition, forecasting models, seasonal naive, forecast validation
@@ -100,5 +100,3 @@ Choose the operational decision, establish a credible simple baseline and test a
 - Armstrong, Green and Graefe, [Golden rule of forecasting](https://faculty.wharton.upenn.edu/wp-content/uploads/2016/10/Golden-Rule-of-Forcasting_Be-Conservative_2.pdf), Journal of Business Research, 2015.
 
 The product and all 12 values are fictional. All forecasts are issued after Q8 without model tuning. Drift uses the unrounded 100/7 slope. Bias is total forecast minus total actual demand, divided by total actual demand. Displayed values are rounded; no prediction intervals are estimated.
-
-The separate weekly demand-sensing case is also fictional and is not part of the quarterly chart.

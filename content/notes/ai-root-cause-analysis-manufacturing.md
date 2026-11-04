@@ -1,15 +1,16 @@
 ---
-title: AI root cause analysis: checking the claim
+title: AI root cause analysis: what counts as evidence?
 date: 2026-10-25
+updated: 2026-11-04
 summary: Assess AI root cause analysis claims. Separate a predictive association, a causal model and process evidence before choosing a corrective action.
-seoTitle: AI root cause analysis: checking the claim
+seoTitle: AI root cause analysis: what counts as evidence?
 seoDescription: Assess AI root cause analysis claims. Separate a predictive association, a causal model and process evidence before choosing a corrective action.
 status: published
 topic: Industrial AI
 keywords: AI root cause analysis manufacturing, can AI do root cause analysis, causal AI manufacturing, AI root cause analysis example
 ---
 
-An AI system can help find patterns associated with a process problem. Establishing why the problem occurred requires more evidence than a high-ranking variable in a prediction model.
+Before changing a production setting on an AI system’s advice, check what the output actually shows. A variable that predicts defects can give the team a lead. To justify a change, look for process evidence or test the proposed intervention.
 
 [Databricks' manufacturing causal-AI article](https://www.databricks.com/blog/manufacturing-root-cause-analysis-causal-ai) makes that distinction through an explicitly fictional production line involving cleaning, assembly and welding. Its demonstration uses domain assumptions and a causal model. It is not a measured customer result.
 
