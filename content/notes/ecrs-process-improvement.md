@@ -1,6 +1,7 @@
 ---
 title: ECRS: four ways to improve a work process
 date: 2026-10-25
+updated: 2026-11-04
 summary: Learn ECRS through a packing cycle. Compare eliminating, combining, rearranging and simplifying work without assuming a cycle-time saving.
 seoTitle: ECRS: four ways to improve a work process
 seoDescription: Learn ECRS through a packing cycle. Compare eliminating, combining, rearranging and simplifying work without assuming a cycle-time saving.
@@ -36,7 +37,7 @@ Reducing that walk to three seconds brings the operator back earlier. Waiting gr
 
 Less walking may still improve the job. It just cannot support a three-second cycle-time saving in this sequence.
 
-That distinction matters when the team compares improvement proposals. Record the affected manual work, machine time and overlap before turning a removed activity into an output or cash claim.
+Record the affected manual work, machine time and overlap before turning a removed activity into an output or cash claim.
 
 ## Test the revised method with the people doing it
 

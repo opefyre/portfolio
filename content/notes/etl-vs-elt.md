@@ -1,6 +1,7 @@
 ---
 title: ETL vs ELT: the data arrived, but can you use it?
 date: 2026-10-14
+updated: 2026-11-04
 summary: Two cases, five pieces and a blank quantity arrive in a stock file. Follow them through ETL and ELT to see what changes, what doesn't, and what a planner should receive.
 seoTitle: ETL vs ELT explained with an inventory example
 seoDescription: Compare ETL and ELT using inventory records. See where transformation happens, how to convert units, and why loaded data may still be unusable.
@@ -80,7 +81,7 @@ For item A, keep the source quantity of two cases, the item-specific conversion,
 
 For C, retain an unresolved reason and an owner who can check it. Don't drop it quietly and label the remaining file complete.
 
-Vrolen's [manufacturing data analytics guide](https://vrolen.com/blog/manufacturing-data-analytics/) extends this to machine, order and quality records. Linking their identities, units and times is part of making the combined result usable.
+When you load machine records, keep the units used for speed or output and preserve the original event time. You’ll need both to match a stop to the order running at that moment. Vrolen’s [manufacturing data analytics guide](https://vrolen.com/blog/manufacturing-data-analytics/) shows how those records fit together.
 
 Before approving a pipeline, check its prepared output against the decision it will support. A planner needs a trustworthy quantity for the right item at the right time, plus a visible reason to investigate anything unresolved. A green “load completed” message establishes only part of that.
 

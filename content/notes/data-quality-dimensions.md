@@ -1,7 +1,7 @@
 ---
 title: Six data quality dimensions, explained with inventory
 date: 2026-10-14
-updated: 2026-10-24
+updated: 2026-11-04
 summary: The stock file is complete, the quantity is valid, and the shelf still contains fewer units. Use six data quality checks to see what a clean-looking record can hide.
 seoTitle: Six data quality dimensions: inventory examples
 seoDescription: Learn the six data quality dimensions through stock records. Compare completeness, uniqueness, consistency, timeliness, validity and accuracy.
@@ -65,7 +65,7 @@ That rule would be wrong for two separate bins with 100 brackets each. It would 
 
 Units need the same care. Ten cases and ten individual pieces share a number, but they aren't interchangeable. Keep the original unit and the conversion rule instead of quietly relabelling both as quantity.
 
-Vrolen's [manufacturing data analytics guide](https://vrolen.com/blog/manufacturing-data-analytics/) extends this to machine, order and quality records. Their identities, units and timestamps need to agree before the combined data can explain an operating problem.
+Before linking defects to a machine stop, check that the machine event, production order and inspection record point to the same run. Vrolen’s [manufacturing data analytics guide](https://vrolen.com/blog/manufacturing-data-analytics/) explains how to join those records.
 
 ## Keep the quality check beside the result
 

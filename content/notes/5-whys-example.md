@@ -1,7 +1,7 @@
 ---
 title: 5 Whys example: finding a cause you can test
 date: 2026-10-03
-updated: 2026-10-23
+updated: 2026-11-04
 summary: The team finishes its 5 Whys, retrains the operators, and the failure returns. A manufacturing example of checking the evidence, choosing a corrective action and testing whether it worked. Includes an Excel worksheet.
 status: published
 topic: Operational excellence
@@ -24,7 +24,7 @@ The [5 Whys method](https://asq.org/quality-resources/five-whys) asks why a prob
 
 Before asking why, make the problem clear. "The line is unreliable" leaves too much room for people to bring their favourite explanation.
 
-For our fictional example, the team records this:
+The team records this problem:
 
 > Line 2 recorded 18 infeed detection stops over six comparable 7.5-hour production shifts, all while running the small carton format. The large carton format did not show the same stop pattern in the records reviewed. Each stop required the infeed to be cleared and restarted.
 
@@ -38,7 +38,7 @@ The original sheet runs from missed detection to incorrect setup, then to insuff
 
 They review the event log with operators and maintenance, watch the changeover, and inspect the detection point. Three explanations are worth checking.
 
-| Proposed explanation | Check in the fictional investigation | What the check shows |
+| Proposed explanation | Check | What the check shows |
 | --- | --- | --- |
 | The sensor lens is dirty | Inspect and clean the lens, then repeat the small-format trial | The missed detections remain during the trial |
 | The wrong sensor setting is loaded | Compare the loaded setting with the approved setup record | The setting matches; no mismatch is found |
@@ -52,7 +52,7 @@ The third observation is more useful because it connects a physical change to th
 
 They check the guide's locating arrangement. The small-format setting has no positive locating stop. Its position depends on a mark and a clamp, and the guide can move after the initial setup check.
 
-Here is the resulting chain. All observations and records in it are fictional.
+The checks lead to this chain.
 
 | Question | Working explanation | Evidence or check |
 | --- | --- | --- |
@@ -69,6 +69,8 @@ There are two useful pieces of work here: prevent the movement, and improve the 
 ::figure five-whys-evidence | Fictional investigation. The observed guide movement supports a physical countermeasure. The missing retention check calls for a separate change to setup approval. Neither conclusion follows from the words "operator error" alone.
 
 If the evidence points down two paths, draw two paths. A single vertical chain should not force a problem with several contributing causes into one answer. The [Institute for Healthcare Improvement](https://www.ihi.org/library/tools/5-whys-finding-root-cause) also recognises that a problem can have more than one root cause.
+
+Vrolen’s [5 Whys video](https://www.youtube.com/watch?v=rs1NfE8DNAc) follows a different case, tracing a wrong-size delivery back through picking and product setup.
 
 ## Choose an action that changes the mechanism
 

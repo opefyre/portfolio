@@ -1,6 +1,7 @@
 ---
 title: Critical-to-quality (CTQ) tree: a worked customer requirements example
 date: 2026-10-15
+updated: 2026-11-04
 summary: A customer asks for reliable deliveries. Does that mean earlier, within a receiving window, complete or usable? Build a CTQ tree before deciding what to measure.
 seoTitle: CTQ tree example: voice of the customer to CTQ
 seoDescription: Build a CTQ tree from customer feedback. Turn reliable delivery into agreed timing, quantity and condition requirements, then test the same shipment.
@@ -36,7 +37,7 @@ Our fictional customer orders 100 units of one item for an agreed delivery date.
 
 Those details are proposed requirements until the customer confirms them. Record the conversation and the reason for each boundary, rather than treating a number chosen in a workshop as a customer specification.
 
-The [Chartered Quality Institute's CTQ-tree explanation](https://www.quality.org/file-download/download/public/23803) separates needs, quality drivers and performance criteria. The tree below is our own delivery example.
+[University College Dublin’s CTQ-tree guide](https://worksmartertogether.ucd.ie/using-a-ctq-tree-to-understand-customer-requirements/) separates needs, quality drivers and performance criteria. The tree below is our own delivery example.
 
 ::interactive ctq-requirements-tree | Original fictional CTQ tree. The timing, quantity and condition branches are proposed interpretations to validate with the customer. The numbers are invented for this example, not industry targets.
 
@@ -87,6 +88,6 @@ A delivery discussion does not need a large tree. For this customer, three clear
 ## Sources and example notes
 
 - [ASQ: Voice of the Customer](https://asq.org/quality-resources/voice-of-the-customer). Gathering customer evidence and translating stated features or complaints into needs.
-- [Chartered Quality Institute: Critical to Quality Trees](https://www.quality.org/file-download/download/public/23803), Darren O'Neill. Need, driver and measurable performance-criteria structure.
+- [University College Dublin: Using a CTQ tree](https://worksmartertogether.ucd.ie/using-a-ctq-tree-to-understand-customer-requirements/). Need, driver and measurable performance-criteria structure.
 
 The customer, order, limits and deliveries are fictional. The tree proposes the requirements. The delivery comparison assumes the customer has agreed them and tests one shipment against those rules.

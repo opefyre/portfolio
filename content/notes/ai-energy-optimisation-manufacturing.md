@@ -1,10 +1,10 @@
 ---
 title: AI energy optimisation: measure the result
 date: 2026-10-25
-updated: 2026-10-27
-summary: Evaluate AI energy optimisation with clear measurement boundaries. Separate consumption, output, normalised performance and future saving scenarios.
+updated: 2026-11-04
+summary: Compare energy use before and after an AI pilot. Match the meter readings to production and account for changes in output or operating conditions.
 seoTitle: AI energy optimisation: measure the result
-seoDescription: Evaluate AI energy optimisation with clear measurement boundaries. Separate consumption, output, normalised performance and future saving scenarios.
+seoDescription: Compare factory energy use before and after an AI pilot. Match meter readings to production and account for changes in output, mix or weather.
 status: published
 topic: Industrial AI
 keywords: AI energy optimization manufacturing, AI energy management manufacturing, energy per good unit, AI industrial energy efficiency
@@ -27,7 +27,7 @@ Example unit: kWh per unit produced
 
 If you choose good units as the output, state the acceptance definition and keep rejected and reworked production visible. That is a defined metric choice, not a reason to drop their energy consumption from the numerator.
 
-::figure aici-energy-boundary | Metered energy and the declared output must share a system boundary and period. This diagram introduces no assumed factory consumption or saving.
+::figure aici-energy-boundary | Use meter readings and production counts from the same equipment and time period.
 
 ## Read consumption and intensity together
 
@@ -36,7 +36,7 @@ If you choose good units as the output, state the acceptance definition and keep
 | Total energy | Energy used within the boundary | Production, operating hours and relevant conditions |
 | Energy per output unit | A ratio of energy to stated output | Product mix, fixed loads, rejects and the chosen denominator |
 | Energy cost | Expenditure at the applicable tariffs | Price changes, demand charges and consumption |
-| Normalised performance | A comparison accounting for included relevant variables | Model validity, baseline choice and unexplained changes |
+| Normalised performance | Energy use after adjusting for factors such as output, product mix or weather | Model validity, baseline choice and unexplained changes |
 
 [DOE's energy baselining guide](https://www.energy.gov/sites/default/files/2016/02/f29/Energy%20Intensity%20Baselining%20and%20Tracking%20Guidance.pdf#page=21) explains how regression can account for relevant variables such as production and weather when comparing periods. Dividing by output alone does not automatically account for those other influences.
 
@@ -46,7 +46,7 @@ Record whether the application recommends a setting, predicts demand, detects ab
 
 Retain the recommendations, approved changes and operating outcomes. Check quality, throughput and equipment constraints alongside energy. The [benefits-realisation guide](/notes/benefits-realisation-automation/) explains why a reported technical improvement still needs a link to the claimed business result.
 
-## Make the pilot comparison reviewable
+## Record what changed during the pilot
 
 Agree the baseline, relevant operating variables and acceptable production outcomes before the trial. Identify other changes made during the comparison period and retain them in the record.
 

@@ -1,8 +1,8 @@
 ---
 title: Is AI taking jobs? What the data and history show
 date: 2026-10-04
+updated: 2026-11-04
 summary: Is AI taking jobs? Explore employment data, lessons from past automation, and why faster work can mean fewer hires or a busier team.
-updated: 2026-10-19
 status: published
 topic: Digital transformation
 keywords: is AI taking jobs, AI and jobs, AI and entry-level jobs, AI adoption, automation and jobs, AI productivity
@@ -41,9 +41,9 @@ But opening a tool and replacing someone's work are very different steps. To und
 
 Someone using AI for one email counts as a user. So does someone using it throughout the day. The adoption rate treats them alike; their working days look very different.
 
-In Q2 2026, 45.2% of employed US adults ages 18-64 reported using AI for work. Across all work hours, including non-users, the survey estimated 6.3% were AI-assisted and workers reported time savings equivalent to 2.2%. [RPS survey data via FRED](https://fred.stlouisfed.org/series/RPSGENAIUSAGESHAREWORK).
+In Q3 2026, 40.5% of employed US adults ages 18-64 reported using generative AI for work and 34.8% said they had used it in the previous week. Across all work hours, the survey estimated AI assisted 5.3%. Workers reported savings equivalent to 2.1% of all work hours. All four measures were lower than in Q2. [RPS survey data via FRED](https://fred.stlouisfed.org/series/RPSGENAIUSAGESHAREWORK).
 
-::interactive ai-jobs-work | Switch between people using AI and the share of work hours assisted or reportedly saved. Time savings come from workers' estimates; they are not a payroll saving. Data run through Q2 2026.
+::interactive ai-jobs-work | Switch between people using AI and the share of work hours assisted or reportedly saved. Workers estimated their own time savings. The survey runs through Q3 2026.
 
 So widespread use can coexist with a much smaller change in total working time. Even the hours saved might become more output, extra checking or a shorter backlog.
 
@@ -165,7 +165,7 @@ Include that choice in the AI rollout plan, and review hiring and supervised lea
 
 ## Sources and calculation notes
 
-The charts use data saved on 4 October 2026. Employment data run through August 2026; the work-use survey runs through Q2 2026. Open “Source and data” beside a chart for the underlying values and methods.
+The employment data run through August 2026. The work-use survey runs through Q3 2026, using the four FRED series retrieved on 4 November 2026. Open “Source and data” beside a chart for the underlying values and methods.
 
 - [St. Louis Fed adoption comparison and survey correction](https://www.stlouisfed.org/on-the-economy/2025/nov/state-generative-ai-adoption-2025). Work-use series via FRED: [people](https://fred.stlouisfed.org/series/RPSGENAIUSAGESHAREWORK), [last-week use](https://fred.stlouisfed.org/series/RPSGENAIUSAGESHARELWWORK), [hours assisted](https://fred.stlouisfed.org/series/RPSGENAIASSISTWRKHRSALL), [reported time saved](https://fred.stlouisfed.org/series/RPSGENAITSALL).
 - Stanford and ADP: [public employment data](https://digitaleconomy.stanford.edu/project/indicators/canaries-dashboard/) and [August 2026 research paper](https://digitaleconomy.stanford.edu/app/uploads/2026/08/Canaries_August2026.pdf). Our chart compares the highest and lowest exposure fifths, unlike the paper's headline grouping. The sample follows firms over time, not individual workers' careers. Education controls substantially reduce estimates in the paper; the chart's calculated ratios have no statistical uncertainty estimates.

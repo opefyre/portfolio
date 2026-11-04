@@ -1,10 +1,10 @@
 ---
 title: Risk vs issue in project management: what changes when it happens?
 date: 2026-10-14
+updated: 2026-11-04
 summary: A supplier misses a milestone. The issue is real, but the effect on testing is still uncertain. One timeline shows what to record, what to act on and what to forecast.
 seoTitle: Risk vs issue in project management: an example
 seoDescription: Understand risks and issues through a missed supplier milestone. Separate confirmed events from uncertain effects, link the records and plan the response.
-updated: 2026-10-20
 status: published
 topic: Project management
 keywords: risk vs issue project management, risk register vs issue log, when risk becomes issue, project issue example, risk trigger, issue management
@@ -52,7 +52,7 @@ The [dependency types article](/notes/project-dependency-types/) explains the li
 
 A **RAID log** brings risks, assumptions, issues and dependencies into a connected view. That is the expansion used here and in the [UK government's Gate 1 review guidance](https://www.gov.uk/government/publications/gate-review-1-business-justification/gate-1-review-business-justification). Some teams use actions or decisions for particular letters; agree the names and record types before using the acronym.
 
-The same need applies on an Agile project: uncertain conditions, current problems and outside commitments still need owners and follow-up. Keep the log proportionate to the work.
+The same need applies on an Agile project: uncertain conditions, current problems and outside commitments still need owners and follow-up.
 
 | Record | Entry at the end of day 6 | Owner, next check and status |
 | --- | --- | --- |

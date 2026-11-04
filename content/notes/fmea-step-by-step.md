@@ -1,8 +1,8 @@
 ---
 title: FMEA step by step: find what could go wrong before it does
 date: 2026-09-29
-updated: 2026-10-27
-summary: A practical guide to process FMEA: the seven steps, how to rate severity, occurrence and detection, why ranking by RPN can hide your worst risk, how action priority fixes it, and a worked example on an order fulfilment process.
+updated: 2026-11-04
+summary: Work through a process FMEA for order fulfilment. Rate severity, occurrence and detection, then see what a risk score can hide and where the action-priority lookup fits.
 status: published
 topic: Operational excellence
 keywords: FMEA, failure mode and effects analysis, process FMEA, PFMEA, RPN, risk priority number, action priority, AIAG VDA FMEA, severity occurrence detection, risk analysis
@@ -94,9 +94,9 @@ This isn't a quirk of the example. RPN has well-known flaws:
 
 Reliability researchers have pointed this out for over twenty years. One well-cited review called RPN prioritisation seriously flawed from a technical perspective.
 
-## Action priority: severity first
+## How the action priority lookup works
 
-The AIAG and VDA handbook uses **action priority (AP)** tables to assign high, medium or low priority to combinations of severity, occurrence and detection. Use the applicable table and its action requirements. A general instruction to put severity first cannot replace that lookup.
+The AIAG and VDA handbook uses **action priority (AP)** tables to assign high, medium or low priority to combinations of severity, occurrence and detection. Two failures can have the same RPN and different combinations of ratings. Use the handbook table to look up each combination and check what action it calls for. The example shows what the RPN ranking can hide without assigning official AP categories.
 
 For each high-severity effect, review the evidence behind prevention and detection. A low occurrence or detection score needs support from the actual controls and operating conditions.
 

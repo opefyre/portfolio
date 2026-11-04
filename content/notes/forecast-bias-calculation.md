@@ -1,7 +1,7 @@
 ---
 title: Forecast bias calculation: why zero bias can hide a bad forecast
 date: 2026-10-12
-updated: 2026-10-23
+updated: 2026-11-04
 summary: A forecast can get the total right and miss every week. Calculate signed bias, compare it with WAPE and see what a balanced result hides from a planning team.
 seoTitle: Forecast bias calculation: what zero bias hides
 seoDescription: Calculate forecast bias with a four-week example. See why zero bias can hide errors, how sign conventions differ and what to check before adjusting demand.
@@ -9,8 +9,6 @@ status: published
 topic: Supply chain
 keywords: forecast bias calculation, forecast bias formula, forecast bias vs accuracy, positive negative forecast bias, demand planning
 ---
-
-MAPE (mean absolute percentage error) averages absolute percentage errors across products or periods. WAPE (weighted absolute percentage error) divides total absolute error by total actual demand. Bias tells you whether forecasts run high or low overall. The [MAPE/WAPE guide](/notes/forecast-accuracy-mape-wape/) introduces all three with a worked example.
 
 The monthly forecast was 400 units. Actual demand was 400. The report shows zero bias, so the team moves on.
 
@@ -45,7 +43,7 @@ A fictional distributor needs 100 units of one product in each of four weeks. Bo
 | 4 | 100 | 120 | +20 | 90 | −10 |
 | Total | 400 | 400 | 0 | 360 | −40 |
 
-A has zero bias. But its absolute errors total 80 units, giving WAPE of **20%**. B's bias is **−10%**, while its absolute errors total only 40 units: WAPE of **10%**.
+A has zero bias, but its misses add up to 80 units. Divide that by 400 units of actual demand to get **20% WAPE**. WAPE stands for weighted absolute percentage error. B misses 40 units, for **10% WAPE**, and runs **10% low** overall. The [MAPE and WAPE guide](/notes/forecast-accuracy-mape-wape/) shows how the two accuracy measures differ.
 
 ::figure forecast-bias-offsets | Fictional four-week comparison. A's alternating errors cancel in the total. B runs low each week but misses fewer units overall. Each bar uses forecast minus actual.
 
@@ -67,7 +65,7 @@ You cannot infer stockouts from this table alone. Starting stock, replenishment 
 
 Four low forecasts are a reason to investigate. They are not proof that a model has a lasting statistical bias, and they do not justify adding 10% to every future forecast.
 
-Check which products, customers and horizons carry the pattern. Compare the stored forecasts with later actuals, including promotions and manual changes. If sales were limited by stock availability, recognise that the recorded actuals may understate demand.
+Check which products, customers and horizons carry the pattern. Compare the stored forecasts with later actuals, including promotions and manual changes. If sales were limited by stock availability, recognise that the [recorded sales may understate demand](/notes/demand-forecasting-stockouts/).
 
 Then compare the original method, any proposed adjustment and a simple baseline on later periods. A correction that repairs these four weeks can still damage the next four.
 

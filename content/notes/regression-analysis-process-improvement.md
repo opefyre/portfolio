@@ -1,6 +1,7 @@
 ---
 title: Regression analysis: a process example
 date: 2026-10-25
+updated: 2026-11-04
 summary: Work through linear regression using NIST calibration data. Check the fitted equation, residuals and why a high R squared cannot approve a model.
 seoTitle: Regression analysis: a process example
 seoDescription: Work through linear regression using NIST calibration data. Check the fitted equation, residuals and why a high R squared cannot approve a model.
@@ -17,7 +18,7 @@ A residual is the observed response minus the fitted response. It keeps the mode
 
 ## Fit the 36 NIST observations
 
-[The Norris dataset](https://www.itl.nist.gov/div898/strd/lls/data/LINKS/DATA/Norris.dat) contains 36 x/y pairs from ozone-monitor calibration. Recalculating ordinary least squares from those rows reproduces NIST's certified results to the displayed precision.
+[The Norris dataset](https://www.itl.nist.gov/div898/strd/lls/data/LINKS/v-Norris.shtml) contains 36 x/y pairs from ozone-monitor calibration. Recalculating ordinary least squares from those rows reproduces NIST's certified results to the displayed precision.
 
 :::formula Fitted relationship in the source variable scale
 Fitted y = −0.262323 + 1.002117 × x
@@ -59,5 +60,5 @@ For a model review, keep the equation, residuals, observed range and intended de
 ## Sources
 
 - [NIST least squares regression](https://www.itl.nist.gov/div898/handbook/pmd/section1/pmd141.htm).
-- [NIST Norris calibration data](https://www.itl.nist.gov/div898/strd/lls/data/LINKS/DATA/Norris.dat).
+- [NIST Norris calibration data](https://www.itl.nist.gov/div898/strd/lls/data/LINKS/v-Norris.shtml).
 - [NIST regression residual checks](https://www.itl.nist.gov/div898/handbook/pmd/section4/pmd44.htm).

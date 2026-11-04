@@ -1,6 +1,7 @@
 ---
 title: ERP implementation: big bang vs phased rollout
 date: 2026-10-21
+updated: 2026-11-04
 summary: Switching two sites together concentrates disruption. Switching them separately creates a period where old and new systems must cooperate. Compare that temporary work too.
 seoTitle: ERP implementation: big bang vs phased rollout
 seoDescription: Compare big bang and phased ERP rollout with a two-site example. Check temporary interfaces, stock authority, readiness, support and recovery decisions.
@@ -27,7 +28,7 @@ Our fictional company is replacing the ERP functions supporting two sites' order
 | Learning before the second switch | Rehearsals and pilots only | Actual A operation, if the findings apply to B |
 | Major risk to resolve | Concentrated disruption | Temporary interfaces and conflicting records |
 
-All weeks and site arrangements are fictional. A phased plan could use a different boundary; the label does not establish which dependencies are manageable.
+A phased plan could split the rollout by site or by function. Check which dependencies cross that boundary.
 
 [Microsoft's Dynamics deployment guidance](https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/implementation-strategy-define-strategy-deployment-release) discusses big-bang and phased choices, including integration, change and support.
 
@@ -74,5 +75,3 @@ Choose the rollout boundary the business can support through both the switch and
 ## Source and example notes
 
 - [Microsoft Learn: Plan your deployment and release](https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/implementation-strategy-define-strategy-deployment-release). Release scope, big bang, phasing, integration and support.
-
-All sites, weeks and transaction scenarios are fictional. Actual rollout choices depend on service dependencies, system architecture, regulation, recovery options and available support.

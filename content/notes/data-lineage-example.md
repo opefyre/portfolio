@@ -1,7 +1,7 @@
 ---
 title: Data lineage explained: trace a number to its source
 date: 2026-10-20
-updated: 2026-10-23
+updated: 2026-11-04
 summary: A report says 50 pieces are available. Trace the source fields, calculation version and downstream uses so the team can explain the number and check what a change affects.
 seoTitle: Data lineage explained with a stock-data example
 seoDescription: Trace a stock figure through source fields, transformation rules and reports. A data-lineage example shows how to investigate errors and assess a rule change.
@@ -73,7 +73,7 @@ Test a shared snapshot through the affected outputs, then retain the release ver
 
 ## How to start a useful lineage record
 
-Begin with a number used for an important decision. Record its output field and owner, follow its direct inputs, and write down each derivation and reference it depends on. Then identify the consumers that need to know when it changes.
+Pick a number your team uses to make a decision. Record the field and who owns it, then trace the input fields, calculation and lookup. List the reports that show the number and the teams to tell if it changes.
 
 A small maintained diagram and a field table can be enough for a bounded example. Automated lineage tools can help discover technical paths, but unsupported connectors and manual exports leave gaps. Mark those gaps instead of drawing a complete-looking route.
 

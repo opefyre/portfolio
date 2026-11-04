@@ -1,9 +1,9 @@
 ---
 title: Three factory habits I use in software
 date: 2026-09-14
-updated: 2026-10-27
+updated: 2026-11-04
 summary: Standard work, inspection at the station, and readiness before launch.
-status: draft
+status: published
 topic: Digital transformation
 seoTitle: Three factory habits I use in software
 seoDescription: How standard work, inspection during the process and launch readiness carry over from manufacturing to software, with examples from my own work.
@@ -15,13 +15,13 @@ I spent my first years on production lines, World Class Manufacturing at Unileve
 
 On a line, standard work is the best-known way to do a job, written down so it can be improved. Without it there's nothing to improve against, and every shift runs its own experiment.
 
-In software, shared conventions, templates and a definition of done give the team a reference for checking a change.
+In software, [shared ways of working](/notes/standard-work-vs-sop/), templates and a definition of done give the team a reference for checking a change.
 
 ## 2. Catch defects at the station
 
 One of the most useful things I did in manufacturing was moving inspection into the process: checkpoints during scale-up and fast feedback to operators, instead of finding defects at the end, when they're expensive and the context is gone.
 
-In software that means tests, reviews and checks as close to the change as possible. [Cargo & Consequence](/work/cargo-and-consequence/) runs 161 engine tests, lint and a formatting check on every push. Stop the defect at the station that made it.
+In software, run tests and reviews close to the change. [Cargo & Consequence](/work/cargo-and-consequence/) checks engine behaviour, code quality and formatting on each push.
 
 ## 3. Readiness before launch
 
