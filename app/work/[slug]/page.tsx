@@ -34,7 +34,9 @@ export default async function CaseStudy({ params }: Params) {
   const i = works.findIndex((x) => x.slug === slug);
   if (i < 0) notFound();
   const w = works[i];
-  const next = works[(i + 1) % works.length];
+  const listedWorks = works.filter((work) => !work.hidden);
+  const listedIndex = listedWorks.findIndex((work) => work.slug === slug);
+  const next = listedWorks[(listedIndex + 1) % listedWorks.length];
 
   return (
     <>

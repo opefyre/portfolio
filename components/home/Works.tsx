@@ -87,8 +87,8 @@ function WorkBlock({ work, index }: { work: Work; index: number }) {
 }
 
 export function Works() {
-  const featured = works.filter((w) => w.featured);
-  const more = works.filter((w) => !w.featured);
+  const featured = works.filter((w) => w.featured && !w.hidden);
+  const more = works.filter((w) => !w.featured && !w.hidden);
   return (
     <section id="work" className="works" data-nav-tone="dark" aria-label="Work">
       <div className="frame">

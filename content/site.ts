@@ -76,6 +76,8 @@ export type Work = {
   body: string[];
   /** Featured works get a full block on the homepage; the rest sit in the index below them. */
   featured?: boolean;
+  /** Hide from project listings while retaining its existing case-study URL. */
+  hidden?: boolean;
 };
 
 export const works: Work[] = [
@@ -107,10 +109,33 @@ export const works: Work[] = [
     ],
   },
   {
+    slug: "foreviq",
+    seoTitle: "Foreviq: demand forecasting and order planning",
+    seoDescription: "Foreviq compares forecasting methods for each customer and product, checks later-period accuracy and nets open orders against expected demand.",
+    featured: true,
+    name: "Foreviq",
+    line: "Monthly demand forecasts for every customer and product, built from sales history and open orders.",
+    status: "In progress",
+    image: { src: "/work/foreviq/outlook.webp", alt: "Foreviq forecast outlook: actual demand, the six-month forecast and its planning range", width: 2400, height: 1500 },
+    gallery: [
+      { src: "/work/foreviq/methods.webp", alt: "Foreviq method comparison: Holt-Winters, Theta, AutoARIMA, AutoETS and more, with selection and later-check error", width: 2400, height: 1500 },
+      { src: "/work/foreviq/accuracy.webp", alt: "Foreviq accuracy view: later-period error, bias and range coverage per item", width: 2400, height: 1500 },
+      { src: "/work/foreviq/orders.webp", alt: "Foreviq sales forecast: confirmed orders and expected demand by month", width: 2400, height: 1500 },
+    ],
+    stats: [
+      { value: "19", label: "forecasting methods compared on every product line" },
+      { value: "4.6%", label: "error on a later period it never saw" },
+    ],
+    body: [
+      "Most sales forecasts are last year's numbers with a gut feeling on top. They also count demand twice: once in the forecast, and again when the orders arrive.",
+      "Foreviq tries 19 methods on every customer and product line, from seasonal smoothing to machine learning, picks the best one on earlier months and checks it on a later period it never saw. Every forecast comes with an 80% planning range.",
+      "Open orders are netted against the forecast, so a fully ordered month counts once. Plans move from draft to review to approved, and the assistant can propose a new forecast but can't publish one without a person.",
+    ],
+  },
+  {
     slug: "elixiary-ai-bartender",
     seoTitle: "Elixiary: AI bartender for your home bar",
     seoDescription: "Elixiary mixes cocktails from ingredients in your cabinet. Explore the AI bartender, recipe library and home bar on the web and on iPhone.",
-    featured: true,
     name: "Elixiary",
     line: "An AI bartender that mixes from what's already in your cabinet, on the web and on iPhone.",
     status: "Live since April 2026",
@@ -189,29 +214,6 @@ export const works: Work[] = [
       "Tax and admin in Portugal are complex, bilingual and scattered across sources. Expats get the worst of it: cross-border rules, double-taxation treaties, deadlines nobody warns you about.",
       "Finkavo answers in Portuguese or English, cites the exact article, and fits the answer to your regime, such as IRS Jovem or IFICI. It builds your deadline calendar from your profile, walks freelancers through quarter close and VAT, and keeps tax, identity, health and banking documents in one vault.",
       "Around the app sit 41 plain-language guides and 19 free tools, each checked against official sources.",
-    ],
-  },
-  {
-    slug: "foreviq",
-    seoTitle: "Foreviq: demand forecasting and order planning",
-    seoDescription: "Foreviq compares forecasting methods for each customer and product, checks later-period accuracy and nets open orders against expected demand.",
-    name: "Foreviq",
-    line: "Monthly demand forecasts for every customer and product, built from sales history and open orders.",
-    status: "In progress",
-    image: { src: "/work/foreviq/outlook.webp", alt: "Foreviq forecast outlook: actual demand, the six-month forecast and its planning range", width: 2400, height: 1500 },
-    gallery: [
-      { src: "/work/foreviq/methods.webp", alt: "Foreviq method comparison: Holt-Winters, Theta, AutoARIMA, AutoETS and more, with selection and later-check error", width: 2400, height: 1500 },
-      { src: "/work/foreviq/accuracy.webp", alt: "Foreviq accuracy view: later-period error, bias and range coverage per item", width: 2400, height: 1500 },
-      { src: "/work/foreviq/orders.webp", alt: "Foreviq sales forecast: confirmed orders and expected demand by month", width: 2400, height: 1500 },
-    ],
-    stats: [
-      { value: "19", label: "forecasting methods compared on every product line" },
-      { value: "4.6%", label: "error on a later period it never saw (sample data)" },
-    ],
-    body: [
-      "Most sales forecasts are last year's numbers with a gut feeling on top. They also count demand twice: once in the forecast, and again when the orders arrive.",
-      "Foreviq tries 19 methods on every customer and product line, from seasonal smoothing to machine learning, picks the best one on earlier months and checks it on a later period it never saw. Every forecast comes with an 80% planning range.",
-      "Open orders are netted against the forecast, so a fully ordered month counts once. Plans move from draft to review to approved, and the assistant can propose a new forecast but can't publish one without a person.",
     ],
   },
   {
@@ -309,6 +311,7 @@ export const works: Work[] = [
   },
   {
     slug: "content-engine",
+    hidden: true,
     seoTitle: "Content engine: from sources to social posts",
     seoDescription: "A content pipeline built on a spare Mac: turn sourced facts into scripts, images, voices and videos, with scheduling and draft approval for four brands.",
     name: "Content engine",
@@ -385,8 +388,8 @@ export const programs: { headline: { value: string; label: string }; items: Prog
     {
       company: "Smart Factory Planning",
       years: "2024 to now",
-      role: "AI product team lead",
-      line: "Product lead for industrial AI software used by manufacturers: planning, live monitoring, skills and MRP.",
+      role: "Industrial Digital Transformation & AI Manager",
+      line: "Lead industrial AI product development and support digital transformation for manufacturers across planning, live monitoring, skills and MRP.",
       hero: { value: "Live", before: "Next day", label: "OEE and downtime, seen as they happen" },
       stats: [
         { value: "6+", label: "industrial customers on the modules" },
