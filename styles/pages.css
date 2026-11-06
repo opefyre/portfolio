@@ -239,6 +239,16 @@
   color: var(--fg-3);
   white-space: nowrap;
 }
+.career-description {
+  grid-column: 2 / -1;
+  margin: 8px 0 0;
+  padding-left: 20px;
+  color: var(--fg-2);
+  line-height: 1.6;
+}
+.career-description li + li {
+  margin-top: 8px;
+}
 
 /* ---------- Publications ------------------------------------------------- */
 
@@ -887,6 +897,9 @@
   .career-role {
     grid-column: 1 / -1;
     grid-row: 2;
+  }
+  .career-description {
+    grid-column: 1 / -1;
   }
   .note-row,
   .note-rows--page .note-row {
