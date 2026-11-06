@@ -34,6 +34,7 @@ export default async function AboutPage() {
     return {
       company: e.company.replace(/\s*\(.*\)\s*$/, ""),
       role: e.positions[0]?.title ?? "",
+      description: e.id === "smart-factory-planning" ? e.positions[0]?.achievements ?? [] : [],
       when: end === null ? `${start} to now` : start === end ? `${start}` : `${start} to ${end}`,
     };
   });
@@ -80,6 +81,11 @@ export default async function AboutPage() {
                 <span className="career-company">{r.company}</span>
                 <span className="career-role">{r.role}</span>
                 <span className="career-when">{r.when}</span>
+                {r.description.length > 0 && (
+                  <ul className="career-description">
+                    {r.description.map((item) => <li key={item}>{item}</li>)}
+                  </ul>
+                )}
               </li>
             ))}
           </ol>
