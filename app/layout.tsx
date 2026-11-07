@@ -59,7 +59,7 @@ async function personJsonLd() {
     knowsAbout: site.expertise,
     worksFor: { "@type": "Organization", name: "Vrolen", url: "https://vrolen.com" },
     hasCredential: certifications.map((c) => ({ "@type": "EducationalOccupationalCredential", name: c.name })),
-    address: { "@type": "PostalAddress", addressLocality: "Lisbon", addressCountry: "PT" },
+    address: { "@type": "PostalAddress", addressLocality: site.city, addressCountry: site.countryCode },
     sameAs: [site.linkedin, site.instagram, site.github, scholarProfile],
   };
 }

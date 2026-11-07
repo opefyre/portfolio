@@ -437,6 +437,7 @@ html[data-js] .work:not([data-in]) :is(.work-line, .work-stats, .work-foot) {
   align-items: start;
   padding: clamp(40px, 6vh, 64px) 0;
   border-bottom: 1px solid var(--rule);
+  scroll-margin-top: 96px;
 }
 .program-company {
   font-family: var(--font-display);
@@ -456,6 +457,34 @@ html[data-js] .work:not([data-in]) :is(.work-line, .work-stats, .work-foot) {
   font-size: 16px;
   line-height: 1.5;
   color: var(--fg-2);
+}
+.program-projects {
+  grid-column: 1 / -1;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+.program-projects > h4 {
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: var(--fg-3);
+}
+.program-projects ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 20px 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.program-projects h5 {
+  font-size: 16px;
+  font-weight: 600;
+}
+.program-projects p {
+  max-width: 65ch;
+  margin-top: 6px;
+  color: var(--fg-2);
+  line-height: 1.55;
 }
 .program-figure {
   display: block;

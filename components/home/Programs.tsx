@@ -32,7 +32,7 @@ export function Programs() {
         >
           <ol className="program-list">
             {programs.items.map((p, i) => (
-              <li key={p.company} className="program">
+              <li key={p.id} id={p.id} className="program">
                 <div className="program-who">
                   <h3 className="program-company">{p.company}</h3>
                   <p className="program-meta">
@@ -74,6 +74,17 @@ export function Programs() {
                     ))}
                   </dl>
                 )}
+                <div className="program-projects">
+                  <h4>Selected projects</h4>
+                  <ul>
+                    {p.projects.map((project) => (
+                      <li key={project.title}>
+                        <h5>{project.title}</h5>
+                        <p>{project.description}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </li>
             ))}
           </ol>

@@ -12,7 +12,9 @@ export const site = {
   nickname: "Abosh",
   role: "Founder, Vrolen",
   email: "hello@abosh.io",
-  location: "Lisbon",
+  location: "Frankfurt, Germany",
+  city: "Frankfurt",
+  countryCode: "DE",
   linkedin: "https://www.linkedin.com/in/abolfazl-shirkavand/",
   github: "https://github.com/opefyre",
   instagram: "https://www.instagram.com/abosh.io/",
@@ -23,6 +25,10 @@ export const site = {
   /** What search engines should associate with the name (schema.org knowsAbout). From Firestore skills. */
   expertise: [
     "Digital transformation",
+    "Production line commissioning",
+    "Industrial software implementation",
+    "Operational technology (OT)",
+    "Industrial Internet of Things (IIoT)",
     "Operational excellence",
     "Continuous improvement",
     "Industrial AI",
@@ -72,7 +78,7 @@ export type Work = {
   image: Shot;
   gallery: Shot[];
   stats: { value: string; label: string }[];
-  /** Case study, three short paragraphs at most. */
+  /** Short case study paragraphs. */
   body: string[];
   /** Featured works get a full block on the homepage; the rest sit in the index below them. */
   featured?: boolean;
@@ -106,6 +112,7 @@ export const works: Work[] = [
       "Continuous improvement usually lives in five places: a process map, a spreadsheet, an analysis deck, a task tracker and a dashboard that knows nothing about the rest. Evidence gets lost between them, and nobody checks whether the fix held.",
       "Vrolen keeps the whole loop in one place. Map how work flows, turn observations into findings with evidence, and test a countermeasure in a guided what-if that compares cautious, balanced and ambitious options before anything changes on the real line. For harder cases, a simulation studio models the line station by station.",
       "After the change, Vrolen measures whether it produced the expected result, and keeps the fixes that held as the new standard.",
+      "I build Vrolen with TypeScript, React and Vite. Supabase Postgres and Edge Functions support the application, and Cloudflare Pages hosts it. The code includes tests for data handling, simulation and database access.",
     ],
   },
   {
@@ -130,6 +137,7 @@ export const works: Work[] = [
       "Most sales forecasts are last year's numbers with a gut feeling on top. They also count demand twice: once in the forecast, and again when the orders arrive.",
       "Foreviq tries 19 methods on every customer and product line, from seasonal smoothing to machine learning, picks the best one on earlier months and checks it on a later period it never saw. Every forecast comes with an 80% planning range.",
       "Open orders are netted against the forecast, so a fully ordered month counts once. Plans move from draft to review to approved, and the assistant can propose a new forecast but can't publish one without a person.",
+      "I built Foreviq with Python, FastAPI and StatsForecast behind a React interface. In local pilot runs, I checked imports, forecasting, order accounting, exports and backup recovery.",
     ],
   },
   {
@@ -157,7 +165,7 @@ export const works: Work[] = [
     body: [
       "Home bartenders stick to the few recipes they remember, or use recipe sites that ignore what's actually in their cabinet.",
       "Marlow, the AI bartender, builds a recipe from whatever you have. Behind it sit a library of 1,000+ classic and modern recipes, a home bar that knows what you can pour tonight and what's running low, and an education hub of essays and reading paths.",
-      "I built it end to end: the website on Next.js, Firebase and Gemini, and a native iPhone app in SwiftUI on the same backend. The site launched in April 2026. With no marketing spend, it has earned 100K+ Google Search impressions, 1,400+ clicks in three months and 300+ users, all organic.",
+      "I built the recipe assistant, the Next.js and TypeScript web app, and a native iPhone client in Swift and SwiftUI. The web backend runs on Google Cloud Run with Supabase Postgres. I use automated evaluations to check the AI before production releases. The site launched in April 2026. With no marketing spend, it has earned 100K+ Google Search impressions, 1,400+ clicks in three months and 300+ users, all organic.",
     ],
   },
   {
@@ -214,6 +222,7 @@ export const works: Work[] = [
       "Tax and admin in Portugal are complex, bilingual and scattered across sources. Expats get the worst of it: cross-border rules, double-taxation treaties, deadlines nobody warns you about.",
       "Finkavo answers in Portuguese or English, cites the exact article, and fits the answer to your regime, such as IRS Jovem or IFICI. It builds your deadline calendar from your profile, walks freelancers through quarter close and VAT, and keeps tax, identity, health and banking documents in one vault.",
       "Around the app sit 41 plain-language guides and 19 free tools, each checked against official sources.",
+      "I built the application in TypeScript with Next.js and Hono on Cloudflare Workers. It uses CockroachDB, R2 and OpenAI. Automated tests check that answers cite the official sources they use.",
     ],
   },
   {
@@ -335,11 +344,13 @@ export const works: Work[] = [
 ];
 
 export type Program = {
+  id: string;
   company: string;
   years: string;
   role: string;
   /** What the program changed, in one line. */
   line: string;
+  projects: { title: string; description: string }[];
   /** The headline result. With `before`, the lens reveals the old value. */
   hero: { value: string; before?: string; label: string };
   stats: { value: string; label: string }[];
@@ -350,10 +361,25 @@ export const programs: { headline: { value: string; label: string }; items: Prog
   headline: { value: "67%", label: "average cycle-time reduction across 70+ digital transformation and operational excellence programs" },
   items: [
     {
+      id: "snoonu-projects",
       company: "Snoonu",
       years: "2023 to 2026",
-      role: "Head of Digital Innovation",
+      role: "Digital innovation and process improvement",
       line: "Led digital transformation across every department: automated payroll, expenses, access, onboarding and IT, and brought in AI assistants, with a team of 12+.",
+      projects: [
+        {
+          title: "Live call-centre monitoring",
+          description: "I designed a dashboard that combined Maqsam call data with shift schedules. Customer Success used it to monitor queues, wait times and staffing coverage, with Slack alerts when conditions needed attention.",
+        },
+        {
+          title: "Book Fair stockout workflow",
+          description: "I designed a tool for the Doha International Book Fair that let staff report unavailable titles in Slack, update a shared inventory and see alternatives in the same workflow. It ran in live operations using Python, BigQuery and Cloud Run.",
+        },
+        {
+          title: "ERP and workflow integration",
+          description: "I led automation and integration projects across ERP, Jira, Notion, Slack and third-party APIs. I worked with developers and digital transformation managers to deliver them.",
+        },
+      ],
       hero: { value: "< 1 hour", before: "4 days", label: "to calculate payroll" },
       stats: [
         { value: "50+", label: "automation and process projects" },
@@ -362,10 +388,25 @@ export const programs: { headline: { value: string; label: string }; items: Prog
       ],
     },
     {
+      id: "bat-projects",
       company: "British American Tobacco",
       years: "2020 to 2023",
       role: "Supply chain, new product introduction",
       line: "Ran new product launches as a supply chain program: readiness gates, supplier sourcing and MRP planning across nine lines.",
+      projects: [
+        {
+          title: "Warehouse digitalization",
+          description: "As a management trainee, I designed and built an Excel/VBA system that warehouse teams used day to day to share inventory records and communicate stock updates.",
+        },
+        {
+          title: "Engineering reporting and analytics",
+          description: "As a management trainee, I built a platform that combined data from several manufacturing sources. Engineering teams used it day to day to review maintenance, preventive maintenance, production performance and trends.",
+        },
+        {
+          title: "Production line commissioning",
+          description: "I participated in commissioning a new production line for super-slim, super-long cigarettes during BAT’s Global Graduate Programme.",
+        },
+      ],
       hero: { value: "2 months", before: "5 months", label: "launch lead time" },
       stats: [
         { value: "12%", label: "average procurement saving" },
@@ -374,10 +415,25 @@ export const programs: { headline: { value: string; label: string }; items: Prog
       ],
     },
     {
+      id: "unilever-projects",
       company: "Unilever",
       years: "2016 to 2020",
-      role: "Operational excellence",
+      role: "Supply chain operations",
       line: "World Class Manufacturing and Lean on live production lines: OEE, MTBF, changeovers and quality defects.",
+      projects: [
+        {
+          title: "Liquid personal-care line commissioning",
+          description: "As Supply Chain Operations Analyst, I participated in the project team commissioning a new production line for shampoo and handwash.",
+        },
+        {
+          title: "Production line improvement",
+          description: "I led more than ten improvement projects with production teams, working on equipment effectiveness, downtime, changeovers and quality defects. I applied World Class Manufacturing practices on operating lines.",
+        },
+        {
+          title: "Power BI production and planning dashboards",
+          description: "I built Power BI dashboards for production and planning KPIs. They cut the time spent preparing production reports by about 60%.",
+        },
+      ],
       hero: { value: "~75%", before: "~60%", label: "OEE on the lines I worked on" },
       stats: [
         { value: "~45 min", label: "changeover time, down from ~90 min" },
@@ -386,13 +442,27 @@ export const programs: { headline: { value: string; label: string }; items: Prog
       ],
     },
     {
+      id: "sfp-projects",
       company: "Smart Factory Planning",
       years: "2024 to now",
       role: "Industrial Digital Transformation & AI Manager",
-      line: "Lead industrial AI product development and support digital transformation for manufacturers across planning, live monitoring, skills and MRP.",
+      line: "Lead product development and support implementation with several manufacturing customers across production planning, scheduling, live monitoring, skills and material requirements planning.",
+      projects: [
+        {
+          title: "Production software delivery",
+          description: "I led product development for Shop Floor Planning, Real-Time Monitoring, Skill Gap and MRP from discovery to launch. I worked with engineering and implementation teams on testing, validation and customer rollouts.",
+        },
+        {
+          title: "Machine data acquisition in development",
+          description: "We are working on sensors connected to production machinery to capture and log operating data for monitoring and performance dashboards.",
+        },
+        {
+          title: "Camera sensing in development",
+          description: "We are developing camera-based motion sensing and industrial image processing.",
+        },
+      ],
       hero: { value: "Live", before: "Next day", label: "OEE and downtime, seen as they happen" },
       stats: [
-        { value: "6+", label: "industrial customers on the modules" },
         { value: "4", label: "product modules taken from discovery to launch" },
       ],
     },
@@ -403,15 +473,31 @@ export const programs: { headline: { value: string; label: string }; items: Prog
 export const author = {
   avatar: "/about/avatar.webp",
   line: "Founder of Vrolen. Operational excellence and digital transformation",
-  bio: "Engineer and founder of Vrolen. Ten years leading operational excellence, supply chain and digital transformation programs at Unilever, British American Tobacco and Snoonu, now building industrial AI. Based in Lisbon.",
+  bio: "Engineer and founder of Vrolen. Ten years leading operational excellence, supply chain and digital transformation programs at Unilever, British American Tobacco and Snoonu, now building industrial AI. Based in Frankfurt, Germany.",
 };
+
+export const careerTitles: Readonly<Record<string, string>> = {
+  "SC New Product Introduction Manager": "New Product Introduction Manager, Supply Chain",
+  "Management Trainee (Global Graduate)": "Management Trainee (Global Graduate Program)",
+  "Operations Improvement Specialist": "Supply Chain Operations Analyst",
+  "Operations Improvement Officer": "Supply Chain Assistant",
+  "Digital Innovation Project Manager": "Digital Innovation Project Lead",
+};
+
+export const sfpExperience = [
+  "I support digital transformation and AI product strategy for manufacturing and supply chain operations.",
+  "I lead product development for Shop Floor Planning, Real-Time Monitoring, Skill Gap and MRP. I have taken these modules from discovery and design through delivery and launch.",
+  "I work with engineering and implementation teams on requirements, testing and validation. I support industrial software rollouts and commercial discussions with several customers.",
+  "We are developing sensor-based machine data capture and logging so teams can review operating data in performance dashboards.",
+  "We are also developing camera-based motion sensing and industrial image processing.",
+];
 
 export const about = {
   bio: [
     "I'm Abolfazl Shirkavand. Most people call me Abosh.",
     "I'm an engineer who has spent ten years on operational excellence and digital transformation: continuous improvement on production lines at Unilever, supply chain and product launches at British American Tobacco, automation and AI at Snoonu, and industrial AI products at Smart Factory Planning.",
     "My toolkit is Lean, Six Sigma and World Class Manufacturing on the floor, program and project management to deliver the change, and software, data and AI to make it last. Across 70+ transformation programs, cycle time came down 67% on average.",
-    "The part I care about most is checking that an improvement actually held. That's why I'm building Vrolen. I live in Lisbon, and I build small products I want to use myself.",
+    "The part I care about most is checking that an improvement actually held. That's why I'm building Vrolen. I’m based in Frankfurt, Germany, and I build small products I want to use myself.",
   ],
   education: "B.Sc. in Engineering, an MBA, and a master's in technology and engineering management.",
   /** Certifications in Firestore that the site doesn't show. */
