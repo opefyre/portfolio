@@ -485,23 +485,13 @@ export const careerTitles: Readonly<Record<string, string>> = {
 };
 
 export const sfpExperience = [
-  "I support digital transformation and AI product strategy for manufacturing and supply chain operations.",
-  "I lead product development for Shop Floor Planning, Real-Time Monitoring, Skill Gap and MRP. I have taken these modules from discovery and design through delivery and launch.",
-  "I work with engineering and implementation teams on requirements, testing and validation. I support industrial software rollouts and commercial discussions with several customers.",
-  "We are developing sensor-based machine data capture and logging so teams can review operating data in performance dashboards.",
-  "We are also developing camera-based motion sensing and industrial image processing.",
+  "I took four tools from early design to launch, covering production scheduling, live monitoring, skills and materials planning. I help customers put the software into use.",
+  "We’re developing two ways to collect data from production equipment. One uses sensors to record machine activity. The other uses cameras to detect motion and process images.",
 ];
 
 export const about = {
-  bio: [
-    "I'm Abolfazl Shirkavand. Most people call me Abosh.",
-    "I'm an engineer who has spent ten years on operational excellence and digital transformation: continuous improvement on production lines at Unilever, supply chain and product launches at British American Tobacco, automation and AI at Snoonu, and industrial AI products at Smart Factory Planning.",
-    "My toolkit is Lean, Six Sigma and World Class Manufacturing on the floor, program and project management to deliver the change, and software, data and AI to make it last. Across 70+ transformation programs, cycle time came down 67% on average.",
-    "The part I care about most is checking that an improvement actually held. That's why I'm building Vrolen. I’m based in Frankfurt, Germany, and I build small products I want to use myself.",
-  ],
-  education: "B.Sc. in Engineering, an MBA, and a master's in technology and engineering management.",
+  title: "I’m Abolfazl Shirkavand. Most people call me Abosh.",
+  education: "I studied engineering and went on to earn an MBA and a master’s in technology and engineering management.",
   /** Certifications in Firestore that the site doesn't show. */
   hiddenCertifications: ["Aha! Product Management Professional", "Google Cloud Digital Leader", "Mastering Jira Administration"],
 };
-
-export const closing = ["Curiosity in systems,", "for a better tomorrow."];

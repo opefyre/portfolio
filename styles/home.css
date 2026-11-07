@@ -631,12 +631,6 @@ html[data-lens="fallback"] .frag--figure::after {
   line-height: 0.95;
   letter-spacing: -0.045em;
 }
-.closing-line span {
-  display: block;
-}
-.closing-line span + span {
-  color: var(--fg-3);
-}
 .closing-lens {
   width: clamp(140px, 17vw, 250px);
   aspect-ratio: 1;

@@ -8,7 +8,7 @@ import { about, careerTitles, ogImage, sfpExperience, site } from "@/content/sit
 import { publications, scholarProfile } from "@/content/publications";
 import { getCertifications, getExperiences } from "@/lib/data";
 
-const description = "Operational excellence, digital transformation and engineering research. Career at Unilever, British American Tobacco and Snoonu. Founder of Vrolen.";
+const description = "Abolfazl Shirkavand is an engineer based in Frankfurt. He works on factory software at Smart Factory Planning and is building Vrolen.";
 
 export const metadata: Metadata = {
   title: "About Abolfazl Shirkavand",
@@ -39,21 +39,32 @@ export default async function AboutPage() {
           </div>
           <div className="about-copy">
             <h1 id="about-title" className="about-title">
-              {about.bio[0]}
+              {about.title}
             </h1>
-            {about.bio.slice(1).map((p, i) => (
-              <p key={i} className="about-p">
-                {p}
-              </p>
-            ))}
             <p className="about-p">
-              I helped commission production lines at <TLink href="/#unilever-projects" className="text-link" documentNavigation>Unilever</TLink> and <TLink href="/#bat-projects" className="text-link" documentNavigation>BAT</TLink>,
-              built warehouse and engineering tools at BAT, and designed software for live operations at <TLink href="/#snoonu-projects" className="text-link" documentNavigation>Snoonu</TLink>.
-              I code, test and set up infrastructure myself, and use AI tools in development. At Snoonu, I also led delivery with developers and digital transformation managers.
+              I’m an engineer based in Frankfurt. I started at <TLink href="/#unilever-projects" className="text-link" documentNavigation>Unilever</TLink>, working with factory teams to make production more reliable and efficient. I worked on projects to shorten changeovers and reduce downtime, built reports that made it easier to track line performance, and helped commission a new production line.
+            </p>
+            <p className="about-p">
+              I joined <TLink href="/#bat-projects" className="text-link" documentNavigation>British American Tobacco</TLink> through its Global Graduate Programme. I rotated through departments to learn how the business worked and prepare for a management role. I built an Excel tool for warehouse teams to share stock updates and a reporting tool for engineers to track maintenance and line performance. I also built a tool that helped the spare parts warehouse keep more accurate stock records and order parts more efficiently, and helped commission a new production line.
+            </p>
+            <p className="about-p">
+              After my promotion to New Product Introduction Manager, I managed the supply chain work behind changes to the product range. I took new products from development through launch and scale-up and brought in new suppliers and raw materials. I worked with each team to agree what had to be ready before a launch could move ahead. That helped cut <TLink href="/notes/busy-machines-slower-orders/" className="text-link">launch lead time from about five months to two</TLink>.
+            </p>
+            <p className="about-p">
+              At <TLink href="/#snoonu-projects" className="text-link" documentNavigation>Snoonu</TLink>, I led digital transformation across the company. I managed a team of developers and digital transformation managers and oversaw more than 50 projects. We worked with departments to simplify everyday processes, connect their systems and decide where automation or AI could save people time.
+            </p>
+            <p className="about-p">
+              That work ranged from payroll and expense automation to tools for teams running live operations. I designed a call-centre dashboard that showed wait times and staffing, and a tool that let staff report stock shortages and see what was available instead. I also built parts of several tools myself and worked with the team to get them into use.
+            </p>
+            <p className="about-p">
+              At <TLink href="/#sfp-projects" className="text-link" documentNavigation>Smart Factory Planning</TLink>, I lead product development for manufacturers. I work with factory teams to understand how they plan production and run their lines, then with engineers to build, test and roll out software they can use on the floor. The tools we’ve launched help teams schedule production, plan materials, track downtime and see where operators need training. We’re also developing ways to collect machine data with sensors and detect motion with cameras.
+            </p>
+            <p className="about-p">
+              I also build my own software. I write and test the code, set up the infrastructure and use AI tools as part of that work. One of those projects is <TLink href="/work/vrolen/" className="text-link">Vrolen</TLink>. I’m building it to help teams find where work gets stuck and see whether a change is still saving time months later.
             </p>
             <p className="about-p about-edu">{about.education}</p>
             <p className="about-p about-certs">
-              Certified: {certifications.map((c) => c.name).join(", ")}.
+              Certifications include {certifications.map((c) => c.name).join(", ")}.
             </p>
             <div className="about-contact">
               <a href={`mailto:${site.email}`} className="text-link">
@@ -100,7 +111,7 @@ export default async function AboutPage() {
               Google Scholar<span className="sr-only"> (opens in a new tab)</span>
             </a>
           </div>
-          <p className="publications-intro">My engineering research covers composite structures, heat transfer and building performance.</p>
+          <p className="publications-intro">I’ve co-authored three studies on how composite cylinders buckle and how heat moves through tissue and buildings.</p>
           <ol className="publication-list">
             {publications.map((p) => (
               <li key={p.id} className="publication-row">
