@@ -74,7 +74,11 @@ export function useTransitionNavigate() {
 }
 
 /** Native links on phones; desktop links keep the optional WebGL transition. */
-export function TLink({ href, onClick, keep, ...props }: ComponentProps<"a"> & { href: string; keep?: string }) {
+export function TLink({ href, onClick, keep, documentNavigation, ...props }: ComponentProps<"a"> & {
+  href: string;
+  keep?: string;
+  documentNavigation?: boolean;
+}) {
   const navigate = useTransitionNavigate();
   return (
     <a
@@ -86,7 +90,7 @@ export function TLink({ href, onClick, keep, ...props }: ComponentProps<"a"> & {
           href,
           target: e.currentTarget.target,
           download: e.currentTarget.hasAttribute("download"),
-        }, window.location.href, window.matchMedia(DOCUMENT_NAVIGATION_QUERY).matches)) return;
+        }, window.location.href, documentNavigation || window.matchMedia(DOCUMENT_NAVIGATION_QUERY).matches)) return;
         e.preventDefault();
         navigate(href, keep);
       }}

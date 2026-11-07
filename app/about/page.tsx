@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { LensAnchor } from "@/components/lens/LensAnchor";
 import { GLImage } from "@/components/media/GLImage";
+import { TLink } from "@/components/shell/transitions";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SocialLinks } from "@/components/site/SocialLinks";
-import { about, ogImage, site } from "@/content/site";
+import { about, careerTitles, ogImage, sfpExperience, site } from "@/content/site";
 import { publications, scholarProfile } from "@/content/publications";
 import { getCertifications, getExperiences } from "@/lib/data";
 
@@ -17,27 +18,16 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: "About Abolfazl Shirkavand", description, images: [ogImage] },
 };
 
-/** "Sep 2016 to Aug 2017" → [2016, 2017]; "Present" → null. */
-function years(period: string): [number, number | null] {
-  const ys = period.match(/\d{4}/g)?.map(Number) ?? [];
-  const now = /present/i.test(period);
-  return [ys[0] ?? 0, now ? null : (ys[ys.length - 1] ?? ys[0] ?? 0)];
-}
-
 export default async function AboutPage() {
   const [experiences, certifications] = await Promise.all([getExperiences(), getCertifications()]);
-  const rows = experiences.map((e) => {
-    const spans = e.positions.map((p) => years(p.period));
-    const start = Math.min(...spans.map((s) => s[0]));
-    const ongoing = spans.some((s) => s[1] === null);
-    const end = ongoing ? null : Math.max(...spans.map((s) => s[1] ?? 0));
-    return {
-      company: e.company.replace(/\s*\(.*\)\s*$/, ""),
-      role: e.positions[0]?.title ?? "",
-      description: e.id === "smart-factory-planning" ? e.positions[0]?.achievements ?? [] : [],
-      when: end === null ? `${start} to now` : start === end ? `${start}` : `${start} to ${end}`,
-    };
-  });
+  const rows = experiences.map((e) => ({
+    id: e.id,
+    company: e.company.replace(/\s*\(.*\)\s*$/, ""),
+    positions: e.positions.map((position) => ({
+      title: careerTitles[position.title] ?? position.title,
+      period: position.period.replace(/\s+[–—]\s+/, " to "),
+    })),
+  }));
 
   return (
     <>
@@ -56,6 +46,11 @@ export default async function AboutPage() {
                 {p}
               </p>
             ))}
+            <p className="about-p">
+              I helped commission production lines at <TLink href="/#unilever-projects" className="text-link" documentNavigation>Unilever</TLink> and <TLink href="/#bat-projects" className="text-link" documentNavigation>BAT</TLink>,
+              built warehouse and engineering tools at BAT, and designed software for live operations at <TLink href="/#snoonu-projects" className="text-link" documentNavigation>Snoonu</TLink>.
+              I code, test and set up infrastructure myself, and use AI tools in development. At Snoonu, I also led delivery with developers and digital transformation managers.
+            </p>
             <p className="about-p about-edu">{about.education}</p>
             <p className="about-p about-certs">
               Certified: {certifications.map((c) => c.name).join(", ")}.
@@ -77,13 +72,19 @@ export default async function AboutPage() {
           </h2>
           <ol className="career-list">
             {rows.map((r) => (
-              <li key={r.company} className="career-row">
+              <li key={r.id} className="career-row">
                 <span className="career-company">{r.company}</span>
-                <span className="career-role">{r.role}</span>
-                <span className="career-when">{r.when}</span>
-                {r.description.length > 0 && (
+                <ul className="career-positions">
+                  {r.positions.map((position) => (
+                    <li key={position.title}>
+                      <span className="career-role">{position.title}</span>
+                      <span className="career-when">{position.period}</span>
+                    </li>
+                  ))}
+                </ul>
+                {r.id === "smart-factory-planning" && (
                   <ul className="career-description">
-                    {r.description.map((item) => <li key={item}>{item}</li>)}
+                    {sfpExperience.map((item) => <li key={item}>{item}</li>)}
                   </ul>
                 )}
               </li>
