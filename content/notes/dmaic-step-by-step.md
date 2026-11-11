@@ -1,7 +1,7 @@
 ---
 title: DMAIC step by step: a Lean Six Sigma project from problem to control
 date: 2026-09-29
-updated: 2026-11-04
+updated: 2026-11-11
 summary: Follow a fictional filling problem through Define, Measure, Analyze, Improve and Control. See how the same approach can investigate supply-chain errors.
 status: published
 topic: Operational excellence
@@ -175,6 +175,8 @@ Choose performance requirements for the product and its consequences. A sigma la
 :::link https://vrolen.com/blog/lean-six-sigma/ | Connect variation and flow in a manufacturing problem
 Vrolen's guide discusses the two kinds of evidence together. Keep the method tied to the cause being investigated rather than selecting a tool from its name.
 :::
+
+::video TD2RB5fikFE | A separate example: a digital invoice keeps failing its matching check, followed through all five phases.
 
 ## Sources
 

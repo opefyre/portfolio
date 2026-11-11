@@ -1,6 +1,7 @@
 ---
 title: SMED example: faster changeovers, smaller batches
 date: 2026-10-03
+updated: 2026-11-11
 summary: A changeover falls from 45 to 15 minutes. Use a worked schedule to decide whether the gain should become more output or smaller batches. Includes an Excel comparison sheet.
 status: published
 topic: Operational excellence
@@ -119,6 +120,8 @@ Translate OEE into the minutes underneath it, then check whether changeovers are
 :::
 
 Take the new setup time back to the planning table. The useful result is the production decision it now makes possible.
+
+::video Ivx9hJuI-dw | A phone-case moulding machine changes moulds three times a day. A separate example from the figures in this note.
 
 ## Sources
 

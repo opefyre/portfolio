@@ -1,6 +1,7 @@
 ---
 title: What is continuous improvement? Follow the work after the fix
 date: 2026-10-19
+updated: 2026-11-11
 summary: Understand continuous improvement through a recurring picking problem. See how evidence, a small trial, operating ownership and follow-up fit together.
 seoTitle: What is continuous improvement? A worked example
 seoDescription: Understand continuous improvement through a recurring picking problem. See how evidence, a small trial, operating ownership and follow-up fit together.
@@ -61,9 +62,7 @@ If the rate rises again, the team uses the new records to investigate. It does n
 
 [Did the improvement hold?](/notes/did-it-hold/) follows that period after implementation. Vrolen's [PDCA guide](https://vrolen.com/blog/pdca-cycle/) applies the same learning cycle to a production example.
 
-:::link https://www.youtube.com/watch?v=rs1NfE8DNAc | Watch Vrolen's 5 Whys example
-A separate wrong-size delivery example shows how to follow the picking process and check an explanation. Its figures are not the trial results above.
-:::
+::video wBenhxg4BSs | A team preparing meeting packs tests a small change and keeps it working after the first trial. A separate example from the one above.
 
 ## Principles and labels need a practical meaning
 

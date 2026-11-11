@@ -2,7 +2,7 @@
 title: How to read a control chart: common cause, special cause and the rules that matter
 date: 2026-09-29
 summary: Compare a run chart with a control chart using the same observations. Calculate provisional individuals limits, inspect signal rules and distinguish stability from meeting requirements.
-updated: 2026-10-20
+updated: 2026-11-11
 status: published
 topic: Operational excellence
 keywords: run chart vs control chart, run chart example, control chart, statistical process control, SPC, I-MR chart, individuals chart, Western Electric rules, common cause variation, special cause variation, Shewhart chart, control limits
@@ -146,6 +146,8 @@ Choose the chart around the data and sampling method. A numerical column alone d
 :::link /notes/did-it-hold/ | Did the improvement hold?
 Follow the changed process over time, with a measurement and chart suited to the work. The follow-up matters after the first better result.
 :::
+
+::video GAGUYZaLAcU | A bakery line making 500 g loaves adds one point every 15 minutes. A separate example from the pick durations above.
 
 ## Sources
 

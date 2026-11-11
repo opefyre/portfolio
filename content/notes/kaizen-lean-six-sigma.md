@@ -4,7 +4,7 @@ date: 2026-10-19
 summary: Compare Kaizen, Lean and Six Sigma through one order-packing problem. Understand their aims, where 5S fits and why the method should follow the evidence.
 seoTitle: Kaizen vs Lean vs Six Sigma: a practical comparison
 seoDescription: Compare Kaizen, Lean and Six Sigma through one order-packing problem. Understand their aims, where 5S fits and why the method should follow the evidence.
-updated: 2026-10-24
+updated: 2026-11-11
 status: published
 topic: Operational excellence
 keywords: Kaizen vs Lean vs Six Sigma, Lean principles, Kaizen principles, 5S, continuous improvement
@@ -75,6 +75,8 @@ If the cause is already verified and the change is straightforward, the team may
 For an accessible first look, Vrolen's [PDCA production example](https://vrolen.com/blog/pdca-cycle/) shows how a trial connects a proposed change to its review.
 
 Start the next discussion with the order, delay or defect you can observe. Choose the amount of investigation the uncertainty requires, then keep responsibility for the result with the operating team. The method is useful when it helps them make a better decision.
+
+::video Khlp3JJMtJo | One café order shows why wasted movement and inconsistent preparation need different investigations.
 
 ## Sources and example notes
 

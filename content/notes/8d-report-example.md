@@ -4,7 +4,7 @@ date: 2026-10-15
 summary: A returned batch needs immediate protection and a verified permanent correction. Follow a filled-in 8D example, including the evidence needed before containment ends.
 seoTitle: 8D report example: steps and corrective action
 seoDescription: Follow an 8D report example from customer complaint to closure. Separate containment, occurrence and escape causes, corrective action and effectiveness checks.
-updated: 2026-10-23
+updated: 2026-11-11
 status: published
 topic: Operational excellence
 keywords: 8D report example, 8D problem solving, eight disciplines, containment vs corrective action, occurrence cause escape cause
@@ -86,9 +86,7 @@ Change the second verification lot to one failure. The stated check is no longer
 
 Do not relabel that failed check as passed because the fixture was installed on time. Installation is evidence of action. The subsequent output is evidence about the result.
 
-:::link https://www.youtube.com/watch?v=p5687M5EoGM | Watch Vrolen's PDCA explanation
-A separate introduction to planning a change, checking its result and deciding what follows. PDCA is the learning loop; this article keeps the wider 8D complaint response in view.
-:::
+::video DhpWCN2AhzU | A water-bottle maker contains a leaking-lid complaint on day one and works through D1 to D8. A separate case from the one above.
 
 ## Close the report without losing the control
 

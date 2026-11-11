@@ -1,6 +1,7 @@
 ---
 title: PDCA cycle explained: test a change before you spread it
 date: 2026-10-14
+updated: 2026-11-11
 summary: An approval process gets faster, but more requests come back with errors. Follow one small trial through Plan, Do, Check and Act to decide what should happen next.
 seoTitle: PDCA cycle explained with a worked example
 seoDescription: Learn the four steps of PDCA through an approval-routing example. Compare speed and errors, inspect the trial results and decide what to change next.
@@ -89,9 +90,7 @@ Whichever approach your organisation uses, the review needs more than a complete
 
 For another application, [Vrolen's PDCA guide](https://vrolen.com/blog/pdca-cycle/) uses a production-flow example.
 
-:::link https://www.youtube.com/watch?v=p5687M5EoGM | Watch Vrolen's PDCA walkthrough
-A short explanation of planning a test, comparing results and deciding what to do next. It uses a separate example; the approval figures in this article belong to the trial above.
-:::
+::video p5687M5EoGM | A customer quote email keeps losing its PDF attachment. The first test improves the result but misses the goal, which shapes the next test.
 
 For your next change, write the expected result and the conditions that would make you reconsider it before the trial starts. At the review, put those beside the actual results. That gives the team a concrete decision to make, even when the answer is to try again.
 

@@ -1,6 +1,7 @@
 ---
 title: Pareto analysis example: count, delay or cost?
 date: 2026-10-14
+updated: 2026-11-11
 summary: Late deliveries lead the complaint count. Damaged items lead the cost. Build a Pareto chart from the same records and see why the measure changes where you look first.
 seoTitle: Pareto analysis example: count, delay or cost?
 seoDescription: Build and read a Pareto chart using 100 fictional complaints. Switch between count, delay and cost, and calculate the cumulative percentage.
@@ -67,9 +68,7 @@ Keep the other views available. A fix for frequent late deliveries might affect 
 
 For manufacturing records, Vrolen's [downtime Pareto guide](https://vrolen.com/blog/downtime-pareto-analysis/) compares event frequency with lost minutes and explains how one stop can affect several machines. Its event model matters before those minutes can be ranked.
 
-:::link https://www.youtube.com/watch?v=UsFA-kIoGho | Watch Vrolen's Pareto chart example
-An animated walkthrough of ranking complaints and reading cumulative share. It uses a separate example; use the figures above for this article's calculations.
-:::
+::video UsFA-kIoGho | An online shop ranks the same complaints by frequency, handling time and remedy cost. A different data set from this note.
 
 ## The 80/20 rule isn't a required result
 

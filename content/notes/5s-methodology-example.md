@@ -1,6 +1,7 @@
 ---
 title: 5S methodology: make the packing station easier to use
 date: 2026-10-14
+updated: 2026-11-11
 summary: The bench is clean, but the scanner is missing and two label versions sit together. Follow the five steps of 5S and test whether the proposed station helps.
 seoTitle: 5S methodology: steps and a workplace example
 seoDescription: Learn Sort, Set in order, Shine, Standardize and Sustain through a packing station. Compare layouts and inspect missing tools, label mix-ups and refill rules.
@@ -79,9 +80,7 @@ If the scanner is missing every morning, investigate the borrowing and return ar
 
 [Vrolen's 5S guide](https://vrolen.com/blog/5s-methodology/) expands on choosing work measures and maintaining the arrangement.
 
-:::link https://www.youtube.com/watch?v=VgeTYssQsnA | Watch Vrolen's 5S explainer
-A five-minute walkthrough of the five steps using a separate packing-station example. The diagram and response rules in this article are our own fictional illustration.
-:::
+::video VgeTYssQsnA | Two shifts share one packing bench in the video, a separate example with its own red-tag and layout decisions.
 
 Begin with one station and the people who use it. When the next shift can see what is missing and knows how to respond, there is something useful to maintain.
 

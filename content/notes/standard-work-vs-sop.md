@@ -1,6 +1,7 @@
 ---
 title: Standard work vs SOP: a packing-station example
 date: 2026-10-14
+updated: 2026-11-11
 summary: The procedure is approved, but each shift packs differently. Use one work cycle to see what sequence, timing and in-process stock add to the instructions.
 seoTitle: Standard work vs SOP: a practical comparison
 seoDescription: Compare standard work, SOPs and work instructions through a packing example. Explore takt time, overlapping machine work and the stock needed at the station.
@@ -91,6 +92,8 @@ The [Control stage of DMAIC](/notes/dmaic-step-by-step/) covers that handover. [
 The same idea carries into software through shared conventions and a definition of done, as I described in [Three factory habits I use in software](/notes/factory-floor-software/). A repetitive production timing chart won't fit every kind of work. A clear, testable working method still helps people see where they differ.
 
 For the wider connection to flow and pull, see [Vrolen's Lean manufacturing guide](https://vrolen.com/blog/lean-manufacturing/).
+
+::video 8_VDXl2bk90 | An electric kettle cell with a 60-second takt, a different station from the packing example above.
 
 ## Sources and example notes
 

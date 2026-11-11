@@ -1,7 +1,7 @@
 ---
 title: FMEA step by step: find what could go wrong before it does
 date: 2026-09-29
-updated: 2026-11-04
+updated: 2026-11-11
 summary: Work through a process FMEA for order fulfilment. Rate severity, occurrence and detection, then see what a risk score can hide and where the action-priority lookup fits.
 status: published
 topic: Operational excellence
@@ -130,12 +130,14 @@ After a failure, update the FMEA with the cause evidence and any control that fa
 Projects have failure modes too. Here's how to build a risk register that actually drives decisions.
 :::
 
+::video F5GjLjVR8Fw | A furniture factory prepares to make a new wooden chair. A different process and different ratings from the order fulfilment example above.
+
 ## Sources
 
 - AIAG & VDA (2019). [FMEA Handbook](https://www.aiag.org/training-and-resources/manuals/details/FMEAAV-1), first edition. Design FMEA, process FMEA and FMEA for monitoring and system response.
 - Quality-One. [AIAG & VDA FMEA](https://quality-one.com/aiag-vda-fmea/). A summary of the seven steps and action priority.
 - Bowles, J. B. (2003). [An assessment of RPN prioritization in a failure modes effects and criticality analysis](https://doi.org/10.1109/RAMS.2003.1182019). *Proceedings of the Annual Reliability and Maintainability Symposium*.
-- UK Ministry of Defence. [FMEA/FMECA](https://www.asems.mod.uk/toolkit/fmeafmeca). ASEMS toolkit, on the method's origins in MIL-P-1629 (1949).
+- UK Ministry of Defence. [FMEA/FMECA](https://web.archive.org/web/20250418200724/https://www.asems.mod.uk/toolkit/fmeafmeca). ASEMS toolkit (archived copy; the original site is offline), on the method's origins in MIL-P-1629 (1949).
 - SAE International. *J1739, Potential Failure Mode and Effects Analysis (FMEA)*.
 
 *The distributor, its process and ratings are illustrative.*
