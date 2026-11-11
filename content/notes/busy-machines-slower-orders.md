@@ -1,7 +1,7 @@
 ---
 title: Why busy machines make customers wait: Little's Law and takt time on the floor
 date: 2026-09-24
-updated: 2026-11-04
+updated: 2026-11-11
 summary: Keeping every resource busy feels productive and often makes lead times worse. Two simple formulas explain why, and how launch times fell from five months to two.
 status: published
 topic: Supply chain
@@ -81,6 +81,8 @@ Put simply: fewer things in flight, each one moving. That's Little's Law applied
 1. What decides when work is released: a due date, material availability, a WIP limit or the constraint's capacity?
 2. Do you know your takt time, and do your teams see the gap in units rather than percentages?
 3. If demand went up 10% tomorrow, would you release more work, or protect flow at the constraint?
+
+::video GQtL71bBuOQ | A separate office example: one five-minute approval waits two days in a busy team. It shows the same split between working time and waiting time.
 
 ## Sources
 

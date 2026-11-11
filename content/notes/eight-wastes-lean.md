@@ -1,6 +1,7 @@
 ---
 title: The eight wastes of Lean, explained through one order
 date: 2026-10-14
+updated: 2026-11-11
 summary: An order needs 60 cartons. The team packs 90, walks for labels and corrects errors. Follow the work to see the eight wastes and choose what to change first.
 seoTitle: Eight wastes of Lean: definitions and examples
 seoDescription: Learn the eight wastes of Lean through one warehouse order. Compare motion with transport, see how wastes overlap, and choose a change worth testing.
@@ -81,6 +82,8 @@ Record the current walk, label errors and interruptions across representative or
 Use [PDCA](/notes/pdca-cycle-example/) to compare the result with that prediction. If the arrangement works, update the working method and ownership. If it creates another problem, revise it before spreading it.
 
 [Vrolen's eight-wastes guide](https://vrolen.com/blog/eight-wastes-lean-manufacturing/) gives a wider view of selecting improvements around flow. For this warehouse, the immediate task is narrower: make one order easier to complete correctly, then check that the change helped.
+
+::video SEuF-QHagcA | The video follows a new colleague's first day through all eight wastes, a different example from the order above.
 
 ## Sources and example notes
 

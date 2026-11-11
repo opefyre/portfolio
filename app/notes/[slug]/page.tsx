@@ -9,6 +9,7 @@ import { LensAnchor } from "@/components/lens/LensAnchor";
 import { GLImage } from "@/components/media/GLImage";
 import { SocialLinks } from "@/components/site/SocialLinks";
 import { author, site } from "@/content/site";
+import { videos, videoUrl } from "@/content/videos";
 import { getNote, getNotes } from "@/lib/notes";
 
 export const dynamicParams = false;
@@ -119,6 +120,16 @@ export default async function NotePage({ params }: Params) {
         knowsAbout: site.expertise,
         sameAs: [site.linkedin, site.instagram, site.github],
       },
+      ...n.videos.map((id) => ({
+        "@type": "VideoObject",
+        name: videos[id].title,
+        description: `${videos[id].title}. A Vrolen video referenced in "${n.title}".`,
+        thumbnailUrl: `${site.url}/notes/videos/${id}.webp`,
+        uploadDate: videos[id].uploaded,
+        contentUrl: videoUrl(id),
+        embedUrl: `https://www.youtube-nocookie.com/embed/${id}`,
+        publisher: { "@type": "Organization", name: "Vrolen", url: "https://vrolen.com" },
+      })),
       {
         "@type": "BreadcrumbList",
         itemListElement: [

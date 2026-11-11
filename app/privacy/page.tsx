@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/privacy/" },
 };
 
-const updated = "19 October 2026";
+const updated = "11 November 2026";
 
 export default function PrivacyPage() {
   return (
@@ -33,6 +33,9 @@ export default function PrivacyPage() {
               <h2>This website</h2>
               <p>
                 abosh.io sets no cookies and runs no analytics, advertising or tracking scripts. The hosting provider (Google Firebase Hosting) keeps standard server logs, such as IP address and requested page, to deliver and protect the site.
+              </p>
+              <p>
+                Some Notes include Vrolen videos. Nothing loads from YouTube until you press play. The video then plays from YouTube&rsquo;s privacy-enhanced domain (youtube-nocookie.com), and Google&rsquo;s privacy policy applies to that playback.
               </p>
 
               <h2>abosh publisher</h2>

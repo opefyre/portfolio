@@ -1,6 +1,7 @@
 ---
 title: SIPOC diagram example: where does the process actually end?
 date: 2026-10-14
+updated: 2026-11-11
 summary: Maintenance has logged the request. Production is waiting for a repair. A SIPOC diagram helps the team agree what its process delivers, and who needs that output.
 seoTitle: SIPOC diagram: definition and a worked example
 seoDescription: Build a SIPOC diagram using a maintenance planning example. Define suppliers, inputs, process, outputs and customers, then check where the handoff stops.
@@ -84,6 +85,8 @@ An automatic alert can enter the same planning process. It still needs an identi
 For our factory, the first improvement meeting can stay much smaller. Put one released work order and one held request beside the SIPOC. Ask the technician whether the released order is usable, and ask the planner whether the hold makes the next action clear.
 
 If either answer is no, change the handoff definition before building a report that counts it as success.
+
+::video q5z6Nbm8kB4 | Vrolen's SIPOC video builds the diagram for its own process example, separate from the maintenance boundary above.
 
 ## Sources and example notes
 

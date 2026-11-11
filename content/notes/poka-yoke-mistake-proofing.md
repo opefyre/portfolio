@@ -1,6 +1,7 @@
 ---
 title: Poka-yoke explained: stop the mistake where it happens
 date: 2026-10-14
+updated: 2026-11-11
 summary: A cover can be fitted backwards. A reminder, a final check and a shaped fixture respond at different points. See what mistake-proofing prevents, what it detects and what remains unchecked.
 seoTitle: Poka-yoke: mistake-proofing with worked examples
 seoDescription: Understand poka-yoke through a simple assembly example. Compare prevention, detection and warnings, then check which mistakes each control can actually catch.
@@ -71,9 +72,7 @@ Define what happens when a control is unavailable or fails its check. The normal
 
 The [PDCA note](/notes/pdca-cycle-example/) explains how to compare the expected result of a change with what a trial actually shows. Keep the trial small enough to examine the failure cases, rather than judging it only by a run of good parts.
 
-:::link https://www.youtube.com/watch?v=p5687M5EoGM | Watch Vrolen's PDCA worked example
-The video uses a separate improvement example. Its plan, trial, check and follow-up sequence is useful when deciding what evidence a proposed mistake-proofing change needs.
-:::
+::video _EG1a4nhQnw | A booking form accepts February 30. The video moves from a reminder to a warning, a block and finally a calendar that prevents the error.
 
 ## Make the control part of the work
 

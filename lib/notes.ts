@@ -4,6 +4,7 @@ import path from "node:path";
 import { cache } from "react";
 import { marked } from "marked";
 import { inlineNoteFigure } from "./note-figure";
+import { videos } from "@/content/videos";
 
 /**
  * Notes are Markdown files in content/notes with a tiny frontmatter block:
@@ -24,6 +25,7 @@ import { inlineNoteFigure } from "./note-figure";
  *   ::figure <name> | <caption>          inline SVG from content/notes/figures/<name>.svg
  *   ::image </public/path> | <alt> | <caption>
  *   ::interactive <name> | <caption>   reviewed interactive figure
+ *   ::video <youtube id> | <caption>     Vrolen video from content/videos.ts, click-to-load
  *
  * Containers (Markdown inside, closed by a line with just :::):
  *
@@ -50,6 +52,8 @@ export type Note = {
   keywords: string[];
   topic: string;
   toc: { id: string; text: string }[];
+  /** YouTube ids embedded with ::video, in page order. */
+  videos: string[];
 };
 
 const DIR = path.join(process.cwd(), "content", "notes");
@@ -84,6 +88,10 @@ function expandContainers(body: string) {
 /** Expand ::figure and ::image lines into <figure> blocks (kept on one line so Markdown passes them through). */
 function expandBlocks(body: string) {
   return expandContainers(body)
+    .replace(/^::video\s+([\w-]{11})\s*\|\s*(.+)$/gm, (_, id: string, caption: string) => {
+      if (!videos[id]) throw new Error(`Unknown video ${id}: add it to content/videos.ts`);
+      return `\n<div data-note-interactive="video--${id}" data-caption="${escapeHtml(caption.trim())}"></div>\n`;
+    })
     .replace(/^::interactive\s+([\w-]+)\s*\|\s*(.+)$/gm, (_, name: string, caption: string) => {
       return `\n<div data-note-interactive="${name}" data-caption="${escapeHtml(caption.trim())}"></div>\n`;
     })
@@ -146,6 +154,7 @@ function parse(file: string): Note {
     keywords: (meta.keywords ?? "").split(",").map((k) => k.trim()).filter(Boolean),
     topic: meta.topic ?? "",
     toc: contents.length >= 2 ? contents : [],
+    videos: [...body.matchAll(/^::video\s+([\w-]{11})/gm)].map((m) => m[1]),
   };
 }
 

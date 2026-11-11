@@ -39,6 +39,7 @@ import { AiControlChart, type AiControlChartName } from "./AiControlCharts";
 
 import { PlanningDecision } from "./PlanningDecision";
 import { ForecastCalculator } from "./ForecastCalculator";
+import { NoteVideo } from "./NoteVideo";
 
 const controlNames: AiControlChartName[] = ["ai-control-theories", "ai-control-evidence", "ai-control-horizons", "ai-control-authority"];
 
@@ -59,7 +60,9 @@ export function NoteArticleContent({ html }: { html: string }) {
   for (const match of html.matchAll(pattern)) {
     const index = match.index!;
     if (index > end) parts.push(<div className="note-copy" key={`copy-${end}`} dangerouslySetInnerHTML={{ __html: html.slice(end, index) }} />);
-    if (["aici-defect-calculator", "aici-histogram-order", "aici-norris-scatter", "aici-norris-regression"].includes(match[1])) {
+    if (match[1].startsWith("video--")) {
+      parts.push(<NoteVideo key={index} id={match[1].slice(7)} caption={decodeCaption(match[2])} />);
+    } else if (["aici-defect-calculator", "aici-histogram-order", "aici-norris-scatter", "aici-norris-regression"].includes(match[1])) {
       parts.push(<IndustrialCiFigure key={index} name={match[1]} caption={decodeCaption(match[2])} />);
     } else if (match[1] === "r4-fisher-comparison") {
       parts.push(<PaaRoundFourChart key={index} caption={decodeCaption(match[2])} />);

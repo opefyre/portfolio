@@ -4,7 +4,7 @@ date: 2026-10-15
 summary: One operator repeats a reading closely. Another gets a different result on the same part. Inspect the individual measurements before changing the production process.
 seoTitle: Gage R&R explained: measurement study example
 seoDescription: Learn Gage R&R with 27 readings. Compare repeated scatter, operator differences and bias, then plan a measurement study with clear limits.
-updated: 2026-10-23
+updated: 2026-11-11
 status: published
 topic: Operational excellence
 keywords: gage R&R explained, measurement system analysis example, repeatability vs reproducibility, gauge R&R, gage repeatability
@@ -106,6 +106,8 @@ Vrolen uses a separate worked example to show the two denominators. Neither meas
 The [Cp and Cpk note](/notes/process-capability-cp-cpk/) is the next step when the measurement is credible enough to assess process capability. Keep the [measurement method and units](/notes/data-quality-dimensions/) with those quality records, especially after a fixture or gauge change.
 
 For the shaft that started this example, remeasure the same identified parts under a planned comparison before changing the machining setting. Otherwise, a measurement disagreement can become an unnecessary production adjustment.
+
+::video 4NkI8UdQ7hg | Three inspectors measure brake discs with one micrometer. A separate study from the example above.
 
 ## Sources and example notes
 

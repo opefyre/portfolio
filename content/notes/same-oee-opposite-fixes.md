@@ -1,7 +1,7 @@
 ---
 title: Same OEE, opposite fixes: turning the percentage back into minutes
 date: 2026-09-28
-updated: 2026-11-04
+updated: 2026-11-11
 summary: Two machines can report the same OEE and need completely different work. Here's how I turn the score back into minutes a team can act on.
 status: published
 topic: Operational excellence
@@ -89,6 +89,8 @@ This is the logic I'm building into [Vrolen](https://vrolen.com) ([more about it
 ::image /work/vrolen/what-if.webp | Vrolen's guided what-if comparing cautious, balanced and ambitious options | Testing a countermeasure in Vrolen before touching the line. Cautious, balanced and ambitious options, side by side.
 
 For the next shift review, take the stop records, speed losses and reject quantities behind the score. Check the minutes, then investigate the loss at the current constraint. Vrolen’s [guide to why higher OEE can leave output flat](https://vrolen.com/blog/oee-improved-throughput-did-not/) can help narrow down what to check.
+
+::video wGdb-NOrHF8 | A separate bottle-filling run: 80% availability, 90% performance and 95% quality give 68.4% OEE.
 
 ## Sources
 

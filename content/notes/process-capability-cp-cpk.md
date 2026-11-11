@@ -1,7 +1,7 @@
 ---
 title: Process capability: Cp, Cpk, Pp and Ppk with a worked example
 date: 2026-09-29
-updated: 2026-10-20
+updated: 2026-11-11
 summary: A shaft process has Cp of 1.39 and Cpk of 1.06. Follow the calculation, check what the difference means and see why a target alone cannot approve a process.
 status: published
 topic: Operational excellence
@@ -104,6 +104,8 @@ For a specific example, Ford's [June 2026 PPAP requirements](https://www.iatfglo
 Before accepting any capability number, check the [control chart](/notes/control-charts-explained/), the [measurement study](/notes/gage-rr-explained/), the distribution and the period and conditions represented. NIST also discusses uncertainty in estimated indices. A small dataset can produce a precise-looking number with substantial uncertainty.
 
 For our shaft process, the next step is to verify the location difference and the measurement, then test an authorised setting change. Recalculate with data that represents the changed process. Keep the underlying measurements with the index so another reviewer can follow the result.
+
+::video TcrhgnnC-vw | The video uses a shaft with the same 25.00 ± 0.05 mm tolerance but its own measurements, so check its figures separately from this example.
 
 ## Sources and calculation notes
 

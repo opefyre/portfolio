@@ -4,7 +4,7 @@ date: 2026-10-14
 summary: Three stations average 60 seconds. The middle one takes 75. Compare each station with takt to see why the average can hide a capacity gap.
 seoTitle: Takt time vs cycle time: formula and example
 seoDescription: Calculate takt time and compare it with each station's cycle time. An interactive example shows why an average can hide the station limiting output.
-updated: 2026-10-24
+updated: 2026-11-11
 status: published
 topic: Operational excellence
 keywords: takt time vs cycle time, takt time formula, cycle time example, takt time calculation, line balancing, takt vs lead time
@@ -111,9 +111,7 @@ The 55 + 75 + 50 seconds describe 180 seconds of station work on one piece in th
 
 That whole journey is lead time. The [value stream mapping example](/notes/value-stream-mapping-example/) separates work from waiting; it is the next place to look when cycle times seem short but orders still take days.
 
-:::link https://www.youtube.com/watch?v=34Z2IQJOeDU | Watch Vrolen's three production clocks
-A separate worked example compares takt, cycle and lead time. Its numbers differ from this three-station line.
-:::
+::video 34Z2IQJOeDU | The video follows one lunch order with 7 minutes of work and a 67-minute lead time. Its numbers are separate from the stations in this note.
 
 For a written companion, [Vrolen's three-clocks guide](https://vrolen.com/blog/takt-time-vs-cycle-time-vs-lead-time/) explains those boundaries in more detail.
 

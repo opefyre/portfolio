@@ -1,6 +1,7 @@
 ---
 title: Fishbone diagram example: from possible causes to checks
 date: 2026-10-21
+updated: 2026-11-11
 summary: A poor seal could come from heat, material or measurement. Build the cause map, then use observations to decide which branch deserves the next test.
 seoTitle: Fishbone diagram: a worked cause-and-effect example
 seoDescription: Build a fishbone diagram for a recurring seal defect. Group possible causes, record contradictory evidence and turn each promising branch into a check.
@@ -62,9 +63,7 @@ The [design-of-experiments note](/notes/design-of-experiments-example/) is usefu
 
 Update the diagram or its linked log as the checks develop. A branch can be untested, weakened, supported or contradicted under specified conditions. Those descriptions are more useful than colouring every branch green when a meeting ends.
 
-:::link https://www.youtube.com/watch?v=p5687M5EoGM | Follow the trial with a result check
-Vrolen's PDCA video uses a different process example to show how a proposed change becomes a test and a follow-up decision.
-:::
+::video siad5jjF4II | A separate printing problem, taken from a clear problem statement to an explanation the team can test.
 
 If the warm-up explanation holds, change the instruction, train the affected roles and confirm the new method continues to work. Keep the failed evidence too. It explains why the team changed the process and which alternative causes it actually checked.
 

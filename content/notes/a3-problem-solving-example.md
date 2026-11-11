@@ -1,7 +1,7 @@
 ---
 title: A3 problem solving example: follow the evidence across the page
 date: 2026-10-14
-updated: 2026-10-23
+updated: 2026-11-11
 summary: A quoting team reduces late replies from ten to four, but misses its target. A completed A3 shows the problem, the reasoning, the trial and what still needs work.
 seoTitle: A3 problem solving: a completed worked example
 seoDescription: See an A3 problem-solving example for late customer quotes. Connect the baseline, suspected cause, trial and result, including a target that was missed.
@@ -71,9 +71,7 @@ The three approval delays also remain. They need their own explanation; adding m
 
 The [PDCA worked example](/notes/pdca-cycle-example/) explains how a result can improve one measure and fail another. Our quoting example instead improves the chosen measure but falls short of its target.
 
-:::link https://www.youtube.com/watch?v=p5687M5EoGM | Watch Vrolen's PDCA walkthrough
-A separate example of testing a change and reviewing the result. It explains the cycle that can sit behind an A3; it is not a walkthrough of the quoting figures above.
-:::
+::video elmJJMYzLnk | Vrolen's A3 video works through its own recurring problem on one page. Its figures are separate from the quoting example above.
 
 For a manufacturing case and an existing printable worksheet, see [Vrolen's A3 guide](https://vrolen.com/blog/a3-problem-solving-manufacturing/). It uses a label-alignment problem, separate from this office process.
 

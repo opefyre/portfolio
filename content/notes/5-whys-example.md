@@ -1,7 +1,7 @@
 ---
 title: 5 Whys example: finding a cause you can test
 date: 2026-10-03
-updated: 2026-11-04
+updated: 2026-11-11
 summary: The team finishes its 5 Whys, retrains the operators, and the failure returns. A manufacturing example of checking the evidence, choosing a corrective action and testing whether it worked. Includes an Excel worksheet.
 status: published
 topic: Operational excellence
@@ -70,7 +70,7 @@ There are two useful pieces of work here: prevent the movement, and improve the 
 
 If the evidence points down two paths, draw two paths. A single vertical chain should not force a problem with several contributing causes into one answer. The [Institute for Healthcare Improvement](https://www.ihi.org/library/tools/5-whys-finding-root-cause) also recognises that a problem can have more than one root cause.
 
-Vrolen’s [5 Whys video](https://www.youtube.com/watch?v=rs1NfE8DNAc) follows a different case, tracing a wrong-size delivery back through picking and product setup.
+::video rs1NfE8DNAc | Vrolen's 5 Whys video follows a different case, tracing a wrong-size delivery back through picking, storage instructions and product setup.
 
 ## Choose an action that changes the mechanism
 

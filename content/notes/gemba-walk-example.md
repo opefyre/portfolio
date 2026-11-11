@@ -1,6 +1,7 @@
 ---
 title: Gemba walk: meaning, steps and questions with an example
 date: 2026-10-15
+updated: 2026-11-11
 summary: One order misses dispatch after spending most of its journey waiting. Follow the handoffs, separate observations from explanations and decide what to check next.
 seoTitle: Gemba walk: meaning, steps and example questions
 seoDescription: Follow a late order in a gemba walk example. Separate what you observe from what people explain, ask better questions and plan a focused follow-up test.
@@ -41,9 +42,7 @@ A faster pick could still help. This record alone doesn't show why the order wai
 
 The [value stream mapping example](/notes/value-stream-mapping-example/) expands this view across a product family. This walk follows one order closely enough to decide what evidence to collect next.
 
-:::link https://www.youtube.com/watch?v=34Z2IQJOeDU | Watch: cycle time and lead time are different clocks
-Vrolen follows a separate order to distinguish processing time from the full journey. Its numbers are separate from W-218.
-:::
+::video rM49sKY8ICo | An electronics plant building heat-pump control boards. Its numbers are separate from W-218.
 
 ## Record observations before choosing a root cause
 

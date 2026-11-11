@@ -1,6 +1,7 @@
 ---
 title: Kanban explained: follow the signal that replaces a box
 date: 2026-10-14
+updated: 2026-11-11
 summary: A box leaves the parts shelf. What tells the upstream team to replace it? Follow the material and its signal separately to see how Kanban controls replenishment.
 seoTitle: Kanban pull system explained with an example
 seoDescription: Follow a container and its Kanban signal through a pull system. See what authorises replenishment, why pull still holds stock and how delays cause shortages.
@@ -66,9 +67,7 @@ Choose the trigger to match the actual arrangement. “Send the card when it is 
 
 Replenishment time includes the whole journey: collecting the signal, waiting for production, making acceptable parts and getting them back to the required location. Timing only the machine cycle leaves out the rest of that wait.
 
-:::link https://www.youtube.com/watch?v=34Z2IQJOeDU | Watch Vrolen's cycle time and lead time example
-The video separates processing time from the longer journey through a process. That distinction helps when measuring how long a Kanban signal takes to produce a usable replacement.
-:::
+::video E70VqFV5q68 | A sandwich shop shows what authorises the next job in a push and a pull system, including kanban cards and buffer limits. A separate example from the box loop above.
 
 The [Little's Law example](/notes/busy-machines-slower-orders/) connects average work in progress, throughput and flow time. It can help explain a queue, but it doesn't by itself calculate a safe number of Kanban cards.
 
@@ -85,6 +84,8 @@ Pull also doesn't mean zero inventory. Our loop deliberately keeps a supermarket
 For the wider relationship between flow, pull and improvement, see [Vrolen's Lean manufacturing guide](https://vrolen.com/blog/lean-manufacturing/).
 
 Before calling a shelf-and-card arrangement a pull system, follow one actual withdrawal. Find the signal it creates, the quantity it authorises and the replacement that closes the loop. If the upstream team keeps producing without that signal, the release rule needs attention.
+
+::video QNiBS2n4cyg | A digital design team decides what to do when a Kanban column reaches its WIP limit. Its numbers are separate from this note.
 
 ## Sources and example notes
 

@@ -1,6 +1,7 @@
 ---
 title: Theory of Constraints: five focusing steps with an example
 date: 2026-10-21
+updated: 2026-11-11
 summary: Cutting can make 120 units an hour, testing 80 and packing 100. See which change raises output, why another does not, and when the constraint moves.
 seoTitle: Theory of Constraints: 5 steps and a worked example
 seoDescription: Apply the five focusing steps to a three-stage production line. Compare local capacity with shipped output and recheck the constraint after each change.
@@ -72,6 +73,8 @@ Vrolen follows the units through a separate filler-and-capper example, including
 :::
 
 Improving cutting may still have a valid safety, quality or resilience benefit. State that benefit directly. Calling it an output increase would promise something the line cannot deliver.
+
+::video wwWQBDz4tSQ | A pick, pack and label line shows how to find blocked and starved steps before speeding anything up. Its figures are separate from the example above.
 
 ## Source and example notes
 
