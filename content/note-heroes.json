@@ -1510,5 +1510,33 @@
     "width": 1600,
     "height": 900,
     "alt": "Two production methods compared with the same measuring tool."
+  },
+  "spare-parts-inventory-management": {
+    "src": "/notes/spare-parts-inventory-management/hero-d943bd88eb20.webp",
+    "smallSrc": "/notes/spare-parts-inventory-management/hero-small-c422a63e3300.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "A spare-parts cabinet beside a machine with an empty gear housing."
+  },
+  "fat-vs-sat": {
+    "src": "/notes/fat-vs-sat/hero-55fcb05c7999.webp",
+    "smallSrc": "/notes/fat-vs-sat/hero-small-06538b980f12.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Industrial control cabinets at the supplier and at the installation site."
+  },
+  "alarm-management": {
+    "src": "/notes/alarm-management/hero-dcb5b5bc2cd0.webp",
+    "smallSrc": "/notes/alarm-management/hero-small-48bbc6d5ac31.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "An industrial console with clustered alerts and a distinct warning tile."
+  },
+  "yamazumi-chart": {
+    "src": "/notes/yamazumi-chart/hero-8c18338965cf.webp",
+    "smallSrc": "/notes/yamazumi-chart/hero-small-2a13699b727c.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Work elements stacked to different heights at three operator stations."
   }
 }
