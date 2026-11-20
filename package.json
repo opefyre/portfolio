@@ -30,7 +30,7 @@
     "react-dom": "19.3.0",
     "server-only": "^0.0.1",
     "three": "0.186.1",
-    "fast-xml-parser": "5.11.1"
+    "fast-xml-parser": "5.12.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",
