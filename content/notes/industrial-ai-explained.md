@@ -28,9 +28,9 @@ That decision determines the workload. It also determines which errors the pilot
 | Task | What the system produces | What someone must check |
 | --- | --- | --- |
 | Inspect a part | A classification, location or score | Defects missed, good parts flagged and the downstream response |
-| Monitor equipment | An unusual-condition alert or life estimate | Operating conditions, confirmed faults and useful warning time |
-| Find maintenance instructions | A generated answer using retrieved documents | Document revision, source passage and permission to act |
-| Support production planning | Predictions or candidate schedules | Capacity, job constraints, delivery requirements and feasibility |
+| Monitor equipment | An unusual-condition alert or [remaining-life estimate](/notes/remaining-useful-life-prediction/) | Operating conditions, confirmed faults and useful warning time |
+| Find maintenance instructions | A generated answer using [retrieved documents](/notes/rag-manufacturing-maintenance/) | Document revision, source passage and permission to act |
+| Support production planning | Predictions or [candidate schedules](/notes/ai-production-scheduling/) | Capacity, job constraints, delivery requirements and feasibility |
 
 A machine-learning model can support some of these tasks. A conventional rule or optimisation solver may be sufficient for others. The industrial label does not tell you which method a product actually uses.
 

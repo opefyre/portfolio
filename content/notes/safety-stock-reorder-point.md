@@ -1,26 +1,31 @@
 ---
-title: Safety stock and reorder point: formulas and example
+title: Safety stock formula and reorder point: worked example
 date: 2026-09-29
-updated: 2026-10-23
+updated: 2026-11-23
 summary: Calculate safety stock and the reorder point for one spare part. Compare demand and supplier delays, distinguish cycle service from fill rate, and price a higher service target.
 status: published
 topic: Supply chain
 keywords: safety stock formula, reorder point, safety stock calculation, service level, fill rate, lead time variability, inventory management, supply chain planning, z-score
-seoTitle: Safety stock and reorder point: formulas and example
-seoDescription: Calculate safety stock and reorder point with a worked example. Compare demand and lead-time variability, service level and the cost of inventory.
+seoTitle: Safety stock formula and reorder point: worked example
+seoDescription: Choose a safety stock formula for demand and lead-time variation. Calculate the reorder point step by step and compare cycle service level with fill rate.
 ---
 
-A distributor needs enough spare parts to cover the wait for replenishment. Its buyer has to allow for two uncertainties: how much customers will need and when the supplier's delivery will become usable.
+**Safety stock is extra inventory held to cover uncertainty in demand and replenishment.** The reorder point is expected demand during lead time plus that buffer. One tells you how much protection to hold; the other tells you when to order.
 
-**Safety stock is extra inventory held to cover uncertainty in demand and replenishment.** The reorder point combines expected demand during lead time with that buffer. The calculation below uses one spare part to compare demand variation, delivery variation and the cost of a chosen service target.
+The calculation below follows one spare part. Allowing for variable supplier lead time raises its safety stock from 148 to 422 units and sets its reorder point at 1,502 units.
 
-:::card The short version
-- **Reorder point** = expected demand during the lead time + safety stock.
-- **Safety stock** = z × the standard deviation of demand over the lead time. The z comes from the service level you want: 1.645 for 95%.
-- If lead times vary, include that variation. It drives most of the buffer in this example.
-- Service level has a steep cost curve. Going from 95% to 99% can need 40% more safety stock.
-- "95% service level" usually means 95% of replenishment cycles without a stock-out. That's not the same as filling 95% of demand.
-:::
+## Safety stock formula: which one to use?
+
+| Conditions | Safety stock formula |
+| --- | --- |
+| Lead time is fixed; daily demand varies independently | z × σ<sub>d</sub> × √L |
+| Demand and lead time vary independently | z × √(L × σ<sub>d</sub>² + d² × σ<sub>L</sub>²) |
+
+Here, d is average daily demand, σ<sub>d</sub> is its standard deviation, L is lead time in days and σ<sub>L</sub> is the standard deviation of lead time. The service factor z is 1.645 for a 95% cycle service target under the normal approximation. [King's APICS guide](https://web.mit.edu/2.810/www/files/readings/King_SafetyStock.pdf) sets out these cases.
+
+**Reorder point = d × L + safety stock.** Check it against [inventory position](/notes/inventory-position-vs-on-hand/), including outstanding orders and backorders, rather than on-hand stock alone.
+
+These formulas need compatible time units and a suitable demand model. A 95% cycle service target concerns cycles without a stockout; [fill rate measures the share of demand supplied](/notes/cycle-service-level-vs-fill-rate/). The example below calculates both.
 
 ## The example product
 

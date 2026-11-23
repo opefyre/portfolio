@@ -87,7 +87,7 @@ When the proposed change moves work between operators, use a [Yamazumi chart](/n
 
 Build the sequence with the people doing the work. Observe representative cycles, including how they handle replenishment, defects and interruptions. Check that the method can be followed across shifts before calling it the standard.
 
-Keep the sequence, key checks, stock locations and current revision together at the station. Use the training instructions to explain how and why. When a trial supports a better method, update the standard and check what happens afterwards.
+Keep the sequence, key checks, stock locations and current revision together at the station. Use the training instructions to explain how and why. [TWI Job Instruction](/notes/twi-job-instruction/) gives the trainer a four-step method for teaching and checking the task. When a trial supports a better method, update the standard and check what happens afterwards.
 
 The [Control stage of DMAIC](/notes/dmaic-step-by-step/) covers that handover. [Did the improvement hold?](/notes/did-it-hold/) follows the question beyond the launch date.
 
