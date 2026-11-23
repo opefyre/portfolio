@@ -12,7 +12,7 @@ keywords: supplier development process, supplier development example, vendor dev
 
 **Supplier development means working with a supplier to improve its capabilities or the products and services it delivers.** Vendor development is often used for the same idea. [CIPS](https://1prd-dxp.cips.org/intelligence-hub/managing-suppliers/supplier-development) describes joint work on areas such as quality, capacity, cost and delivery.
 
-A [supplier scorecard](/notes/supplier-scorecard-example/) shows where performance falls short. Development gives both teams work to do about it. Repeating “improve on-time delivery” changes little if the buyer keeps releasing orders late or the supplier cannot load them on time.
+A [supplier scorecard](/notes/supplier-scorecard-example/) shows where performance falls short. In a development project, both teams agree what they will change. Repeating “improve on-time delivery” changes little if the buyer keeps releasing orders late or the supplier cannot load them on time.
 
 ## Supplier development process
 
@@ -23,7 +23,6 @@ For the delivery problem below, the process has four parts:
 3. **Agree and run a trial.** Name each action, owner, resource commitment and record needed to check it.
 4. **Review the result.** Compare deliveries under the same rules, then check whether the method holds under busier conditions.
 
-The example follows those decisions through one supplier's late deliveries.
 
 ## Start with the deliveries that missed
 
