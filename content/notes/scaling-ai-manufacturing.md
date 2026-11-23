@@ -10,7 +10,7 @@ topic: Industrial AI
 keywords: scaling AI in manufacturing, manufacturing AI pilot to production, multi-site AI deployment, industrial AI ROI
 ---
 
-An AI application helps a packaging team find recurring faults. The team fixes them, overtime spending falls, and management wants to put the application in the other factories.
+An [industrial AI application](/notes/industrial-ai-explained/) helps a packaging team find recurring faults. The team fixes them, overtime spending falls, and management wants to put the application in the other factories.
 
 At the second plant, the fault records look familiar. The columns even have the same names. But a stop code includes events that the first plant records separately, and the supervisors have less time to investigate warnings.
 

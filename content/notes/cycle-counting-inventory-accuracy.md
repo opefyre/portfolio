@@ -53,7 +53,7 @@ The [data quality note](/notes/data-quality-dimensions/) explains why a valid-lo
 
 ## Reconcile the difference without erasing it
 
-The equal and opposite differences suggest a possible missed transfer. They don't prove one. The team should also check the count, item identity, units and movements around the cutoff.
+The equal and opposite differences suggest a possible missed transfer. They don't prove one. The [inventory shrinkage example](/notes/inventory-shrinkage-example/) separates a count discrepancy from confirmed stock loss. The team should also check the count, item identity, units and movements around the cutoff.
 
 In the next part of our fictional example, a recount and transfer record T17 confirm that five pieces moved from B to C before 09:00. The movement wasn't posted. An authorised posting brings B to 45 and C to 25. The physical stock hasn't changed.
 

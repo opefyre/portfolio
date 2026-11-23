@@ -72,7 +72,7 @@ Cost needs a similar check. Price compliance records whether the invoice matches
 
 ## Give each measure a possible action
 
-For this review, Quality needs to agree how the rejected pieces are contained and why they failed. Planning and the supplier need to investigate the four unsuccessful deliveries. Purchasing needs to resolve the two price discrepancies.
+For this review, Quality needs to agree how the rejected pieces are contained and why they failed. Planning and the supplier need to investigate the four unsuccessful deliveries. The [supplier development example](/notes/supplier-development-example/) follows a joint trial when both sides need to change how they work. Purchasing needs to resolve the two price discrepancies.
 
 Record the action, owner, due date and evidence required for closure. Review repeat failures as well as completion of the actions. An action marked closed while the same defect returns deserves another look.
 

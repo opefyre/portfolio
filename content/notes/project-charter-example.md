@@ -24,7 +24,7 @@ These documents can share information. They serve different decisions.
 
 | Document | Main question | For our warehouse project |
 | --- | --- | --- |
-| Business case | Is the proposed investment worth pursuing? | Compare options, expected service improvement, costs and risks |
+| [Business case](/notes/project-business-case-example/) | Is the proposed investment worth pursuing? | Compare options, expected service improvement, costs and risks |
 | Project charter | What project is authorised, and who can act? | Approve a bounded pilot, assign a sponsor and manager, set resource limits |
 | Project plan | How will we deliver and control the agreed work? | Define deliverables, dependencies, dates, responsibilities and checks |
 

@@ -63,6 +63,8 @@ Ask why making the extra batch seemed sensible. Was the team trying to avoid a l
 
 [SMED and smaller batches](/notes/smed-changeover-smaller-batches/) explore the setup problem. A [Kanban replenishment rule](/notes/kanban-pull-system/) can make permission to produce clearer where a suitable repeatable loop exists. Neither follows automatically from spotting a pile of cartons.
 
+Uneven loading and overburden can create waste too. The [muda, mura and muri example](/notes/muda-mura-muri-examples/) follows their connection through a delivery task.
+
 ## A waste label doesn't explain the cause
 
 The six wrong labels are a defect observation. “Be more careful” leaves the team with the same station, files and choices.

@@ -1,21 +1,28 @@
 ---
-title: Supplier development: a process and worked example
+title: Supplier development: meaning, process and example
 date: 2026-10-20
-summary: Another poor delivery score does not improve a supplier. Follow a joint trial that changes release timing, loading work and the evidence reviewed afterwards.
-seoTitle: Supplier development: process and worked example
-seoDescription: Follow supplier development from delivery misses to a joint trial. Agree buyer and supplier actions, resources and checks on sustained results.
+updated: 2026-11-23
+summary: Supplier development means improving capability with a supplier. Follow the process from delivery records to a joint trial and a check on what changed.
+seoTitle: Supplier development: meaning, process and example
+seoDescription: What supplier development means, how to choose a supplier and run a joint improvement trial, with delivery records, actions and a worked example.
 status: published
 topic: Supply chain
 keywords: supplier development process, supplier development example, vendor development, supplier improvement
 ---
 
-The supplier receives another delivery score below target. The review ends with the same instruction as last month: improve on-time performance.
-
-Nobody has changed the conditions that produced the late deliveries.
-
 **Supplier development means working with a supplier to improve its capabilities or the products and services it delivers.** Vendor development is often used for the same idea. [CIPS](https://1prd-dxp.cips.org/intelligence-hub/managing-suppliers/supplier-development) describes joint work on areas such as quality, capacity, cost and delivery.
 
-A [supplier scorecard](/notes/supplier-scorecard-example/) can identify a result worth investigating. Development is the work that follows when both sides agree the capability is worth improving.
+A [supplier scorecard](/notes/supplier-scorecard-example/) shows where performance falls short. In a development project, both teams agree what they will change. Repeating “improve on-time delivery” changes little if the buyer keeps releasing orders late or the supplier cannot load them on time.
+
+## Supplier development process
+
+For the delivery problem below, the process has four parts:
+
+1. **Choose where to invest.** Check the supplier's importance, willingness to cooperate and the time both teams can commit.
+2. **Find what caused the misses.** Review the failed orders and the work on both sides of the relationship.
+3. **Agree and run a trial.** Name each action, owner, resource commitment and record needed to check it.
+4. **Review the result.** Compare deliveries under the same rules, then check whether the method holds under busier conditions.
+
 
 ## Start with the deliveries that missed
 

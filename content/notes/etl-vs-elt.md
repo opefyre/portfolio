@@ -20,7 +20,7 @@ Choosing the order of those letters doesn't decide how many pieces fit in a case
 
 ## What extract, transform and load mean
 
-A data pipeline is the path that collects and prepares information for another use. For this example, the destination is a reporting database. It may be called a data warehouse, which means an analytical data store rather than a building full of stock.
+A data pipeline is the path that collects and prepares information for another use. For this example, the destination is a reporting database. It may be called a [data warehouse](/notes/data-lake-vs-data-warehouse/), which means an analytical data store rather than a building full of stock.
 
 | Step | Plain meaning | In our inventory file |
 | --- | --- | --- |
