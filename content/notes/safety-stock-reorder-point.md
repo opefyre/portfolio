@@ -6,7 +6,7 @@ summary: Calculate safety stock and the reorder point for one spare part. Compar
 status: published
 topic: Supply chain
 keywords: safety stock formula, reorder point, safety stock calculation, service level, fill rate, lead time variability, inventory management, supply chain planning, z-score
-seoTitle: Safety stock formula and reorder point: worked example
+seoTitle: Safety stock formula and reorder point: example
 seoDescription: Choose a safety stock formula for demand and lead-time variation. Calculate the reorder point step by step and compare cycle service level with fill rate.
 ---
 
