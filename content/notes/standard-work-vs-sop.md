@@ -81,6 +81,8 @@ If one shift keeps five prepared cartons nearby and another starts with none, th
 
 Safety, quality and the actual layout still govern what work can overlap. Check those conditions when developing the sequence.
 
+When the proposed change moves work between operators, use a [Yamazumi chart](/notes/yamazumi-chart/) to compare their work elements against takt. Then check the full sequence, including any walking the transfer adds.
+
 ## Test the method, then keep it current
 
 Build the sequence with the people doing the work. Observe representative cycles, including how they handle replenishment, defects and interruptions. Check that the method can be followed across shifts before calling it the standard.

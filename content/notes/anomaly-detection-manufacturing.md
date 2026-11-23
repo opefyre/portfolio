@@ -44,6 +44,8 @@ For equipment alerts, choose an evaluation unit that fits the job. An event, an 
 
 Record investigation time, confirmed findings, missed events and warning time. An alert that arrives after the failure needs a different interpretation from one that supports a planned intervention.
 
+Before routing a detector output to the operator, agree what action it requires and how much time the operator has. The [alarm management guide](/notes/alarm-management/) explains how to review that response and the workload created by recurring alerts.
+
 ## Use control charts where they fit
 
 A [control chart](/notes/control-charts-explained/) uses a defined statistical model and signal rules to examine process behaviour over time. An ML detector may learn a more complex relationship across several signals. More complexity does not establish that it makes the better operating decision.

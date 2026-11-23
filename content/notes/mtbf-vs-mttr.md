@@ -69,6 +69,8 @@ Record the stop, response, repair and return-to-production times where they answ
 
 The [OEE note](/notes/same-oee-opposite-fixes/) puts downtime beside speed and quality losses. MTBF and MTTR describe part of that operating picture. They don't establish good output, customer service or the best maintenance investment on their own.
 
+The [TPM example](/notes/total-productive-maintenance-explained/) shows how operators, maintenance and engineering can share the follow-up when the same equipment fault keeps returning.
+
 ## Use the pattern to choose the next investigation
 
 Start with A's recurring events and B's longest recoveries. For a repeated fault, the [5 Whys example](/notes/5-whys-example/) shows how to test an explanation before settling on a fix. For a long recovery, compare where the time actually went before asking technicians to work faster.

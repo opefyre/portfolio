@@ -70,6 +70,8 @@ Seven-step Kaizen guides also vary by author; LEI's resource describes an eight-
 
 If the packing errors recur across products and shifts and their cause remains unclear, [DMAIC](/notes/dmaic-step-by-step/) provides a structured route through Define, Measure, Analyze, Improve and Control. It can include a small [PDCA trial](/notes/pdca-cycle-example/) of the proposed fix.
 
+For individual work steps, [ECRS](/notes/ecrs-process-improvement/) helps the team test whether it can eliminate, combine, rearrange or simplify the work. The packing example also shows why less walking does not always shorten the cycle.
+
 If the cause is already verified and the change is straightforward, the team may need an authorised correction and a result check. It should not create a long project merely to use a preferred method.
 
 For an accessible first look, Vrolen's [PDCA production example](https://vrolen.com/blog/pdca-cycle/) shows how a trial connects a proposed change to its review.

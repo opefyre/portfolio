@@ -1,7 +1,7 @@
 ---
 title: Forecast accuracy: MAPE vs WAPE, with a worked example
 date: 2026-10-03
-updated: 2026-10-23
+updated: 2026-11-23
 summary: MAPE and WAPE can pick different winners from the same forecasts. Compare their formulas, try the calculator and see what each score hides.
 status: published
 topic: Supply chain
@@ -72,6 +72,23 @@ For A, absolute errors total 111 parts: 111 ÷ 1,110 = 10%. B is closer when the
 But its five-unit miss on the third product still matters. A cheap accessory and a part that keeps a customer's machine running need different attention. Volume alone cannot tell you which one this is.
 
 WAPE is also sensitive to its denominator. If demand rises while absolute error stays unchanged, WAPE falls. That alone does not establish better forecasting. For comparisons over time, consider a consistent baseline and scaled measures such as MASE or RMSSE, as [Hyndman explains](https://robjhyndman.com/hyndsight/wape.html).
+
+## WAPE vs MAE: the same errors in different units
+
+MAE means mean absolute error. Add the absolute errors and divide by the number of observations. MAE stays in the original unit, such as parts per product-month. WAPE expresses the same total error relative to actual demand.
+
+Using the three product-months above:
+
+| Forecast | Total absolute error | MAE, parts per product-month | WAPE |
+| --- | ---: | ---: | ---: |
+| A | 111 parts | 111 ÷ 3 = 37 | 10% |
+| B | 20 parts | 20 ÷ 3 = 6.67 | 1.80% |
+
+For these nonnegative actuals, WAPE = MAE ÷ mean actual demand × 100. Mean demand is 1,110 ÷ 3 = 370 parts per product-month. Forecast B's unrounded MAE is 20 ÷ 3, so (20 ÷ 3) ÷ 370 × 100 = 1.80% after rounding.
+
+MAE and WAPE rank forecasts in the same order when both use the same observations and WAPE's denominator is positive. Changing the demand period or product group changes that denominator. A lower WAPE across different groups therefore does not necessarily mean fewer units missed.
+
+If every actual is zero, MAE still measures the average absolute error. WAPE is undefined. Keep that distinction when reading a report that uses either name.
 
 ## Bias tells you which way the forecast misses
 
