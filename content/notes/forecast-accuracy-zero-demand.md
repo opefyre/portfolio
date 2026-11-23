@@ -1,6 +1,7 @@
 ---
 title: Forecast accuracy when demand is zero: what to use instead of MAPE
 date: 2026-10-12
+updated: 2026-11-23
 summary: Zero demand makes MAPE undefined. A spare-part example shows what WAPE, absolute error and a historical baseline can tell you without deleting the awkward weeks.
 seoTitle: Forecast accuracy with zero demand: beyond MAPE
 seoDescription: Zero demand makes MAPE undefined. Compare WAPE, absolute error and MASE with a worked example, and keep quiet weeks visible in your planning review.
@@ -40,6 +41,8 @@ You can change these inputs using the “Zero demand” example in the [MAPE/WAP
 Then WAPE's denominator is also zero. Report it as unavailable, even if every forecast was zero too. That is different from a measured 0% error.
 
 Mean absolute error, or **MAE**, still works. It averages the absolute misses in the original units. If actuals are 0, 0 and 0 and forecasts are 2, 2 and 2, MAE is 2 units per week. If the forecasts are all zero, MAE is 0.
+
+MAE and WAPE rank forecasts in the same order when they use the same weeks and total demand is positive. The [WAPE vs MAE comparison](/notes/forecast-accuracy-mape-wape/#wape-vs-mae-the-same-errors-in-different-units) shows how the same absolute errors become either units per week or a percentage of demand.
 
 | Situation | Useful report | Important limit |
 | --- | --- | --- |
