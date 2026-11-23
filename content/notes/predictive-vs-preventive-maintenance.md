@@ -44,7 +44,7 @@ The [MTBF and MTTR guide](/notes/mtbf-vs-mttr/) explains how definitions change 
 
 A useful warning arrives early enough for someone to act. Record which alerts led to inspection, what the inspection found and whether a timely intervention was possible. Include unnecessary checks and missed events in the review.
 
-Check how much time the warning gives the team to inspect the machine, get the part and schedule a safe intervention. A warning can be accurate and still arrive too late to act before failure.
+Check how much time the warning gives the team to inspect the machine, [obtain the replacement part](/notes/spare-parts-inventory-management/) and schedule a safe intervention. A warning can be accurate and still arrive too late to act before failure.
 
 Vrolen's [maintenance-event guide](https://vrolen.com/blog/mtbf-vs-mttr-oee/) provides a separate worked example of turning a failure log into measures. Keep that example's equipment and time boundary separate from your pilot.
 

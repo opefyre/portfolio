@@ -29,6 +29,8 @@ Our fictional factory has an hourly production report and a machine controller. 
 
 Some IT services are time-critical. Some OT systems only monitor a low-consequence condition. Classify the actual function and failure impact before using the label to choose a change process.
 
+When AI uses those machine records, the same distinction matters. The [industrial AI guide](/notes/industrial-ai-explained/) follows a model output through to the operating decision and the person allowed to make it.
+
 ## IT/OT convergence: follow the data and command paths
 
 IT/OT convergence means these environments exchange information and become more closely connected. The factory wants production counts in its reporting system. That does not automatically require the reporting app to command the machine.

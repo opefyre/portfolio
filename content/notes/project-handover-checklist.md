@@ -50,6 +50,8 @@ Use the following checks while preparing that transfer. A file marked “complet
 
 Adjust the depth to the service. A small reporting tool and a production-control system need different recovery evidence. Neither benefits from a checklist whose entries nobody can explain.
 
+For an equipment project, keep the acceptance-test results with the handover record. The [FAT and SAT comparison](/notes/fat-vs-sat/) explains what the supplier test and installed-site test establish, and how to carry open items between them.
+
 ## Test the support route before releasing the team
 
 Assume the supplier covers 6am starts, but only accepts calls from two registered contacts. Registering those people, confirming their access and rehearsing a call would expose Monday's gap before release.
