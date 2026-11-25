@@ -1,7 +1,7 @@
 ---
 title: Theory of Constraints: five focusing steps with an example
 date: 2026-10-21
-updated: 2026-11-11
+updated: 2026-11-25
 summary: Cutting can make 120 units an hour, testing 80 and packing 100. See which change raises output, why another does not, and when the constraint moves.
 seoTitle: Theory of Constraints: 5 steps and a worked example
 seoDescription: Apply the five focusing steps to a three-stage production line. Compare local capacity with shipped output and recheck the constraint after each change.
@@ -15,6 +15,8 @@ keywords: theory of constraints, five focusing steps, bottleneck example, constr
 A line can cut 120 units an hour, test 80 and pack 100. Buying faster cutting equipment would make the first number better. It would leave the same 80 units passing through testing.
 
 The [Lean Enterprise Institute's explanation](https://www.lean.org/the-lean-post/articles/what-is-the-theory-of-constraints-and-how-does-it-compare-to-lean-thinking/) sets out the five focusing steps. The work starts by identifying the current limit, rather than choosing the most visible improvement.
+
+Try the [Bottleneck Finder](/tools/bottleneck-finder/) to compare speeding up the slowest step with speeding up another step. The moving example separates a small startup gain from a faster ongoing pace.
 
 ## Identify the constraint using the whole flow
 
