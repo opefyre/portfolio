@@ -65,6 +65,8 @@ The horizon and level of detail vary with the process and system. The table desc
 
 A detailed plan can expose constraints the rough-cut view misses: work arriving on the same day, an operation assigned to the wrong resource or a route with more setup time. A weekly total alone does not reserve an executable sequence.
 
+A total-hours check also leaves out arrival timing. The [Queue and Capacity Playground](/tools/queue-capacity/) shows how grouped arrivals create waiting even when the hour has spare time.
+
 ## Resolve the eight-hour gap without hiding it
 
 For the original mix, compare an approved additional shift, a different week, an alternative qualified bench or a changed commitment. Check the cost and practical conditions of each option.

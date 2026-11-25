@@ -1,7 +1,7 @@
 ---
 title: SMED example: faster changeovers, smaller batches
 date: 2026-10-03
-updated: 2026-11-11
+updated: 2026-11-25
 summary: A changeover falls from 45 to 15 minutes. Use a worked schedule to decide whether the gain should become more output or smaller batches. Includes an Excel comparison sheet.
 status: published
 topic: Operational excellence
@@ -98,6 +98,8 @@ You cannot spend it twice.
 | Main option created | More spare capacity | More frequent product availability |
 
 A smaller batch does not guarantee a shorter customer lead time. Orders may still wait for material, another process or dispatch. It does change how often planning can replenish each product, which is a useful condition to test.
+
+The [batch vs one-piece flow tool](/tools/batch-vs-flow/) lets you change how many completed pieces move to the next step together. That transfer size is separate from the production runs above: moving a group does not itself require a product changeover.
 
 The question is which option addresses the current problem. If orders are late because the cell cannot make enough, protect capacity. If the cell makes enough overall but the wrong products sit in stock, a shorter repeat cycle deserves a trial.
 

@@ -1,0 +1,23 @@
+{
+  "batch-vs-flow": {
+    "src": "/tools/batch-vs-flow/hero-df8e4afcb50b.webp",
+    "smallSrc": "/tools/batch-vs-flow/hero-small-7455e4b8be7f.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Clay workstations with copper parts grouped on a pallet and blue parts moving between steps."
+  },
+  "queue-capacity": {
+    "src": "/tools/queue-capacity/hero-d0f8b6680b04.webp",
+    "smallSrc": "/tools/queue-capacity/hero-small-ff6ea18fcdc5.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Clay workbenches with grouped copper jobs and evenly spaced blue jobs waiting beside presses."
+  },
+  "bottleneck-finder": {
+    "src": "/tools/bottleneck-finder/hero-4d292185c7f5.webp",
+    "smallSrc": "/tools/bottleneck-finder/hero-small-179cfff2782a.webp",
+    "width": 1600,
+    "height": 900,
+    "alt": "Three tactile clay presses with copper parts waiting before the middle step."
+  }
+}

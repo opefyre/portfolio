@@ -1,7 +1,7 @@
 ---
 title: Why busy machines make customers wait: Little's Law and takt time on the floor
 date: 2026-09-24
-updated: 2026-11-11
+updated: 2026-11-25
 summary: Keeping every resource busy feels productive and often makes lead times worse. Two simple formulas explain why, and how launch times fell from five months to two.
 status: published
 topic: Supply chain
@@ -25,6 +25,8 @@ For any stable system, over a consistent period ([Little, 2011](https://doi.org/
 Divide average work in process by average throughput to get **mean flow time**. On a saturated line, releasing more work can lengthen the queue while completions stay flat.
 
 ::figure littles-law | At the same throughput, twice the average work in process means twice the average time inside the line.
+
+The [batch vs one-piece flow tool](/tools/batch-vs-flow/) shows a different source of waiting: holding finished pieces until the rest of their group is ready to move. Compare the same ten pieces under different transfer rules.
 
 Measure average work in process and average daily completions across the same line over a stable period. At 20 completions a day, an average of 40 orders inside the line gives a mean flow time of two days. If average work in process rises to 80 and throughput stays at 20, mean flow time rises to four days. Vrolen’s [worked Little’s Law example](https://vrolen.com/blog/littles-law-wip-lead-time/) shows how to set the measurement boundary.
 

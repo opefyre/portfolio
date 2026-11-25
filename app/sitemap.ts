@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { ogImage, site, works } from "@/content/site";
+import toolHeroes from "@/content/tool-heroes.json";
 import { getNoteHero } from "@/lib/note-heroes";
 import { getNotes } from "@/lib/notes";
 
@@ -64,5 +65,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
-  return [home, ...workPages, about, notesIndex, ...notePages];
+  return [home, ...workPages, about, notesIndex, { url: abs("/tools/batch-vs-flow/"), lastModified: new Date("2026-11-25T12:00:00Z"), changeFrequency: "monthly", priority: 0.7, images: [abs(toolHeroes["batch-vs-flow"].src)] }, { url: abs("/tools/queue-capacity/"), lastModified: new Date("2026-11-25T12:00:00Z"), changeFrequency: "monthly", priority: 0.7, images: [abs(toolHeroes["queue-capacity"].src)] }, { url: abs("/tools/bottleneck-finder/"), lastModified: new Date("2026-11-25T12:00:00Z"), changeFrequency: "monthly", priority: 0.7, images: [abs(toolHeroes["bottleneck-finder"].src)] }, ...notePages];
 }
